@@ -1,0 +1,70 @@
+﻿.EtiquetaCelulaRuta
+{
+	height:24px;
+	width:100%;
+	background-image: url(images/bg1.png);
+	background-repeat:repeat-x;
+	color:Black;
+	font-weight:bold;
+	font-size:10pt;
+	vertical-align:middle;
+	padding-left:5px;
+}
+
+.TagLabel
+{
+	font-weight:bold;
+	color:Green;
+}
+
+.TagLabelFolio
+{
+	width:10%;
+}
+
+.TagLabelAutotanque
+{
+	width:25%;
+}
+
+.TagLabelTotalizador
+{
+	width:20%;
+}
+
+.TagLabelOperador
+{
+}
+
+.TagLabelLimiteCredito
+{
+}
+
+.InfoLabel
+{
+	font-weight:bold;
+	color:Gray;
+}
+
+.LabelFolio
+{
+	width:25%;
+}
+
+.LabelAutotanque
+{
+	width:15%;
+}
+
+.LabelTotalizador
+{
+	width:20%;
+}
+
+.LabelOperador
+{
+}
+
+.LabelLimiteCredito
+{
+}

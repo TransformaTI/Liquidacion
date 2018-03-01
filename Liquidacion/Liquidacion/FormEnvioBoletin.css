@@ -1,0 +1,95 @@
+﻿.rightElements
+{
+	width:200px;
+}
+
+.leftElements
+{
+	width:125px;
+}
+
+.tagCliente
+{
+	font-weight:bold;
+	color:Red;
+}
+
+.Cliente
+{
+	font-weight:bold;
+}
+
+.tagDireccion
+{
+	font-weight:bold;
+	color:Gray;
+	vertical-align:text-top;
+}
+
+.Direccion
+{
+	font-weight:bold;
+}
+
+.tagCelula
+{
+	font-weight:bold;
+	color:Green;
+}
+
+.Celula
+{
+	font-weight:bold;
+}
+
+.tagRuta
+{
+	font-weight:bold;
+	color:Maroon;
+}
+
+.Ruta
+{
+	font-weight:bold;	
+}
+
+.tagPedido
+{
+	font-weight:bold;
+	color:Teal;
+}
+
+.Pedido
+{
+	font-weight:bold;
+}
+
+.tagAutotanque
+{
+	font-weight:bold;
+}
+
+.Autotanque
+{
+	font-weight:bold;
+}
+
+.tagOperador
+{
+	font-weight:bold;
+}
+
+.Operador
+{
+	font-weight:bold;
+}
+
+.tagTelefono
+{
+	font-weight:bold;
+}
+
+.Telefono
+{
+	font-weight:bold;
+}

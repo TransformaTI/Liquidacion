@@ -1,0 +1,70 @@
+﻿<%--
+Default skin template. The following skins are provided as examples only.
+
+1. Named control skin. The SkinId should be uniquely defined because
+   duplicate SkinId's per control type are not allowed in the same theme.
+
+<asp:GridView runat="server" SkinId="gridviewSkin" BackColor="White" >
+   <AlternatingRowStyle BackColor="Blue" />
+</asp:GridView>
+
+2. Default skin. The SkinId is not defined. Only one default 
+   control skin per control type is allowed in the same theme.
+
+<asp:Image runat="server" ImageUrl="~/images/image1.jpg" />
+--%>
+
+<asp:TreeView SkinID="CTreeView"
+    runat="server" 
+    Width="100%" 
+    Font-Names="Tahoma" 
+    Font-Size="11px" 
+    ForeColor="Black"
+    NodeIndent="10" />
+    
+<asp:ImageButton SkinID="btnBuscarCliente" runat="server" 
+    AlternateText="Consultar cliente" 
+    ImageUrl="~/Images/btnBuscar.png" Width="22px" Height="22px"/>
+    
+<asp:ImageButton SkinID="btnAceptar" runat="server" 
+    AlternateText="Consultar cliente" 
+    ImageUrl="~/Images/btnAceptar.png" Width="85px" Height="26px"/>
+
+<asp:ImageButton SkinID="btnCancelar" runat="server" 
+    AlternateText="Consultar cliente" 
+    ImageUrl="~/Images/btnCancelar.png" Width="85px" Height="26px"/>
+    
+<asp:ImageButton SkinID="btnRemover" runat="server" 
+    AlternateText="Consultar cliente" 
+    ImageUrl="~/Images/btnRemover.png" Width="85px" Height="26px"/>
+    
+<asp:ImageButton SkinID="btnCierreLiquidacion" runat="server" 
+    AlternateText="Cerrar Liquidacion" 
+    ImageUrl="~/Images/btnCerrarLiquidacion.jpg" Width="145px" Height="26px"/>    
+
+<asp:ImageButton SkinID="btnCerrarPopUp" runat="server" 
+    AlternateText="Cerrar" 
+    ImageUrl="~/Images/CloseWindow.ico" Width="16px" Height="16px"/>   
+    
+<%-- Menu Top Horizontal MENU PRINCIPAL --%>
+<asp:Menu runat="server"  SkinID="menuPrincipal" 
+          Orientation="Horizontal" 
+          StaticDisplayLevels="2" 
+          MaximumDynamicDisplayLevels="2" 
+          StaticSubMenuIndent="0" 
+          Width="100%"
+          DynamicHorizontalOffset="1"
+          DynamicVerticalOffset="1">
+            
+    <StaticMenuStyle BackColor="Transparent"/>
+	<StaticMenuItemStyle CssClass="item" ItemSpacing="0" />
+	<StaticHoverStyle CssClass="hover" />
+	<StaticSelectedStyle CssClass="selected" />					
+
+    <DynamicMenuItemStyle CssClass="itemSubMenu" width="150px"/>
+    <DynamicHoverStyle CssClass="hover" width="150px"/>   
+    <DynamicSelectedStyle CssClass="selected" width="150px"/>					
+</asp:Menu>
+
+
+

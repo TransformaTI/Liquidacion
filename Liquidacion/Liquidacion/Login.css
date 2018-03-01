@@ -1,0 +1,48 @@
+﻿body
+{
+	background: #B4B4B4 url(images/body_bg.gif) repeat left top;
+	font-family: Tahoma;
+	font-size:75%;
+}
+
+table
+{
+	background-color: White;
+	width:250px;
+}
+
+.Left
+{
+	width:35%;
+	padding-left:7px;
+	font-weight:bold;
+	font-size:9pt;
+}
+
+.Right
+{
+	width:65%;
+	padding-left:5px;
+	padding-right:7px;
+}
+
+.ApplicationTitle
+{
+	text-align: left;
+	font-family: Tahoma;
+	font-style:italic;
+	font-weight:bold;
+	font-size: 20pt;	
+}
+
+.Caption
+{
+	background-image: url(images/bg1.png);
+	border-width: 0px;
+	background-repeat:repeat-x;
+	font-weight: bold;
+	color: Black;
+	text-align: center;
+	height: 24px;
+	font-size: 9pt;
+}

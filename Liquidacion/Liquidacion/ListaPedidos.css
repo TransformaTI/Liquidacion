@@ -1,0 +1,148 @@
+﻿.HeaderMainStyle
+{
+	background-image: url(images/bg1.png);
+	border-width: 0px;
+	background-repeat:repeat-x;
+	font-weight: bold;
+	color: Black;
+	text-align: center;
+	height: 22px;
+	font-size: 9pt;
+}
+
+.AlternateHeader
+{
+	background-image: url(images/body_bg.gif);
+}
+
+.HeaderBtnExpand
+{
+	height: 24px;
+	width: 22Px;
+}
+
+.HeaderIconBox
+{
+	height: 24px;
+	width: 22Px;
+}
+
+.HeaderPedido
+{
+	height: 24px;	
+	width: 120px; 
+}
+
+.HeaderCliente
+{
+	height: 24px;	
+	width: 110px; 
+}
+
+.HeaderNombre
+{
+	height: 24px;	
+	width: 225px; 
+}
+
+.HeaderLitros
+{
+	height: 24px;	
+	width: 80px; 
+}
+
+.HeaderPrecio
+{
+	height: 24px;	
+	width: 80px; 
+}
+
+.HeaderImporte
+{
+	height: 24px;	
+	width: 90px; 
+}
+
+.HeaderFormaPago
+{
+	height: 24px;	
+	width: 130px; 
+}
+/*
+.HeaderFolioRemision
+{
+	height: 24px;	
+	width: 60px; 
+}
+*/
+.ContentMainStyle
+{
+	font-family: Tahoma;
+	font-size:8pt;
+}
+
+.ContentBtnExpand
+{
+	/*width: 20px;*/
+}
+
+.ContentImgStatus
+{
+}
+
+.ContentImgCredito
+{
+}
+
+.ContentPedido
+{
+	/*width: 100px; */
+}
+
+.ContentCliente
+{
+	/*width: 100px;*/
+}
+
+.ContentNombre
+{
+	/*width: 225px; */
+	/*color: Red;*/
+}
+
+.ContentLitros
+{
+	/*width: 75px; */
+	text-align: right;
+}
+
+.ContentPrecio
+{
+	/*width: 75px; */
+	text-align: right;
+}
+
+
+.ContentImporte
+{
+	/*width: 75px;*/
+	text-align: right;
+}
+
+.ContentFormaPago
+{
+	/*width: 100px;*/
+	text-align: center;
+}
+
+.ContentFolioRemision
+{
+	/*width: 100px;*/
+	text-align: center;
+}
+
+.OversizedText
+{
+	overflow: hidden;
+	white-space: nowrap;
+}

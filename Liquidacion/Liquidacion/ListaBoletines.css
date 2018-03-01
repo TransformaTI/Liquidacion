@@ -1,0 +1,117 @@
+﻿.HeaderMainStyle
+{
+	background-image: url(images/limeGreenHStrip.jpg);
+	background-repeat:repeat-x;
+	font-weight: bold;
+	color: White;
+	text-align: center;
+	height: 26px;
+}
+
+.HeaderBtnExpand
+{
+	width: 20px;
+}
+
+.HeaderPedido
+{
+	width: 80px; 
+}
+
+.HeaderRuta
+{
+	width: 50px;
+}
+
+.HeaderFAlta
+{
+	width: 100px;
+}
+
+.HeaderFCompromiso
+{
+	width: 100px;
+}
+
+.HeaderCliente
+{
+	width: 100px; 
+}
+
+.HeaderNombre
+{
+	width: 225px; 
+}
+
+.HeaderPrioridad
+{
+	width: 100px;
+}
+
+.HeaderAtendio
+{
+	width: 100px;
+}
+
+.HeaderStatus
+{
+	width: 100px;
+}
+
+.ContentMainStyle
+{
+	font-family: Tahoma;
+}
+
+.ContentBtnExpand
+{
+}
+
+.ContentPedido
+{
+}
+
+.ContentRuta
+{
+	text-align: right;	
+}
+
+.ContentFAlta
+{
+	text-align: center;
+}
+
+.ContentFCompromiso
+{
+	text-align: center;
+}
+
+.ContentCliente
+{
+	text-align: right;
+}
+
+.ContentNombre
+{
+	margin-left:10px;
+	margin-right:10px;
+	color: Red;
+}
+
+.OversizedText
+{
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.ContentPrioridad
+{
+}
+
+.ContentAtendio
+{
+}
+
+.ContentEstatus
+{
+}

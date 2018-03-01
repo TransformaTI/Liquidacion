@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--            
+_dtListaPedido.Columns.Add("ID", System.Type.GetType("System.Int32"));
+_dtListaPedido.Columns.Add("Status", System.Type.GetType("System.String"));
+_dtListaPedido.Columns.Add("PedidoReferencia", System.Type.GetType("System.String"));
+_dtListaPedido.Columns.Add("Cliente", System.Type.GetType("System.Int32"));
+_dtListaPedido.Columns.Add("Nombre", System.Type.GetType("System.String"));
+_dtListaPedido.Columns.Add("Litros", System.Type.GetType("System.Double"));
+_dtListaPedido.Columns.Add("Precio", System.Type.GetType("System.Decimal"));
+_dtListaPedido.Columns.Add("Importe", System.Type.GetType("System.Decimal"));
+_dtListaPedido.Columns.Add("FormaPago", System.Type.GetType("System.Byte"));
+_dtListaPedido.Columns.Add("FormaPagoDescripcion", System.Type.GetType("System.String"));
+_dtListaPedido.Columns.Add("TipoPedido", System.Type.GetType("System.Byte"));
+_dtListaPedido.Columns.Add("SerieRemision", System.Type.GetType("System.String"));
+_dtListaPedido.Columns.Add("Remision", System.Type.GetType("System.Int64"));
+_dtListaPedido.Columns.Add("FolioRemision", System.Type.GetType("System.String"));
+_dtListaPedido.Columns.Add("Origen", System.Type.GetType("System.Int32"));//Rampac,RI,Captura
+_dtListaPedido.Columns.Add("ConsecutivoOrigen", System.Type.GetType("System.Int64"));
+-->
+<Columns>
+  <Column>
+    <Name>colBtnExpand</Name>
+    <Caption></Caption>
+    <DataField></DataField>
+    <Type>ControlBox</Type>
+    <Format></Format>
+    <DisplayStyle>Normal</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderBtnExpand</HeaderCssClass>
+    <ContentCssClass>ContentBtnExpand</ContentCssClass>
+  </Column>
+  <Column>
+    <Name>colImgStatus</Name>
+    <Caption></Caption>
+    <DataField></DataField>
+    <Type>AlternatingIconBox1</Type>
+    <Format></Format>
+    <DisplayStyle>Normal</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderIconBox</HeaderCssClass>
+    <ContentCssClass>ContentImgStatus</ContentCssClass>
+  </Column>
+  <Column>
+    <Name>colImgCredito</Name>
+    <Caption></Caption>
+    <DataField></DataField>
+    <Type>AlternatingIconBox2</Type>
+    <Format></Format>
+    <DisplayStyle>Normal</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderIconBox</HeaderCssClass>
+    <ContentCssClass>ContentImgCredito</ContentCssClass>
+  </Column>
+  <Column>
+    <Name>colPedido</Name>
+    <Caption>Remisión</Caption>
+    <DataField>FolioRemision</DataField>
+    <Type>Text</Type>
+    <Format></Format>
+    <DisplayStyle>Normal</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderPedido</HeaderCssClass>
+    <ContentCssClass>ContentMainStyle ContentPedido</ContentCssClass>
+  </Column>
+  <Column>
+    <Name>colCliente</Name>
+    <Caption>Cliente</Caption>
+    <DataField>Cliente</DataField>
+    <Type>Text</Type>
+    <Format></Format>
+    <DisplayStyle>Normal</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderCliente</HeaderCssClass>
+    <ContentCssClass>ContentMainStyle ContentCliente</ContentCssClass>
+  </Column>
+  <Column>
+    <Name>colNombre</Name>
+    <Caption>Nombre</Caption>
+    <DataField>Nombre</DataField>
+    <Type>Text</Type>
+    <Format></Format>
+    <DisplayStyle>OversizedField</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderNombre</HeaderCssClass>
+    <ContentCssClass>ContentMainStyle ContentNombre</ContentCssClass>
+    <OversizedCssClass>ContentNombre OversizedText</OversizedCssClass>
+  </Column>
+  <Column>
+    <Name>colLitros</Name>
+    <Caption>Litros</Caption>
+    <DataField>Litros</DataField>
+    <Type>FormattedText</Type>
+    <Format>0.00</Format>
+    <DisplayStyle>Normal</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderLitros</HeaderCssClass>
+    <ContentCssClass>ContentMainStyle ContentLitros</ContentCssClass>
+  </Column>
+  <column>
+    <name>colprecio</name>
+    <caption>p.l.</caption>
+    <datafield>precio</datafield>
+    <type>Text</type>
+    <format></format>
+    <displaystyle>normal</displaystyle>
+    <headercssclass>headermainstyle headerprecio</headercssclass>
+    <contentcssclass>contentmainstyle contentprecio</contentcssclass>
+  </column>
+  <Column>
+    <Name>colImporte</Name>
+    <Caption>Importe</Caption>
+    <DataField>Importe</DataField>
+    <Type>FormattedText</Type>
+    <Format>$ 0.00</Format>
+    <DisplayStyle>Normal</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderImporte</HeaderCssClass>
+    <ContentCssClass>ContentMainStyle ContentImporte</ContentCssClass>
+  </Column>
+  <Column>
+    <Name>colFormaPago</Name>
+    <Caption>Forma de Pago</Caption>
+    <DataField>FormaPagoDescripcion</DataField>
+    <Type>Text</Type>
+    <Format></Format>
+    <DisplayStyle>Normal</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderFormaPago</HeaderCssClass>
+    <ContentCssClass>ContentMainStyle ContentFormaPago</ContentCssClass>
+  </Column>
+  <!--<Column>
+    <Name>colRemision</Name>
+    <Caption>Remisión</Caption>
+    <DataField>FolioRemision</DataField>
+    <Type>Text</Type>
+    <Format></Format>
+    <DisplayStyle>Normal</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderFolioRemision</HeaderCssClass>
+    <ContentCssClass>ContentMainStyle ContentFolioRemision</ContentCssClass>
+  </Column>-->
+</Columns>

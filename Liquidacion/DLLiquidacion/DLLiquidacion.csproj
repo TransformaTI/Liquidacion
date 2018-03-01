@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Proyectos\SigametLiquidacion\DLLiquidacion.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2A7F0835-420F-4917-AF00-A1FA0A00DD05}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>DLLiquidacion</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>SigametLiquidacion</RootNamespace>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DocumentosBSR">
+      <HintPath>..\Liquidacion\Bin\DocumentosBSR.dll</HintPath>
+    </Reference>
+    <Reference Include="SGDAC">
+      <HintPath>..\Liquidacion\Bin\SGDAC.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine" />
+    <Reference Include="System" />
+    <Reference Include="System.Web" />
+    <Reference Include="CrystalDecisions.Shared" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Clase_Reporte.cs" />
+    <Compile Include="FolioLiquidacion.cs" />
+    <Compile Include="RegistroBitacora.cs" />
+    <Compile Include="AdministracionUsuarios.cs" />
+    <Compile Include="Seguridad.cs" />
+    <Compile Include="Datos.cs" />
+    <Compile Include="DatosPrecio.cs" />
+    <Compile Include="Precio.cs" />
+    <Compile Include="Tripulacion.cs" />
+    <Compile Include="Parametros.cs" />
+    <Compile Include="Boletines.cs" />
+    <Compile Include="ControlDeCredito.cs" />
+    <Compile Include="FoliosPendientes.cs" />
+    <Compile Include="DatosFoliosPendientes.cs" />
+    <Compile Include="DatosFolio.cs" />
+    <Compile Include="DatosTripulacion.cs" />
+    <Compile Include="DatosPedido.cs" />
+    <Compile Include="DatosCliente.cs" />
+    <Compile Include="DatosCatalogos.cs" />
+    <Compile Include="DatosBoletin.cs" />
+    <Compile Include="DatosParametros.cs" />
+    <Compile Include="DatosSeleccionRuta.cs" />
+    <Compile Include="DatosSeguridad.cs" />
+    <Compile Include="DatosRegistroPago.cs" />
+    <Compile Include="DatosAdministracionUsuario.cs" />
+    <Compile Include="DatosBitacora.cs" />
+    <Compile Include="ControlDeDescuento.cs" />
+    <Compile Include="SeleccionRuta.cs" />
+    <Compile Include="TipoOperacionPedido.cs" />
+    <Compile Include="TipoDesasignacionPedido.cs" />
+    <Compile Include="TipoOperacionDescarga.cs" />
+    <Compile Include="TipoLayoutControl.cs" />
+    <Compile Include="ParametrosLiquidacion.cs" />
+    <Compile Include="Catalogos.cs" />
+    <Compile Include="RegistroPago.cs" />
+    <Compile Include="Pedido.cs" />
+    <Compile Include="DatosControlDeRemisiones.cs" />
+    <Compile Include="ControlDeRemisiones.cs" />
+    <Compile Include="Cliente.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-2.1.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Scripts\jquery-2.1.4.min.map" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

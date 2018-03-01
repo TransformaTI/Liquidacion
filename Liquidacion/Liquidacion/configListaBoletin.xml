@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--            
+_dtListaPedido.Columns.Add("ID", System.Type.GetType("System.Int32"));
+_dtListaPedido.Columns.Add("Status", System.Type.GetType("System.String"));
+_dtListaPedido.Columns.Add("PedidoReferencia", System.Type.GetType("System.String"));
+_dtListaPedido.Columns.Add("Cliente", System.Type.GetType("System.Int32"));
+_dtListaPedido.Columns.Add("Nombre", System.Type.GetType("System.String"));
+_dtListaPedido.Columns.Add("Litros", System.Type.GetType("System.Double"));
+_dtListaPedido.Columns.Add("Precio", System.Type.GetType("System.Decimal"));
+_dtListaPedido.Columns.Add("Importe", System.Type.GetType("System.Decimal"));
+_dtListaPedido.Columns.Add("FormaPago", System.Type.GetType("System.Byte"));
+_dtListaPedido.Columns.Add("FormaPagoDescripcion", System.Type.GetType("System.String"));
+_dtListaPedido.Columns.Add("TipoPedido", System.Type.GetType("System.Byte"));
+_dtListaPedido.Columns.Add("SerieRemision", System.Type.GetType("System.String"));
+_dtListaPedido.Columns.Add("Remision", System.Type.GetType("System.Int64"));
+_dtListaPedido.Columns.Add("FolioRemision", System.Type.GetType("System.String"));
+_dtListaPedido.Columns.Add("Origen", System.Type.GetType("System.Int32"));//Rampac,RI,Captura
+_dtListaPedido.Columns.Add("ConsecutivoOrigen", System.Type.GetType("System.Int64"));
+-->
+<Columns>
+  <Column>
+    <Name>colBtnExpand</Name>
+    <Caption></Caption>
+    <DataField></DataField>
+    <Type>ControlBox</Type>
+    <Format></Format>
+    <DisplayStyle>Normal</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderBtnExpand</HeaderCssClass>
+    <ContentCssClass>HeaderBtnExpand ContentMainStyle ContentBtnExpand</ContentCssClass>
+  </Column>
+  <Column>
+    <Name>colPedido</Name>
+    <Caption>Pedido</Caption>
+    <DataField>PedidoReferencia</DataField>
+    <Type>Text</Type>
+    <Format></Format>
+    <DisplayStyle>Normal</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderPedido</HeaderCssClass>
+    <ContentCssClass>ContentMainStyle ContentPedido</ContentCssClass>
+  </Column>
+  <Column>
+    <Name>colRuta</Name>
+    <Caption>Ruta</Caption>
+    <DataField>Ruta</DataField>
+    <Type>Text</Type>
+    <Format></Format>
+    <DisplayStyle>Normal</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderRuta</HeaderCssClass>
+    <ContentCssClass>ContentMainStyle ContentRuta</ContentCssClass>
+  </Column>
+  <Column>
+    <Name>colFAlta</Name>
+    <Caption>F. Alta</Caption>
+    <DataField>FAlta</DataField>
+    <Type>FormattedDate</Type>
+    <Format>d</Format>
+    <DisplayStyle>Normal</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderFAlta</HeaderCssClass>
+    <ContentCssClass>ContentMainStyle ContentFAlta</ContentCssClass>
+  </Column>
+  <Column>
+    <Name>colFCompromiso</Name>
+    <Caption>F. Compromiso</Caption>
+    <DataField>FCompromiso</DataField>
+    <Type>FormattedDate</Type>
+    <Format>d</Format>
+    <DisplayStyle>Normal</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderFCompromiso</HeaderCssClass>
+    <ContentCssClass>ContentMainStyle ContentFCompromiso</ContentCssClass>
+  </Column>
+  <Column>
+    <Name>colCliente</Name>
+    <Caption>Cliente</Caption>
+    <DataField>Cliente</DataField>
+    <Type>Text</Type>
+    <Format></Format>
+    <DisplayStyle>Normal</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderCliente</HeaderCssClass>
+    <ContentCssClass>ContentMainStyle ContentCliente</ContentCssClass>
+  </Column>
+  <Column>
+    <Name>colNombre</Name>
+    <Caption>Nombre</Caption>
+    <DataField>Nombre</DataField>
+    <Type>Text</Type>
+    <Format></Format>
+    <DisplayStyle>OversizedField</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderNombre</HeaderCssClass>
+    <ContentCssClass>ContentMainStyle ContentNombre</ContentCssClass>
+    <OversizedCssClass>OversizedText</OversizedCssClass>
+  </Column>
+  <Column>
+    <Name>colPrioridad</Name>
+    <Caption>Prioridad</Caption>
+    <DataField>PrioridadPedidoDescripcion</DataField>
+    <Type>Text</Type>
+    <Format></Format>
+    <DisplayStyle>Normal</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderPrioridad</HeaderCssClass>
+    <ContentCssClass>ContentMainStyle ContentPrioridad</ContentCssClass>
+  </Column>
+  <Column>
+    <Name>colAtendio</Name>
+    <Caption>Atendió</Caption>
+    <DataField>Usuario</DataField>
+    <Type>Text</Type>
+    <Format></Format>
+    <DisplayStyle>Normal</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderAtendio</HeaderCssClass>
+    <ContentCssClass>ContentMainStyle ContentAtendio</ContentCssClass>
+  </Column>
+  <Column>
+    <Name>colEstatus</Name>
+    <Caption>Estatus</Caption>
+    <DataField>StatusBoletin</DataField>
+    <Type>Text</Type>
+    <Format></Format>
+    <DisplayStyle>Normal</DisplayStyle>
+    <HeaderCssClass>HeaderMainStyle HeaderEstatus</HeaderCssClass>
+    <ContentCssClass>ContentMainStyle ContentEstatus</ContentCssClass>
+  </Column>
+</Columns>

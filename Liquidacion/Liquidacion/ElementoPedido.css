@@ -1,0 +1,62 @@
+﻿.TableStyle
+{
+	background:#e1f8e2;
+	width:175px;
+}
+
+.TagLabel
+{
+	font-weight:bold;
+	color:Black;
+}
+
+.FieldNumeroPedido
+{
+	font-weight:bold;
+	color:#406062;
+}
+
+.FieldCelulaRuta
+{
+	font-weight:bold;
+	color:#749357;
+}
+
+.LocalHeaders
+{
+	font-weight:bold;
+	color:Black;
+}
+
+.WarningLabels
+{
+	font-weight:bold;
+	color:Red;
+}
+
+.ClientTextBox
+{
+	font-weight:bold;
+	color:#476F68;
+}
+
+.MiscFields
+{
+	font-weight:bold;
+	color:#146402;
+}
+
+.HorizontalLayoutCapturable
+{
+	width:100px;
+}
+
+.SubDetailBackGround
+{
+	background:#e1f8e2;
+}
+
+.SubDetailCellBackGround
+{
+	background-image: url(images/Betel_Green_background_top_bottom.jpg);
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0">
+ 
+  <siteMapNode>
+    <siteMapNode>
+      <siteMapNode title="Liquidaciones Activas" url ="~/LiquidacionesActivas.aspx"  description="Consultar las Liquidaciones Activas por usuario">
+      </siteMapNode>
+      <siteMapNode title="Asignacion" url ="~/Asignacion.aspx"  description="Asignar Usuarios a Celulas">
+      </siteMapNode>
+      <siteMapNode title="Cancelación" url ="~/Cancelacion.aspx"  description="Cancelación de Liquidaciones">
+      </siteMapNode>
+      <siteMapNode title="Remisiones" url="~/LiquidacionCorreccionRemision.aspx" description ="Corrección de captura de remisiones">
+      </siteMapNode>
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>  

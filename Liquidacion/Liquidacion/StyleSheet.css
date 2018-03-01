@@ -1,0 +1,267 @@
+﻿body, div, p, h1, h2, h3, h4, ul, li, table
+{
+	border-style: none;
+	/*border-color: inherit;*/
+	/*border-width: medium;*/
+	margin: 0;
+	padding: 0;
+	/*width: 252px;*/
+}
+
+body
+{
+	background: #B4B4B4 url(images/body_bg.gif) repeat left top;
+	font-family: Tahoma, Arial, sans-serif;
+	font-size:75%;
+}
+table
+{
+	background-color:White;
+	text-align:left;
+	/*height: 29px;*/
+}
+/*Layout Tables*/
+.rightColumn
+{
+	width:825px;
+}
+.leftColum
+{
+	width:175px;
+}
+.genericHeader
+{
+	
+}
+/*Collapsible panels*/
+/*CollapsiblePanel*/
+.collapsePanel 
+{
+	background-color:white;
+	overflow:hidden;
+}
+.collapsePanelHeader
+{
+	width:100%;
+	height:30px;
+	background-image: url(images/bg1.png);
+	background-repeat:repeat-x;
+	color:#FFF;
+	font-weight:bold;
+	
+}
+.containsPanel
+{
+	width:100%;
+	height:300px;
+}
+/* Rounded Corners*/
+.roundedPanel
+{	
+	width:300px;
+	background-color:#5377A9;
+	color:white;
+	font-weight:bold;
+}
+/**/
+.calendarTextBox
+{
+	width:80px;
+}
+.miscLabel
+{
+	color:#B4B4B4;
+	font-weight:bold;
+}
+.leftTableLabel
+{
+	width:100px;
+	text-align:left;
+	font-weight:bold;
+}
+.contentTableLabel
+{
+	width:100px;
+	text-align:right;
+	font-weight:bold;
+}
+
+.buttonZone
+{
+	text-align:right;
+}
+
+/* Captura de Pagos */
+.textboxcaptura
+{
+	font-weight:bold;
+	color:#476F68;
+	font-size:13px;
+	font-family: Tahoma;	
+}
+.labeltipopago
+{
+	font-family: Tahoma;
+	color: #6E6E6E;
+	Font-Size: 11px;
+	font-style: normal;
+	font-weight: 600;
+}
+.labeltipopagoforma
+{
+	font-family:Arial;
+	color: #404040;
+	Font-Size: 11px;
+	font-style: normal;
+	font-weight: 600;
+}
+.CollapsePanelCheque
+{
+	background-color: #339933;
+	overflow:hidden;
+	Height:0;
+}
+.CollapsePanelTarjeta
+{
+	background-color:#E2DED6;
+	overflow:hidden;
+	Height:0;
+}
+.CollapsePanelVale
+{
+	background-color:#284775;
+	overflow:hidden;
+	Height:0;
+}
+/*GridViewCSS*/ 
+.GridViewStyle 
+{ 
+    font-family: Arial, Sans-Serif; 
+    font-size:small; 
+    table-layout: auto; 
+    border-collapse: collapse; 
+    border: #1d1d1d 5px solid; 
+} 
+
+/*Header and Pager styles*/ 
+
+.HeaderStyle, .PagerStyle /*Common Styles*/ 
+
+{ 
+    background-image: url(Images/HeaderGlassBlack.jpg); 
+    background-position:center; 
+    background-repeat:repeat-x; 
+    background-color:#6D7B8D;
+} 
+.HeaderStyle th 
+{ 
+    padding: 5px; 
+    color: #ffffff; 
+} 
+.HeaderStyle a 
+{ 
+    text-decoration:none; 
+    color:#848484; 
+    display:block; 
+    text-align:left; 
+    font-weight:normal; 
+} 
+
+.PagerStyle table 
+{ 
+    text-align:center; 
+    margin:auto; 
+} 
+
+.PagerStyle table td 
+{ 
+    border:0px; 
+    padding:5px; 
+} 
+
+.PagerStyle td 
+{ 
+    border-top: #1d1d1d 3px solid; 
+} 
+.PagerStyle a 
+{ 
+    color:#ffffff; 
+    text-decoration:none; 
+    padding:2px 10px 2px 10px; 
+    border-top:solid 1px #777777; 
+    border-right:solid 1px #333333; 
+    border-bottom:solid 1px #333333; 
+    border-left:solid 1px #777777; 
+} 
+
+.PagerStyle span 
+{ 
+    font-weight:bold; 
+    color:#FFFFFF; 
+    text-decoration:none; 
+    padding:2px 10px 2px 10px; 
+} 
+/*RowStyles*/ 
+.RowStyle td, .AltRowStyle td, .SelectedRowStyle td, .EditRowStyle td /*Common Styles*/ 
+{ 
+    padding: 2px; 
+    border-right: solid 1px #1d1d1d; 
+} 
+.RowStyle td 
+{ 
+    background-color: #D8D8D8; 
+} 
+.AltRowStyle td 
+{ 
+    background-color: #E0E0F8; 
+} 
+.SelectedRowStyle td 
+{ 
+    background-color: #A9D0F5;
+} 
+.modalBackground 
+{
+	background-color:Gray;
+	filter:alpha(opacity=30);
+	opacity:0.7;
+}
+
+/*Menu Style */
+
+#areaMenuPrincipal 
+{
+	/*background-color:#F2F2F2;
+	font-style:normal;
+	font-size:small;*/
+}
+#areaMenuPrincipal .item {
+	
+	/*border-style:Solid; 
+	border-color:#B3C3D2;
+	 
+	color:#333333; 
+	cursor:Pointer;
+	text-align:center;*/
+}
+#areaMenuPrincipal .itemSubMenu 
+{
+	padding:0px 2px;
+	border-width:1px 1px 1px 1px; 
+	height:20px;
+	border-style:Solid;
+	/*border-color:#FFFFFF;*/
+	background-color:#B3C3D2;
+	color:#333333; 
+	cursor:Pointer;
+	text-indent:10px;
+    text-align: left;
+}
+#areaMenuPrincipal .selected {
+	background-color:#6A6D70; 
+	color:#FFFFFF;
+}
+#areaMenuPrincipal .hover {
+	color:#FFFFFF; 
+	background-color:#6A6D70;
+		
+}

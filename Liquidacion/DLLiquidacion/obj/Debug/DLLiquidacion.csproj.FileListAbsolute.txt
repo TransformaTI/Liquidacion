@@ -1,0 +1,8 @@
+D:\TFSGM\SigametLiquidacion\Liquidacion\DLLiquidacion\bin\Debug\DLLiquidacion.dll
+D:\TFSGM\SigametLiquidacion\Liquidacion\DLLiquidacion\bin\Debug\DLLiquidacion.pdb
+D:\TFSGM\SigametLiquidacion\Liquidacion\DLLiquidacion\bin\Debug\DocumentosBSR.dll
+D:\TFSGM\SigametLiquidacion\Liquidacion\DLLiquidacion\bin\Debug\SGDAC.dll
+D:\TFSGM\SigametLiquidacion\Liquidacion\DLLiquidacion\bin\Debug\stdole.dll
+D:\TFSGM\SigametLiquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.csproj.CoreCompileInputs.cache
+D:\TFSGM\SigametLiquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.dll
+D:\TFSGM\SigametLiquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.pdb

@@ -1,0 +1,1 @@
+Data Source=192.168.1.26;Initial Catalog=Sigamet;User ID=LIQWEB;Password=LIQWEB01;

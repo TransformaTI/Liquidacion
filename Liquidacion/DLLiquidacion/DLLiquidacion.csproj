@@ -7,7 +7,7 @@
     <ProjectGuid>{2A7F0835-420F-4917-AF00-A1FA0A00DD05}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>DLLiquidacion</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <RootNamespace>SigametLiquidacion</RootNamespace>
     <FileUpgradeFlags>
@@ -34,6 +34,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>

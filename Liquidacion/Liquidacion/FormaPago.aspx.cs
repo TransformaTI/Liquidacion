@@ -17,6 +17,7 @@ using SigametLiquidacion;
 
 public partial class FormaPago : System.Web.UI.Page
 {
+    #region variables
     DataTable dtPedidos = new DataTable();
     RegistroPago rp = new RegistroPago();
     DataTable dtCobro = new DataTable();
@@ -24,21 +25,44 @@ public partial class FormaPago : System.Web.UI.Page
     DataSet ds = new DataSet();
     DataTable dtPagos;
     DataTable dtCobros;
-    DataTable dtMovimientos;    
+    DataTable dtMovimientos;
+    DataTable dtPagosConTarjeta; // mcc 2018 05 10
+
     string pagoActivo;
+    #endregion
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        #region "Propiedades Controles"
+        #region validaciones postback 
+        if (Page.IsPostBack)
+        {
+                if (Request.Form["__EVENTTARGET"] == "ConsultaTPV")
+            {
+                HiddenInput.Value = "ConsultaTPV";
+                if (txtClienteTarjeta.Text!=string.Empty)
+                {
+                    ConsultarCargoTarjeta(int.Parse(txtClienteTarjeta.Text));
+                }
+            }
+        }
 
-       imbAceptar.Attributes.Add("onclick", "return confirmar(" + (char)39 + imbAceptar.UniqueID + (char)39 + ")");
+        else
+        {
+
+            HiddenInput.Value = "";
+            HiddenInputPCT.Value = "";
+        }
+        #endregion
+
+        #region "Propiedades Controles"
+        imbAceptar.Attributes.Add("onclick", "return confirmar(" + (char)39 + imbAceptar.UniqueID + (char)39 + ")");
         imbAceptarTDC.Attributes.Add("onclick", "return confirmar(" + (char)39 + imbAceptarTDC.UniqueID + (char)39 + ")");
         imbAceptarVale.Attributes.Add("onclick", "return confirmar(" + (char)39 + imbAceptarVale.UniqueID + (char)39 + ")");
 
 
         txtLectorCheque.Attributes.Add("onkeyup", "return txtCuentaDocumento();");
         txtClienteCheque.Attributes.Add("onblur", "ObtenerCliente(" + (char)39 + txtClienteCheque.UniqueID + (char)39 + "," + (char)39 + txtNombreClienteCheque.UniqueID + (char)39 + ")");
-        txtClienteTarjeta.Attributes.Add("onblur", "ObtenerCliente(" + (char)39 + txtClienteTarjeta.UniqueID + (char)39 + "," + (char)39 + txtNombreClienteTarjeta.UniqueID + (char)39 + ")");
+       // txtClienteTarjeta.Attributes.Add("onblur", "ObtenerCliente(" + (char)39 + txtClienteTarjeta.UniqueID + (char)39 + "," + (char)39 + txtNombreClienteTarjeta.UniqueID + (char)39 + ")");
         txtClienteVale.Attributes.Add("onblur", "ObtenerCliente(" + (char)39 + txtClienteVale.UniqueID + (char)39 + "," + (char)39 + txtValeNombre.UniqueID + (char)39 + ")");
 
         imgCheque.Attributes.Add("onclick", "toggle('display', 'cheque', 'tarjeta', 'vale', " + (char)39 + txtLectorCheque.UniqueID + (char)39 + ")");
@@ -83,9 +107,11 @@ public partial class FormaPago : System.Web.UI.Page
        imbEfectivo.Attributes.Add("onclick", "return confirm('¿Desea enviar todos los pedidos a Pago en Efectivo?')");
        imbCancelar.Attributes.Add("onclick", "return confirm('¿Desea Cancelar los Pagos Capturados?')");
 
+        txtClienteTarjeta.Attributes.Add("onblur", "return ConsultaPagosTPV()");
+
         #endregion
 
-       if (!Page.IsPostBack)
+        if (!Page.IsPostBack)
        {
            LlenaDropDowns();
        }
@@ -841,5 +867,48 @@ public partial class FormaPago : System.Web.UI.Page
     protected void imbResumen_Click(object sender, ImageClickEventArgs e)
     {
         Response.Redirect("GenerarPago.aspx");
+    }
+    /// <summary>
+    /// Consulta Pagos Con Tarjeta del Cliente
+    /// </summary>
+    /// <param name="NumCliente"></param>
+    private void ConsultarCargoTarjeta(int NumCliente)
+    {
+        DataTable dtDatosControlUsuario = new DataTable();
+        dtDatosControlUsuario.Columns.Add("Banco", typeof(string));
+        dtDatosControlUsuario.Columns.Add("Numero Tarjeta", typeof(string));
+        dtDatosControlUsuario.Columns.Add("Importe", typeof(string));    
+        dtDatosControlUsuario.Columns.Add("Fecha", typeof(string));
+
+        dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text));
+        if (dtPagosConTarjeta.Rows.Count >0)
+         {
+            HiddenInputPCT.Value = "Si";
+            HiddenInputNumPagos.Value = dtPagosConTarjeta.Rows.Count.ToString();
+
+            if (dtPagosConTarjeta.Rows.Count > 1)
+                {
+                        foreach ( DataRow row in dtPagosConTarjeta.Rows)
+                    {
+                        dtDatosControlUsuario.Rows.Add(row["NombreBanco"].ToString(), row["NumeroTarjeta"].ToString(), row["Importe"].ToString(), row["FAlta"].ToString());
+                    }
+                    wucConsultaCargoTarjetaCliente1.dtPagosContarjeta = dtDatosControlUsuario;
+              }
+            else
+            {
+                txtNombreClienteTarjeta.Text = dtPagosConTarjeta.Rows[0]["NombreCliente"].ToString();
+            }
+
+        }
+        else
+        {
+            HiddenInputPCT.Value = "No";
+
+        }
+    }
+
+    protected void TtxtClienteTarjeta_TextChanged(object sender, EventArgs e)
+    {
+
     }
 }   

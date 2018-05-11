@@ -12,13 +12,16 @@ namespace SigametLiquidacion
 {
   public class DatosRegistroPago : Datos
   {
+   #region variables
     private DataTable dtPedidos;
     private DataTable dtBancos;
     private DataTable dtCliente;
     private DataTable dtPromociones;
     private DataTable dtAutoTanque;
-
-    public DataTable Pedidos
+    private DataTable dtPagosConTarjeta;
+        #endregion
+        #region propiedades
+        public DataTable Pedidos
     {
       get
       {
@@ -58,7 +61,18 @@ namespace SigametLiquidacion
       }
     }
 
-    public void CargaPedidos()
+    public DataTable PagosConTarjeta
+        {
+            get
+            {
+                return this.dtPagosConTarjeta;
+            }
+
+        }
+        #endregion
+
+
+        public void CargaPedidos()
     {
       this.dtPedidos = new DataTable();
       this._dataAccess.LoadData(this.dtPedidos, "SELECT p.litros,p.pedidoreferencia,p.Cliente,isnull(p.total,0) as total,isnull(p.saldo,0) as saldo,p.celula,p.añoped,p.pedido,'Pedido: '+rtrim(convert(varchar,p.pedidoreferencia))+' Cliente: '+convert(varchar,p.cliente)+' '+substring(rtrim(c.nombre),0,20)+' Litros: '+convert(varchar,isnull(p.litros,0)) as Descripcion from pedido p inner join cliente c on (p.cliente = c.cliente) where AñoAtt = 2008 AND Folio = 45980 AND p.tipocobro = 5", CommandType.Text, (SqlParameter[]) null, true);
@@ -85,8 +99,23 @@ namespace SigametLiquidacion
       this.dtCliente = new DataTable();
       this._dataAccess.LoadData(this.dtCliente, "spLIQ2ConsultaDatosCliente", CommandType.StoredProcedure, sqlParameterArray, true);
     }
+        /// <summary>
+        /// Devuelve datatable con pagos de tarjeta del cliente
+        /// </summary>
+        /// <param name="NumCliente"></param>
+    public void CargaPagosConTarjeta(int NumCliente)
+    {
+         SqlParameter[] sqlParameterArray = new SqlParameter[1]
+         {
+        new SqlParameter("@Cliente",NumCliente)
+         };
+            this.dtPagosConTarjeta = new DataTable();
+            this._dataAccess.LoadData(this.dtPagosConTarjeta, "spCBConsultarCargoTarjetaCliente", CommandType.StoredProcedure, sqlParameterArray, true);
+        }
 
-    private void CobroEnEfectivo(string Usuario, DataTable dtPedidos, ref DataTable dtPago, ref DataTable dtDetallePago)
+
+
+        private void CobroEnEfectivo(string Usuario, DataTable dtPedidos, ref DataTable dtPago, ref DataTable dtDetallePago)
     {
       DataRow[] dataRowArray = dtPedidos.Select("Saldo > 0");
       DataRow row1 = (DataRow) null;

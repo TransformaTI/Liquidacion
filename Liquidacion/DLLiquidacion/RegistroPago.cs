@@ -20,6 +20,7 @@ namespace SigametLiquidacion
     private DataTable dtCelulas = new DataTable();
     private DataTable dtPromociones = new DataTable();
     private DatosRegistroPago _datos = new DatosRegistroPago();
+    private DataTable dtPagosConTarjeta = new DataTable(); // mcc 2018 05 10
 
     public DataTable ListaPedidos()
     {
@@ -48,6 +49,15 @@ namespace SigametLiquidacion
       this.dtPromociones = this._datos.Promociones;
       return this.dtPromociones;
     }
+
+     public DataTable PagosConTarjeta(int NumCliente)
+        {
+            this._datos.CargaPagosConTarjeta(NumCliente);
+            this.dtPagosConTarjeta = this._datos.PagosConTarjeta;
+            return this.dtPagosConTarjeta;
+
+        }
+
 
     public void GuardaPagos(string Usuario, DataTable dtPedidos, DataTable dtPago, DataTable dtDetallePago, DataTable dtResumenLiquidacion)
     {

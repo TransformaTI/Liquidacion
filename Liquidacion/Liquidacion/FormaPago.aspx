@@ -809,21 +809,28 @@
 
 
     <asp:LinkButton ID="lnkDummy" runat="server"></asp:LinkButton>
-<ccR:ModalPopupExtender ID="ModalPopupExtender1" BehaviorID="mpe" runat="server"
-    PopupControlID="pnlPopup" TargetControlID="lnkDummy" BackgroundCssClass="modalBackground" >
-</ccR:ModalPopupExtender>
-<asp:Panel ID="pnlPopup" runat="server" CssClass="modalPopup" Style="display: none;align-content:center">
-    <div class="header">
-        
-    </div>
-    <div class="body"  style="align-content:center">
-        <uc1:wucConsultaCargoTarjetaCliente runat="server" id="wucConsultaCargoTarjetaCliente1" />
-        <br />
-         <div  style="align-content:center">
-        <asp:Button ID="btnHide" runat="server" Text="Cerrar" OnClientClick="return HideModalPopup()"   />
-         </div>   
-    </div>
-</asp:Panel>
+    <ccR:ModalPopupExtender ID="ModalPopupExtender1" BehaviorID="mpe" runat="server"
+        PopupControlID="pnlPopup" TargetControlID="lnkDummy" BackgroundCssClass="modalBackground">
+    </ccR:ModalPopupExtender>
+    <asp:Panel ID="pnlPopup" runat="server" CssClass="modalPopup" Style="display: none; align-content: center">
+        <div class="header">
+        </div>
+        <div class="body" style="align-content: center; background-color: beige">
+            <uc1:wucConsultaCargoTarjetaCliente runat="server" ID="wucConsultaCargoTarjetaCliente1" />
+            <br />
+            <div style="align-content: center">
+                <table style="width: 100%; align-content: center; background-color: beige;border:thin">
+                    <tr style="align-content: center;">
+                        <td style="text-align: center">
+                            <asp:Button ID="btnHide" runat="server" Text="Cerrar" OnClientClick="return HideModalPopup()" /></td>
+
+                    </tr>
+                </table>
+
+
+            </div>
+        </div>
+    </asp:Panel>
 
     <script type="text/javascript" language="javascript">   
 

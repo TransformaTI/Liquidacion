@@ -875,10 +875,13 @@ public partial class FormaPago : System.Web.UI.Page
     private void ConsultarCargoTarjeta(int NumCliente)
     {
         DataTable dtDatosControlUsuario = new DataTable();
-        dtDatosControlUsuario.Columns.Add("Banco", typeof(string));
-        dtDatosControlUsuario.Columns.Add("Numero Tarjeta", typeof(string));
-        dtDatosControlUsuario.Columns.Add("Importe", typeof(string));    
-        dtDatosControlUsuario.Columns.Add("Fecha", typeof(string));
+
+        dtDatosControlUsuario.Columns.Add("Tipo Cobro", typeof(string));
+        dtDatosControlUsuario.Columns.Add("Tarjeta", typeof(string));
+        dtDatosControlUsuario.Columns.Add("Banco", typeof(string));    
+        dtDatosControlUsuario.Columns.Add("Autorizacion", typeof(string));
+        dtDatosControlUsuario.Columns.Add("Importe", typeof(string));
+        dtDatosControlUsuario.Columns.Add("Observacion", typeof(string));
 
         dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text));
         if (dtPagosConTarjeta.Rows.Count >0)
@@ -890,13 +893,19 @@ public partial class FormaPago : System.Web.UI.Page
                 {
                         foreach ( DataRow row in dtPagosConTarjeta.Rows)
                     {
-                        dtDatosControlUsuario.Rows.Add(row["NombreBanco"].ToString(), row["NumeroTarjeta"].ToString(), row["Importe"].ToString(), row["FAlta"].ToString());
+                        dtDatosControlUsuario.Rows.Add(row["TipoCobro"].ToString(), row["NumeroTarjeta"].ToString(), row["NombreBanco"].ToString(), row["Autorizacion"].ToString(), row["Importe"].ToString(), row["Observacion"].ToString());
                     }
                     wucConsultaCargoTarjetaCliente1.dtPagosContarjeta = dtDatosControlUsuario;
               }
             else
             {
                 txtNombreClienteTarjeta.Text = dtPagosConTarjeta.Rows[0]["NombreCliente"].ToString();
+                txtNoAutorizacionTarjeta.Text= dtPagosConTarjeta.Rows[0]["Autorizacion"].ToString();
+                txtNumTarjeta.Text= dtPagosConTarjeta.Rows[0]["NumeroTarjeta"].ToString();
+                ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
+                ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
+                txtImporteTarjeta.Text = dtPagosConTarjeta.Rows[0]["Importe"].ToString();
+                txtObservacionesTarjeta.Text= dtPagosConTarjeta.Rows[0]["Observacion"].ToString();
             }
 
         }

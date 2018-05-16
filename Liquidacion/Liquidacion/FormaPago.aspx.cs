@@ -39,6 +39,8 @@ public partial class FormaPago : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
             LlenaDropDowns();
+
+
         }
 
         #region validaciones postback 
@@ -50,7 +52,7 @@ public partial class FormaPago : System.Web.UI.Page
                 if (txtClienteTarjeta.Text!=string.Empty)
                 {
                     LimpiarCampos("tarjeta");
-                    ConsultarCargoTarjeta(int.Parse(txtClienteTarjeta.Text), "tarjeta");
+                    ConsultarCargoTarjeta(int.Parse(txtClienteTarjeta.Text), "tarjeta",int.Parse( Session["Ruta"].ToString()),int.Parse( Session["Autotanque"].ToString()));
                 }
             }
 
@@ -60,7 +62,7 @@ public partial class FormaPago : System.Web.UI.Page
                 if (TxtCteAfiliacion.Text != string.Empty)
                 {
                     LimpiarCampos("transferencia");
-                    ConsultarCargoTarjeta(int.Parse(TxtCteAfiliacion.Text), "transferencia");
+                    ConsultarCargoTarjeta(int.Parse(TxtCteAfiliacion.Text), "transferencia", int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
                 }
             }
             
@@ -933,7 +935,7 @@ public partial class FormaPago : System.Web.UI.Page
         {
             HiddenInput.Value = "SeleccionaPago";
             clave = Request.Form["__EVENTTARGET"].ToString().Split('=');
-                dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text));
+                dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text), int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
                 dtPagosConTarjetaSelec = dtPagosConTarjeta.Select("Registro=" + clave[1].ToString());
 
                 txtNombreClienteTarjeta.Text = dtPagosConTarjetaSelec[0]["NombreCliente"].ToString();
@@ -951,7 +953,7 @@ public partial class FormaPago : System.Web.UI.Page
         {
             HiddenInput.Value = "SeleccionaPago-Trans";
             clave = Request.Form["__EVENTTARGET"].ToString().Split('=');
-                dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(TxtCteAfiliacion.Text));
+                dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(TxtCteAfiliacion.Text), int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
                 dtPagosConTarjetaSelec = dtPagosConTarjeta.Select("Registro=" + clave[1].ToString());
 
                 TxtNombreCteTrans.Text = dtPagosConTarjetaSelec[0]["NombreCliente"].ToString();
@@ -967,7 +969,7 @@ public partial class FormaPago : System.Web.UI.Page
     /// Consulta Pagos Con Tarjeta del Cliente
     /// </summary>
     /// <param name="NumCliente"></param>
-    private void ConsultarCargoTarjeta(int NumCliente,string sFormaPago)
+    private void ConsultarCargoTarjeta(int NumCliente,string sFormaPago,int Ruta,int Autotanque)
     {
         DataTable dtDatosControlUsuario = new DataTable();
 
@@ -982,10 +984,10 @@ public partial class FormaPago : System.Web.UI.Page
         dtDatosControlUsuario.Columns.Add("Folio", typeof(string));
 
         if (sFormaPago == "tarjeta")
-        dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text));
+        dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text),Ruta,Autotanque);
 
         if (sFormaPago == "transferencia")
-            dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(TxtCteAfiliacion.Text));
+            dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(TxtCteAfiliacion.Text),Ruta,Autotanque);
 
 
 

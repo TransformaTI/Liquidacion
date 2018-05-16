@@ -17,8 +17,9 @@ namespace SigametLiquidacion.WebControls
     private short _tipo;
     private string _formaLiquidacion;
     private string _statusLiquidacion;
+    private int _autotanque;
 
-    public short Celula
+        public short Celula
     {
       get
       {
@@ -102,7 +103,13 @@ namespace SigametLiquidacion.WebControls
       }
     }
 
-    protected override object SaveViewState()
+        public int Autotanque
+        {
+            get { return this._autotanque; }
+            set { _autotanque = value; }
+        }
+
+        protected override object SaveViewState()
     {
       this.EnsureChildControls();
       object[] objArray = new object[7];

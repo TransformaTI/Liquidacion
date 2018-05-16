@@ -103,11 +103,14 @@ namespace SigametLiquidacion
         /// Devuelve datatable con pagos de tarjeta del cliente
         /// </summary>
         /// <param name="NumCliente"></param>
-    public void CargaPagosConTarjeta(int NumCliente)
+    public void CargaPagosConTarjeta(int NumCliente,int Ruta,int Autotanque)
     {
-         SqlParameter[] sqlParameterArray = new SqlParameter[1]
+         SqlParameter[] sqlParameterArray = new SqlParameter[3]
          {
-        new SqlParameter("@Cliente",NumCliente)
+            new SqlParameter("@Cliente",NumCliente),
+            new SqlParameter("@Ruta",Ruta),
+            new SqlParameter("@Autotanque",Autotanque),
+
          };
             this.dtPagosConTarjeta = new DataTable();
             this._dataAccess.LoadData(this.dtPagosConTarjeta, "spCBConsultarCargoTarjetaCliente", CommandType.StoredProcedure, sqlParameterArray, true);

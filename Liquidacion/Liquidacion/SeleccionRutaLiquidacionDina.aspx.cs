@@ -85,7 +85,7 @@ public partial class SeleccionRutaLiquidacionDina : System.Web.UI.Page
                     //Inserta ImageButton
                     tr = new TableRow();
                     tc = new TableCell();
-                    tc.Controls.Add(AddControl(id, celula, 0, 0, 0, 0, desc, desc2, "", true, string.Empty, string.Empty));
+                    tc.Controls.Add(AddControl(id, celula, 0, 0, 0, 0, desc, desc2, "", true, string.Empty, string.Empty,0));
                     tr.Cells.Add(tc);
                     tbCelulas.Rows.Add(tr);
 
@@ -93,7 +93,7 @@ public partial class SeleccionRutaLiquidacionDina : System.Web.UI.Page
                     tr = new TableRow();
                     tc = new TableCell();
                     tc.HorizontalAlign = HorizontalAlign.Center;
-                    tc.Controls.Add(AddControl(id, celula, 0, 0, 0, 0, desc, desc2, "", false, string.Empty, string.Empty));
+                    tc.Controls.Add(AddControl(id, celula, 0, 0, 0, 0, desc, desc2, "", false, string.Empty, string.Empty,0));
                     tr.Cells.Add(tc);
                     tbCelulas.Rows.Add(tr);
                 }
@@ -101,7 +101,7 @@ public partial class SeleccionRutaLiquidacionDina : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            throw ex;
+             throw ex;
         }
     }
     //Genera ImageButton y LinkButton de cada una de las Rutas pendientes pertenecientes a la Célula seleccionada
@@ -136,6 +136,7 @@ public partial class SeleccionRutaLiquidacionDina : System.Web.UI.Page
                 string desc;
                 string desc2;
                 string status;
+                short autotanque=0;
 
                 //Para determinar si es necesario descargar registros
                 string formaLiquidacion;
@@ -153,14 +154,17 @@ public partial class SeleccionRutaLiquidacionDina : System.Web.UI.Page
                 formaLiquidacion = dr["TipoLiquidacion"].ToString().Trim().ToUpper();
 
                 statusLiquidacion = dr["StatusLiquidacion"].ToString().Trim().ToUpper();
+                autotanque= Convert.ToInt16(dr["AutoTanque"]);
 
                 tbInner = new Table();
                 tc = new TableCell();
                 trInner = new TableRow();
                 tcInner = new TableCell();
 
+                
+
                 tcInner.Controls.Add(AddControl(id, celula, ruta, añoAtt, folio, 1, desc, string.Empty, status, true, formaLiquidacion,
-                    statusLiquidacion));
+                    statusLiquidacion, autotanque));
 
                 tcInner.HorizontalAlign = HorizontalAlign.Center;
                 trInner.Cells.Add(tcInner);
@@ -170,7 +174,8 @@ public partial class SeleccionRutaLiquidacionDina : System.Web.UI.Page
                 tcInner = new TableCell();
 
                 tcInner.Controls.Add(AddControl(id, celula, ruta, añoAtt, folio, 1, desc, string.Empty, status, false, formaLiquidacion,
-                    statusLiquidacion));
+                    statusLiquidacion, autotanque));
+
 
                 tcInner.HorizontalAlign = HorizontalAlign.Center;
                 trInner.Cells.Add(tcInner);
@@ -196,7 +201,7 @@ public partial class SeleccionRutaLiquidacionDina : System.Web.UI.Page
     //Genera Controles 
     private Control AddControl(string nomControl, short celula, short ruta, short añoAtt, int folio, short tipo,
         string descripcion, string descripcion2, string status, bool tipoControl, string FormaLiquidacion,
-        string StatusLiquidacion)
+        string StatusLiquidacion, int autotanque)
     {
         LiquidacionImageButton ibl ;
         LiquidacionLinkButton lbl;
@@ -217,7 +222,10 @@ public partial class SeleccionRutaLiquidacionDina : System.Web.UI.Page
                 ibl.FormaLiquidacion = FormaLiquidacion;
 
                 ibl.StatusLiquidacion = StatusLiquidacion;
-                
+
+                ibl.Autotanque = autotanque;
+
+
                 switch (status)
                 {
                     //Los ImageButtons de Celulas no llevan la descripcion
@@ -283,6 +291,11 @@ public partial class SeleccionRutaLiquidacionDina : System.Web.UI.Page
                 lbl.AñoAtt = añoAtt;
                 lbl.Folio = folio;
                 lbl.Tipo = tipo;
+                lbl.Autotanque = autotanque;
+                
+
+
+
 
                 lbl.Text = descripcion;
 
@@ -360,6 +373,11 @@ public partial class SeleccionRutaLiquidacionDina : System.Web.UI.Page
                 {
                     Session["AñoAtt"] = ibt.AñoAtt;
                     Session["Folio"] = ibt.Folio;
+                    Session["Ruta"] = ibt.Ruta; // mcc 2018 05 16
+                    Session["Autotanque"] = ibt.Autotanque;// mcc 2018 05 16
+
+
+
 
                     if (ibt.FormaLiquidacion == "AUTOMATICA")
                     {

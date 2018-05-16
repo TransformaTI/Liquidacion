@@ -50,9 +50,9 @@ namespace SigametLiquidacion
       return this.dtPromociones;
     }
 
-     public DataTable PagosConTarjeta(int NumCliente)
+     public DataTable PagosConTarjeta(int NumCliente,int Ruta, int Autotanque)
         {
-            this._datos.CargaPagosConTarjeta(NumCliente);
+            this._datos.CargaPagosConTarjeta(NumCliente,Ruta, Autotanque);
             this.dtPagosConTarjeta = this._datos.PagosConTarjeta;
             return this.dtPagosConTarjeta;
 

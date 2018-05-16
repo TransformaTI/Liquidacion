@@ -16,11 +16,12 @@
         var HiddenInputPCT = '<%= HiddenInputPCT.Value %>';   // mcc 2018 05 10
         var NumCte = '<%= txtClienteTarjeta.Text %>'; // mcc 2018 05 10
         var NumPagos = '<%=HiddenInputNumPagos.Value  %>'; // mcc 2018 05 10
-
+        var Ruta= '<%=Session["Ruta"]%>';
 
         //Validaciones  On load
         document.addEventListener("DOMContentLoaded", function () { // mcc 2018 05 10
             alert(HiddenInput);
+            alert('ruta=' + Ruta)
 
             if (HiddenInput == 'ConsultaTPV' || HiddenInput == 'SeleccionaPago') {
                 document.getElementById('tarjeta').style.display = 'inherit';

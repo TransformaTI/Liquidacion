@@ -17,6 +17,7 @@ namespace SigametLiquidacion.WebControls
     private short _tipo;
     private string _formaLiquidacion;
     private string _statusLiquidacion;
+    private int _autotanque;
 
     public short Celula
     {
@@ -101,8 +102,17 @@ namespace SigametLiquidacion.WebControls
         this._statusLiquidacion = value;
       }
     }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Autotanque
+        {
+            get { return this._autotanque; }
+            set { _autotanque = value; }
+        }
 
-    protected override object SaveViewState()
+
+        protected override object SaveViewState()
     {
       this.EnsureChildControls();
       object[] objArray = new object[6];
@@ -113,7 +123,8 @@ namespace SigametLiquidacion.WebControls
       objArray[3] = (object) this._añoAtt;
       objArray[4] = (object) this._folio;
       objArray[5] = (object) this._tipo;
-      return (object) objArray;
+/*      objArray[6] = (object)this._autotanque*/;
+            return (object) objArray;
     }
 
     protected override void LoadViewState(object savedState)
@@ -125,7 +136,8 @@ namespace SigametLiquidacion.WebControls
       this._añoAtt = (short) objArray[3];
       this._folio = (int) objArray[4];
       this._tipo = (short) objArray[5];
-      this.EnsureChildControls();
+      //this._autotanque=(int)objArray[6];
+            this.EnsureChildControls();
     }
   }
 }

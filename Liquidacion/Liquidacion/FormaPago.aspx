@@ -16,7 +16,7 @@
         var HiddenInputPCT = '<%= HiddenInputPCT.Value %>';   // mcc 2018 05 10
         var NumCte = '<%= txtClienteTarjeta.Text %>'; // mcc 2018 05 10
         var NumPagos = '<%=HiddenInputNumPagos.Value  %>'; // mcc 2018 05 10
-        var Ruta= '<%=Session["Ruta"]%>';
+        var Ruta = '<%=Session["Ruta"]%>';
 
         //Validaciones  On load
         document.addEventListener("DOMContentLoaded", function () { // mcc 2018 05 10
@@ -27,13 +27,13 @@
 
             }
 
-              if (HiddenInput == 'ConsultaTPV-Trans' || HiddenInput == 'SeleccionaPago-Trans') {
-                  document.getElementById('transferencia').style.display = 'inherit';
+            if (HiddenInput == 'ConsultaTPV-Trans' || HiddenInput == 'SeleccionaPago-Trans') {
+                document.getElementById('transferencia').style.display = 'inherit';
 
 
             }
 
-            if (HiddenInputPCT == 'Si' && (HiddenInput == 'ConsultaTPV' || HiddenInput == 'ConsultaTPV-Trans' ) && NumPagos != '1') {
+            if (HiddenInputPCT == 'Si' && (HiddenInput == 'ConsultaTPV' || HiddenInput == 'ConsultaTPV-Trans') && NumPagos != '1') {
                 var respuesta = confirm(smMensajeCargo);
 
                 if (respuesta == true) {
@@ -41,8 +41,7 @@
                 }
             }
 
-            else if ( HiddenInputPCT!='Si' && NumCte!='')
-            {
+            else if (HiddenInputPCT != 'Si' && NumCte != '') {
                 alert('No se encontraron pagos de TPV para el cliente, por favor verifique con el área de tarjetas de crédito');
 
 
@@ -67,10 +66,9 @@
         document.getElementById(inactivo).style.display = 'none';
         document.getElementById(inactivoA).style.display = 'none';
 
-        if (activo == 'transferencia')
-        {
+        if (activo == 'transferencia') {
 
-                document.getElementById('transferencia').style.display = 'inherit';
+            document.getElementById('transferencia').style.display = 'inherit';
         }
     }
 
@@ -99,15 +97,15 @@
         //Consulta Pagos Con tarjeta mcc 2018 05 10
         function ConsultaPagosTPV(FormaPago) {
 
-            if ((document.getElementById('<%=txtClienteTarjeta.ClientID%>').value != "" || document.getElementById('<%=TxtCteAfiliacion.ClientID%>').value != "" )
-                    && (HiddenInput == '' || HiddenInput == 'SeleccionaPago' || HiddenInput == 'ConsultaTPV')) {
+            if ((document.getElementById('<%=txtClienteTarjeta.ClientID%>').value != "" || document.getElementById('<%=TxtCteAfiliacion.ClientID%>').value != "")
+                && (HiddenInput == '' || HiddenInput == 'SeleccionaPago' || HiddenInput == 'ConsultaTPV')) {
                 javascript: __doPostBack(FormaPago, '');
             }
 
         }
 
-        function ConsultaPagosSeleccion(FormaPago,Llave) {
-            javascript: __doPostBack(FormaPago+' SeleccionaPago=' + Llave, '');
+        function ConsultaPagosSeleccion(FormaPago, Llave) {
+            javascript: __doPostBack(FormaPago + ' SeleccionaPago=' + Llave, '');
 
 
         }
@@ -145,11 +143,11 @@
 
             var str = document.getElementById('<%=txtLectorCheque.ClientID%>').value;
 
-         ctrCuenta = document.getElementById('<%=txtNumCuenta.ClientID%>');
-         if (ctrCuenta != null) {
-             ctrCuenta.value = str.substring(13, 24);
-         }
-         ctrDocumento = document.getElementById('<%=txtNumeroCheque.ClientID%>');
+            ctrCuenta = document.getElementById('<%=txtNumCuenta.ClientID%>');
+            if (ctrCuenta != null) {
+                ctrCuenta.value = str.substring(13, 24);
+            }
+            ctrDocumento = document.getElementById('<%=txtNumeroCheque.ClientID%>');
             if (ctrDocumento != null) {
                 ctrDocumento.value = str.substring(24, 31);
             }
@@ -211,7 +209,7 @@
                                                     ImageUrl="~/Images/imgCapturarTarjeta.png" />
                                             </td>
                                         </tr>
-                                                                                         <tr>
+                                        <tr>
                                             <td>
                                                 <asp:Image ID="ImgTransferencia" runat="server"
                                                     ImageUrl="~/Images/imgCapturarTarjeta.png" />
@@ -223,47 +221,46 @@
                                                     ImageUrl="~/Images/imgVale.png" Height="26px" Width="138px" />
                                             </td>
                                         </tr>
-                                        </tr>
-                                                                                         <tr>
-                                            <td>
-                                                <asp:Image ID="ImgAnticipo" runat="server"
-                                                    ImageUrl="~/Images/imgCapturarTarjeta.png" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <asp:ImageButton ID="imbEfectivo" runat="server" Height="26px"
-                                                    ImageUrl="~/Images/imgEfectivo.png" OnClick="imbEfectivo_Click"
-                                                    Width="138px" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <asp:ImageButton ID="imbCancelar" runat="server" Height="25px"
-                                                    ImageUrl="~/Images/imgCancelarPagos.png" OnClick="imbCancelar_Click"
-                                                    Width="137px" />
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <asp:ImageButton ID="imbResumen" runat="server" Height="25px"
-                                                    ImageUrl="~/Images/captPagos.png" OnClick="imbResumen_Click" Visible="False"
-                                                    Width="74px" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <asp:Label ID="lblError" runat="server" CssClass="labeltipopagoforma" ForeColor="Red"></asp:Label>
-                                            </td>
-                                        </tr>
-
                                     </tr>
-                                </table>
-                            </td>
+                                    <tr>
+                                        <td>
+                                            <asp:Image ID="ImgAnticipo" runat="server"
+                                                ImageUrl="~/Images/imgCapturarTarjeta.png" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:ImageButton ID="imbEfectivo" runat="server" Height="26px"
+                                                ImageUrl="~/Images/imgEfectivo.png" OnClick="imbEfectivo_Click"
+                                                Width="138px" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:ImageButton ID="imbCancelar" runat="server" Height="25px"
+                                                ImageUrl="~/Images/imgCancelarPagos.png" OnClick="imbCancelar_Click"
+                                                Width="137px" />
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:ImageButton ID="imbResumen" runat="server" Height="25px"
+                                                ImageUrl="~/Images/captPagos.png" OnClick="imbResumen_Click" Visible="False"
+                                                Width="74px" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Label ID="lblError" runat="server" CssClass="labeltipopagoforma" ForeColor="Red"></asp:Label>
+                                        </td>
+                                    </tr>
+                        </tr>
+                    </table>
+                    </td>
                             <td valign="top">
                                 <table style="vertical-align: top; width: 534px;">
-             
+
 
                                     <tr>
                                         <td valign="top" style="vertical-align: top;">
@@ -434,7 +431,7 @@
                                                                 Text="Cliente:"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox ID="txtClienteTarjeta" runat="server" CssClass="textboxcaptura" ></asp:TextBox>
+                                                            <asp:TextBox ID="txtClienteTarjeta" runat="server" CssClass="textboxcaptura"></asp:TextBox>
 
                                                             <asp:RequiredFieldValidator ID="rfvCliente0" runat="server"
                                                                 ControlToValidate="txtClienteTarjeta" Display="None"
@@ -735,202 +732,202 @@
                                                     </tr>
                                             </div>
                                         </td>
-                                                                         
+
                                     </tr>
 
-                                  
 
-   
+
+
                                 </table>
 
                             </td>
-                        </tr>
+                    </tr>
 
                     </table>
                     <table style="vertical-align: top; width: 534px;">
-                           <tr>
-                                        <td valign="top">
-                                            <div id="transferencia" style="display: none; vertical-align: top">
-                                                <table style="background-color: #e1f8e2; height: 360px; width: 900px">
+                        <tr>
+                            <td valign="top">
+                                <div id="transferencia" style="display: none; vertical-align: top">
+                                    <table style="background-color: #e1f8e2; height: 360px; width: 900px">
 
-                                                    <tr>
-                                                        <td colspan="2" class="HeaderMainStyle" align="center">
-                                                            <asp:Label ID="Label1" runat="server" CssClass="labeltipopagoheader"
-                                                                Text="Transferencia"></asp:Label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="style1">
-                                                            <asp:Label ID="Label2" runat="server" CssClass="labeltipopagoforma"
-                                                                Text="Cliente:"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:TextBox ID="TxtCteAfiliacion" runat="server" CssClass="textboxcaptura" ></asp:TextBox>
+                                        <tr>
+                                            <td colspan="2" class="HeaderMainStyle" align="center">
+                                                <asp:Label ID="Label1" runat="server" CssClass="labeltipopagoheader"
+                                                    Text="Transferencia"></asp:Label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="style1">
+                                                <asp:Label ID="Label2" runat="server" CssClass="labeltipopagoforma"
+                                                    Text="Cliente:"></asp:Label>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="TxtCteAfiliacion" runat="server" CssClass="textboxcaptura"></asp:TextBox>
 
-                                                            <asp:RequiredFieldValidator ID="rfvCteAfiliacion" runat="server"
-                                                                ControlToValidate="TxtCteAfiliacion" Display="None"
-                                                                ErrorMessage="Capturar No Cliente y Click en Buscar" Font-Size="11px"
-                                                                ValidationGroup="TarjetaCliente"></asp:RequiredFieldValidator>
-                                                            <ccR:ValidatorCalloutExtender ID="ValidatorCalloutExtender1" runat="server"
-                                                                TargetControlID="rfvCteAfiliacion">
-                                                            </ccR:ValidatorCalloutExtender>
-                                                            <ccR:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="TxtCteAfiliacion" FilterType="Numbers"></ccR:FilteredTextBoxExtender>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="style1">
-                                                            <asp:Label ID="Label4" runat="server" CssClass="labeltipopagoforma"
-                                                                Text="Nombre:"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:TextBox ID="TxtNombreCteTrans" runat="server" CssClass="textboxcaptura"
-                                                                Width="200px" ReadOnly="True"></asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="style1">
-                                                            <asp:Label ID="Label5" runat="server" CssClass="labeltipopagoforma"
-                                                                Text="Fecha documento:"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:TextBox ID="TxtFechaDocTrans" runat="server" CssClass="textboxcaptura"
-                                                                ReadOnly="False" AutoPostBack="false"></asp:TextBox>
-                                                            
-                                                            <asp:ImageButton ID="ImageButtonCal" runat="server"
-                                                                ImageUrl="~/Imagenes/Calendar.png" />
-                                                            <asp:RequiredFieldValidator ID="rfvFechaDocTrans" runat="server"
-                                                                ControlToValidate="TxtFechaDocTrans" Display="None"
-                                                                ErrorMessage="Capturar la Fecha" Font-Size="11px" ValidationGroup="Tarjeta"></asp:RequiredFieldValidator>
-                                                            <ccR:CalendarExtender ID="CalendarExtender1" runat="server"
-                                                                Format="dd/MM/yyyy" PopupButtonID="ImageButtonCal"
-                                                                TargetControlID="TxtFechaDocTrans">
-                                                            </ccR:CalendarExtender>
-                                                            <ccR:ValidatorCalloutExtender ID="ValidatorCalloutExtender2"
-                                                                runat="server" TargetControlID="rfvFechaDocTrans">
-                                                            </ccR:ValidatorCalloutExtender>
-                                                        </td>
+                                                <asp:RequiredFieldValidator ID="rfvCteAfiliacion" runat="server"
+                                                    ControlToValidate="TxtCteAfiliacion" Display="None"
+                                                    ErrorMessage="Capturar No Cliente y Click en Buscar" Font-Size="11px"
+                                                    ValidationGroup="TarjetaCliente"></asp:RequiredFieldValidator>
+                                                <ccR:ValidatorCalloutExtender ID="ValidatorCalloutExtender1" runat="server"
+                                                    TargetControlID="rfvCteAfiliacion">
+                                                </ccR:ValidatorCalloutExtender>
+                                                <ccR:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="TxtCteAfiliacion" FilterType="Numbers"></ccR:FilteredTextBoxExtender>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="style1">
+                                                <asp:Label ID="Label4" runat="server" CssClass="labeltipopagoforma"
+                                                    Text="Nombre:"></asp:Label>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="TxtNombreCteTrans" runat="server" CssClass="textboxcaptura"
+                                                    Width="200px" ReadOnly="True"></asp:TextBox>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="style1">
+                                                <asp:Label ID="Label5" runat="server" CssClass="labeltipopagoforma"
+                                                    Text="Fecha documento:"></asp:Label>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="TxtFechaDocTrans" runat="server" CssClass="textboxcaptura"
+                                                    ReadOnly="False" AutoPostBack="false"></asp:TextBox>
 
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="style1">
-                                                            <asp:Label ID="Label6" runat="server" CssClass="labeltipopagoforma"
-                                                                Text="Afiliación:"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:DropDownList ID="ddAfiliacion" runat="server" CssClass="textboxcaptura"
-                                                                Width="200px">
-                                                            </asp:DropDownList>
-                                                            <asp:RequiredFieldValidator ID="rfvddAfiliacion" runat="server"
-                                                                ControlToValidate="ddAfiliacion" Display="None"
-                                                                ErrorMessage="Seleccione la afiliación"
-                                                                ValidationGroup="Tarjeta" InitialValue="0"></asp:RequiredFieldValidator>
-                                                            <ccR:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server"
-                                                                TargetControlID="rfvddAfiliacion">
-                                                            </ccR:ValidatorCalloutExtender>
-                                                        </td>
-                                                    </tr>
+                                                <asp:ImageButton ID="ImageButtonCal" runat="server"
+                                                    ImageUrl="~/Imagenes/Calendar.png" />
+                                                <asp:RequiredFieldValidator ID="rfvFechaDocTrans" runat="server"
+                                                    ControlToValidate="TxtFechaDocTrans" Display="None"
+                                                    ErrorMessage="Capturar la Fecha" Font-Size="11px" ValidationGroup="Tarjeta"></asp:RequiredFieldValidator>
+                                                <ccR:CalendarExtender ID="CalendarExtender1" runat="server"
+                                                    Format="dd/MM/yyyy" PopupButtonID="ImageButtonCal"
+                                                    TargetControlID="TxtFechaDocTrans">
+                                                </ccR:CalendarExtender>
+                                                <ccR:ValidatorCalloutExtender ID="ValidatorCalloutExtender2"
+                                                    runat="server" TargetControlID="rfvFechaDocTrans">
+                                                </ccR:ValidatorCalloutExtender>
+                                            </td>
 
-                                                      <tr>
-                                                        <td class="style1">
-                                                            <asp:Label ID="Label15" runat="server" CssClass="labeltipopagoforma"
-                                                                Text="Tipo Tarjeta:"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:DropDownList ID="ddTipoTarjeta" runat="server" CssClass="textboxcaptura"
-                                                                Width="200px">
-                                                            </asp:DropDownList>
-                                                            <asp:RequiredFieldValidator ID="rfvTipoTarjeta" runat="server"
-                                                                ControlToValidate="ddTipoTarjeta" Display="None"
-                                                                ErrorMessage="Seleccione el Tipo Tarjeta"
-                                                                ValidationGroup="Tarjeta" InitialValue="0"></asp:RequiredFieldValidator>
-                                                            <ccR:ValidatorCalloutExtender ID="ValidatorCalloutExtender7" runat="server"
-                                                                TargetControlID="rfvTipoTarjeta">
-                                                            </ccR:ValidatorCalloutExtender>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="style1">
-                                                            <asp:Label ID="Label7" runat="server" CssClass="labeltipopagoforma"
-                                                                Text="Tarjeta:"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:TextBox ID="TxtTarjetaTranferencia" runat="server" CssClass="textboxcaptura"
-                                                                Width="100px"></asp:TextBox>
+                                        </tr>
+                                        <tr>
+                                            <td class="style1">
+                                                <asp:Label ID="Label6" runat="server" CssClass="labeltipopagoforma"
+                                                    Text="Afiliación:"></asp:Label>
+                                            </td>
+                                            <td>
+                                                <asp:DropDownList ID="ddAfiliacion" runat="server" CssClass="textboxcaptura"
+                                                    Width="200px">
+                                                </asp:DropDownList>
+                                                <asp:RequiredFieldValidator ID="rfvddAfiliacion" runat="server"
+                                                    ControlToValidate="ddAfiliacion" Display="None"
+                                                    ErrorMessage="Seleccione la afiliación"
+                                                    ValidationGroup="Tarjeta" InitialValue="0"></asp:RequiredFieldValidator>
+                                                <ccR:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server"
+                                                    TargetControlID="rfvddAfiliacion">
+                                                </ccR:ValidatorCalloutExtender>
+                                            </td>
+                                        </tr>
 
-                                                            <ccR:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" TargetControlID="TxtTarjetaTranferencia" FilterType="Numbers"></ccR:FilteredTextBoxExtender>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="style1">
-                                                            <asp:Label ID="Label9" runat="server" CssClass="labeltipopagoforma"
-                                                                Text="Banco:"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:DropDownList ID="ddBancoTrasferencia" runat="server" CssClass="textboxcaptura"
-                                                                Width="200px">
-                                                            </asp:DropDownList>
-                                                            <asp:RequiredFieldValidator ID="rfBancoTrasferencia" runat="server"
-                                                                ControlToValidate="ddBancoTrasferencia" Display="None"
-                                                                ErrorMessage="Seleccione el Banco"
-                                                                ValidationGroup="Tarjeta" InitialValue="0"></asp:RequiredFieldValidator>
-                                                            <ccR:ValidatorCalloutExtender ID="ValidatorCalloutExtender4" runat="server"
-                                                                TargetControlID="rfBancoTrasferencia">
-                                                            </ccR:ValidatorCalloutExtender>
-                                                        </td>
+                                        <tr>
+                                            <td class="style1">
+                                                <asp:Label ID="Label15" runat="server" CssClass="labeltipopagoforma"
+                                                    Text="Tipo Tarjeta:"></asp:Label>
+                                            </td>
+                                            <td>
+                                                <asp:DropDownList ID="ddTipoTarjeta" runat="server" CssClass="textboxcaptura"
+                                                    Width="200px">
+                                                </asp:DropDownList>
+                                                <asp:RequiredFieldValidator ID="rfvTipoTarjeta" runat="server"
+                                                    ControlToValidate="ddTipoTarjeta" Display="None"
+                                                    ErrorMessage="Seleccione el Tipo Tarjeta"
+                                                    ValidationGroup="Tarjeta" InitialValue="0"></asp:RequiredFieldValidator>
+                                                <ccR:ValidatorCalloutExtender ID="ValidatorCalloutExtender7" runat="server"
+                                                    TargetControlID="rfvTipoTarjeta">
+                                                </ccR:ValidatorCalloutExtender>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="style1">
+                                                <asp:Label ID="Label7" runat="server" CssClass="labeltipopagoforma"
+                                                    Text="Tarjeta:"></asp:Label>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="TxtTarjetaTranferencia" runat="server" CssClass="textboxcaptura"
+                                                    Width="100px"></asp:TextBox>
 
-                                                    </tr>
-                                                     <tr>
-                                                        <td class="style1">
-                                                            <asp:Label ID="Label10" runat="server" CssClass="labeltipopagoforma"
-                                                                Text="Autorización:"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:TextBox ID="TxtAutorizacionTrans" runat="server" CssClass="textboxcaptura"
-                                                                Width="100px"></asp:TextBox>
+                                                <ccR:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" TargetControlID="TxtTarjetaTranferencia" FilterType="Numbers"></ccR:FilteredTextBoxExtender>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="style1">
+                                                <asp:Label ID="Label9" runat="server" CssClass="labeltipopagoforma"
+                                                    Text="Banco:"></asp:Label>
+                                            </td>
+                                            <td>
+                                                <asp:DropDownList ID="ddBancoTrasferencia" runat="server" CssClass="textboxcaptura"
+                                                    Width="200px">
+                                                </asp:DropDownList>
+                                                <asp:RequiredFieldValidator ID="rfBancoTrasferencia" runat="server"
+                                                    ControlToValidate="ddBancoTrasferencia" Display="None"
+                                                    ErrorMessage="Seleccione el Banco"
+                                                    ValidationGroup="Tarjeta" InitialValue="0"></asp:RequiredFieldValidator>
+                                                <ccR:ValidatorCalloutExtender ID="ValidatorCalloutExtender4" runat="server"
+                                                    TargetControlID="rfBancoTrasferencia">
+                                                </ccR:ValidatorCalloutExtender>
+                                            </td>
 
-                                                            <ccR:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" TargetControlID="TxtAutorizacionTrans" FilterType="Numbers"></ccR:FilteredTextBoxExtender>
-                                                        </td>
-                                                    </tr>
-                                                      <tr>
-                                                        <td class="style1">
-                                                            <asp:Label ID="Label12" runat="server" CssClass="labeltipopagoforma"
-                                                                Text="Repetir Autorización:"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:TextBox ID="TxtRepAutorizacionTrans" runat="server" CssClass="textboxcaptura"
-                                                                Width="100px"></asp:TextBox>
+                                        </tr>
+                                        <tr>
+                                            <td class="style1">
+                                                <asp:Label ID="Label10" runat="server" CssClass="labeltipopagoforma"
+                                                    Text="Autorización:"></asp:Label>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="TxtAutorizacionTrans" runat="server" CssClass="textboxcaptura"
+                                                    Width="100px"></asp:TextBox>
 
-                                                            <ccR:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server" TargetControlID="TxtRepAutorizacionTrans" FilterType="Numbers"></ccR:FilteredTextBoxExtender>
-                                                        </td>
-                                                    </tr>
-                                                   
-                                                     <tr>
-                                                        <td class="style1">
-                                                            <asp:Label ID="Label14" runat="server"
-                                                                CssClass="labeltipopagoforma" Text="Observaciones:"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:TextBox ID="TxtObervacionesTrans" runat="server" CssClass="textboxcaptura"
-                                                                Height="75px" Width="300px" TextMode="MultiLine"></asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>&nbsp;</td>
-                                                        <td>
-                                                            <asp:ImageButton ID="ImageButton2" runat="server"
-                                                                SkinID="btnAceptar"
-                                                                ValidationGroup="Tarjeta" OnClick="imbAceptarTDC_Click" Height="25px"
-                                                                Width="25px" />
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                                <ccR:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" TargetControlID="TxtAutorizacionTrans" FilterType="Numbers"></ccR:FilteredTextBoxExtender>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="style1">
+                                                <asp:Label ID="Label12" runat="server" CssClass="labeltipopagoforma"
+                                                    Text="Repetir Autorización:"></asp:Label>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="TxtRepAutorizacionTrans" runat="server" CssClass="textboxcaptura"
+                                                    Width="100px"></asp:TextBox>
+
+                                                <ccR:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server" TargetControlID="TxtRepAutorizacionTrans" FilterType="Numbers"></ccR:FilteredTextBoxExtender>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="style1">
+                                                <asp:Label ID="Label14" runat="server"
+                                                    CssClass="labeltipopagoforma" Text="Observaciones:"></asp:Label>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="TxtObervacionesTrans" runat="server" CssClass="textboxcaptura"
+                                                    Height="75px" Width="300px" TextMode="MultiLine"></asp:TextBox>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <asp:ImageButton ID="ImageButton2" runat="server"
+                                                    SkinID="btnAceptar"
+                                                    ValidationGroup="Tarjeta" OnClick="imbAceptarTDC_Click" Height="25px"
+                                                    Width="25px" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
                     </table>
 
 

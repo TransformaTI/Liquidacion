@@ -13,7 +13,7 @@ using System.Xml.Linq;
 using System.IO;
 
 using SigametLiquidacion;
-
+using System.Collections.Generic;
 
 public partial class FormaPago : System.Web.UI.Page
 {
@@ -27,22 +27,49 @@ public partial class FormaPago : System.Web.UI.Page
     DataTable dtCobros;
     DataTable dtMovimientos;
     DataTable dtPagosConTarjeta; // mcc 2018 05 10
+    DataRow[] dtPagosConTarjetaSelec;
+    string[] clave ;
+    
 
     string pagoActivo;
     #endregion
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!Page.IsPostBack)
+        {
+            LlenaDropDowns();
+        }
+
         #region validaciones postback 
         if (Page.IsPostBack)
         {
-                if (Request.Form["__EVENTTARGET"] == "ConsultaTPV")
+                if (Request.Form["__EVENTTARGET"] == "ConsultaTPV" )
             {
                 HiddenInput.Value = "ConsultaTPV";
                 if (txtClienteTarjeta.Text!=string.Empty)
                 {
-                    ConsultarCargoTarjeta(int.Parse(txtClienteTarjeta.Text));
+                    LimpiarCampos("tarjeta");
+                    ConsultarCargoTarjeta(int.Parse(txtClienteTarjeta.Text), "tarjeta");
                 }
+            }
+
+            if (Request.Form["__EVENTTARGET"] == "ConsultaTPV-Trans")
+            {
+                HiddenInput.Value = "ConsultaTPV-Trans";
+                if (TxtCteAfiliacion.Text != string.Empty)
+                {
+                    LimpiarCampos("transferencia");
+                    ConsultarCargoTarjeta(int.Parse(TxtCteAfiliacion.Text), "transferencia");
+                }
+            }
+            
+
+                else if (Request.Form["__EVENTTARGET"].ToString().Contains("SeleccionaPago"))
+            {
+                LimpiarCampos("tarjeta");
+                LimpiarCampos("transferencia");
+                MuestraPagoSeleccionado(Request.Form["__EVENTTARGET"].ToString());
             }
         }
 
@@ -51,6 +78,8 @@ public partial class FormaPago : System.Web.UI.Page
 
             HiddenInput.Value = "";
             HiddenInputPCT.Value = "";
+            LimpiarCampos("tarjeta");
+            LimpiarCampos("transferencia");
         }
         #endregion
 
@@ -107,16 +136,19 @@ public partial class FormaPago : System.Web.UI.Page
        imbEfectivo.Attributes.Add("onclick", "return confirm('¿Desea enviar todos los pedidos a Pago en Efectivo?')");
        imbCancelar.Attributes.Add("onclick", "return confirm('¿Desea Cancelar los Pagos Capturados?')");
 
-        txtClienteTarjeta.Attributes.Add("onblur", "return ConsultaPagosTPV()");
+        txtClienteTarjeta.Attributes.Add("onblur", "return ConsultaPagosTPV('ConsultaTPV')");
+
+        ImgTransferencia.Attributes.Add("onclick", "toggle('display', 'transferencia', 'cheque', 'tarjeta', " + (char)39 + txtClienteTarjeta.UniqueID + (char)39 + ")");
+
+        ImgAnticipo.Attributes.Add("onclick", "toggle('display', 'transferencia', 'cheque', 'tarjeta', " + (char)39 + txtClienteTarjeta.UniqueID + (char)39 + ")");
+
+        TxtCteAfiliacion.Attributes.Add("onblur", "return ConsultaPagosTPV('ConsultaTPV-Trans')");
 
         #endregion
 
-        if (!Page.IsPostBack)
-       {
-           LlenaDropDowns();
-       }
-       
-                
+
+
+
         if (Session["dsLiquidacion"] == null)
         {
             string path = Server.MapPath("");
@@ -180,6 +212,10 @@ public partial class FormaPago : System.Web.UI.Page
     {
         DataTable dtBancos = new DataTable();
         DataTable dtPromocion = new DataTable();
+        Dictionary<string, string> TipoTarjeta = new Dictionary<string, string>();
+
+
+
         try
         {
             dtBancos = rp.ListaBancos();
@@ -209,6 +245,22 @@ public partial class FormaPago : System.Web.UI.Page
             ddlValePromocion.DataTextField = "ValePromocion";
             ddlValePromocion.DataValueField = "Descripcion";
             ddlValePromocion.DataBind();
+
+            ddBancoTrasferencia.DataSource = dtBancos;
+            ddBancoTrasferencia.DataTextField = "Nombre";
+            ddBancoTrasferencia.DataValueField = "Banco";
+            ddBancoTrasferencia.DataBind();
+            ddBancoTrasferencia.Items.Insert(0, new ListItem("- Seleccione -", "0"));
+            ddBancoTrasferencia.SelectedIndex = 0;
+
+            // Tipo Tarjeta
+            TipoTarjeta.Add("1", "Tarjeta de Debito");
+            TipoTarjeta.Add("2", "Tarjeta de Crédito");
+
+            ddTipoTarjeta.DataSource =  TipoTarjeta;
+            ddTipoTarjeta.DataTextField = "Value";
+            ddTipoTarjeta.DataValueField = "Key";
+            ddTipoTarjeta.DataBind();
 
         }
         catch (Exception ex)
@@ -869,44 +921,90 @@ public partial class FormaPago : System.Web.UI.Page
         Response.Redirect("GenerarPago.aspx");
     }
     /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sTipoConsulta"></param>
+    private void MuestraPagoSeleccionado(string sTipoConsulta)
+    {
+
+      
+
+            if( Request.Form["__EVENTTARGET"].ToString().Contains("tarjeta") )
+        {
+            HiddenInput.Value = "SeleccionaPago";
+            clave = Request.Form["__EVENTTARGET"].ToString().Split('=');
+                dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text));
+                dtPagosConTarjetaSelec = dtPagosConTarjeta.Select("Registro=" + clave[1].ToString());
+
+                txtNombreClienteTarjeta.Text = dtPagosConTarjetaSelec[0]["NombreCliente"].ToString();
+                txtNoAutorizacionTarjeta.Text = dtPagosConTarjetaSelec[0]["Autorizacion"].ToString();
+                txtNumTarjeta.Text = dtPagosConTarjetaSelec[0]["NumeroTarjeta"].ToString();
+                ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString().Trim()));
+                ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString().Trim()));
+                txtImporteTarjeta.Text = dtPagosConTarjetaSelec[0]["Importe"].ToString();
+                txtObservacionesTarjeta.Text = dtPagosConTarjetaSelec[0]["Observacion"].ToString();
+        }
+
+
+
+        if (Request.Form["__EVENTTARGET"].ToString().Contains("transferencia"))
+        {
+            HiddenInput.Value = "SeleccionaPago-Trans";
+            clave = Request.Form["__EVENTTARGET"].ToString().Split('=');
+                dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(TxtCteAfiliacion.Text));
+                dtPagosConTarjetaSelec = dtPagosConTarjeta.Select("Registro=" + clave[1].ToString());
+
+                TxtNombreCteTrans.Text = dtPagosConTarjetaSelec[0]["NombreCliente"].ToString();
+        }
+
+
+
+    }
+
+
+
+    /// <summary>
     /// Consulta Pagos Con Tarjeta del Cliente
     /// </summary>
     /// <param name="NumCliente"></param>
-    private void ConsultarCargoTarjeta(int NumCliente)
+    private void ConsultarCargoTarjeta(int NumCliente,string sFormaPago)
     {
         DataTable dtDatosControlUsuario = new DataTable();
 
-        dtDatosControlUsuario.Columns.Add("Tipo Cobro", typeof(string));
+
+        dtDatosControlUsuario.Columns.Add("TipoCobro", typeof(string));
         dtDatosControlUsuario.Columns.Add("Tarjeta", typeof(string));
         dtDatosControlUsuario.Columns.Add("Banco", typeof(string));    
         dtDatosControlUsuario.Columns.Add("Autorizacion", typeof(string));
         dtDatosControlUsuario.Columns.Add("Importe", typeof(string));
         dtDatosControlUsuario.Columns.Add("Observacion", typeof(string));
+        dtDatosControlUsuario.Columns.Add("Anio", typeof(string));
+        dtDatosControlUsuario.Columns.Add("Folio", typeof(string));
 
+        if (sFormaPago == "tarjeta")
         dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text));
+
+        if (sFormaPago == "transferencia")
+            dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(TxtCteAfiliacion.Text));
+
+
+
         if (dtPagosConTarjeta.Rows.Count >0)
          {
+            CargaPrimerRegistro(sFormaPago);
+
             HiddenInputPCT.Value = "Si";
+
             HiddenInputNumPagos.Value = dtPagosConTarjeta.Rows.Count.ToString();
 
-            if (dtPagosConTarjeta.Rows.Count > 1)
-                {
                         foreach ( DataRow row in dtPagosConTarjeta.Rows)
                     {
-                        dtDatosControlUsuario.Rows.Add(row["TipoCobro"].ToString(), row["NumeroTarjeta"].ToString(), row["NombreBanco"].ToString(), row["Autorizacion"].ToString(), row["Importe"].ToString(), row["Observacion"].ToString());
+                        dtDatosControlUsuario.Rows.Add(row["TipoCobroDescripcion"].ToString(), row["NumeroTarjeta"].ToString(), row["NombreBanco"].ToString(), row["Autorizacion"].ToString(), row["Importe"].ToString(), row["Observacion"].ToString(), row["Año"].ToString(), row["Folio"].ToString());
                     }
-                    wucConsultaCargoTarjetaCliente1.dtPagosContarjeta = dtDatosControlUsuario;
-              }
-            else
-            {
-                txtNombreClienteTarjeta.Text = dtPagosConTarjeta.Rows[0]["NombreCliente"].ToString();
-                txtNoAutorizacionTarjeta.Text= dtPagosConTarjeta.Rows[0]["Autorizacion"].ToString();
-                txtNumTarjeta.Text= dtPagosConTarjeta.Rows[0]["NumeroTarjeta"].ToString();
-                ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
-                ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
-                txtImporteTarjeta.Text = dtPagosConTarjeta.Rows[0]["Importe"].ToString();
-                txtObservacionesTarjeta.Text= dtPagosConTarjeta.Rows[0]["Observacion"].ToString();
-            }
+            wucConsultaCargoTarjetaCliente1.sFormaPago = sFormaPago;
+                wucConsultaCargoTarjetaCliente1.dtPagosContarjeta = dtDatosControlUsuario;
+              //}
+   
 
         }
         else
@@ -915,9 +1013,66 @@ public partial class FormaPago : System.Web.UI.Page
 
         }
     }
-
-    protected void TtxtClienteTarjeta_TextChanged(object sender, EventArgs e)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sFormaPago"></param>
+    private void CargaPrimerRegistro(string sFormaPago)
     {
+        switch (sFormaPago)
+        {
+            case "tarjeta":
+                txtNombreClienteTarjeta.Text = dtPagosConTarjeta.Rows[0]["NombreCliente"].ToString();
+                txtNoAutorizacionTarjeta.Text = dtPagosConTarjeta.Rows[0]["Autorizacion"].ToString();
+                txtNumTarjeta.Text = dtPagosConTarjeta.Rows[0]["NumeroTarjeta"].ToString();
+                ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
+                ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
+                txtImporteTarjeta.Text = dtPagosConTarjeta.Rows[0]["Importe"].ToString();
+                txtObservacionesTarjeta.Text = dtPagosConTarjeta.Rows[0]["Observacion"].ToString();
 
+                break;
+
+            case "transferencia":
+                TxtNombreCteTrans.Text= dtPagosConTarjeta.Rows[0]["NombreCliente"].ToString();
+
+                break;
+
+            default:
+                break;
+        }
     }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private void LimpiarCampos(string FormaPago)
+    {
+        switch (FormaPago)
+        {
+            case "tarjeta":
+                txtNombreClienteTarjeta.Text = string.Empty;
+                txtNoAutorizacionTarjeta.Text = string.Empty;
+                txtNumTarjeta.Text = string.Empty;
+                ddlBancoOrigen.SelectedIndex = -1;
+                ddlBancoOrigen.SelectedIndex = -1;
+                txtImporteTarjeta.Text = string.Empty;
+                txtObservacionesTarjeta.Text = string.Empty;
+                ddBancoTarjeta.SelectedIndex = -1;
+
+                break;
+
+            case "transferencia":
+                TxtNombreCteTrans.Text = string.Empty;
+                break;
+            default:
+                break;
+        }
+
+
+       
+    }
+
+
+
 }   

@@ -20,8 +20,7 @@
 
         //Validaciones  On load
         document.addEventListener("DOMContentLoaded", function () { // mcc 2018 05 10
-            alert(HiddenInput);
-            alert('ruta=' + Ruta)
+
 
             if (HiddenInput == 'ConsultaTPV' || HiddenInput == 'SeleccionaPago') {
                 document.getElementById('tarjeta').style.display = 'inherit';
@@ -42,7 +41,7 @@
                 }
             }
 
-            else if (HiddenInput != '')
+            else if ( HiddenInputPCT!='Si' && NumCte!='')
             {
                 alert('No se encontraron pagos de TPV para el cliente, por favor verifique con el área de tarjetas de crédito');
 

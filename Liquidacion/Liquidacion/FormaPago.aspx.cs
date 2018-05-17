@@ -29,6 +29,7 @@ public partial class FormaPago : System.Web.UI.Page
     DataTable dtPagosConTarjeta; // mcc 2018 05 10
     DataRow[] dtPagosConTarjetaSelec;
     string[] clave ;
+    DataTable dtAfiliaciones;
     
 
     string pagoActivo;
@@ -39,7 +40,6 @@ public partial class FormaPago : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
             LlenaDropDowns();
-
 
         }
 
@@ -221,6 +221,7 @@ public partial class FormaPago : System.Web.UI.Page
         try
         {
             dtBancos = rp.ListaBancos();
+            dtAfiliaciones = rp.Afiliaciones(int.Parse(Session["Ruta"].ToString()));
 
             ddBancoTarjeta.DataSource = dtBancos;
             ddBancoTarjeta.DataTextField = "Nombre";
@@ -263,6 +264,13 @@ public partial class FormaPago : System.Web.UI.Page
             ddTipoTarjeta.DataTextField = "Value";
             ddTipoTarjeta.DataValueField = "Key";
             ddTipoTarjeta.DataBind();
+
+            ddAfiliacion.DataSource = dtAfiliaciones;
+            ddAfiliacion.DataTextField = "NumeroAfiliacion";
+            ddAfiliacion.DataValueField = "Afiliacion";
+            ddAfiliacion.DataBind();
+            ddAfiliacion.Items.Insert(0, new ListItem("- Seleccione -", "0"));
+            ddAfiliacion.SelectedIndex = 0;
 
         }
         catch (Exception ex)
@@ -927,9 +935,7 @@ public partial class FormaPago : System.Web.UI.Page
     /// </summary>
     /// <param name="sTipoConsulta"></param>
     private void MuestraPagoSeleccionado(string sTipoConsulta)
-    {
-
-      
+    {     
 
             if( Request.Form["__EVENTTARGET"].ToString().Contains("tarjeta") )
         {
@@ -953,10 +959,16 @@ public partial class FormaPago : System.Web.UI.Page
         {
             HiddenInput.Value = "SeleccionaPago-Trans";
             clave = Request.Form["__EVENTTARGET"].ToString().Split('=');
-                dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(TxtCteAfiliacion.Text), int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
-                dtPagosConTarjetaSelec = dtPagosConTarjeta.Select("Registro=" + clave[1].ToString());
+            dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(TxtCteAfiliacion.Text), int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
+            dtPagosConTarjetaSelec = dtPagosConTarjeta.Select("Registro=" + clave[1].ToString());
 
-                TxtNombreCteTrans.Text = dtPagosConTarjetaSelec[0]["NombreCliente"].ToString();
+            TxtNombreCteTrans.Text = dtPagosConTarjetaSelec[0]["NombreCliente"].ToString();
+            TxtAutorizacionTrans.Text = dtPagosConTarjetaSelec[0]["Autorizacion"].ToString();
+            ddBancoTrasferencia.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString().Trim()));
+            TxtTarjetaTranferencia.Text = dtPagosConTarjetaSelec[0]["NumeroTarjeta"].ToString();
+            ddAfiliacion.SelectedIndex = ddAfiliacion.Items.IndexOf(ddAfiliacion.Items.FindByValue(dtPagosConTarjetaSelec[0]["Afiliacion"].ToString().Trim()));
+            TxtRepAutorizacionTrans.Text= dtPagosConTarjetaSelec[0]["Autorizacion"].ToString();
+            TxtObervacionesTrans.Text = dtPagosConTarjetaSelec[0]["Observacion"].ToString();
         }
 
 
@@ -1036,7 +1048,12 @@ public partial class FormaPago : System.Web.UI.Page
 
             case "transferencia":
                 TxtNombreCteTrans.Text= dtPagosConTarjeta.Rows[0]["NombreCliente"].ToString();
-
+                TxtAutorizacionTrans.Text= dtPagosConTarjeta.Rows[0]["Autorizacion"].ToString();
+                ddBancoTrasferencia.SelectedIndex= ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
+                TxtTarjetaTranferencia.Text = dtPagosConTarjeta.Rows[0]["NumeroTarjeta"].ToString();
+                ddAfiliacion.SelectedIndex = ddAfiliacion.Items.IndexOf(ddAfiliacion.Items.FindByValue(dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString().Trim()));
+                TxtRepAutorizacionTrans.Text = dtPagosConTarjeta.Rows[0]["Autorizacion"].ToString();
+                TxtObervacionesTrans.Text = dtPagosConTarjeta.Rows[0]["Observacion"].ToString();
                 break;
 
             default:
@@ -1066,6 +1083,7 @@ public partial class FormaPago : System.Web.UI.Page
 
             case "transferencia":
                 TxtNombreCteTrans.Text = string.Empty;
+                TxtRepAutorizacionTrans.Text = string.Empty;
                 break;
             default:
                 break;

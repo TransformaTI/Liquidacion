@@ -21,16 +21,12 @@
         //Validaciones  On load
         document.addEventListener("DOMContentLoaded", function () { // mcc 2018 05 10
 
-
             if (HiddenInput == 'ConsultaTPV' || HiddenInput == 'SeleccionaPago') {
                 document.getElementById('tarjeta').style.display = 'inherit';
-
             }
 
             if (HiddenInput == 'ConsultaTPV-Trans' || HiddenInput == 'SeleccionaPago-Trans') {
                 document.getElementById('transferencia').style.display = 'inherit';
-
-
             }
 
             if (HiddenInputPCT == 'Si' && (HiddenInput == 'ConsultaTPV' || HiddenInput == 'ConsultaTPV-Trans') && NumPagos != '1') {
@@ -43,8 +39,6 @@
 
             else if (HiddenInputPCT != 'Si' && NumCte != '') {
                 alert('No se encontraron pagos de TPV para el cliente, por favor verifique con el área de tarjetas de crédito');
-
-
             }
 
         });
@@ -212,7 +206,7 @@
                                         <tr>
                                             <td>
                                                 <asp:Image ID="ImgTransferencia" runat="server"
-                                                    ImageUrl="~/Images/imgCapturarTarjeta.png" />
+                                                    ImageUrl="~/Images/imgCapturarTrans.png" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -225,7 +219,7 @@
                                     <tr>
                                         <td>
                                             <asp:Image ID="ImgAnticipo" runat="server"
-                                                ImageUrl="~/Images/imgCapturarTarjeta.png" />
+                                                ImageUrl="~/Images/imgCapturarAnticipo.png" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -1040,20 +1034,25 @@
     <ccR:ModalPopupExtender ID="ModalPopupExtender1" BehaviorID="mpe" runat="server"
         PopupControlID="pnlPopup" TargetControlID="lnkDummy" BackgroundCssClass="modalBackground">
     </ccR:ModalPopupExtender>
-    <asp:Panel ID="pnlPopup" runat="server" CssClass="modalPopup" Style="display: none; align-content: center">
+    <asp:Panel ID="pnlPopup" runat="server" CssClass="modalPopup" Style="display: none; align-content: center" ScrollBars="Vertical" Height="350px">
         <div class="header">
+                                      
         </div>
         <div class="body" style="align-content: center; background-color: aliceblue">
-            <uc1:wucConsultaCargoTarjetaCliente runat="server" ID="wucConsultaCargoTarjetaCliente1" />
-            <br />
-            <div style="align-content: center">
-                <table style="width: 100%; align-content: center; background-color: aliceblue; border: thin">
+                     <table style="width: 100%; align-content: center; background-color: aliceblue; border: thin">
                     <tr style="align-content: center;">
-                        <td style="text-align: center">
-                            <asp:Button ID="btnHide" runat="server" Text="Cerrar" OnClientClick="return HideModalPopup()" /></td>
+                        <td style="text-align: right">
+                             <asp:Button ID="btnHide" runat="server" Text="Cerrar" OnClientClick="return HideModalPopup()" />
+
+                        </td>
 
                     </tr>
                 </table>
+             
+            <uc1:wucConsultaCargoTarjetaCliente runat="server" ID="wucConsultaCargoTarjetaCliente1" />
+            <br />
+            <div style="align-content: center">
+       
 
 
             </div>

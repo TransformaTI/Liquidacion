@@ -21,6 +21,7 @@ namespace SigametLiquidacion
     private DataTable dtPromociones = new DataTable();
     private DatosRegistroPago _datos = new DatosRegistroPago();
     private DataTable dtPagosConTarjeta = new DataTable(); // mcc 2018 05 10
+    private DataTable dtAfiliaciones = new DataTable();
 
     public DataTable ListaPedidos()
     {
@@ -58,8 +59,16 @@ namespace SigametLiquidacion
 
         }
 
+    public DataTable Afiliaciones(int Ruta)
+        {
+            this._datos.CargaAfiliaciones(Ruta);
+            this.dtAfiliaciones = this._datos.Afiliaciones;
+            return this.dtAfiliaciones;
+        }
 
-    public void GuardaPagos(string Usuario, DataTable dtPedidos, DataTable dtPago, DataTable dtDetallePago, DataTable dtResumenLiquidacion)
+
+
+        public void GuardaPagos(string Usuario, DataTable dtPedidos, DataTable dtPago, DataTable dtDetallePago, DataTable dtResumenLiquidacion)
     {
       this._datos.GuardaPagos(Usuario, dtPedidos, dtPago, dtDetallePago, dtResumenLiquidacion);
     }

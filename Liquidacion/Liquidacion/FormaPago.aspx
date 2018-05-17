@@ -1033,23 +1033,33 @@
     <asp:LinkButton ID="lnkDummy" runat="server"></asp:LinkButton>
     <ccR:ModalPopupExtender ID="ModalPopupExtender1" BehaviorID="mpe" runat="server"
         PopupControlID="pnlPopup" TargetControlID="lnkDummy" BackgroundCssClass="modalBackground">
+       
     </ccR:ModalPopupExtender>
-    <asp:Panel ID="pnlPopup" runat="server" CssClass="modalPopup" Style="display: none; align-content: center" ScrollBars="Vertical" Height="350px">
+    <asp:Panel ID="pnlPopup" runat="server" CssClass="modalPopup" Style="display: none; align-content: center"  >
         <div class="header">
-                                      
+                                   
         </div>
         <div class="body" style="align-content: center; background-color: aliceblue">
                      <table style="width: 100%; align-content: center; background-color: aliceblue; border: thin">
                     <tr style="align-content: center;">
                         <td style="text-align: right">
                              <asp:Button ID="btnHide" runat="server" Text="Cerrar" OnClientClick="return HideModalPopup()" />
-
                         </td>
 
                     </tr>
+                   <tr style="align-content: center;">
+                        <td style="text-align: center">
+                           <b> CARGOS DEL MISMO CLIENTE </b>
+                                 <br />
+                        </td>
+
+                    </tr>
+                     
                 </table>
-             
-            <uc1:wucConsultaCargoTarjetaCliente runat="server" ID="wucConsultaCargoTarjetaCliente1" />
+            <div style="height:350px;overflow:auto;">
+                <uc1:wucConsultaCargoTarjetaCliente runat="server" ID="wucConsultaCargoTarjetaCliente1" />
+             </div>
+   
             <br />
             <div style="align-content: center">
        

@@ -18,6 +18,7 @@ public partial class ControlesUsuario_wucConsultaCargoTarjetaClienta : System.We
             if (dtPagosContarjeta.Rows.Count >0)
             GrdPagosConTarjeta.DataSource = dtPagosContarjeta;
             GrdPagosConTarjeta.DataBind();
+            GrdPagosConTarjeta.Columns[0].ItemStyle.HorizontalAlign = HorizontalAlign.Center;
         }
 
         if (Page.IsPostBack == true)
@@ -40,16 +41,21 @@ public partial class ControlesUsuario_wucConsultaCargoTarjetaClienta : System.We
         }
 
     }
-
-
-
-
     protected void OnRowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
     {
+       
+
         if (e.Row.RowIndex > -1)
-            //e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(GrdPagosConTarjeta+, "Select$" + e.Row.RowIndex);
+        {            
             e.Row.Attributes.Add("onclick", "return ConsultaPagosSeleccion('"+ sFormaPago.ToString()+"','" + e.Row.RowIndex.ToString()+ "')");
             e.Row.ToolTip = "Click en el registro.";
+            e.Row.Attributes["style"] = "cursor:pointer";
+
+            e.Row.Attributes.Add("onmouseover", "this.style.backgroundColor='#E4EBAB'");
+            e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor='#FFFFFF'");
+            e.Row.BackColor = Color.FromName("#FAFAFA");
+
+        }
     }
 
 

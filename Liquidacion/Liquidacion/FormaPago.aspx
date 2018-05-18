@@ -169,7 +169,7 @@
         }
     </script>
 
-    <%--<script src="Scripts/jsUpdateProgress.js" type="text/javascript"></script>--%>
+    <script src="Scripts/jsUpdateProgress.js" type="text/javascript"></script>
     <script src="Scripts/MiscFunctions.js" type="text/javascript"></script>
 
     <div style="text-align: center; vertical-align: top;">
@@ -289,7 +289,7 @@
                                                                 CssClass="labeltipopagoforma" Font-Size="11px"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox ID="txtClienteCheque" runat="server" CssClass="textboxcaptura"></asp:TextBox>
+                                                            <asp:TextBox ID="txtClienteCheque" runat="server" CssClass="textboxcaptura" Text="1"></asp:TextBox>
                                                             <ccR:FilteredTextBoxExtender ID="ftxCliente" runat="server" TargetControlID="txtClienteCheque" FilterType="Numbers"></ccR:FilteredTextBoxExtender>
                                                         </td>
                                                     </tr>
@@ -1033,38 +1033,42 @@
     <asp:LinkButton ID="lnkDummy" runat="server"></asp:LinkButton>
     <ccR:ModalPopupExtender ID="ModalPopupExtender1" BehaviorID="mpe" runat="server"
         PopupControlID="pnlPopup" TargetControlID="lnkDummy" BackgroundCssClass="modalBackground">
-       
     </ccR:ModalPopupExtender>
-    <asp:Panel ID="pnlPopup" runat="server" CssClass="modalPopup" Style="display: none; align-content: center"  >
+    <asp:Panel ID="pnlPopup" runat="server" CssClass="modalPopup" Style="display: none; align-content: center">
         <div class="header">
-                                   
         </div>
         <div class="body" style="align-content: center; background-color: aliceblue">
-                     <table style="width: 100%; align-content: center; background-color: aliceblue; border: thin">
-                    <tr style="align-content: center;">
-                        <td style="text-align: right">
-                             <asp:Button ID="btnHide" runat="server" Text="Cerrar" OnClientClick="return HideModalPopup()" />
-                        </td>
+            <table style="width: 100%; align-content: center; background-color: aliceblue; border: thin">
+                               <tr style="align-content: center;">
+                    <td style="text-align: center">
+                        <br />
+                        <br />
+                    </td>
 
-                    </tr>
-                   <tr style="align-content: center;">
-                        <td style="text-align: center">
-                           <b> CARGOS DEL MISMO CLIENTE </b>
-                                 <br />
-                        </td>
+                </tr>
+                <tr style="align-content: center;">
+                    <td style="text-align: center">
+                        <b>CARGOS DEL MISMO CLIENTE </b>
+                        <br />
+                    </td>
 
-                    </tr>
-                     
-                </table>
-            <div style="height:350px;overflow:auto;">
+                </tr>
+
+            </table>
+            <div style="height: 350px; overflow: auto;">
                 <uc1:wucConsultaCargoTarjetaCliente runat="server" ID="wucConsultaCargoTarjetaCliente1" />
-             </div>
-   
+            </div>
+            <table style="width: 100%; align-content: center; background-color: aliceblue; border: thin">
+                <tr style="align-content: center;">
+                    <td style="text-align: center">
+                        <asp:Button ID="Button1" runat="server" Text="Cerrar" OnClientClick="return HideModalPopup()" />
+                    </td>
+
+                </tr>
+            </table>
+
             <br />
             <div style="align-content: center">
-       
-
-
             </div>
         </div>
     </asp:Panel>

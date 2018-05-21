@@ -14,6 +14,7 @@ using System.IO;
 
 using SigametLiquidacion;
 using System.Collections.Generic;
+using System.Web.Script.Serialization;
 
 public partial class FormaPago : System.Web.UI.Page
 {
@@ -92,8 +93,9 @@ public partial class FormaPago : System.Web.UI.Page
 
 
         txtLectorCheque.Attributes.Add("onkeyup", "return txtCuentaDocumento();");
-        txtClienteCheque.Attributes.Add("onblur", "ObtenerCliente(" + (char)39 + txtClienteCheque.UniqueID + (char)39 + "," + (char)39 + txtNombreClienteCheque.UniqueID + (char)39 + ")");
-       // txtClienteTarjeta.Attributes.Add("onblur", "ObtenerCliente(" + (char)39 + txtClienteTarjeta.UniqueID + (char)39 + "," + (char)39 + txtNombreClienteTarjeta.UniqueID + (char)39 + ")");
+        // txtClienteCheque.Attributes.Add("onblur", "ObtenerCliente(" + (char)39 + txtClienteCheque.UniqueID + (char)39 + "," + (char)39 + txtNombreClienteCheque.UniqueID + (char)39 + ")");
+        txtClienteCheque.Attributes.Add("onblur", "ConsultaClienteCheque(" + (char)39 + txtClienteCheque.UniqueID + (char)39 + ")");
+        // txtClienteTarjeta.Attributes.Add("onblur", "ObtenerCliente(" + (char)39 + txtClienteTarjeta.UniqueID + (char)39 + "," + (char)39 + txtNombreClienteTarjeta.UniqueID + (char)39 + ")");
         txtClienteVale.Attributes.Add("onblur", "ObtenerCliente(" + (char)39 + txtClienteVale.UniqueID + (char)39 + "," + (char)39 + txtValeNombre.UniqueID + (char)39 + ")");
 
         imgCheque.Attributes.Add("onclick", "toggle('display', 'cheque', 'tarjeta', 'vale', " + (char)39 + txtLectorCheque.UniqueID + (char)39 + ")");
@@ -1091,6 +1093,44 @@ public partial class FormaPago : System.Web.UI.Page
 
 
        
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="NumCte"></param>
+    /// <returns></returns>
+    [System.Web.Services.WebMethod]
+    public static string ConsultaClienteCheque(string NumCte)
+    {
+
+        RegistroPago RegPago = new RegistroPago();
+        DataTable dt = RegPago.DatosCliente(int.Parse(NumCte));
+
+        return DataTableToJSONWithJavaScriptSerializer(dt);
+
+
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="table"></param>
+    /// <returns></returns>
+    public static string DataTableToJSONWithJavaScriptSerializer(DataTable table)
+    {
+        JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
+        List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
+        Dictionary<string, object> childRow;
+        foreach (DataRow row in table.Rows)
+        {
+            childRow = new Dictionary<string, object>();
+            foreach (DataColumn col in table.Columns)
+            {
+                childRow.Add(col.ColumnName, row[col]);
+            }
+            parentRow.Add(childRow);
+        }
+        return jsSerializer.Serialize(parentRow);
+
     }
 
 

@@ -6,6 +6,7 @@
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainPlaceHolder" runat="server">
 
+
     <script type="text/javascript" language="javascript">  
 
         //Variables
@@ -41,7 +42,10 @@
                 alert('No se encontraron pagos de TPV para el cliente, por favor verifique con el área de tarjetas de crédito');
             }
 
+
+
         });
+
 
     </script>
     <script type="text/javascript">
@@ -168,6 +172,39 @@
             return str;
         }
     </script>
+
+
+       <script type="text/javascript">
+   function ConsultaClienteCheque() {
+    $("#<%=txtNombreClienteCheque.ClientID%>")[0].value=''; 
+
+    $.ajax({
+        type: "POST",
+        url: "FormaPago.aspx/ConsultaClienteCheque",
+        data: '{NumCte: "' + $("#<%=txtClienteCheque.ClientID%>")[0].value + '" }',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: OnSuccess,
+        failure: function(response) {
+            alert(response.d);
+        }
+    });
+}
+function OnSuccess(response) {
+    var obj =JSON.parse(response.d);
+   $.each( obj, function( key, value ) {
+   $("#<%=txtNombreClienteCheque.ClientID%>")[0].value=value.Nombre; 
+
+    
+    });
+
+
+ 
+  
+  }
+ 
+
+</script>
 
     <script src="Scripts/jsUpdateProgress.js" type="text/javascript"></script>
     <script src="Scripts/MiscFunctions.js" type="text/javascript"></script>

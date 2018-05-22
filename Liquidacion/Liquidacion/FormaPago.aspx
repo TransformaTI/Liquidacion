@@ -18,6 +18,7 @@
         var NumCte = '<%= txtClienteTarjeta.Text %>'; // mcc 2018 05 10
         var NumPagos = '<%=HiddenInputNumPagos.Value  %>'; // mcc 2018 05 10
         var Ruta = '<%=Session["Ruta"]%>';
+        var sTipoPago = '';
 
         //Validaciones  On load
         document.addEventListener("DOMContentLoaded", function () { // mcc 2018 05 10
@@ -49,7 +50,8 @@
 
     </script>
     <script type="text/javascript">
-       <!--
+
+  
     function toggle(display, activo, inactivo, inactivoA, control) {
 
         document.getElementById('tarjeta').style.display = 'none';
@@ -70,7 +72,6 @@
         }
     }
 
-       //-->
     </script>
     <script type="text/javascript">
        <!--
@@ -85,7 +86,9 @@
 
     <script type="text/javascript">
         function confirmar(button) {
-            if (document.getElementById(button).disabled = true) {
+
+
+            if (document.getElementById(button).disabled == true) {
                 var answer = confirm('¿Desea agregar el Pago?')
                 if (answer)
                     document.getElementById(button).disabled = false;
@@ -174,37 +177,60 @@
     </script>
 
 
-       <script type="text/javascript">
-   function ConsultaClienteCheque() {
-    $("#<%=txtNombreClienteCheque.ClientID%>")[0].value=''; 
+    <script type="text/javascript">
+        function ConsultaClienteCheque(TipoPago) {
 
-    $.ajax({
-        type: "POST",
-        url: "FormaPago.aspx/ConsultaClienteCheque",
-        data: '{NumCte: "' + $("#<%=txtClienteCheque.ClientID%>")[0].value + '" }',
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: OnSuccess,
-        failure: function(response) {
-            alert(response.d);
+            var IdCliente = '';
+
+            switch (TipoPago) {
+                case "cheque":
+                    IdCliente = $("#<%=txtClienteCheque.ClientID%>")[0].value;
+                    $("#<%=txtNombreClienteCheque.ClientID%>")[0].value = '';
+                    sTipoPago='cheque'
+                    break;
+
+                case "vale":
+                    IdCliente = $("#<%=txtClienteVale.ClientID%>")[0].value;
+                    $("#<%=txtValeNombre.ClientID%>")[0].value = '';
+                    sTipoPago = 'vale';
+                default:
+            }         
+
+       $.ajax({
+           type: "POST",
+           url: "FormaPago.aspx/ConsultaClienteCheque",
+           data: '{NumCte: "' + IdCliente + '" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: OnSuccess,
+                failure: function (response) {
+                    alert(response.d);
+                }
+            });
         }
-    });
-}
-function OnSuccess(response) {
-    var obj =JSON.parse(response.d);
-   $.each( obj, function( key, value ) {
-   $("#<%=txtNombreClienteCheque.ClientID%>")[0].value=value.Nombre; 
+        function OnSuccess(response) {
+            var obj = JSON.parse(response.d);
+            $.each(obj, function (key, value) {
+                if (sTipoPago == 'cheque')
+                {
+                    $("#<%=txtNombreClienteCheque.ClientID%>")[0].value = value.Nombre;
+                }
+                if (sTipoPago == 'vale')
+                {
+                  $("#<%=txtValeNombre.ClientID%>")[0].value =  value.Nombre;
+                }
 
-    
-    });
 
 
- 
-  
-  }
- 
+            });
 
-</script>
+
+
+
+        }
+
+
+    </script>
 
     <script src="Scripts/jsUpdateProgress.js" type="text/javascript"></script>
     <script src="Scripts/MiscFunctions.js" type="text/javascript"></script>
@@ -744,7 +770,7 @@ function OnSuccess(response) {
                                                         <td></td>
                                                         <td>
                                                             <asp:ImageButton ID="imbAceptarVale" runat="server"
-                                                                SkinID="btnAceptar"
+                                                                SkinID="btnAceptar" OnClick="imbAceptarVale_Click"
                                                                 ValidationGroup="Vale" Height="25px" Width="25px" />
 
                                                         </td>
@@ -1076,7 +1102,7 @@ function OnSuccess(response) {
         </div>
         <div class="body" style="align-content: center; background-color: aliceblue">
             <table style="width: 100%; align-content: center; background-color: aliceblue; border: thin">
-                               <tr style="align-content: center;">
+                <tr style="align-content: center;">
                     <td style="text-align: center">
                         <br />
                         <br />

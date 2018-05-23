@@ -20,6 +20,9 @@ namespace SigametLiquidacion
     private DataTable dtAutoTanque;
     private DataTable dtPagosConTarjeta;
     private DataTable dtAfiliaciones;
+    private DataTable dtProveedores;
+    private DataTable dtTipoVale;
+
         #endregion
         #region propiedades
         public DataTable Pedidos
@@ -80,6 +83,24 @@ namespace SigametLiquidacion
 
         }
 
+        public DataTable Proveedores
+        {
+            get
+            {
+                return this.dtProveedores;
+            }
+
+        }
+
+        public DataTable TipoVale
+        {
+            get
+            {
+                return this.dtTipoVale;
+            }
+
+        }
+
         #endregion
 
 
@@ -126,7 +147,26 @@ namespace SigametLiquidacion
             this.dtPagosConTarjeta = new DataTable();
             this._dataAccess.LoadData(this.dtPagosConTarjeta, "spCBConsultarCargoTarjetaCliente", CommandType.StoredProcedure, sqlParameterArray, true);
      }
-    
+
+        public void CargaProveedores()
+        {
+            this.dtProveedores = new DataTable();
+            this._dataAccess.LoadData(this.dtProveedores, "spLiqConsultaValeProveedor", CommandType.StoredProcedure, (SqlParameter[])null, true);
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public void CargaTipoVale()
+        {
+            this.dtTipoVale = new DataTable();
+            this._dataAccess.LoadData(this.dtTipoVale, "spLiqConsultaValeTipo", CommandType.StoredProcedure, (SqlParameter[])null, true);
+        }
+
+
+
+
+
         public void CargaAfiliaciones(int Ruta)
         {
             SqlParameter[] sqlParameterArray = new SqlParameter[1]

@@ -31,6 +31,10 @@ public partial class FormaPago : System.Web.UI.Page
     DataRow[] dtPagosConTarjetaSelec;
     string[] clave ;
     DataTable dtAfiliaciones;
+    DataTable dtProveedores;
+    DataTable dtTipoVale;
+
+
     
 
     string pagoActivo;
@@ -90,20 +94,24 @@ public partial class FormaPago : System.Web.UI.Page
         imbAceptar.Attributes.Add("onclick", "return confirmar(" + (char)39 + imbAceptar.UniqueID + (char)39 + ")");
         imbAceptarTDC.Attributes.Add("onclick", "return confirmar(" + (char)39 + imbAceptarTDC.UniqueID + (char)39 + ")");
         imbAceptarVale.Attributes.Add("onclick", "return confirmar(" + (char)39 + imbAceptarVale.UniqueID + (char)39 + ")");
+        //imbAceptarVale.Attributes.Add("onclick", "return confirmar(" + (char)39 + 'imbAceptarVale + (char)39 + ")");
+   
 
 
         txtLectorCheque.Attributes.Add("onkeyup", "return txtCuentaDocumento();");
         // txtClienteCheque.Attributes.Add("onblur", "ObtenerCliente(" + (char)39 + txtClienteCheque.UniqueID + (char)39 + "," + (char)39 + txtNombreClienteCheque.UniqueID + (char)39 + ")");
-        txtClienteCheque.Attributes.Add("onblur", "ConsultaClienteCheque(" + (char)39 + txtClienteCheque.UniqueID + (char)39 + ")");
+        txtClienteCheque.Attributes.Add("onblur", "ConsultaClienteCheque(" + (char)39 + "cheque" + (char)39 + ")");
         // txtClienteTarjeta.Attributes.Add("onblur", "ObtenerCliente(" + (char)39 + txtClienteTarjeta.UniqueID + (char)39 + "," + (char)39 + txtNombreClienteTarjeta.UniqueID + (char)39 + ")");
-        txtClienteVale.Attributes.Add("onblur", "ObtenerCliente(" + (char)39 + txtClienteVale.UniqueID + (char)39 + "," + (char)39 + txtValeNombre.UniqueID + (char)39 + ")");
+        //txtClienteVale.Attributes.Add("onblur", "ObtenerCliente(" + (char)39 + txtClienteVale.UniqueID + (char)39 + "," + (char)39 + txtValeNombre.UniqueID + (char)39 + ")");
+
+        txtClienteVale.Attributes.Add("onblur", "ConsultaClienteCheque(" + (char)39 + "vale" + (char)39 + ")");
 
         imgCheque.Attributes.Add("onclick", "toggle('display', 'cheque', 'tarjeta', 'vale', " + (char)39 + txtLectorCheque.UniqueID + (char)39 + ")");
         imgTarjeta.Attributes.Add("onclick", "toggle('display', 'tarjeta', 'cheque', 'vale', " + (char)39 + txtClienteTarjeta.UniqueID + (char)39 + ")");
         imgVale.Attributes.Add("onclick", "toggle('display', 'vale', 'cheque', 'tarjeta', " + (char)39 + txtClienteVale.UniqueID + (char)39 + ")");
 
         txtLectorCheque.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtClienteCheque.UniqueID + (char)39 + ")");
-        txtClienteCheque.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + imgCalendario.UniqueID + (char)39 + ")");
+        txtClienteCheque.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtClienteCheque.UniqueID + (char)39 + ")");
         imgCalendario.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtFechaChueque.UniqueID + (char)39 + ")");
         txtFechaChueque.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtNumCuenta.UniqueID + (char)39 + ")");
         txtNumCuenta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtNumeroCheque.UniqueID + (char)39 + ")");
@@ -128,13 +136,13 @@ public partial class FormaPago : System.Web.UI.Page
         txtObservacionesTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + imbAceptarTDC.UniqueID + (char)39 + ")");
 
 
-        txtClienteVale.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + imgValeCalendario.UniqueID + (char)39 + ")");
+       // txtClienteVale.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtClienteVale.UniqueID + (char)39 + ")");
 
-        imgValeCalendario.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtFolioVale.UniqueID + (char)39 + ")");
+        //imgValeCalendario.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtFolioVale.UniqueID + (char)39 + ")");
                 
-        txtFolioVale.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtValeFecha.UniqueID + (char)39 + ")");
+        ///txtFolioVale.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtValeFecha.UniqueID + (char)39 + ")");
         txtValeFecha.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtValeImporte.UniqueID + (char)39 + ")");
-        txtValeImporte.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtValeObs.UniqueID + (char)39 + ")");
+        //txtValeImporte.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtValeImporte.UniqueID + (char)39 + ")");
         txtValeObs.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + imbAceptarVale.UniqueID + (char)39 + ")");
 
        imbEfectivo.Attributes.Add("onclick", "return confirm('¿Desea enviar todos los pedidos a Pago en Efectivo?')");
@@ -147,6 +155,8 @@ public partial class FormaPago : System.Web.UI.Page
         ImgAnticipo.Attributes.Add("onclick", "toggle('display', 'transferencia', 'cheque', 'tarjeta', " + (char)39 + txtClienteTarjeta.UniqueID + (char)39 + ")");
 
         TxtCteAfiliacion.Attributes.Add("onblur", "return ConsultaPagosTPV('ConsultaTPV-Trans')");
+
+
 
         #endregion
 
@@ -224,6 +234,8 @@ public partial class FormaPago : System.Web.UI.Page
         {
             dtBancos = rp.ListaBancos();
             dtAfiliaciones = rp.Afiliaciones(int.Parse(Session["Ruta"].ToString()));
+            dtProveedores = rp.Proveedores();
+            dtTipoVale = rp.TipoVale();
 
             ddBancoTarjeta.DataSource = dtBancos;
             ddBancoTarjeta.DataTextField = "Nombre";
@@ -246,10 +258,10 @@ public partial class FormaPago : System.Web.UI.Page
             ddlBancoOrigen.Items.Insert(0, new ListItem("- Seleccione -", "0"));
             ddlBancoOrigen.SelectedIndex = 0;
 
-            ddlValePromocion.DataSource = dtPromocion;
-            ddlValePromocion.DataTextField = "ValePromocion";
-            ddlValePromocion.DataValueField = "Descripcion";
-            ddlValePromocion.DataBind();
+            //ddlValePromocion.DataSource = dtPromocion;
+            //ddlValePromocion.DataTextField = "ValePromocion";
+            //ddlValePromocion.DataValueField = "Descripcion";
+            //ddlValePromocion.DataBind();
 
             ddBancoTrasferencia.DataSource = dtBancos;
             ddBancoTrasferencia.DataTextField = "Nombre";
@@ -274,6 +286,22 @@ public partial class FormaPago : System.Web.UI.Page
             ddAfiliacion.Items.Insert(0, new ListItem("- Seleccione -", "0"));
             ddAfiliacion.SelectedIndex = 0;
 
+
+            ddlProveedor.DataSource = dtProveedores;
+            ddlProveedor.DataTextField = "NombreProveedor";
+            ddlProveedor.DataValueField = "ValeProveedor";
+            ddlProveedor.DataBind();
+            ddlProveedor.Items.Insert(0, new ListItem("- Seleccione -", "0"));
+            ddlProveedor.SelectedIndex = 0;
+
+
+            ddlTipoVale.DataSource = dtTipoVale;
+            ddlTipoVale.DataTextField = "Descripcion";
+            ddlTipoVale.DataValueField = "ValeTipo";
+            ddlTipoVale.DataBind();
+            ddlTipoVale.Items.Insert(0, new ListItem("- Seleccione -", "0"));
+            ddlTipoVale.SelectedIndex = 0;
+
         }
         catch (Exception ex)
         {
@@ -296,9 +324,9 @@ public partial class FormaPago : System.Web.UI.Page
                 DataRow dr;
                 dr = dtCobro.NewRow();
 
-                dr["IdCobro"] = 0; //Consecutivo
-                dr["Referencia"] = txtFolioVale.Text;
-                dr["NumeroCuenta"] = txtFolioVale.Text;
+                //dr["IdCobro"] = 0; //Consecutivo
+                //dr["Referencia"] = txtFolioVale.Text;
+                //dr["NumeroCuenta"] = txtFolioVale.Text;
 
                 dr["FechaCheque"] = "";
                 dr["Cliente"] = txtClienteVale.Text;
@@ -338,8 +366,8 @@ public partial class FormaPago : System.Web.UI.Page
 
 
                 dr["IdCobro"] = 0; //Consecutivo
-                dr["Referencia"] = txtFolioVale.Text;
-                dr["NumeroCuenta"] = txtFolioVale.Text;
+                //dr["Referencia"] = txtFolioVale.Text;
+                //dr["NumeroCuenta"] = txtFolioVale.Text;
 
                 dr["FechaCheque"] = "";
                 dr["Cliente"] = txtClienteVale.Text;
@@ -368,7 +396,12 @@ public partial class FormaPago : System.Web.UI.Page
                 //Session["TablaCobro"] = dtCobro;
                 Session["idCliente"] = txtClienteVale.Text;
                 Session["dsLiquidacion"] = dtCobro.DataSet;
+
+          
             }
+
+            Response.Redirect("RegistroPagos.aspx");
+
         }
         catch (Exception ex)
         {
@@ -1102,9 +1135,13 @@ public partial class FormaPago : System.Web.UI.Page
     [System.Web.Services.WebMethod]
     public static string ConsultaClienteCheque(string NumCte)
     {
+        DataTable dt = null;
+        if (NumCte!=string.Empty)
+        {
+            RegistroPago RegPago = new RegistroPago();
+           dt = RegPago.DatosCliente(int.Parse(NumCte));
 
-        RegistroPago RegPago = new RegistroPago();
-        DataTable dt = RegPago.DatosCliente(int.Parse(NumCte));
+        }
 
         return DataTableToJSONWithJavaScriptSerializer(dt);
 

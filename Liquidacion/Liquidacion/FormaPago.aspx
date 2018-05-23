@@ -9,6 +9,7 @@
 
     <script type="text/javascript" language="javascript">  
 
+
         //Variables
         var respuesta = false;
         var smMensajeCargo = 'El cliente tiene un cargo, ¿quiere utilizarlo?'; // mcc 2018 05 10
@@ -46,6 +47,31 @@
 
 
         });
+
+
+
+    function onlyNumbers(evt) {
+     evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+
+         return false;
+     }
+     return true;
+        }
+
+   function onlyNumbersDecimals(evt) {
+     evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+     if (charCode > 31 && (charCode < 46  || charCode > 57 || charCode == 47 )) {
+
+         return false;
+     }
+     return true;
+ }
+
+      
+
 
 
     </script>
@@ -194,7 +220,10 @@
                     $("#<%=txtValeNombre.ClientID%>")[0].value = '';
                     sTipoPago = 'vale';
                 default:
-            }         
+            }     
+
+            if (IdCliente == '')
+                return;
 
        $.ajax({
            type: "POST",
@@ -677,7 +706,7 @@
                                                             <asp:Label ID="lblValeCliente" runat="server" Text="Cliente" CssClass="labeltipopagoforma"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox ID="txtClienteVale" runat="server" CssClass="textboxcaptura"></asp:TextBox>
+                                                            <asp:TextBox ID="txtClienteVale" runat="server"  CssClass="textboxcaptura" onKeypress="return onlyNumbers(event)" ></asp:TextBox>
 
                                                             <asp:RequiredFieldValidator ID="rfvClienteVale" runat="server"
                                                                 ControlToValidate="txtClienteVale" Display="None"
@@ -693,26 +722,13 @@
                                                             <asp:Label ID="lblValeNombre" runat="server" Text="Nombre" CssClass="labeltipopagoforma"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox ID="txtValeNombre" runat="server" Width="200px" CssClass="textboxcaptura"></asp:TextBox>
+                                                            <asp:TextBox ID="txtValeNombre" runat="server" Width="200px" CssClass="textboxcaptura" ReadOnly="True"></asp:TextBox>
                                                         </td>
                                                     </tr>
+                                                    
                                                     <tr>
                                                         <td class="style1">
-                                                            <asp:Label ID="lblValeFolio" runat="server" Text="Folio" CssClass="labeltipopagoforma"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtFolioVale" runat="server" CssClass="textboxcaptura"></asp:TextBox>
-                                                            <asp:RequiredFieldValidator ID="rfvFolioVale" runat="server"
-                                                                ControlToValidate="txtFolioVale" Display="None"
-                                                                ErrorMessage="Capturar el Folio" Font-Size="11px" ValidationGroup="Vale"></asp:RequiredFieldValidator>
-                                                            <ccR:ValidatorCalloutExtender ID="vceFolioVale" runat="server"
-                                                                TargetControlID="rfvFolioVale">
-                                                            </ccR:ValidatorCalloutExtender>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="style1">
-                                                            <asp:Label ID="lblValeFecha" runat="server" Text="Fecha" CssClass="labeltipopagoforma"></asp:Label>
+                                                            <asp:Label ID="lblValeFecha" runat="server" Text="Fecha Documento" CssClass="labeltipopagoforma"></asp:Label>
                                                         </td>
                                                         <td>
                                                             <asp:TextBox ID="txtValeFecha" runat="server" CssClass="WarningLabels"></asp:TextBox>
@@ -731,15 +747,27 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="style1">
-                                                            <asp:Label ID="lblValePromocion" runat="server" Text="Promoción" CssClass="labeltipopagoforma"> </asp:Label>
+                                                            <asp:Label ID="lblProveedor" runat="server" Text="Proveedor" CssClass="labeltipopagoforma"> </asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:DropDownList ID="ddlValePromocion" runat="server" CssClass="textboxcaptura">
-                                                                <asp:ListItem>Promoción 1</asp:ListItem>
+                                                            <asp:DropDownList ID="ddlProveedor" runat="server" CssClass="textboxcaptura">
+                                                                <asp:ListItem>Si Vale</asp:ListItem>
                                                                 <asp:ListItem>Promoción 2</asp:ListItem>
                                                                 <asp:ListItem>Promoción 3</asp:ListItem>
                                                                 <asp:ListItem>Promoción 4</asp:ListItem>
                                                                 <asp:ListItem>Promoción 5</asp:ListItem>
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="style1">
+                                                            <asp:Label ID="lblTipoVale" runat="server" Text="Tipo Vale" CssClass="labeltipopagoforma"> </asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:DropDownList ID="ddlTipoVale" runat="server" CssClass="textboxcaptura">
+                                                                <asp:ListItem>Despensa</asp:ListItem>
+
                                                             </asp:DropDownList>
                                                         </td>
                                                     </tr>
@@ -748,7 +776,7 @@
                                                             <asp:Label ID="lblValeImporte" runat="server" Text="Importe" CssClass="labeltipopagoforma"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox ID="txtValeImporte" runat="server" CssClass="textboxcaptura"></asp:TextBox>
+                                                            <asp:TextBox ID="txtValeImporte" runat="server" onKeypress="return onlyNumbersDecimals(event)"  CssClass="textboxcaptura"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="rfvImporteVale" runat="server"
                                                                 ControlToValidate="txtValeImporte" Display="None"
                                                                 ErrorMessage="Capturar Importe" Font-Size="11px" ValidationGroup="Vale"></asp:RequiredFieldValidator>

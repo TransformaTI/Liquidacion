@@ -22,8 +22,10 @@ namespace SigametLiquidacion
     private DatosRegistroPago _datos = new DatosRegistroPago();
     private DataTable dtPagosConTarjeta = new DataTable(); // mcc 2018 05 10
     private DataTable dtAfiliaciones = new DataTable();
+    private DataTable dtProveedores = new DataTable();
+    private DataTable dtTipoVale = new DataTable();
 
-    public DataTable ListaPedidos()
+   public DataTable ListaPedidos()
     {
       this._datos.CargaPedidos();
       this.dtPedidos = this._datos.Pedidos;
@@ -66,6 +68,19 @@ namespace SigametLiquidacion
             return this.dtAfiliaciones;
         }
 
+    public DataTable Proveedores()
+        {
+            this._datos.CargaProveedores();
+            this.dtProveedores = this._datos.Proveedores;
+            return this.dtProveedores;
+        }
+
+        public DataTable TipoVale()
+        {
+            this._datos.CargaTipoVale();
+            this.dtTipoVale = this._datos.TipoVale;
+            return this.dtTipoVale;
+        }
 
 
         public void GuardaPagos(string Usuario, DataTable dtPedidos, DataTable dtPago, DataTable dtDetallePago, DataTable dtResumenLiquidacion)

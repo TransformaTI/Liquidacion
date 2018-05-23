@@ -20,27 +20,9 @@ public partial class ControlesUsuario_wucConsultaCargoTarjetaClienta : System.We
             GrdPagosConTarjeta.DataBind();
             GrdPagosConTarjeta.Columns[0].ItemStyle.HorizontalAlign = HorizontalAlign.Center;
         }
-
-        if (Page.IsPostBack == true)
-        {
-            
-        }
-
-
-
     }
 
-    private void AsignaLlaves()
-    {
-        foreach (GridViewRow row in GrdPagosConTarjeta.Rows)
-        {
-            if (row.RowIndex > -1)
-                row.Attributes.Add("onclick", "return ConsultaPagosTPV("+ row.Cells[7].ToString()+")"); 
-                row.ToolTip = "Seleccione un Registro!.";
 
-        }
-
-    }
     protected void OnRowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
     {
        

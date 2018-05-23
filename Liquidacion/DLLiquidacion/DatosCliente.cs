@@ -30,6 +30,30 @@ namespace SigametLiquidacion
             this._fSuministro = FSuministro;
         }
 
+
+        public DataTable ConsultaSaldosAFavor(int cliente,string statusMovimiento, int folioMovimiento, int anioMovimiento)
+        {
+            DataTable dataTable = new DataTable();
+            SqlParameter[] sqlParameterArray = new SqlParameter[4]
+            {
+                new SqlParameter("@Cliente", cliente),
+                new SqlParameter("@StatusMovimiento",statusMovimiento),
+                new SqlParameter("@FolioMovimiento",folioMovimiento),
+                new SqlParameter("@AñoMovimiento",anioMovimiento)
+            };
+            try
+            {
+                this._dataAccess.LoadData(dataTable, "spLIQ2ConsultaSaldosAFavor", CommandType.StoredProcedure, sqlParameterArray, true);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return dataTable;
+
+        }
+        
+
         public DataTable ConsultaCliente()
         {
             DataTable dataTable = new DataTable();
@@ -48,7 +72,7 @@ namespace SigametLiquidacion
             }
             return dataTable;
         }
-        
+
         public bool ClienteLiquidado(short AñoAtt, int Folio, int Cliente)
         {
             bool flag = false;
@@ -58,23 +82,23 @@ namespace SigametLiquidacion
                 new SqlParameter("@Folio", (object) Folio),
                 new SqlParameter("@Cliente", (object) Cliente)
       };
-      try
-      {
-        SqlDataReader sqlDataReader = this._dataAccess.LoadData("spLIQ2ConsultaClienteLiquidado", CommandType.StoredProcedure, sqlParameterArray);
-        this._dataAccess.OpenConnection();
-        while (sqlDataReader.Read())
-          flag = true;
-        sqlDataReader.Close();
-      }
-      catch (Exception ex)
-      {
-        throw ex;
-      }
-      finally
-      {
-        this._dataAccess.CloseConnection();
-      }
-      return flag;
+            try
+            {
+                SqlDataReader sqlDataReader = this._dataAccess.LoadData("spLIQ2ConsultaClienteLiquidado", CommandType.StoredProcedure, sqlParameterArray);
+                this._dataAccess.OpenConnection();
+                while (sqlDataReader.Read())
+                    flag = true;
+                sqlDataReader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this._dataAccess.CloseConnection();
+            }
+            return flag;
+        }
     }
-  }
 }

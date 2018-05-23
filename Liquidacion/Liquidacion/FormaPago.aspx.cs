@@ -90,6 +90,7 @@ public partial class FormaPago : System.Web.UI.Page
         }
         #endregion
 
+
         #region "Propiedades Controles"
         imbAceptar.Attributes.Add("onclick", "return confirmar(" + (char)39 + imbAceptar.UniqueID + (char)39 + ")");
         imbAceptarTDC.Attributes.Add("onclick", "return confirmar(" + (char)39 + imbAceptarTDC.UniqueID + (char)39 + ")");
@@ -106,9 +107,11 @@ public partial class FormaPago : System.Web.UI.Page
 
         txtClienteVale.Attributes.Add("onblur", "ConsultaClienteCheque(" + (char)39 + "vale" + (char)39 + ")");
 
-        imgCheque.Attributes.Add("onclick", "toggle('display', 'cheque', 'tarjeta', 'vale', " + (char)39 + txtLectorCheque.UniqueID + (char)39 + ")");
-        imgTarjeta.Attributes.Add("onclick", "toggle('display', 'tarjeta', 'cheque', 'vale', " + (char)39 + txtClienteTarjeta.UniqueID + (char)39 + ")");
-        imgVale.Attributes.Add("onclick", "toggle('display', 'vale', 'cheque', 'tarjeta', " + (char)39 + txtClienteVale.UniqueID + (char)39 + ")");
+        imgCheque.Attributes.Add("onclick", "toggle('display',  'cheque', 'tarjeta', 'vale','Transferencia','Anticipo', " + (char)39 + txtLectorCheque.UniqueID + (char)39 + ")");
+        imgTarjeta.Attributes.Add("onclick", "toggle('display', 'tarjeta', 'cheque', 'vale','Transferencia','Anticipo', " + (char)39 + txtClienteTarjeta.UniqueID + (char)39 + ")");
+        imgVale.Attributes.Add("onclick", "toggle('display',    'vale', 'cheque', 'tarjeta','Transferencia','Anticipo', " + (char)39 + txtClienteVale.UniqueID + (char)39 + ")");
+        imgTransferencia.Attributes.Add("onclick", "toggle('display','Transferencia', 'vale','cheque', 'tarjeta','Anticipo', " + (char)39 + this.ucTransferencia.TxtIdCliente.UniqueID + (char)39 + ")");
+        imgAnticipo.Attributes.Add("onclick", "toggle('display','Anticipo', 'cheque','vale', 'tarjeta','Transferencia', " + (char)39 + this.ucAnticipo.TxtAntIdCliente.UniqueID + (char)39 + ")");
 
         txtLectorCheque.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtClienteCheque.UniqueID + (char)39 + ")");
         txtClienteCheque.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtClienteCheque.UniqueID + (char)39 + ")");
@@ -408,6 +411,7 @@ public partial class FormaPago : System.Web.UI.Page
             lblError.Text = ex.Message;
         }
     }
+
     protected void imbAceptar_Click(object sender, ImageClickEventArgs e)
     {
         try

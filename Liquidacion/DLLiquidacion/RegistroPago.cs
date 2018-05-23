@@ -88,6 +88,11 @@ namespace SigametLiquidacion
       this._datos.GuardaPagos(Usuario, dtPedidos, dtPago, dtDetallePago, dtResumenLiquidacion);
     }
 
+        public void InsertaMovimientoAConciliar(int folioMovimiento, int anioMovimiento, int anioCobro, int cobro, decimal monto, string status)
+        {
+            this._datos.InsertaMovimientoAConciliar(folioMovimiento, anioMovimiento, anioCobro, cobro, monto, status);
+        }
+
     public enum TipoPago
     {
       tipoCheque = 3,
@@ -95,6 +100,8 @@ namespace SigametLiquidacion
       tipoTarjeta = 6,
       tipoDescuento = 12,
       tipoVale = 16,
+      transferencia =22,
+      anticipo = 21
     }
   }
 }

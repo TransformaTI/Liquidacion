@@ -311,7 +311,7 @@
                                     <tr>
                                         <td>
                                             <asp:Image ID="ImgAnticipo" runat="server"
-                                                ImageUrl="~/Images/imgCapturarAnticipo.png" />
+                                                ImageUrl="~/Images/imgCapturarTrans.png" />
                                         </td>
                                     </tr>
                                     <tr>

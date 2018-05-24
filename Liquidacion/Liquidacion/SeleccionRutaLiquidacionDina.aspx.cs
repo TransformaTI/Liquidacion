@@ -223,7 +223,7 @@ public partial class SeleccionRutaLiquidacionDina : System.Web.UI.Page
 
                 ibl.StatusLiquidacion = StatusLiquidacion;
 
-                ibl.Autotanque = autotanque;
+               // ibl.Autotanque = autotanque;
 
 
                 switch (status)

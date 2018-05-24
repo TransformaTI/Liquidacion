@@ -110,8 +110,8 @@ public partial class FormaPago : System.Web.UI.Page
         imgCheque.Attributes.Add("onclick", "toggle('display',  'cheque', 'tarjeta', 'vale','Transferencia','Anticipo', " + (char)39 + txtLectorCheque.UniqueID + (char)39 + ")");
         imgTarjeta.Attributes.Add("onclick", "toggle('display', 'tarjeta', 'cheque', 'vale','Transferencia','Anticipo', " + (char)39 + txtClienteTarjeta.UniqueID + (char)39 + ")");
         imgVale.Attributes.Add("onclick", "toggle('display',    'vale', 'cheque', 'tarjeta','Transferencia','Anticipo', " + (char)39 + txtClienteVale.UniqueID + (char)39 + ")");
-        imgTransferencia.Attributes.Add("onclick", "toggle('display','Transferencia', 'vale','cheque', 'tarjeta','Anticipo', " + (char)39 + this.ucTransferencia.TxtIdCliente.UniqueID + (char)39 + ")");
-        imgAnticipo.Attributes.Add("onclick", "toggle('display','Anticipo', 'cheque','vale', 'tarjeta','Transferencia', " + (char)39 + this.ucAnticipo.TxtAntIdCliente.UniqueID + (char)39 + ")");
+        //imgTransferencia.Attributes.Add("onclick", "toggle('display','Transferencia', 'vale','cheque', 'tarjeta','Anticipo', " + (char)39 + this.ucTransferencia.TxtIdCliente.UniqueID + (char)39 + ")");
+        //imgAnticipo.Attributes.Add("onclick", "toggle('display','Anticipo', 'cheque','vale', 'tarjeta','Transferencia', " + (char)39 + this.ucAnticipo.TxtAntIdCliente.UniqueID + (char)39 + ")");
 
         txtLectorCheque.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtClienteCheque.UniqueID + (char)39 + ")");
         txtClienteCheque.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtClienteCheque.UniqueID + (char)39 + ")");

@@ -12,12 +12,19 @@ namespace SigametLiquidacion
 {
     public class DatosRegistroPago : Datos
     {
+        #region variables
         private DataTable dtPedidos;
         private DataTable dtBancos;
         private DataTable dtCliente;
         private DataTable dtPromociones;
         private DataTable dtAutoTanque;
+        private DataTable dtPagosConTarjeta;
+        private DataTable dtAfiliaciones;
+        private DataTable dtProveedores;
+        private DataTable dtTipoVale;
 
+        #endregion
+        #region propiedades
         public DataTable Pedidos
         {
             get
@@ -58,6 +65,45 @@ namespace SigametLiquidacion
             }
         }
 
+        public DataTable PagosConTarjeta
+        {
+            get
+            {
+                return this.dtPagosConTarjeta;
+            }
+
+        }
+
+        public DataTable Afiliaciones
+        {
+            get
+            {
+                return this.dtAfiliaciones;
+            }
+
+        }
+
+        public DataTable Proveedores
+        {
+            get
+            {
+                return this.dtProveedores;
+            }
+
+        }
+
+        public DataTable TipoVale
+        {
+            get
+            {
+                return this.dtTipoVale;
+            }
+
+        }
+
+        #endregion
+
+
         public void CargaPedidos()
         {
             this.dtPedidos = new DataTable();
@@ -85,6 +131,57 @@ namespace SigametLiquidacion
             this.dtCliente = new DataTable();
             this._dataAccess.LoadData(this.dtCliente, "spLIQ2ConsultaDatosCliente", CommandType.StoredProcedure, sqlParameterArray, true);
         }
+        /// <summary>
+        /// Devuelve datatable con pagos de tarjeta del cliente
+        /// </summary>
+        /// <param name="NumCliente"></param>
+        public void CargaPagosConTarjeta(int NumCliente, int Ruta, int Autotanque)
+        {
+            SqlParameter[] sqlParameterArray = new SqlParameter[3]
+            {
+            new SqlParameter("@Cliente",NumCliente),
+            new SqlParameter("@Ruta",Ruta),
+            new SqlParameter("@Autotanque",Autotanque),
+
+            };
+            this.dtPagosConTarjeta = new DataTable();
+            this._dataAccess.LoadData(this.dtPagosConTarjeta, "spCBConsultarCargoTarjetaCliente", CommandType.StoredProcedure, sqlParameterArray, true);
+        }
+
+        public void CargaProveedores()
+        {
+            this.dtProveedores = new DataTable();
+            this._dataAccess.LoadData(this.dtProveedores, "spLiqConsultaValeProveedor", CommandType.StoredProcedure, (SqlParameter[])null, true);
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public void CargaTipoVale()
+        {
+            this.dtTipoVale = new DataTable();
+            this._dataAccess.LoadData(this.dtTipoVale, "spLiqConsultaValeTipo", CommandType.StoredProcedure, (SqlParameter[])null, true);
+        }
+
+
+
+
+
+        public void CargaAfiliaciones(int Ruta)
+        {
+            SqlParameter[] sqlParameterArray = new SqlParameter[1]
+             {
+                 new SqlParameter("@Ruta",Ruta)
+             };
+
+            this.dtAfiliaciones = new DataTable();
+            this._dataAccess.LoadData(this.dtAfiliaciones, "spLiqConsultaAfiliacion", CommandType.StoredProcedure, sqlParameterArray, true);
+        }
+
+
+
+
+
 
         private void CobroEnEfectivo(string Usuario, DataTable dtPedidos, ref DataTable dtPago, ref DataTable dtDetallePago)
         {
@@ -414,7 +511,9 @@ namespace SigametLiquidacion
                 throw ex;
             }
         }
-        public void InsertaMovimientoAConciliar(int folioMovimiento,int anioMovimiento, int anioCobro, int cobro,decimal monto ,string status)
+
+
+        public void InsertaMovimientoAConciliar(int folioMovimiento, int anioMovimiento, int anioCobro, int cobro, decimal monto, string status)
         {
             this._dataAccess.ModifyData("spLIQ2InsertaMovimientoAConciliarCobro", CommandType.StoredProcedure, new SqlParameter[6]
               { new SqlParameter("@FolioMovimiento", folioMovimiento),

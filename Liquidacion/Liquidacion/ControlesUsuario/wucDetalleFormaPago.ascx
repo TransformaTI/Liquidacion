@@ -3,6 +3,8 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc2" %>
 
 
+
+
 <div style="text-align: right" id ="Transfer">
 <asp:Panel ID="pnlTransferencia" runat="server">
 <table style="background-color: #e1f8e2; height: 360px; width: 900px">
@@ -157,7 +159,8 @@
             </div>
         </td>
         <td>
-            <asp:TextBox ID="txtObservaciones" runat="server" Width="300px" Height="75px" TextMode="MultiLine"></asp:TextBox>
+
+            <asp:TextBox ID="txtObservaciones" runat="server" Width="300px" Height="75px"  TextMode="MultiLine"></asp:TextBox>
 
         </td>
     </tr>
@@ -202,22 +205,18 @@
             </div>
         </td>
         <td>
-            <div style="float: left;">
-            <asp:TextBox ID="txtAntCliente" Width="150px" runat="server" CssClass="textboxcaptura"></asp:TextBox>
-                 </div>
-            <div style="float: left; vertical-align: middle">
-                <asp:ImageButton runat="Server" ID="btnBuscarCliente"  ValidationGroup="GuardaAnt"  OnClick="btnBuscarCliente_Click" AlternateText="Buscar cliente" />
+            <div style="float: right; vertical-align: middle;visibility:hidden">
+                <asp:ImageButton runat="Server" ID="btnBuscarCliente"  ValidationGroup="GuardaAnt"   AlternateText="Buscar cliente" style="width: 14px" />
             </div>
             <cc2:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" FilterType="Numbers"
-                TargetControlID="txtAntCliente">
-            </cc2:FilteredTextBoxExtender>
+                TargetControlID="txtAntCliente"></cc2:FilteredTextBoxExtender>
+            <asp:TextBox ID="txtAntCliente" runat="server" CssClass="textboxcaptura" Width="150px"></asp:TextBox>
             <asp:RequiredFieldValidator ID="rfvAntCliente" runat="server"
                 ControlToValidate="txtAntCliente" Display="None"
                 ErrorMessage="Capturar el No. de Cliente"
                 ValidationGroup="GuardaAnt"></asp:RequiredFieldValidator>
             <cc2:ValidatorCalloutExtender ID="ValidatorCalloutExtender1" runat="server"
-                TargetControlID="rfvAntCliente">
-            </cc2:ValidatorCalloutExtender>
+                TargetControlID="rfvAntCliente"></cc2:ValidatorCalloutExtender>
         </td>
     </tr>
     <tr>
@@ -239,15 +238,13 @@
             </div>
         </td>
         <td>
-            <asp:TextBox ID="txtAntSaldo" ReadOnly ="true" runat="server" Width="150px" CssClass="textboxcaptura"></asp:TextBox>
-            <cc2:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server" TargetControlID="txtAntSaldo" FilterType="Custom" ValidChars="0123456789./"></cc2:FilteredTextBoxExtender>
+            <asp:ListBox ID="LstSaldos" runat="server"  Height="100px"  style="overflow-x:auto;margin-left: 0px" Width="222px"></asp:ListBox>
             <asp:RequiredFieldValidator ID="rfvAntSaldo" runat="server"
-                ControlToValidate="txtAntSaldo" Display="None"
+                ControlToValidate="LstSaldos" Display="None"
                 ErrorMessage="Capturar el Saldo"
                 ></asp:RequiredFieldValidator>
             <cc2:ValidatorCalloutExtender ID="ValidatorCalloutExtender5" runat="server"
-                TargetControlID="rfvAntSaldo">
-            </cc2:ValidatorCalloutExtender>
+                TargetControlID="rfvAntSaldo"></cc2:ValidatorCalloutExtender>
         </td>
     </tr>
     <tr>
@@ -265,8 +262,7 @@
                 ErrorMessage="Capturar el Monto"
                 ></asp:RequiredFieldValidator>
             <cc2:ValidatorCalloutExtender ID="ValidatorCalloutExtender2" runat="server"
-                TargetControlID="rfvAntMonto">
-            </cc2:ValidatorCalloutExtender>
+                TargetControlID="rfvAntMonto"></cc2:ValidatorCalloutExtender>
         </td>
     </tr>
     <tr>
@@ -303,4 +299,5 @@
     </tr>
 </table>
 </asp:Panel>
+    <asp:HiddenField ID="HiddenInputUC" runat="server" Value="" />
  </div>

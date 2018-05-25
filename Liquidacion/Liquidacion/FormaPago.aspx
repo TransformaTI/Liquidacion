@@ -23,6 +23,8 @@
         var Ruta = '<%=Session["Ruta"]%>';
         var sTipoPago = '';
 
+        
+
         //Validaciones  On load
         document.addEventListener("DOMContentLoaded", function () { // mcc 2018 05 10
 
@@ -45,6 +47,15 @@
             else if (HiddenInputPCT != 'Si' && NumCte != '') {
                 alert('No se encontraron pagos de TPV para el cliente, por favor verifique con el área de tarjetas de crédito');
             }
+
+            if (HiddenInput == "ConsultaCteAnticipo")
+            {
+                           alert('anticipo');
+                            document.getElementById('AnticipoUC').style.display = 'inherit';
+               document.getElementById('Anticipo').style.display = 'inherit'; 
+                    document.getElementById('Transfer').style.display = 'none';      
+            }
+
 
 
 
@@ -150,6 +161,12 @@
 
         function ConsultaPagosSeleccion(FormaPago, Llave) {
             javascript: __doPostBack(FormaPago + ' SeleccionaPago=' + Llave, '');
+
+
+        }
+
+       function ConsultaCteAnticipo(FormaPago) {
+            javascript: __doPostBack(FormaPago);
 
 
         }

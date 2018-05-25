@@ -36,6 +36,7 @@ namespace SigametLiquidacion
         private DataTable dtDatosCliente;
 
         private decimal _precioCliente;
+        private DataTable _dtSaldosCliente;
 
         public bool Encontrado
         {
@@ -209,6 +210,8 @@ namespace SigametLiquidacion
             }
         }
 
+       
+
         //20-07-2015
         public decimal PrecioCliente
         {
@@ -217,6 +220,20 @@ namespace SigametLiquidacion
                 return _precioCliente;
             }
         }
+
+        public DataTable SaldosCliente
+        {
+            get
+            {
+                return this._dtSaldosCliente;
+            }
+            set
+            {
+                this._dtSaldosCliente = value;
+            }
+
+        }
+
 
         public Cliente(int Cliente, byte ClaveCreditoAutorizado)
         {
@@ -237,6 +254,10 @@ namespace SigametLiquidacion
             }
             this.asignacionDatosCliente(this.dtDatosCliente);
         }
+
+        
+
+        
 
         private void asignacionDatosCliente(DataTable DatosCliente)
         {
@@ -293,7 +314,8 @@ namespace SigametLiquidacion
             {
                 saldoCliente = datosCliente.ConsultaSaldosAFavor(cliente, statusMovimiento, folioMovimiento, anioMovimiento);
                 this._nombre = Convert.ToString(saldoCliente.Rows[0]["Nombre"]);
-                this._saldo = this._saldo = Convert.ToDecimal(saldoCliente.Rows[0]["Saldo"]);
+                //this._saldo = this._saldo = Convert.ToDecimal(saldoCliente.Rows[0]["Saldo"]);
+                SaldosCliente = saldoCliente;
             }
             catch (Exception ex)
             {

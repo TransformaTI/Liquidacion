@@ -78,6 +78,15 @@ public partial class FormaPago : System.Web.UI.Page
                 LimpiarCampos("transferencia");
                 MuestraPagoSeleccionado(Request.Form["__EVENTTARGET"].ToString());
             }
+
+            if (Request.Form["__EVENTTARGET"] == "ConsultaCteAnticipo")
+            {
+                HiddenInput.Value = "ConsultaCteAnticipo";
+
+            }
+
+
+
         }
 
         else

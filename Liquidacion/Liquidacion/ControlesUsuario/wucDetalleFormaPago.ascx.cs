@@ -111,6 +111,9 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
             this.btnAntAceptar.ImageUrl = this.ImgBoton;
             this.btnBuscarCliente.ImageUrl = this.imgBtnBuscar;
 
+            this.lblTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Transferencia electrónica de fondos" : this.Titulo;
+            this.lblAntTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Aplicación de anticipo" : this.Titulo;
+
             if (this.TipoCobro == "22")
             {
                 LlenaDropDowns();
@@ -124,7 +127,20 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                 this.pnlAnticipo.Style.Add("display", "block");
                 this.lblAntTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Aplicación de anticipo" : this.Titulo;
             }
+
+            txtAntCliente.Attributes.Add("onblur", "return ConsultaCteAnticipo('ConsultaCteAnticipo')");
         }
+
+        else
+        {
+            if (Request.Form["__EVENTTARGET"].ToString().Contains("ConsultaCteAnticipo"))
+            {
+                    ConsultaSaldos();
+
+            }
+
+        }
+
     }
 
     private void LlenaDropDowns()
@@ -219,7 +235,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                 dr["Impuesto"] = 0;
                 dr["Total"] = Convert.ToDouble(this.txtAntMonto.Text);
 
-                dr["Saldo"] = Convert.ToDouble(this.txtAntSaldo.Text);
+                //dr["Saldo"] = Convert.ToDouble(this.txtAntSaldo.Text);
                 dr["Observaciones"] = this.txtAntOnservaciones.Text;
                 dr["Status"] = "ABIERTO";
 
@@ -245,19 +261,53 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
             lblError.Text = ex.Message;
         }
     }
-    protected void btnBuscarCliente_Click(object sender, EventArgs e)
-    {
-        Cliente _datosCliente = new Cliente(0,1);
+    //protected void btnBuscarCliente_Click(object sender, EventArgs e)   {
+    //    {
+
+
+    //        Cliente _datosCliente = new Cliente(0,1);
+    //    try
+    //    {
+    //        _datosCliente.ConsultaSaldosAFavor(Convert.ToInt32(this.txtAntCliente.Text),"",0,0);
+    //        this.txtAntNombre.Text = _datosCliente.Nombre;
+    //        // this.txtAntSaldo.Text = _datosCliente.Saldo.ToString();
+     
+    //        LstSaldos.DataSource = _datosCliente.SaldosCliente;
+    //        LstSaldos.DataTextField = "Saldo";
+    //        LstSaldos.DataValueField = "AñoMovimiento";
+    //        LstSaldos.DataBind();
+
+
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        throw ex;
+    //    }
+    //}
+    //}
+    private void ConsultaSaldos()
+        {
+
+            Cliente _datosCliente = new Cliente(0, 1);
         try
         {
             _datosCliente.ConsultaSaldosAFavor(Convert.ToInt32(this.txtAntCliente.Text),"",0,0);
             this.txtAntNombre.Text = _datosCliente.Nombre;
-            this.txtAntSaldo.Text = _datosCliente.Saldo.ToString();
+            // this.txtAntSaldo.Text = _datosCliente.Saldo.ToString();
+
+            LstSaldos.DataSource = _datosCliente.SaldosCliente;
+            LstSaldos.DataTextField = "Saldo";
+            LstSaldos.DataValueField = "AñoMovimiento";
+            LstSaldos.DataBind();
+            pnlAnticipo.Visible = true;
+
+
         }
         catch (Exception ex)
         {
             throw ex;
         }
-    }
         
+    }
+
 }

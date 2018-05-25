@@ -111,7 +111,7 @@ public partial class FormaPago : System.Web.UI.Page
         imgTarjeta.Attributes.Add("onclick", "toggle('display', 'tarjeta', 'cheque', 'vale','Transferencia','Anticipo', " + (char)39 + txtClienteTarjeta.UniqueID + (char)39 + ")");
         imgVale.Attributes.Add("onclick", "toggle('display',    'vale', 'cheque', 'tarjeta','Transferencia','Anticipo', " + (char)39 + txtClienteVale.UniqueID + (char)39 + ")");
         //imgTransferencia.Attributes.Add("onclick", "toggle('display','Transferencia', 'vale','cheque', 'tarjeta','Anticipo', " + (char)39 + this.ucTransferencia.TxtIdCliente.UniqueID + (char)39 + ")");
-        //imgAnticipo.Attributes.Add("onclick", "toggle('display','Anticipo', 'cheque','vale', 'tarjeta','Transferencia', " + (char)39 + this.ucAnticipo.TxtAntIdCliente.UniqueID + (char)39 + ")");
+        //ImgAnticipo.Attributes.Add("onclick", "toggle('display','Anticipo', 'cheque','vale', 'tarjeta','Transferencia', " + (char)39 + this.wucDetalleFormaPago.TxtAntIdCliente.UniqueID + (char)39 + ")");
 
         txtLectorCheque.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtClienteCheque.UniqueID + (char)39 + ")");
         txtClienteCheque.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtClienteCheque.UniqueID + (char)39 + ")");
@@ -153,9 +153,9 @@ public partial class FormaPago : System.Web.UI.Page
 
         txtClienteTarjeta.Attributes.Add("onblur", "return ConsultaPagosTPV('ConsultaTPV')");
 
-        ImgTransferencia.Attributes.Add("onclick", "toggle('display', 'transferencia', 'cheque', 'tarjeta', " + (char)39 + txtClienteTarjeta.UniqueID + (char)39 + ")");
+        ImgTransferencia.Attributes.Add("onclick", "toggle('display', 'Transfer', 'cheque', 'tarjeta', " + (char)39 + txtClienteTarjeta.UniqueID + (char)39 + ")");
 
-        ImgAnticipo.Attributes.Add("onclick", "toggle('display', 'transferencia', 'cheque', 'tarjeta', " + (char)39 + txtClienteTarjeta.UniqueID + (char)39 + ")");
+        ImgAnticipo.Attributes.Add("onclick", "toggle('display', 'Anticipo', 'cheque', 'tarjeta', " + (char)39 + txtClienteTarjeta.UniqueID + (char)39 + ")");
 
         TxtCteAfiliacion.Attributes.Add("onblur", "return ConsultaPagosTPV('ConsultaTPV-Trans')");
 
@@ -1129,7 +1129,7 @@ public partial class FormaPago : System.Web.UI.Page
         }
 
 
-       
+
     }
     /// <summary>
     /// 
@@ -1146,7 +1146,7 @@ public partial class FormaPago : System.Web.UI.Page
            dt = RegPago.DatosCliente(int.Parse(NumCte));
 
         }
-
+       
         return DataTableToJSONWithJavaScriptSerializer(dt);
 
 
@@ -1171,6 +1171,8 @@ public partial class FormaPago : System.Web.UI.Page
             parentRow.Add(childRow);
         }
         return jsSerializer.Serialize(parentRow);
+
+       
 
     }
 

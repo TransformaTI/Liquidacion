@@ -2,6 +2,8 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc2" %>
 
+
+<div style="text-align: right" id ="Transfer">
 <asp:Panel ID="pnlTransferencia" runat="server">
 <table style="background-color: #e1f8e2; height: 360px; width: 900px">
     <tr>
@@ -181,7 +183,10 @@
     </tr>
 </table>
 </asp:Panel>
+</div>
 
+
+<div style="text-align: right" id ="Anticipo">
 <asp:Panel ID="pnlAnticipo" runat="server">
 <table style="background-color: #e1f8e2; height: 360px; width: 900px">
     <tr>
@@ -298,3 +303,4 @@
     </tr>
 </table>
 </asp:Panel>
+ </div>

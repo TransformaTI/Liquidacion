@@ -313,9 +313,12 @@ namespace SigametLiquidacion
             try
             {
                 saldoCliente = datosCliente.ConsultaSaldosAFavor(cliente, statusMovimiento, folioMovimiento, anioMovimiento);
-                this._nombre = Convert.ToString(saldoCliente.Rows[0]["Nombre"]);
+                if (saldoCliente.Rows.Count >0)
+                {
+                    this._nombre = Convert.ToString(saldoCliente.Rows[0]["Nombre"]);
                 //this._saldo = this._saldo = Convert.ToDecimal(saldoCliente.Rows[0]["Saldo"]);
                 SaldosCliente = saldoCliente;
+                }
             }
             catch (Exception ex)
             {

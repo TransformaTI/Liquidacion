@@ -429,7 +429,7 @@ namespace SigametLiquidacion
                     sqlParameterArray[14].Direction = ParameterDirection.Output;
                     sqlParameterArray[15] = new SqlParameter("@Cobro", SqlDbType.Int);
                     sqlParameterArray[15].Direction = ParameterDirection.Output;
-                    this._dataAccess.ModifyData("spCCLiqAltaCobroLiquidacion", CommandType.StoredProcedure, sqlParameterArray);
+                    this._dataAccess.ModifyData("spLiq3AltaCobroLiquidacion", CommandType.StoredProcedure, sqlParameterArray);
                     int num1 = Convert.ToInt32(sqlParameterArray[15].Value);
                     int num2 = (int)Convert.ToInt16(sqlParameterArray[14].Value);
                     for (int index2 = 0; index2 <= dtDetallePago.Rows.Count - 1; ++index2)

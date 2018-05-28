@@ -80,7 +80,9 @@
 
          return false;
      }
-     return true;
+       return true;
+
+
  }
 
       
@@ -165,11 +167,7 @@
 
         }
 
-       function ConsultaCteAnticipo(FormaPago) {
-            javascript: __doPostBack(FormaPago);
 
-
-        }
 
         function ShowModalPopup() {
             $find("mpe").show();

@@ -1160,12 +1160,10 @@ public partial class FormaPago : System.Web.UI.Page
 
 
     }
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="table"></param>
-    /// <returns></returns>
-    public static string DataTableToJSONWithJavaScriptSerializer(DataTable table)
+
+
+
+        public static string DataTableToJSONWithJavaScriptSerializer(DataTable table)
     {
         JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
         List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using SigametLiquidacion;
 using System.Data;
 using SigametLiquidacion;
+using System.Web.Script.Serialization;
 
 public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.Web.UI.UserControl
 {
@@ -107,9 +108,9 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         if (!Page.IsPostBack)
         {
             this.btnCalFAsignacion.ImageUrl = this.ImgCal;
-            this.btnbAceptar.ImageUrl = this.ImgBoton;
-            this.btnAntAceptar.ImageUrl = this.ImgBoton;
-            this.btnBuscarCliente.ImageUrl = this.imgBtnBuscar;
+            //this.btnbAceptar.ImageUrl = this.ImgBoton;
+            //this.btnAntAceptar.ImageUrl = this.ImgBoton;
+            //this.btnBuscarCliente.ImageUrl = this.imgBtnBuscar;
 
             this.lblTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Transferencia electrónica de fondos" : this.Titulo;
             this.lblAntTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Aplicación de anticipo" : this.Titulo;
@@ -128,13 +129,14 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                 this.lblAntTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Aplicación de anticipo" : this.Titulo;
             }
 
-            txtAntCliente.Attributes.Add("onblur", "return ConsultaCteAnticipo('ConsultaCteAnticipo')");
+            //txtAntCliente.Attributes.Add("onblur", "return ConsultaCteAnticipo('ConsultaCteAnticipo')");
         }
 
         else
         {
             if (Request.Form["__EVENTTARGET"].ToString().Contains("ConsultaCteAnticipo"))
             {
+                    LimpiarControles();
                     ConsultaSaldos();
 
             }
@@ -143,7 +145,18 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
 
     }
 
-    private void LlenaDropDowns()
+    private void LimpiarControles()
+        {
+        LstSaldos.Items.Clear();
+        txtAntNombre.Text = string.Empty; ;
+        txtAntMonto.Text = string.Empty;
+        txtAntOnservaciones.Text = string.Empty;
+     }
+
+
+
+
+private void LlenaDropDowns()
     {
         DataTable dtBancos = new DataTable();
         
@@ -292,16 +305,19 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         try
         {
             _datosCliente.ConsultaSaldosAFavor(Convert.ToInt32(this.txtAntCliente.Text),"",0,0);
-            this.txtAntNombre.Text = _datosCliente.Nombre;
-            // this.txtAntSaldo.Text = _datosCliente.Saldo.ToString();
-
-            LstSaldos.DataSource = _datosCliente.SaldosCliente;
-            LstSaldos.DataTextField = "Saldo";
-            LstSaldos.DataValueField = "AñoMovimiento";
-            LstSaldos.DataBind();
-            pnlAnticipo.Visible = true;
-
-
+            
+            if (_datosCliente!=null)
+            {
+                if (_datosCliente.SaldosCliente!=null)
+                {
+                    this.txtAntNombre.Text = _datosCliente.Nombre;
+                    LstSaldos.DataSource = _datosCliente.SaldosCliente;
+                    LstSaldos.DataTextField = "Saldo";
+                    LstSaldos.DataValueField = "AñoMovimiento";
+                    LstSaldos.DataBind();
+                    pnlAnticipo.Visible = true;
+                }
+            }
         }
         catch (Exception ex)
         {
@@ -309,5 +325,39 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         }
         
     }
+
+
+    protected void txtNoCuenta_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="table"></param>
+    /// <returns></returns>
+    public static string DataTableToJSONWithJavaScriptSerializer(DataTable table)
+    {
+        JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
+        List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
+        Dictionary<string, object> childRow;
+        foreach (DataRow row in table.Rows)
+        {
+            childRow = new Dictionary<string, object>();
+            foreach (DataColumn col in table.Columns)
+            {
+                childRow.Add(col.ColumnName, row[col]);
+            }
+            parentRow.Add(childRow);
+        }
+        return jsSerializer.Serialize(parentRow);
+
+
+
+    }
+
 
 }

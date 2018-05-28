@@ -2,14 +2,42 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc2" %>
 
+<script type="text/javascript">
 
+
+
+    function ConsultaCteAnticipo(IdCliente) {
+        alert('consultaanticipo');
+
+
+
+       if (document.getElementById("<%=txtAntCliente.ClientID %>").value != '') {
+            javascript: __doPostBack('ConsultaCteAnticipo');
+        }
+
+
+   
+
+    }
+
+    function MontoSaldo() {
+
+        var listBox = document.getElementById("<%= LstSaldos.ClientID%>");
+        var Monto = listBox.options[listBox.selectedIndex].text.split(",");
+        document.getElementById("<%= txtAntMonto.ClientID%>").value = Monto[0];
+    }
+
+
+
+
+</script>
 
 
 <div style="text-align: right" id ="Transfer">
 <asp:Panel ID="pnlTransferencia" runat="server">
 <table style="background-color: #e1f8e2; height: 360px; width: 900px">
     <tr>
-        <td colspan="2" class="HeaderMainStyle" align="center">
+        <td colspan="2" class="HeaderMainStyle" >
             <asp:Label ID="lblTitulo" runat="server" CssClass="labeltipopagoheader" Text=""></asp:Label>
         </td>
     </tr>
@@ -81,7 +109,7 @@
             </div>
         </td>
         <td>
-            <asp:TextBox ID="txtNoCuenta" Width="150px" runat="server" CssClass="textboxcaptura"></asp:TextBox>
+            <asp:TextBox ID="txtNoCuenta" Width="150px" runat="server" CssClass="textboxcaptura" OnTextChanged="txtNoCuenta_TextChanged"></asp:TextBox>
             <cc2:FilteredTextBoxExtender ID="ftbNumCuenta" runat="server" TargetControlID="txtNoCuenta" FilterType="Numbers"></cc2:FilteredTextBoxExtender>
             <asp:RequiredFieldValidator ID="rfvNoCuenta" runat="server"
                 ControlToValidate="txtNoCuenta" Display="None"
@@ -210,7 +238,7 @@
             </div>
             <cc2:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" FilterType="Numbers"
                 TargetControlID="txtAntCliente"></cc2:FilteredTextBoxExtender>
-            <asp:TextBox ID="txtAntCliente" runat="server" CssClass="textboxcaptura" Width="150px"></asp:TextBox>
+            <asp:TextBox ID="txtAntCliente" runat="server" CssClass="textboxcaptura" Width="150px" ValidChars="0123456789" onblur="return ConsultaCteAnticipo()"></asp:TextBox >
             <asp:RequiredFieldValidator ID="rfvAntCliente" runat="server"
                 ControlToValidate="txtAntCliente" Display="None"
                 ErrorMessage="Capturar el No. de Cliente"
@@ -238,7 +266,7 @@
             </div>
         </td>
         <td>
-            <asp:ListBox ID="LstSaldos" runat="server"  Height="100px"  style="overflow-x:auto;margin-left: 0px" Width="222px"></asp:ListBox>
+            <asp:ListBox ID="LstSaldos" runat="server"  Height="80px"  style="overflow-x:auto;margin-left: 0px" Width="222px" onchange ="return MontoSaldo()" ></asp:ListBox>
             <asp:RequiredFieldValidator ID="rfvAntSaldo" runat="server"
                 ControlToValidate="LstSaldos" Display="None"
                 ErrorMessage="Capturar el Saldo"
@@ -259,7 +287,7 @@
             <cc2:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" TargetControlID="txtAntMonto" FilterType="Custom" ValidChars="0123456789./"></cc2:FilteredTextBoxExtender>
             <asp:RequiredFieldValidator ID="rfvAntMonto" runat="server"
                 ControlToValidate="txtAntMonto" Display="None"
-                ErrorMessage="Capturar el Monto"
+                ErrorMessage="Capturar el Monto" ValidationGroup="GuardaAnt"
                 ></asp:RequiredFieldValidator>
             <cc2:ValidatorCalloutExtender ID="ValidatorCalloutExtender2" runat="server"
                 TargetControlID="rfvAntMonto"></cc2:ValidatorCalloutExtender>
@@ -275,7 +303,7 @@
         <td>
             <asp:TextBox ID="txtAntOnservaciones" runat="server" Width="300px" Height="75px" TextMode="MultiLine"></asp:TextBox>
 
-        </td>
+        </td>       
     </tr>
     <tr>
         <td>&nbsp;</td>
@@ -286,7 +314,7 @@
         <td></td>
         <td>
             <asp:ImageButton ID="btnAntAceptar" runat="server"
-                OnClick="btnAceptarAnticipo_Click"
+                OnClick="btnAceptarAnticipo_Click" ImageUrl="~/Images/btnAceptar.png"
                 SkinID="btnAceptar" ValidationGroup="GuardaAnt" />
         </td>
     </tr>

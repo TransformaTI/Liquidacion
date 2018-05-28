@@ -50,7 +50,7 @@
 
             if (HiddenInput == "ConsultaCteAnticipo")
             {
-                           alert('anticipo');
+
                             document.getElementById('AnticipoUC').style.display = 'inherit';
                document.getElementById('Anticipo').style.display = 'inherit'; 
                     document.getElementById('Transfer').style.display = 'none';      
@@ -118,7 +118,7 @@
         }
 
         if (activo == 'Anticipo') {
-                    alert('anticipo');
+
             document.getElementById('AnticipoUC').style.display = 'inherit';
                document.getElementById('Anticipo').style.display = 'inherit'; 
                     document.getElementById('Transfer').style.display = 'none';                    

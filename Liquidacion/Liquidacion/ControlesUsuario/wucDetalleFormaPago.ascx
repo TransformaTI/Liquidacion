@@ -2,22 +2,20 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc2" %>
 
+<style type="text/css">
+    .auto-style1 {
+        width: 238px;
+    }
+</style>
+
 <script type="text/javascript">
 
 
 
     function ConsultaCteAnticipo(IdCliente) {
-        alert('consultaanticipo');
-
-
-
-       if (document.getElementById("<%=txtAntCliente.ClientID %>").value != '') {
+        if (document.getElementById("<%=txtAntCliente.ClientID %>").value != '') {
             javascript: __doPostBack('ConsultaCteAnticipo');
         }
-
-
-   
-
     }
 
     function MontoSaldo() {
@@ -226,16 +224,14 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td class="auto-style1">
             <div style="text-align: right">
                 <asp:Label ID="lblAntCliente" runat="server" CssClass="labeltipopagoforma"
                     Text="Cliente:"></asp:Label>
             </div>
         </td>
         <td>
-            <div style="float: right; vertical-align: middle;visibility:hidden">
-                <asp:ImageButton runat="Server" ID="btnBuscarCliente"  ValidationGroup="GuardaAnt"   AlternateText="Buscar cliente" style="width: 14px" />
-            </div>
+
             <cc2:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" FilterType="Numbers"
                 TargetControlID="txtAntCliente"></cc2:FilteredTextBoxExtender>
             <asp:TextBox ID="txtAntCliente" runat="server" CssClass="textboxcaptura" Width="150px" ValidChars="0123456789" onblur="return ConsultaCteAnticipo()"></asp:TextBox >
@@ -248,7 +244,7 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td class="auto-style1">
             <div style="text-align: right">
                 <asp:Label ID="lblAntNombre" runat="server" CssClass="labeltipopagoforma"
                     Text="Nombre:"></asp:Label>
@@ -259,14 +255,14 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td class="auto-style1">
             <div style="text-align: right">
                 <asp:Label ID="lblAntSaldo" runat="server" CssClass="labeltipopagoforma"
                     Text="Saldo:"></asp:Label>
             </div>
         </td>
         <td>
-            <asp:ListBox ID="LstSaldos" runat="server"  Height="80px"  style="overflow-x:auto;margin-left: 0px" Width="222px" onchange ="return MontoSaldo()" ></asp:ListBox>
+            <asp:ListBox ID="LstSaldos" runat="server"  Height="90px"  style="overflow-x:auto;margin-left: 0px" Width="222px" onchange ="return MontoSaldo()" ></asp:ListBox>
             <asp:RequiredFieldValidator ID="rfvAntSaldo" runat="server"
                 ControlToValidate="LstSaldos" Display="None"
                 ErrorMessage="Capturar el Saldo"
@@ -276,7 +272,7 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td class="auto-style1">
             <div style="text-align: right">
                 <asp:Label ID="lblAntMonto" runat="server" CssClass="labeltipopagoforma"
                     Text="Monto:"></asp:Label>
@@ -294,7 +290,7 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td class="auto-style1">
             <div style="text-align: right">
                 <asp:Label ID="lblAntObservaciones" runat="server" CssClass="labeltipopagoforma"
                     Text="Observaciones:"></asp:Label>
@@ -306,12 +302,12 @@
         </td>       
     </tr>
     <tr>
-        <td>&nbsp;</td>
+        <td class="auto-style1">&nbsp;</td>
         <td>&nbsp;</td>
     </tr>
 
     <tr>
-        <td></td>
+        <td class="auto-style1"></td>
         <td>
             <asp:ImageButton ID="btnAntAceptar" runat="server"
                 OnClick="btnAceptarAnticipo_Click" ImageUrl="~/Images/btnAceptar.png"
@@ -319,7 +315,7 @@
         </td>
     </tr>
     <tr>
-        <td>&nbsp;</td>
+        <td class="auto-style1">&nbsp;</td>
         <td>
             <asp:Label ID="lblAntError" runat="server" CssClass="labeltipopagoforma"
                 ForeColor="Red"></asp:Label>

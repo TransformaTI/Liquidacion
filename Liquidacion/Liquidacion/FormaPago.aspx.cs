@@ -29,35 +29,40 @@ public partial class FormaPago : System.Web.UI.Page
     DataTable dtMovimientos;
     DataTable dtPagosConTarjeta; // mcc 2018 05 10
     DataRow[] dtPagosConTarjetaSelec;
-    string[] clave ;
+    string[] clave;
     DataTable dtAfiliaciones;
     DataTable dtProveedores;
     DataTable dtTipoVale;
 
 
-    
+
 
     string pagoActivo;
     #endregion
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
         if (!Page.IsPostBack)
         {
+
             LlenaDropDowns();
 
+    
         }
 
         #region validaciones postback 
         if (Page.IsPostBack)
         {
-                if (Request.Form["__EVENTTARGET"] == "ConsultaTPV" )
+
+
+            if (Request.Form["__EVENTTARGET"] == "ConsultaTPV")
             {
                 HiddenInput.Value = "ConsultaTPV";
-                if (txtClienteTarjeta.Text!=string.Empty)
+                if (txtClienteTarjeta.Text != string.Empty)
                 {
                     LimpiarCampos("tarjeta");
-                    ConsultarCargoTarjeta(int.Parse(txtClienteTarjeta.Text), "tarjeta",int.Parse( Session["Ruta"].ToString()),int.Parse( Session["Autotanque"].ToString()));
+                    ConsultarCargoTarjeta(int.Parse(txtClienteTarjeta.Text), "tarjeta", int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
                 }
             }
 
@@ -70,9 +75,9 @@ public partial class FormaPago : System.Web.UI.Page
                     ConsultarCargoTarjeta(int.Parse(TxtCteAfiliacion.Text), "transferencia", int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
                 }
             }
-            
 
-                else if (Request.Form["__EVENTTARGET"].ToString().Contains("SeleccionaPago"))
+
+            else if (Request.Form["__EVENTTARGET"].ToString().Contains("SeleccionaPago"))
             {
                 LimpiarCampos("tarjeta");
                 LimpiarCampos("transferencia");
@@ -105,7 +110,7 @@ public partial class FormaPago : System.Web.UI.Page
         imbAceptarTDC.Attributes.Add("onclick", "return confirmar(" + (char)39 + imbAceptarTDC.UniqueID + (char)39 + ")");
         imbAceptarVale.Attributes.Add("onclick", "return confirmar(" + (char)39 + imbAceptarVale.UniqueID + (char)39 + ")");
         //imbAceptarVale.Attributes.Add("onclick", "return confirmar(" + (char)39 + 'imbAceptarVale + (char)39 + ")");
-   
+
 
 
         txtLectorCheque.Attributes.Add("onkeyup", "return txtCuentaDocumento();");
@@ -132,7 +137,7 @@ public partial class FormaPago : System.Web.UI.Page
         ddChequeBanco.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtImporteCheque.UniqueID + (char)39 + ")");
         txtImporteCheque.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtObservacionesChueque.UniqueID + (char)39 + ")");
         txtObservacionesChueque.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + imbAceptar.UniqueID + (char)39 + ")");
-        
+
         txtClienteTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + imgCalendario0.UniqueID + (char)39 + ")");
 
         imgCalendario0.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtFechaTarjeta.UniqueID + (char)39 + ")");
@@ -143,22 +148,22 @@ public partial class FormaPago : System.Web.UI.Page
 
         ddBancoTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + ddlBancoOrigen.UniqueID + (char)39 + ")");
         ddlBancoOrigen.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtImporteTarjeta.UniqueID + (char)39 + ")");
-        
+
         txtImporteTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtObservacionesTarjeta.UniqueID + (char)39 + ")");
         txtObservacionesTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + imbAceptarTDC.UniqueID + (char)39 + ")");
 
 
-       // txtClienteVale.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtClienteVale.UniqueID + (char)39 + ")");
+        // txtClienteVale.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtClienteVale.UniqueID + (char)39 + ")");
 
         //imgValeCalendario.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtFolioVale.UniqueID + (char)39 + ")");
-                
+
         ///txtFolioVale.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtValeFecha.UniqueID + (char)39 + ")");
         txtValeFecha.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtValeImporte.UniqueID + (char)39 + ")");
         //txtValeImporte.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtValeImporte.UniqueID + (char)39 + ")");
         txtValeObs.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + imbAceptarVale.UniqueID + (char)39 + ")");
 
-       imbEfectivo.Attributes.Add("onclick", "return confirm('¿Desea enviar todos los pedidos a Pago en Efectivo?')");
-       imbCancelar.Attributes.Add("onclick", "return confirm('¿Desea Cancelar los Pagos Capturados?')");
+        imbEfectivo.Attributes.Add("onclick", "return confirm('¿Desea enviar todos los pedidos a Pago en Efectivo?')");
+        imbCancelar.Attributes.Add("onclick", "return confirm('¿Desea Cancelar los Pagos Capturados?')");
 
         txtClienteTarjeta.Attributes.Add("onblur", "return ConsultaPagosTPV('ConsultaTPV')");
 
@@ -215,11 +220,11 @@ public partial class FormaPago : System.Web.UI.Page
             txtFechaChueque.Text = Session["FechaAsignacion"].ToString();
             txtFechaTarjeta.Text = Session["FechaAsignacion"].ToString();
         }
-       
-    }
-   
 
-    
+    }
+
+
+
     #region "Funcs and Subs"
     private void CargaPedidos()
     {
@@ -286,7 +291,7 @@ public partial class FormaPago : System.Web.UI.Page
             TipoTarjeta.Add("1", "Tarjeta de Debito");
             TipoTarjeta.Add("2", "Tarjeta de Crédito");
 
-            ddTipoTarjeta.DataSource =  TipoTarjeta;
+            ddTipoTarjeta.DataSource = TipoTarjeta;
             ddTipoTarjeta.DataTextField = "Value";
             ddTipoTarjeta.DataValueField = "Key";
             ddTipoTarjeta.DataBind();
@@ -320,7 +325,7 @@ public partial class FormaPago : System.Web.UI.Page
             throw ex;
         }
     }
-  
+
     #endregion
     #region "Handlers"
     protected void imbAceptarVale_Click(object sender, EventArgs e)
@@ -409,7 +414,7 @@ public partial class FormaPago : System.Web.UI.Page
                 Session["idCliente"] = txtClienteVale.Text;
                 Session["dsLiquidacion"] = dtCobro.DataSet;
 
-          
+
             }
 
             Response.Redirect("RegistroPagos.aspx");
@@ -425,10 +430,10 @@ public partial class FormaPago : System.Web.UI.Page
     {
         try
         {
-            
+
             if ((DataSet)(Session["dsLiquidacion"]) == null)
             {
-                
+
                 //CreateTableCobro();
                 //Genera Registro del Cobro con Cheque
 
@@ -439,7 +444,7 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["IdPago"] = 1; //Consecutivo
                 dr["Referencia"] = txtNumeroCheque.Text;
                 dr["NumeroCuenta"] = txtNumCuenta.Text;
-                            
+
                 dr["FechaCheque"] = txtFechaChueque.Text;
                 dr["Cliente"] = txtClienteCheque.Text;
                 dr["Banco"] = ddChequeBanco.SelectedValue;
@@ -563,7 +568,7 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["Usuario"] = Convert.ToString(Session["Usuario"]); ;
 
                 dr["SaldoAFavor"] = 0;
-		    if(chkLocal.Checked) {dr["TPV"] = 1;} else {dr["TPV"] = 0;}
+                if (chkLocal.Checked) { dr["TPV"] = 1; } else { dr["TPV"] = 0; }
                 dr["FechaDeposito"] = DateTime.Now.Date;
 
                 dr["BancoOrigen"] = ddlBancoOrigen.SelectedItem.Text;
@@ -605,13 +610,13 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["Saldo"] = 0;
                 dr["Observaciones"] = txtObservacionesTarjeta.Text;
                 dr["Status"] = "EMITIDO"; //CHECK THIS 
-                
+
                 dr["FechaAlta"] = DateTime.Now.Date.ToString("dd/MM/yyyy");
                 dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.tipoTarjeta);
                 dr["Usuario"] = Convert.ToString(Session["Usuario"]); ;
 
                 dr["SaldoAFavor"] = 0;
-		    if(chkLocal.Checked) {dr["TPV"] = 1;} else {dr["TPV"] = 0;}
+                if (chkLocal.Checked) { dr["TPV"] = 1; } else { dr["TPV"] = 0; }
                 dr["FechaDeposito"] = DateTime.Now.Date;
 
                 dr["BancoOrigen"] = ddlBancoOrigen.SelectedItem.Text;
@@ -632,13 +637,13 @@ public partial class FormaPago : System.Web.UI.Page
     }
     protected void imbEfectivo_Click(object sender, ImageClickEventArgs e)
     {
-	try
+        try
         {
             DataTable dtPedidosEf = new DataTable();
             dtPedidosEf = ((DataTable)(Session["dtPedidos"]));
 
-                rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dtPedidosEf, null, null, (DataTable)(Session["dtResumenLiquidacion"]));
-                Response.Redirect("ReporteLiquidacion.aspx");
+            rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dtPedidosEf, null, null, (DataTable)(Session["dtResumenLiquidacion"]));
+            Response.Redirect("ReporteLiquidacion.aspx");
             //Parametros param = new Parametros(1, 1, 22);
             // Reporte
 
@@ -677,11 +682,11 @@ public partial class FormaPago : System.Web.UI.Page
             //            throw new Exception("strError");
             //        }
             //        Reporte = null;
-                //}
-                //catch (Exception ex)
-                //{
-                //    lblError.Text = ex.Message;
-                //}
+            //}
+            //catch (Exception ex)
+            //{
+            //    lblError.Text = ex.Message;
+            //}
             //}
             //else
             //{
@@ -693,7 +698,7 @@ public partial class FormaPago : System.Web.UI.Page
             lblError.Text = ex.Message;
         }
     }
-   
+
     protected void imbCancelar_Click(object sender, ImageClickEventArgs e)
     {
         try
@@ -709,6 +714,8 @@ public partial class FormaPago : System.Web.UI.Page
             lblError.Text = ex.Message;
         }
     }
+
+
     #endregion
     //protected void dlPagosCapturados_DeleteCommand(object source, DataListCommandEventArgs e)
     //{
@@ -717,7 +724,7 @@ public partial class FormaPago : System.Web.UI.Page
 
     //    //dlPagosCapturados.SelectedIndex = e.Item.ItemIndex;
     //    //idPago = dlPagosCapturados.DataKeyField[e.Item.ItemIndex];
-        
+
     //    string refPago;
     //    //int pagoActivo = Convert.ToInt32(Session["idCobroConsec"]);
     //    string pagoActivo;
@@ -807,11 +814,11 @@ public partial class FormaPago : System.Web.UI.Page
                         //dtPedidos = ds.Tables["Pedidos"];
 
                         saldoActual = (Convert.ToDecimal(ds.Tables["Pedidos"].Rows[i]["saldo"].ToString()) + monto);
-                     
+
 
                         dr = ds.Tables["Pedidos"].Rows[i];
                         dr.BeginEdit();
-                        dr["saldo"] = Convert.ToDecimal(saldoActual);     
+                        dr["saldo"] = Convert.ToDecimal(saldoActual);
                         dr.EndEdit();
 
                         valid = true;
@@ -970,7 +977,7 @@ public partial class FormaPago : System.Web.UI.Page
 
                 imbResumen.Visible = false;
             }
-           
+
         }
         catch { throw; }
     }
@@ -983,22 +990,22 @@ public partial class FormaPago : System.Web.UI.Page
     /// </summary>
     /// <param name="sTipoConsulta"></param>
     private void MuestraPagoSeleccionado(string sTipoConsulta)
-    {     
+    {
 
-            if( Request.Form["__EVENTTARGET"].ToString().Contains("tarjeta") )
+        if (Request.Form["__EVENTTARGET"].ToString().Contains("tarjeta"))
         {
             HiddenInput.Value = "SeleccionaPago";
             clave = Request.Form["__EVENTTARGET"].ToString().Split('=');
-                dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text), int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
-                dtPagosConTarjetaSelec = dtPagosConTarjeta.Select("Registro=" + clave[1].ToString());
+            dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text), int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
+            dtPagosConTarjetaSelec = dtPagosConTarjeta.Select("Registro=" + clave[1].ToString());
 
-                txtNombreClienteTarjeta.Text = dtPagosConTarjetaSelec[0]["NombreCliente"].ToString();
-                txtNoAutorizacionTarjeta.Text = dtPagosConTarjetaSelec[0]["Autorizacion"].ToString();
-                txtNumTarjeta.Text = dtPagosConTarjetaSelec[0]["NumeroTarjeta"].ToString();
-                ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString().Trim()));
-                ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString().Trim()));
-                txtImporteTarjeta.Text = dtPagosConTarjetaSelec[0]["Importe"].ToString();
-                txtObservacionesTarjeta.Text = dtPagosConTarjetaSelec[0]["Observacion"].ToString();
+            txtNombreClienteTarjeta.Text = dtPagosConTarjetaSelec[0]["NombreCliente"].ToString();
+            txtNoAutorizacionTarjeta.Text = dtPagosConTarjetaSelec[0]["Autorizacion"].ToString();
+            txtNumTarjeta.Text = dtPagosConTarjetaSelec[0]["NumeroTarjeta"].ToString();
+            ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString().Trim()));
+            ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString().Trim()));
+            txtImporteTarjeta.Text = dtPagosConTarjetaSelec[0]["Importe"].ToString();
+            txtObservacionesTarjeta.Text = dtPagosConTarjetaSelec[0]["Observacion"].ToString();
         }
 
 
@@ -1015,7 +1022,7 @@ public partial class FormaPago : System.Web.UI.Page
             ddBancoTrasferencia.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString().Trim()));
             TxtTarjetaTranferencia.Text = dtPagosConTarjetaSelec[0]["NumeroTarjeta"].ToString();
             ddAfiliacion.SelectedIndex = ddAfiliacion.Items.IndexOf(ddAfiliacion.Items.FindByValue(dtPagosConTarjetaSelec[0]["Afiliacion"].ToString().Trim()));
-            TxtRepAutorizacionTrans.Text= dtPagosConTarjetaSelec[0]["Autorizacion"].ToString();
+            TxtRepAutorizacionTrans.Text = dtPagosConTarjetaSelec[0]["Autorizacion"].ToString();
             TxtObervacionesTrans.Text = dtPagosConTarjetaSelec[0]["Observacion"].ToString();
         }
 
@@ -1029,14 +1036,14 @@ public partial class FormaPago : System.Web.UI.Page
     /// Consulta Pagos Con Tarjeta del Cliente
     /// </summary>
     /// <param name="NumCliente"></param>
-    private void ConsultarCargoTarjeta(int NumCliente,string sFormaPago,int Ruta,int Autotanque)
+    private void ConsultarCargoTarjeta(int NumCliente, string sFormaPago, int Ruta, int Autotanque)
     {
         DataTable dtDatosControlUsuario = new DataTable();
 
 
         dtDatosControlUsuario.Columns.Add("TipoCobro", typeof(string));
         dtDatosControlUsuario.Columns.Add("Tarjeta", typeof(string));
-        dtDatosControlUsuario.Columns.Add("Banco", typeof(string));    
+        dtDatosControlUsuario.Columns.Add("Banco", typeof(string));
         dtDatosControlUsuario.Columns.Add("Autorizacion", typeof(string));
         dtDatosControlUsuario.Columns.Add("Importe", typeof(string));
         dtDatosControlUsuario.Columns.Add("Observacion", typeof(string));
@@ -1044,29 +1051,29 @@ public partial class FormaPago : System.Web.UI.Page
         dtDatosControlUsuario.Columns.Add("Folio", typeof(string));
 
         if (sFormaPago == "tarjeta")
-        dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text),Ruta,Autotanque);
+            dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text), Ruta, Autotanque);
 
         if (sFormaPago == "transferencia")
-            dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(TxtCteAfiliacion.Text),Ruta,Autotanque);
+            dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(TxtCteAfiliacion.Text), Ruta, Autotanque);
 
 
 
-        if (dtPagosConTarjeta.Rows.Count >0)
-         {
+        if (dtPagosConTarjeta.Rows.Count > 0)
+        {
             CargaPrimerRegistro(sFormaPago);
 
             HiddenInputPCT.Value = "Si";
 
             HiddenInputNumPagos.Value = dtPagosConTarjeta.Rows.Count.ToString();
 
-                        foreach ( DataRow row in dtPagosConTarjeta.Rows)
-                    {
-                        dtDatosControlUsuario.Rows.Add(row["TipoCobroDescripcion"].ToString(), row["NumeroTarjeta"].ToString(), row["NombreBanco"].ToString(), row["Autorizacion"].ToString(), row["Importe"].ToString(), row["Observacion"].ToString(), row["Año"].ToString(), row["Folio"].ToString());
-                    }
+            foreach (DataRow row in dtPagosConTarjeta.Rows)
+            {
+                dtDatosControlUsuario.Rows.Add(row["TipoCobroDescripcion"].ToString(), row["NumeroTarjeta"].ToString(), row["NombreBanco"].ToString(), row["Autorizacion"].ToString(), row["Importe"].ToString(), row["Observacion"].ToString(), row["Año"].ToString(), row["Folio"].ToString());
+            }
             wucConsultaCargoTarjetaCliente1.sFormaPago = sFormaPago;
-                wucConsultaCargoTarjetaCliente1.dtPagosContarjeta = dtDatosControlUsuario;
-              //}
-   
+            wucConsultaCargoTarjetaCliente1.dtPagosContarjeta = dtDatosControlUsuario;
+            //}
+
 
         }
         else
@@ -1095,9 +1102,9 @@ public partial class FormaPago : System.Web.UI.Page
                 break;
 
             case "transferencia":
-                TxtNombreCteTrans.Text= dtPagosConTarjeta.Rows[0]["NombreCliente"].ToString();
-                TxtAutorizacionTrans.Text= dtPagosConTarjeta.Rows[0]["Autorizacion"].ToString();
-                ddBancoTrasferencia.SelectedIndex= ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
+                TxtNombreCteTrans.Text = dtPagosConTarjeta.Rows[0]["NombreCliente"].ToString();
+                TxtAutorizacionTrans.Text = dtPagosConTarjeta.Rows[0]["Autorizacion"].ToString();
+                ddBancoTrasferencia.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
                 TxtTarjetaTranferencia.Text = dtPagosConTarjeta.Rows[0]["NumeroTarjeta"].ToString();
                 ddAfiliacion.SelectedIndex = ddAfiliacion.Items.IndexOf(ddAfiliacion.Items.FindByValue(dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString().Trim()));
                 TxtRepAutorizacionTrans.Text = dtPagosConTarjeta.Rows[0]["Autorizacion"].ToString();
@@ -1149,13 +1156,13 @@ public partial class FormaPago : System.Web.UI.Page
     public static string ConsultaClienteCheque(string NumCte)
     {
         DataTable dt = null;
-        if (NumCte!=string.Empty)
+        if (NumCte != string.Empty)
         {
             RegistroPago RegPago = new RegistroPago();
-           dt = RegPago.DatosCliente(int.Parse(NumCte));
+            dt = RegPago.DatosCliente(int.Parse(NumCte));
 
         }
-       
+
         return DataTableToJSONWithJavaScriptSerializer(dt);
 
 
@@ -1163,7 +1170,7 @@ public partial class FormaPago : System.Web.UI.Page
 
 
 
-        public static string DataTableToJSONWithJavaScriptSerializer(DataTable table)
+    public static string DataTableToJSONWithJavaScriptSerializer(DataTable table)
     {
         JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
         List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
@@ -1179,9 +1186,15 @@ public partial class FormaPago : System.Web.UI.Page
         }
         return jsSerializer.Serialize(parentRow);
 
-       
+
 
     }
+
+    void SubscribForm_ButtonClicked(object sender, EventArgs e)
+    {
+        Response.Redirect("WebForm2.aspx");
+    }
+
 
 
 

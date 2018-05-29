@@ -22,11 +22,18 @@
         var NumPagos = '<%=HiddenInputNumPagos.Value  %>'; // mcc 2018 05 10
         var Ruta = '<%=Session["Ruta"]%>';
         var sTipoPago = '';
+        var RegistroCobro = '<%= wucDetalleFormaPago1.RegistroCobro%>';
 
         
 
         //Validaciones  On load
         document.addEventListener("DOMContentLoaded", function () { // mcc 2018 05 10
+
+            if (RegistroCobro == 'Si')
+            {
+                window.location='RegistroPagos.aspx'
+            }
+
 
             if (HiddenInput == 'ConsultaTPV' || HiddenInput == 'SeleccionaPago') {
                 document.getElementById('tarjeta').style.display = 'inherit';
@@ -1052,7 +1059,10 @@
                         <tr>
                             <td valign="top">
                                 <div id="AnticipoUC" style="display: none; vertical-align: top">
-                                    <ucDetallePago:wucDetalleFormaPago runat="server" ID="wucDetalleFormaPago1" />
+                                    <ucDetallePago:wucDetalleFormaPago runat="server" id="wucDetalleFormaPago1" /> 
+                                    <%--<asp:ImageButton ID="btnAntAceptar" runat="server"
+                                        OnClick="btnAceptarAnticipo_Click" ImageUrl="~/Images/btnAceptar.png"
+                                        SkinID="btnAceptar" ValidationGroup="GuardaAnt" />--%>
                                 </div>
                             </td>
                         </tr>

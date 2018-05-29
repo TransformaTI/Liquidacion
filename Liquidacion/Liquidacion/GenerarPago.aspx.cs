@@ -82,10 +82,19 @@ public partial class GenerarPago : System.Web.UI.Page
     {
         try
         {
-            
-               rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dsPagos.Tables["Pedidos"], dsPagos.Tables["Cobro"], dsPagos.Tables["CobroPedido"], dtResumenLiquidacion);
-               Response.Redirect("ReporteLiquidacion.aspx");
-	
+            if (Session["LiqPagoAnticipado"].ToString()!="Si")
+            {
+                rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dsPagos.Tables["Pedidos"], dsPagos.Tables["Cobro"], dsPagos.Tables["CobroPedido"], dtResumenLiquidacion);
+            }
+            else
+            {
+
+                rp.InsertaMovimientoAConciliar(0, 0, 2018, 200, Convert.ToDecimal(dsPagos.Tables["Cobro"].Rows[0]["Total"]), "EMITIDO");
+
+            }
+
+            Response.Redirect("ReporteLiquidacion.aspx");
+
         }
         catch (Exception ex)
         {

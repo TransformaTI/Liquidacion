@@ -111,7 +111,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
             this.btnAntAceptar.ImageUrl = this.ImgBoton;
             this.btnBuscarCliente.ImageUrl = this.imgBtnBuscar;
 
-            if (this.TipoCobro == "22")
+            if (this.TipoCobro == "10")
             {
                 LlenaDropDowns();
                 this.lblTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Transferencia electrónica de fondos" : this.Titulo;
@@ -237,7 +237,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                 dtCobro.Rows.Add(dr);
                 Session["idCliente"] = this.txtAntCliente.Text;
                 Session["dsLiquidacion"] = dtCobro.DataSet;
-                rp.InsertaMovimientoAConciliar(1, 2014, 2014, 1, Convert.ToInt32(this.txtAntMonto.Text), "EMITIDO");
+                rp.InsertaMovimientoAConciliar(null, 2018, null, null, Convert.ToInt32(this.txtAntMonto.Text), "EMITIDO");
             }
         }
         catch (Exception ex)

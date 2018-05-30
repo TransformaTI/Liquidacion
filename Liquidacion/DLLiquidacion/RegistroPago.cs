@@ -54,7 +54,7 @@ namespace SigametLiquidacion
       this._datos.GuardaPagos(Usuario, dtPedidos, dtPago, dtDetallePago, dtResumenLiquidacion);
     }
 
-        public void InsertaMovimientoAConciliar(int folioMovimiento, int anioMovimiento, int anioCobro, int cobro, decimal monto, string status)
+        public void InsertaMovimientoAConciliar(int? folioMovimiento, int? anioMovimiento, int? anioCobro, int? cobro, decimal monto, string status)
         {
             this._datos.InsertaMovimientoAConciliar(folioMovimiento, anioMovimiento, anioCobro, cobro, monto, status);
         }

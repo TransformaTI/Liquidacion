@@ -414,12 +414,12 @@ namespace SigametLiquidacion
                 throw ex;
             }
         }
-        public void InsertaMovimientoAConciliar(int folioMovimiento,int anioMovimiento, int anioCobro, int cobro,decimal monto ,string status)
+        public void InsertaMovimientoAConciliar(int? folioMovimiento,int? anioMovimiento, int? anioCobro, int? cobro,decimal monto ,string status)
         {
             this._dataAccess.ModifyData("spLIQ2InsertaMovimientoAConciliarCobro", CommandType.StoredProcedure, new SqlParameter[6]
-              { new SqlParameter("@FolioMovimiento", folioMovimiento),
-                new SqlParameter("@AñoMovimiento",anioMovimiento),
-                new SqlParameter("@AñoCobro",anioCobro),
+              { new SqlParameter("@FolioMovimiento", folioMovimiento ?? null),
+                new SqlParameter("@AñoMovimiento",anioMovimiento ?? null),
+                new SqlParameter("@AñoCobro",anioCobro ?? null),
                 new SqlParameter("@Cobro", cobro),
                 new SqlParameter("@Monto", monto),
                 new SqlParameter("@Status",status ) });

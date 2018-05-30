@@ -394,7 +394,7 @@ namespace SigametLiquidacion
             }
         }
 
-        public void GuardaPagos(string Usuario, DataTable dtPedidos, DataTable dtPago, DataTable dtDetallePago, DataTable dtResumenLiquidacion)
+        public void GuardaPagos(string Usuario, DataTable dtPedidos, DataTable dtPago, DataTable dtDetallePago, DataTable dtResumenLiquidacion, DataTable liqPagoAnticipado=null)
         {
             try
             {
@@ -445,9 +445,19 @@ namespace SigametLiquidacion
                 new SqlParameter("@Total", (object) Convert.ToDecimal(dtDetallePago.Rows[index2]["Total"]))
                             });
                     }
+
+                if (liqPagoAnticipado!=null)
+                    {
+
+                        InsertaMovimientoAConciliar(int.Parse(liqPagoAnticipado.Rows[0]["Folio"].ToString()), int.Parse(liqPagoAnticipado.Rows[0]["AñoMovimiento"].ToString()),int.Parse( DateTime.Now.Year.ToString()), num1, decimal.Parse(liqPagoAnticipado.Rows[0]["AñoMovimiento"].ToString()),"EMITIDO");
+                    }
+
                 }
                 this.ActualizaTerminado(dtResumenLiquidacion);
                 //this._dataAccess.get_Transaction().Commit();
+
+
+
                 this._dataAccess.Transaction.Commit();
             }
             catch

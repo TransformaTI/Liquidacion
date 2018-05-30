@@ -82,16 +82,15 @@ public partial class GenerarPago : System.Web.UI.Page
     {
         try
         {
-            if (Session["LiqPagoAnticipado"].ToString()!="Si")
-            {
-                rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dsPagos.Tables["Pedidos"], dsPagos.Tables["Cobro"], dsPagos.Tables["CobroPedido"], dtResumenLiquidacion);
-            }
-            else
-            {
 
-                rp.InsertaMovimientoAConciliar(0, 0, 2018, 200, Convert.ToDecimal(dsPagos.Tables["Cobro"].Rows[0]["Total"]), "EMITIDO");
+                rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dsPagos.Tables["Pedidos"], dsPagos.Tables["Cobro"], dsPagos.Tables["CobroPedido"], dtResumenLiquidacion, dsPagos.Tables["LiqPagoAnticipado"]);
+            
+            // if (Session["LiqPagoAnticipado"] != null)
+            // {
+            //        DataTable LiqPagoAnticipado = (DataTable)(Session["LiqPagoAnticipado"]);
+            //   // rp.InsertaMovimientoAConciliar(int.Parse(LiqPagoAnticipado.Rows[0]["Folio"].ToString()), int.Parse(LiqPagoAnticipado.Rows[0]["AñoMovimiento"].ToString()),int.Parse( DateTime.Now.Year.ToString()), dsPagos.Tables["Cobro"].Rows[0], Convert.ToDecimal(dsPagos.Tables["Cobro"].Rows[0]["Total"]), "EMITIDO");
 
-            }
+            //}
 
             Response.Redirect("ReporteLiquidacion.aspx");
 

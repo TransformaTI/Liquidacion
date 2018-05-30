@@ -21,6 +21,13 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
     RegistroPago rp = new RegistroPago();
     DataTable dtCobro = new DataTable();
     DataSet ds = new DataSet();
+    ImageClickEventArgs evt ;
+    object sender;
+    string registroCobro;
+    DataTable dtLiqAnticipo=new DataTable("LiqPagoAnticipado");
+
+
+
 
     public string ImgCal
     {
@@ -103,6 +110,14 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         }
     }
 
+
+    public string RegistroCobro
+    {
+        get { return registroCobro; }
+        set { registroCobro = value; }
+    }
+
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
@@ -129,7 +144,11 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                 this.lblAntTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Aplicación de anticipo" : this.Titulo;
             }
 
-            //txtAntCliente.Attributes.Add("onblur", "return ConsultaCteAnticipo('ConsultaCteAnticipo')");
+
+
+            //postback.Attributes.Add("onclick", "return RegistroPago()");
+
+
         }
 
         else
@@ -228,19 +247,36 @@ private void LlenaDropDowns()
 
     protected void btnAceptarAnticipo_Click(object sender, EventArgs e)
     {
+        if (dtLiqAnticipo.Columns.Count ==0)
+        {
+            dtLiqAnticipo.Columns.Add("Folio", typeof(String));
+            dtLiqAnticipo.Columns.Add("AñoMovimiento", typeof(String));
+            dtLiqAnticipo.Columns.Add("AñoCobro", typeof(String));
+            dtLiqAnticipo.Columns.Add("Monto", typeof(decimal));
+        }
+
+
         try
         {
+            if (Session["dsLiquidacion"] == null)
+            {
+                string path = Server.MapPath("");
+                ds.ReadXml(path + "/App_Code/dsLiquidacion.xsd");
+            }
+
             if ((DataSet)(Session["dsLiquidacion"]) != null)
             {
+                Session["idCobroConsec"] = ((Int32)(Session["idCobroConsec"]) + 1);
                 dtCobro = ((DataSet)(Session["dsLiquidacion"])).Tables["Cobro"];
                 DataRow dr;
                 dr = dtCobro.NewRow();
 
-                dr["IdCobro"] = 0;
+                //dr["IdCobro"] = 0;
+                dr["IdPago"] = ((Int32)(Session["idCobroConsec"]) + 1); ; //Consecutivo
                 dr["Referencia"] =0;
                 dr["NumeroCuenta"] = 0;
 
-                dr["FechaCheque"] = "";
+                dr["FechaCheque"] = LstSaldos.SelectedValue.ToString().Split('/')[3];
                 dr["Cliente"] = this.txtAntCliente.Text;
                 dr["Banco"] = "";
 
@@ -248,7 +284,7 @@ private void LlenaDropDowns()
                 dr["Impuesto"] = 0;
                 dr["Total"] = Convert.ToDouble(this.txtAntMonto.Text);
 
-                //dr["Saldo"] = Convert.ToDouble(this.txtAntSaldo.Text);
+                dr["Saldo"] = 0;
                 dr["Observaciones"] = this.txtAntOnservaciones.Text;
                 dr["Status"] = "ABIERTO";
 
@@ -263,11 +299,81 @@ private void LlenaDropDowns()
                 dr["BancoOrigen"] = 0;
                 dr["NombreTipoCobro"] = "ANTICIPO";
 
+                Session["ImporteOperacion"] = Convert.ToDecimal(this.txtAntMonto.Text); ;
+
+                dtCobro.Rows.Add(dr);
+
+                //ds.Tables.Add(dtCobro);
+               // ds.Tables.Add(dtLiqAnticipo);
+
+                Session["idCliente"] = this.txtAntCliente.Text;
+                // Session["dsLiquidacion"] = dtCobro.DataSet;
+               // Session["dsLiquidacion"] = ds;
+
+                // rp.InsertaMovimientoAConciliar(1, 2014, 2014, 1, Convert.ToInt32(this.txtAntMonto.Text), "EMITIDO");
+
+                //ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.replace('RegistroPagos.aspx');;", true);
+            }
+
+
+            else
+            {
+                //Genera Registro del Cobro con Cheque
+                Session["idCobroConsec"] = 1;
+                dtCobro = ds.Tables["Cobro"];
+                DataRow dr;
+                dr = dtCobro.NewRow();
+
+                //dr["IdCobro"] = 0;
+                dr["IdPago"] = 1; //Consecutivo
+                dr["Referencia"] = 0;
+                dr["NumeroCuenta"] = 0;
+
+                dr["FechaCheque"] = LstSaldos.SelectedValue.ToString().Split('/')[3]; ;
+                dr["Cliente"] = this.txtAntCliente.Text;
+                dr["Banco"] = "0";
+
+                dr["Importe"] = Convert.ToDouble(this.txtAntMonto.Text);
+                dr["Impuesto"] = Convert.ToDouble(this.txtAntMonto.Text) * rp.dbIVA;
+                dr["Total"] = Convert.ToDouble(this.txtAntMonto.Text)+(Convert.ToDouble(this.txtAntMonto.Text) * rp.dbIVA);
+
+                dr["Saldo"] = 0;
+                dr["Observaciones"] = this.txtAntOnservaciones.Text;
+                dr["Status"] = "ABIERTO";
+
+                dr["FechaAlta"] = DateTime.Now.Date.ToString("dd/MM/yyyy");
+                dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.anticipo);
+                dr["Usuario"] = "";
+
+                dr["SaldoAFavor"] = 0;
+                dr["TPV"] = 0;
+                dr["FechaDeposito"] = "";
+
+                dr["BancoOrigen"] = 0;
+                dr["NombreTipoCobro"] = "ANTICIPO";
+
+                Session["ImporteOperacion"] = Convert.ToDecimal(this.txtAntMonto.Text); ;
+
                 dtCobro.Rows.Add(dr);
                 Session["idCliente"] = this.txtAntCliente.Text;
-                Session["dsLiquidacion"] = dtCobro.DataSet;
-                rp.InsertaMovimientoAConciliar(1, 2014, 2014, 1, Convert.ToInt32(this.txtAntMonto.Text), "EMITIDO");
+
+                //ds.Tables.Add(dtCobro);
+       
+
+                // Session["dsLiquidacion"] = dtCobro.DataSet;
+
+         
+
             }
+
+
+
+            dtLiqAnticipo.Rows.Add(LstSaldos.SelectedValue.ToString().Split('/')[0], LstSaldos.SelectedValue.ToString().Split('/')[1], LstSaldos.SelectedValue.ToString().Split('/')[2], Convert.ToDecimal(this.txtAntMonto.Text));
+            ds.Tables.Add(dtLiqAnticipo);
+            Session["dsLiquidacion"] = ds;
+            ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.replace('RegistroPagos.aspx');;", true);
+
+
         }
         catch (Exception ex)
         {
@@ -313,7 +419,7 @@ private void LlenaDropDowns()
                     this.txtAntNombre.Text = _datosCliente.Nombre;
                     LstSaldos.DataSource = _datosCliente.SaldosCliente;
                     LstSaldos.DataTextField = "Saldo";
-                    LstSaldos.DataValueField = "AñoMovimiento";
+                    LstSaldos.DataValueField = "Clave";
                     LstSaldos.DataBind();
                     pnlAnticipo.Visible = true;
                 }
@@ -360,4 +466,17 @@ private void LlenaDropDowns()
     }
 
 
+
+    protected void LstSaldos_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        txtAntMonto.Text = LstSaldos.SelectedItem.Text.Split(',')[0].ToString().Replace("$","");
+    }
+
+
+
+
+    protected void postback_Click(object sender, ImageClickEventArgs e)
+    {
+        var x = 1;
+    }
 }

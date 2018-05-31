@@ -10,6 +10,11 @@
 
 <script type="text/javascript">
 
+     function RegistroPago() {
+            javascript: __doPostBack('RegistroPago', '');
+
+
+        }
 
 
     function ConsultaCteAnticipo(IdCliente) {
@@ -262,7 +267,7 @@
             </div>
         </td>
         <td>
-            <asp:ListBox ID="LstSaldos" runat="server"  Height="90px"  style="overflow-x:auto;margin-left: 0px" Width="222px" onchange ="return MontoSaldo()" ></asp:ListBox>
+            <asp:ListBox ID="LstSaldos" runat="server"  Height="90px"  style="overflow-x:auto;margin-left: 0px" Width="222px" onchange ="return MontoSaldo()" OnSelectedIndexChanged="LstSaldos_SelectedIndexChanged" AutoPostBack="True" OnTextChanged="LstSaldos_SelectedIndexChanged" ></asp:ListBox>
             <asp:RequiredFieldValidator ID="rfvAntSaldo" runat="server"
                 ControlToValidate="LstSaldos" Display="None"
                 ErrorMessage="Capturar el Saldo"
@@ -279,7 +284,7 @@
             </div>
         </td>
         <td>
-            <asp:TextBox ID="txtAntMonto" runat="server" Width="150px" CssClass="textboxcaptura"></asp:TextBox>
+            <asp:TextBox ID="txtAntMonto" runat="server" Width="150px" CssClass="textboxcaptura" ReadOnly="True"></asp:TextBox>
             <cc2:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" TargetControlID="txtAntMonto" FilterType="Custom" ValidChars="0123456789./"></cc2:FilteredTextBoxExtender>
             <asp:RequiredFieldValidator ID="rfvAntMonto" runat="server"
                 ControlToValidate="txtAntMonto" Display="None"
@@ -310,7 +315,7 @@
         <td class="auto-style1"></td>
         <td>
             <asp:ImageButton ID="btnAntAceptar" runat="server"
-                OnClick="btnAceptarAnticipo_Click" ImageUrl="~/Images/btnAceptar.png"
+                OnClick="btnAceptarAnticipo_Click" ImageUrl="~/Images/btnAceptar.png" 
                 SkinID="btnAceptar" ValidationGroup="GuardaAnt" />
         </td>
     </tr>
@@ -324,4 +329,6 @@
 </table>
 </asp:Panel>
     <asp:HiddenField ID="HiddenInputUC" runat="server" Value="" />
+      <asp:HiddenField ID="HiddenInputRegPago" runat="server" Value="" />  
+    <br />
  </div>

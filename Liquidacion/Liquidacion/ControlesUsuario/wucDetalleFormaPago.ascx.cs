@@ -25,6 +25,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
     object sender;
     string registroCobro;
     DataTable dtLiqAnticipo=new DataTable("LiqPagoAnticipado");
+    string ClaveAnticipo = string.Empty;
 
 
 
@@ -144,11 +145,6 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                 this.lblAntTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Aplicación de anticipo" : this.Titulo;
             }
 
-
-
-            //postback.Attributes.Add("onclick", "return RegistroPago()");
-
-
         }
 
         else
@@ -247,6 +243,7 @@ private void LlenaDropDowns()
 
     protected void btnAceptarAnticipo_Click(object sender, EventArgs e)
     {
+
         if (dtLiqAnticipo.Columns.Count ==0)
         {
             dtLiqAnticipo.Columns.Add("Folio", typeof(String));
@@ -371,6 +368,7 @@ private void LlenaDropDowns()
             dtLiqAnticipo.Rows.Add(LstSaldos.SelectedValue.ToString().Split('/')[0], LstSaldos.SelectedValue.ToString().Split('/')[1], LstSaldos.SelectedValue.ToString().Split('/')[2], Convert.ToDecimal(this.txtAntMonto.Text));
             ds.Tables.Add(dtLiqAnticipo);
             Session["dsLiquidacion"] = ds;
+
             ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.replace('RegistroPagos.aspx');;", true);
 
 
@@ -470,6 +468,7 @@ private void LlenaDropDowns()
     protected void LstSaldos_SelectedIndexChanged(object sender, EventArgs e)
     {
         txtAntMonto.Text = LstSaldos.SelectedItem.Text.Split(',')[0].ToString().Replace("$","");
+        ClaveAnticipo = LstSaldos.SelectedValue.ToString();
     }
 
 

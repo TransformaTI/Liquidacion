@@ -396,13 +396,18 @@ namespace SigametLiquidacion
 
         public void GuardaPagos(string Usuario, DataTable dtPedidos, DataTable dtPago, DataTable dtDetallePago, DataTable dtResumenLiquidacion, DataTable liqPagoAnticipado=null)
         {
+            int cobro = 0;
             try
             {
-                this.CobroDescuentos(Usuario, dtPedidos, ref dtPago, ref dtDetallePago);
-                this.CobroEnEfectivo(Usuario, dtPedidos, ref dtPago, ref dtDetallePago);
+                if (liqPagoAnticipado == null)
+                {
+                    this.CobroDescuentos(Usuario, dtPedidos, ref dtPago, ref dtDetallePago);
+                    this.CobroEnEfectivo(Usuario, dtPedidos, ref dtPago, ref dtDetallePago);
+                }
                 this.ValidaStatusAutotanqueTurno((int)Convert.ToInt16(dtResumenLiquidacion.Rows[0]["AñoAtt"]), Convert.ToInt32(dtResumenLiquidacion.Rows[0]["Folio"]));
                 if (!(this.dtAutoTanque.Rows[0]["StatusLogistica"].ToString().Trim() == "CIERRE"))
                     return;
+              
                 this._dataAccess.OpenConnection();
                 this._dataAccess.BeginTransaction();
                 for (int index1 = 0; index1 <= dtPago.Rows.Count - 1; ++index1)
@@ -432,6 +437,7 @@ namespace SigametLiquidacion
                     this._dataAccess.ModifyData("spLiq3AltaCobroLiquidacion", CommandType.StoredProcedure, sqlParameterArray);
                     int num1 = Convert.ToInt32(sqlParameterArray[15].Value);
                     int num2 = (int)Convert.ToInt16(sqlParameterArray[14].Value);
+                    cobro = num1;
                     for (int index2 = 0; index2 <= dtDetallePago.Rows.Count - 1; ++index2)
                     {
                         if (dtPago.Rows[index1]["IdPago"].ToString() == dtDetallePago.Rows[index2]["idPago"].ToString())
@@ -446,14 +452,16 @@ namespace SigametLiquidacion
                             });
                     }
 
-                if (liqPagoAnticipado!=null)
-                    {
-
-                        InsertaMovimientoAConciliar(int.Parse(liqPagoAnticipado.Rows[0]["Folio"].ToString()), int.Parse(liqPagoAnticipado.Rows[0]["AñoMovimiento"].ToString()),int.Parse( DateTime.Now.Year.ToString()), num1, decimal.Parse(liqPagoAnticipado.Rows[0]["AñoMovimiento"].ToString()),"EMITIDO");
-                    }
 
                 }
                 this.ActualizaTerminado(dtResumenLiquidacion);
+
+                if (liqPagoAnticipado != null)
+                {
+                    decimal Totalpedidos = decimal.Parse(dtDetallePago.Compute("Sum(Total)", "").ToString());
+                    InsertaMovimientoAConciliar(int.Parse(liqPagoAnticipado.Rows[0]["Folio"].ToString()), int.Parse(liqPagoAnticipado.Rows[0]["AñoMovimiento"].ToString()), int.Parse(DateTime.Now.Year.ToString()), cobro, Totalpedidos, "EMITIDO");
+                }
+
                 //this._dataAccess.get_Transaction().Commit();
 
 

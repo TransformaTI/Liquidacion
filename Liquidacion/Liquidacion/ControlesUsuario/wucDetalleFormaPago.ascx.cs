@@ -300,16 +300,8 @@ private void LlenaDropDowns()
 
                 dtCobro.Rows.Add(dr);
 
-                //ds.Tables.Add(dtCobro);
-               // ds.Tables.Add(dtLiqAnticipo);
-
                 Session["idCliente"] = this.txtAntCliente.Text;
-                // Session["dsLiquidacion"] = dtCobro.DataSet;
-               // Session["dsLiquidacion"] = ds;
 
-                // rp.InsertaMovimientoAConciliar(1, 2014, 2014, 1, Convert.ToInt32(this.txtAntMonto.Text), "EMITIDO");
-
-                //ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.replace('RegistroPagos.aspx');;", true);
             }
 
 
@@ -352,14 +344,7 @@ private void LlenaDropDowns()
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtAntMonto.Text); ;
 
                 dtCobro.Rows.Add(dr);
-                Session["idCliente"] = this.txtAntCliente.Text;
-
-                //ds.Tables.Add(dtCobro);
-       
-
-                // Session["dsLiquidacion"] = dtCobro.DataSet;
-
-         
+                Session["idCliente"] = this.txtAntCliente.Text;         
 
             }
 
@@ -369,6 +354,7 @@ private void LlenaDropDowns()
             ds.Tables.Add(dtLiqAnticipo);
             Session["dsLiquidacion"] = ds;
 
+            
             ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.replace('RegistroPagos.aspx');;", true);
 
 
@@ -476,6 +462,6 @@ private void LlenaDropDowns()
 
     protected void postback_Click(object sender, ImageClickEventArgs e)
     {
-        var x = 1;
+   
     }
 }

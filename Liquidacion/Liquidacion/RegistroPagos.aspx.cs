@@ -27,9 +27,9 @@ public partial class RegistroPagos : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        if (!Page.IsPostBack)
+        if (!Page.IsPostBack && Session["ImporteOperacion"].ToString()!=null)
         {
-            lblImporteTotalA.Text = String.Format("{0:C}", (Decimal)(Session["ImporteOperacion"]));
+            lblImporteTotalA.Text = String.Format("{0:C}", decimal.Parse(Session["ImporteOperacion"].ToString()));
         }
         
         //dsLiquidacion es el dataset creado y obtenido por esquema, validamos que esté inicializado

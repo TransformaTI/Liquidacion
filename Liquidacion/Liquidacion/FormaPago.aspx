@@ -3,6 +3,8 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ccR" %>
 
 <%@ Register Src="~/ControlesUsuario/wucConsultaCargoTarjetaCliente.ascx" TagPrefix="uc1" TagName="wucConsultaCargoTarjetaCliente" %>
+<%@ Register Src="~/ControlesUsuario/wucDetalleFormaPago.ascx" TagPrefix="ucDetallePago" TagName="wucDetalleFormaPago" %>
+
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainPlaceHolder" runat="server">
 
@@ -20,9 +22,18 @@
         var NumPagos = '<%=HiddenInputNumPagos.Value  %>'; // mcc 2018 05 10
         var Ruta = '<%=Session["Ruta"]%>';
         var sTipoPago = '';
+        var RegistroCobro = '<%= wucDetalleFormaPago1.RegistroCobro%>';
+
+        
 
         //Validaciones  On load
         document.addEventListener("DOMContentLoaded", function () { // mcc 2018 05 10
+
+            if (RegistroCobro == 'Si')
+            {
+                window.location='RegistroPagos.aspx'
+            }
+
 
             if (HiddenInput == 'ConsultaTPV' || HiddenInput == 'SeleccionaPago') {
                 document.getElementById('tarjeta').style.display = 'inherit';
@@ -43,6 +54,15 @@
             else if (HiddenInputPCT != 'Si' && NumCte != '') {
                 alert('No se encontraron pagos de TPV para el cliente, por favor verifique con el área de tarjetas de crédito');
             }
+
+            if (HiddenInput == "ConsultaCteAnticipo")
+            {
+
+                    document.getElementById('AnticipoUC').style.display = 'inherit';
+                    document.getElementById('Anticipo').style.display = 'inherit'; 
+                    document.getElementById('Transfer').style.display = 'none';      
+            }
+
 
 
 
@@ -67,7 +87,9 @@
 
          return false;
      }
-     return true;
+       return true;
+
+
  }
 
       
@@ -83,7 +105,9 @@
         document.getElementById('tarjeta').style.display = 'none';
         document.getElementById('cheque').style.display = 'none';
         document.getElementById('vale').style.display = 'none';
-        document.getElementById('transferencia').style.display = 'none';
+        document.getElementById('Transfer').style.display = 'none';
+        document.getElementById('Anticipo').style.display = 'none';
+         document.getElementById('AnticipoUC').style.display = 'none';
 
 
         document.getElementById(activo).style.display = (
@@ -92,10 +116,23 @@
         document.getElementById(inactivo).style.display = 'none';
         document.getElementById(inactivoA).style.display = 'none';
 
-        if (activo == 'transferencia') {
-
-            document.getElementById('transferencia').style.display = 'inherit';
+        if (activo == 'Transfer') {
+            document.getElementById('AnticipoUC').style.display = 'inherit';
+            document.getElementById('Transfer').style.display = 'inherit';
+            document.getElementById('Anticipo').style.display = 'none'; 
+            document.getElementById('lblTitulo').style.value = 'Transferencia'; 
+            
         }
+
+        if (activo == 'Anticipo') {
+
+            document.getElementById('AnticipoUC').style.display = 'inherit';
+               document.getElementById('Anticipo').style.display = 'inherit'; 
+                    document.getElementById('Transfer').style.display = 'none';                    
+        }
+
+
+
     }
 
     </script>
@@ -136,6 +173,8 @@
 
 
         }
+
+
 
         function ShowModalPopup() {
             $find("mpe").show();
@@ -832,7 +871,7 @@
                     <table style="vertical-align: top; width: 534px;">
                         <tr>
                             <td valign="top">
-                                <div id="transferencia" style="display: none; vertical-align: top">
+                                <div id="transferenciaOld" style="display: none; vertical-align: top">
                                     <table style="background-color: #e1f8e2; height: 360px; width: 900px">
 
                                         <tr>
@@ -1010,6 +1049,20 @@
                                             <td></td>
                                         </tr>
                                     </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                                        <table style="vertical-align: top; width: 534px;">
+                        <tr>
+                            <td valign="top">
+                                <div id="AnticipoUC" style="display: none; vertical-align: top">
+                                    <ucDetallePago:wucDetalleFormaPago runat="server" id="wucDetalleFormaPago1" /> 
+                                    <%--<asp:ImageButton ID="btnAntAceptar" runat="server"
+                                        OnClick="btnAceptarAnticipo_Click" ImageUrl="~/Images/btnAceptar.png"
+                                        SkinID="btnAceptar" ValidationGroup="GuardaAnt" />--%>
                                 </div>
                             </td>
                         </tr>

@@ -83,10 +83,15 @@ namespace SigametLiquidacion
         }
 
 
-        public void GuardaPagos(string Usuario, DataTable dtPedidos, DataTable dtPago, DataTable dtDetallePago, DataTable dtResumenLiquidacion)
+        public void GuardaPagos(string Usuario, DataTable dtPedidos, DataTable dtPago, DataTable dtDetallePago, DataTable dtResumenLiquidacion, DataTable liqPagoAnticipado = null)
     {
-      this._datos.GuardaPagos(Usuario, dtPedidos, dtPago, dtDetallePago, dtResumenLiquidacion);
+      this._datos.GuardaPagos(Usuario, dtPedidos, dtPago, dtDetallePago, dtResumenLiquidacion, liqPagoAnticipado);
     }
+
+        public void InsertaMovimientoAConciliar(int folioMovimiento, int anioMovimiento, int anioCobro, int cobro, decimal monto, string status)
+        {
+            this._datos.InsertaMovimientoAConciliar(folioMovimiento, anioMovimiento, anioCobro, cobro, monto, status);
+        }
 
     public enum TipoPago
     {
@@ -95,6 +100,8 @@ namespace SigametLiquidacion
       tipoTarjeta = 6,
       tipoDescuento = 12,
       tipoVale = 16,
+      transferencia =22,
+      anticipo = 21
     }
   }
 }

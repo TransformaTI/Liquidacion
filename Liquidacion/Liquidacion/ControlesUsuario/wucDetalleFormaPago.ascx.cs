@@ -244,6 +244,14 @@ private void LlenaDropDowns()
     protected void btnAceptarAnticipo_Click(object sender, EventArgs e)
     {
 
+        if (decimal.Parse(txtAntMonto.Text)== 0)
+        {
+            ScriptManager.RegisterStartupScript(this, GetType(), "saldo", "alert('El saldo debe ser mayor a cero');", true);
+            return;
+        }
+
+
+
         if (dtLiqAnticipo.Columns.Count ==0)
         {
             dtLiqAnticipo.Columns.Add("Folio", typeof(String));
@@ -354,8 +362,11 @@ private void LlenaDropDowns()
             ds.Tables.Add(dtLiqAnticipo);
             Session["dsLiquidacion"] = ds;
 
-            
-            ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.replace('RegistroPagos.aspx');;", true);
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.replace('RegistroPagos.aspx');", true);
+
+    
+  
 
 
         }

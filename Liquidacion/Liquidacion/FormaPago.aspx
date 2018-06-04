@@ -58,8 +58,8 @@
             if (HiddenInput == "ConsultaCteAnticipo")
             {
 
-                            document.getElementById('AnticipoUC').style.display = 'inherit';
-               document.getElementById('Anticipo').style.display = 'inherit'; 
+                    document.getElementById('AnticipoUC').style.display = 'inherit';
+                    document.getElementById('Anticipo').style.display = 'inherit'; 
                     document.getElementById('Transfer').style.display = 'none';      
             }
 

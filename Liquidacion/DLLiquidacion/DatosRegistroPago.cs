@@ -415,7 +415,7 @@ namespace SigametLiquidacion
                     SqlParameter[] sqlParameterArray = new SqlParameter[16]
                     {
             new SqlParameter("@NumeroCheque", (object) dtPago.Rows[index1]["Referencia"].ToString()),
-            new SqlParameter("@Total", (object) Convert.ToDecimal(dtPago.Rows[index1]["Total"])),
+            new SqlParameter("@Total",liqPagoAnticipado!=null?(object) Convert.ToDecimal(dtDetallePago.Rows[index1]["Total"]): (object) Convert.ToDecimal(dtPago.Rows[index1]["Total"])),
             new SqlParameter("@Saldo", (object) Convert.ToDecimal(dtPago.Rows[index1]["Saldo"])),
             new SqlParameter("@NumeroCuenta", (object) dtPago.Rows[index1]["NumeroCuenta"].ToString()),
             new SqlParameter("@FCheque", (object) Convert.ToDateTime(dtPago.Rows[index1]["FechaCheque"].ToString())),

@@ -9,12 +9,14 @@
 </style>
 
 <script type="text/javascript">
+    
 
      function RegistroPago() {
             javascript: __doPostBack('RegistroPago', '');
 
+    }
 
-        }
+
 
 
     function ConsultaCteAnticipo(IdCliente) {
@@ -27,7 +29,20 @@
 
         var listBox = document.getElementById("<%= LstSaldos.ClientID%>");
         var Monto = listBox.options[listBox.selectedIndex].text.split(",");
-        document.getElementById("<%= txtAntMonto.ClientID%>").value = Monto[0];
+
+        if (parseInt(Monto[0].replace('$',''))<=0)
+        {
+            alert('¡El saldo debe ser mayor a cero!');
+            document.getElementById("<%= txtAntMonto.ClientID%>").value = '';
+        }
+
+        else
+
+        {
+             document.getElementById("<%= txtAntMonto.ClientID%>").value = Monto[0];
+        }
+
+
     }
 
 
@@ -239,7 +254,7 @@
 
             <cc2:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" FilterType="Numbers"
                 TargetControlID="txtAntCliente"></cc2:FilteredTextBoxExtender>
-            <asp:TextBox ID="txtAntCliente" runat="server" CssClass="textboxcaptura" Width="150px" ValidChars="0123456789" onblur="return ConsultaCteAnticipo()"></asp:TextBox >
+            <asp:TextBox ID="txtAntCliente" runat="server" CssClass="textboxcaptura" Width="150px" ValidChars="0123456789" onblur="return ConsultaCteAnticipo()" ></asp:TextBox >
             <asp:RequiredFieldValidator ID="rfvAntCliente" runat="server"
                 ControlToValidate="txtAntCliente" Display="None"
                 ErrorMessage="Capturar el No. de Cliente"

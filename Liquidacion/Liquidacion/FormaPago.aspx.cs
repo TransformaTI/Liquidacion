@@ -47,7 +47,6 @@ public partial class FormaPago : System.Web.UI.Page
         {
 
             LlenaDropDowns();
-
     
         }
 
@@ -63,6 +62,7 @@ public partial class FormaPago : System.Web.UI.Page
                 {
                     LimpiarCampos("tarjeta");
                     ConsultarCargoTarjeta(int.Parse(txtClienteTarjeta.Text), "tarjeta", int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
+
                 }
             }
 
@@ -96,11 +96,13 @@ public partial class FormaPago : System.Web.UI.Page
 
         else
         {
-
+            titNoAut.Visible = false;
+            titNoAutNum.Visible = false;
             HiddenInput.Value = "";
             HiddenInputPCT.Value = "";
             LimpiarCampos("tarjeta");
             LimpiarCampos("transferencia");
+
         }
         #endregion
 
@@ -143,7 +145,7 @@ public partial class FormaPago : System.Web.UI.Page
         imgCalendario0.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtFechaTarjeta.UniqueID + (char)39 + ")");
 
         txtFechaTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtNoAutorizacionTarjeta.UniqueID + (char)39 + ")");
-        txtNoAutorizacionTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtNumTarjeta.UniqueID + (char)39 + ")");
+       // txtNoAutorizacionTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtNumTarjeta.UniqueID + (char)39 + ")");
         txtNumTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + ddBancoTarjeta.UniqueID + (char)39 + ")");
 
         ddBancoTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + ddlBancoOrigen.UniqueID + (char)39 + ")");
@@ -172,6 +174,12 @@ public partial class FormaPago : System.Web.UI.Page
         ImgAnticipo.Attributes.Add("onclick", "toggle('display', 'Anticipo', 'cheque', 'tarjeta', " + (char)39 + txtClienteTarjeta.UniqueID + (char)39 + ")");
 
         TxtCteAfiliacion.Attributes.Add("onblur", "return ConsultaPagosTPV('ConsultaTPV-Trans')");
+
+        imbAceptarTDC.Attributes.Add("onclick", "return ValidaCamposTDC()");
+
+        txtNoAutorizacionTarjeta.Attributes.Add("onkeypress", "return isAlphaNumeric(event)");
+
+        txtNoAutorizacionTarjetaConfirm.Attributes.Add("onkeypress", "return isAlphaNumeric(event)");
 
 
 
@@ -539,6 +547,8 @@ public partial class FormaPago : System.Web.UI.Page
     {
         try
         {
+
+              
             if ((DataSet)(Session["dsLiquidacion"]) == null)
             {
                 //Genera Registro del Cobro con Cheque
@@ -629,6 +639,10 @@ public partial class FormaPago : System.Web.UI.Page
                 Session["ImporteOperacion"] = importeOperacion;
             }
             Response.Redirect("RegistroPagos.aspx");
+                // your code here.
+
+
+
         }
         catch (Exception ex)
         {
@@ -1073,12 +1087,24 @@ public partial class FormaPago : System.Web.UI.Page
             wucConsultaCargoTarjetaCliente1.sFormaPago = sFormaPago;
             wucConsultaCargoTarjetaCliente1.dtPagosContarjeta = dtDatosControlUsuario;
             //}
+            titNoAut.Visible = false;
+            titNoAutNum.Visible = false;
 
+            if (dtPagosConTarjeta.Rows[0]["Folio"].ToString()=="")
+            {
+                HiddenInputPCT.Value = "No";
+                titNoAut.Visible = true;
+                titNoAutNum.Visible = true;
+            }
 
         }
         else
         {
             HiddenInputPCT.Value = "No";
+            titNoAut.Visible = true;
+            titNoAutNum.Visible = true;
+
+
 
         }
     }

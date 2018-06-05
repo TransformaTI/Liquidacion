@@ -63,6 +63,13 @@
                     document.getElementById('Transfer').style.display = 'none';      
             }
 
+           if (HiddenInput == "TarjetaClienteFalse")
+           {
+              document.getElementById('terjeta').style.display = 'inherit';
+
+           }
+            
+
 
 
 
@@ -90,7 +97,22 @@
        return true;
 
 
- }
+        }
+
+
+ function isAlphaNumeric(str) {
+  var code, i, len;
+
+  for (i = 0, len = str.length; i < len; i++) {
+    code = str.charCodeAt(i);
+    if (!(code > 47 && code < 58) && // numeric (0-9)
+        !(code > 64 && code < 91) && // upper alpha (A-Z)
+        !(code > 96 && code < 123)) { // lower alpha (a-z)
+      return false;
+    }
+  }
+  return true;
+};
 
       
 
@@ -185,6 +207,77 @@
             $find("mpe").hide();
             return false;
         }
+
+
+
+        function ValidaCamposTDC()
+        {
+            if (document.getElementById('<%=txtClienteTarjeta.ClientID%>').value == "")
+            {
+                alert('Capture el número de cliente');
+                 return false;
+            }
+
+                 if (document.getElementById('<%=txtNombreClienteTarjeta.ClientID%>').value == "")
+            {
+                alert('El nombre del cliente es requerido');
+                 return false;
+            }
+
+            
+
+             if (document.getElementById('<%=HiddenInputPCT.ClientID%>').value == "No")
+             {
+              if (document.getElementById('<%=txtNoAutorizacionTarjeta.ClientID%>').value == "")
+                   {
+                         alert('Capture el número de Autorizacion');
+                         return false;
+                 }
+
+
+
+                 if (document.getElementById('<%=txtNoAutorizacionTarjetaConfirm.ClientID%>').value == "")
+                  {
+                            alert('Confirme el número de autorización');
+                         return false; 
+                 }
+
+                 if (document.getElementById('<%=txtNoAutorizacionTarjetaConfirm.ClientID%>').value != document.getElementById('<%=txtNoAutorizacionTarjeta.ClientID%>').value)
+                 {
+                     alert('Los números de autorización no coinciden');
+                     return false;
+                 }
+
+                 if (document.getElementById('<%=ddBancoTarjeta.ClientID%>').selectedIndex == "0")
+                 {
+                     alert('Seleccione un banco de la tarjeta');
+                       return false;
+                 }
+
+
+                if (document.getElementById('<%=ddlBancoOrigen.ClientID%>').selectedIndex == "0")
+                 {
+                     alert('Seleccione un banco origen');
+                       return false;
+                 }
+
+                if (document.getElementById('<%=txtImporteTarjeta.ClientID%>').value == "")
+                 {
+                     alert('Capture el Importe');
+                       return false;
+                 }
+
+                 
+
+               
+            }
+
+
+           
+        }
+
+
+
 
 
     </script>
@@ -616,8 +709,32 @@
                                                             <ccR:ValidatorCalloutExtender ID="vceAutorizacion" runat="server"
                                                                 TargetControlID="rfvTDAutorizacion">
                                                             </ccR:ValidatorCalloutExtender>
-                                                            <ccR:FilteredTextBoxExtender ID="ftbTDAutorizacion" runat="server" TargetControlID="txtNoAutorizacionTarjeta" FilterType="Numbers"></ccR:FilteredTextBoxExtender>
+                                                            <ccR:FilteredTextBoxExtender ID="ftbTDAutorizacion" runat="server" TargetControlID="txtNoAutorizacionTarjeta" FilterType="Custom,LowercaseLetters,UppercaseLetters,Numbers" ValidChars="" ></ccR:FilteredTextBoxExtender>
                                                         </td>
+                                                    </tr>
+                                                          <tr id ="ConfirmAut">
+   
+                                                        <td class="style1">
+                                                          <div id="titNoAut" runat="server">
+                                                            <asp:Label ID="Label13" runat="server" CssClass="labeltipopagoforma"
+                                                                Text="No Autorización:"></asp:Label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div runat="server" id="titNoAutNum">
+                                                            <asp:TextBox ID="txtNoAutorizacionTarjetaConfirm" runat="server" CssClass="textboxcaptura"
+                                                                Width="100px"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+                                                                ControlToValidate="txtNoAutorizacionTarjeta" Display="None"
+                                                                ErrorMessage="Capturar Número de Autorización"
+                                                                ValidationGroup="Tarjeta"></asp:RequiredFieldValidator>
+                                                            <ccR:ValidatorCalloutExtender ID="ValidatorCalloutExtender5" runat="server"
+                                                                TargetControlID="RequiredFieldValidator1">
+                                                            </ccR:ValidatorCalloutExtender>
+                                                            <ccR:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server" TargetControlID="txtNoAutorizacionTarjetaConfirm" FilterType="Custom,LowercaseLetters,UppercaseLetters,Numbers" ValidChars=""></ccR:FilteredTextBoxExtender>
+                                                        </div>
+                                                        </td>
+                                                             
                                                     </tr>
                                                     <tr>
                                                         <td class="style1">
@@ -1205,7 +1322,6 @@
             <table style="width: 100%; align-content: center; background-color: aliceblue; border: thin">
                 <tr style="align-content: center;">
                     <td style="text-align: center">
-                        <asp:Button ID="Button1" runat="server" Text="Cerrar" OnClientClick="return HideModalPopup()" />
                     </td>
 
                 </tr>

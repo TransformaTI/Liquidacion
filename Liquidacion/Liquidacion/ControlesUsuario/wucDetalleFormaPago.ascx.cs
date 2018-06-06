@@ -128,6 +128,8 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
             //this.btnAntAceptar.ImageUrl = this.ImgBoton;
             //this.btnBuscarCliente.ImageUrl = this.imgBtnBuscar;
 
+            //txtAntMonto.Attributes.Add("onkeypress", "return ValidaMontoSaldo()");
+            
             this.lblTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Transferencia electrónica de fondos" : this.Titulo;
             this.lblAntTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Aplicación de anticipo" : this.Titulo;
 

@@ -9,3 +9,15 @@ D:\TFSGM\SigametLiquidacion\Liquidacion\LiquidacionWebControls\obj\Debug\Liquida
 D:\TFSGM\SigametLiquidacion\Liquidacion\LiquidacionWebControls\obj\Debug\LiquidacionWebControls.csproj.CoreCompileInputs.cache
 D:\TFSGM\SigametLiquidacion\Liquidacion\LiquidacionWebControls\obj\Debug\LiquidacionWebControls.dll
 D:\TFSGM\SigametLiquidacion\Liquidacion\LiquidacionWebControls\obj\Debug\LiquidacionWebControls.pdb
+C:\Proyectos\SigametLiquidacion\Liquidacion\LiquidacionWebControls\bin\Debug\LiquidacionWebControls.dll
+C:\Proyectos\SigametLiquidacion\Liquidacion\LiquidacionWebControls\bin\Debug\LiquidacionWebControls.pdb
+C:\Proyectos\SigametLiquidacion\Liquidacion\LiquidacionWebControls\bin\Debug\DLLiquidacion.dll
+C:\Proyectos\SigametLiquidacion\Liquidacion\LiquidacionWebControls\bin\Debug\SGDAC.dll
+C:\Proyectos\SigametLiquidacion\Liquidacion\LiquidacionWebControls\bin\Debug\DocumentosBSR.dll
+C:\Proyectos\SigametLiquidacion\Liquidacion\LiquidacionWebControls\bin\Debug\stdole.dll
+C:\Proyectos\SigametLiquidacion\Liquidacion\LiquidacionWebControls\bin\Debug\DLLiquidacion.pdb
+C:\Proyectos\SigametLiquidacion\Liquidacion\LiquidacionWebControls\obj\Debug\LiquidacionWebControls.csprojAssemblyReference.cache
+C:\Proyectos\SigametLiquidacion\Liquidacion\LiquidacionWebControls\obj\Debug\LiquidacionWebControls.csproj.CoreCompileInputs.cache
+C:\Proyectos\SigametLiquidacion\Liquidacion\LiquidacionWebControls\obj\Debug\LiquidacionWebControls.csproj.CopyComplete
+C:\Proyectos\SigametLiquidacion\Liquidacion\LiquidacionWebControls\obj\Debug\LiquidacionWebControls.dll
+C:\Proyectos\SigametLiquidacion\Liquidacion\LiquidacionWebControls\obj\Debug\LiquidacionWebControls.pdb

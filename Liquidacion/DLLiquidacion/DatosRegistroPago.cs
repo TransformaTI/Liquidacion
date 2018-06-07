@@ -22,6 +22,7 @@ namespace SigametLiquidacion
         private DataTable dtAfiliaciones;
         private DataTable dtProveedores;
         private DataTable dtTipoVale;
+        private DataTable dtPedidosLiq; 
 
         #endregion
         #region propiedades
@@ -101,6 +102,15 @@ namespace SigametLiquidacion
 
         }
 
+        public DataTable PedidosLiquidacion
+        {
+            get
+            {
+                return this.dtPedidosLiq;
+            }
+
+        }
+
         #endregion
 
 
@@ -176,6 +186,17 @@ namespace SigametLiquidacion
 
             this.dtAfiliaciones = new DataTable();
             this._dataAccess.LoadData(this.dtAfiliaciones, "spLiqConsultaAfiliacion", CommandType.StoredProcedure, sqlParameterArray, true);
+        }
+
+        public void CargaPedidosLiquidacion(int Cliente)
+        {
+            SqlParameter[] sqlParameterArray = new SqlParameter[1]
+          {
+                 new SqlParameter("@Cliente",Cliente)
+          };
+
+            this.dtPedidosLiq = new DataTable();
+            this._dataAccess.LoadData(this.dtPedidosLiq, "spLIQAnticipoPedidos", CommandType.StoredProcedure, sqlParameterArray, true);
         }
 
 

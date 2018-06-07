@@ -13,16 +13,12 @@
 
     function ValidaMontoSaldo()
     {
-        alert('validasaldo');
         var listBox = document.getElementById("<%= LstSaldos.ClientID%>");
         var Monto = listBox.options[listBox.selectedIndex].text.split(",");
 
-        alert(document.getElementById("<%= txtAntMonto.ClientID%>").value);
-        alert(Monto[0].replace('$', ''));
-
         if (parseFloat(document.getElementById("<%= txtAntMonto.ClientID%>").value) > parseFloat(Monto[0].replace('$', '')))
         {
-            alert('EL Monto debe ser menor o igual al saldo seleccionado ');
+            alert('¡El Monto debe ser menor o igual al saldo seleccionado!');
             document.getElementById("<%= txtAntMonto.ClientID%>").value = Monto[0].replace('$', '')
             return false;
         }        

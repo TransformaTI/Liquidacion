@@ -26,6 +26,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
     string registroCobro;
     DataTable dtLiqAnticipo=new DataTable("LiqPagoAnticipado");
     string ClaveAnticipo = string.Empty;
+    DataTable dtPedidos=new DataTable("Pedidos");
 
 
 
@@ -155,6 +156,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
             {
                     LimpiarControles();
                     ConsultaSaldos();
+                    
 
             }
 
@@ -265,10 +267,16 @@ private void LlenaDropDowns()
 
         try
         {
+            ConsultaPedidos();
+
             if (Session["dsLiquidacion"] == null)
             {
                 string path = Server.MapPath("");
                 ds.ReadXml(path + "/App_Code/dsLiquidacion.xsd");
+            }
+            else
+            {
+               
             }
 
             if ((DataSet)(Session["dsLiquidacion"]) != null)
@@ -362,13 +370,17 @@ private void LlenaDropDowns()
 
             dtLiqAnticipo.Rows.Add(LstSaldos.SelectedValue.ToString().Split('/')[0], LstSaldos.SelectedValue.ToString().Split('/')[1], LstSaldos.SelectedValue.ToString().Split('/')[2], Convert.ToDecimal(this.txtAntMonto.Text));
             ds.Tables.Add(dtLiqAnticipo);
+
+            if (ds.Tables.Contains("Pedidos"))
+            {
+                ds.Tables.Remove("Pedidos");
+            }
+            dtPedidos.TableName = "Pedidos";
+            ds.Tables.Add(dtPedidos);
             Session["dsLiquidacion"] = ds;
 
 
-                ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.replace('RegistroPagos.aspx');", true);
-
-    
-  
+            ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.replace('RegistroPagos.aspx');", true);  
 
 
         }
@@ -401,6 +413,15 @@ private void LlenaDropDowns()
     //    }
     //}
     //}
+
+ private void ConsultaPedidos()
+    {
+        dtPedidos= rp.PedidosLiquidacion(int.Parse(txtAntCliente.Text));
+
+    }
+
+
+
     private void ConsultaSaldos()
         {
 

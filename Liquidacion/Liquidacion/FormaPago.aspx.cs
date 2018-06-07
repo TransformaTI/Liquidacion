@@ -1020,6 +1020,7 @@ public partial class FormaPago : System.Web.UI.Page
             ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString().Trim()));
             txtImporteTarjeta.Text = dtPagosConTarjetaSelec[0]["Importe"].ToString();
             txtObservacionesTarjeta.Text = dtPagosConTarjetaSelec[0]["Observacion"].ToString();
+            txtNoAutorizacionTarjeta.ReadOnly = true;
         }
 
 
@@ -1095,6 +1096,7 @@ public partial class FormaPago : System.Web.UI.Page
                 HiddenInputPCT.Value = "No";
                 titNoAut.Visible = true;
                 titNoAutNum.Visible = true;
+                txtNoAutorizacionTarjeta.ReadOnly = false;
             }
 
         }
@@ -1103,11 +1105,16 @@ public partial class FormaPago : System.Web.UI.Page
             HiddenInputPCT.Value = "No";
             titNoAut.Visible = true;
             titNoAutNum.Visible = true;
+            
 
 
 
         }
     }
+
+
+
+
     /// <summary>
     /// 
     /// </summary>

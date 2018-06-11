@@ -10,12 +10,19 @@ using System.Drawing;
 public partial class ControlesUsuario_wucConsultaCargoTarjetaClienta : System.Web.UI.UserControl
 {
     public DataTable dtPagosContarjeta = null;
+    protected DataSet ds = null;
     public string sFormaPago = "";
     protected void Page_Load(object sender, EventArgs e)
     {
         if (dtPagosContarjeta!=null)
         {
             if (dtPagosContarjeta.Rows.Count >0)
+            
+             if ((Session["dsLiquidacion"])!=null)
+                {
+                    ds = (DataSet)(Session["dsLiquidacion"]);
+                }
+
             GrdPagosConTarjeta.DataSource = dtPagosContarjeta;
             GrdPagosConTarjeta.DataBind();
             GrdPagosConTarjeta.Columns[0].ItemStyle.HorizontalAlign = HorizontalAlign.Center;

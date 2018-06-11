@@ -56,6 +56,7 @@ public partial class RegistroPagos : System.Web.UI.Page
             CargaPedidos(ds.Tables["Pedidos"], idCliente, true);
         }
 
+        if (ds.Tables["CobroPedido"]!=null)
          if (ds.Tables["CobroPedido"].Rows.Count > 0)
         {
             pagoActivo = Session["idCobroConsec"].ToString();
@@ -65,6 +66,7 @@ public partial class RegistroPagos : System.Web.UI.Page
             gvRelacionCobro.DataSource = vistaPagoActivo;
             gvRelacionCobro.DataBind();
         }
+
     }
     #region "Functs and Subs"
     protected void CargaPedidos(DataTable dtPedidosCarga, int idCliente, bool orden)
@@ -105,6 +107,9 @@ public partial class RegistroPagos : System.Web.UI.Page
         DataRow dr;
         bool valid = false;
         DataRow[] drArrayMov;
+
+
+
 
         try
         {
@@ -157,11 +162,14 @@ public partial class RegistroPagos : System.Web.UI.Page
                                 valid = true;
                                 lblError.Text = "";
 
+            
 
                                 Session["dsLiquidacion"] = ds;
 
 
                             }
+
+
                         }
                         else
                         {
@@ -207,6 +215,8 @@ public partial class RegistroPagos : System.Web.UI.Page
                     }
                 }
             }
+
+
             return valid;
         }
 
@@ -256,6 +266,8 @@ public partial class RegistroPagos : System.Web.UI.Page
                         ActualizaSaldo(refPago, importeAbono, true);
                     }
                 }
+
+
             }
 
             // Eliminar de la tabla del Detalle los Rows del Cobro Cancelado           
@@ -279,9 +291,34 @@ public partial class RegistroPagos : System.Web.UI.Page
 
             pagoActivo = pagoActivo - 1;
             Session["idCobroConsec"] = pagoActivo;
+
+
+
          
         }
         catch { throw; }
+    }
+
+    protected void CancelaRelacionPagoPedido()
+    {
+      foreach (DataRow pedidos in ds.Tables["CobroPedido"].Rows)
+            {
+            DataTable dtLiqAnticipo = ds.Tables["LiqPagoAnticipado"];
+
+            foreach (DataRow row in dtLiqAnticipo.Rows)
+            {
+                if (Session["PagoEnUsoAnticipo"].ToString() == row["Folio"].ToString() + row["AñoMovimiento"].ToString() && row["Pedidos"].ToString().Contains(pedidos["Pedido"].ToString()))
+                {
+                    row.BeginEdit();
+                    row["Pedidos"] = row["Pedidos"].ToString().Replace(pedidos["Pedido"].ToString(), "");
+                    row.EndEdit();
+                }
+            }
+
+            ds.Tables.Remove("LiqPagoAnticipado");
+            ds.Tables.Add(dtLiqAnticipo);
+
+        }
     }
     #endregion
     #region "Handlers"
@@ -343,6 +380,13 @@ public partial class RegistroPagos : System.Web.UI.Page
     {
         string referencia;
         string pagoActivo;
+        string PagoEnUso;
+
+
+        if (Session["PagoEnUsoAnticipo"]!=null)
+            PagoEnUso = Session["PagoEnUsoAnticipo"].ToString();
+
+
 
         try
         {
@@ -381,6 +425,23 @@ public partial class RegistroPagos : System.Web.UI.Page
                     txtImporteAbono.Text = "";
                     txtImporteDocto.Text = "";
                     txtSaldoMovimiento.Text = "";
+
+                    DataTable dtLiqAnticipo = ds.Tables["LiqPagoAnticipado"];
+
+                    foreach (DataRow row in dtLiqAnticipo.Rows)
+                    {
+                        if (Session["PagoEnUsoAnticipo"].ToString() == row["Folio"].ToString() + row["AñoMovimiento"].ToString())
+                        {
+                            row.BeginEdit();
+                            row["Pedidos"] = row["Pedidos"] + ","+ gvPedidos.SelectedRow.Cells[3].Text.TrimEnd();
+                            row.EndEdit();
+                        }
+                    }
+
+                    ds.Tables.Remove("LiqPagoAnticipado");
+                    ds.Tables.Add(dtLiqAnticipo);
+
+                    Session["dsLiquidacion"] = ds;
                 }
             }
             //La tabla ya tiene contenido
@@ -417,12 +478,31 @@ public partial class RegistroPagos : System.Web.UI.Page
                         txtImporteAbono.Text = "";
                         txtImporteDocto.Text = "";
                         txtSaldoMovimiento.Text = "";
+                        ///
+                        DataTable dtLiqAnticipo = ds.Tables["LiqPagoAnticipado"];
+
+                        foreach (DataRow row in dtLiqAnticipo.Rows)
+                        {
+                            if (Session["PagoEnUsoAnticipo"].ToString() == row["Folio"].ToString() + row["AñoMovimiento"].ToString())
+                            {
+                                row.BeginEdit();
+                                row["Pedidos"] = row["Pedidos"] + "," + gvPedidos.SelectedRow.Cells[3].Text.TrimEnd();
+                                row.EndEdit();
+                            }
+                        }
+
+                        ds.Tables.Remove("LiqPagoAnticipado");
+                        ds.Tables.Add(dtLiqAnticipo);
+
+                        Session["dsLiquidacion"] = ds;
                     }
                     lblError.Text = "";
                 }
                 else { lblError.Text = "Ya existe un Abono para el pedido Seleccionado!"; }
             }
             lblDescuento.Visible = false;
+
+
         }
         catch (Exception ex)
         {
@@ -472,6 +552,8 @@ public partial class RegistroPagos : System.Web.UI.Page
             DataRow[] CobrosPedido = ds.Tables["CobroPedido"].Select("IdPago = '" + Session["idCobroConsec"].ToString() + "'");
             //DataRow[] CobrosPedido = ds.Tables["CobroPedido"].Select();
             if (CobrosPedido.Length > 0)
+
+            
                 Response.Redirect("GenerarPago.aspx");
             else
                 lblError.Text = "Debe Capturar Abonos para el Pago";
@@ -486,6 +568,7 @@ public partial class RegistroPagos : System.Web.UI.Page
         try
         {
             CancelarAbonos();
+            CancelaRelacionPagoPedido();
             Response.Redirect("FormaPago.aspx");
         }
         catch (Exception ex)

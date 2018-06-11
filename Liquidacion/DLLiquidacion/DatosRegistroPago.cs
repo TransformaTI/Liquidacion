@@ -161,7 +161,7 @@ namespace SigametLiquidacion
         public void CargaProveedores()
         {
             this.dtProveedores = new DataTable();
-            this._dataAccess.LoadData(this.dtProveedores, "spLiqConsultaValeProveedor", CommandType.StoredProcedure, (SqlParameter[])null, true);
+            this._dataAccess.LoadData(this.dtProveedores, "spLiqConsultaValeProveedores", CommandType.StoredProcedure, (SqlParameter[])null, true);
 
         }
         /// <summary>

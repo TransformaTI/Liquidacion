@@ -196,7 +196,8 @@ public partial class FormaPago : System.Web.UI.Page
         else
         {
             ds = (DataSet)(Session["dsLiquidacion"]);
-            if (ds.Tables["Cobro"].Rows.Count > 0)
+            if (((DataSet)(Session["dsLiquidacion"])).Tables.Contains("Cobro"))
+                if (ds.Tables["Cobro"].Rows.Count > 0)
             {
                 lblCobros.Visible = true;
                 imgExpandCollapse.Visible = true;

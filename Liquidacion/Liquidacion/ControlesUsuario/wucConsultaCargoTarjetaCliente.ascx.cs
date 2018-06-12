@@ -6,36 +6,91 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Drawing;
+using System.Reflection;
 
 public partial class ControlesUsuario_wucConsultaCargoTarjetaClienta : System.Web.UI.UserControl
 {
     public DataTable dtPagosContarjeta = null;
     protected DataSet ds = null;
     public string sFormaPago = "";
+    protected DataTable dtPagosContarjetaDel=new DataTable("dtPagosContarjetaDel") ;
     protected void Page_Load(object sender, EventArgs e)
     {
+
+
+
+      
+
         if (dtPagosContarjeta!=null)
         {
+           // dtPagosContarjetaDel = dtPagosContarjeta;
             if (dtPagosContarjeta.Rows.Count >0)
-            
-             if ((Session["dsLiquidacion"])!=null)
+            {
+                if ((Session["dsLiquidacion"])!=null )
                 {
                     ds = (DataSet)(Session["dsLiquidacion"]);
+                    if (ds.Tables["Cobro"] != null && dtPagosContarjeta != null && ds.Tables["Cobro"].Columns.Count > 0)
+                    {
+                        var PagosConTarjeta = dtPagosContarjeta.AsEnumerable();
+                        var Cobros = ds.Tables["Cobro"].AsEnumerable();
+
+                        var Registros = (
+                                                    from c in PagosConTarjeta
+                                                    join b in Cobros
+                                                        on
+                                                              c.Field<string>("Autorizacion") equals b.Field<string>("referencia")
+
+                                                    into j
+                                                    from x in j.DefaultIfEmpty()
+                                                    where x == null
+                                                    select c
+                                                );
+
+                        if (Registros.ToList().Count > 0)
+                        {
+
+                            dtPagosContarjetaDel =  (
+                                                    from c in PagosConTarjeta
+                                                    join b in Cobros
+                                                        on 
+                                                              c.Field<string>("Autorizacion") equals b.Field<string>("referencia")
+  
+                                                    into j
+                                                    from x in j.DefaultIfEmpty()
+                                                    where x == null
+                                                    select c
+                                                ).CopyToDataTable();
+                        }
+                        else
+                        {
+                            dtPagosContarjetaDel = null;
+
+                        }
+
+
+
+                    }
+                    else
+                    {
+                        dtPagosContarjetaDel = dtPagosContarjeta;
+                    }
+
+
                 }
-
-            GrdPagosConTarjeta.DataSource = dtPagosContarjeta;
-            GrdPagosConTarjeta.DataBind();
-            GrdPagosConTarjeta.Columns[0].ItemStyle.HorizontalAlign = HorizontalAlign.Center;
-        }
-
-        if (Page.IsPostBack == true)
-        {
-            
-        }
-
-
-
+                else
+                    {
+                    dtPagosContarjetaDel = dtPagosContarjeta;
+                     }
+            }
     }
+
+
+
+        GrdPagosConTarjeta.DataSource = dtPagosContarjetaDel;
+        GrdPagosConTarjeta.DataBind();
+        GrdPagosConTarjeta.Columns[0].ItemStyle.HorizontalAlign = HorizontalAlign.Center;
+    }
+
 
     private void AsignaLlaves()
     {
@@ -49,8 +104,7 @@ public partial class ControlesUsuario_wucConsultaCargoTarjetaClienta : System.We
 
     }
     protected void OnRowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
-    {
-       
+    {    
 
         if (e.Row.RowIndex > -1)
         {            

@@ -428,7 +428,9 @@ public partial class RegistroPagos : System.Web.UI.Page
 
                     DataTable dtLiqAnticipo = ds.Tables["LiqPagoAnticipado"];
 
-                    foreach (DataRow row in dtLiqAnticipo.Rows)
+                    if (dtLiqAnticipo != null)
+                    {
+                        foreach (DataRow row in dtLiqAnticipo.Rows)
                     {
                         if (Session["PagoEnUsoAnticipo"].ToString() == row["Folio"].ToString() + row["AñoMovimiento"].ToString())
                         {
@@ -438,10 +440,12 @@ public partial class RegistroPagos : System.Web.UI.Page
                         }
                     }
 
-                    ds.Tables.Remove("LiqPagoAnticipado");
-                    ds.Tables.Add(dtLiqAnticipo);
+                        ds.Tables.Remove("LiqPagoAnticipado");
+                        ds.Tables.Add(dtLiqAnticipo);
 
-                    Session["dsLiquidacion"] = ds;
+                        Session["dsLiquidacion"] = ds;
+                    }
+
                 }
             }
             //La tabla ya tiene contenido
@@ -481,7 +485,9 @@ public partial class RegistroPagos : System.Web.UI.Page
                         ///
                         DataTable dtLiqAnticipo = ds.Tables["LiqPagoAnticipado"];
 
-                        foreach (DataRow row in dtLiqAnticipo.Rows)
+                        if (dtLiqAnticipo!=null)
+                        {
+                            foreach (DataRow row in dtLiqAnticipo.Rows)
                         {
                             if (Session["PagoEnUsoAnticipo"].ToString() == row["Folio"].ToString() + row["AñoMovimiento"].ToString())
                             {
@@ -491,10 +497,11 @@ public partial class RegistroPagos : System.Web.UI.Page
                             }
                         }
 
-                        ds.Tables.Remove("LiqPagoAnticipado");
-                        ds.Tables.Add(dtLiqAnticipo);
+                                ds.Tables.Remove("LiqPagoAnticipado");
+                                ds.Tables.Add(dtLiqAnticipo);
 
-                        Session["dsLiquidacion"] = ds;
+                                Session["dsLiquidacion"] = ds;
+                        }
                     }
                     lblError.Text = "";
                 }

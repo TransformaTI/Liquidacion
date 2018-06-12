@@ -5,6 +5,7 @@
 // Assembly location: C:\Proyectos\SigametLiquidacion\DLLiquidacion.dll
 
 using DocumentosBSR;
+using RTGMGateway;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -25,13 +26,40 @@ namespace SigametLiquidacion
       return this.ConsultaDatosPorFolio("spLiq2ConsultaDatosFolio", CommandType.StoredProcedure);
     }
 
-    public void ConsultaListaPedidos(short AñoAtt, int Folio, DataTable ListaPedidos)
+    public RTGMCore.DireccionEntrega obtenDireccionEntrega(int Cliente)
+    {
+        RTGMCore.DireccionEntrega objDireccionEntega;
+        try
+        {
+
+
+            RTGMGateway.RTGMGateway objGateway = new RTGMGateway.RTGMGateway();
+            objGateway.URLServicio = @"http://192.168.1.30:88/GasMetropolitanoRuntimeService.svc";
+            SolicitudGateway objRequest = new SolicitudGateway
+            {
+                Fuente = RTGMCore.Fuente.Sigamet,
+                IDCliente = Cliente,
+
+            };
+            objDireccionEntega = objGateway.buscarDireccionEntrega(objRequest);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        return objDireccionEntega;
+
+    }
+
+        public void ConsultaListaPedidos(short AñoAtt, int Folio, DataTable ListaPedidos)
     {
       SqlParameter[] sqlParameterArray = new SqlParameter[2]
       {
         new SqlParameter("@AñoAtt", (object) AñoAtt),
         new SqlParameter("@Folio", (object) Folio)
       };
+
+      RTGMCore.DireccionEntrega objDireccionEntega; 
       try
       {
         this._dataAccess.OpenConnection();
@@ -41,12 +69,16 @@ namespace SigametLiquidacion
         {
           ++num;
           DataRow row = ListaPedidos.NewRow();
+
+          objDireccionEntega = obtenDireccionEntrega(int.Parse(sqlDataReader["Cliente"].ToString()));
+
           row["ID"] = (object) num;
           row["Cliente"] = sqlDataReader["Cliente"];
           row["Celula"] = sqlDataReader["Celula"];
           row["AñoPed"] = sqlDataReader["AñoPed"];
           row["Pedido"] = sqlDataReader["Pedido"];
-          row["Nombre"] = sqlDataReader["Nombre"];
+          //row["Nombre"] = sqlDataReader["Nombre"];
+          row["Nombre"] = objDireccionEntega.Nombre;
           row["PedidoReferencia"] = sqlDataReader["PedidoReferencia"];
           row["Litros"] = sqlDataReader["Litros"];
           row["Precio"] = sqlDataReader["Precio"];

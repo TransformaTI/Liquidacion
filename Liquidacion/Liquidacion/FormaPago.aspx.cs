@@ -196,7 +196,8 @@ public partial class FormaPago : System.Web.UI.Page
         else
         {
             ds = (DataSet)(Session["dsLiquidacion"]);
-            if (ds.Tables["Cobro"].Rows.Count > 0)
+            if (((DataSet)(Session["dsLiquidacion"])).Tables.Contains("Cobro"))
+                if (ds.Tables["Cobro"].Rows.Count > 0)
             {
                 lblCobros.Visible = true;
                 imgExpandCollapse.Visible = true;
@@ -1020,6 +1021,7 @@ public partial class FormaPago : System.Web.UI.Page
             ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString().Trim()));
             txtImporteTarjeta.Text = dtPagosConTarjetaSelec[0]["Importe"].ToString();
             txtObservacionesTarjeta.Text = dtPagosConTarjetaSelec[0]["Observacion"].ToString();
+            txtNoAutorizacionTarjeta.ReadOnly = true;
         }
 
 
@@ -1095,6 +1097,7 @@ public partial class FormaPago : System.Web.UI.Page
                 HiddenInputPCT.Value = "No";
                 titNoAut.Visible = true;
                 titNoAutNum.Visible = true;
+                txtNoAutorizacionTarjeta.ReadOnly = false;
             }
 
         }
@@ -1103,11 +1106,16 @@ public partial class FormaPago : System.Web.UI.Page
             HiddenInputPCT.Value = "No";
             titNoAut.Visible = true;
             titNoAutNum.Visible = true;
+            
 
 
 
         }
     }
+
+
+
+
     /// <summary>
     /// 
     /// </summary>

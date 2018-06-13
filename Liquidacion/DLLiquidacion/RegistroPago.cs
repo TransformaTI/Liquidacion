@@ -24,6 +24,7 @@ namespace SigametLiquidacion
     private DataTable dtAfiliaciones = new DataTable();
     private DataTable dtProveedores = new DataTable();
     private DataTable dtTipoVale = new DataTable();
+    private DataTable dtPedidosLiqAnticipado = new DataTable();
 
    public DataTable ListaPedidos()
     {
@@ -32,7 +33,16 @@ namespace SigametLiquidacion
       return this.dtPedidos;
     }
 
-    public DataTable ListaBancos()
+
+    public DataTable PedidosLiquidacion(int Cliente)
+    {
+            this._datos.CargaPedidosLiquidacion(Cliente);
+            this.dtPedidosLiqAnticipado = this._datos.PedidosLiquidacion;
+            return this.dtPedidosLiqAnticipado;
+    }
+
+
+        public DataTable ListaBancos()
     {
       this._datos.CargaBancos();
       this.dtBancos = this._datos.Bancos;

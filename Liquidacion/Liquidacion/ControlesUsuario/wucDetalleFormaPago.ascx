@@ -11,6 +11,20 @@
 <script type="text/javascript">
     
 
+    function ValidaMontoSaldo()
+    {
+        var listBox = document.getElementById("<%= LstSaldos.ClientID%>");
+        var Monto = listBox.options[listBox.selectedIndex].text.split(",");
+
+        if (parseFloat(document.getElementById("<%= txtAntMonto.ClientID%>").value) > parseFloat(Monto[0].replace('$', '')))
+        {
+            alert('¡El Monto debe ser menor o igual al saldo seleccionado!');
+            document.getElementById("<%= txtAntMonto.ClientID%>").value = Monto[0].replace('$', '')
+            return false;
+        }        
+    }
+
+
      function RegistroPago() {
             javascript: __doPostBack('RegistroPago', '');
 
@@ -299,7 +313,7 @@
             </div>
         </td>
         <td>
-            <asp:TextBox ID="txtAntMonto" runat="server" Width="150px" CssClass="textboxcaptura" ReadOnly="True"></asp:TextBox>
+            <asp:TextBox ID="txtAntMonto" runat="server" Width="150px" CssClass="textboxcaptura" ReadOnly="False"></asp:TextBox>
             <cc2:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" TargetControlID="txtAntMonto" FilterType="Custom" ValidChars="0123456789./"></cc2:FilteredTextBoxExtender>
             <asp:RequiredFieldValidator ID="rfvAntMonto" runat="server"
                 ControlToValidate="txtAntMonto" Display="None"
@@ -329,7 +343,7 @@
     <tr>
         <td class="auto-style1"></td>
         <td>
-            <asp:ImageButton ID="btnAntAceptar" runat="server"
+            <asp:ImageButton ID="btnAntAceptar" runat="server" OnClientClick="return ValidaMontoSaldo()"
                 OnClick="btnAceptarAnticipo_Click" ImageUrl="~/Images/btnAceptar.png" 
                 SkinID="btnAceptar" ValidationGroup="GuardaAnt" />
         </td>

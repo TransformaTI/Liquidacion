@@ -25,8 +25,10 @@ namespace SigametLiquidacion
     private DataTable dtProveedores = new DataTable();
     private DataTable dtTipoVale = new DataTable();
     private DataTable dtPedidosLiqAnticipado = new DataTable();
+    private DataTable dtAltaTarjeta;
 
-   public DataTable ListaPedidos()
+
+        public DataTable ListaPedidos()
     {
       this._datos.CargaPedidos();
       this.dtPedidos = this._datos.Pedidos;
@@ -56,7 +58,9 @@ namespace SigametLiquidacion
       return this.dtCliente;
     }
 
-    public DataTable Promociones()
+
+
+        public DataTable Promociones()
     {
       this._datos.CargaPromociones();
       this.dtPromociones = this._datos.Promociones;
@@ -92,6 +96,13 @@ namespace SigametLiquidacion
             return this.dtTipoVale;
         }
 
+        public DataTable AltaTarjeta(string NombreModulo, string Parametro)
+        {
+            this._datos.ConsultaAltaTarjeta(NombreModulo, Parametro);
+            this.dtAltaTarjeta = this._datos.AltaTarjeta;
+            return this.dtAltaTarjeta;
+
+        }
 
         public void GuardaPagos(string Usuario, DataTable dtPedidos, DataTable dtPago, DataTable dtDetallePago, DataTable dtResumenLiquidacion, DataTable liqPagoAnticipado = null)
     {

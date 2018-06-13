@@ -23,6 +23,7 @@
         var Ruta = '<%=Session["Ruta"]%>';
         var sTipoPago = '';
         var RegistroCobro = '<%= wucDetalleFormaPago1.RegistroCobro%>';
+        var AltaTarjeta = '';
 
         
 
@@ -51,7 +52,7 @@
                 }
             }
 
-            else if (HiddenInputPCT != 'Si' && NumCte != '') {
+            else if (HiddenInputPCT != 'Si' && NumCte != '' && HiddenInputPCT != '' ) {
                 alert('No se encontraron pagos de TPV para el cliente, por favor verifique con el área de tarjetas de crédito');
             }
 
@@ -70,7 +71,7 @@
            }
             
 
-
+            ConsultaAltaTarjeta();
 
 
         });
@@ -185,7 +186,11 @@
 
             if ((document.getElementById('<%=txtClienteTarjeta.ClientID%>').value != "" || document.getElementById('<%=TxtCteAfiliacion.ClientID%>').value != "")
                 && (HiddenInput == '' || HiddenInput == 'SeleccionaPago' || HiddenInput == 'ConsultaTPV')) {
-                javascript: __doPostBack(FormaPago, '');
+                if ($("#<%=HiddenAltaDeTarjeta.ClientID%>")[0].value == 'true') // parametro AltaTarjeta
+                {
+                    javascript: __doPostBack(FormaPago, '');
+                }
+
             }
 
         }
@@ -369,6 +374,7 @@
                 }
             });
         }
+
         function OnSuccess(response) {
             var obj = JSON.parse(response.d);
             $.each(obj, function (key, value) {
@@ -381,16 +387,34 @@
                   $("#<%=txtValeNombre.ClientID%>")[0].value =  value.Nombre;
                 }
 
-
-
             });
-
-
-
 
         }
 
+        function ConsultaAltaTarjeta()
+        {
+              $.ajax({
+           type: "POST",
+           url: "FormaPago.aspx/ConsultaAltaTarjeta",
+           data: '{NombreModulo: "Liquidacion",Parametro:"AltaDeTarjeta"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: OnSuccessAltaTarjeta,
+                failure: function (response) {
+                    alert(response.d);
+                }
+            });
+        }
 
+        
+        function OnSuccessAltaTarjeta(response) {
+            var obj = JSON.parse(response.d);
+            $.each(obj, function (key, value) {                
+                AltaTarjeta = value.VALOR == '1' ? 'true' : 'false';
+               $("#<%=HiddenAltaDeTarjeta.ClientID%>")[0].value =  AltaTarjeta; 
+            });
+
+        }
     </script>
 
     <script src="Scripts/jsUpdateProgress.js" type="text/javascript"></script>
@@ -410,6 +434,8 @@
                 <asp:HiddenField ID="HiddenInput" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenInputPCT" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenInputNumPagos" runat="server" Value="" />
+                <asp:HiddenField ID="HiddenAltaDeTarjeta" runat="server" Value="" />
+
                 <div style="text-align: left; height: 650px; width: 1000px; vertical-align: top;">
                     <table style="vertical-align: top; height: 650px;">
                         <tr>

@@ -22,8 +22,8 @@ namespace SigametLiquidacion
         private DataTable dtAfiliaciones;
         private DataTable dtProveedores;
         private DataTable dtTipoVale;
-        private DataTable dtPedidosLiq; 
-
+        private DataTable dtPedidosLiq;
+        private DataTable dtAltaTarjeta;
         #endregion
         #region propiedades
         public DataTable Pedidos
@@ -111,6 +111,14 @@ namespace SigametLiquidacion
 
         }
 
+        public DataTable AltaTarjeta
+        {
+            get
+            {
+                return this.dtAltaTarjeta;
+            }
+        }
+
         #endregion
 
 
@@ -173,7 +181,16 @@ namespace SigametLiquidacion
             this._dataAccess.LoadData(this.dtTipoVale, "spLiqConsultaValeTipo", CommandType.StoredProcedure, (SqlParameter[])null, true);
         }
 
-
+        public void ConsultaAltaTarjeta(string NombreModulo, string Parametro)
+        {
+            SqlParameter[] sqlParameterArray = new SqlParameter[2]
+                {
+                     new SqlParameter("@NombreModulo",NombreModulo),
+                     new SqlParameter("@Parametro",Parametro)
+                };
+            this.dtAltaTarjeta = new DataTable();
+            this._dataAccess.LoadData(this.dtAltaTarjeta, "spObtieneParametroPorModuloliq", CommandType.StoredProcedure, sqlParameterArray, true);
+        }
 
 
 

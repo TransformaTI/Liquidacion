@@ -57,12 +57,17 @@ public partial class FormaPago : System.Web.UI.Page
 
             if (Request.Form["__EVENTTARGET"] == "ConsultaTPV")
             {
-                HiddenInput.Value = "ConsultaTPV";
-                if (txtClienteTarjeta.Text != string.Empty)
+                LimpiarCampos("tarjeta");
+                if (HiddenAltaDeTarjeta.Value=="true")
                 {
-                    LimpiarCampos("tarjeta");
-                    ConsultarCargoTarjeta(int.Parse(txtClienteTarjeta.Text), "tarjeta", int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
+                    
+                    HiddenInput.Value = "ConsultaTPV";
+                    if (txtClienteTarjeta.Text != string.Empty)
+                    {
+                        
+                        ConsultarCargoTarjeta(int.Parse(txtClienteTarjeta.Text), "tarjeta", int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
 
+                    }
                 }
             }
 
@@ -1196,13 +1201,25 @@ public partial class FormaPago : System.Web.UI.Page
             dt = RegPago.DatosCliente(int.Parse(NumCte));
 
         }
-
         return DataTableToJSONWithJavaScriptSerializer(dt);
-
-
     }
 
+    /// <summary>
+    /// Devuele Valor del de un paarametro
+    /// </summary>
+    /// <param name="NombreModulo"></param>
+    /// <param name="Parametro"></param>
+    /// <returns></returns>
+    [System.Web.Services.WebMethod]
+    public  static string ConsultaAltaTarjeta(string NombreModulo, string Parametro)
+    {
+        DataTable dt = null;
 
+            RegistroPago RegPago = new RegistroPago();
+        dt = RegPago.AltaTarjeta(NombreModulo, Parametro);
+        return DataTableToJSONWithJavaScriptSerializer(dt);
+
+    }
 
     public static string DataTableToJSONWithJavaScriptSerializer(DataTable table)
     {

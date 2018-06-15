@@ -48,6 +48,40 @@ namespace SigametLiquidacion
             }
             return dataTable;
         }
+
+        public string obtenURLGateway(string usuario)
+        {
+            string url = "";
+            SqlParameter[] sqlParameterArray = new SqlParameter[3]
+            {
+                new SqlParameter("@usuario", (object) usuario),
+                new SqlParameter("@modulo", (object) 30),
+                new SqlParameter("@parametro", (object) "URLGateway")
+            };
+
+            try
+            {
+                SqlDataReader sqlDataReader = this._dataAccess.LoadData("spObtieneParametro", CommandType.StoredProcedure, sqlParameterArray);
+                this._dataAccess.OpenConnection();
+                if (sqlDataReader.Read())
+                    url = (string)sqlDataReader["VALOR"];
+                sqlDataReader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this._dataAccess.CloseConnection();
+            }
+        
+
+
+            return url;
+            
+        }
+        
         
         public bool ClienteLiquidado(short AñoAtt, int Folio, int Cliente)
         {

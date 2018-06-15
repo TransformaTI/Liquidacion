@@ -15,7 +15,23 @@ namespace SigametLiquidacion
   [Serializable]
   internal class DatosFolio : Datos
   {
-    public DatosFolio(short AñoAtt, int Folio)
+
+    private string _usuario;
+
+        public string Usuario
+        {
+            get
+            {
+                return _usuario;
+            }
+
+            set
+            {
+                _usuario = value;
+            }
+        }
+
+        public DatosFolio(short AñoAtt, int Folio)
     {
       this._AñoAtt = AñoAtt;
       this._Folio = Folio;
@@ -28,7 +44,7 @@ namespace SigametLiquidacion
 
     public RTGMCore.DireccionEntrega obtenDireccionEntrega(int Cliente)
     {
-        RTGMCore.DireccionEntrega objDireccionEntega;
+        RTGMCore.DireccionEntrega objDireccionEntega = new RTGMCore.DireccionEntrega();
         try
         {
 
@@ -45,7 +61,7 @@ namespace SigametLiquidacion
         }
         catch (Exception ex)
         {
-            throw ex;
+           // throw ex;
         }
         return objDireccionEntega;
 
@@ -59,7 +75,6 @@ namespace SigametLiquidacion
         new SqlParameter("@Folio", (object) Folio)
       };
 
-      RTGMCore.DireccionEntrega objDireccionEntega; 
       try
       {
         this._dataAccess.OpenConnection();
@@ -70,7 +85,13 @@ namespace SigametLiquidacion
           ++num;
           DataRow row = ListaPedidos.NewRow();
 
-          objDireccionEntega = obtenDireccionEntrega(int.Parse(sqlDataReader["Cliente"].ToString()));
+          
+            
+          Cliente clienteTemp = new Cliente(int.Parse(sqlDataReader["Cliente"].ToString()), 1, _usuario) ;
+          clienteTemp.ConsultaDatosCliente();
+
+
+//          objDireccionEntega = obtenDireccionEntrega();
 
           row["ID"] = (object) num;
           row["Cliente"] = sqlDataReader["Cliente"];
@@ -78,7 +99,7 @@ namespace SigametLiquidacion
           row["AñoPed"] = sqlDataReader["AñoPed"];
           row["Pedido"] = sqlDataReader["Pedido"];
           //row["Nombre"] = sqlDataReader["Nombre"];
-          row["Nombre"] = objDireccionEntega.Nombre;
+          row["Nombre"] = clienteTemp.Nombre;
           row["PedidoReferencia"] = sqlDataReader["PedidoReferencia"];
           row["Litros"] = sqlDataReader["Litros"];
           row["Precio"] = sqlDataReader["Precio"];

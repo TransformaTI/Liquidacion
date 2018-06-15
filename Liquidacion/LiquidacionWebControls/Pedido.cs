@@ -1294,7 +1294,7 @@ namespace SigametLiquidacion.WebControls
                 this.clearInfo();
                 this.txtNumeroRemision.Text = text;
             }
-            this._cliente = new SigametLiquidacion.Cliente(Cliente, this._claveCreditoAutorizado);
+            this._cliente = new SigametLiquidacion.Cliente(Cliente, this._claveCreditoAutorizado, _usuario);
 
             this._cliente.FSuministro = FechaSuministro;//21-07-15 Consulta del precio de acuerdo a la zona económica del cliente
 

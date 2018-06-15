@@ -286,14 +286,14 @@ public partial class FormaPago : System.Web.UI.Page
             ddAfiliacion.Items.Insert(0, new ListItem("- Seleccione -", "0"));
             ddAfiliacion.SelectedIndex = 0;
 
-
+/*
             ddlProveedor.DataSource = dtProveedores;
             ddlProveedor.DataTextField = "NombreProveedor";
             ddlProveedor.DataValueField = "ValeProveedor";
             ddlProveedor.DataBind();
             ddlProveedor.Items.Insert(0, new ListItem("- Seleccione -", "0"));
             ddlProveedor.SelectedIndex = 0;
-
+            */
 
             ddlTipoVale.DataSource = dtTipoVale;
             ddlTipoVale.DataTextField = "Descripcion";
@@ -688,7 +688,7 @@ public partial class FormaPago : System.Web.UI.Page
             ds.Tables["Pedidos"].Clear();
             ds.Tables["Pedidos"].Merge((DataTable)(Session["dtPedidos"]));
             ds.Tables["Cobro"].Clear();
-            ds.Tables["CobroPedido"].Clear();
+            ds.Tables[""].Clear();
             Response.Redirect("Liquidacion.aspx");
         }
         catch (Exception ex)

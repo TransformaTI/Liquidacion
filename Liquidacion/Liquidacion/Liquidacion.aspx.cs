@@ -137,6 +137,8 @@ public partial class Liquidacion : System.Web.UI.Page
                 AutoTanqueTurno1.AltaInicioLiquidacionFolio();
             }
 
+           
+         
             AutoTanqueTurno1.CargarListaPedidos();
 
             if (!(AutoTanqueTurno1.LiquidacionIniciada(ref _usuario,
@@ -505,6 +507,8 @@ public partial class Liquidacion : System.Web.UI.Page
         //{
         //    btnPagos.Attributes.Add("onclick", "return confirm('La liquidacion tiene diferencia con el totalizador. ¿Desea Continuar?')");
         //}
+        //string hola;
+        //hola = Convert.ToString( Session["Usuario"]);
 
         if (_conciliacion)
         {

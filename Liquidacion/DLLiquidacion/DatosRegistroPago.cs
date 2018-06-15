@@ -22,6 +22,7 @@ namespace SigametLiquidacion
     private DataTable dtAfiliaciones;
     private DataTable dtProveedores;
     private DataTable dtTipoVale;
+    private string _usuario; 
 
         #endregion
         #region propiedades
@@ -101,6 +102,19 @@ namespace SigametLiquidacion
 
         }
 
+        public string Usuario
+        {
+            get
+            {
+                return _usuario;
+            }
+
+            set
+            {
+                _usuario = value;
+            }
+        }
+
         #endregion
 
 
@@ -121,7 +135,7 @@ namespace SigametLiquidacion
       this.dtPromociones = new DataTable();
       this._dataAccess.LoadData(this.dtBancos, "spLIQ2ConsultaPromocionesVale", CommandType.StoredProcedure, (SqlParameter[]) null, true);
     }
-
+   //aqui
     public void CargaCliente(int Cliente)
     {
       SqlParameter[] sqlParameterArray = new SqlParameter[1]
@@ -146,7 +160,17 @@ namespace SigametLiquidacion
          };
             this.dtPagosConTarjeta = new DataTable();
             this._dataAccess.LoadData(this.dtPagosConTarjeta, "spCBConsultarCargoTarjetaCliente", CommandType.StoredProcedure, sqlParameterArray, true);
-     }
+            this.dtPagosConTarjeta.Columns.Add("NombreCliente", typeof(String));
+
+            Cliente _cliente = new SigametLiquidacion.Cliente(NumCliente, 0, _usuario );
+            _cliente.ConsultaDatosCliente();
+
+            foreach (DataRow row in dtPagosConTarjeta.Rows)
+            {
+                row["NombreCliente"] = _cliente.Nombre;
+            }
+
+        }
 
         public void CargaProveedores()
         {
@@ -161,12 +185,9 @@ namespace SigametLiquidacion
         {
             this.dtTipoVale = new DataTable();
             this._dataAccess.LoadData(this.dtTipoVale, "spLiqConsultaValeTipo", CommandType.StoredProcedure, (SqlParameter[])null, true);
+
+
         }
-
-
-
-
-
         public void CargaAfiliaciones(int Ruta)
         {
             SqlParameter[] sqlParameterArray = new SqlParameter[1]
@@ -177,10 +198,6 @@ namespace SigametLiquidacion
             this.dtAfiliaciones = new DataTable();
             this._dataAccess.LoadData(this.dtAfiliaciones, "spLiqConsultaAfiliacion", CommandType.StoredProcedure, sqlParameterArray, true);
         }
-
-
-
-
 
 
         private void CobroEnEfectivo(string Usuario, DataTable dtPedidos, ref DataTable dtPago, ref DataTable dtDetallePago)

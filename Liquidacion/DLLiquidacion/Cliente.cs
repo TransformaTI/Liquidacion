@@ -4,6 +4,7 @@
 // MVID: 7D22AA6E-AE05-4F4C-8F60-FC6A8FDBE6F8
 // Assembly location: C:\Proyectos\SigametLiquidacion\DLLiquidacion.dll
 
+using RTGMGateway;
 using System;
 using System.Data;
 
@@ -36,7 +37,9 @@ namespace SigametLiquidacion
         private DataTable dtDatosCliente;
 
         private decimal _precioCliente;
-        
+        private string _usuario;
+        private string _urlGateway;
+         
         public bool Encontrado
         {
             get
@@ -218,58 +221,151 @@ namespace SigametLiquidacion
             }
         }
                 
-        public Cliente(int Cliente, byte ClaveCreditoAutorizado)
+        public Cliente(int Cliente, byte ClaveCreditoAutorizado, string usuario)
         {
             this._cliente = Cliente;
             this._claveCreditoAutorizado = ClaveCreditoAutorizado;
+           this._usuario = usuario;
         }
         
         public void ConsultaDatosCliente()
         {
-            DatosCliente datosCliente = new DatosCliente(this._cliente, this._fSuministro);
+            //DatosCliente datosCliente = new DatosCliente(this._cliente, this._fSuministro);
+            //try
+            //{
+            //    this.dtDatosCliente = datosCliente.ConsultaCliente();
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw ex;
+            //}
+            this.asignacionDatosCliente(this.dtDatosCliente);
+        }
+
+        public RTGMCore.DireccionEntrega obtenDireccionEntrega(int Cliente)
+        {
+            RTGMCore.DireccionEntrega objDireccionEntega = new RTGMCore.DireccionEntrega();
             try
             {
-                this.dtDatosCliente = datosCliente.ConsultaCliente();
+                RTGMGateway.RTGMGateway objGateway = new RTGMGateway.RTGMGateway();
+                objGateway.URLServicio = _urlGateway;
+                SolicitudGateway objRequest = new SolicitudGateway
+                {
+                    Fuente = RTGMCore.Fuente.Sigamet,
+                    IDCliente = Cliente,
+
+                };
+                objDireccionEntega = objGateway.buscarDireccionEntrega(objRequest);
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                objDireccionEntega.Nombre = "Error "+_usuario;
+            }
+            return objDireccionEntega;
+
+        }
+
+        public RTGMCore.CondicionesCredito obtenCondicionesCredito(int Cliente)
+        {
+            RTGMCore.CondicionesCredito objCondicionCredito;
+            try
+            {
+
+                //string hola;
+                //hola = Convert.ToString(Session["Usuario"]);
+
+                RTGMGateway.RTGMGateway objGateway = new RTGMGateway.RTGMGateway();
+                objGateway.URLServicio = _urlGateway;
+                SolicitudGateway objRequest = new SolicitudGateway
+                {
+                    Fuente = RTGMCore.Fuente.Sigamet,
+                    IDCliente = Cliente,
+
+                };
+                objCondicionCredito = objGateway.buscarCondicionesCredito(objRequest);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            this.asignacionDatosCliente(this.dtDatosCliente);
+            return objCondicionCredito;
+
         }
-        
+
+
+
         private void asignacionDatosCliente(DataTable DatosCliente)
         {
-            if (DatosCliente != null && DatosCliente.Rows.Count > 0)
+            DatosCliente datosCliente = new DatosCliente(this._cliente, this._fSuministro);
+            try
             {
-                foreach (DataRow dataRow in DatosCliente.Rows)
-                {
-                    this._encontrado = true;
-                    this._nombre = Convert.ToString(dataRow["Nombre"]);
-                    this._direccion = Convert.ToString(dataRow["DireccionCompleta"]);
-                    this._celula = Convert.ToInt16(dataRow["Celula"]);
-                    this._ruta = Convert.ToInt16(dataRow["Ruta"]);
-                    this._tipoCartera = Convert.ToByte(dataRow["Cartera"]);
-                    this._descripcionTipoCartera = Convert.ToString(dataRow["DescripcionCartera"]);
-                    this._limiteCredito = Convert.ToDecimal(dataRow["MaxImporteCredito"]);
-                    this._saldo = Convert.ToDecimal(dataRow["Saldo"]);
-                    this._limiteDisponible = this._limiteCredito - this._saldo - this._saldoClienteMovimiento;
-                    this._tipoCreditoCliente = Convert.ToByte(dataRow["TipoCreditoCliente"]);
-                    this._tipoCarteraCliente = Convert.ToString(dataRow["ClasificacionCartera"]);
-                    this._creditoAutorizado = (int)this._tipoCartera == (int)this._claveCreditoAutorizado;
-                    this._limiteCreditoExcedido = !(this._limiteDisponible > new Decimal(0));
-                    this._descuento = Convert.ToDecimal(dataRow["Descuento"]);
-                    this._descripcionDescuento = Convert.ToString(dataRow["TipoDescuento"]);
+                _urlGateway = datosCliente.obtenURLGateway(_usuario);
+                RTGMCore.DireccionEntrega objDireccionEntega = obtenDireccionEntrega(this._cliente);
+                RTGMCore.CondicionesCredito objCondicionCredito = obtenCondicionesCredito(this._cliente);
 
-                    this._zonaEconomica = dataRow["ZonaEconomica"] == DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dataRow["ZonaEconomica"]);//Se asignará automáticamente la zona económica 0 para clientes sin zona económica.
+                this._encontrado = true;
+                this._nombre = objDireccionEntega.Nombre;
+                this._direccion = objDireccionEntega.DireccionCompleta;
+               // this._celula = objDireccionEntega. Convert.ToInt16(dataRow["Celula"]);
+                this._ruta =  short.Parse(objDireccionEntega.Ruta.IDRuta.ToString());
+                //this._tipoCartera = objCondicionCredito. ;
+                this._descripcionTipoCartera = objCondicionCredito.CarteraDescripcion;
+                this._limiteCredito = objCondicionCredito.LimiteCredito.Value;
+                this._saldo = objCondicionCredito.Saldo.Value;
+                this._limiteDisponible = this._limiteCredito - this._saldo - this._saldoClienteMovimiento;
+               // this._tipoCreditoCliente = Convert.ToByte(dataRow["TipoCreditoCliente"]);
+                //this._tipoCarteraCliente = Convert.ToString(dataRow["ClasificacionCartera"]);
+                this._creditoAutorizado = (int)this._tipoCartera == (int)this._claveCreditoAutorizado;
+                this._limiteCreditoExcedido = !(this._limiteDisponible > new Decimal(0));
+                this._descuento = objDireccionEntega.Descuentos[0].ImporteDescuento;
+                this._descripcionDescuento = objDireccionEntega.Descuentos[0].TipoDescuento;
 
-                    this._precioCliente = dataRow["Precio"] == DBNull.Value ? Convert.ToDecimal(0) : Convert.ToDecimal(dataRow["Precio"]);//Para consultar el precio del cliente de acuerdo a la zona económica.
-                }
+                this._zonaEconomica = Convert.ToByte(objDireccionEntega.ZonaEconomica.IDZonaEconomomica);
+
+                this._precioCliente = objDireccionEntega.PrecioPorDefecto.ValorPrecio.Value;
+
+
             }
-            else
+            catch (Exception ex)
             {
-                this._encontrado = false;
+                this._nombre ="Error "+_usuario;
+                this._encontrado= true;
+
+                //this._encontrado = false;
             }
+
+
+            //if (DatosCliente != null && DatosCliente.Rows.Count > 0)
+            //{
+            //    foreach (DataRow dataRow in DatosCliente.Rows)
+            //    {
+            //        this._encontrado = true;
+            //        this._nombre = Convert.ToString(dataRow["Nombre"]);
+            //        this._direccion = Convert.ToString(dataRow["DireccionCompleta"]);
+            //        this._celula = Convert.ToInt16(dataRow["Celula"]);
+            //        this._ruta = Convert.ToInt16(dataRow["Ruta"]);
+            //        this._tipoCartera = Convert.ToByte(dataRow["Cartera"]);
+            //        this._descripcionTipoCartera = Convert.ToString(dataRow["DescripcionCartera"]);
+            //        this._limiteCredito = Convert.ToDecimal(dataRow["MaxImporteCredito"]);
+            //        this._saldo = Convert.ToDecimal(dataRow["Saldo"]);
+            //        this._limiteDisponible = this._limiteCredito - this._saldo - this._saldoClienteMovimiento;
+            //        this._tipoCreditoCliente = Convert.ToByte(dataRow["TipoCreditoCliente"]);
+            //        this._tipoCarteraCliente = Convert.ToString(dataRow["ClasificacionCartera"]);
+            //        this._creditoAutorizado = (int)this._tipoCartera == (int)this._claveCreditoAutorizado;
+            //        this._limiteCreditoExcedido = !(this._limiteDisponible > new Decimal(0));
+            //        this._descuento = Convert.ToDecimal(dataRow["Descuento"]);
+            //        this._descripcionDescuento = Convert.ToString(dataRow["TipoDescuento"]);
+
+            //        this._zonaEconomica = dataRow["ZonaEconomica"] == DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dataRow["ZonaEconomica"]);//Se asignará automáticamente la zona económica 0 para clientes sin zona económica.
+
+            //        this._precioCliente = dataRow["Precio"] == DBNull.Value ? Convert.ToDecimal(0) : Convert.ToDecimal(dataRow["Precio"]);//Para consultar el precio del cliente de acuerdo a la zona económica.
+            //    }
+            //}
+            //else
+            //{
+            //    this._encontrado = false;
+            //}
         }
         
         public bool ClienteLiquidado(short AñoAtt, int Folio, int Cliente)

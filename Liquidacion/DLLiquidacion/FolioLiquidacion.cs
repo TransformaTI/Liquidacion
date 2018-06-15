@@ -344,6 +344,7 @@ namespace SigametLiquidacion
         
         public void ConsultaPedidos()
         {
+            this._datosFolio.Usuario = _usuario;
             this._datosFolio.ConsultaListaPedidos(this._añoAtt, this._folio, this._dtListaPedido);
             if (!Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("DescuentoProntoPago"))))
             {            
@@ -351,7 +352,7 @@ namespace SigametLiquidacion
             }
             foreach (DataRow dataRow in (InternalDataCollectionBase) this._dtListaPedido.Rows)
             {
-                Cliente cliente = new Cliente(Convert.ToInt32(dataRow["Cliente"]), (byte) 7);
+                Cliente cliente = new Cliente(Convert.ToInt32(dataRow["Cliente"]), (byte) 7, _usuario);
                 cliente.ConsultaDatosCliente();
                 dataRow["Descuento"] = !cliente.Encontrado ? (object) 0 : (object) (cliente.Descuento * Convert.ToDecimal(dataRow["Litros"]));
                 if ((int) Convert.ToInt16(this._parametros.ValorParametro("LiqPrecioNeto")) == 0)
@@ -486,7 +487,7 @@ namespace SigametLiquidacion
                 string FormaPago = (string) dataRow["FormaPago"];
                 Decimal Precio = (Decimal) dataRow["Precio"];
                 Decimal TotalPedido = (Decimal) dataRow["Importe"];
-                Cliente Cliente2 = new Cliente(Cliente1, (byte) 7);
+                Cliente Cliente2 = new Cliente(Cliente1, (byte) 7, _usuario);
 
                 Cliente2.FSuministro = Fecha;//21-07-15 Consulta de precio de acuerdo a la zona económica del cliente.
 

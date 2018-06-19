@@ -42,30 +42,30 @@ namespace SigametLiquidacion
       return this.ConsultaDatosPorFolio("spLiq2ConsultaDatosFolio", CommandType.StoredProcedure);
     }
 
-    public RTGMCore.DireccionEntrega obtenDireccionEntrega(int Cliente)
-    {
-        RTGMCore.DireccionEntrega objDireccionEntega = new RTGMCore.DireccionEntrega();
-        try
-        {
+    //public RTGMCore.DireccionEntrega obtenDireccionEntrega(int Cliente)
+    //{
+    //    RTGMCore.DireccionEntrega objDireccionEntega = new RTGMCore.DireccionEntrega();
+    //    try
+    //    {
 
 
-            RTGMGateway.RTGMGateway objGateway = new RTGMGateway.RTGMGateway();
-            objGateway.URLServicio = @"http://192.168.1.30:88/GasMetropolitanoRuntimeService.svc";
-            SolicitudGateway objRequest = new SolicitudGateway
-            {
-                Fuente = RTGMCore.Fuente.Sigamet,
-                IDCliente = Cliente,
+    //        RTGMGateway.RTGMGateway objGateway = new RTGMGateway.RTGMGateway();
+    //        objGateway.URLServicio = @"http://192.168.1.30:88/GasMetropolitanoRuntimeService.svc";
+    //        SolicitudGateway objRequest = new SolicitudGateway
+    //        {
+    //            Fuente = RTGMCore.Fuente.Sigamet,
+    //            IDCliente = Cliente,
 
-            };
-            objDireccionEntega = objGateway.buscarDireccionEntrega(objRequest);
-        }
-        catch (Exception ex)
-        {
-           // throw ex;
-        }
-        return objDireccionEntega;
+    //        };
+    //        objDireccionEntega = objGateway.buscarDireccionEntrega(objRequest);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //       // throw ex;
+    //    }
+    //    return objDireccionEntega;
 
-    }
+    //}
 
         public void ConsultaListaPedidos(short AñoAtt, int Folio, DataTable ListaPedidos)
     {
@@ -80,6 +80,7 @@ namespace SigametLiquidacion
         this._dataAccess.OpenConnection();
         SqlDataReader sqlDataReader = this._dataAccess.LoadData("spLIQ2ConsultaPedidosFolio", CommandType.StoredProcedure, sqlParameterArray);
         int num = 0;
+               
         while (sqlDataReader.Read())
         {
           ++num;

@@ -253,6 +253,7 @@ namespace SigametLiquidacion
                 {
                     Fuente = RTGMCore.Fuente.Sigamet,
                     IDCliente = Cliente,
+                    IDEmpresa=1
 
                 };
                 objDireccionEntega = objGateway.buscarDireccionEntrega(objRequest);
@@ -281,6 +282,7 @@ namespace SigametLiquidacion
                 {
                     Fuente = RTGMCore.Fuente.Sigamet,
                     IDCliente = Cliente,
+                    IDEmpresa=1
 
                 };
                 objCondicionCredito = objGateway.buscarCondicionesCredito(objRequest);
@@ -307,19 +309,38 @@ namespace SigametLiquidacion
                 this._encontrado = true;
                 this._nombre = objDireccionEntega.Nombre;
                 this._direccion = objDireccionEntega.DireccionCompleta;
-               // this._celula = objDireccionEntega. Convert.ToInt16(dataRow["Celula"]);
+                this._celula = Convert.ToInt16(objDireccionEntega.ZonaSuministro.IDZona);
                 this._ruta =  short.Parse(objDireccionEntega.Ruta.IDRuta.ToString());
-                //this._tipoCartera = objCondicionCredito. ;
+                this._tipoCartera = Convert.ToByte(objDireccionEntega.CondicionesCredito.IDCartera);                                   
+
                 this._descripcionTipoCartera = objCondicionCredito.CarteraDescripcion;
                 this._limiteCredito = objCondicionCredito.LimiteCredito.Value;
                 this._saldo = objCondicionCredito.Saldo.Value;
                 this._limiteDisponible = this._limiteCredito - this._saldo - this._saldoClienteMovimiento;
-               // this._tipoCreditoCliente = Convert.ToByte(dataRow["TipoCreditoCliente"]);
-                //this._tipoCarteraCliente = Convert.ToString(dataRow["ClasificacionCartera"]);
+                this._tipoCreditoCliente = Convert.ToByte(objDireccionEntega.CondicionesCredito.IDClasificacionCredito);
+
+                this._tipoCarteraCliente = objDireccionEntega.CondicionesCredito.CarteraDescripcion;
                 this._creditoAutorizado = (int)this._tipoCartera == (int)this._claveCreditoAutorizado;
                 this._limiteCreditoExcedido = !(this._limiteDisponible > new Decimal(0));
-                this._descuento = objDireccionEntega.Descuentos[0].ImporteDescuento;
-                this._descripcionDescuento = objDireccionEntega.Descuentos[0].TipoDescuento;
+                
+                try
+                {
+                    this._descuento = objDireccionEntega.Descuentos[0].ImporteDescuento;
+                }
+                catch
+                {
+                    this._descuento = 0;
+                }
+
+                try
+                {
+                    this._descripcionDescuento = objDireccionEntega.Descuentos[0].TipoDescuento;
+                }
+                catch
+                {
+                    this._descripcionDescuento = "";
+                }
+                
 
                 this._zonaEconomica = Convert.ToByte(objDireccionEntega.ZonaEconomica.IDZonaEconomomica);
 
@@ -329,7 +350,7 @@ namespace SigametLiquidacion
             }
             catch (Exception ex)
             {
-                this._nombre ="Error "+_usuario;
+                this._nombre ="Error "+ex.Message;
                 this._encontrado= true;
 
                 //this._encontrado = false;

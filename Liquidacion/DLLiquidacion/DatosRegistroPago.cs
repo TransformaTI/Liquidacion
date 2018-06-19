@@ -138,18 +138,57 @@ namespace SigametLiquidacion
    //aqui
     public void CargaCliente(int Cliente)
     {
-      SqlParameter[] sqlParameterArray = new SqlParameter[1]
-      {
-        new SqlParameter("@Cliente", (object) Cliente)
-      };
+      //SqlParameter[] sqlParameterArray = new SqlParameter[1]
+      //{
+      //  new SqlParameter("@Cliente", (object) Cliente)
+      //};
       this.dtCliente = new DataTable();
-      this._dataAccess.LoadData(this.dtCliente, "spLIQ2ConsultaDatosCliente", CommandType.StoredProcedure, sqlParameterArray, true);
-    }
+      //this._dataAccess.LoadData(this.dtCliente, "spLIQ2ConsultaDatosCliente", CommandType.StoredProcedure, sqlParameterArray, true);
+        this.dtCliente = new DataTable();
+        this.dtCliente.Columns.Add("Cliente", typeof(Int32));
+        this.dtCliente.Columns.Add("Nombre", typeof(string));
+        this.dtCliente.Columns.Add("DireccionCompleta", typeof(string));
+        this.dtCliente.Columns.Add("Celula", typeof(Int32));
+        this.dtCliente.Columns.Add("Ruta", typeof(Int32));
+        this.dtCliente.Columns.Add("MaxImporteCredito", typeof(decimal));
+        this.dtCliente.Columns.Add("Saldo", typeof(decimal));
+        this.dtCliente.Columns.Add("Cartera", typeof(byte));
+        this.dtCliente.Columns.Add("DescripcionCartera", typeof(String));
+        this.dtCliente.Columns.Add("TipoCreditoCliente", typeof(byte));
+        this.dtCliente.Columns.Add("ClasificacionCartera", typeof(string));
+        this.dtCliente.Columns.Add("Descuento", typeof(decimal));
+        this.dtCliente.Columns.Add("TipoDescuento", typeof(string));
+        this.dtCliente.Columns.Add("ZonaEconomica", typeof(Int32));
+        this.dtCliente.Columns.Add("Precio", typeof(Decimal));
+        
+
+        Cliente clienteTemp = new SigametLiquidacion.Cliente(Cliente, 0, _usuario);
+
+        DataRow row = this.dtCliente.NewRow();
+
+        row["Cliente"] = clienteTemp.NumeroCliente;
+        row["Nombre"] = clienteTemp.Nombre;
+        row["DireccionCompleta"] = clienteTemp.Direccion;
+        row["Celula"] = clienteTemp.Celula;
+        row["Ruta"] = clienteTemp.Ruta;
+        row["MaxImporteCredito"] = clienteTemp.LimiteCredito;
+        row["Saldo"] = clienteTemp.Saldo;
+        row["Cartera"] = clienteTemp.TipoCartera;
+        row["DescripcionCartera"] = clienteTemp.DescripcionTipoCartera;
+        row["TipoCreditoCliente"] = clienteTemp.TipoCreditoCliente;
+        row["ClasificacionCartera"] = clienteTemp.ClasificacionCartera;
+        row["Descuento"] = clienteTemp.Descuento;
+        row["TipoDescuento"] = clienteTemp.DescripcionDescuento;
+        row["ZonaEconomica"] = clienteTemp.ZonaEconomica;
+        row["Precio"] = clienteTemp.PrecioCliente;
+
+        this.dtCliente.Rows.Add(row);
+        }
         /// <summary>
         /// Devuelve datatable con pagos de tarjeta del cliente
         /// </summary>
         /// <param name="NumCliente"></param>
-    public void CargaPagosConTarjeta(int NumCliente,int Ruta,int Autotanque)
+        public void CargaPagosConTarjeta(int NumCliente,int Ruta,int Autotanque)
     {
          SqlParameter[] sqlParameterArray = new SqlParameter[3]
          {

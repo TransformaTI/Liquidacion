@@ -35,7 +35,7 @@ public partial class FormaPago : System.Web.UI.Page
     DataTable dtTipoVale;
 
 
-    
+
 
     string pagoActivo;
     #endregion
@@ -1029,6 +1029,8 @@ public partial class FormaPago : System.Web.UI.Page
         dtDatosControlUsuario.Columns.Add("Observacion", typeof(string));
         dtDatosControlUsuario.Columns.Add("Anio", typeof(string));
         dtDatosControlUsuario.Columns.Add("Folio", typeof(string));
+
+        rp.Usuario = Convert.ToString(Session["Usuario"]); 
 
         if (sFormaPago == "tarjeta")
         dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text),Ruta,Autotanque);

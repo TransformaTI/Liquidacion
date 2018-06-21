@@ -517,6 +517,7 @@ public partial class Liquidacion : System.Web.UI.Page
                 if (!(AutoTanqueTurno1.SuministrosPorFormaDePago("CONTADO").Rows.Count > 0))
                 {
                     DatosRegistroPago _datos = new DatosRegistroPago();
+                    _datos.Usuario = Convert.ToString(Session["Usuario"]);
                     _datos.ActualizaTerminado(AutoTanqueTurno1.ResumenLiquidacionFinal(Convert.ToString(Session["Usuario"])));
                     btnPagos.Visible = false;
                     imbReporte_Click(sender, e);

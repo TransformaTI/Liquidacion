@@ -11,8 +11,8 @@ C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\bin\Debug\DLLiquidacio
 C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\bin\Debug\DocumentosBSR.dll
 C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\bin\Debug\SGDAC.dll
 C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\bin\Debug\stdole.dll
+C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.csprojAssemblyReference.cache
 C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.csproj.CoreCompileInputs.cache
 C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.csproj.CopyComplete
 C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.dll
 C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.pdb
-C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.csprojAssemblyReference.cache

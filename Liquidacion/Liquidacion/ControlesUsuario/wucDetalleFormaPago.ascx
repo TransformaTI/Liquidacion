@@ -118,8 +118,8 @@
                 <asp:TextBox ID="txtFecha" Width="150px" runat="server" Text=""
                     CssClass="calendarTextBox" ></asp:TextBox>
             </div>
-            <div style="float: left; vertical-align: middle">
-                <asp:ImageButton runat="Server" ID="btnCalFAsignacion" AlternateText="Click to show calendar" />
+            <div style="float: left; vertical-align: middle; height: 16px; width: 30px;">
+                <asp:ImageButton runat="Server" ID="btnCalFAsignacion" AlternateText="Click to show calendar" ImageUrl="~/Imagenes/Calendar.png" Height="16px" />
             </div>
             <cc2:CalendarExtender ID="txtFecha_CalendarExtender" runat="server"
                 TargetControlID="txtFecha" Format="dd/MM/yyyy" PopupButtonID="btnCalFAsignacion">
@@ -180,7 +180,7 @@
             </div>
         </td>
         <td>
-            <asp:DropDownList ID="ddlBanco" Width="200px" runat="server" Font-Size="Smaller">
+            <asp:DropDownList ID="ddlBanco" Width="200px" runat="server"  Height="25">
                 <asp:ListItem>Promoción 1</asp:ListItem>
                 <asp:ListItem>Promoción 2</asp:ListItem>
                 <asp:ListItem>Promoción 3</asp:ListItem>

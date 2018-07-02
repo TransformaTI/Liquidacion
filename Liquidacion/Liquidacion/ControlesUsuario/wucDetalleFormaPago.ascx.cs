@@ -144,6 +144,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
 
             if (!Page.IsPostBack)
         {
+            LlenaDropDowns();
             this.btnCalFAsignacion.ImageUrl = this.ImgCal;
             //this.btnbAceptar.ImageUrl = this.ImgBoton;
             //this.btnAntAceptar.ImageUrl = this.ImgBoton;
@@ -156,7 +157,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
 
             if (this.TipoCobro == "22")
             {
-                LlenaDropDowns();
+             
                 this.lblTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Transferencia electrónica de fondos" : this.Titulo;
                 this.pnlTransferencia.Style.Add("display", "block");
                 this.pnlAnticipo.Style.Add("display", "none");

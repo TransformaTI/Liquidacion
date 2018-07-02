@@ -297,6 +297,8 @@ public partial class FormaPago : System.Web.UI.Page
             ddBancoTrasferencia.SelectedIndex = 0;
 
             // Tipo Tarjeta
+
+            TipoTarjeta.Add("0", "Seleccione");
             TipoTarjeta.Add("1", "Tarjeta de Debito");
             TipoTarjeta.Add("2", "Tarjeta de Crédito");
 
@@ -304,6 +306,13 @@ public partial class FormaPago : System.Web.UI.Page
             ddTipoTarjeta.DataTextField = "Value";
             ddTipoTarjeta.DataValueField = "Key";
             ddTipoTarjeta.DataBind();
+
+
+
+            ddTipTarjeta.DataSource = TipoTarjeta;
+            ddTipTarjeta.DataTextField = "Value";
+            ddTipTarjeta.DataValueField = "Key";
+            ddTipTarjeta.DataBind();
 
             ddAfiliacion.DataSource = dtAfiliaciones;
             ddAfiliacion.DataTextField = "NumeroAfiliacion";

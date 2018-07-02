@@ -51,7 +51,7 @@
                 }
             }
 
-            else if (HiddenInputPCT != 'Si' && NumCte != '') {
+            else if (HiddenInputPCT != 'Si' && NumCte != '' && HiddenInput!='ConsultaCteAnticipo') {
                 alert('No se encontraron pagos de TPV para el cliente, por favor verifique con el área de tarjetas de crédito');
             }
 
@@ -692,8 +692,34 @@
                                                                 runat="server" TargetControlID="rfvFecha0">
                                                             </ccR:ValidatorCalloutExtender>
                                                         </td>
-
                                                     </tr>
+
+
+
+
+
+
+                                                    <tr>
+                                            <td class="style1">
+                                                <asp:Label ID="Label16" runat="server" CssClass="labeltipopagoforma"
+                                                    Text="Tipo Tarjeta:"></asp:Label>
+                                            </td>
+                                            <td>
+                                                <asp:DropDownList ID="ddTipTarjeta" runat="server" CssClass="textboxcaptura"
+                                                    Width="200px">
+                                                </asp:DropDownList>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
+                                                    ControlToValidate="ddTipTarjeta" Display="None"
+                                                    ErrorMessage="Seleccione el Tipo Tarjeta"
+                                                    ValidationGroup="Tarjeta" InitialValue="0"></asp:RequiredFieldValidator>
+                                                <ccR:ValidatorCalloutExtender ID="ValidatorCalloutExtender6" runat="server"
+                                                    TargetControlID="rfvTipoTarjeta">
+                                                </ccR:ValidatorCalloutExtender>
+                                            </td>
+                                        </tr>
+
+
+
                                                     <tr>
                                                         <td class="style1">
                                                             <asp:Label ID="lblTCAutorizacion" runat="server" CssClass="labeltipopagoforma"

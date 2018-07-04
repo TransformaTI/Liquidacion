@@ -24,12 +24,37 @@ namespace SigametLiquidacion
             }
         }
 
+        public DatosCliente(int Cliente)
+        {
+            this._cliente = Cliente;
+        }
         public DatosCliente(int Cliente, DateTime FSuministro)
         {
             this._cliente = Cliente;
             this._fSuministro = FSuministro;
         }
 
+
+        public string consultaNombreCliente(int ClienteID)
+        {
+            string NombreCliente = "";
+            DataTable dtNombreCliente = new DataTable();
+            try
+            {
+                this._dataAccess.LoadData(dtNombreCliente, "SELECT NOMBRE FROM CLIENTE WHERE CLIENTE = " + ClienteID.ToString(), CommandType.Text, null, true);
+                if (dtNombreCliente.Rows.Count > 0)
+                {
+                    NombreCliente = dtNombreCliente.Rows[0]["NOMBRE"].ToString();
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+
+
+            return NombreCliente;
+        }
 
         public DataTable ConsultaSaldosAFavor(int cliente,string statusMovimiento, int folioMovimiento, int anioMovimiento)
         {

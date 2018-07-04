@@ -142,7 +142,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
 
 
 
-            if (!Page.IsPostBack)
+        if (!Page.IsPostBack)
         {
             LlenaDropDowns();
 
@@ -173,10 +173,18 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
             {
                     LimpiarControles();
                     ConsultaSaldos();
-                    
-
             }
-
+            
+            if (Request.Form["__EVENTTARGET"].ToString().Contains("ConsultaCteTransferencia"))
+            {
+                this.TipoCobro = "22";
+                int ClienteID = 0;
+                if (txtCliente.Text.Trim().Length > 0)
+                {
+                    ClienteID = Convert.ToInt32(txtCliente.Text.Trim());
+                    txtNombre.Text = consultaNombreClienteTransferencia(ClienteID);
+                }                
+            }
         }
 
     }
@@ -524,6 +532,25 @@ private void LlenaDropDowns()
             throw ex;
         }
         
+    }
+
+    private string consultaNombreClienteTransferencia(int ClienteID)
+    {
+        string NombreCliente = "";
+        try
+        {
+            Cliente objCliente = new Cliente(ClienteID);
+            NombreCliente = objCliente.Nombre;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        } 
+        finally
+        {
+            
+        }
+        return NombreCliente;
     }
 
 

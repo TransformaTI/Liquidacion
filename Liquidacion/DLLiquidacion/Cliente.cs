@@ -234,7 +234,12 @@ namespace SigametLiquidacion
 
         }
 
-
+        public Cliente(int Cliente)
+        {
+            this._cliente = Cliente;
+            DatosCliente datosCliente = new DatosCliente(this._cliente);
+            this._nombre = datosCliente.consultaNombreCliente(this._cliente);
+        }
         public Cliente(int Cliente, byte ClaveCreditoAutorizado)
         {
             this._cliente = Cliente;

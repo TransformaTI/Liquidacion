@@ -39,6 +39,12 @@
         }
     }
 
+    function ConsultaCteTransferencia(IdCliente) {
+        if (document.getElementById("<%=txtCliente.ClientID %>").value != '') {
+            javascript: __doPostBack('ConsultaCteTransferencia');
+        }
+    }
+
     function MontoSaldo() {
 
         var listBox = document.getElementById("<%= LstSaldos.ClientID%>");
@@ -75,13 +81,13 @@
     </tr>
     <tr>
         <td>
-            <div style="text-align: right">
+            <div style="text-align: left">
                 <asp:Label ID="lblCliente" runat="server" CssClass="labeltipopagoforma"
                     Text="Cliente:"></asp:Label>
             </div>
         </td>
         <td>
-            <asp:TextBox ID="txtCliente" Width="150px" runat="server" CssClass="textboxcaptura"></asp:TextBox>
+            <asp:TextBox ID="txtCliente" Width="150px" runat="server" CssClass="textboxcaptura" onblur="return ConsultaCteTransferencia()"></asp:TextBox>
             <cc2:FilteredTextBoxExtender ID="ftbLector" runat="server" FilterType="Numbers"
                 TargetControlID="txtCliente">
             </cc2:FilteredTextBoxExtender>
@@ -96,7 +102,7 @@
     </tr>
     <tr>
         <td>
-            <div style="text-align: right">
+            <div style="text-align: left">
                 <asp:Label ID="lblNombre" runat="server" CssClass="labeltipopagoforma"
                     Text="Nombre:"></asp:Label>
             </div>
@@ -108,7 +114,7 @@
     </tr>
     <tr>
         <td>
-            <div style="text-align: right">
+            <div style="text-align: left">
                 <asp:Label ID="lblFecha" runat="server" CssClass="labeltipopagoforma"
                     Text="Fecha documento:"></asp:Label>
             </div>
@@ -125,7 +131,7 @@
     </tr>
     <tr>
         <td>
-            <div style="text-align: right">
+            <div style="text-align: left">
                 <asp:Label ID="lblNoCuenta" runat="server" CssClass="labeltipopagoforma"
                     Text="No. Cuenta:"></asp:Label>
             </div>
@@ -144,7 +150,7 @@
     </tr>
     <tr>
         <td>
-            <div style="text-align: right">
+            <div style="text-align: left">
                 <asp:Label ID="lblNoDocumento" runat="server" CssClass="labeltipopagoforma"
                     Text="No. Documento:"></asp:Label>
             </div>
@@ -164,7 +170,7 @@
     </tr>
     <tr>
         <td>
-            <div style="text-align: right">
+            <div style="text-align: left">
                 <asp:Label ID="lblBanco" runat="server" CssClass="labeltipopagoforma"
                     Text="Banco:"></asp:Label>
             </div>
@@ -184,7 +190,7 @@
     </tr>
     <tr>
         <td>
-            <div style="text-align: right">
+            <div style="text-align: left">
                 <asp:Label ID="lblImporte" runat="server" CssClass="labeltipopagoforma"
                     Text="Importe:"></asp:Label>
             </div>
@@ -203,7 +209,7 @@
     </tr>
     <tr>
         <td>
-            <div style="text-align: right">
+            <div style="text-align: left">
                 <asp:Label ID="lblObservaciones" runat="server" CssClass="labeltipopagoforma"
                     Text="Observaciones:"></asp:Label>
             </div>
@@ -249,7 +255,7 @@
     </tr>
     <tr>
         <td class="auto-style1">
-            <div style="text-align: right">
+            <div style="text-align: left">
                 <asp:Label ID="lblAntCliente" runat="server" CssClass="labeltipopagoforma"
                     Text="Cliente:"></asp:Label>
             </div>
@@ -269,7 +275,7 @@
     </tr>
     <tr>
         <td class="auto-style1">
-            <div style="text-align: right">
+            <div style="text-align: left">
                 <asp:Label ID="lblAntNombre" runat="server" CssClass="labeltipopagoforma"
                     Text="Nombre:"></asp:Label>
             </div>
@@ -280,7 +286,7 @@
     </tr>
     <tr>
         <td class="auto-style1">
-            <div style="text-align: right">
+            <div style="text-align: left">
                 <asp:Label ID="lblAntSaldo" runat="server" CssClass="labeltipopagoforma"
                     Text="Saldo:"></asp:Label>
             </div>
@@ -297,7 +303,7 @@
     </tr>
     <tr>
         <td class="auto-style1">
-            <div style="text-align: right">
+            <div style="text-align: left">
                 <asp:Label ID="lblAntMonto" runat="server" CssClass="labeltipopagoforma"
                     Text="Monto:"></asp:Label>
             </div>
@@ -315,7 +321,7 @@
     </tr>
     <tr>
         <td class="auto-style1">
-            <div style="text-align: right">
+            <div style="text-align: left">
                 <asp:Label ID="lblAntObservaciones" runat="server" CssClass="labeltipopagoforma"
                     Text="Observaciones:"></asp:Label>
             </div>

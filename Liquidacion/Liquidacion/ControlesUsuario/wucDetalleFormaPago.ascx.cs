@@ -145,7 +145,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
             if (!Page.IsPostBack)
         {
             LlenaDropDowns();
-            this.btnCalFAsignacion.ImageUrl = this.ImgCal;
+            //this.btnCalFAsignacion.ImageUrl = this.ImgCal;
             //this.btnbAceptar.ImageUrl = this.ImgBoton;
             //this.btnAntAceptar.ImageUrl = this.ImgBoton;
             //this.btnBuscarCliente.ImageUrl = this.imgBtnBuscar;

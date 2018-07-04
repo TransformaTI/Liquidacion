@@ -115,22 +115,12 @@
         </td>
         <td>
             <div style="float: left;">
-                <asp:TextBox ID="txtFecha" Width="150px" runat="server" Text=""
-                    CssClass="calendarTextBox" ></asp:TextBox>
+                <asp:TextBox ID="txtFecha" Width="150px" runat="server" Text="" CssClass="calendarTextBox" ></asp:TextBox>
+                <asp:ImageButton runat="Server" ID="btnCalFAsignacion" AlternateText="Clic para mostrar el calendario" ImageUrl="~/Imagenes/Calendar.png" Height="16px" Width="16px" />
+                <cc2:CalendarExtender ID="txtFecha_CalendarExtender" runat="server" TargetControlID="txtFecha" Format="dd/MM/yyyy" PopupButtonID="btnCalFAsignacion"></cc2:CalendarExtender>
+                <asp:RequiredFieldValidator ID="rfvFechaDoc" runat="server" ControlToValidate="txtFecha" Display="None" ErrorMessage="Capturar la Fecha" ValidationGroup="Guarda"></asp:RequiredFieldValidator>
+                <cc2:ValidatorCalloutExtender ID="vceFecha" runat="server" TargetControlID="rfvFechaDoc"></cc2:ValidatorCalloutExtender>
             </div>
-            <div style="float: left; vertical-align: middle; height: 16px; width: 30px;">
-                <asp:ImageButton runat="Server" ID="btnCalFAsignacion" AlternateText="Click to show calendar" ImageUrl="~/Imagenes/Calendar.png" Height="16px" />
-            </div>
-            <cc2:CalendarExtender ID="txtFecha_CalendarExtender" runat="server"
-                TargetControlID="txtFecha" Format="dd/MM/yyyy" PopupButtonID="btnCalFAsignacion">
-            </cc2:CalendarExtender>
-            <asp:RequiredFieldValidator ID="rfvFechaDoc" runat="server"
-                ControlToValidate="txtFecha" Display="None"
-                ErrorMessage="Capturar la Fecha"
-                ValidationGroup="Guarda"></asp:RequiredFieldValidator>
-            <cc2:ValidatorCalloutExtender ID="vceFecha" runat="server"
-                TargetControlID="rfvFechaDoc">
-            </cc2:ValidatorCalloutExtender>
         </td>
     </tr>
     <tr>

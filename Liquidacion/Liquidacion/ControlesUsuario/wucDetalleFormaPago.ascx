@@ -108,7 +108,7 @@
             </div>
         </td>
         <td>
-            <asp:TextBox ID="txtNombre" Width="200px" runat="server" CssClass="textboxcaptura"></asp:TextBox>
+            <asp:TextBox ID="txtNombre" Width="200px" runat="server" CssClass="textboxcaptura" ReadOnly="true"></asp:TextBox>
 
         </td>
     </tr>

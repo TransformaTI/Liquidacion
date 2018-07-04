@@ -57,7 +57,6 @@
 
             if (HiddenInput == "ConsultaCteAnticipo")
             {
-
                     document.getElementById('AnticipoUC').style.display = 'inherit';
                     document.getElementById('Anticipo').style.display = 'inherit'; 
                     document.getElementById('Transfer').style.display = 'none';      
@@ -66,70 +65,59 @@
            if (HiddenInput == "TarjetaClienteFalse")
            {
               document.getElementById('terjeta').style.display = 'inherit';
+            }
 
-           }
-            
-
-
-
-
+            if (HiddenInput == "ConsultaCteTransferencia")
+            {
+                document.getElementById('Anticipo').style.display = 'inherit'; 
+                document.getElementById('Transfer').style.display = 'inherit';   
+                document.getElementById('AnticipoUC').style.display = 'inherit';
+            }
         });
 
 
 
-    function onlyNumbers(evt) {
-     evt = (evt) ? evt : window.event;
-        var charCode = (evt.which) ? evt.which : evt.keyCode;
-     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+         function onlyNumbers(evt) {
+          evt = (evt) ? evt : window.event;
+             var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if (charCode > 31 && (charCode < 48 || charCode > 57)) {
 
-         return false;
-     }
-     return true;
+              return false;
+          }
+          return true;
+             }
+
+        function onlyNumbersDecimals(evt) {
+          evt = (evt) ? evt : window.event;
+             var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if (charCode > 31 && (charCode < 46  || charCode > 57 || charCode == 47 )) {
+
+              return false;
+          }
+            return true;
         }
 
-   function onlyNumbersDecimals(evt) {
-     evt = (evt) ? evt : window.event;
-        var charCode = (evt.which) ? evt.which : evt.keyCode;
-     if (charCode > 31 && (charCode < 46  || charCode > 57 || charCode == 47 )) {
+         function isAlphaNumeric(str) {
+          var code, i, len;
+        
+          for (i = 0, len = str.length; i < len; i++) {
+            code = str.charCodeAt(i);
+            if (!(code > 47 && code < 58) && // numeric (0-9)
+                !(code > 64 && code < 91) && // upper alpha (A-Z)
+                !(code > 96 && code < 123)) { // lower alpha (a-z)
+              return false;
+            }
+          }
+          return true;
+        };
 
-         return false;
-     }
-       return true;
-
-
-        }
-
-
- function isAlphaNumeric(str) {
-  var code, i, len;
-
-  for (i = 0, len = str.length; i < len; i++) {
-    code = str.charCodeAt(i);
-    if (!(code > 47 && code < 58) && // numeric (0-9)
-        !(code > 64 && code < 91) && // upper alpha (A-Z)
-        !(code > 96 && code < 123)) { // lower alpha (a-z)
-      return false;
-    }
-  }
-  return true;
-};
-
-      
-
-
-
-    </script>
-    <script type="text/javascript">
-
-  
-    function toggle(display, activo, inactivo, inactivoA, control) {
-
+        function toggle(display, activo, inactivo, inactivoA, control) {
         document.getElementById('tarjeta').style.display = 'none';
         document.getElementById('cheque').style.display = 'none';
         document.getElementById('vale').style.display = 'none';
         document.getElementById('Transfer').style.display = 'none';
         document.getElementById('Anticipo').style.display = 'none';
-         document.getElementById('AnticipoUC').style.display = 'none';
+        document.getElementById('AnticipoUC').style.display = 'none';
 
 
         document.getElementById(activo).style.display = (
@@ -152,10 +140,7 @@
                document.getElementById('Anticipo').style.display = 'inherit'; 
                     document.getElementById('Transfer').style.display = 'none';                    
         }
-
-
-
-    }
+        }
 
     </script>
     <script type="text/javascript">

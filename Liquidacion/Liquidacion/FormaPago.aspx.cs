@@ -42,19 +42,14 @@ public partial class FormaPago : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
         if (!Page.IsPostBack)
         {
-
             LlenaDropDowns();
-    
         }
 
         #region validaciones postback 
         if (Page.IsPostBack)
         {
-
-
             if (Request.Form["__EVENTTARGET"] == "ConsultaTPV")
             {
                 HiddenInput.Value = "ConsultaTPV";
@@ -62,7 +57,6 @@ public partial class FormaPago : System.Web.UI.Page
                 {
                     LimpiarCampos("tarjeta");
                     ConsultarCargoTarjeta(int.Parse(txtClienteTarjeta.Text), "tarjeta", int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
-
                 }
             }
 
@@ -75,7 +69,6 @@ public partial class FormaPago : System.Web.UI.Page
                     ConsultarCargoTarjeta(int.Parse(TxtCteAfiliacion.Text), "transferencia", int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
                 }
             }
-
 
             else if (Request.Form["__EVENTTARGET"].ToString().Contains("SeleccionaPago"))
             {
@@ -90,9 +83,12 @@ public partial class FormaPago : System.Web.UI.Page
             }
 
 
-
+            if (Request.Form["__EVENTTARGET"] == "ConsultaCteTransferencia")
+            {
+                HiddenInput.Value = "ConsultaCteTransferencia";
+            }
+            
         }
-
         else
         {
             titNoAut.Visible = false;
@@ -101,7 +97,6 @@ public partial class FormaPago : System.Web.UI.Page
             HiddenInputPCT.Value = "";
             LimpiarCampos("tarjeta");
             LimpiarCampos("transferencia");
-
         }
         #endregion
 

@@ -87,7 +87,6 @@ public partial class FormaPago : System.Web.UI.Page
             if (Request.Form["__EVENTTARGET"] == "ConsultaCteAnticipo")
             {
                 HiddenInput.Value = "ConsultaCteAnticipo";
-
             }
 
 

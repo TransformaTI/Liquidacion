@@ -722,11 +722,11 @@
 
                                                     <tr>
                                                         <td class="style1">
-                                                            <asp:Label ID="lblTCAutorizacion" runat="server" CssClass="labeltipopagoforma"
+                                                            <asp:Label ID="lblTCAutorizacion" runat="server" CssClass="labeltipopagoforma"  
                                                                 Text="No Autorización:"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox ID="txtNoAutorizacionTarjeta" runat="server" CssClass="textboxcaptura"
+                                                            <asp:TextBox ID="txtNoAutorizacionTarjeta" runat="server" CssClass="textboxcaptura"  ReadOnly="true" 
                                                                 Width="100px"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="rfvTDAutorizacion" runat="server"
                                                                 ControlToValidate="txtNoAutorizacionTarjeta" Display="None"
@@ -764,11 +764,11 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="style1">
-                                                            <asp:Label ID="lblTCNoTarjeta" runat="server" CssClass="labeltipopagoforma"
+                                                            <asp:Label ID="lblTCNoTarjeta" runat="server" CssClass="labeltipopagoforma"  ReadOnly="true" 
                                                                 Text="No de Tarjeta:"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox ID="txtNumTarjeta" runat="server" CssClass="textboxcaptura"
+                                                            <asp:TextBox ID="txtNumTarjeta" runat="server" CssClass="textboxcaptura" ReadOnly="true"
                                                                 Width="100px"></asp:TextBox>
                                                             <%--   <asp:RequiredFieldValidator ID="rfvNumTarjeta" runat="server" 
                                                         ControlToValidate="txtNumTarjeta" Display="None" 
@@ -786,7 +786,7 @@
                                                         </td>
                                                         <td>
                                                             <asp:DropDownList ID="ddBancoTarjeta" runat="server" CssClass="textboxcaptura"
-                                                                Width="200px">
+                                                                Width="200px" readonly="true">
                                                             </asp:DropDownList>
                                                             <asp:RequiredFieldValidator ID="rfvBancoTarjeta" runat="server"
                                                                 ControlToValidate="ddBancoTarjeta" Display="None"
@@ -805,7 +805,7 @@
 
                                                         </td>
                                                         <td>
-                                                            <asp:DropDownList ID="ddlBancoOrigen" runat="server" CssClass="textboxcaptura"
+                                                            <asp:DropDownList ID="ddlBancoOrigen" runat="server" CssClass="textboxcaptura" readonly="true"
                                                                 Width="200px">
                                                             </asp:DropDownList>
                                                             <asp:RequiredFieldValidator ID="rfvBancoOrigen" runat="server"
@@ -1057,7 +1057,7 @@
                                                     Text="Fecha documento:"></asp:Label>
                                             </td>
                                             <td>
-                                                <asp:TextBox ID="TxtFechaDocTrans" runat="server" CssClass="textboxcaptura"
+                                                <asp:TextBox ID="TxtFechaDocTrans" runat="server" CssClass="textboxcaptura" 
                                                     ReadOnly="False" AutoPostBack="false"></asp:TextBox>
 
                                                 <asp:ImageButton ID="ImageButtonCal" runat="server"

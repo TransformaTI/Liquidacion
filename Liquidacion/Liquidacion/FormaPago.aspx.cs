@@ -87,7 +87,6 @@ public partial class FormaPago : System.Web.UI.Page
             if (Request.Form["__EVENTTARGET"] == "ConsultaCteAnticipo")
             {
                 HiddenInput.Value = "ConsultaCteAnticipo";
-
             }
 
 
@@ -359,7 +358,7 @@ public partial class FormaPago : System.Web.UI.Page
                 DataRow dr;
                 dr = dtCobro.NewRow();
 
-                //dr["IdCobro"] = 0; //Consecutivo
+                dr["IdCobro"] = 0; //Consecutivo
                 //dr["Referencia"] = txtFolioVale.Text;
                 //dr["NumeroCuenta"] = txtFolioVale.Text;
 
@@ -385,6 +384,9 @@ public partial class FormaPago : System.Web.UI.Page
 
                 dr["BancoOrigen"] = 0;
                 dr["NombreTipoCobro"] = "VALE";
+
+                Session["ImporteOperacion"] = Convert.ToDecimal(this.txtValeImporte.Text);
+                dr["IdCobro"] = 0;
 
                 dtCobro.Rows.Add(dr);
                 Session["idCliente"] = txtClienteVale.Text;
@@ -1031,6 +1033,8 @@ public partial class FormaPago : System.Web.UI.Page
             txtImporteTarjeta.Text = dtPagosConTarjetaSelec[0]["Importe"].ToString();
             txtObservacionesTarjeta.Text = dtPagosConTarjetaSelec[0]["Observacion"].ToString();
             txtNoAutorizacionTarjeta.ReadOnly = true;
+            ddTipTarjeta.SelectedIndex = int.Parse(dtPagosConTarjetaSelec[0]["TipoTarjeta"].ToString());
+            chkLocal.Checked = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "True" ? true : false;
         }
 
 
@@ -1141,6 +1145,8 @@ public partial class FormaPago : System.Web.UI.Page
                 ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
                 txtImporteTarjeta.Text = dtPagosConTarjeta.Rows[0]["Importe"].ToString();
                 txtObservacionesTarjeta.Text = dtPagosConTarjeta.Rows[0]["Observacion"].ToString();
+                ddTipTarjeta.SelectedIndex= int.Parse(dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString());
+                chkLocal.Checked = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "True" ? true : false;
 
                 break;
 
@@ -1152,6 +1158,7 @@ public partial class FormaPago : System.Web.UI.Page
                 ddAfiliacion.SelectedIndex = ddAfiliacion.Items.IndexOf(ddAfiliacion.Items.FindByValue(dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString().Trim()));
                 TxtRepAutorizacionTrans.Text = dtPagosConTarjeta.Rows[0]["Autorizacion"].ToString();
                 TxtObervacionesTrans.Text = dtPagosConTarjeta.Rows[0]["Observacion"].ToString();
+
                 break;
 
             default:

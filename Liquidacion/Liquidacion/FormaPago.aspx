@@ -652,7 +652,7 @@
 
                                                             <asp:RequiredFieldValidator ID="rfvCliente0" runat="server"
                                                                 ControlToValidate="txtClienteTarjeta" Display="None"
-                                                                ErrorMessage="Capturar No Cliente y Click en Buscar" Font-Size="11px"
+                                                                ErrorMessage="Capturar número de cliente y clic en buscar" Font-Size="11px"
                                                                 ValidationGroup="TarjetaCliente"></asp:RequiredFieldValidator>
                                                             <ccR:ValidatorCalloutExtender ID="vceTarjetaCliente" runat="server"
                                                                 TargetControlID="rfvCliente0">

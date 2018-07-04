@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="FormaPago.aspx.cs" Inherits="FormaPago" Title="Untitled Page" Theme="Theme1" UICulture="es" Culture="es-MX" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="FormaPago.aspx.cs" Inherits="FormaPago" Title="Captura de formas de pago" Theme="Theme1" UICulture="es" Culture="es-MX" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ccR" %>
 
@@ -542,8 +542,7 @@
                                                         <td>
                                                             <asp:TextBox ID="txtFechaChueque" runat="server" CssClass="textboxcaptura"
                                                                 ReadOnly="False"></asp:TextBox>
-                                                            <asp:ImageButton ID="imgCalendario" runat="server"
-                                                                ImageUrl="~/Imagenes/Calendar.png" />
+                                                            <asp:ImageButton ID="imgCalendario" runat="server" ImageUrl="~/Imagenes/Calendar.png" />
                                                             <asp:RequiredFieldValidator ID="rfvFecha" runat="server"
                                                                 ControlToValidate="txtFechaChueque" Display="None"
                                                                 ErrorMessage="Capturar la Fecha" Font-Size="11px" ValidationGroup="Cheque"></asp:RequiredFieldValidator>

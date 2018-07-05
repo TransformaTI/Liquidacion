@@ -347,8 +347,12 @@ public partial class FormaPago : System.Web.UI.Page
     #region "Handlers"
     protected void imbAceptarVale_Click(object sender, EventArgs e)
     {
+        int idConsecutivo;
+
         try
         {
+            idConsecutivo = Session["idCobroConsec"] != null ? ((Int32)(Session["idCobroConsec"]) + 1) : 1;
+
             if ((DataSet)(Session["dsLiquidacion"]) == null)
             {
                 //CreateTableCobro();
@@ -358,13 +362,19 @@ public partial class FormaPago : System.Web.UI.Page
                 DataRow dr;
                 dr = dtCobro.NewRow();
 
-                dr["IdCobro"] = 0; //Consecutivo
+                //dr["IdCobro"] = 0; //Consecutivo
                 //dr["Referencia"] = txtFolioVale.Text;
                 //dr["NumeroCuenta"] = txtFolioVale.Text;
 
-                dr["FechaCheque"] = "";
+
+         
+
+                dr["IdPago"] = idConsecutivo; //Consecutivo
+                dr["FechaCheque"] = txtValeFecha.Text; 
                 dr["Cliente"] = txtClienteVale.Text;
                 dr["Banco"] = " ";
+                dr["Referencia"] = 0;
+                dr["NumeroCuenta"] = 0;
 
                 dr["Importe"] = (Convert.ToDouble(txtValeImporte.Text) * rp.dbIVA);
                 dr["Impuesto"] = (Convert.ToDouble(txtValeImporte.Text) * rp.dbIVA);
@@ -376,7 +386,7 @@ public partial class FormaPago : System.Web.UI.Page
 
                 dr["FechaAlta"] = DateTime.Now.Date.ToString("dd/MM/yyyy");
                 dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.tipoVale);
-                dr["Usuario"] = "";
+                dr["Usuario"] = Convert.ToString(Session["Usuario"]); ;
 
                 dr["SaldoAFavor"] = 0;
                 dr["TPV"] = 0;
@@ -384,14 +394,17 @@ public partial class FormaPago : System.Web.UI.Page
 
                 dr["BancoOrigen"] = 0;
                 dr["NombreTipoCobro"] = "VALE";
+                dr["Banco"] = 0;
 
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtValeImporte.Text);
-                dr["IdCobro"] = 0;
+               // dr["IdCobro"] = 0;
 
                 dtCobro.Rows.Add(dr);
                 Session["idCliente"] = txtClienteVale.Text;
                 //Session["TablaCobro"] = dtCobro;
                 Session["dsLiquidacion"] = dtCobro.DataSet;
+
+                Session["idCobroConsec"] = idConsecutivo;
             }
             else
             {
@@ -402,13 +415,16 @@ public partial class FormaPago : System.Web.UI.Page
                 dr = dtCobro.NewRow();
 
 
-                dr["IdCobro"] = 0; //Consecutivo
+                //dr["IdCobro"] = 0; //Consecutivo
                 //dr["Referencia"] = txtFolioVale.Text;
                 //dr["NumeroCuenta"] = txtFolioVale.Text;
 
-                dr["FechaCheque"] = "";
+                dr["IdPago"] = idConsecutivo; //Consecutivo
+                dr["FechaCheque"] = txtValeFecha.Text;
                 dr["Cliente"] = txtClienteVale.Text;
                 dr["Banco"] = " ";
+                dr["Referencia"] = 0;
+                dr["NumeroCuenta"] = 0;
 
                 dr["Importe"] = (Convert.ToDouble(txtValeImporte.Text) * rp.dbIVA);
                 dr["Impuesto"] = (Convert.ToDouble(txtValeImporte.Text) * rp.dbIVA);
@@ -420,7 +436,7 @@ public partial class FormaPago : System.Web.UI.Page
 
                 dr["FechaAlta"] = DateTime.Now.Date.ToString("dd/MM/yyyy");
                 dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.tipoVale);
-                dr["Usuario"] = "";
+                dr["Usuario"] = Convert.ToString(Session["Usuario"]); ;
 
                 dr["SaldoAFavor"] = 0;
                 dr["TPV"] = 0;
@@ -428,14 +444,18 @@ public partial class FormaPago : System.Web.UI.Page
 
                 dr["BancoOrigen"] = 0;
                 dr["NombreTipoCobro"] = "VALE";
+                dr["Banco"] = 0;
+
 
                 dtCobro.Rows.Add(dr);
                 //Session["TablaCobro"] = dtCobro;
                 Session["idCliente"] = txtClienteVale.Text;
                 Session["dsLiquidacion"] = dtCobro.DataSet;
 
-
+                Session["idCobroConsec"] = idConsecutivo;
             }
+
+        
 
             Response.Redirect("RegistroPagos.aspx");
 

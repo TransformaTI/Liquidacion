@@ -69,9 +69,10 @@
 
             if (HiddenInput == "ConsultaCteTransferencia")
             {
-                document.getElementById('Anticipo').style.display = 'inherit'; 
-                document.getElementById('Transfer').style.display = 'inherit';   
+                document.getElementById('Anticipo').style.display = 'none'; 
                 document.getElementById('AnticipoUC').style.display = 'inherit';
+                document.getElementById('Transfer').style.display = 'inherit';   
+         
             }
         });
 

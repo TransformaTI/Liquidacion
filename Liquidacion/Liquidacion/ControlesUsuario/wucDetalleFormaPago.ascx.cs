@@ -33,7 +33,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
 
 
 
-
+    #region Propiedades del control
     public string ImgCal
     {
         get
@@ -121,7 +121,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         get { return registroCobro; }
         set { registroCobro = value; }
     }
-
+    #endregion
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -132,22 +132,13 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         }
         else
         {
-
             ds = (DataSet)(Session["dsLiquidacion"]);
-
         }
-
-
-
-
-
 
         if (!Page.IsPostBack)
         {
             LlenaDropDowns();
-
-            //txtAntMonto.Attributes.Add("onkeypress", "return ValidaMontoSaldo()");
-            
+                        
             this.lblTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Transferencia electrónica de fondos" : this.Titulo;
             this.lblAntTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Aplicación de anticipo" : this.Titulo;
 
@@ -164,9 +155,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                 this.pnlAnticipo.Style.Add("display", "block");
                 this.lblAntTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Aplicación de anticipo" : this.Titulo;
             }
-
         }
-
         else
         {
             if (Request.Form["__EVENTTARGET"].ToString().Contains("ConsultaCteAnticipo"))
@@ -174,7 +163,6 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                     LimpiarControles();
                     ConsultaSaldos();
             }
-            
             if (Request.Form["__EVENTTARGET"].ToString().Contains("ConsultaCteTransferencia"))
             {
                 this.TipoCobro = "22";
@@ -183,10 +171,9 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                 {
                     ClienteID = Convert.ToInt32(txtCliente.Text.Trim());
                     txtNombre.Text = consultaNombreClienteTransferencia(ClienteID);
-                }                
+                }
             }
         }
-
     }
 
     private void LimpiarControles()

@@ -30,9 +30,6 @@
 
     }
 
-
-
-
     function ConsultaCteAnticipo(IdCliente) {
         if (document.getElementById("<%=txtAntCliente.ClientID %>").value != '') {
             javascript: __doPostBack('ConsultaCteAnticipo');

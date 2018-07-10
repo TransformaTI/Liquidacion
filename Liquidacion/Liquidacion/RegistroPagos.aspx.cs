@@ -577,6 +577,7 @@ public partial class RegistroPagos : System.Web.UI.Page
             CancelarAbonos();
             CancelaRelacionPagoPedido();
             Response.Redirect("FormaPago.aspx");
+            
         }
         catch (Exception ex)
         {

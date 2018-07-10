@@ -1165,6 +1165,16 @@ public partial class FormaPago : System.Web.UI.Page
                 ddTipTarjeta.SelectedIndex= dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()!=""?int.Parse(dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()):0;
                 chkLocal.Checked = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "True" ? true : false;
 
+
+                txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
+                txtFechaTarjeta.ReadOnly= txtFechaTarjeta.Text == "" ? false : true;
+                txtNumTarjeta.ReadOnly= txtNumTarjeta.Text == "" ? false : true;
+                txtImporteTarjeta.ReadOnly= txtImporteTarjeta.Text == "" ? false : true;
+                ddBancoTarjeta.Enabled = ddBancoTarjeta.SelectedIndex == 0 ? true : false;
+                ddlBancoOrigen.Enabled = ddlBancoOrigen.SelectedIndex == 0 ? true:false;
+                ddTipTarjeta.Enabled = ddTipTarjeta.SelectedIndex == 0 ? true : false;
+                chkLocal.Enabled = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "" ? true : false;
+                //ddBancoTarjeta.Enabled=
                 break;
 
             case "transferencia":

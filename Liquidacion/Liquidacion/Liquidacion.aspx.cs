@@ -122,6 +122,7 @@ public partial class Liquidacion : System.Web.UI.Page
         AutoTanqueTurno1.Usuario = _usuario;
 
         nuevoPedido.AutoTanque = AutoTanqueTurno1.Autotanque;
+        Session["Autotanque"] = AutoTanqueTurno1.Autotanque; // mcc 2018 09-09-2018
         nuevoPedido.Usuario = _usuario;
 
         //Carga de precios de acuerdo a los datos de pedido

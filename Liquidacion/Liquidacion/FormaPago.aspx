@@ -663,7 +663,7 @@
                                                         </td>
                                                         <td>
                                                             <asp:TextBox ID="txtFechaTarjeta" runat="server" CssClass="textboxcaptura"
-                                                                ReadOnly="False" AutoPostBack="false"></asp:TextBox>
+                                                                ReadOnly="True" AutoPostBack="false"></asp:TextBox>
                                                             <ccR:CalendarExtender ID="txtFechaTarjeta_CalendarExtender" runat="server"
                                                                 Format="dd/MM/yyyy" PopupButtonID="imgCalendario0"
                                                                 TargetControlID="txtFechaTarjeta">
@@ -690,7 +690,7 @@
                                                     Text="Tipo Tarjeta:"></asp:Label>
                                             </td>
                                             <td>
-                                                <asp:DropDownList ID="ddTipTarjeta" runat="server" CssClass="textboxcaptura"
+                                                <asp:DropDownList ID="ddTipTarjeta" runat="server" CssClass="textboxcaptura" enabled="false"
                                                     Width="200px">
                                                 </asp:DropDownList>
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
@@ -771,7 +771,7 @@
                                                         </td>
                                                         <td>
                                                             <asp:DropDownList ID="ddBancoTarjeta" runat="server" CssClass="textboxcaptura"
-                                                                Width="200px" readonly="true">
+                                                                Width="200px" readonly="true" enabled="false">
                                                             </asp:DropDownList>
                                                             <asp:RequiredFieldValidator ID="rfvBancoTarjeta" runat="server"
                                                                 ControlToValidate="ddBancoTarjeta" Display="None"
@@ -791,7 +791,7 @@
                                                         </td>
                                                         <td>
                                                             <asp:DropDownList ID="ddlBancoOrigen" runat="server" CssClass="textboxcaptura" readonly="true"
-                                                                Width="200px">
+                                                                Width="200px" enabled="false">
                                                             </asp:DropDownList>
                                                             <asp:RequiredFieldValidator ID="rfvBancoOrigen" runat="server"
                                                                 ControlToValidate="ddlBancoOrigen" Display="None"
@@ -812,7 +812,7 @@
 
                                                         </td>
                                                         <td>
-                                                            <asp:CheckBox ID="chkLocal" runat="server" CssClass="textboxcaptura" Text="Local" />
+                                                            <asp:CheckBox ID="chkLocal" runat="server" CssClass="textboxcaptura" Text="Local"  enabled="false"/>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -821,7 +821,7 @@
                                                                 Text="Importe:"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox ID="txtImporteTarjeta" runat="server" CssClass="textboxcaptura"></asp:TextBox>
+                                                            <asp:TextBox ID="txtImporteTarjeta" runat="server" CssClass="textboxcaptura"  ReadOnly="true" ></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="rfvTDImporte" runat="server"
                                                                 ControlToValidate="txtImporteTarjeta" Display="None" ErrorMessage="Capturar Importe"
                                                                 Font-Size="11px" ValidationGroup="Tarjeta"></asp:RequiredFieldValidator>
@@ -837,7 +837,7 @@
                                                                 CssClass="labeltipopagoforma" Text="Observaciones:"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox ID="txtObservacionesTarjeta" runat="server" CssClass="textboxcaptura"
+                                                            <asp:TextBox ID="txtObservacionesTarjeta" runat="server" CssClass="textboxcaptura"  ReadOnly="true" 
                                                                 Height="75px" Width="300px" TextMode="MultiLine"></asp:TextBox>
                                                         </td>
                                                     </tr>

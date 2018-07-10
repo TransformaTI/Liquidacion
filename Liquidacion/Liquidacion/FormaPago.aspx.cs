@@ -440,7 +440,7 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["BancoOrigen"] = 0;
                 dr["NombreTipoCobro"] = "VALE";
                 dr["Banco"] = 0;
-
+                Session["ImporteOperacion"] = Convert.ToDecimal(this.txtValeImporte.Text);
 
                 dtCobro.Rows.Add(dr);
                 //Session["TablaCobro"] = dtCobro;
@@ -484,8 +484,8 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["Cliente"] = txtClienteCheque.Text;
                 dr["Banco"] = ddChequeBanco.SelectedValue;
 
-                dr["Importe"] = (Convert.ToDouble((txtImporteCheque.Text)) * rp.dbIVA);
-                dr["Impuesto"] = (Convert.ToDouble((txtImporteCheque.Text)) * rp.dbIVA);
+                dr["Importe"] = (Convert.ToDouble((txtImporteCheque.Text.ToString().Replace("$", ""))) * rp.dbIVA);
+                dr["Impuesto"] = (Convert.ToDouble((txtImporteCheque.Text.ToString().Replace("$", ""))) * rp.dbIVA);
                 dr["Total"] = txtImporteCheque.Text; //CHECK THIS
 
                 dr["Saldo"] = 0;
@@ -535,8 +535,8 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["Cliente"] = txtClienteCheque.Text;
                 dr["Banco"] = ddChequeBanco.SelectedValue;
 
-                dr["Importe"] = (Convert.ToDouble(txtImporteCheque.Text) * rp.dbIVA);
-                dr["Impuesto"] = (Convert.ToDouble(txtImporteCheque.Text) * rp.dbIVA);
+                dr["Importe"] = (Convert.ToDouble(txtImporteCheque.Text.ToString().Replace("$", "")) * rp.dbIVA);
+                dr["Impuesto"] = (Convert.ToDouble(txtImporteCheque.Text.ToString().Replace("$", "")) * rp.dbIVA);
                 dr["Total"] = txtImporteCheque.Text; //CHECK THIS
 
                 dr["Saldo"] = 0;
@@ -592,9 +592,9 @@ public partial class FormaPago : System.Web.UI.Page
                 //dr["Banco"] = ddBancoTarjeta.SelectedItem.Text;
                 dr["Banco"] = ddBancoTarjeta.SelectedValue;
 
-                dr["Importe"] = (Convert.ToDouble((txtImporteTarjeta.Text)) * rp.dbIVA);
-                dr["Impuesto"] = (Convert.ToDouble((txtImporteTarjeta.Text)) * rp.dbIVA);
-                dr["Total"] = txtImporteTarjeta.Text; //CHECK THIS
+                dr["Importe"] = (Convert.ToDouble((txtImporteTarjeta.Text.ToString().Replace("$",""))) * rp.dbIVA);
+                dr["Impuesto"] = (Convert.ToDouble((txtImporteTarjeta.Text.ToString().Replace("$", ""))) * rp.dbIVA);
+                dr["Total"] = txtImporteTarjeta.Text.ToString().Replace("$", ""); //CHECK THIS
 
                 dr["Saldo"] = 0;
                 dr["Observaciones"] = txtObservacionesTarjeta.Text;
@@ -640,9 +640,9 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["Cliente"] = txtClienteTarjeta.Text;
                 dr["Banco"] = ddBancoTarjeta.SelectedValue;
 
-                dr["Importe"] = (Convert.ToDouble((txtImporteTarjeta.Text)) * rp.dbIVA);
-                dr["Impuesto"] = (Convert.ToDouble((txtImporteTarjeta.Text)) * rp.dbIVA);
-                dr["Total"] = txtImporteTarjeta.Text; //CHECK THIS
+                dr["Importe"] = (Convert.ToDouble((txtImporteTarjeta.Text.ToString().ToString().Replace("$",""))) * rp.dbIVA);
+                dr["Impuesto"] = (Convert.ToDouble((txtImporteTarjeta.Text.ToString().Replace("$", ""))) * rp.dbIVA);
+                dr["Total"] = txtImporteTarjeta.Text.ToString().Replace("$", ""); //CHECK THIS
 
                 dr["Saldo"] = 0;
                 dr["Observaciones"] = txtObservacionesTarjeta.Text;
@@ -1045,11 +1045,12 @@ public partial class FormaPago : System.Web.UI.Page
             txtNumTarjeta.Text = dtPagosConTarjetaSelec[0]["NumeroTarjeta"].ToString();
             ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString().Trim()));
             ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString().Trim()));
-            txtImporteTarjeta.Text = dtPagosConTarjetaSelec[0]["Importe"].ToString();
+            txtImporteTarjeta.Text = dtPagosConTarjetaSelec[0]["Importe"].ToString().ToString().Replace("$", "");
             txtObservacionesTarjeta.Text = dtPagosConTarjetaSelec[0]["Observacion"].ToString();
             txtNoAutorizacionTarjeta.ReadOnly = true;
             ddTipTarjeta.SelectedIndex = int.Parse(dtPagosConTarjetaSelec[0]["TipoTarjeta"].ToString());
             chkLocal.Checked = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "True" ? true : false;
+            txtFechaTarjeta.Text = DateTime.Parse(dtPagosConTarjetaSelec[0]["FAlta"].ToString()).ToShortDateString();
         }
 
 
@@ -1155,12 +1156,13 @@ public partial class FormaPago : System.Web.UI.Page
             case "tarjeta":
                 txtNombreClienteTarjeta.Text = dtPagosConTarjeta.Rows[0]["NombreCliente"].ToString();
                 txtNoAutorizacionTarjeta.Text = dtPagosConTarjeta.Rows[0]["Autorizacion"].ToString();
+                txtFechaTarjeta.Text= dtPagosConTarjeta.Rows[0]["FAlta"].ToString()!=""? DateTime.Parse(dtPagosConTarjeta.Rows[0]["FAlta"].ToString()).ToShortDateString():"";
                 txtNumTarjeta.Text = dtPagosConTarjeta.Rows[0]["NumeroTarjeta"].ToString();
                 ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
                 ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
-                txtImporteTarjeta.Text = dtPagosConTarjeta.Rows[0]["Importe"].ToString();
+                txtImporteTarjeta.Text = dtPagosConTarjeta.Rows[0]["Importe"].ToString().Replace("$", "");
                 txtObservacionesTarjeta.Text = dtPagosConTarjeta.Rows[0]["Observacion"].ToString();
-                ddTipTarjeta.SelectedIndex= int.Parse(dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString());
+                ddTipTarjeta.SelectedIndex= dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()!=""?int.Parse(dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()):0;
                 chkLocal.Checked = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "True" ? true : false;
 
                 break;
@@ -1192,6 +1194,7 @@ public partial class FormaPago : System.Web.UI.Page
             case "tarjeta":
                 txtNombreClienteTarjeta.Text = string.Empty;
                 txtNoAutorizacionTarjeta.Text = string.Empty;
+                txtFechaTarjeta.Text = string.Empty;
                 txtNumTarjeta.Text = string.Empty;
                 ddlBancoOrigen.SelectedIndex = -1;
                 ddlBancoOrigen.SelectedIndex = -1;
@@ -1263,4 +1266,9 @@ public partial class FormaPago : System.Web.UI.Page
 
 
 
+
+    protected void ddTipTarjeta_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }   

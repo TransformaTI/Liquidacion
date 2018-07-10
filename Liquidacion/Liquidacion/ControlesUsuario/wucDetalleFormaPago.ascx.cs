@@ -447,6 +447,7 @@ private void LlenaDropDowns()
 
         decimal NuevoSaldo=0;
         decimal TotalPedidos = 0;
+        DataRow[] drSaldo = null;
         try
         {
             dsLiq = (DataSet)(Session["dsLiquidacion"]);
@@ -465,8 +466,10 @@ private void LlenaDropDowns()
 
                         foreach (DataRow dr in _datosCliente.SaldosCliente.Rows)
                             {
-                                DataRow[] drSaldo = dtLiq.Select("Folio="+ dr["FolioMovimiento"].ToString() + " AND AñoMovimiento="+ dr["AñoMovimiento"].ToString());
-
+                            
+                            if  (dtLiq != null)
+                                {
+                                drSaldo = dtLiq.Select("Folio=" + dr["FolioMovimiento"].ToString() + " AND AñoMovimiento=" + dr["AñoMovimiento"].ToString());
                                 foreach (DataRow row in drSaldo)
                                 {
                                   if (dsLiq.Tables["CobroPedido"]!=null)
@@ -494,6 +497,7 @@ private void LlenaDropDowns()
                                 {
                                     dr.Delete();
                                 }
+                            }
                             }
                         }
 

@@ -111,7 +111,7 @@ namespace SigametLiquidacion
       tipoDescuento = 12,
       tipoVale = 16,
       transferencia =10,
-      anticipo = 21
+      anticipo = 21 
     }
   }
 }

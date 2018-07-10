@@ -301,7 +301,6 @@ private void LlenaDropDowns()
 
                 ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.replace('RegistroPagos.aspx');", true);
 
-
             }
 
 

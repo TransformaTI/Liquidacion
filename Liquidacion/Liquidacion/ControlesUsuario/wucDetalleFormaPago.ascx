@@ -227,7 +227,7 @@
         <td>
             <asp:ImageButton ID="btnbAceptar" runat="server"
                 OnClick="btnAceptar_Click"
-                SkinID="btnAceptar" ValidationGroup="Guarda" />
+                SkinID="btnAceptar" ValidationGroup="Guarda" style=" margin-left: 0px;" ImageUrl="~/Images/btnAceptar.png" />
         </td>
     </tr>
     <tr>

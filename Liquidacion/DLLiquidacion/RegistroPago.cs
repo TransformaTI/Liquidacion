@@ -110,7 +110,7 @@ namespace SigametLiquidacion
       tipoTarjeta = 6,
       tipoDescuento = 12,
       tipoVale = 16,
-      transferencia =22,
+      transferencia =10,
       anticipo = 21
     }
   }

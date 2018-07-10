@@ -219,7 +219,7 @@ private void LlenaDropDowns()
                 DataRow dr;
                 dr = dtCobro.NewRow();
 
-                dr["IdCobro"] = 0; 
+                dr["IdPago"] = ((Int32)(Session["idCobroConsec"] == null ? 0: Session["idCobroConsec"]) + 1); ; //Consecutivo
                 dr["Referencia"] = this.txtNoDocumento.Text;
                 dr["NumeroCuenta"] = this.txtNoDocumento.Text;
 
@@ -227,7 +227,7 @@ private void LlenaDropDowns()
                 dr["Cliente"] = this.txtCliente.Text;
                 dr["Banco"] = ddlBanco.SelectedValue; 
 
-                dr["Importe"] = (Convert.ToDouble(this.txtImporte.Text) * rp.dbIVA);
+                dr["Importe"] = (Convert.ToDouble(this.txtImporte.Text));
                 dr["Impuesto"] = (Convert.ToDouble(this.txtImporte.Text) * rp.dbIVA);
                 dr["Total"] = txtImporte.Text; 
 
@@ -237,7 +237,7 @@ private void LlenaDropDowns()
 
                 dr["FechaAlta"] = DateTime.Now.Date.ToString("dd/MM/yyyy");
                 dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.transferencia);
-                dr["Usuario"] = "";
+                dr["Usuario"] = Convert.ToString(Session["Usuario"]); 
 
                 dr["SaldoAFavor"] = 0;
                 dr["TPV"] = 0;
@@ -246,10 +246,68 @@ private void LlenaDropDowns()
                 dr["BancoOrigen"] = 0;
                 dr["NombreTipoCobro"] = "TRANSFERENCIA";
 
+                Session["ImporteOperacion"] = Convert.ToDecimal(this.txtImporte.Text); ;
+
+                dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.transferencia);
+
                 dtCobro.Rows.Add(dr);
                 Session["idCliente"] = this.txtCliente.Text;
                 Session["dsLiquidacion"] = dtCobro.DataSet;
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.replace('RegistroPagos.aspx');", true);
             }
+
+            else
+
+            {
+                //Genera Registro del Cobro con Cheque
+                Session["idCobroConsec"] = 1;
+                dtCobro = ds.Tables["Cobro"];
+                DataRow dr;
+                dr = dtCobro.NewRow();
+
+                dr["IdPago"] = ((Int32)(Session["idCobroConsec"] == null ? 0 : Session["idCobroConsec"]) + 1); ; //Consecutivo
+                dr["Referencia"] = this.txtNoDocumento.Text;
+                dr["NumeroCuenta"] = this.txtNoDocumento.Text;
+
+                dr["FechaCheque"] = this.txtFecha.Text;
+                dr["Cliente"] = this.txtCliente.Text;
+                dr["Banco"] = ddlBanco.SelectedValue;
+
+                dr["Importe"] = (Convert.ToDouble(this.txtImporte.Text) );
+                dr["Impuesto"] = (Convert.ToDouble(this.txtImporte.Text) * rp.dbIVA);
+                dr["Total"] = txtImporte.Text;
+
+                dr["Saldo"] = 0;
+                dr["Observaciones"] = txtObservaciones.Text;
+                dr["Status"] = "ABIERTO";
+
+                dr["FechaAlta"] = DateTime.Now.Date.ToString("dd/MM/yyyy");
+                dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.transferencia);
+                dr["Usuario"] = Convert.ToString(Session["Usuario"]); ;
+
+                dr["SaldoAFavor"] = 0;
+                dr["TPV"] = 0;
+                dr["FechaDeposito"] = this.txtFecha.Text;
+
+                dr["BancoOrigen"] = 0;
+                dr["NombreTipoCobro"] = "TRANSFERENCIA";
+                dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.transferencia);
+                Session["ImporteOperacion"] = Convert.ToDecimal(this.txtImporte.Text); ;
+
+                dtCobro.Rows.Add(dr);
+                Session["idCliente"] = this.txtCliente.Text;
+                Session["dsLiquidacion"] = dtCobro.DataSet;
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.replace('RegistroPagos.aspx');", true);
+
+
+            }
+
+
+
+
+
         }
         catch (Exception ex)
         {
@@ -309,8 +367,8 @@ private void LlenaDropDowns()
                 dr["Status"] = "ABIERTO";
 
                 dr["FechaAlta"] = DateTime.Now.Date.ToString("dd/MM/yyyy");
-                dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.anticipo); 
-                dr["Usuario"] = "";
+                dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.anticipo);
+                dr["Usuario"] = Convert.ToString(Session["Usuario"]); ;
 
                 dr["SaldoAFavor"] = 0;
                 dr["TPV"] = 0;
@@ -318,6 +376,7 @@ private void LlenaDropDowns()
 
                 dr["BancoOrigen"] = 0;
                 dr["NombreTipoCobro"] = "ANTICIPO";
+                dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.anticipo);
 
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtAntMonto.Text); ;
 
@@ -357,11 +416,12 @@ private void LlenaDropDowns()
 
                 dr["FechaAlta"] = DateTime.Now.Date.ToString("dd/MM/yyyy");
                 dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.anticipo);
-                dr["Usuario"] = "";
+                dr["Usuario"] = Convert.ToString(Session["Usuario"]); ;
 
                 dr["SaldoAFavor"] = 0;
                 dr["TPV"] = 0;
                 dr["FechaDeposito"] = "";
+                dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.anticipo);
 
                 dr["BancoOrigen"] = 0;
                 dr["NombreTipoCobro"] = "ANTICIPO";

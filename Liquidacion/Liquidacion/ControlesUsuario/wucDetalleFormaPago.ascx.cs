@@ -212,6 +212,8 @@ private void LlenaDropDowns()
     {
         try
         {
+            int idConsecutivo = Session["idCobroConsec"] != null ? ((Int32)(Session["idCobroConsec"]) + 1) : 1;
+
             if ((DataSet)(Session["dsLiquidacion"]) != null)
             {
                 dtCobro = ((DataSet)(Session["dsLiquidacion"])).Tables["Cobro"];
@@ -219,7 +221,8 @@ private void LlenaDropDowns()
                 DataRow dr;
                 dr = dtCobro.NewRow();
 
-                dr["IdPago"] = ((Int32)(Session["idCobroConsec"] == null ? 0: Session["idCobroConsec"]) + 1); ; //Consecutivo
+                //dr["IdPago"] = ((Int32)(Session["idCobroConsec"] == null ? 0: Session["idCobroConsec"]) + 1); ; //Consecutivo
+                dr["IdPago"] = idConsecutivo; //Consecutivo
                 dr["Referencia"] = this.txtNoDocumento.Text;
                 dr["NumeroCuenta"] = this.txtNoDocumento.Text;
 
@@ -253,20 +256,20 @@ private void LlenaDropDowns()
                 dtCobro.Rows.Add(dr);
                 Session["idCliente"] = this.txtCliente.Text;
                 Session["dsLiquidacion"] = dtCobro.DataSet;
+                Session["idCobroConsec"] = idConsecutivo;
 
                 ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.replace('RegistroPagos.aspx');", true);
             }
-
             else
-
             {
                 //Genera Registro del Cobro con Cheque
-                Session["idCobroConsec"] = 1;
+                //Session["idCobroConsec"] = 1;
                 dtCobro = ds.Tables["Cobro"];
                 DataRow dr;
                 dr = dtCobro.NewRow();
 
-                dr["IdPago"] = ((Int32)(Session["idCobroConsec"] == null ? 0 : Session["idCobroConsec"]) + 1); ; //Consecutivo
+                //dr["IdPago"] = ((Int32)(Session["idCobroConsec"] == null ? 0 : Session["idCobroConsec"]) + 1); ; //Consecutivo
+                dr["IdPago"] = idConsecutivo; //Consecutivo
                 dr["Referencia"] = this.txtNoDocumento.Text;
                 dr["NumeroCuenta"] = this.txtNoDocumento.Text;
 
@@ -298,15 +301,10 @@ private void LlenaDropDowns()
                 dtCobro.Rows.Add(dr);
                 Session["idCliente"] = this.txtCliente.Text;
                 Session["dsLiquidacion"] = dtCobro.DataSet;
+                Session["idCobroConsec"] = idConsecutivo;
 
                 ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.replace('RegistroPagos.aspx');", true);
-
             }
-
-
-
-
-
         }
         catch (Exception ex)
         {
@@ -340,16 +338,18 @@ private void LlenaDropDowns()
             ConsultaPedidos();
 
             //ds = (DataSet)(Session["dsLiquidacion"]);
+            int idConsecutivo = Session["idCobroConsec"] != null ? ((Int32)(Session["idCobroConsec"]) + 1) : 1;
 
             if ((DataSet)(Session["dsLiquidacion"]) != null)
             {
-                Session["idCobroConsec"] = ((Int32)(Session["idCobroConsec"]) + 1);
+                //Session["idCobroConsec"] = ((Int32)(Session["idCobroConsec"]) + 1);
                 dtCobro = ((DataSet)(Session["dsLiquidacion"])).Tables["Cobro"];
                 DataRow dr;
                 dr = dtCobro.NewRow();
 
                 //dr["IdCobro"] = 0;
-                dr["IdPago"] = ((Int32)(Session["idCobroConsec"]) + 1); ; //Consecutivo
+                //dr["IdPago"] = ((Int32)(Session["idCobroConsec"]) + 1); ; //Consecutivo
+                dr["IdPago"] = idConsecutivo; //Consecutivo
                 dr["Referencia"] =0;
                 dr["NumeroCuenta"] = 0;
 
@@ -384,20 +384,20 @@ private void LlenaDropDowns()
                 dtCobro.Rows.Add(dr);
 
                 Session["idCliente"] = this.txtAntCliente.Text;
+                Session["idCobroConsec"] = idConsecutivo;
 
             }
-
-
             else
             {
                 //Genera Registro del Cobro con Cheque
-                Session["idCobroConsec"] = 1;
+                //Session["idCobroConsec"] = 1;
                 dtCobro = ds.Tables["Cobro"];
                 DataRow dr;
                 dr = dtCobro.NewRow();
 
                 //dr["IdCobro"] = 0;
-                dr["IdPago"] = 1; //Consecutivo
+                //dr["IdPago"] = 1; //Consecutivo
+                dr["IdPago"] = idConsecutivo; //Consecutivo
                 dr["Referencia"] = 0;
                 dr["NumeroCuenta"] = 0;
 
@@ -455,6 +455,7 @@ private void LlenaDropDowns()
             ds.Tables.Add(dtLiqAnticipo);
 
             Session["dsLiquidacion"] = ds;
+            Session["idCobroConsec"] = idConsecutivo;
 
 
             ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.replace('RegistroPagos.aspx');", true);  

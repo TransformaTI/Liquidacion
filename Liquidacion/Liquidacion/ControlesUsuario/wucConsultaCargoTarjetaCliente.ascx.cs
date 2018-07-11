@@ -63,7 +63,7 @@ public partial class ControlesUsuario_wucConsultaCargoTarjetaClienta : System.We
                         }
                         else
                         {
-                            dtPagosContarjetaDel = null;
+                            dtPagosContarjetaDel = dtPagosContarjeta;
 
                         }
 

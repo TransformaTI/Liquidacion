@@ -1174,6 +1174,7 @@ public partial class FormaPago : System.Web.UI.Page
                 ddlBancoOrigen.Enabled = ddlBancoOrigen.SelectedIndex == 0 ? true:false;
                 ddTipTarjeta.Enabled = ddTipTarjeta.SelectedIndex == 0 ? true : false;
                 chkLocal.Enabled = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "" ? true : false;
+                txtObservacionesTarjeta.ReadOnly= txtNoAutorizacionTarjeta.Text == "" ? false : true;
                 //ddBancoTarjeta.Enabled=
                 break;
 

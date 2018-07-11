@@ -305,18 +305,23 @@ public partial class RegistroPagos : System.Web.UI.Page
             {
             DataTable dtLiqAnticipo = ds.Tables["LiqPagoAnticipado"];
 
-            foreach (DataRow row in dtLiqAnticipo.Rows)
+            if (dtLiqAnticipo!=null)
             {
-                if (Session["PagoEnUsoAnticipo"].ToString() == row["Folio"].ToString() + row["AñoMovimiento"].ToString() && row["Pedidos"].ToString().Contains(pedidos["Pedido"].ToString()))
-                {
-                    row.BeginEdit();
-                    row["Pedidos"] = row["Pedidos"].ToString().Replace(pedidos["Pedido"].ToString(), "");
-                    row.EndEdit();
-                }
-            }
 
-            ds.Tables.Remove("LiqPagoAnticipado");
-            ds.Tables.Add(dtLiqAnticipo);
+                    foreach (DataRow row in dtLiqAnticipo.Rows)
+                {
+                    if (Session["PagoEnUsoAnticipo"].ToString() == row["Folio"].ToString() + row["AñoMovimiento"].ToString() && row["Pedidos"].ToString().Contains(pedidos["Pedido"].ToString()))
+                    {
+                        row.BeginEdit();
+                        row["Pedidos"] = row["Pedidos"].ToString().Replace(pedidos["Pedido"].ToString(), "");
+                        row.EndEdit();
+                    }
+                }
+
+                ds.Tables.Remove("LiqPagoAnticipado");
+                ds.Tables.Add(dtLiqAnticipo);
+
+            }
 
         }
     }
@@ -576,8 +581,8 @@ public partial class RegistroPagos : System.Web.UI.Page
         {
             CancelarAbonos();
             CancelaRelacionPagoPedido();
-            Response.Redirect("FormaPago.aspx");
-            
+            ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.replace('FormaPago.aspx');", true);
+
         }
         catch (Exception ex)
         {

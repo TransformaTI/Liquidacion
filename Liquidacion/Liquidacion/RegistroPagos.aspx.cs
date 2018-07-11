@@ -307,7 +307,6 @@ public partial class RegistroPagos : System.Web.UI.Page
 
             if (dtLiqAnticipo!=null)
             {
-
                     foreach (DataRow row in dtLiqAnticipo.Rows)
                 {
                     if (Session["PagoEnUsoAnticipo"].ToString() == row["Folio"].ToString() + row["AñoMovimiento"].ToString() && row["Pedidos"].ToString().Contains(pedidos["Pedido"].ToString()))

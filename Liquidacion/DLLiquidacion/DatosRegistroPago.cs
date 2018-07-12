@@ -426,31 +426,33 @@ namespace SigametLiquidacion
                     this.CobroEnEfectivo(Usuario, dtPedidos, ref dtPago, ref dtDetallePago);
                 }
                 this.ValidaStatusAutotanqueTurno((int)Convert.ToInt16(dtResumenLiquidacion.Rows[0]["AñoAtt"]), Convert.ToInt32(dtResumenLiquidacion.Rows[0]["Folio"]));
+
                 if (!(this.dtAutoTanque.Rows[0]["StatusLogistica"].ToString().Trim() == "CIERRE"))
                     return;
               
                 this._dataAccess.OpenConnection();
                 this._dataAccess.BeginTransaction();
+
                 for (int index1 = 0; index1 <= dtPago.Rows.Count - 1; ++index1)
                 {
                     SqlParameter[] sqlParameterArray = new SqlParameter[16]
                     {
-            new SqlParameter("@NumeroCheque", (object) dtPago.Rows[index1]["Referencia"].ToString()),
-            new SqlParameter("@Total",liqPagoAnticipado!=null?(object) Convert.ToDecimal(dtDetallePago.Rows[index1]["Total"]): (object) Convert.ToDecimal(dtPago.Rows[index1]["Total"])),
-            new SqlParameter("@Saldo", (object) Convert.ToDecimal(dtPago.Rows[index1]["Saldo"])),
-            new SqlParameter("@NumeroCuenta", (object) dtPago.Rows[index1]["NumeroCuenta"].ToString()),
-            new SqlParameter("@FCheque", (object) Convert.ToDateTime(dtPago.Rows[index1]["FechaCheque"].ToString())),
-            new SqlParameter("@Cliente", (object) Convert.ToInt32(dtPago.Rows[index1]["Cliente"])),
-            new SqlParameter("@Banco", (object) Convert.ToInt16(dtPago.Rows[index1]["Banco"].ToString())),
-            new SqlParameter("@Observaciones", (object) dtPago.Rows[index1]["Observaciones"].ToString()),
-            new SqlParameter("@Estatus", (object) "EMITIDO"),
-            new SqlParameter("@TipoCobro", (object) dtPago.Rows[index1]["TipoCobro"].ToString()),
-            new SqlParameter("@Usuario", (object) dtPago.Rows[index1]["Usuario"].ToString()),
-            new SqlParameter("@SaldoAFavor", (object) dtPago.Rows[index1]["SaldoAFavor"].ToString()),
-            new SqlParameter("@TPV", (object) dtPago.Rows[index1]["TPV"].ToString()),
-            new SqlParameter("@BancoTarjeta", (object) Convert.ToInt16(dtPago.Rows[index1]["Banco"].ToString())),
-            new SqlParameter("@AñoCobro", SqlDbType.SmallInt),
-            null
+                        new SqlParameter("@NumeroCheque", (object) dtPago.Rows[index1]["Referencia"].ToString()),
+                        new SqlParameter("@Total",liqPagoAnticipado!=null?(object) Convert.ToDecimal(dtDetallePago.Rows[index1]["Total"]): (object) Convert.ToDecimal(dtPago.Rows[index1]["Total"])),
+                        new SqlParameter("@Saldo", (object) Convert.ToDecimal(dtPago.Rows[index1]["Saldo"])),
+                        new SqlParameter("@NumeroCuenta", (object) dtPago.Rows[index1]["NumeroCuenta"].ToString()),
+                        new SqlParameter("@FCheque", (object) Convert.ToDateTime(dtPago.Rows[index1]["FechaCheque"].ToString())),
+                        new SqlParameter("@Cliente", (object) Convert.ToInt32(dtPago.Rows[index1]["Cliente"])),
+                        new SqlParameter("@Banco", (object) Convert.ToInt16(dtPago.Rows[index1]["Banco"].ToString())),
+                        new SqlParameter("@Observaciones", (object) dtPago.Rows[index1]["Observaciones"].ToString()),
+                        new SqlParameter("@Estatus", (object) "EMITIDO"),
+                        new SqlParameter("@TipoCobro", (object) dtPago.Rows[index1]["TipoCobro"].ToString()),
+                        new SqlParameter("@Usuario", (object) dtPago.Rows[index1]["Usuario"].ToString()),
+                        new SqlParameter("@SaldoAFavor", (object) dtPago.Rows[index1]["SaldoAFavor"].ToString()),
+                        new SqlParameter("@TPV", (object) dtPago.Rows[index1]["TPV"].ToString()),
+                        new SqlParameter("@BancoTarjeta", (object) Convert.ToInt16(dtPago.Rows[index1]["Banco"].ToString())),
+                        new SqlParameter("@AñoCobro", SqlDbType.SmallInt),
+                        null
                     };
                     sqlParameterArray[14].Direction = ParameterDirection.Output;
                     sqlParameterArray[15] = new SqlParameter("@Cobro", SqlDbType.Int);
@@ -462,15 +464,17 @@ namespace SigametLiquidacion
                     for (int index2 = 0; index2 <= dtDetallePago.Rows.Count - 1; ++index2)
                     {
                         if (dtPago.Rows[index1]["IdPago"].ToString() == dtDetallePago.Rows[index2]["idPago"].ToString())
+                        {
                             this._dataAccess.ModifyData("spCobroPedidoAlta", CommandType.StoredProcedure, new SqlParameter[6]
                             {
-                new SqlParameter("@Celula", (object) Convert.ToInt16(dtDetallePago.Rows[index2]["Celula"])),
-                new SqlParameter("@AnoCobro", (object) num2),
-                new SqlParameter("@Cobro", (object) num1),
-                new SqlParameter("@AnoPed", (object) Convert.ToInt16(dtDetallePago.Rows[index2]["Anio"])),
-                new SqlParameter("@Pedido", (object) dtDetallePago.Rows[index2]["Pedido"].ToString()),
-                new SqlParameter("@Total", (object) Convert.ToDecimal(dtDetallePago.Rows[index2]["Total"]))
+                                new SqlParameter("@Celula", (object) Convert.ToInt16(dtDetallePago.Rows[index2]["Celula"])),
+                                new SqlParameter("@AnoCobro", (object) num2),
+                                new SqlParameter("@Cobro", (object) num1),
+                                new SqlParameter("@AnoPed", (object) Convert.ToInt16(dtDetallePago.Rows[index2]["Anio"])),
+                                new SqlParameter("@Pedido", (object) dtDetallePago.Rows[index2]["Pedido"].ToString()),
+                                new SqlParameter("@Total", (object) Convert.ToDecimal(dtDetallePago.Rows[index2]["Total"]))
                             });
+                        }
                     }
 
 

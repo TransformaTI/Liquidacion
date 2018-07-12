@@ -107,10 +107,7 @@ public partial class RegistroPagos : System.Web.UI.Page
         DataRow dr;
         bool valid = false;
         DataRow[] drArrayMov;
-
-
-
-
+        
         try
         {
             importeMovto = (Decimal)(Session["ImporteOperacion"]);
@@ -153,6 +150,14 @@ public partial class RegistroPagos : System.Web.UI.Page
                                     {
                                         drMov.BeginEdit();
                                         drMov["saldo"] = importeMovto;
+                                        if (importeMovto > 0)
+                                        {
+                                            drMov["SaldoAFavor"] = 1;
+                                        }
+                                        else
+                                        {
+                                            drMov["SaldoAFavor"] = 0;
+                                        }
                                         drMov.EndEdit();
                                     }
                                 }
@@ -301,14 +306,13 @@ public partial class RegistroPagos : System.Web.UI.Page
 
     protected void CancelaRelacionPagoPedido()
     {
-      foreach (DataRow pedidos in ds.Tables["CobroPedido"].Rows)
-            {
+        foreach (DataRow pedidos in ds.Tables["CobroPedido"].Rows)
+        {
             DataTable dtLiqAnticipo = ds.Tables["LiqPagoAnticipado"];
 
             if (dtLiqAnticipo!=null)
             {
-
-                    foreach (DataRow row in dtLiqAnticipo.Rows)
+                foreach (DataRow row in dtLiqAnticipo.Rows)
                 {
                     if (Session["PagoEnUsoAnticipo"].ToString() == row["Folio"].ToString() + row["AñoMovimiento"].ToString() && row["Pedidos"].ToString().Contains(pedidos["Pedido"].ToString()))
                     {
@@ -317,12 +321,9 @@ public partial class RegistroPagos : System.Web.UI.Page
                         row.EndEdit();
                     }
                 }
-
                 ds.Tables.Remove("LiqPagoAnticipado");
                 ds.Tables.Add(dtLiqAnticipo);
-
             }
-
         }
     }
     #endregion
@@ -332,49 +333,48 @@ public partial class RegistroPagos : System.Web.UI.Page
         decimal disponible = Convert.ToDecimal(Session["ImporteOperacion"]);
         try
         {
-            
             Decimal saldo;
                 
-                txtImporteDocto.Text = String.Format("{0:0.00}", gvPedidos.SelectedRow.Cells[8].Text.Replace("$", ""));
-                txtSaldoMovimiento.Text = String.Format("{0:0.00}", gvPedidos.SelectedRow.Cells[9].Text.Replace("$", ""));
+            txtImporteDocto.Text = String.Format("{0:0.00}", gvPedidos.SelectedRow.Cells[8].Text.Replace("$", ""));
+            txtSaldoMovimiento.Text = String.Format("{0:0.00}", gvPedidos.SelectedRow.Cells[9].Text.Replace("$", ""));
 
-		//Valido si el pedido tiene descuento y solo le digo de donde va a tomar el valor
-                //if (gvPedidos.SelectedRow.Cells[10].Text != "$0.00")
-		if ((gvPedidos.SelectedRow.Cells[10].Text.Trim().Length > 0) && (gvPedidos.SelectedRow.Cells[10].Text != "$0.00"))
+            //Valido si el pedido tiene descuento y solo le digo de donde va a tomar el valor
+            //if (gvPedidos.SelectedRow.Cells[10].Text != "$0.00")
+            if ((gvPedidos.SelectedRow.Cells[10].Text.Trim().Length > 0) && (gvPedidos.SelectedRow.Cells[10].Text != "$0.00"))
+            {
+                //Sacamos el saldo con el descuento 
+                try
                 {
-                    //Sacamos el saldo con el descuento 
-		    try
-                    {
-                      saldo = Convert.ToDecimal(gvPedidos.SelectedRow.Cells[8].Text.Replace("$", "")) - Convert.ToDecimal(gvPedidos.SelectedRow.Cells[10].Text.Replace("$", ""));
-                      lblDescuento.Text = "El pedido tiene un descuento por: " + String.Format("{0:0.00}", gvPedidos.SelectedRow.Cells[10].Text);
-                      lblDescuento.Visible = true;
-                    }
-                    catch (Exception ex)
-                    {
-                      saldo = Convert.ToDecimal(gvPedidos.SelectedRow.Cells[9].Text.Replace("$", ""));
-                      lblDescuento.Visible = false;
-                    }
+                    saldo = Convert.ToDecimal(gvPedidos.SelectedRow.Cells[8].Text.Replace("$", "")) - Convert.ToDecimal(gvPedidos.SelectedRow.Cells[10].Text.Replace("$", ""));
+                    lblDescuento.Text = "El pedido tiene un descuento por: " + String.Format("{0:0.00}", gvPedidos.SelectedRow.Cells[10].Text);
+                    lblDescuento.Visible = true;
                 }
-                else
+                catch (Exception ex)
                 {
                     saldo = Convert.ToDecimal(gvPedidos.SelectedRow.Cells[9].Text.Replace("$", ""));
                     lblDescuento.Visible = false;
                 }
+            }
+            else
+            {
+                saldo = Convert.ToDecimal(gvPedidos.SelectedRow.Cells[9].Text.Replace("$", ""));
+                lblDescuento.Visible = false;
+            }
 
-                //Si el disponible es mayor al monto total del pedido entonces pone el total en el txt
-                //if (disponible >= Convert.ToDecimal(gvPedidos.SelectedRow.Cells[7].Text.Replace("$", "")))
-                    if (disponible >= saldo)
-                    {
-                        txtImporteAbono.Text = saldo.ToString();
-                    }
-                    else if (disponible > 0)
-                    {
-                        txtImporteAbono.Text = String.Format("{0:0.00}", disponible);
-                    }
-                    else
-                    {
-                        txtImporteAbono.Text = "0.00";
-                    }
+            //Si el disponible es mayor al monto total del pedido entonces pone el total en el txt
+            //if (disponible >= Convert.ToDecimal(gvPedidos.SelectedRow.Cells[7].Text.Replace("$", "")))
+            if (disponible >= saldo)
+            {
+                txtImporteAbono.Text = saldo.ToString();
+            }
+            else if (disponible > 0)
+            {
+                txtImporteAbono.Text = String.Format("{0:0.00}", disponible);
+            }
+            else
+            {
+                txtImporteAbono.Text = "0.00";
+            }
         }
         catch (Exception ex)
         {
@@ -395,9 +395,9 @@ public partial class RegistroPagos : System.Web.UI.Page
 
         try
         {
-          referencia = gvPedidos.SelectedRow.Cells[2].Text.TrimEnd();
+            referencia = gvPedidos.SelectedRow.Cells[2].Text.TrimEnd();
             
-          pagoActivo = Session["idCobroConsec"].ToString();
+            pagoActivo = Session["idCobroConsec"].ToString();
             //Primer detalle del Pago 
                   
             if (ds.Tables["CobroPedido"].Rows.Count == 0)

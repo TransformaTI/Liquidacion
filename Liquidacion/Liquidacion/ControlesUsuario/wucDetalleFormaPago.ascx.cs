@@ -320,9 +320,7 @@ private void LlenaDropDowns()
             ScriptManager.RegisterStartupScript(this, GetType(), "saldo", "alert('El saldo debe ser mayor a cero');", true);
             return;
         }
-
-
-
+        
         if (dtLiqAnticipo.Columns.Count ==0)
         {
             dtLiqAnticipo.Columns.Add("Folio", typeof(String));
@@ -331,11 +329,10 @@ private void LlenaDropDowns()
             dtLiqAnticipo.Columns.Add("Monto", typeof(decimal));
             dtLiqAnticipo.Columns.Add("Pedidos", typeof(String));
         }
-
-
+        
         try
         {
-            ConsultaPedidos();
+            //ConsultaPedidosCliente();
 
             //ds = (DataSet)(Session["dsLiquidacion"]);
             int idConsecutivo = Session["idCobroConsec"] != null ? ((Int32)(Session["idCobroConsec"]) + 1) : 1;
@@ -385,7 +382,6 @@ private void LlenaDropDowns()
 
                 Session["idCliente"] = this.txtAntCliente.Text;
                 Session["idCobroConsec"] = idConsecutivo;
-
             }
             else
             {
@@ -431,21 +427,20 @@ private void LlenaDropDowns()
 
                 dtCobro.Rows.Add(dr);
                 Session["idCliente"] = this.txtAntCliente.Text;         
-
             }
 
             if (ds.Tables["LiqPagoAnticipado"]!=null)
-            dtLiqAnticipo = ds.Tables["LiqPagoAnticipado"];
+                dtLiqAnticipo = ds.Tables["LiqPagoAnticipado"];
 
             dtLiqAnticipo.Rows.Add(LstSaldos.SelectedValue.ToString().Split('/')[0], LstSaldos.SelectedValue.ToString().Split('/')[1], LstSaldos.SelectedValue.ToString().Split('/')[2], Convert.ToDecimal(this.txtAntMonto.Text),"");
 
-
-            if (ds.Tables.Contains("Pedidos"))
-            {
-                ds.Tables.Remove("Pedidos");
-            }
-            dtPedidos.TableName = "Pedidos";
-            ds.Tables.Add(dtPedidos);
+            //if (ds.Tables.Contains("Pedidos"))
+            //{
+            //    ds.Tables.Remove("Pedidos");
+            //}
+            //dtPedidos.TableName = "Pedidos";
+            //ds.Tables.Add(dtPedidos);
+            ActualizarSaldoPedidos();
 
             if (ds.Tables.Contains("LiqPagoAnticipado"))
             {
@@ -457,16 +452,14 @@ private void LlenaDropDowns()
             Session["dsLiquidacion"] = ds;
             Session["idCobroConsec"] = idConsecutivo;
 
-
             ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.replace('RegistroPagos.aspx');", true);  
-
-
         }
         catch (Exception ex)
         {
             lblError.Text = ex.Message;
         }
     }
+
     //protected void btnBuscarCliente_Click(object sender, EventArgs e)   {
     //    {
 
@@ -477,7 +470,7 @@ private void LlenaDropDowns()
     //        _datosCliente.ConsultaSaldosAFavor(Convert.ToInt32(this.txtAntCliente.Text),"",0,0);
     //        this.txtAntNombre.Text = _datosCliente.Nombre;
     //        // this.txtAntSaldo.Text = _datosCliente.Saldo.ToString();
-     
+
     //        LstSaldos.DataSource = _datosCliente.SaldosCliente;
     //        LstSaldos.DataTextField = "Saldo";
     //        LstSaldos.DataValueField = "AñoMovimiento";
@@ -492,7 +485,11 @@ private void LlenaDropDowns()
     //}
     //}
 
- private void ConsultaPedidos()
+    /// <summary>
+    /// Consulta los pedidos que correspondan al cliente seleccionado
+    /// y al folio actual
+    /// </summary>
+    private void ConsultaPedidosCliente()
     {
         int folio;
         //DataTable dtPedidosActual;
@@ -507,13 +504,10 @@ private void LlenaDropDowns()
         {
             folio = (Int32)Session["Folio"];
             dtPedidos = rp.PedidosLiquidacion(int.Parse(txtAntCliente.Text), folio);
-
-
+            dtPedidos.TableName = "Pedidos";
         }        
     }
-
-
-
+    
     private void ConsultaSaldos()
         {
 
@@ -650,21 +644,55 @@ private void LlenaDropDowns()
 
 
     }
-
-
-
+    
     protected void LstSaldos_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (LstSaldos.Items.Count >0)
         txtAntMonto.Text = LstSaldos.SelectedItem.Text.Split(',')[0].ToString().Replace("$","");
         ClaveAnticipo = LstSaldos.SelectedValue.ToString();
     }
-
-
-
-
+    
     protected void postback_Click(object sender, ImageClickEventArgs e)
     {
    
+    }
+    
+    private void ActualizarSaldoPedidos()
+    {
+        DataTable dtPedidosActual;
+        string pedidoReferencia, pedidoReferenciaCliente;
+        decimal saldoActual;
+
+        ConsultaPedidosCliente();
+        if (ds.Tables.Contains("Pedidos") && dtPedidos != null)
+        {
+            // Respaldar pedidos
+            dtPedidosActual = ds.Tables["Pedidos"];
+
+            foreach(DataRow rowPedido in dtPedidosActual.Rows)
+            {
+                pedidoReferencia = ((string)rowPedido["PedidoReferencia"]).Trim();
+                saldoActual = (decimal)rowPedido["Saldo"];
+
+                foreach (DataRow rowPedidoCliente in dtPedidos.Rows)
+                {
+                    pedidoReferenciaCliente = ((string)rowPedidoCliente["PedidoReferencia"]).Trim();
+                    //saldoCliente = (decimal)rowPedido["Saldo"];
+
+                    if (pedidoReferencia == pedidoReferenciaCliente)
+                    {
+                        rowPedidoCliente.BeginEdit();
+                        rowPedidoCliente["Saldo"] = saldoActual;
+                        rowPedidoCliente.EndEdit();
+                        break;
+                    }
+                }
+            }
+
+            //dtPedidos.TableName = "Pedidos";
+            ds.Tables.Remove("Pedidos");
+            ds.Tables.Add(dtPedidos);
+        }
+
     }
 }

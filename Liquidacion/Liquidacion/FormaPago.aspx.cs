@@ -74,7 +74,14 @@ public partial class FormaPago : System.Web.UI.Page
             {
                 LimpiarCampos("tarjeta");
                 LimpiarCampos("transferencia");
-                MuestraPagoSeleccionado(Request.Form["__EVENTTARGET"].ToString());
+                if (hfCargoTarjetaEncontrado.Value == "false")
+                {
+                    LimpiarCampos("tarjeta");
+                }
+                else
+                {
+                    MuestraPagoSeleccionado(Request.Form["__EVENTTARGET"].ToString());
+                }
             }
 
             if (Request.Form["__EVENTTARGET"] == "ConsultaCteAnticipo")
@@ -1118,6 +1125,8 @@ public partial class FormaPago : System.Web.UI.Page
         if (dtPagosConTarjeta.Rows.Count > 0)
         {
             CargaPrimerRegistro(sFormaPago);
+
+
 
             HiddenInputPCT.Value = "Si";
 

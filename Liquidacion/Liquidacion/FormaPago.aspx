@@ -45,7 +45,9 @@
 
             if (HiddenInputPCT == 'Si' && (HiddenInput == 'ConsultaTPV' || HiddenInput == 'ConsultaTPV-Trans') && NumPagos != '1') {
                 var respuesta = confirm(smMensajeCargo);
-
+                var bandera = document.getElementById('ctl00_MainPlaceHolder_hfCargoTarjetaEncontrado');
+                bandera.value = respuesta;
+                __doPostBack('SeleccionaPago', '');
                 if (respuesta == true) {
                     ShowModalPopup();
                 }
@@ -393,6 +395,7 @@
         </asp:ScriptManager>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" EnableViewState="true">
             <ContentTemplate>
+                <asp:HiddenField ID="hfCargoTarjetaEncontrado" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenInput" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenInputPCT" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenInputNumPagos" runat="server" Value="" />

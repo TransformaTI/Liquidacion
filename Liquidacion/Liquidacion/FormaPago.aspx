@@ -47,7 +47,19 @@
                 var respuesta = confirm(smMensajeCargo);
                 var bandera = document.getElementById('ctl00_MainPlaceHolder_hfCargoTarjetaEncontrado');
                 bandera.value = respuesta;
-                __doPostBack('SeleccionaPago', '');
+                if (respuesta == false)
+                {
+                    document.getElementById('ctl00_MainPlaceHolder_txtFechaTarjeta').value = '';
+                    document.getElementById('ctl00_MainPlaceHolder_txtNoAutorizacionTarjeta').value = '';
+                    document.getElementById('ctl00_MainPlaceHolder_txtNumTarjeta').value = '';
+                    document.getElementById('ctl00_MainPlaceHolder_txtImporteTarjeta').value = '';
+                    document.getElementById('ctl00_MainPlaceHolder_txtObservacionesTarjeta').value = '';
+                    document.getElementById('ctl00_MainPlaceHolder_ddTipTarjeta').selectedIndex = "0";
+                    document.getElementById('ctl00_MainPlaceHolder_ddBancoTarjeta').selectedIndex = "0";
+                    document.getElementById('ctl00_MainPlaceHolder_ddlBancoOrigen').selectedIndex = "0";
+                    document.getElementById('ctl00_MainPlaceHolder_chkLocal').checked = false;
+                }
+                
                 if (respuesta == true) {
                     ShowModalPopup();
                 }

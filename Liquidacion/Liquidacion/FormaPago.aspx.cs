@@ -300,8 +300,8 @@ public partial class FormaPago : System.Web.UI.Page
             // Tipo Tarjeta
 
             TipoTarjeta.Add("0", "Seleccione");
-            TipoTarjeta.Add("1", "Tarjeta de Debito");
-            TipoTarjeta.Add("2", "Tarjeta de Crédito");
+            TipoTarjeta.Add("19", "Tarjeta de Debito");
+            TipoTarjeta.Add("6", "Tarjeta de Crédito");
 
             ddTipoTarjeta.DataSource = TipoTarjeta;
             ddTipoTarjeta.DataTextField = "Value";
@@ -407,6 +407,8 @@ public partial class FormaPago : System.Web.UI.Page
                 Session["dsLiquidacion"] = dtCobro.DataSet;
 
                 Session["idCobroConsec"] = idConsecutivo;
+
+                Session["FormaPago"] = "Vale";
             }
             else
             {
@@ -455,6 +457,7 @@ public partial class FormaPago : System.Web.UI.Page
                 Session["dsLiquidacion"] = dtCobro.DataSet;
 
                 Session["idCobroConsec"] = idConsecutivo;
+                Session["FormaPago"] = "Vale";
             }
 
         
@@ -521,7 +524,7 @@ public partial class FormaPago : System.Web.UI.Page
                 Session["ImporteOperacion"] = importeOperacion;
 
                 Session["idCliente"] = txtClienteCheque.Text;
-
+                Session["FormaPago"] = "cheque";
             }
             else
             {
@@ -568,7 +571,7 @@ public partial class FormaPago : System.Web.UI.Page
 
                 Session["idCliente"] = txtClienteCheque.Text;
                 Session["dsLiquidacion"] = dtCobro.DataSet;
-
+                Session["FormaPago"] = "cheque";
             }
             Response.Redirect("RegistroPagos.aspx");
         }
@@ -608,7 +611,7 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["Status"] = "EMITIDO"; //CHECK THIS 
 
                 dr["FechaAlta"] = DateTime.Now.Date.ToString("dd/MM/yyyy");
-                dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.tipoTarjeta);
+                dr["TipoCobro"] = (Int16)(int.Parse(ddTipTarjeta.SelectedValue.ToString())); 
                 dr["Usuario"] = Convert.ToString(Session["Usuario"]); ;
 
                 dr["SaldoAFavor"] = 0;
@@ -627,6 +630,7 @@ public partial class FormaPago : System.Web.UI.Page
                 Session["idCobroConsec"] = 1;
                 importeOperacion = Convert.ToDecimal(txtImporteTarjeta.Text);
                 Session["ImporteOperacion"] = importeOperacion;
+                Session["FormaPago"] = "TDC";
             }
             else
             {
@@ -656,7 +660,7 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["Status"] = "EMITIDO"; //CHECK THIS 
 
                 dr["FechaAlta"] = DateTime.Now.Date.ToString("dd/MM/yyyy");
-                dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.tipoTarjeta);
+                dr["TipoCobro"] = (Int16)(int.Parse(ddTipTarjeta.SelectedValue.ToString()));
                 dr["Usuario"] = Convert.ToString(Session["Usuario"]); ;
 
                 dr["SaldoAFavor"] = 0;
@@ -671,6 +675,7 @@ public partial class FormaPago : System.Web.UI.Page
                 importeOperacion = Convert.ToDecimal(txtImporteTarjeta.Text);
                 Session["idCliente"] = txtClienteTarjeta.Text;
                 Session["ImporteOperacion"] = importeOperacion;
+                Session["FormaPago"] = "TDC";
             }
             Response.Redirect("RegistroPagos.aspx");
                 // your code here.
@@ -692,6 +697,7 @@ public partial class FormaPago : System.Web.UI.Page
 
             rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dtPedidosEf, null, null, (DataTable)(Session["dtResumenLiquidacion"]));
             Response.Redirect("ReporteLiquidacion.aspx");
+            Session["FormaPago"] = "Efectivo";
             //Parametros param = new Parametros(1, 1, 22);
             // Reporte
 

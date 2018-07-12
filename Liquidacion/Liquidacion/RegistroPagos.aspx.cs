@@ -49,6 +49,20 @@ public partial class RegistroPagos : System.Web.UI.Page
             else
             {
                 ds = (DataSet)(Session["dsLiquidacion"]);
+
+                if ( Session["FormaPago"]!=null)
+                {
+                    if (Session["FormaPago"].ToString()!="Anticipo")
+                    {
+
+                        DataTable dtPedidosNoParientes = (DataTable)Session["dtPedidos"];
+                        ds.Tables.Remove("Pedidos");
+                        dtPedidosNoParientes.TableName = "Pedidos";
+                        ds.Tables.Add(dtPedidosNoParientes);
+                        Session["dsLiquidacion"] = ds;
+                    }
+
+                }
             }
           
             idCliente = Convert.ToInt32(Session["idCliente"]);

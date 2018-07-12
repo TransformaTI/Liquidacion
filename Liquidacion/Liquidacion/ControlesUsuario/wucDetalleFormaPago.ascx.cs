@@ -451,6 +451,7 @@ private void LlenaDropDowns()
 
             Session["dsLiquidacion"] = ds;
             Session["idCobroConsec"] = idConsecutivo;
+            Session["FormaPago"] = "Anticipo";
 
             ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.replace('RegistroPagos.aspx');", true);  
         }

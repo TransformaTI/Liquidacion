@@ -188,22 +188,19 @@ namespace SigametLiquidacion
             this._dataAccess.LoadData(this.dtAfiliaciones, "spLiqConsultaAfiliacion", CommandType.StoredProcedure, sqlParameterArray, true);
         }
 
-        public void CargaPedidosLiquidacion(int Cliente)
+        public void CargaPedidosLiquidacion(int Cliente, int Folio)
         {
-            SqlParameter[] sqlParameterArray = new SqlParameter[1]
-          {
-                 new SqlParameter("@Cliente",Cliente)
-          };
+            //SqlParameter[] sqlParameterArray = new SqlParameter[1]
+            SqlParameter[] sqlParameterArray = new SqlParameter[2]
+            {
+                new SqlParameter("@Cliente", Cliente),
+                new SqlParameter("@Folio", Folio)
+            };
 
             this.dtPedidosLiq = new DataTable();
             this._dataAccess.LoadData(this.dtPedidosLiq, "spLIQAnticipoPedidos", CommandType.StoredProcedure, sqlParameterArray, true);
         }
-
-
-
-
-
-
+        
         private void CobroEnEfectivo(string Usuario, DataTable dtPedidos, ref DataTable dtPago, ref DataTable dtDetallePago)
         {
             DataRow[] dataRowArray = dtPedidos.Select("Saldo > 0");

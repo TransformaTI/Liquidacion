@@ -34,9 +34,9 @@ namespace SigametLiquidacion
     }
 
 
-    public DataTable PedidosLiquidacion(int Cliente)
+    public DataTable PedidosLiquidacion(int Cliente, int Folio)
     {
-            this._datos.CargaPedidosLiquidacion(Cliente);
+            this._datos.CargaPedidosLiquidacion(Cliente, Folio);
             this.dtPedidosLiqAnticipado = this._datos.PedidosLiquidacion;
             return this.dtPedidosLiqAnticipado;
     }

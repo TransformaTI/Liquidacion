@@ -494,8 +494,22 @@ private void LlenaDropDowns()
 
  private void ConsultaPedidos()
     {
-        dtPedidos= rp.PedidosLiquidacion(int.Parse(txtAntCliente.Text));
+        int folio;
+        //DataTable dtPedidosActual;
+        
+        //if (ds.Tables.Contains("Pedidos"))
+        //{
+        //    dtPedidosActual= ds.Tables["Pedidos"];
 
+        //}
+
+        if (Session["Folio"] != null)
+        {
+            folio = (Int32)Session["Folio"];
+            dtPedidos = rp.PedidosLiquidacion(int.Parse(txtAntCliente.Text), folio);
+
+
+        }        
     }
 
 

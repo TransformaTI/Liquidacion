@@ -40,9 +40,12 @@ public partial class RegistroPagos : System.Web.UI.Page
             {
                 ds = (DataSet)(Session["dsLiquidacion"]);
                 dtPedidos = ((DataTable)(Session["dtPedidos"]));
+                dtPedidos.TableName = "Pedidos";
 
-                ds.Tables["Pedidos"].Clear();
-                ds.Tables["Pedidos"].Merge(dtPedidos);
+                //ds.Tables["Pedidos"].Clear();
+                //ds.Tables["Pedidos"].Merge(dtPedidos);
+                ds.Tables.Remove("Pedidos");
+                ds.Tables.Add(dtPedidos);
             }
             else
             {

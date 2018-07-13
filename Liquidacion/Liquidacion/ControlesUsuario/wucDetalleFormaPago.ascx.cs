@@ -487,19 +487,11 @@ private void LlenaDropDowns()
     //}
 
     /// <summary>
-    /// Consulta los pedidos que correspondan al cliente seleccionado
-    /// y al folio actual
+    /// Consulta los pedidos que correspondan al cliente y folio seleccionados
     /// </summary>
     private void ConsultaPedidosCliente()
     {
         int folio;
-        //DataTable dtPedidosActual;
-        
-        //if (ds.Tables.Contains("Pedidos"))
-        //{
-        //    dtPedidosActual= ds.Tables["Pedidos"];
-
-        //}
 
         if (Session["Folio"] != null)
         {
@@ -670,7 +662,7 @@ private void LlenaDropDowns()
             // Respaldar pedidos
             dtPedidosActual = ds.Tables["Pedidos"];
 
-            foreach(DataRow rowPedido in dtPedidosActual.Rows)
+            foreach (DataRow rowPedido in dtPedidosActual.Rows)
             {
                 pedidoReferencia = ((string)rowPedido["PedidoReferencia"]).Trim();
                 saldoActual = (decimal)rowPedido["Saldo"];
@@ -690,10 +682,8 @@ private void LlenaDropDowns()
                 }
             }
 
-            //dtPedidos.TableName = "Pedidos";
             ds.Tables.Remove("Pedidos");
             ds.Tables.Add(dtPedidos);
         }
-
     }
 }

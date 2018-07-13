@@ -641,7 +641,7 @@ private void LlenaDropDowns()
     protected void LstSaldos_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (LstSaldos.Items.Count >0)
-        txtAntMonto.Text = LstSaldos.SelectedItem.Text.Split(',')[0].ToString().Replace("$","");
+            //txtAntMonto.Text = LstSaldos.SelectedItem.Text.Split(',')[0].ToString().Replace("$", "");
         ClaveAnticipo = LstSaldos.SelectedValue.ToString();
     }
     

@@ -52,12 +52,26 @@ public partial class FormaPago : System.Web.UI.Page
         {
             if (Request.Form["__EVENTTARGET"] == "ConsultaTPV")
             {
+
+
                 HiddenInput.Value = "ConsultaTPV";
                 if (txtClienteTarjeta.Text != string.Empty)
                 {
                     LimpiarCampos("tarjeta");
                     ConsultarCargoTarjeta(int.Parse(txtClienteTarjeta.Text), "tarjeta", int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
+                    txtNoAutorizacionTarjeta.ReadOnly = false;
+                    txtFechaTarjeta.ReadOnly = false;
+                    txtNumTarjeta.ReadOnly = false;
+                    txtImporteTarjeta.ReadOnly = false;
+                    ddBancoTarjeta.Enabled = true;
+                    ddlBancoOrigen.Enabled = true;
+                    ddTipTarjeta.Enabled = true;
+                    chkLocal.Enabled = true;
+                    txtObservacionesTarjeta.ReadOnly = false;
+                    imgCalendario0.Enabled = true;
                 }
+
+        
             }
 
             if (Request.Form["__EVENTTARGET"] == "ConsultaTPV-Trans")

@@ -26,26 +26,24 @@ public partial class RegistroPagos : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
         if (!Page.IsPostBack && Session["ImporteOperacion"].ToString()!=null)
         {
             lblImporteTotalA.Text = String.Format("{0:C}", decimal.Parse(Session["ImporteOperacion"].ToString()));
         }
         
         //dsLiquidacion es el dataset creado y obtenido por esquema, validamos que esté inicializado
-
         
-            if (Session["dsLiquidacion"] != null)
+        if (Session["dsLiquidacion"] != null)
+        {
+            // if (!Page.IsPostBack)
+            if (((DataSet)(Session["dsLiquidacion"])).Tables["Pedidos"].Rows.Count == 0)
             {
-               // if (!Page.IsPostBack)
-                if (((DataSet)(Session["dsLiquidacion"])).Tables["Pedidos"].Rows.Count == 0)
-                {
                 ds = (DataSet)(Session["dsLiquidacion"]);
                 dtPedidos = ((DataTable)(Session["dtPedidos"]));
 
                 ds.Tables["Pedidos"].Clear();
                 ds.Tables["Pedidos"].Merge(dtPedidos);
-               }
+            }
             else
             {
                 ds = (DataSet)(Session["dsLiquidacion"]);
@@ -54,14 +52,12 @@ public partial class RegistroPagos : System.Web.UI.Page
                 {
                     if (Session["FormaPago"].ToString()!="Anticipo")
                     {
-
                         DataTable dtPedidosNoParientes = (DataTable)Session["dtPedidos"];
                         ds.Tables.Remove("Pedidos");
                         dtPedidosNoParientes.TableName = "Pedidos";
                         ds.Tables.Add(dtPedidosNoParientes);
                         Session["dsLiquidacion"] = ds;
                     }
-
                 }
             }
           
@@ -70,17 +66,18 @@ public partial class RegistroPagos : System.Web.UI.Page
             CargaPedidos(ds.Tables["Pedidos"], idCliente, true);
         }
 
-        if (ds.Tables["CobroPedido"]!=null)
-         if (ds.Tables["CobroPedido"].Rows.Count > 0)
+        if (ds.Tables["CobroPedido"] != null)
         {
-            pagoActivo = Session["idCobroConsec"].ToString();
+            if (ds.Tables["CobroPedido"].Rows.Count > 0)
+            {
+                pagoActivo = Session["idCobroConsec"].ToString();
 
-            DataView vistaPagoActivo = new DataView(ds.Tables["CobroPedido"]);
-            vistaPagoActivo.RowFilter = "IdPago = " + pagoActivo;
-            gvRelacionCobro.DataSource = vistaPagoActivo;
-            gvRelacionCobro.DataBind();
+                DataView vistaPagoActivo = new DataView(ds.Tables["CobroPedido"]);
+                vistaPagoActivo.RowFilter = "IdPago = " + pagoActivo;
+                gvRelacionCobro.DataSource = vistaPagoActivo;
+                gvRelacionCobro.DataBind();
+            }
         }
-
     }
     #region "Functs and Subs"
     protected void CargaPedidos(DataTable dtPedidosCarga, int idCliente, bool orden)
@@ -92,17 +89,18 @@ public partial class RegistroPagos : System.Web.UI.Page
             {
                 ds.Tables["Pedidos"].Columns.Add("IdOrder");
             }
-                foreach (DataRow dr in ds.Tables["Pedidos"].Rows)
-                {
-                    if (Convert.ToInt32(dr["Cliente"]) == idCliente)
-                    {
-                        dr.BeginEdit();
-                        dr["IdOrder"] = i;
-                        dr.EndEdit();
 
-                        i++;
-                    }
+            foreach (DataRow dr in ds.Tables["Pedidos"].Rows)
+            {
+                if (Convert.ToInt32(dr["Cliente"]) == idCliente)
+                {
+                    dr.BeginEdit();
+                    dr["IdOrder"] = i;
+                    dr.EndEdit();
+
+                    i++;
                 }
+            }
             DataView vistaPedidos = new DataView(ds.Tables["Pedidos"]);
             vistaPedidos.Sort = "IdOrder DESC";
             gvPedidos.DataSource = vistaPedidos;

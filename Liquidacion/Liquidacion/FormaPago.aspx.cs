@@ -59,17 +59,19 @@ public partial class FormaPago : System.Web.UI.Page
                 {
                     LimpiarCampos("tarjeta");
                     ConsultarCargoTarjeta(int.Parse(txtClienteTarjeta.Text), "tarjeta", int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
-                    txtNoAutorizacionTarjeta.ReadOnly = false;
-                    txtFechaTarjeta.ReadOnly = false;
-                    txtNumTarjeta.ReadOnly = false;
-                    txtImporteTarjeta.ReadOnly = false;
-                    ddBancoTarjeta.Enabled = true;
-                    ddlBancoOrigen.Enabled = true;
-                    ddlTAfiliacion.Enabled = true;
-                    ddTipTarjeta.Enabled = true;
-                    chkLocal.Enabled = true;
-                    txtObservacionesTarjeta.ReadOnly = false;
-                    imgCalendario0.Enabled = true;
+                    txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
+                    txtFechaTarjeta.ReadOnly = txtFechaTarjeta.Text == "" ? false : true;
+                    txtNumTarjeta.ReadOnly = txtNumTarjeta.Text == "" ? false : true;
+                    txtImporteTarjeta.ReadOnly = txtImporteTarjeta.Text == "" ? false : true;
+                    ddBancoTarjeta.Enabled = ddBancoTarjeta.SelectedIndex == 0 ? true : false;
+                    ddlBancoOrigen.Enabled = ddlBancoOrigen.SelectedIndex == 0 ? true : false;
+                    ddlTAfiliacion.Enabled = ddlTAfiliacion.SelectedIndex == 0 ? true : false;
+                    ddTipTarjeta.Enabled = ddTipTarjeta.SelectedIndex == 0 ? true : false;
+
+                    txtObservacionesTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
+                    imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
+                    if (dtPagosConTarjeta.Rows.Count > 0)
+                        chkLocal.Enabled = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "" ? true : false;
                 }
 
         

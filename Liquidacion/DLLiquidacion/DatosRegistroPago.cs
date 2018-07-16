@@ -206,9 +206,39 @@ namespace SigametLiquidacion
             DataRow[] dataRowArray = dtPedidos.Select("Saldo > 0");
             DataRow row1 = (DataRow)null;
             Decimal num1 = new Decimal(0);
+            string pedidosefectivo = "";
             int num2 = 1;
-            if (dtPedidos != null && dtPedidos.Rows.Count > 0)
-                num1 = Convert.ToDecimal(dtPedidos.Compute("SUM(Saldo)", (string)null));
+            if (dtPedidos != null && dtPedidos.Rows.Count > 0 && dtDetallePago != null)
+                foreach (DataRow row in dtPedidos.Rows)
+                {
+                    
+
+                    foreach (DataRow rowdetalle in dtDetallePago.Rows)
+                    {
+                         if (row["Pedido"].ToString().Contains(rowdetalle["Pedido"].ToString()))
+                        {
+                            string idpago = rowdetalle["IdPago"].ToString();
+
+                            DataRow[] dr = dtPago.Select("IdPago='"+ idpago +"'");
+                                if (dr!=null && dr[0]["NombreTipoCobro"].ToString().ToUpper().Contains("EFECTIVO)"))
+                                {
+
+                                num1 = num1 +decimal.Parse(row["Saldo"].ToString());
+                                // Convert.ToDecimal(dtPedidos.Compute("SUM(Saldo)", (string)null));
+                                pedidosefectivo = pedidosefectivo + "," + rowdetalle["Pedido"].ToString();
+                            }
+
+                        }
+                    }
+                    /// if row
+                }   
+            else
+            {
+
+               num1 = Convert.ToDecimal(dtPedidos.Compute("SUM(Saldo)", (string)null));
+
+            }
+
             if (dtPago != null && dtPago.Rows.Count > 0)
             {
                 num2 = Convert.ToInt32(dtPago.Compute("MAX(IdPago)", (string)null)) + 1;
@@ -245,9 +275,9 @@ namespace SigametLiquidacion
                 dtDetallePago.Columns.Add(new DataColumn("Impuesto"));
                 dtDetallePago.Columns.Add(new DataColumn("Total"));
             }
-            foreach (DataRow dataRow in dataRowArray)
+            foreach (DataRow dataRow in dataRowArray )
             {
-                if (row1 == null)
+                if (row1 == null && num1 > 0)
                 {
                     row1 = dtPago.NewRow();
                     row1.BeginEdit();
@@ -274,17 +304,20 @@ namespace SigametLiquidacion
                     row1.EndEdit();
                     dtPago.Rows.Add(row1);
                 }
-                DataRow row2 = dtDetallePago.NewRow();
-                row2.BeginEdit();
-                row2["IdPago"] = (object)num2;
-                row2["Pedido"] = dataRow["Pedido"];
-                row2["Celula"] = dataRow["Celula"];
-                row2["Anio"] = dataRow["AñoPed"];
-                row2["Importe"] = dataRow["Total"];
-                row2["Impuesto"] = (object)0;
-                row2["Total"] = dataRow["Saldo"];
-                row2.EndEdit();
-                dtDetallePago.Rows.Add(row2);
+                if ( num1 > 0)
+                {
+                    DataRow row2 = dtDetallePago.NewRow();
+                    row2.BeginEdit();
+                    row2["IdPago"] = (object)num2;
+                    row2["Pedido"] = dataRow["Pedido"];
+                    row2["Celula"] = dataRow["Celula"];
+                    row2["Anio"] = dataRow["AñoPed"];
+                    row2["Importe"] = dataRow["Total"];
+                    row2["Impuesto"] = (object)0;
+                    row2["Total"] = dataRow["Saldo"];
+                    row2.EndEdit();
+                    dtDetallePago.Rows.Add(row2);
+                }
             }
         }
 
@@ -417,11 +450,10 @@ namespace SigametLiquidacion
             int cobro = 0;
             try
             {
-                if (liqPagoAnticipado == null)
-                {
+
                     this.CobroDescuentos(Usuario, dtPedidos, ref dtPago, ref dtDetallePago);
                     this.CobroEnEfectivo(Usuario, dtPedidos, ref dtPago, ref dtDetallePago);
-                }
+
                 this.ValidaStatusAutotanqueTurno((int)Convert.ToInt16(dtResumenLiquidacion.Rows[0]["AñoAtt"]), Convert.ToInt32(dtResumenLiquidacion.Rows[0]["Folio"]));
 
                 if (!(this.dtAutoTanque.Rows[0]["StatusLogistica"].ToString().Trim() == "CIERRE"))

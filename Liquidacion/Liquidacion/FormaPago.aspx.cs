@@ -65,6 +65,7 @@ public partial class FormaPago : System.Web.UI.Page
                     txtImporteTarjeta.ReadOnly = false;
                     ddBancoTarjeta.Enabled = true;
                     ddlBancoOrigen.Enabled = true;
+                    ddlTAfiliacion.Enabled = true;
                     ddTipTarjeta.Enabled = true;
                     chkLocal.Enabled = true;
                     txtObservacionesTarjeta.ReadOnly = false;
@@ -269,8 +270,6 @@ public partial class FormaPago : System.Web.UI.Page
         DataTable dtPromocion = new DataTable();
         Dictionary<string, string> TipoTarjeta = new Dictionary<string, string>();
 
-
-
         try
         {
             dtBancos = rp.ListaBancos();
@@ -322,12 +321,17 @@ public partial class FormaPago : System.Web.UI.Page
             ddTipoTarjeta.DataValueField = "Key";
             ddTipoTarjeta.DataBind();
 
-
-
             ddTipTarjeta.DataSource = TipoTarjeta;
             ddTipTarjeta.DataTextField = "Value";
             ddTipTarjeta.DataValueField = "Key";
             ddTipTarjeta.DataBind();
+
+            ddlTAfiliacion.DataSource = dtAfiliaciones;
+            ddlTAfiliacion.DataTextField = "NumeroAfiliacion";
+            ddlTAfiliacion.DataValueField = "Afiliacion";
+            ddlTAfiliacion.DataBind();
+            ddlTAfiliacion.Items.Insert(0, new ListItem("- Seleccione -", "0"));
+            ddlTAfiliacion.SelectedIndex = 0;
 
             ddAfiliacion.DataSource = dtAfiliaciones;
             ddAfiliacion.DataTextField = "NumeroAfiliacion";
@@ -336,14 +340,12 @@ public partial class FormaPago : System.Web.UI.Page
             ddAfiliacion.Items.Insert(0, new ListItem("- Seleccione -", "0"));
             ddAfiliacion.SelectedIndex = 0;
 
-
             ddlProveedor.DataSource = dtProveedores;
             ddlProveedor.DataTextField = "NombreProveedor";
             ddlProveedor.DataValueField = "ValeProveedor";
             ddlProveedor.DataBind();
             ddlProveedor.Items.Insert(0, new ListItem("- Seleccione -", "0"));
             ddlProveedor.SelectedIndex = 0;
-
 
             ddlTipoVale.DataSource = dtTipoVale;
             ddlTipoVale.DataTextField = "Descripcion";

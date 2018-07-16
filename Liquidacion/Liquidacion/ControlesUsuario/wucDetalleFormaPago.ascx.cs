@@ -212,6 +212,7 @@ private void LlenaDropDowns()
     {
         try
         {
+            Session["FormaPago"] = "Transferencia";
             int idConsecutivo = Session["idCobroConsec"] != null ? ((Int32)(Session["idCobroConsec"]) + 1) : 1;
 
             if ((DataSet)(Session["dsLiquidacion"]) != null)

@@ -218,67 +218,46 @@
                  return false;
             }
 
-                 if (document.getElementById('<%=txtNombreClienteTarjeta.ClientID%>').value == "")
+            if (document.getElementById('<%=txtNombreClienteTarjeta.ClientID%>').value == "")
             {
                 alert('El nombre del cliente es requerido');
                  return false;
             }
 
-            
-
-             if (document.getElementById('<%=HiddenInputPCT.ClientID%>').value == "No")
-             {
-              if (document.getElementById('<%=txtNoAutorizacionTarjeta.ClientID%>').value == "")
-                   {
-                         alert('Capture el número de Autorizacion');
-                         return false;
-                 }
-
-
-
-                 if (document.getElementById('<%=txtNoAutorizacionTarjetaConfirm.ClientID%>').value == "")
-                  {
-                            alert('Confirme el número de autorización');
-                         return false; 
-                 }
-
-                 if (document.getElementById('<%=txtNoAutorizacionTarjetaConfirm.ClientID%>').value != document.getElementById('<%=txtNoAutorizacionTarjeta.ClientID%>').value)
-                 {
-                     alert('Los números de autorización no coinciden');
-                     return false;
-                 }
-
-                 if (document.getElementById('<%=ddBancoTarjeta.ClientID%>').selectedIndex == "0")
-                 {
-                     alert('Seleccione un banco de la tarjeta');
-                       return false;
-                 }
-
-
+            if (document.getElementById('<%=HiddenInputPCT.ClientID%>').value == "No")
+            {
+                if (document.getElementById('<%=txtNoAutorizacionTarjeta.ClientID%>').value == "")
+                {
+                        alert('Capture el número de Autorizacion');
+                        return false;
+                }
+                if (document.getElementById('<%=txtNoAutorizacionTarjetaConfirm.ClientID%>').value == "")
+                {
+                        alert('Confirme el número de autorización');
+                        return false; 
+                }
+                if (document.getElementById('<%=txtNoAutorizacionTarjetaConfirm.ClientID%>').value != document.getElementById('<%=txtNoAutorizacionTarjeta.ClientID%>').value)
+                {
+                    alert('Los números de autorización no coinciden');
+                    return false;
+                }
+                if (document.getElementById('<%=ddBancoTarjeta.ClientID%>').selectedIndex == "0")
+                {
+                    alert('Seleccione un banco de la tarjeta');
+                    return false;
+                }
                 if (document.getElementById('<%=ddlBancoOrigen.ClientID%>').selectedIndex == "0")
-                 {
-                     alert('Seleccione un banco origen');
-                       return false;
-                 }
-
+                {
+                    alert('Seleccione un banco origen');
+                    return false;
+                }
                 if (document.getElementById('<%=txtImporteTarjeta.ClientID%>').value == "")
-                 {
-                     alert('Capture el Importe');
-                       return false;
-                 }
-
-                 
-
-               
-            }
-
-
-           
+                {
+                    alert('Capture el Importe');
+                    return false;
+                }
+            }  
         }
-
-
-
-
 
     </script>
 
@@ -634,6 +613,7 @@
                                     </tr>
                                     <tr>
                                         <td valign="top">
+                                            <%-- =====      TARJETA     ===== --%>
                                             <div id="tarjeta" style="display: none; vertical-align: top">
                                                 <table style="background-color: #e1f8e2; height: 360px; width: 900px">
 
@@ -643,6 +623,7 @@
                                                                 Text="Tarjeta"></asp:Label>
                                                         </td>
                                                     </tr>
+                                                    <%-- Cliente --%>
                                                     <tr>
                                                         <td class="style1">
                                                             <asp:Label ID="lblCLiente" runat="server" CssClass="labeltipopagoforma"
@@ -661,6 +642,7 @@
                                                             <ccR:FilteredTextBoxExtender ID="ftbClienteTC" runat="server" TargetControlID="txtClienteTarjeta" FilterType="Numbers"></ccR:FilteredTextBoxExtender>
                                                         </td>
                                                     </tr>
+                                                    <%-- Nombre --%>
                                                     <tr>
                                                         <td class="style1">
                                                             <asp:Label ID="lblNombre" runat="server" CssClass="labeltipopagoforma"
@@ -671,6 +653,7 @@
                                                                 Width="200px" ReadOnly="True"></asp:TextBox>
                                                         </td>
                                                     </tr>
+                                                    <%-- Fecha documento --%>
                                                     <tr>
                                                         <td class="style1">
                                                             <asp:Label ID="lblFechaCheque0" runat="server" CssClass="labeltipopagoforma"
@@ -693,32 +676,44 @@
                                                             </ccR:ValidatorCalloutExtender>
                                                         </td>
                                                     </tr>
-
-
-
-
-
-
+                                                    <%-- Afiliación --%>
                                                     <tr>
-                                            <td class="style1">
-                                                <asp:Label ID="Label16" runat="server" CssClass="labeltipopagoforma"
-                                                    Text="Tipo Tarjeta:"></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:DropDownList ID="ddTipTarjeta" runat="server" CssClass="textboxcaptura" enabled="false"
-                                                    Width="200px">
-                                                </asp:DropDownList>
-                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
-                                                    ControlToValidate="ddTipTarjeta" Display="None"
-                                                    ErrorMessage="Seleccione el Tipo Tarjeta"
-                                                    ValidationGroup="Tarjeta" InitialValue="0"></asp:RequiredFieldValidator>
-                                                <ccR:ValidatorCalloutExtender ID="ValidatorCalloutExtender6" runat="server"
-                                                    TargetControlID="rfvTipoTarjeta">
-                                                </ccR:ValidatorCalloutExtender>
-                                            </td>
-                                        </tr>
-
-
+                                                        <td class="style1">
+                                                            <asp:Label ID="Label17" runat="server" CssClass="labeltipopagoforma"
+                                                                Text="Afiliación:"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:DropDownList ID="ddlTAfiliacion" runat="server" CssClass="textboxcaptura"
+                                                                Width="200px" Enabled="false">
+                                                            </asp:DropDownList>
+                                                            <asp:RequiredFieldValidator ID="rfvTAfiliacion" runat="server"
+                                                                ControlToValidate="ddlTAfiliacion" Display="None"
+                                                                ErrorMessage="Seleccione la afiliación"
+                                                                ValidationGroup="Tarjeta" InitialValue="0"></asp:RequiredFieldValidator>
+                                                            <ccR:ValidatorCalloutExtender ID="vceTAfiliacion" runat="server"
+                                                                TargetControlID="rfvTAfiliacion">
+                                                            </ccR:ValidatorCalloutExtender>
+                                                        </td>
+                                                    </tr>
+                                                    <%-- Tipo tarjeta --%>
+                                                    <tr>
+                                                        <td class="style1">
+                                                            <asp:Label ID="Label16" runat="server" CssClass="labeltipopagoforma"
+                                                                Text="Tipo Tarjeta:"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:DropDownList ID="ddTipTarjeta" runat="server" CssClass="textboxcaptura" enabled="false"
+                                                                Width="200px">
+                                                            </asp:DropDownList>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
+                                                                ControlToValidate="ddTipTarjeta" Display="None"
+                                                                ErrorMessage="Seleccione el Tipo Tarjeta"
+                                                                ValidationGroup="Tarjeta" InitialValue="0"></asp:RequiredFieldValidator>
+                                                            <ccR:ValidatorCalloutExtender ID="ValidatorCalloutExtender6" runat="server"
+                                                                TargetControlID="rfvTipoTarjeta">
+                                                            </ccR:ValidatorCalloutExtender>
+                                                        </td>
+                                                    </tr>
 
                                                     <tr>
                                                         <td class="style1">

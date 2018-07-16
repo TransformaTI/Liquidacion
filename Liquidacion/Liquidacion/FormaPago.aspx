@@ -256,6 +256,11 @@
                     alert('Capture el Importe');
                     return false;
                 }
+                if (document.getElementById('<%= ddlTAfiliacion.ClientID %>').selectedIndex == "0")
+                {
+                    alert('Seleccione una afiliación');
+                    return false;
+                }
             }  
         }
 

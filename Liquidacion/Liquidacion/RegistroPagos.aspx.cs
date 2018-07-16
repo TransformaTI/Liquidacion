@@ -44,8 +44,6 @@ public partial class RegistroPagos : System.Web.UI.Page
 
                 if (Session["FormaPago"] != null && (string)Session["FormaPago"] != "Anticipo")
                 {
-                    //ds.Tables["Pedidos"].Clear();
-                    //ds.Tables["Pedidos"].Merge(dtPedidos);
                     ds.Tables.Remove("Pedidos");
                     ds.Tables.Add(dtPedidos);
                 }

@@ -50,14 +50,24 @@
                 if (respuesta == false)
                 {
                     document.getElementById('ctl00_MainPlaceHolder_txtFechaTarjeta').value = '';
+                    document.getElementById('ctl00_MainPlaceHolder_txtFechaTarjeta').readOnly = false;
+                    document.getElementById('ctl00_MainPlaceHolder_imgCalendario0').disabled = false;
                     document.getElementById('ctl00_MainPlaceHolder_txtNoAutorizacionTarjeta').value = '';
+                    document.getElementById('ctl00_MainPlaceHolder_txtNoAutorizacionTarjeta').readOnly = false;
                     document.getElementById('ctl00_MainPlaceHolder_txtNumTarjeta').value = '';
+                    document.getElementById('ctl00_MainPlaceHolder_txtNumTarjeta').readOnly = false;
                     document.getElementById('ctl00_MainPlaceHolder_txtImporteTarjeta').value = '';
+                    document.getElementById('ctl00_MainPlaceHolder_txtImporteTarjeta').readOnly = false;
                     document.getElementById('ctl00_MainPlaceHolder_txtObservacionesTarjeta').value = '';
+                    document.getElementById('ctl00_MainPlaceHolder_txtObservacionesTarjeta').readOnly = false;
                     document.getElementById('ctl00_MainPlaceHolder_ddTipTarjeta').selectedIndex = "0";
+                    document.getElementById('ctl00_MainPlaceHolder_ddTipTarjeta').disabled = false;
                     document.getElementById('ctl00_MainPlaceHolder_ddBancoTarjeta').selectedIndex = "0";
+                    document.getElementById('ctl00_MainPlaceHolder_ddBancoTarjeta').disabled = false;
                     document.getElementById('ctl00_MainPlaceHolder_ddlBancoOrigen').selectedIndex = "0";
+                    document.getElementById('ctl00_MainPlaceHolder_ddlBancoOrigen').disabled = false;
                     document.getElementById('ctl00_MainPlaceHolder_chkLocal').checked = false;
+                    document.getElementById('ctl00_MainPlaceHolder_chkLocal').disabled = false;
                 }
                 
                 if (respuesta == true) {

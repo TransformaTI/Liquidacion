@@ -1063,6 +1063,8 @@ public partial class FormaPago : System.Web.UI.Page
     /// <param name="sTipoConsulta"></param>
     private void MuestraPagoSeleccionado(string sTipoConsulta)
     {
+        string afiliacion = "";
+        ListItem liAfiliacion = null;
 
         if (Request.Form["__EVENTTARGET"].ToString().Contains("tarjeta"))
         {
@@ -1079,7 +1081,25 @@ public partial class FormaPago : System.Web.UI.Page
             txtImporteTarjeta.Text = dtPagosConTarjetaSelec[0]["Importe"].ToString().ToString().Replace("$", "");
             txtObservacionesTarjeta.Text = dtPagosConTarjetaSelec[0]["Observacion"].ToString();
             txtNoAutorizacionTarjeta.ReadOnly = true;
-            ddlTAfiliacion.SelectedValue = Convert.ToString((int)(dtPagosConTarjetaSelec[0]["Afiliacion"]));
+            //ddlTAfiliacion.SelectedValue = Convert.ToString((int)(dtPagosConTarjetaSelec[0]["Afiliacion"]));
+            
+            afiliacion = dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString() == "" ?
+                "0" : Convert.ToString(dtPagosConTarjeta.Rows[0]["Afiliacion"]);
+
+            liAfiliacion = ddlTAfiliacion.Items.FindByValue(afiliacion);
+            try
+            {
+                ddlTAfiliacion.SelectedValue = afiliacion;
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("ddlTAfiliacion"))
+                {
+                    ddlTAfiliacion.Enabled = false;
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('La afiliación es incorrecta. Verifíque.');", true);
+                }
+            }
+
             ddTipTarjeta.SelectedIndex = int.Parse(dtPagosConTarjetaSelec[0]["TipoTarjeta"].ToString());
             chkLocal.Checked = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "True" ? true : false;
             txtFechaTarjeta.Text = DateTime.Parse(dtPagosConTarjetaSelec[0]["FAlta"].ToString()).ToShortDateString();
@@ -1091,7 +1111,7 @@ public partial class FormaPago : System.Web.UI.Page
             txtImporteTarjeta.ReadOnly = txtImporteTarjeta.Text == "" ? false : true;
             ddBancoTarjeta.Enabled = ddBancoTarjeta.SelectedIndex == 0 ? true : false;
             ddlBancoOrigen.Enabled = ddlBancoOrigen.SelectedIndex == 0 ? true : false;
-            ddlTAfiliacion.Enabled = ddlTAfiliacion.SelectedIndex == 0 ? true : false;
+            //ddlTAfiliacion.Enabled = ddlTAfiliacion.SelectedIndex == 0 ? true : false;
             ddTipTarjeta.Enabled = ddTipTarjeta.SelectedIndex == 0 ? true : false;
             chkLocal.Enabled = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "" ? true : false;
             txtObservacionesTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
@@ -1198,6 +1218,9 @@ public partial class FormaPago : System.Web.UI.Page
     /// <param name="sFormaPago"></param>
     private void CargaPrimerRegistro(string sFormaPago)
     {
+        string afiliacion = "";
+        ListItem liAfiliacion = null;
+
         switch (sFormaPago)
         {
             case "tarjeta":
@@ -1209,34 +1232,50 @@ public partial class FormaPago : System.Web.UI.Page
                 ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
                 txtImporteTarjeta.Text = dtPagosConTarjeta.Rows[0]["Importe"].ToString().Replace("$", "");
                 txtObservacionesTarjeta.Text = dtPagosConTarjeta.Rows[0]["Observacion"].ToString();
-                if (ddlTAfiliacion.Items.Count > 0)
+                //if (ddlTAfiliacion.Items.Count > 0)
+                //{
+                //    string ValorElegido = dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString() == "" ? "0" : Convert.ToString(dtPagosConTarjeta.Rows[0]["Afiliacion"]);
+                //    try
+                //    {
+                //        ddlTAfiliacion.SelectedValue = ValorElegido;
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        if (ex.Message.Contains("ddlTAfiliacion"))
+                //        {
+                //            ddlTAfiliacion.Items.Clear();
+                //            ddlTAfiliacion.Items.Add(ValorElegido);
+                //            ddlTAfiliacion.SelectedValue = ValorElegido;
+                //        }
+                //    }
+                //}
+
+                afiliacion = dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString() == "" ?
+                    "0" : Convert.ToString(dtPagosConTarjeta.Rows[0]["Afiliacion"]);
+
+                liAfiliacion = ddlTAfiliacion.Items.FindByValue(afiliacion);
+                try
                 {
-                    string ValorElegido = dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString() == "" ? "0" : Convert.ToString(dtPagosConTarjeta.Rows[0]["Afiliacion"]);
-                    try
+                    ddlTAfiliacion.SelectedValue = afiliacion;
+                }
+                catch (Exception ex)
+                {
+                    if (ex.Message.Contains("ddlTAfiliacion"))
                     {
-                        ddlTAfiliacion.SelectedValue = ValorElegido;
-                    }
-                    catch(Exception ex)
-                    {
-                        if (ex.Message.Contains("ddlTAfiliacion"))
-                        {
-                            ddlTAfiliacion.Items.Clear();
-                            ddlTAfiliacion.Items.Add(ValorElegido);
-                            ddlTAfiliacion.SelectedValue = ValorElegido;
-                        }
+                        ddlTAfiliacion.Enabled = false;
+                        ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('La afiliación es incorrecta. Verifíque.');", true);
                     }
                 }
+
                 ddTipTarjeta.SelectedIndex= dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()!=""?int.Parse(dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()):0;
                 chkLocal.Checked = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "True" ? true : false;
-
-
                 txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
                 txtFechaTarjeta.ReadOnly= txtFechaTarjeta.Text == "" ? false : true;
                 txtNumTarjeta.ReadOnly= txtNumTarjeta.Text == "" ? false : true;
                 txtImporteTarjeta.ReadOnly= txtImporteTarjeta.Text == "" ? false : true;
                 ddBancoTarjeta.Enabled = ddBancoTarjeta.SelectedIndex == 0 ? true : false;
                 ddlBancoOrigen.Enabled = ddlBancoOrigen.SelectedIndex == 0 ? true:false;
-                ddlTAfiliacion.Enabled = ddlTAfiliacion.SelectedIndex == 0 ? true : false;
+                //ddlTAfiliacion.Enabled = ddlTAfiliacion.SelectedIndex == 0 ? true : false;
                 ddTipTarjeta.Enabled = ddTipTarjeta.SelectedIndex == 0 ? true : false;
                 chkLocal.Enabled = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "" ? true : false;
                 txtObservacionesTarjeta.ReadOnly= txtNoAutorizacionTarjeta.Text == "" ? false : true;
@@ -1339,5 +1378,5 @@ public partial class FormaPago : System.Web.UI.Page
     {
         Response.Redirect("WebForm2.aspx");
     }
-    
+
 }   

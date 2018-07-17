@@ -1209,8 +1209,23 @@ public partial class FormaPago : System.Web.UI.Page
                 ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
                 txtImporteTarjeta.Text = dtPagosConTarjeta.Rows[0]["Importe"].ToString().Replace("$", "");
                 txtObservacionesTarjeta.Text = dtPagosConTarjeta.Rows[0]["Observacion"].ToString();
-                ddlTAfiliacion.SelectedValue
-                    = dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString() == "" ? "0" : Convert.ToString(dtPagosConTarjeta.Rows[0]["Afiliacion"]);
+                if (ddlTAfiliacion.Items.Count > 0)
+                {
+                    string ValorElegido = dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString() == "" ? "0" : Convert.ToString(dtPagosConTarjeta.Rows[0]["Afiliacion"]);
+                    try
+                    {
+                        ddlTAfiliacion.SelectedValue = ValorElegido;
+                    }
+                    catch(Exception ex)
+                    {
+                        if (ex.Message.Contains("ddlTAfiliacion"))
+                        {
+                            ddlTAfiliacion.Items.Clear();
+                            ddlTAfiliacion.Items.Add(ValorElegido);
+                            ddlTAfiliacion.SelectedValue = ValorElegido;
+                        }
+                    }
+                }
                 ddTipTarjeta.SelectedIndex= dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()!=""?int.Parse(dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()):0;
                 chkLocal.Checked = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "True" ? true : false;
 

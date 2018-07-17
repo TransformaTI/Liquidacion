@@ -68,6 +68,8 @@
                     document.getElementById('ctl00_MainPlaceHolder_ddlBancoOrigen').disabled = false;
                     document.getElementById('ctl00_MainPlaceHolder_chkLocal').checked = false;
                     document.getElementById('ctl00_MainPlaceHolder_chkLocal').disabled = false;
+                    document.getElementById('ctl00_MainPlaceHolder_ddlTAfiliacion').selectedIndex = "0";
+                    document.getElementById('ctl00_MainPlaceHolder_ddlTAfiliacion').disabled = false;
                 }
                 
                 if (respuesta == true) {

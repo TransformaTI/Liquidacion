@@ -1081,25 +1081,9 @@ public partial class FormaPago : System.Web.UI.Page
             txtImporteTarjeta.Text = dtPagosConTarjetaSelec[0]["Importe"].ToString().ToString().Replace("$", "");
             txtObservacionesTarjeta.Text = dtPagosConTarjetaSelec[0]["Observacion"].ToString();
             txtNoAutorizacionTarjeta.ReadOnly = true;
-            //ddlTAfiliacion.SelectedValue = Convert.ToString((int)(dtPagosConTarjetaSelec[0]["Afiliacion"]));
+
+            ddlTAfiliacion.SelectedIndex = ddlTAfiliacion.Items.IndexOf(ddlTAfiliacion.Items.FindByValue(dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString()));
             
-            afiliacion = dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString() == "" ?
-                "0" : Convert.ToString(dtPagosConTarjeta.Rows[0]["Afiliacion"]);
-
-            liAfiliacion = ddlTAfiliacion.Items.FindByValue(afiliacion);
-            try
-            {
-                ddlTAfiliacion.SelectedValue = afiliacion;
-            }
-            catch (Exception ex)
-            {
-                if (ex.Message.Contains("ddlTAfiliacion"))
-                {
-                    ddlTAfiliacion.Enabled = false;
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('La afiliación es incorrecta. Verifíque.');", true);
-                }
-            }
-
             ddTipTarjeta.SelectedIndex = int.Parse(dtPagosConTarjetaSelec[0]["TipoTarjeta"].ToString());
             chkLocal.Checked = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "True" ? true : false;
             txtFechaTarjeta.Text = DateTime.Parse(dtPagosConTarjetaSelec[0]["FAlta"].ToString()).ToShortDateString();
@@ -1111,7 +1095,7 @@ public partial class FormaPago : System.Web.UI.Page
             txtImporteTarjeta.ReadOnly = txtImporteTarjeta.Text == "" ? false : true;
             ddBancoTarjeta.Enabled = ddBancoTarjeta.SelectedIndex == 0 ? true : false;
             ddlBancoOrigen.Enabled = ddlBancoOrigen.SelectedIndex == 0 ? true : false;
-            //ddlTAfiliacion.Enabled = ddlTAfiliacion.SelectedIndex == 0 ? true : false;
+            ddlTAfiliacion.Enabled = ddlTAfiliacion.SelectedIndex == 0 ? true : false;
             ddTipTarjeta.Enabled = ddTipTarjeta.SelectedIndex == 0 ? true : false;
             chkLocal.Enabled = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "" ? true : false;
             txtObservacionesTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
@@ -1232,41 +1216,8 @@ public partial class FormaPago : System.Web.UI.Page
                 ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
                 txtImporteTarjeta.Text = dtPagosConTarjeta.Rows[0]["Importe"].ToString().Replace("$", "");
                 txtObservacionesTarjeta.Text = dtPagosConTarjeta.Rows[0]["Observacion"].ToString();
-                //if (ddlTAfiliacion.Items.Count > 0)
-                //{
-                //    string ValorElegido = dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString() == "" ? "0" : Convert.ToString(dtPagosConTarjeta.Rows[0]["Afiliacion"]);
-                //    try
-                //    {
-                //        ddlTAfiliacion.SelectedValue = ValorElegido;
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        if (ex.Message.Contains("ddlTAfiliacion"))
-                //        {
-                //            ddlTAfiliacion.Items.Clear();
-                //            ddlTAfiliacion.Items.Add(ValorElegido);
-                //            ddlTAfiliacion.SelectedValue = ValorElegido;
-                //        }
-                //    }
-                //}
-
-                afiliacion = dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString() == "" ?
-                    "0" : Convert.ToString(dtPagosConTarjeta.Rows[0]["Afiliacion"]);
-
-                liAfiliacion = ddlTAfiliacion.Items.FindByValue(afiliacion);
-                try
-                {
-                    ddlTAfiliacion.SelectedValue = afiliacion;
-                }
-                catch (Exception ex)
-                {
-                    if (ex.Message.Contains("ddlTAfiliacion"))
-                    {
-                        ddlTAfiliacion.Enabled = false;
-                        ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('La afiliación es incorrecta. Verifíque.');", true);
-                    }
-                }
-
+                ddlTAfiliacion.SelectedIndex = ddlTAfiliacion.Items.IndexOf(ddlTAfiliacion.Items.FindByValue(dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString()));
+                
                 ddTipTarjeta.SelectedIndex= dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()!=""?int.Parse(dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()):0;
                 chkLocal.Checked = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "True" ? true : false;
                 txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
@@ -1275,7 +1226,7 @@ public partial class FormaPago : System.Web.UI.Page
                 txtImporteTarjeta.ReadOnly= txtImporteTarjeta.Text == "" ? false : true;
                 ddBancoTarjeta.Enabled = ddBancoTarjeta.SelectedIndex == 0 ? true : false;
                 ddlBancoOrigen.Enabled = ddlBancoOrigen.SelectedIndex == 0 ? true:false;
-                //ddlTAfiliacion.Enabled = ddlTAfiliacion.SelectedIndex == 0 ? true : false;
+                ddlTAfiliacion.Enabled = ddlTAfiliacion.SelectedIndex == 0 ? true : false;
                 ddTipTarjeta.Enabled = ddTipTarjeta.SelectedIndex == 0 ? true : false;
                 chkLocal.Enabled = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "" ? true : false;
                 txtObservacionesTarjeta.ReadOnly= txtNoAutorizacionTarjeta.Text == "" ? false : true;
@@ -1314,6 +1265,7 @@ public partial class FormaPago : System.Web.UI.Page
                 txtNumTarjeta.Text = string.Empty;
                 ddlBancoOrigen.SelectedIndex = -1;
                 ddlBancoOrigen.SelectedIndex = -1;
+                ddlTAfiliacion.SelectedIndex = -1;
                 txtImporteTarjeta.Text = string.Empty;
                 txtObservacionesTarjeta.Text = string.Empty;
                 ddBancoTarjeta.SelectedIndex = -1;

@@ -404,7 +404,8 @@ private void LlenaDropDowns()
 
                 dr["Importe"] = Convert.ToDouble(this.txtAntMonto.Text);
                 dr["Impuesto"] = Convert.ToDouble(this.txtAntMonto.Text) * rp.dbIVA;
-                dr["Total"] = Convert.ToDouble(this.txtAntMonto.Text)+(Convert.ToDouble(this.txtAntMonto.Text) * rp.dbIVA);
+                // dr["Total"] = Convert.ToDouble(this.txtAntMonto.Text)+(Convert.ToDouble(this.txtAntMonto.Text) * rp.dbIVA);
+                dr["Total"] = Convert.ToDouble(this.txtAntMonto.Text);
 
                 dr["Saldo"] = 0;
                 dr["Observaciones"] = this.txtAntOnservaciones.Text;
@@ -499,6 +500,8 @@ private void LlenaDropDowns()
             folio = (Int32)Session["Folio"];
             dtPedidos = rp.PedidosLiquidacion(int.Parse(txtAntCliente.Text), folio);
             dtPedidos.TableName = "Pedidos";
+
+            (Session["PedidosParientes"]) = dtPedidos;
         }        
     }
     

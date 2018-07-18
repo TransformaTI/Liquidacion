@@ -712,10 +712,33 @@ public partial class FormaPago : System.Web.UI.Page
         {
             DataTable dtPedidosEf = new DataTable();
             dtPedidosEf = ((DataTable)(Session["dtPedidos"]));
+            DataSet dsPagos = (DataSet)(Session["dsLiquidacion"]);
 
-            rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dtPedidosEf, null, null, (DataTable)(Session["dtResumenLiquidacion"]));
-            Response.Redirect("ReporteLiquidacion.aspx");
+           DataTable dtPedidosParientes =( DataTable)(Session["PedidosParientes"]);
+
+            if (dtPedidosParientes!=null)
+            {
+                foreach (DataRow item in dtPedidosEf.Rows)
+                {
+                    foreach (DataRow row in dtPedidosParientes.Rows)
+                    {
+                        if (item["Pedido"].ToString().Trim()== row["Pedido"].ToString().Trim())
+                        {
+                            item.BeginEdit();
+                            item["Saldo"] =row ["Saldo"];
+                            item.EndEdit();
+                        }
+
+                    }
+                }
+            }
+
+            rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dtPedidosEf, dsPagos.Tables["Cobro"], dsPagos.Tables["CobroPedido"], (DataTable)(Session["dtResumenLiquidacion"]));
             Session["FormaPago"] = "Efectivo";
+            Session["dsLiquidacion"] = null;
+            (Session["PedidosParientes"]) = null;
+            Response.Redirect("ReporteLiquidacion.aspx");
+            
             //Parametros param = new Parametros(1, 1, 22);
             // Reporte
 

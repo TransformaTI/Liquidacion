@@ -59,6 +59,29 @@ public partial class RegistroPagos : System.Web.UI.Page
                         DataTable dtPedidosNoParientes = (DataTable)Session["dtPedidos"];
                         ds.Tables.Remove("Pedidos");
                         dtPedidosNoParientes.TableName = "Pedidos";
+                      
+
+                        //actuliza saldo de pgos anticipados 
+                        DataTable dtPedidosParientes = (DataTable)(Session["PedidosParientes"]);
+
+                        if (dtPedidosParientes != null)
+                        {
+                            foreach (DataRow item in dtPedidosNoParientes.Rows)
+                            {
+                                foreach (DataRow row in dtPedidosParientes.Rows)
+                                {
+                                    if (item["Pedido"].ToString().Trim() == row["Pedido"].ToString().Trim())
+                                    {
+                                        item.BeginEdit();
+                                        item["Saldo"] = row["Saldo"];
+                                        item.EndEdit();
+                                    }
+
+                                }
+                            }
+                        }
+
+
                         ds.Tables.Add(dtPedidosNoParientes);
                         Session["dsLiquidacion"] = ds;
                     }
@@ -285,6 +308,9 @@ public partial class RegistroPagos : System.Web.UI.Page
                     {
                         importeAbono = Convert.ToDecimal(ds.Tables["Pedidos"].Rows[i]["Importe"]);
                         ActualizaSaldo(refPago, importeAbono, true);
+
+
+
                     }
                 }
 

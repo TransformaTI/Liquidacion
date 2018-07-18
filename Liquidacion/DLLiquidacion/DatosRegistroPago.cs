@@ -200,44 +200,143 @@ namespace SigametLiquidacion
             this.dtPedidosLiq = new DataTable();
             this._dataAccess.LoadData(this.dtPedidosLiq, "spLIQAnticipoPedidos", CommandType.StoredProcedure, sqlParameterArray, true);
         }
-        
+
+        //private void CobroEnEfectivo(string Usuario, DataTable dtPedidos, ref DataTable dtPago, ref DataTable dtDetallePago)
+        //{
+        //    DataRow[] dataRowArray = dtPedidos.Select("Saldo > 0");
+        //    DataRow row1 = (DataRow)null;
+        //    Decimal num1 = new Decimal(0);
+        //    string pedidosefectivo = "";
+        //    int num2 = 1;
+        //    if (dtPedidos != null && dtPedidos.Rows.Count > 0 && dtDetallePago != null)
+        //        foreach (DataRow row in dtPedidos.Rows)
+        //        {
+
+
+        //            foreach (DataRow rowdetalle in dtDetallePago.Rows)
+        //            {
+        //                 if (row["Pedido"].ToString().Contains(rowdetalle["Pedido"].ToString()))
+        //                {
+        //                    string idpago = rowdetalle["IdPago"].ToString();
+
+        //                    DataRow[] dr = dtPago.Select("IdPago='"+ idpago +"'");
+        //                        if (dr!=null && dr[0]["NombreTipoCobro"].ToString().ToUpper().Contains("EFECTIVO)"))
+        //                        {
+
+        //                        num1 = num1 +decimal.Parse(row["Saldo"].ToString());
+        //                        // Convert.ToDecimal(dtPedidos.Compute("SUM(Saldo)", (string)null));
+        //                        pedidosefectivo = pedidosefectivo + "," + rowdetalle["Pedido"].ToString();
+        //                    }
+
+        //                }
+        //            }
+        //            /// if row
+        //        }   
+        //    else
+        //    {
+
+        //       num1 = Convert.ToDecimal(dtPedidos.Compute("SUM(Saldo)", (string)null));
+
+        //    }
+
+        //    if (dtPago != null && dtPago.Rows.Count > 0)
+        //    {
+        //        num2 = Convert.ToInt32(dtPago.Compute("MAX(IdPago)", (string)null)) + 1;
+        //    }
+        //    else
+        //    {
+        //        dtPago = new DataTable();
+        //        dtPago.Columns.Add("IdPago", Type.GetType("System.Int32"));
+        //        dtPago.Columns.Add(new DataColumn("Referencia"));
+        //        dtPago.Columns.Add(new DataColumn("NumeroCuenta"));
+        //        dtPago.Columns.Add(new DataColumn("FechaCheque"));
+        //        dtPago.Columns.Add(new DataColumn("Cliente"));
+        //        dtPago.Columns.Add(new DataColumn("Banco"));
+        //        dtPago.Columns.Add(new DataColumn("Importe"));
+        //        dtPago.Columns.Add(new DataColumn("Impuesto"));
+        //        dtPago.Columns.Add(new DataColumn("Total"));
+        //        dtPago.Columns.Add(new DataColumn("Saldo"));
+        //        dtPago.Columns.Add(new DataColumn("Observaciones"));
+        //        dtPago.Columns.Add(new DataColumn("Status"));
+        //        dtPago.Columns.Add(new DataColumn("FechaAlta"));
+        //        dtPago.Columns.Add(new DataColumn("TipoCobro"));
+        //        dtPago.Columns.Add(new DataColumn("Usuario"));
+        //        dtPago.Columns.Add(new DataColumn("SaldoAFavor"));
+        //        dtPago.Columns.Add(new DataColumn("TPV"));
+        //        dtPago.Columns.Add(new DataColumn("FechaDeposito"));
+        //        dtPago.Columns.Add(new DataColumn("BancoOrigen"));
+        //        dtPago.Columns.Add(new DataColumn("NombreTipoCobro"));
+        //        dtDetallePago = new DataTable();
+        //        dtDetallePago.Columns.Add(new DataColumn("IdPago"));
+        //        dtDetallePago.Columns.Add(new DataColumn("Pedido"));
+        //        dtDetallePago.Columns.Add(new DataColumn("Celula"));
+        //        dtDetallePago.Columns.Add(new DataColumn("Anio"));
+        //        dtDetallePago.Columns.Add(new DataColumn("Importe"));
+        //        dtDetallePago.Columns.Add(new DataColumn("Impuesto"));
+        //        dtDetallePago.Columns.Add(new DataColumn("Total"));
+        //    }
+        //    foreach (DataRow dataRow in dataRowArray )
+        //    {
+        //        if (row1 == null && num1 > 0)
+        //        {
+        //            row1 = dtPago.NewRow();
+        //            row1.BeginEdit();
+        //            row1["IdPago"] = (object)num2;
+        //            row1["Referencia"] = (object)DBNull.Value;
+        //            row1["NumeroCuenta"] = (object)DBNull.Value;
+        //            row1["FechaCheque"] = (object)DateTime.Now.Date;
+        //            row1["Cliente"] = (object)0;
+        //            row1["Banco"] = (object)0;
+        //            row1["Importe"] = (object)0;
+        //            row1["Impuesto"] = (object)0;
+        //            row1["Total"] = (object)num1;
+        //            row1["Saldo"] = (object)0;
+        //            row1["Observaciones"] = (object)"";
+        //            row1["Status"] = (object)"EMITIDO";
+        //            row1["FechaAlta"] = (object)DateTime.Now.Date;
+        //            row1["TipoCobro"] = (object)5;
+        //            row1["Usuario"] = (object)Usuario;
+        //            row1["SaldoAFavor"] = (object)DBNull.Value;
+        //            row1["TPV"] = (object)DBNull.Value;
+        //            row1["FechaDeposito"] = (object)DateTime.Now.Date;
+        //            row1["BancoOrigen"] = (object)0;
+        //            row1["NombreTipoCobro"] = (object)"EFECTIVO";
+        //            row1.EndEdit();
+        //            dtPago.Rows.Add(row1);
+        //        }
+        //        if ( num1 > 0)
+        //        {
+        //            DataRow row2 = dtDetallePago.NewRow();
+        //            row2.BeginEdit();
+        //            row2["IdPago"] = (object)num2;
+        //            row2["Pedido"] = dataRow["Pedido"];
+        //            row2["Celula"] = dataRow["Celula"];
+        //            row2["Anio"] = dataRow["AñoPed"];
+        //            row2["Importe"] = dataRow["Total"];
+        //            row2["Impuesto"] = (object)0;
+        //            row2["Total"] = dataRow["Saldo"];
+        //            row2.EndEdit();
+        //            dtDetallePago.Rows.Add(row2);
+        //        }
+        //    }
+        //}
+
+
         private void CobroEnEfectivo(string Usuario, DataTable dtPedidos, ref DataTable dtPago, ref DataTable dtDetallePago)
         {
             DataRow[] dataRowArray = dtPedidos.Select("Saldo > 0");
             DataRow row1 = (DataRow)null;
             Decimal num1 = new Decimal(0);
-            string pedidosefectivo = "";
             int num2 = 1;
-            if (dtPedidos != null && dtPedidos.Rows.Count > 0 && dtDetallePago != null)
-                foreach (DataRow row in dtPedidos.Rows)
+            if (dtPedidos != null && dtPedidos.Rows.Count > 0)
+                // num1 = Convert.ToDecimal(dtPedidos.Compute("SUM(Saldo)", (string)null));
+                foreach (DataRow item in dtPedidos.Rows)
                 {
-                    
-
-                    foreach (DataRow rowdetalle in dtDetallePago.Rows)
+                    if (Convert.ToDecimal(item["Saldo"]) > 0)
                     {
-                         if (row["Pedido"].ToString().Contains(rowdetalle["Pedido"].ToString()))
-                        {
-                            string idpago = rowdetalle["IdPago"].ToString();
-
-                            DataRow[] dr = dtPago.Select("IdPago='"+ idpago +"'");
-                                if (dr!=null && dr[0]["NombreTipoCobro"].ToString().ToUpper().Contains("EFECTIVO)"))
-                                {
-
-                                num1 = num1 +decimal.Parse(row["Saldo"].ToString());
-                                // Convert.ToDecimal(dtPedidos.Compute("SUM(Saldo)", (string)null));
-                                pedidosefectivo = pedidosefectivo + "," + rowdetalle["Pedido"].ToString();
-                            }
-
-                        }
+                        num1 = num1 + Convert.ToDecimal(item["Saldo"]);
                     }
-                    /// if row
-                }   
-            else
-            {
-
-               num1 = Convert.ToDecimal(dtPedidos.Compute("SUM(Saldo)", (string)null));
-
-            }
+                }
 
             if (dtPago != null && dtPago.Rows.Count > 0)
             {
@@ -275,9 +374,9 @@ namespace SigametLiquidacion
                 dtDetallePago.Columns.Add(new DataColumn("Impuesto"));
                 dtDetallePago.Columns.Add(new DataColumn("Total"));
             }
-            foreach (DataRow dataRow in dataRowArray )
+            foreach (DataRow dataRow in dataRowArray)
             {
-                if (row1 == null && num1 > 0)
+                if (row1 == null)
                 {
                     row1 = dtPago.NewRow();
                     row1.BeginEdit();
@@ -304,22 +403,20 @@ namespace SigametLiquidacion
                     row1.EndEdit();
                     dtPago.Rows.Add(row1);
                 }
-                if ( num1 > 0)
-                {
-                    DataRow row2 = dtDetallePago.NewRow();
-                    row2.BeginEdit();
-                    row2["IdPago"] = (object)num2;
-                    row2["Pedido"] = dataRow["Pedido"];
-                    row2["Celula"] = dataRow["Celula"];
-                    row2["Anio"] = dataRow["AñoPed"];
-                    row2["Importe"] = dataRow["Total"];
-                    row2["Impuesto"] = (object)0;
-                    row2["Total"] = dataRow["Saldo"];
-                    row2.EndEdit();
-                    dtDetallePago.Rows.Add(row2);
-                }
+                DataRow row2 = dtDetallePago.NewRow();
+                row2.BeginEdit();
+                row2["IdPago"] = (object)num2;
+                row2["Pedido"] = dataRow["Pedido"];
+                row2["Celula"] = dataRow["Celula"];
+                row2["Anio"] = dataRow["AñoPed"];
+                row2["Importe"] = dataRow["Total"];
+                row2["Impuesto"] = (object)0;
+                row2["Total"] = dataRow["Saldo"];
+                row2.EndEdit();
+                dtDetallePago.Rows.Add(row2);
             }
         }
+
 
         private void CobroDescuentos(string Usuario, DataTable dtPedidos, ref DataTable dtPago, ref DataTable dtDetallePago)
         {

@@ -22,8 +22,14 @@ public partial class GenerarPago : System.Web.UI.Page
     DataSet dsPagos = new DataSet();
     RegistroPago rp = new RegistroPago();
 
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        #region eventos
+        //imbGuardar.Attributes.Add("onclick", "return confirm('¿Desea guardar y Cerrar la liquidacion?')");
+        imbGuardar.Attributes.Add("onclick", "return ValidaSaldo();");
+        #endregion
+
         dtResumenLiquidacion = (DataTable)(Session["dtResumenLiquidacion"]);
 
         dsPagos = (DataSet)(Session["dsLiquidacion"]);
@@ -39,9 +45,17 @@ public partial class GenerarPago : System.Web.UI.Page
         DataView vistaPagoActivo = new DataView(dsPagos.Tables["CobroPedido"]);
         vistaPagoActivo.RowFilter = "IdPago = " + pagoSeleccionado;
         
-	imbGuardar.Attributes.Add("onclick", "return confirm('¿Desea guardar y Cerrar la liquidacion?')");
+
         dlDetallePago.DataSource = vistaPagoActivo;
         dlDetallePago.DataBind();
+
+        DataTable Cobro = dsPagos.Tables["Cobro"];
+        if (Cobro!=null)
+        {
+            HiddenSaldo.Value = Cobro.Compute("Sum(Saldo)","").ToString();
+        }
+
+
 
     }
     #region "Handlers"
@@ -79,9 +93,11 @@ public partial class GenerarPago : System.Web.UI.Page
         }
     }
     protected void imbGuardar_Click(object sender, ImageClickEventArgs e)
-    {
+    {    
+
         try
         {
+
 
            rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dsPagos.Tables["Pedidos"], dsPagos.Tables["Cobro"], dsPagos.Tables["CobroPedido"], dtResumenLiquidacion, dsPagos.Tables["LiqPagoAnticipado"]);
             Session["dsLiquidacion"] = null; // MCC  se limpia la session de liquidacion despues de registrar el pago  2018 05 31
@@ -120,6 +136,7 @@ public partial class GenerarPago : System.Web.UI.Page
             dsPagos.Tables["Pedidos"].Clear();
             dsPagos.Tables["Pedidos"].Merge((DataTable)(Session["dtPedidos"]));
             dsPagos.Tables["CobroPedido"].Clear();
+            Session["CargoTarjeta"] = null;
             Response.Redirect("Liquidacion.aspx");
         }
         catch (Exception ex)

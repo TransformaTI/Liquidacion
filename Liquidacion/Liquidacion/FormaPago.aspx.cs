@@ -231,7 +231,7 @@ public partial class FormaPago : System.Web.UI.Page
             {
                 lblCobros.Visible = true;
                 imgExpandCollapse.Visible = true;
-                imbResumen.Visible = true;
+                //imbResumen.Visible = true;
 
                 TitlePanel.Visible = true;
                 ContentPanel.Visible = true;
@@ -250,7 +250,7 @@ public partial class FormaPago : System.Web.UI.Page
                 gvPagoGenerado.DataSource = null;
                 gvPagoGenerado.DataBind();
 
-                imbResumen.Visible = false;
+               // imbResumen.Visible = false;
             }
         }
 
@@ -1080,7 +1080,7 @@ public partial class FormaPago : System.Web.UI.Page
 
                 gvPagoGenerado.DataSource = ds.Tables["Cobro"];
                 gvPagoGenerado.DataBind();
-                imbResumen.Visible = true;
+               // imbResumen.Visible = true;
             }
             else
             {
@@ -1093,7 +1093,7 @@ public partial class FormaPago : System.Web.UI.Page
                 gvPagoGenerado.DataSource = null;
                 gvPagoGenerado.DataBind();
 
-                imbResumen.Visible = false;
+                //imbResumen.Visible = false;
             }
 
         }

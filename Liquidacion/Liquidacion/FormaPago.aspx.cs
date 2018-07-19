@@ -45,6 +45,7 @@ public partial class FormaPago : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
             LlenaDropDowns();
+            
         }
 
         #region validaciones postback 
@@ -111,7 +112,14 @@ public partial class FormaPago : System.Web.UI.Page
             {
                 HiddenInput.Value = "ConsultaCteTransferencia";
             }
-            
+
+            if (Request.Form["__EVENTTARGET"] == "AgregarCargoTarjeta")
+            {
+                AgregarCargoTarjeta(txtClienteTarjeta.Text.Trim(), txtNumTarjeta.Text.Trim(), txtNoAutorizacionTarjeta.Text.Trim());
+            }
+
+
+
         }
         else
         {
@@ -163,6 +171,8 @@ public partial class FormaPago : System.Web.UI.Page
         imgCalendario0.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtFechaTarjeta.UniqueID + (char)39 + ")");
 
         txtFechaTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtNoAutorizacionTarjeta.UniqueID + (char)39 + ")");
+
+
        // txtNoAutorizacionTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtNumTarjeta.UniqueID + (char)39 + ")");
         txtNumTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + ddBancoTarjeta.UniqueID + (char)39 + ")");
 
@@ -198,6 +208,8 @@ public partial class FormaPago : System.Web.UI.Page
         txtNoAutorizacionTarjeta.Attributes.Add("onkeypress", "return isAlphaNumeric(event)");
 
         txtNoAutorizacionTarjetaConfirm.Attributes.Add("onkeypress", "return isAlphaNumeric(event)");
+
+        txtNoAutorizacionTarjeta.Attributes.Add("onblur", "return AgregarCargoTarjeta('AgregarCargoTarjeta')");
 
 
 
@@ -602,9 +614,11 @@ public partial class FormaPago : System.Web.UI.Page
     {
         try
         {
+            
+//if (AgregarCargoTarjeta(txtClienteTarjeta.Text.Trim(),txtNumTarjeta.Text.Trim(),txtNoAutorizacionTarjeta.Text.Trim()))
+//            {
 
-              
-            if ((DataSet)(Session["dsLiquidacion"]) == null)
+                if ((DataSet)(Session["dsLiquidacion"]) == null)
             {
                 //Genera Registro del Cobro con Cheque
                 dtCobro = ds.Tables["Cobro"];
@@ -695,8 +709,15 @@ public partial class FormaPago : System.Web.UI.Page
                 Session["ImporteOperacion"] = importeOperacion;
                 Session["FormaPago"] = "TDC";
             }
+            HiddenTDCDupliado.Value = "";
             Response.Redirect("RegistroPagos.aspx");
                 // your code here.
+
+//            }
+//else
+//            {
+//                ScriptManager.RegisterStartupScript(this, GetType(), "ErrorCargoTDC", "alert(¡'El cargo ya se encuentra registrado!');", true);
+//            }
 
 
 
@@ -736,7 +757,8 @@ public partial class FormaPago : System.Web.UI.Page
             rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dtPedidosEf, dsPagos.Tables["Cobro"], dsPagos.Tables["CobroPedido"], (DataTable)(Session["dtResumenLiquidacion"]));
             Session["FormaPago"] = "Efectivo";
             Session["dsLiquidacion"] = null;
-            (Session["PedidosParientes"]) = null;
+            Session["PedidosParientes"] = null;
+            Session["CargoTarjeta"] = null;
             Response.Redirect("ReporteLiquidacion.aspx");
             
             //Parametros param = new Parametros(1, 1, 22);
@@ -802,6 +824,7 @@ public partial class FormaPago : System.Web.UI.Page
             ds.Tables["Pedidos"].Merge((DataTable)(Session["dtPedidos"]));
             ds.Tables["Cobro"].Clear();
             ds.Tables["CobroPedido"].Clear();
+            Session["CargoTarjeta"] = null;
             Response.Redirect("Liquidacion.aspx");
         }
         catch (Exception ex)
@@ -1329,6 +1352,66 @@ public partial class FormaPago : System.Web.UI.Page
 
 
 
+
+    private bool AgregarCargoTarjeta(string Cliente,string Tarjeta, string Autorizacion)
+    {
+        bool Return = false;
+        DataRow dr=null;
+        DataTable dtCargoTarjeta=null;
+
+        try
+        {
+
+            if (Session["CargoTarjeta"] != null)
+            {
+                dtCargoTarjeta =(DataTable) (Session["CargoTarjeta"]);                  
+
+                    dr = dtCargoTarjeta.NewRow();
+                    dr["Cliente"] = Cliente;
+                    dr["Tarjeta"] = Tarjeta;
+                    dr["Autorizacion"] = Autorizacion;
+
+                    dtCargoTarjeta.Rows.Add(dr);
+                    ds.Tables.Add(dtCargoTarjeta);
+                    (Session["CargoTarjeta"]) = dtCargoTarjeta; ;
+                    Return = true;
+                    HiddenTDCDupliado.Value = "false";
+            }
+
+                else
+                {
+
+                    dtCargoTarjeta = new DataTable("CargoTarjeta");
+                    dtCargoTarjeta.Columns.Add("Cliente", typeof(string));
+                    dtCargoTarjeta.Columns.Add("Tarjeta", typeof(string));
+                    dtCargoTarjeta.Columns.Add("Autorizacion", typeof(string));
+                    dtCargoTarjeta.PrimaryKey = new DataColumn[] { dtCargoTarjeta.Columns["Cliente"], dtCargoTarjeta.Columns["Tarjeta"], dtCargoTarjeta.Columns["Autorizacion"] };
+
+
+                    dtCargoTarjeta.Rows.Add(Cliente, Tarjeta, Autorizacion);
+                    ds.Tables.Add(dtCargoTarjeta);
+                    (Session["CargoTarjeta"]) = dtCargoTarjeta;
+                    Return = true;
+                    HiddenTDCDupliado.Value = "false";
+            }
+         
+        }
+        catch (Exception ex )
+        {
+
+           
+            Return = false;
+            HiddenTDCDupliado.Value = "true";
+        }
+        finally
+        {
+            
+        }
+        return Return;
+    }
+
+
+
     public static string DataTableToJSONWithJavaScriptSerializer(DataTable table)
     {
         JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
@@ -1354,4 +1437,9 @@ public partial class FormaPago : System.Web.UI.Page
         Response.Redirect("WebForm2.aspx");
     }
 
+
+    protected void txtNoAutorizacionTarjeta_TextChanged(object sender, EventArgs e)
+    {
+        AgregarCargoTarjeta(txtClienteTarjeta.Text.Trim(), txtNumTarjeta.Text.Trim(), txtNoAutorizacionTarjeta.Text.Trim());
+    }
 }   

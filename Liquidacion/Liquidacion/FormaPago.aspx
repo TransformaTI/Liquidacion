@@ -24,6 +24,8 @@
         var sTipoPago = '';
         var RegistroCobro = '<%= wucDetalleFormaPago1.RegistroCobro%>';
 
+        var HiddenTDCDupliado='<%= HiddenTDCDupliado.Value %>';
+
         
 
         //Validaciones  On load
@@ -77,7 +79,7 @@
                 }
             }
 
-            else if (HiddenInputPCT != 'Si' && NumCte != '' && HiddenInput!='ConsultaCteAnticipo') {
+            else if (HiddenInputPCT != 'Si' && NumCte != '' && HiddenInput!='ConsultaCteAnticipo' && HiddenTDCDupliado==''  ) {
                 alert('No se encontraron pagos de TPV para el cliente, por favor verifique con el área de tarjetas de crédito');
             }
 
@@ -202,6 +204,10 @@
 
         }
 
+        function AgregarCargoTarjeta() {
+            javascript: __doPostBack('AgregarCargoTarjeta', '');
+        }
+
         function ConsultaPagosSeleccion(FormaPago, Llave) {
             javascript: __doPostBack(FormaPago + ' SeleccionaPago=' + Llave, '');
 
@@ -271,6 +277,13 @@
                 if (document.getElementById('<%= ddlTAfiliacion.ClientID %>').selectedIndex == "0")
                 {
                     alert('Seleccione una afiliación');
+                    return false;
+                }
+
+
+                if (document.getElementById('<%= HiddenTDCDupliado.ClientID %>').value == "true")
+                {
+                    alert('¡El cargo ya se encuentra registrado!');
                     return false;
                 }
             }  
@@ -407,6 +420,7 @@
                 <asp:HiddenField ID="HiddenInput" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenInputPCT" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenInputNumPagos" runat="server" Value="" />
+                <asp:HiddenField ID="HiddenTDCDupliado" runat="server" Value="" />
                 <div style="text-align: left; height: 650px; width: 1000px; vertical-align: top;">
                     <table style="vertical-align: top; height: 650px;">
                         <tr>
@@ -739,7 +753,7 @@
                                                         </td>
                                                         <td>
                                                             <asp:TextBox ID="txtNoAutorizacionTarjeta" runat="server" CssClass="textboxcaptura"  ReadOnly="true" 
-                                                                Width="100px"></asp:TextBox>
+                                                                Width="100px" AutoPostBack="True"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="rfvTDAutorizacion" runat="server"
                                                                 ControlToValidate="txtNoAutorizacionTarjeta" Display="None"
                                                                 ErrorMessage="Capturar Número de Autorización"

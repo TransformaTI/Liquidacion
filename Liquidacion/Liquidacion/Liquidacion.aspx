@@ -195,7 +195,9 @@ function onKeyPress_OnlyDigits(evt)
                                                 ondesasignarpedido="nuevoPedido_DesasignarPedido" 
                                                 OnCambiarClientePedidoLiquidado="nuevoPedido_CambiarCliente"
                                                 OnActualizarCliente="nuevoPedido1_Actualizar"
-                                                PermitirCaptura="True" onerror="ListaPedidos1_Error"/>
+                                                PermitirCaptura="True" onerror="ListaPedidos1_Error" 
+                                                ImageButtonEnviarURL="~/images/new-sms.png"
+                                                />
                                         </td>
                                     </tr>
                                 </table>

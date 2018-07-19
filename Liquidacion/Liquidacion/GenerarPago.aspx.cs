@@ -85,6 +85,7 @@ public partial class GenerarPago : System.Web.UI.Page
 
            rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dsPagos.Tables["Pedidos"], dsPagos.Tables["Cobro"], dsPagos.Tables["CobroPedido"], dtResumenLiquidacion, dsPagos.Tables["LiqPagoAnticipado"]);
             Session["dsLiquidacion"] = null; // MCC  se limpia la session de liquidacion despues de registrar el pago  2018 05 31
+            Session["CargoTarjeta"] = null;
             Response.Redirect("ReporteLiquidacion.aspx");
             
 

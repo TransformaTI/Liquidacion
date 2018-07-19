@@ -9,20 +9,20 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainPlaceHolder" Runat="Server">
    
     <script type="text/javascript" language="javascript">   
-function CallPrint(strid)
-{
+        function CallPrint(strid)
+        {
 
-//var prtContent = document.getElementById(strid);
-//var WinPrint =
-window.open('Impresion.aspx','','left=0,top=0,toolbar=0,scrollbars=0,status=0, resizable=1, width=800, heigth=600');
-//WinPrint.document.write(prtContent.innerHTML);
-//WinPrint.document.close();
-//WinPrint.focus();
-//WinPrint.print();   
-//WinPrint.close();
+        //var prtContent = document.getElementById(strid);
+        //var WinPrint =
+        window.open('Impresion.aspx','','left=0,top=0,toolbar=0,scrollbars=0,status=0, resizable=1, width=800, heigth=600');
+        //WinPrint.document.write(prtContent.innerHTML);
+        //WinPrint.document.close();
+        //WinPrint.focus();
+        //WinPrint.print();   
+        //WinPrint.close();
 
-}
-</script>
+        }
+    </script>
 
 
 

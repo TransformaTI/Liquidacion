@@ -93,7 +93,9 @@ namespace SigametLiquidacion.WebControls
         private Decimal _precioMaximo;
         private Decimal _precioMinimo;
         private Decimal _descuento;
-        
+        private string _imageButtonEnviarURL;
+
+
         private byte _longitudSerie;
         private byte _longitudRemision;
         
@@ -472,7 +474,19 @@ namespace SigametLiquidacion.WebControls
                 _longitudSerie = value;
             }
         }
-        
+
+        public string ImageButtonEnviarURL
+        {
+            get
+            {
+                return this._imageButtonEnviarURL;
+            }
+            set
+            {
+                this._imageButtonEnviarURL = value;
+            }
+        }
+
         public event EventHandler ClickAceptar;
         
         public event EventHandler ClickCancelar;
@@ -1084,8 +1098,9 @@ namespace SigametLiquidacion.WebControls
             this.Controls.Add((Control) new LiteralControl("<tr>"));
             this.escribirEtiquetaLitros("TagFieldLabels");
             this.controlCapturaLitros("MediumNumericText");
-            this.imgDecoration.Width = (Unit) 1;
-            this.imgDecoration.Width = (Unit) 1;
+            this.imgDecoration.Width = (Unit) 20;
+            this.imgDecoration.Width = (Unit) 20;
+            this.imgDecoration.ImageUrl = this._imageButtonEnviarURL;            
             this.imgDecoration.Attributes.Add("onkeypress", "return btnDecorationUnSubmit();");
             this.Controls.Add((Control) this.imgDecoration);
             this.Controls.Add((Control) new LiteralControl("</tr>"));

@@ -60,10 +60,16 @@ public partial class ControlesUsuario_wucConsultaCargoTarjetaClienta : System.We
                                                     where x == null
                                                     select c
                                                 ).CopyToDataTable();
+
+                            Session["TDCdisponibles"] = dtPagosContarjetaDel.Rows.Count;
+                            Session["PrimerRegTDC"] = dtPagosContarjetaDel.Rows[0]["Folio"].ToString();
+
                         }
                         else
                         {
-                            dtPagosContarjetaDel = dtPagosContarjeta;
+                            ScriptManager.RegisterStartupScript(this, GetType(), "Hidepopup", " HideModalPopup();", true);
+                           
+                            //dtPagosContarjetaDel = dtPagosContarjeta;
 
                         }
 
@@ -73,6 +79,8 @@ public partial class ControlesUsuario_wucConsultaCargoTarjetaClienta : System.We
                     else
                     {
                         dtPagosContarjetaDel = dtPagosContarjeta;
+                        Session["TDCdisponibles"] = dtPagosContarjetaDel.Rows.Count;
+                        Session["PrimerRegTDC"] = dtPagosContarjetaDel.Rows[0]["Folio"].ToString();
                     }
 
 
@@ -80,7 +88,9 @@ public partial class ControlesUsuario_wucConsultaCargoTarjetaClienta : System.We
                 else
                     {
                     dtPagosContarjetaDel = dtPagosContarjeta;
-                     }
+                    Session["TDCdisponibles"] = dtPagosContarjetaDel.Rows.Count;
+                    Session["PrimerRegTDC"] = dtPagosContarjetaDel.Rows[0]["Folio"].ToString();
+                }
             }
     }
 
@@ -107,8 +117,10 @@ public partial class ControlesUsuario_wucConsultaCargoTarjetaClienta : System.We
     {    
 
         if (e.Row.RowIndex > -1)
-        {            
-            e.Row.Attributes.Add("onclick", "return ConsultaPagosSeleccion('"+ sFormaPago.ToString()+"','" + e.Row.RowIndex.ToString()+ "')");
+        {
+            //e.Row.Attributes.Add("onclick", "return ConsultaPagosSeleccion('"+ sFormaPago.ToString()+"','" + e.Row.RowIndex.ToString()+ "')");
+            e.Row.Attributes.Add("onclick", "return ConsultaPagosSeleccion('" + sFormaPago.ToString() + "','" + e.Row.Cells[7].Text.Trim() + "')");
+            
             e.Row.ToolTip = "Click en el registro.";
             e.Row.Attributes["style"] = "cursor:pointer";
 

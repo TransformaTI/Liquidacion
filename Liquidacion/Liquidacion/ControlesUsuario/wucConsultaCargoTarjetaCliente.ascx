@@ -24,7 +24,7 @@
         </asp:BoundField>
 
         <asp:BoundField DataField="Anio" HeaderText="Año" Visible="False" />
-        <asp:BoundField DataField="Folio" HeaderText="Folio" Visible="False" />
+        <asp:BoundField DataField="Folio" HeaderText="Folio" />
 
     </Columns>
 

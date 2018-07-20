@@ -19,7 +19,7 @@
         var HiddenInput = '<%= HiddenInput.Value %>';   // mcc 2018 05 10
         var HiddenInputPCT = '<%= HiddenInputPCT.Value %>';   // mcc 2018 05 10
         var NumCte = '<%= txtClienteTarjeta.Text %>'; // mcc 2018 05 10
-        var NumPagos = '<%=HiddenInputNumPagos.Value  %>'; // mcc 2018 05 10
+        var NumPagos = '<%=Session["TDCdisponibles"]!=null?Session["TDCdisponibles"].ToString():"0" %>'; // mcc 2018 05 10
         var Ruta = '<%=Session["Ruta"]%>';
         var sTipoPago = '';
         var RegistroCobro = '<%= wucDetalleFormaPago1.RegistroCobro%>';

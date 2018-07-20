@@ -1206,6 +1206,7 @@ else
             dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text), Ruta, Autotanque);
             if (dtPagosConTarjeta!=null)
             Registrosdisponibles(dtPagosConTarjeta);
+            txtNombreClienteTarjeta.Text= dtPagosConTarjeta.Rows[0]["Nombrecliente"].ToString();
             //Session["PrimerRegTDC"] = dtPagosConTarjeta.Rows[0]["Folio"].ToString();
         }
 
@@ -1256,6 +1257,21 @@ else
         {
             CargaPrimerRegistro(sFormaPago);
         }
+
+        //ddTipTarjeta.SelectedIndex = dtPagosPrimerRegistro[0]["TipoTarjeta"].ToString() != "" ? int.Parse(dtPagosPrimerRegistro[0]["TipoTarjeta"].ToString()) : 0;
+
+       // chkLocal.Checked = dtPagosPrimerRegistro[0]["Local"].ToString() == "True" ? true : false;
+        txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
+        txtFechaTarjeta.ReadOnly = txtFechaTarjeta.Text == "" ? false : true;
+        txtNumTarjeta.ReadOnly = txtNumTarjeta.Text == "" ? false : true;
+        txtImporteTarjeta.ReadOnly = txtImporteTarjeta.Text == "" ? false : true;
+        ddBancoTarjeta.Enabled = ddBancoTarjeta.SelectedIndex == 0 ? true : false;
+        ddlBancoOrigen.Enabled = ddlBancoOrigen.SelectedIndex == 0 ? true : false;
+        ddlTAfiliacion.Enabled = ddlTAfiliacion.SelectedIndex == 0 ? true : false;
+        ddTipTarjeta.Enabled = ddTipTarjeta.SelectedIndex == 0 ? true : false;
+        ///chkLocal.Enabled = dtPagosPrimerRegistro[0]["Local"].ToString() == "" ? true : false;
+        txtObservacionesTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
+        imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
     }
 
 
@@ -1278,7 +1294,10 @@ else
 
                 if (Session["PrimerRegTDC"]!=null)
                 {
-                    DataRow[] dtPagosPrimerRegistro = dtPagosConTarjeta.Select("Folio=" + Session["PrimerRegTDC"].ToString());
+
+                 if (Session["PrimerRegTDC"] != string.Empty)
+                    {
+                        DataRow[] dtPagosPrimerRegistro = dtPagosConTarjeta.Select("Folio=" + Session["PrimerRegTDC"].ToString());
 
                 txtNombreClienteTarjeta.Text = dtPagosPrimerRegistro[0]["NombreCliente"].ToString();
                 txtNoAutorizacionTarjeta.Text = dtPagosPrimerRegistro[0]["Autorizacion"].ToString();
@@ -1290,49 +1309,38 @@ else
                 txtObservacionesTarjeta.Text = dtPagosPrimerRegistro[0]["Observacion"].ToString();
                 ddlTAfiliacion.SelectedIndex = ddlTAfiliacion.Items.IndexOf(ddlTAfiliacion.Items.FindByValue(dtPagosPrimerRegistro[0]["Afiliacion"].ToString()));
 
-                ddTipTarjeta.SelectedIndex = dtPagosPrimerRegistro[0]["TipoTarjeta"].ToString() != "" ? int.Parse(dtPagosPrimerRegistro[0]["TipoTarjeta"].ToString()) : 0;
+              
 
-                chkLocal.Checked = dtPagosPrimerRegistro[0]["Local"].ToString() == "True" ? true : false;
-                txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
-                txtFechaTarjeta.ReadOnly = txtFechaTarjeta.Text == "" ? false : true;
-                txtNumTarjeta.ReadOnly = txtNumTarjeta.Text == "" ? false : true;
-                txtImporteTarjeta.ReadOnly = txtImporteTarjeta.Text == "" ? false : true;
-                ddBancoTarjeta.Enabled = ddBancoTarjeta.SelectedIndex == 0 ? true : false;
-                ddlBancoOrigen.Enabled = ddlBancoOrigen.SelectedIndex == 0 ? true : false;
-                ddlTAfiliacion.Enabled = ddlTAfiliacion.SelectedIndex == 0 ? true : false;
-                ddTipTarjeta.Enabled = ddTipTarjeta.SelectedIndex == 0 ? true : false;
-                chkLocal.Enabled = dtPagosPrimerRegistro[0]["Local"].ToString() == "" ? true : false;
-                txtObservacionesTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
-                imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
+                        //txtNombreClienteTarjeta.Text = dtPagosConTarjeta.Rows[0]["NombreCliente"].ToString();
+                        //txtNoAutorizacionTarjeta.Text = dtPagosConTarjeta.Rows[0]["Autorizacion"].ToString();
+                        //txtFechaTarjeta.Text= dtPagosConTarjeta.Rows[0]["FAlta"].ToString()!=""? DateTime.Parse(dtPagosConTarjeta.Rows[0]["FAlta"].ToString()).ToShortDateString():"";
+                        //txtNumTarjeta.Text = dtPagosConTarjeta.Rows[0]["NumeroTarjeta"].ToString();
+                        //ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
+                        //ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
+                        //txtImporteTarjeta.Text = dtPagosConTarjeta.Rows[0]["Importe"].ToString().Replace("$", "");
+                        //txtObservacionesTarjeta.Text = dtPagosConTarjeta.Rows[0]["Observacion"].ToString();
+                        //ddlTAfiliacion.SelectedIndex = ddlTAfiliacion.Items.IndexOf(ddlTAfiliacion.Items.FindByValue(dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString()));
 
-                    //txtNombreClienteTarjeta.Text = dtPagosConTarjeta.Rows[0]["NombreCliente"].ToString();
-                    //txtNoAutorizacionTarjeta.Text = dtPagosConTarjeta.Rows[0]["Autorizacion"].ToString();
-                    //txtFechaTarjeta.Text= dtPagosConTarjeta.Rows[0]["FAlta"].ToString()!=""? DateTime.Parse(dtPagosConTarjeta.Rows[0]["FAlta"].ToString()).ToShortDateString():"";
-                    //txtNumTarjeta.Text = dtPagosConTarjeta.Rows[0]["NumeroTarjeta"].ToString();
-                    //ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
-                    //ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
-                    //txtImporteTarjeta.Text = dtPagosConTarjeta.Rows[0]["Importe"].ToString().Replace("$", "");
-                    //txtObservacionesTarjeta.Text = dtPagosConTarjeta.Rows[0]["Observacion"].ToString();
-                    //ddlTAfiliacion.SelectedIndex = ddlTAfiliacion.Items.IndexOf(ddlTAfiliacion.Items.FindByValue(dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString()));
+                        //ddTipTarjeta.SelectedIndex= dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()!=""?int.Parse(dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()):0;
 
-                    //ddTipTarjeta.SelectedIndex= dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()!=""?int.Parse(dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()):0;
+                        //chkLocal.Checked = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "True" ? true : false;
+                        //txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
+                        //txtFechaTarjeta.ReadOnly= txtFechaTarjeta.Text == "" ? false : true;
+                        //txtNumTarjeta.ReadOnly= txtNumTarjeta.Text == "" ? false : true;
+                        //txtImporteTarjeta.ReadOnly= txtImporteTarjeta.Text == "" ? false : true;
+                        //ddBancoTarjeta.Enabled = ddBancoTarjeta.SelectedIndex == 0 ? true : false;
+                        //ddlBancoOrigen.Enabled = ddlBancoOrigen.SelectedIndex == 0 ? true:false;
+                        //ddlTAfiliacion.Enabled = ddlTAfiliacion.SelectedIndex == 0 ? true : false;
+                        //ddTipTarjeta.Enabled = ddTipTarjeta.SelectedIndex == 0 ? true : false;
+                        //chkLocal.Enabled = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "" ? true : false;
+                        //txtObservacionesTarjeta.ReadOnly= txtNoAutorizacionTarjeta.Text == "" ? false : true;
+                        //imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
 
-                    //chkLocal.Checked = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "True" ? true : false;
-                    //txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
-                    //txtFechaTarjeta.ReadOnly= txtFechaTarjeta.Text == "" ? false : true;
-                    //txtNumTarjeta.ReadOnly= txtNumTarjeta.Text == "" ? false : true;
-                    //txtImporteTarjeta.ReadOnly= txtImporteTarjeta.Text == "" ? false : true;
-                    //ddBancoTarjeta.Enabled = ddBancoTarjeta.SelectedIndex == 0 ? true : false;
-                    //ddlBancoOrigen.Enabled = ddlBancoOrigen.SelectedIndex == 0 ? true:false;
-                    //ddlTAfiliacion.Enabled = ddlTAfiliacion.SelectedIndex == 0 ? true : false;
-                    //ddTipTarjeta.Enabled = ddTipTarjeta.SelectedIndex == 0 ? true : false;
-                    //chkLocal.Enabled = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "" ? true : false;
-                    //txtObservacionesTarjeta.ReadOnly= txtNoAutorizacionTarjeta.Text == "" ? false : true;
-                    //imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
+                        // AgregarCargoTarjeta(txtClienteTarjeta.Text.Trim(), txtNumTarjeta.Text.Trim(), txtNoAutorizacionTarjeta.Text.Trim());
 
-                    // AgregarCargoTarjeta(txtClienteTarjeta.Text.Trim(), txtNumTarjeta.Text.Trim(), txtNoAutorizacionTarjeta.Text.Trim());
+                        //ddBancoTarjeta.Enabled=
 
-                    //ddBancoTarjeta.Enabled=
+                    }
                 }
                 break;
 

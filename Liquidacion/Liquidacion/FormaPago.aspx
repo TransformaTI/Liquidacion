@@ -23,6 +23,7 @@
         var Ruta = '<%=Session["Ruta"]%>';
         var sTipoPago = '';
         var RegistroCobro = '<%= wucDetalleFormaPago1.RegistroCobro%>';
+        var FolioPrimerReg ='<%= Session["PrimerRegTDC"] %>';
 
         var HiddenTDCDupliado='<%= HiddenTDCDupliado.Value %>';
 
@@ -44,8 +45,9 @@
             if (HiddenInput == 'ConsultaTPV-Trans' || HiddenInput == 'SeleccionaPago-Trans') {
                 document.getElementById('transferencia').style.display = 'inherit';
             }
-
-            if (HiddenInputPCT == 'Si' && (HiddenInput == 'ConsultaTPV' || HiddenInput == 'ConsultaTPV-Trans') && NumPagos != '1') {
+       
+            
+            if (HiddenInputPCT == 'Si' && (HiddenInput == 'ConsultaTPV' || HiddenInput == 'ConsultaTPV-Trans') && FolioPrimerReg != '0') {
                 var respuesta = confirm(smMensajeCargo);
                 var bandera = document.getElementById('ctl00_MainPlaceHolder_hfCargoTarjetaEncontrado');
                 bandera.value = respuesta;
@@ -79,7 +81,9 @@
                 }
             }
 
-            else if (HiddenInputPCT != 'Si' && NumCte != '' && HiddenInput!='ConsultaCteAnticipo' && HiddenTDCDupliado==''  ) {
+
+
+            if (HiddenInputPCT != 'Si' && NumCte != '' && HiddenInput!='ConsultaCteAnticipo' && HiddenTDCDupliado==''  ) {
                 alert('No se encontraron pagos de TPV para el cliente, por favor verifique con el área de tarjetas de crédito');
             }
 
@@ -753,7 +757,7 @@
                                                         </td>
                                                         <td>
                                                             <asp:TextBox ID="txtNoAutorizacionTarjeta" runat="server" CssClass="textboxcaptura"  ReadOnly="true" 
-                                                                Width="100px" AutoPostBack="True"></asp:TextBox>
+                                                                Width="100px" AutoPostBack="false"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="rfvTDAutorizacion" runat="server"
                                                                 ControlToValidate="txtNoAutorizacionTarjeta" Display="None"
                                                                 ErrorMessage="Capturar Número de Autorización"

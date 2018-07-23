@@ -15,11 +15,7 @@ public partial class ControlesUsuario_wucConsultaCargoTarjetaClienta : System.We
     public string sFormaPago = "";
     protected DataTable dtPagosContarjetaDel=new DataTable("dtPagosContarjetaDel") ;
     protected void Page_Load(object sender, EventArgs e)
-    {
-
-
-
-      
+    {     
 
         if (dtPagosContarjeta!=null)
         {
@@ -88,8 +84,8 @@ public partial class ControlesUsuario_wucConsultaCargoTarjetaClienta : System.We
                 else
                     {
                     dtPagosContarjetaDel = dtPagosContarjeta;
-                    Session["TDCdisponibles"] = dtPagosContarjetaDel.Rows.Count;
-                    Session["PrimerRegTDC"] = dtPagosContarjetaDel.Rows[0]["Folio"].ToString();
+                   // Session["TDCdisponibles"] = dtPagosContarjetaDel.Rows.Count;
+                   // Session["PrimerRegTDC"] = dtPagosContarjetaDel.Rows[0]["Folio"].ToString();
                 }
             }
     }

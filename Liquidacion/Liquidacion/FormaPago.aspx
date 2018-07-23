@@ -45,7 +45,12 @@
             if (HiddenInput == 'ConsultaTPV-Trans' || HiddenInput == 'SeleccionaPago-Trans') {
                 document.getElementById('transferencia').style.display = 'inherit';
             }
-       
+            // alert('HiddenInputPCT='+HiddenInputPCT);
+            //alert('HiddenInput='+HiddenInput);
+            //alert('NumPagos=' + NumPagos); 
+            //alert('HiddenTDCDupliado=' + HiddenTDCDupliado);
+            //alert('NumCte=' + NumCte);
+
             
             if (HiddenInputPCT == 'Si' && (HiddenInput == 'ConsultaTPV' || HiddenInput == 'ConsultaTPV-Trans') && FolioPrimerReg != '0') {
                 var respuesta = confirm(smMensajeCargo);

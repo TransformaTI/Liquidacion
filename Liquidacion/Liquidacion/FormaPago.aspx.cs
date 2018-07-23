@@ -1417,7 +1417,7 @@ else
                                 Session["TDCdisponibles"] = dtPagosContarjetaDel.Rows.Count;
                                 Session["PrimerRegTDC"] = dtPagosContarjetaDel.Rows[0]["Folio"].ToString();
                             }
-                            else if (dtPagosContarjetaDel.Rows.Count ==1 && dtPagosContarjetaDel.Rows[0]["Folio"].ToString() == string.Empty)
+                            else if (dtPagosContarjetaDel.Rows.Count ==1 && dtPagosContarjetaDel.Rows[0]["Folio"].ToString() != "0")
                             {
                                     Session["TDCdisponibles"] = dtPagosContarjetaDel.Rows.Count;
                                     Session["PrimerRegTDC"] = dtPagosContarjetaDel.Rows[0]["Folio"].ToString();

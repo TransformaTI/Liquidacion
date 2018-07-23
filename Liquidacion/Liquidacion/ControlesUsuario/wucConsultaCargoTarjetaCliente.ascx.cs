@@ -57,8 +57,8 @@ public partial class ControlesUsuario_wucConsultaCargoTarjetaClienta : System.We
                                                     select c
                                                 ).CopyToDataTable();
 
-                            Session["TDCdisponibles"] = dtPagosContarjetaDel.Rows.Count;
-                            Session["PrimerRegTDC"] = dtPagosContarjetaDel.Rows[0]["Folio"].ToString();
+                            //Session["TDCdisponibles"] = dtPagosContarjetaDel.Rows.Count;
+                            //Session["PrimerRegTDC"] = dtPagosContarjetaDel.Rows[0]["Folio"].ToString();
 
                         }
                         else
@@ -75,8 +75,8 @@ public partial class ControlesUsuario_wucConsultaCargoTarjetaClienta : System.We
                     else
                     {
                         dtPagosContarjetaDel = dtPagosContarjeta;
-                        Session["TDCdisponibles"] = dtPagosContarjetaDel.Rows.Count;
-                        Session["PrimerRegTDC"] = dtPagosContarjetaDel.Rows[0]["Folio"].ToString();
+                        //Session["TDCdisponibles"] = dtPagosContarjetaDel.Rows.Count;
+                        //Session["PrimerRegTDC"] = dtPagosContarjetaDel.Rows[0]["Folio"].ToString();
                     }
 
 

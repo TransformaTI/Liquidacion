@@ -173,10 +173,6 @@ namespace SigametLiquidacion
             this._dataAccess.LoadData(this.dtTipoVale, "spLiqConsultaValeTipo", CommandType.StoredProcedure, (SqlParameter[])null, true);
         }
 
-
-
-
-
         public void CargaAfiliaciones(int Ruta)
         {
             SqlParameter[] sqlParameterArray = new SqlParameter[1]
@@ -542,7 +538,7 @@ namespace SigametLiquidacion
             }
         }
 
-        public void GuardaPagos(string Usuario, DataTable dtPedidos, DataTable dtPago, DataTable dtDetallePago, DataTable dtResumenLiquidacion, DataTable liqPagoAnticipado=null)
+        public void GuardaPagos(string Usuario, DataTable dtPedidos, DataTable dtPago=null, DataTable dtDetallePago=null, DataTable dtResumenLiquidacion=null, DataTable liqPagoAnticipado=null)
         {
             int cobro = 0;
             try
@@ -583,6 +579,7 @@ namespace SigametLiquidacion
                     sqlParameterArray[14].Direction = ParameterDirection.Output;
                     sqlParameterArray[15] = new SqlParameter("@Cobro", SqlDbType.Int);
                     sqlParameterArray[15].Direction = ParameterDirection.Output;
+
                     this._dataAccess.ModifyData("spLiq3AltaCobroLiquidacion", CommandType.StoredProcedure, sqlParameterArray);
                     int num1 = Convert.ToInt32(sqlParameterArray[15].Value);
                     int num2 = (int)Convert.ToInt16(sqlParameterArray[14].Value);

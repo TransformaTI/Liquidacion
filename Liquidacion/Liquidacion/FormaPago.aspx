@@ -24,7 +24,7 @@
         var sTipoPago = '';
         var RegistroCobro = '<%= wucDetalleFormaPago1.RegistroCobro%>';
         var FolioPrimerReg ='<%= Session["PrimerRegTDC"] %>';
-
+        var HiddenPagosOtraRuta='<%= HiddenPagosOtraRuta.Value %>';
         var HiddenTDCDupliado='<%= HiddenTDCDupliado.Value %>';
 
         
@@ -88,9 +88,17 @@
 
 
 
-            if (HiddenInputPCT != 'Si' && NumCte != '' && HiddenInput!='ConsultaCteAnticipo' && HiddenTDCDupliado==''  ) {
+            if (HiddenInputPCT != 'Si' && NumCte != '' && HiddenInput!='ConsultaCteAnticipo' && HiddenTDCDupliado=='' && HiddenPagosOtraRuta==''  ) {
                 alert('No se encontraron pagos de TPV para el cliente, por favor verifique con el área de tarjetas de crédito');
             }
+
+            if (HiddenPagosOtraRuta == 'true')
+            {
+                 alert('¡Existen cargos para el cliente que pertenecen a otra ruta !');
+            }
+
+
+
 
             if (HiddenInput == "ConsultaCteAnticipo")
             {
@@ -430,6 +438,8 @@
                 <asp:HiddenField ID="HiddenInputPCT" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenInputNumPagos" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenTDCDupliado" runat="server" Value="" />
+                <asp:HiddenField ID="HiddenPagosOtraRuta" runat="server" Value="" />
+
                 <div style="text-align: left; height: 650px; width: 1000px; vertical-align: top;">
                     <table style="vertical-align: top; height: 650px;">
                         <tr>

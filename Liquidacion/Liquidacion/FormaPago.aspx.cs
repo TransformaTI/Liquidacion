@@ -33,6 +33,10 @@ public partial class FormaPago : System.Web.UI.Page
     DataTable dtAfiliaciones;
     DataTable dtProveedores;
     DataTable dtTipoVale;
+    int PagosDeRuta = 0;
+    int PagosOtraRuta = 0;
+    int Pagos = 0;
+    DataTable dtDatosControlUsuario = new DataTable();
 
 
 
@@ -718,9 +722,8 @@ if (AgregarCargoTarjeta(txtClienteTarjeta.Text.Trim(),txtNumTarjeta.Text.Trim(),
         }
 else
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "ErrorCargoTDC", "document.getElementById('tarjeta').style.display = 'inherit';alert('El cargo ya se encuentra registrado!');", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "ErrorCargoTDC", "document.getElementById('tarjeta').style.display = 'inherit';alert('¡El cargo ya se encuentra registrado!');", true);               
                 
-                //ScriptManager.RegisterStartupScript(this, GetType(), "ErrorCargoTDC", "alert('El cargo ya se encuentra registrado!');", true);
         }
 
 
@@ -733,8 +736,8 @@ else
     }
     protected void imbEfectivo_Click(object sender, ImageClickEventArgs e)
     {
-        try
-        {
+        //try
+        //{
             DataTable dtPedidosEf = new DataTable();
             dtPedidosEf = ((DataTable)(Session["dtPedidos"]));
             DataSet dsPagos = (DataSet)(Session["dsLiquidacion"]);
@@ -758,7 +761,7 @@ else
                 }
             }
 
-            rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dtPedidosEf, dsPagos.Tables["Cobro"], dsPagos.Tables["CobroPedido"], (DataTable)(Session["dtResumenLiquidacion"]));
+            rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dtPedidosEf, dsPagos!=null?dsPagos.Tables["Cobro"]:null, dsPagos!=null?dsPagos.Tables["CobroPedido"]:null, (DataTable)(Session["dtResumenLiquidacion"]));
             Session["FormaPago"] = "Efectivo";
             Session["dsLiquidacion"] = null;
             Session["PedidosParientes"] = null;
@@ -813,11 +816,11 @@ else
             //{
             //    lblError.Text = "El archivo de Reporte no fue encontrado";
             //}
-        }
-        catch (Exception ex)
-        {
-            lblError.Text = ex.Message;
-        }
+        //}
+        //catch (Exception ex)
+        //{
+        //    lblError.Text = ex.Message;
+        //}
     }
 
     protected void imbCancelar_Click(object sender, ImageClickEventArgs e)
@@ -1136,7 +1139,7 @@ else
 
             ddlTAfiliacion.SelectedIndex = ddlTAfiliacion.Items.IndexOf(ddlTAfiliacion.Items.FindByValue(dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString()));
             
-            ddTipTarjeta.SelectedIndex = int.Parse(dtPagosConTarjetaSelec[0]["TipoTarjeta"].ToString());
+            ddTipTarjeta.SelectedIndex = ddTipTarjeta.Items.IndexOf(ddTipTarjeta.Items.FindByValue(dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()));// int.Parse(dtPagosConTarjetaSelec[0]["TipoTarjeta"].ToString());
             chkLocal.Checked = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "True" ? true : false;
             txtFechaTarjeta.Text = DateTime.Parse(dtPagosConTarjetaSelec[0]["FAlta"].ToString()).ToShortDateString();
 
@@ -1153,7 +1156,9 @@ else
             txtObservacionesTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
             imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
 
-            
+     
+
+
         }
 
 
@@ -1186,9 +1191,13 @@ else
     /// <param name="NumCliente"></param>
     private void ConsultarCargoTarjeta(int NumCliente, string sFormaPago, int Ruta, int Autotanque)
     {
-        DataTable dtDatosControlUsuario = new DataTable();
+    
+      
+
         Session["TDCdisponibles"] = null;
         Session["PrimerRegTDC"] = null;
+        HiddenInputPCT.Value = string.Empty;
+        HiddenTDCDupliado.Value = string.Empty;
 
 
         dtDatosControlUsuario.Columns.Add("TipoCobro", typeof(string));
@@ -1205,7 +1214,7 @@ else
             dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text), Ruta, Autotanque);
             if (dtPagosConTarjeta!=null )
             {
-                Registrosdisponibles(dtPagosConTarjeta);
+                
                 if (dtPagosConTarjeta.Rows.Count > 0)        
                 {
                    
@@ -1222,17 +1231,61 @@ else
 
         if (dtPagosConTarjeta.Rows.Count > 0)
         {
-            if (Session["TDCdisponibles"]!=null && Session["TDCdisponibles"].ToString()!="0")
-                {
-                HiddenInputPCT.Value = "Si";
-            }
+     
 
             foreach (DataRow row in dtPagosConTarjeta.Rows)
             {
-                dtDatosControlUsuario.Rows.Add(row["TipoCobroDescripcion"].ToString(), row["NumeroTarjeta"].ToString(), row["NombreBanco"].ToString(), row["Autorizacion"].ToString(), row["Importe"].ToString(), row["Observacion"].ToString(), row["Año"].ToString(), row["Folio"].ToString());
+                if (Session["Ruta"].ToString()== row["Ruta"].ToString() && Session["Autotanque"].ToString() == row["Autotanque"].ToString() )
+                    {
+                          dtDatosControlUsuario.Rows.Add(row["TipoCobroDescripcion"].ToString(), row["NumeroTarjeta"].ToString(), row["NombreBanco"].ToString(), row["Autorizacion"].ToString(), row["Importe"].ToString(), row["Observacion"].ToString(), row["Año"].ToString(), row["Folio"].ToString());
+                          PagosDeRuta = PagosDeRuta + 1;
+                        
+                    }
+                else if (row["Folio"].ToString()!=string.Empty)
+                    {
+                        PagosOtraRuta = PagosOtraRuta + 1;
+                    }
+
+
+
             }
             wucConsultaCargoTarjetaCliente1.sFormaPago = sFormaPago;
             wucConsultaCargoTarjetaCliente1.dtPagosContarjeta = dtDatosControlUsuario;
+
+            Registrosdisponibles(dtDatosControlUsuario);
+
+            if (PagosDeRuta== 0)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Hidepopup", " HideModalPopup();", true);
+            }
+
+            if ((PagosOtraRuta== 1 && dtDatosControlUsuario.Rows.Count==1 && Session["TDCdisponibles"] == null) || (PagosOtraRuta > 0 && PagosDeRuta >= 0 &&  Session["TDCdisponibles"] == null))
+            {
+                //  ScriptManager.RegisterStartupScript(this, GetType(), "CargoTarjeta", "document.getElementById('tarjeta').style.display = 'inherit';alert('¡Existen cargos para el cliente que pertenecen a otra ruta !');", true);
+                HiddenPagosOtraRuta.Value = "true";
+            }
+
+
+            if (Session["TDCdisponibles"] != null && Session["TDCdisponibles"].ToString() != "0"&& PagosDeRuta > 0 )
+            {
+                HiddenInputPCT.Value = "Si";
+            }
+
+
+
+
+
+
+
+            //   if (Session["Ruta"].ToString() != dtPagosConTarjetaSelec[0]["Ruta"].ToString()
+            //||
+            //Session["Autotanque"].ToString() != dtPagosConTarjetaSelec[0]["Autotanque"].ToString()
+            //)
+            //   {
+            //       ScriptManager.RegisterStartupScript(this, GetType(), "CargoTarjeta", "document.getElementById('tarjeta').style.display = 'inherit';alert('¡El cargo seleccionado no pertenece a la ruta !');", true);
+            //   }
+
+
             //}
             titNoAut.Visible = false;
             titNoAutNum.Visible = false;
@@ -1292,6 +1345,7 @@ else
         string afiliacion = "";
         ListItem liAfiliacion = null;
 
+
        
 
         switch (sFormaPago)
@@ -1301,7 +1355,7 @@ else
                 if (Session["PrimerRegTDC"]!=null)
                 {
 
-                 if (Session["PrimerRegTDC"] != string.Empty)
+                 if (Session["PrimerRegTDC"].ToString() != string.Empty && dtDatosControlUsuario.Rows.Count > 0)
                     {
                         DataRow[] dtPagosPrimerRegistro = dtPagosConTarjeta.Select("Folio=" + Session["PrimerRegTDC"].ToString());
 
@@ -1315,38 +1369,10 @@ else
                 txtObservacionesTarjeta.Text = dtPagosPrimerRegistro[0]["Observacion"].ToString();
                 ddlTAfiliacion.SelectedIndex = ddlTAfiliacion.Items.IndexOf(ddlTAfiliacion.Items.FindByValue(dtPagosPrimerRegistro[0]["Afiliacion"].ToString()));
                 chkLocal.Checked = bool.Parse(dtPagosPrimerRegistro[0]["local"].ToString());
-                ddTipTarjeta.SelectedIndex = dtPagosPrimerRegistro[0]["TipoTarjeta"].ToString() != "" ? int.Parse(dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()) : 0;
+                ddTipTarjeta.SelectedIndex = dtPagosPrimerRegistro[0]["TipoTarjeta"].ToString() != null ? ddTipTarjeta.Items.IndexOf(ddTipTarjeta.Items.FindByValue(dtPagosPrimerRegistro[0]["TipoTarjeta"].ToString())) : 0;
 
 
 
-                        //txtNombreClienteTarjeta.Text = dtPagosConTarjeta.Rows[0]["NombreCliente"].ToString();
-                        //txtNoAutorizacionTarjeta.Text = dtPagosConTarjeta.Rows[0]["Autorizacion"].ToString();
-                        //txtFechaTarjeta.Text= dtPagosConTarjeta.Rows[0]["FAlta"].ToString()!=""? DateTime.Parse(dtPagosConTarjeta.Rows[0]["FAlta"].ToString()).ToShortDateString():"";
-                        //txtNumTarjeta.Text = dtPagosConTarjeta.Rows[0]["NumeroTarjeta"].ToString();
-                        //ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
-                        //ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjeta.Rows[0]["Nombrebanco"].ToString().Trim()));
-                        //txtImporteTarjeta.Text = dtPagosConTarjeta.Rows[0]["Importe"].ToString().Replace("$", "");
-                        //txtObservacionesTarjeta.Text = dtPagosConTarjeta.Rows[0]["Observacion"].ToString();
-                        //ddlTAfiliacion.SelectedIndex = ddlTAfiliacion.Items.IndexOf(ddlTAfiliacion.Items.FindByValue(dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString()));
-
-                        //ddTipTarjeta.SelectedIndex= dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()!=""?int.Parse(dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()):0;
-
-                        //chkLocal.Checked = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "True" ? true : false;
-                        //txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
-                        //txtFechaTarjeta.ReadOnly= txtFechaTarjeta.Text == "" ? false : true;
-                        //txtNumTarjeta.ReadOnly= txtNumTarjeta.Text == "" ? false : true;
-                        //txtImporteTarjeta.ReadOnly= txtImporteTarjeta.Text == "" ? false : true;
-                        //ddBancoTarjeta.Enabled = ddBancoTarjeta.SelectedIndex == 0 ? true : false;
-                        //ddlBancoOrigen.Enabled = ddlBancoOrigen.SelectedIndex == 0 ? true:false;
-                        //ddlTAfiliacion.Enabled = ddlTAfiliacion.SelectedIndex == 0 ? true : false;
-                        //ddTipTarjeta.Enabled = ddTipTarjeta.SelectedIndex == 0 ? true : false;
-                        //chkLocal.Enabled = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "" ? true : false;
-                        //txtObservacionesTarjeta.ReadOnly= txtNoAutorizacionTarjeta.Text == "" ? false : true;
-                        //imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
-
-                        // AgregarCargoTarjeta(txtClienteTarjeta.Text.Trim(), txtNumTarjeta.Text.Trim(), txtNoAutorizacionTarjeta.Text.Trim());
-
-                        //ddBancoTarjeta.Enabled=
 
                     }
                 }
@@ -1412,7 +1438,7 @@ else
                                                     select c
                                                 ).CopyToDataTable();
 
-                            if (dtPagosContarjetaDel.Rows.Count > 1)
+                            if (dtPagosContarjetaDel.Rows.Count > 1 )
                             {
                                 Session["TDCdisponibles"] = dtPagosContarjetaDel.Rows.Count;
                                 Session["PrimerRegTDC"] = dtPagosContarjetaDel.Rows[0]["Folio"].ToString();
@@ -1431,7 +1457,6 @@ else
                             ScriptManager.RegisterStartupScript(this, GetType(), "Hidepopup", " HideModalPopup();", true);
                             Session["PrimerRegTDC"] = null;
                             Session["TDCdisponibles"] = null;
-                            //dtPagosContarjetaDel = dtPagosContarjeta;
 
                         }
 
@@ -1488,6 +1513,7 @@ else
                 txtImporteTarjeta.Text = string.Empty;
                 txtObservacionesTarjeta.Text = string.Empty;
                 ddBancoTarjeta.SelectedIndex = -1;
+                ddTipoTarjeta.SelectedIndex = -1;
 
                 break;
 

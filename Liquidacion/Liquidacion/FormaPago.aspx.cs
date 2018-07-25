@@ -1241,7 +1241,7 @@ else
                           PagosDeRuta = PagosDeRuta + 1;
                         
                     }
-                else if (row["Folio"].ToString()!=string.Empty)
+                else if (row["Folio"].ToString()!=string.Empty && row["Folio"].ToString() !="0")
                     {
                         PagosOtraRuta = PagosOtraRuta + 1;
                     }

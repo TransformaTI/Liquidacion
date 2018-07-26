@@ -15,7 +15,9 @@ public partial class ControlesUsuario_wucConsultaCargoTarjetaClienta : System.We
     public string sFormaPago = "";
     protected DataTable dtPagosContarjetaDel=new DataTable("dtPagosContarjetaDel") ;
     protected void Page_Load(object sender, EventArgs e)
-    {     
+    {
+
+
 
         if (dtPagosContarjeta!=null)
         {
@@ -63,7 +65,7 @@ public partial class ControlesUsuario_wucConsultaCargoTarjetaClienta : System.We
                         }
                         else
                         {
-                            ScriptManager.RegisterStartupScript(this, GetType(), "Hidepopup", " HideModalPopup();", true);
+                            //ScriptManager.RegisterStartupScript(this, GetType(), "Hidepopup", " HideModalPopup();", true);
                            
                             //dtPagosContarjetaDel = dtPagosContarjeta;
 

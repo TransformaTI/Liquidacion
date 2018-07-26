@@ -261,7 +261,9 @@ public partial class FormaPago : System.Web.UI.Page
         if ((!Page.IsPostBack) && (Session["FechaAsignacion"] != null))//09/07/2011 ERROR DE CAPTURA DE FECHA
         {
             txtFechaChueque.Text = Session["FechaAsignacion"].ToString();
+            txtValeFecha.Text = Session["FechaAsignacion"].ToString();
             txtFechaTarjeta.Text = Session["FechaAsignacion"].ToString();
+            Session["FechaAsignacion"].ToString();
         }
 
     }
@@ -443,6 +445,7 @@ public partial class FormaPago : System.Web.UI.Page
                 Session["idCobroConsec"] = idConsecutivo;
 
                 Session["FormaPago"] = "Vale";
+            
             }
             else
             {
@@ -494,7 +497,7 @@ public partial class FormaPago : System.Web.UI.Page
                 Session["FormaPago"] = "Vale";
             }
 
-        
+            Session["SalMovto"] = 0; ;
 
             Response.Redirect("RegistroPagos.aspx");
 
@@ -1256,7 +1259,8 @@ else
 
             if (PagosDeRuta== 0)
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "Hidepopup", " HideModalPopup();", true);
+                ///ScriptManager.RegisterStartupScript(this, GetType(), "Hidepopup", " HideModalPopup();", true);
+                HiddenInputPCT.Value = "";
             }
 
             if ((PagosOtraRuta== 1 && dtDatosControlUsuario.Rows.Count==1 && Session["TDCdisponibles"] == null) || (PagosOtraRuta > 0 && PagosDeRuta >= 0 &&  Session["TDCdisponibles"] == null))
@@ -1454,7 +1458,8 @@ else
                         }
                         else
                         {
-                            ScriptManager.RegisterStartupScript(this, GetType(), "Hidepopup", " HideModalPopup();", true);
+                            // ScriptManager.RegisterStartupScript(this, GetType(), "Hidepopup", " HideModalPopup();", true);
+                            HiddenInputPCT.Value = "";
                             Session["PrimerRegTDC"] = null;
                             Session["TDCdisponibles"] = null;
 

@@ -16,8 +16,6 @@
           
 
           var respuestaConfirm = confirm(sMensajeConfirmacion);
-
-
           if (respuestaConfirm == false)
                {
                  return false;

@@ -27,7 +27,7 @@ public partial class GenerarPago : System.Web.UI.Page
     {
         #region eventos
         //imbGuardar.Attributes.Add("onclick", "return confirm('¿Desea guardar y Cerrar la liquidacion?')");
-        imbGuardar.Attributes.Add("onclick", "return ValidaSaldo();");
+        //imbGuardar.Attributes.Add("onclick", "return ValidaSaldo();");
         #endregion
 
         dtResumenLiquidacion = (DataTable)(Session["dtResumenLiquidacion"]);

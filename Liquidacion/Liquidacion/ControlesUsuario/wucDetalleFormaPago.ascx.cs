@@ -30,6 +30,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
     DataSet dsLiq;
     DataTable dtLiq, dtCobroPedido;
     DataTable dt;
+    DataTable dtCobroLiq;
 
 
 
@@ -125,6 +126,14 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        if ((!Page.IsPostBack) && (Session["FechaAsignacion"] != null))//09/07/2011 ERROR DE CAPTURA DE FECHA
+        {
+            txtFecha.Text = Session["FechaAsignacion"].ToString();
+           
+        }
+
+
         if (Session["dsLiquidacion"] == null)
         {
             string path = Server.MapPath("");
@@ -316,7 +325,7 @@ private void LlenaDropDowns()
     protected void btnAceptarAnticipo_Click(object sender, EventArgs e)
     {
         DataTable dtLiqAnticipoTmp = new DataTable("LiqPagoAnticipado");
-        if (decimal.Parse(txtAntMonto.Text)== 0)
+        if (decimal.Parse(txtAntMonto.Text != "" ? txtAntMonto.Text:"0") == 0)
         {
             ScriptManager.RegisterStartupScript(this, GetType(), "saldo", "alert('El saldo debe ser mayor a cero');", true);
             return;
@@ -454,6 +463,7 @@ private void LlenaDropDowns()
             Session["dsLiquidacion"] = ds;
             Session["idCobroConsec"] = idConsecutivo;
             Session["FormaPago"] = "Anticipo";
+            Session["SalMovto"] = 0;
 
             ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.replace('RegistroPagos.aspx');", true);  
         }
@@ -513,6 +523,7 @@ private void LlenaDropDowns()
         decimal NuevoSaldo=0;
         decimal TotalPedidos = 0;
         DataRow[] drSaldo = null;
+        DataRow[] drCobro = null;
         try
         {
             dsLiq = (DataSet)(Session["dsLiquidacion"]);
@@ -528,6 +539,7 @@ private void LlenaDropDowns()
                         dt = dsLiq.Tables["CobroPedido"];
                         dtLiq = dsLiq.Tables["LiqPagoAnticipado"];
                         dtCobroPedido= dsLiq.Tables["CobroPedido"];
+                        dtCobroLiq = dsLiq.Tables["Cobro"];
 
                         foreach (DataRow dr in _datosCliente.SaldosCliente.Rows)
                             {
@@ -543,12 +555,19 @@ private void LlenaDropDowns()
                                     {
                                        foreach(DataRow rpedido in dtCobroPedido.Rows)
                                         {
-                                            if (row["Pedidos"].ToString().Contains(rpedido["Pedido"].ToString()))
-                                            {
-                                                TotalPedidos = TotalPedidos + decimal.Parse(rpedido["Total"].ToString());                                               
+                                                //DataTable dt = new DataTable();
+                                                drCobro = dtCobroLiq.Select("IDPAGO='"+ rpedido["IdPago"]+ "' AND NombreTipoCobro='ANTICIPO'");
+                                                //DataTable dtPagosAnticipo = drCobro.Count() > 0 ? drCobro.CopyToDataTable():null ;
+
+                                                foreach (DataRow rcobro in drCobro)
+                                                {
+                                                    if (row["Pedidos"].ToString().Contains(rpedido["Pedido"].ToString()) )
+                                                    {
+                                                        TotalPedidos = TotalPedidos + decimal.Parse(rpedido["Total"].ToString());                                               
                                                 
+                                                    }
+                                                }
                                             }
-                                        }
                                         
                                     }
                                 }
@@ -645,7 +664,6 @@ private void LlenaDropDowns()
     protected void LstSaldos_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (LstSaldos.Items.Count >0)
-            //txtAntMonto.Text = LstSaldos.SelectedItem.Text.Split(',')[0].ToString().Replace("$", "");
         ClaveAnticipo = LstSaldos.SelectedValue.ToString();
     }
     

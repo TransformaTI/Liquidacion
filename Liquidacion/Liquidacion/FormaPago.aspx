@@ -184,7 +184,8 @@
 
             document.getElementById('AnticipoUC').style.display = 'inherit';
                document.getElementById('Anticipo').style.display = 'inherit'; 
-                    document.getElementById('Transfer').style.display = 'none';                    
+            document.getElementById('Transfer').style.display = 'none';     
+            
         }
         }
 
@@ -447,8 +448,8 @@
                                 <table style="vertical-align: top;">
                                     <tr>
                                         <td>
-                                            <asp:Image ID="imgCheque" runat="server"
-                                                ImageUrl="~/Images/imgCapturarCheque.png" />
+                                            <asp:Image ID="imgCheque" runat="server" 
+                                                ImageUrl="~/Images/imgCapturarCheque.png"  />
 
                                         </td>
                                         <tr>

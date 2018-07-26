@@ -24,11 +24,17 @@ public partial class RegistroPagos : System.Web.UI.Page
     string pagoActivo;
     int idCliente;
 
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        imbRedirAbonos.Attributes.Add("onclick", "return ValidaSaldos();");
+
+       
+
         if (!Page.IsPostBack && Session["ImporteOperacion"].ToString()!=null)
         {
             lblImporteTotalA.Text = String.Format("{0:C}", decimal.Parse(Session["ImporteOperacion"].ToString()));
+
         }
         
         //dsLiquidacion es el dataset creado y obtenido por esquema, validamos que esté inicializado
@@ -296,22 +302,28 @@ public partial class RegistroPagos : System.Web.UI.Page
         decimal importeAbono;
         DataTable dtEliminar = new DataTable();
         DataRow[] drArray;
+        DataTable Pedidos = new DataTable();
 
         try
         {
             for (int i = 0; i <= ds.Tables["CobroPedido"].Rows.Count - 1; i++)
             {
                 refPago = ds.Tables["CobroPedido"].Rows[i]["Anio"].ToString().TrimEnd() + ds.Tables["CobroPedido"].Rows[i]["Celula"].ToString().TrimEnd() + ds.Tables["CobroPedido"].Rows[i]["Pedido"].ToString().TrimEnd();
-                for (int j = 0; j <= dtPedidos.Rows.Count - 1; j++)
+                if (ds.Tables.Contains("Pedidos"))
                 {
-                    if (refPago == ds.Tables["Pedidos"].Rows[j]["PedidoReferencia"].ToString().TrimEnd() && pagoActivo.ToString() == ds.Tables["Pedidos"].Rows[i]["IdPago"].ToString())
+                    for (int j = 0; j <= ds.Tables["Pedidos"].Rows.Count - 1; j++)
                     {
-                        importeAbono = Convert.ToDecimal(ds.Tables["Pedidos"].Rows[i]["Importe"]);
-                        ActualizaSaldo(refPago, importeAbono, true);
+
+                        if (refPago == ds.Tables["Pedidos"].Rows[j]["PedidoReferencia"].ToString().TrimEnd() && pagoActivo.ToString() == ds.Tables["CobroPedido"].Rows[i]["IdPago"].ToString())
+                         {
+                            importeAbono = Convert.ToDecimal(ds.Tables["CobroPedido"].Rows[i]["Importe"]);
+                            ActualizaSaldo(refPago, importeAbono, true);
 
 
 
+                         }
                     }
+
                 }
 
 
@@ -557,6 +569,10 @@ public partial class RegistroPagos : System.Web.UI.Page
             lblDescuento.Visible = false;
 
 
+          
+
+
+
         }
         catch (Exception ex)
         {
@@ -603,6 +619,8 @@ public partial class RegistroPagos : System.Web.UI.Page
     {
         try
         {
+
+
             DataRow[] CobrosPedido = ds.Tables["CobroPedido"].Select("IdPago = '" + Session["idCobroConsec"].ToString() + "'");
             //DataRow[] CobrosPedido = ds.Tables["CobroPedido"].Select();
             if (CobrosPedido.Length > 0)

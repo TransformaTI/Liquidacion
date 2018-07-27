@@ -1260,7 +1260,7 @@ else
             if (PagosDeRuta== 0)
             {
                 ///ScriptManager.RegisterStartupScript(this, GetType(), "Hidepopup", " HideModalPopup();", true);
-                HiddenInputPCT.Value = "";
+                HiddenInputPCT.Value = "No";
             }
 
             if ((PagosOtraRuta== 1 && dtDatosControlUsuario.Rows.Count==1 && Session["TDCdisponibles"] == null) || (PagosOtraRuta > 0 && PagosDeRuta >= 0 &&  Session["TDCdisponibles"] == null))
@@ -1294,7 +1294,7 @@ else
             titNoAut.Visible = false;
             titNoAutNum.Visible = false;
 
-            if (dtPagosConTarjeta.Rows[0]["Folio"].ToString()=="")
+            if (dtPagosConTarjeta.Rows[0]["Folio"].ToString()=="" )
             {
                 HiddenInputPCT.Value = "No";
                 titNoAut.Visible = true;

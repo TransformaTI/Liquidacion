@@ -2,12 +2,6 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc2" %>
 
-<style type="text/css">
-    .auto-style1 {
-        width: 238px;
-    }
-</style>
-
 <script type="text/javascript">
     document.getElementById("<%= txtCliente.ClientID%>").focus
 
@@ -72,18 +66,19 @@
 <asp:Panel ID="pnlTransferencia" runat="server">
 <table style="background-color: #e1f8e2; height: 360px; width: 900px">
     <tr>
-        <td colspan="2" class="HeaderMainStyle" >
+        <td  colspan="2" class="HeaderMainStyle" align="center">
             <asp:Label ID="lblTitulo" runat="server" CssClass="labeltipopagoheader" Text=""></asp:Label>
         </td>
     </tr>
     <tr>
-        <td>
-            <div style="text-align: left">
+        <td class="style1">
+            <div>
                 <asp:Label ID="lblCliente" runat="server" CssClass="labeltipopagoforma"
                     Text="Cliente:"></asp:Label>
             </div>
         </td>
-        <td>
+        <td style="text-align: left">
+            
             <asp:TextBox ID="txtCliente" Width="150px" runat="server" CssClass="textboxcaptura" onblur="return ConsultaCteTransferencia()"></asp:TextBox>
             <cc2:FilteredTextBoxExtender ID="ftbLector" runat="server" FilterType="Numbers"
                 TargetControlID="txtCliente">
@@ -95,28 +90,28 @@
             <cc2:ValidatorCalloutExtender ID="vceCliente" runat="server"
                 TargetControlID="rfvCliente">
             </cc2:ValidatorCalloutExtender>
+           
         </td>
     </tr>
     <tr>
-        <td>
-            <div style="text-align: left">
+        <td class="style1">
+            <div >
                 <asp:Label ID="lblNombre" runat="server" CssClass="labeltipopagoforma"
                     Text="Nombre:"></asp:Label>
             </div>
         </td>
-        <td>
+        <td style="text-align: left">
             <asp:TextBox ID="txtNombre" Width="200px" runat="server" CssClass="textboxcaptura" ReadOnly="true"></asp:TextBox>
-
         </td>
     </tr>
     <tr>
-        <td>
-            <div style="text-align: left">
+        <td class="style1">
+            <div>
                 <asp:Label ID="lblFecha" runat="server" CssClass="labeltipopagoforma"
                     Text="Fecha documento:"></asp:Label>
             </div>
         </td>
-        <td>
+        <td style="text-align: left">
             <div style="float: left;">
                 <asp:TextBox ID="txtFecha" Width="150px" runat="server" Text="" CssClass="calendarTextBox" ></asp:TextBox>
                 <asp:ImageButton runat="Server" ID="btnCalFAsignacion" AlternateText="Clic para mostrar el calendario" ImageUrl="~/Imagenes/Calendar.png" Height="16px" Width="16px" />
@@ -127,13 +122,13 @@
         </td>
     </tr>
     <tr>
-        <td>
-            <div style="text-align: left">
+        <td class="style1">
+            <div>
                 <asp:Label ID="lblNoCuenta" runat="server" CssClass="labeltipopagoforma"
                     Text="No. Cuenta:"></asp:Label>
             </div>
         </td>
-        <td>
+        <td style="text-align: left">
             <asp:TextBox ID="txtNoCuenta" Width="150px" runat="server" CssClass="textboxcaptura" OnTextChanged="txtNoCuenta_TextChanged"></asp:TextBox>
             <cc2:FilteredTextBoxExtender ID="ftbNumCuenta" runat="server" TargetControlID="txtNoCuenta" FilterType="Numbers"></cc2:FilteredTextBoxExtender>
             <asp:RequiredFieldValidator ID="rfvNoCuenta" runat="server"
@@ -146,13 +141,13 @@
         </td>
     </tr>
     <tr>
-        <td>
-            <div style="text-align: left">
+        <td class="style1">
+            <div >
                 <asp:Label ID="lblNoDocumento" runat="server" CssClass="labeltipopagoforma"
                     Text="No. Documento:"></asp:Label>
             </div>
-        </td>
-        <td>
+        </t>
+        <td style="text-align: left">
             <asp:TextBox ID="txtNoDocumento" Width="150px" runat="server" CssClass="textboxcaptura"></asp:TextBox>
             
             <asp:RequiredFieldValidator ID="rfvNoDocumento" runat="server"
@@ -166,13 +161,13 @@
         </td>
     </tr>
     <tr>
-        <td>
-            <div style="text-align: left">
+        <td class="style1">
+            <div>
                 <asp:Label ID="lblBanco" runat="server" CssClass="labeltipopagoforma"
                     Text="Banco:"></asp:Label>
             </div>
         </td>
-        <td>
+        <td style="text-align: left">
             <asp:DropDownList ID="ddlBanco" Width="200px" runat="server"  Height="25">
                 <asp:ListItem>Promoción 1</asp:ListItem>
                 <asp:ListItem>Promoción 2</asp:ListItem>
@@ -186,13 +181,13 @@
         </td>
     </tr>
     <tr>
-        <td>
-            <div style="text-align: left">
+        <td class="style1">
+            <div>
                 <asp:Label ID="lblImporte" runat="server" CssClass="labeltipopagoforma"
                     Text="Importe:"></asp:Label>
             </div>
         </td>
-        <td>
+        <td style="text-align: left">
             <asp:TextBox ID="txtImporte" runat="server" Width="150px" CssClass="textboxcaptura"></asp:TextBox>
             <cc2:FilteredTextBoxExtender ID="ftbImporte" runat="server" TargetControlID="txtImporte" FilterType="Custom" ValidChars="0123456789./"></cc2:FilteredTextBoxExtender>
             <asp:RequiredFieldValidator ID="rfvImporte" runat="server"
@@ -205,16 +200,14 @@
         </td>
     </tr>
     <tr>
-        <td>
-            <div style="text-align: left">
+        <td class="style1">
+            <div>
                 <asp:Label ID="lblObservaciones" runat="server" CssClass="labeltipopagoforma"
                     Text="Observaciones:"></asp:Label>
             </div>
         </td>
-        <td>
-
+        <td style="text-align: left">
             <asp:TextBox ID="txtObservaciones" runat="server" Width="300px" Height="75px"  TextMode="MultiLine"></asp:TextBox>
-
         </td>
     </tr>
     <tr>
@@ -246,19 +239,18 @@
 <asp:Panel ID="pnlAnticipo" runat="server">
 <table style="background-color: #e1f8e2; height: 360px; width: 900px">
     <tr>
-        <td colspan="2" class="HeaderMainStyle" align="center">
+        <td  colspan="2" class="HeaderMainStyle" align="center">
             <asp:Label ID="lblAntTitulo" runat="server" CssClass="labeltipopagoheader" Text=""></asp:Label>
         </td>
     </tr>
     <tr>
-        <td class="auto-style1">
-            <div style="text-align: left">
-                <asp:Label ID="lblAntCliente" runat="server" CssClass="labeltipopagoforma"
+        <td class="style1">
+            <div>
+                <asp:Label ID="lblAntCliente" CssClass="labeltipopagoforma" runat="server" 
                     Text="Cliente:"></asp:Label>
             </div>
         </td>
-        <td>
-
+        <td style="text-align: left">
             <cc2:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" FilterType="Numbers"
                 TargetControlID="txtAntCliente"></cc2:FilteredTextBoxExtender>
             <asp:TextBox ID="txtAntCliente" runat="server" CssClass="textboxcaptura" Width="150px" ValidChars="0123456789" onblur="return ConsultaCteAnticipo()" ></asp:TextBox >
@@ -271,24 +263,24 @@
         </td>
     </tr>
     <tr>
-        <td class="auto-style1">
-            <div style="text-align: left">
+        <td class="style1">
+            <div>
                 <asp:Label ID="lblAntNombre" runat="server" CssClass="labeltipopagoforma"
                     Text="Nombre:"></asp:Label>
             </div>
         </td>
-        <td>
+        <td style="text-align: left">
             <asp:TextBox ID="txtAntNombre"  ReadOnly ="true" Width="200px" runat="server" CssClass="textboxcaptura"></asp:TextBox>
         </td>
     </tr>
     <tr>
-        <td class="auto-style1">
-            <div style="text-align: left">
+        <td class="style1">
+            <div>
                 <asp:Label ID="lblAntSaldo" runat="server" CssClass="labeltipopagoforma"
                     Text="Saldo:"></asp:Label>
             </div>
         </td>
-        <td>
+        <td style="text-align: left">
             <asp:ListBox ID="LstSaldos" runat="server"  Height="90px"  style="overflow-x:auto;margin-left: 0px" Width="222px" onchange ="return MontoSaldo()" OnSelectedIndexChanged="LstSaldos_SelectedIndexChanged" AutoPostBack="True" OnTextChanged="LstSaldos_SelectedIndexChanged" ></asp:ListBox>
             <asp:RequiredFieldValidator ID="rfvAntSaldo" runat="server"
                 ControlToValidate="LstSaldos" Display="None"
@@ -299,13 +291,13 @@
         </td>
     </tr>
     <tr>
-        <td class="auto-style1">
-            <div style="text-align: left">
+        <td class="style1">
+            <div>
                 <asp:Label ID="lblAntMonto" runat="server" CssClass="labeltipopagoforma"
                     Text="Monto:"></asp:Label>
             </div>
         </td>
-        <td>
+        <td style="text-align: left">
             <asp:TextBox ID="txtAntMonto" runat="server" Width="150px" CssClass="textboxcaptura" ReadOnly="False"></asp:TextBox>
             <cc2:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" TargetControlID="txtAntMonto" FilterType="Custom" ValidChars="0123456789./"></cc2:FilteredTextBoxExtender>
             <asp:RequiredFieldValidator ID="rfvAntMonto" runat="server"
@@ -317,24 +309,24 @@
         </td>
     </tr>
     <tr>
-        <td class="auto-style1">
-            <div style="text-align: left">
+        <td class="style1">
+            <div>
                 <asp:Label ID="lblAntObservaciones" runat="server" CssClass="labeltipopagoforma"
                     Text="Observaciones:"></asp:Label>
             </div>
         </td>
-        <td>
+        <td style="text-align: left">
             <asp:TextBox ID="txtAntOnservaciones" runat="server" Width="300px" Height="75px" TextMode="MultiLine"></asp:TextBox>
 
         </td>       
     </tr>
     <tr>
-        <td class="auto-style1">&nbsp;</td>
+        <td>&nbsp;</td>
         <td>&nbsp;</td>
     </tr>
 
     <tr>
-        <td class="auto-style1"></td>
+        <td></td>
         <td>
             <asp:ImageButton ID="btnAntAceptar" runat="server" OnClientClick="return ValidaMontoSaldo()"
                 OnClick="btnAceptarAnticipo_Click" ImageUrl="~/Images/btnAceptar.png" 
@@ -342,7 +334,7 @@
         </td>
     </tr>
     <tr>
-        <td class="auto-style1">&nbsp;</td>
+        <td>&nbsp;</td>
         <td>
             <asp:Label ID="lblAntError" runat="server" CssClass="labeltipopagoforma"
                 ForeColor="Red"></asp:Label>

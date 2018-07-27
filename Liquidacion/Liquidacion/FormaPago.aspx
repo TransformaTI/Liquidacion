@@ -248,6 +248,7 @@
 
         function ValidaCamposTDC()
         {
+            
             if (document.getElementById('<%=txtClienteTarjeta.ClientID%>').value == "")
             {
                 alert('Capture el número de cliente');
@@ -260,7 +261,9 @@
                  return false;
             }
 
-            if (document.getElementById('<%=HiddenInputPCT.ClientID%>').value == "No")
+            alert(document.getElementById('<%=HiddenInputPCT.ClientID%>').value);
+
+            if (document.getElementById('<%=HiddenInputPCT.ClientID%>').value == "No" ||   document.getElementById('<%=HiddenInputPCT.ClientID%>').value== "")
             {
                 if (document.getElementById('<%=txtNoAutorizacionTarjeta.ClientID%>').value == "")
                 {
@@ -338,10 +341,10 @@
                 ctrDocumento.value = str.substring(24, 31);
             }
         }
-        function test(txtCliente) {
-            var test = document.getElementById(txtCliente).value;
-            alert(test);
-        }
+        //function test(txtCliente) {
+        //    var test = document.getElementById(txtCliente).value;
+        //    alert(test);
+        //}
     </script>
     <script type="text/javascript"> 
         function txtImagenTipoCobro(tipo) {

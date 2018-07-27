@@ -302,11 +302,6 @@
                 }
 
 
-              <%--  if (document.getElementById('<%= HiddenTDCDupliado.ClientID %>').value == "true")
-                {
-                    alert('¡El cargo ya se encuentra registrado!');
-                    return false;
-                }--%>
             }  
         }
 

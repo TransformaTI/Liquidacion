@@ -9,7 +9,6 @@
 </style>
 
 <script type="text/javascript">
-    document.getElementById("<%= txtCliente.ClientID%>").focus
 
     function ValidaMontoSaldo()
     {

@@ -739,11 +739,12 @@ else
     }
     protected void imbEfectivo_Click(object sender, ImageClickEventArgs e)
     {
-        //try
-        //{
+        try
+        {
             DataTable dtPedidosEf = new DataTable();
             dtPedidosEf = ((DataTable)(Session["dtPedidos"]));
             DataSet dsPagos = (DataSet)(Session["dsLiquidacion"]);
+            DataTable LiqPagoAnticipado = dsPagos != null ? dsPagos.Tables["LiqPagoAnticipado"] : null;
 
            DataTable dtPedidosParientes =( DataTable)(Session["PedidosParientes"]);
 
@@ -764,13 +765,15 @@ else
                 }
             }
 
-            rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dtPedidosEf, dsPagos!=null?dsPagos.Tables["Cobro"]:null, dsPagos!=null?dsPagos.Tables["CobroPedido"]:null, (DataTable)(Session["dtResumenLiquidacion"]));
+        
+
+            rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dtPedidosEf, dsPagos!=null?dsPagos.Tables["Cobro"]:null, dsPagos!=null?dsPagos.Tables["CobroPedido"]:null, (DataTable)(Session["dtResumenLiquidacion"]), LiqPagoAnticipado);
             Session["FormaPago"] = "Efectivo";
             Session["dsLiquidacion"] = null;
             Session["PedidosParientes"] = null;
             Session["CargoTarjeta"] = null;
             Response.Redirect("ReporteLiquidacion.aspx");
-            
+
             //Parametros param = new Parametros(1, 1, 22);
             // Reporte
 
@@ -819,11 +822,11 @@ else
             //{
             //    lblError.Text = "El archivo de Reporte no fue encontrado";
             //}
-        //}
-        //catch (Exception ex)
-        //{
-        //    lblError.Text = ex.Message;
-        //}
+        }
+        catch (Exception ex)
+        {
+            lblError.Text = ex.Message;
+        }
     }
 
     protected void imbCancelar_Click(object sender, ImageClickEventArgs e)

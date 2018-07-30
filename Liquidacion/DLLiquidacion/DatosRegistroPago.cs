@@ -606,7 +606,7 @@ namespace SigametLiquidacion
 
                 if (liqPagoAnticipado != null)
                 {
-                    decimal Totalpedidos = decimal.Parse(dtDetallePago.Compute("Sum(Total)", "").ToString());
+                    decimal Totalpedidos = decimal.Parse(liqPagoAnticipado.Compute("Sum(Monto)", "").ToString());
                     InsertaMovimientoAConciliar(int.Parse(liqPagoAnticipado.Rows[0]["Folio"].ToString()), int.Parse(liqPagoAnticipado.Rows[0]["AñoMovimiento"].ToString()), int.Parse(DateTime.Now.Year.ToString()), cobro, Totalpedidos, "EMITIDO");
                 }
 

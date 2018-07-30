@@ -69,6 +69,7 @@ namespace SigametLiquidacion
             try
             {
                 this._dataAccess.LoadData(dataTable, "spLIQ2ConsultaSaldosAFavor", CommandType.StoredProcedure, sqlParameterArray, true);
+
             }
             catch (Exception ex)
             {

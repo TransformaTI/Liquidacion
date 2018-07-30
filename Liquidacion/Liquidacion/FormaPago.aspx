@@ -45,11 +45,6 @@
             if (HiddenInput == 'ConsultaTPV-Trans' || HiddenInput == 'SeleccionaPago-Trans') {
                 document.getElementById('transferencia').style.display = 'inherit';
             }
-            // alert('HiddenInputPCT='+HiddenInputPCT);
-            //alert('HiddenInput='+HiddenInput);
-            //alert('NumPagos=' + NumPagos); 
-            //alert('HiddenTDCDupliado=' + HiddenTDCDupliado);
-            //alert('NumCte=' + NumCte);
 
             
             if (HiddenInputPCT == 'Si' && (HiddenInput == 'ConsultaTPV' || HiddenInput == 'ConsultaTPV-Trans') && FolioPrimerReg != '0') {
@@ -94,7 +89,7 @@
 
             if (HiddenPagosOtraRuta == 'true')
             {
-                 alert('¡Existen cargos para el cliente que pertenecen a otra ruta !');
+                 alert('¡Existen cargos para el cliente que pertenecen a otra ruta . No se encontraron pagos de TPV que corresponda a la ruta y autotanque, porfavor verifique con el área de tarjetas de crédito.!');
             }
 
 
@@ -255,21 +250,28 @@
                  return false;
             }
 
-            if (document.getElementById('<%=txtNombreClienteTarjeta.ClientID%>').value == "")
+<%--            if (document.getElementById('<%=txtNombreClienteTarjeta.ClientID%>').value == "")
             {
                 alert('El nombre del cliente es requerido');
                  return false;
-            }
+            }--%>
 
-            alert(document.getElementById('<%=HiddenInputPCT.ClientID%>').value);
+
 
             if (document.getElementById('<%=HiddenInputPCT.ClientID%>').value == "No" ||   document.getElementById('<%=HiddenInputPCT.ClientID%>').value== "")
             {
+
+               if (document.getElementById('<%= ddlTAfiliacion.ClientID %>').selectedIndex == "0")
+                {
+                    alert('Seleccione una afiliación');
+                    return false;
+                }
                 if (document.getElementById('<%=txtNoAutorizacionTarjeta.ClientID%>').value == "")
                 {
                         alert('Capture el número de Autorizacion');
                         return false;
                 }
+
                 if (document.getElementById('<%=txtNoAutorizacionTarjetaConfirm.ClientID%>').value == "")
                 {
                         alert('Confirme el número de autorización');
@@ -295,11 +297,7 @@
                     alert('Capture el Importe');
                     return false;
                 }
-                if (document.getElementById('<%= ddlTAfiliacion.ClientID %>').selectedIndex == "0")
-                {
-                    alert('Seleccione una afiliación');
-                    return false;
-                }
+        
 
 
             }  

@@ -10,9 +10,10 @@
 
       <script type="text/javascript" language="javascript"> 
         var sMensajeSaldos = 'El cliente tiene saldos a favor ¿ Desea continuar?';
+          var Saldo = 0;
 
           function ValidaSaldos() { 
-             var  Saldo='<%=  lblImportePagoA.Text.Replace("$", "") %>'; 
+
                       if (parseFloat(Saldo.toString()) > 0)
                       {
                              var respuesta = confirm(sMensajeSaldos);

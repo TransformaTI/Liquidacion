@@ -1294,7 +1294,7 @@ else
             titNoAut.Visible = false;
             titNoAutNum.Visible = false;
 
-            if (dtPagosConTarjeta.Rows[0]["Folio"].ToString()=="" )
+            if (dtPagosConTarjeta.Rows[0]["Folio"].ToString()=="" || PagosDeRuta==0)
             {
                 HiddenInputPCT.Value = "No";
                 titNoAut.Visible = true;
@@ -1510,7 +1510,7 @@ else
             case "tarjeta":
                 txtNombreClienteTarjeta.Text = string.Empty;
                 txtNoAutorizacionTarjeta.Text = string.Empty;
-                txtFechaTarjeta.Text = string.Empty;
+                txtFechaTarjeta.Text = txtFechaTarjeta.Text = Session["FechaAsignacion"].ToString();
                 txtNumTarjeta.Text = string.Empty;
                 ddlBancoOrigen.SelectedIndex = -1;
                 ddlBancoOrigen.SelectedIndex = -1;

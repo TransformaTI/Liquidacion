@@ -25,6 +25,7 @@ public partial class RegistroPagos : System.Web.UI.Page
     int idCliente;
 
 
+
     protected void Page_Load(object sender, EventArgs e)
     {
         imbRedirAbonos.Attributes.Add("onclick", "return ValidaSaldos();");
@@ -391,6 +392,11 @@ public partial class RegistroPagos : System.Web.UI.Page
                 
             txtImporteDocto.Text = String.Format("{0:0.00}", gvPedidos.SelectedRow.Cells[8].Text.Replace("$", ""));
             txtSaldoMovimiento.Text = String.Format("{0:0.00}", gvPedidos.SelectedRow.Cells[9].Text.Replace("$", ""));
+            Session["SaldoMtvo"] = Convert.ToDecimal(Session["ImporteOperacion"]) - Convert.ToDecimal(txtImporteDocto.Text);
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "saldo", "Saldo="+ Session["SaldoMtvo"].ToString()+"; ", true);
+
+
 
             //Valido si el pedido tiene descuento y solo le digo de donde va a tomar el valor
             //if (gvPedidos.SelectedRow.Cells[10].Text != "$0.00")
@@ -449,6 +455,8 @@ public partial class RegistroPagos : System.Web.UI.Page
 
         try
         {
+
+
             referencia = gvPedidos.SelectedRow.Cells[2].Text.TrimEnd();
             
             pagoActivo = Session["idCobroConsec"].ToString();
@@ -479,6 +487,8 @@ public partial class RegistroPagos : System.Web.UI.Page
                     vistaPago.RowFilter = "IdPago = " + Session["idCobroConsec"].ToString();
                     gvRelacionCobro.DataSource = vistaPago;
                     gvRelacionCobro.DataBind();
+
+
                  
                     //Limpio Controles de Captura
                     txtImporteAbono.Text = "";
@@ -664,7 +674,8 @@ public partial class RegistroPagos : System.Web.UI.Page
             //txtImporteDocto.Text = String.Format("{0:0.00}", gvPedidos.SelectedRow.Cells[7].Text.Replace("$", ""));
             txtImporteDocto.Text = String.Format("{0:0.00}", gvPedidos.Rows[row.RowIndex].Cells[7].Text.Replace("$", ""));
             txtSaldoMovimiento.Text = String.Format("{0:0.00}", gvPedidos.Rows[row.RowIndex].Cells[8].Text.Replace("$", ""));
-            
+            //Session["SaldoMtvo"]= Convert.ToDecimal(Session["ImporteOperacion"])- Convert.ToDecimal(txtImporteDocto.Text);
+
             //Valido si el pedido tiene descuento y solo le digo de donde va a tomar el valor
             if (gvPedidos.Rows[row.RowIndex].Cells[9].Text != "$0.00")
             {

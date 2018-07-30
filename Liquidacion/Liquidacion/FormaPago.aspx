@@ -5,7 +5,6 @@
 <%@ Register Src="~/ControlesUsuario/wucConsultaCargoTarjetaCliente.ascx" TagPrefix="uc1" TagName="wucConsultaCargoTarjetaCliente" %>
 <%@ Register Src="~/ControlesUsuario/wucDetalleFormaPago.ascx" TagPrefix="ucDetallePago" TagName="wucDetalleFormaPago" %>
 
-
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainPlaceHolder" runat="server">
 
     
@@ -439,47 +438,47 @@
                                 <table style="vertical-align: top;">
                                     <tr>
                                         <td>
-                                            <asp:Image ID="imgCheque" runat="server" 
+                                            <asp:Image ID="imgCheque" runat="server" Height="26px" Width="137px" 
                                                 ImageUrl="~/Images/imgCapturarCheque.png"  />
 
                                         </td>
                                         <tr>
                                             <td>
-                                                <asp:Image ID="imgTarjeta" runat="server"
+                                                <asp:Image ID="imgTarjeta" runat="server" Height="26px" Width="137px" 
                                                     ImageUrl="~/Images/imgCapturarTarjeta.png" />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <asp:Image ID="ImgTransferencia" runat="server"
+                                                <asp:Image ID="ImgTransferencia" runat="server" Height="26px" Width="137px" 
                                                     ImageUrl="~/Images/imgCapturarTrans.png" />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <asp:Image ID="imgVale" runat="server"
-                                                    ImageUrl="~/Images/imgVale.png" Height="26px" Width="138px" />
+                                                <asp:Image ID="imgVale" runat="server" Height="26px" Width="137px" 
+                                                    ImageUrl="~/Images/imgCapturarVale.png"  />
                                             </td>
                                         </tr>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:Image ID="ImgAnticipo" runat="server"
+                                            <asp:Image ID="ImgAnticipo" runat="server" Height="26px" Width="137px" 
                                                 ImageUrl="~/Images/imgCapturarAnticipo.png" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:ImageButton ID="imbEfectivo" runat="server" Height="26px"
-                                                ImageUrl="~/Images/imgEfectivo.png" OnClick="imbEfectivo_Click"
-                                                Width="138px" />
+                                            <asp:ImageButton ID="imbEfectivo" runat="server"  Height="26px" Width="137px" 
+                                                ImageUrl="~/Images/imgPagoEfectivo.png" OnClick="imbEfectivo_Click"
+                                                 />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:ImageButton ID="imbCancelar" runat="server" Height="25px"
+                                            <asp:ImageButton ID="imbCancelar" runat="server" Height="26px" Width="137px" 
                                                 ImageUrl="~/Images/imgCancelarPagos.png" OnClick="imbCancelar_Click"
-                                                Width="137px" />
+                                                />
 
                                         </td>
                                     </tr>
@@ -495,11 +494,7 @@
                                             <asp:Label ID="lblError" runat="server" CssClass="labeltipopagoforma" ForeColor="Red"></asp:Label>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="lblalgo0" runat="server" ForeColor="Lime"></asp:Label>
-                                        </td>
-                                    </tr>
+                                
                         </tr>
                     </table>
                     </td>

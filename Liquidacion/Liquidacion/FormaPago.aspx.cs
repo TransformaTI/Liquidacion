@@ -1519,7 +1519,7 @@ else
                 txtObservacionesTarjeta.Text = string.Empty;
                 ddBancoTarjeta.SelectedIndex = -1;
                 ddTipoTarjeta.SelectedIndex = -1;
-
+                
                 break;
 
             case "transferencia":

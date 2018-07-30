@@ -8,7 +8,7 @@
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainPlaceHolder" runat="server">
 
-
+    
     <script type="text/javascript" language="javascript">  
 
 
@@ -121,7 +121,7 @@
             }
         });
 
-
+        
 
          function onlyNumbers(evt) {
           evt = (evt) ? evt : window.event;
@@ -157,48 +157,52 @@
           return true;
         };
 
-        function toggle(display, activo, inactivo, inactivoA, control) {
-        document.getElementById('tarjeta').style.display = 'none';
-        document.getElementById('cheque').style.display = 'none';
-        document.getElementById('vale').style.display = 'none';
-        document.getElementById('Transfer').style.display = 'none';
-        document.getElementById('Anticipo').style.display = 'none';
-        document.getElementById('AnticipoUC').style.display = 'none';
+         function toggle(display, activo, inactivo, inactivoA, control) {
+             
+            document.getElementById('tarjeta').style.display = 'none';
+            document.getElementById('cheque').style.display = 'none';
+            document.getElementById('vale').style.display = 'none';
+            document.getElementById('Transfer').style.display = 'none';
+            document.getElementById('Anticipo').style.display = 'none';
+            document.getElementById('AnticipoUC').style.display = 'none';
 
 
-        document.getElementById(activo).style.display = (
-            document.getElementById(activo).style.display == 'none') ? 'block' : 'none';
+            document.getElementById(activo).style.display = (
+                document.getElementById(activo).style.display == 'none') ? 'block' : 'none';
 
-        document.getElementById(inactivo).style.display = 'none';
-        document.getElementById(inactivoA).style.display = 'none';
+            document.getElementById(inactivo).style.display = 'none';
+            document.getElementById(inactivoA).style.display = 'none';
 
-        if (activo == 'Transfer') {
-            document.getElementById('AnticipoUC').style.display = 'inherit';
-            document.getElementById('Transfer').style.display = 'inherit';
-            document.getElementById('Anticipo').style.display = 'none'; 
-            document.getElementById('lblTitulo').style.value = 'Transferencia'; 
+            if (activo == 'Transfer') {
+                document.getElementById('AnticipoUC').style.display = 'inherit';
+                document.getElementById('Transfer').style.display = 'inherit';
+                document.getElementById('Anticipo').style.display = 'none'; 
+              //  document.getElementById('lblTitulo').style.value = 'Transferencia'; 
+            
+            }
+
+
+
+
+            if (activo == 'Anticipo') {
+
+                document.getElementById('AnticipoUC').style.display = 'inherit';
+                   document.getElementById('Anticipo').style.display = 'inherit'; 
+                document.getElementById('Transfer').style.display = 'none';     
+            
+            }
+            $("input[type='text']:visible:enabled:first").focus();
+            
+            $("input[type='text'], textarea, input[type='password']").each(
+                function () {
+                    $(this).val('');
+
+                }
+            );
+
             
         }
 
-        if (activo == 'Anticipo') {
-
-            document.getElementById('AnticipoUC').style.display = 'inherit';
-               document.getElementById('Anticipo').style.display = 'inherit'; 
-            document.getElementById('Transfer').style.display = 'none';     
-            
-        }
-        }
-
-    </script>
-    <script type="text/javascript">
-       <!--
-    function firstFocus(control) {
-
-        document.getElementById(activo).focus();
-        return true;
-    }
-
-       //-->
     </script>
 
     <script type="text/javascript">
@@ -405,17 +409,8 @@
                 {
                   $("#<%=txtValeNombre.ClientID%>")[0].value =  value.Nombre;
                 }
-
-
-
             });
-
-
-
-
         }
-
-
     </script>
 
     <script src="Scripts/jsUpdateProgress.js" type="text/javascript"></script>
@@ -502,6 +497,11 @@
                                             <asp:Label ID="lblError" runat="server" CssClass="labeltipopagoforma" ForeColor="Red"></asp:Label>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Label ID="lblalgo0" runat="server" ForeColor="Lime"></asp:Label>
+                                        </td>
+                                    </tr>
                         </tr>
                     </table>
                     </td>
@@ -542,7 +542,7 @@
                                                                 CssClass="labeltipopagoforma" Font-Size="11px"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox ID="txtClienteCheque" runat="server" CssClass="textboxcaptura" Text="1"></asp:TextBox>
+                                                            <asp:TextBox ID="txtClienteCheque" runat="server" CssClass="textboxcaptura" ></asp:TextBox>
                                                             <ccR:FilteredTextBoxExtender ID="ftxCliente" runat="server" TargetControlID="txtClienteCheque" FilterType="Numbers"></ccR:FilteredTextBoxExtender>
                                                         </td>
                                                     </tr>

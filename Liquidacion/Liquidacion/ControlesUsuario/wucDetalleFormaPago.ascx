@@ -3,7 +3,6 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc2" %>
 
 <script type="text/javascript">
-    document.getElementById("<%= txtCliente.ClientID%>").focus
 
     function ValidaMontoSaldo()
     {

@@ -55,6 +55,9 @@ public partial class FormaPago : System.Web.UI.Page
         #region validaciones postback 
         if (Page.IsPostBack)
         {
+            HiddenNomCteCheque.Value = string.Empty;
+            HiddenNomCteVale.Value = string.Empty;
+
             if (Request.Form["__EVENTTARGET"] == "ConsultaTPV")
             {
 
@@ -116,10 +119,39 @@ public partial class FormaPago : System.Web.UI.Page
                 HiddenInput.Value = "ConsultaCteTransferencia";
             }
 
-            //if (Request.Form["__EVENTTARGET"] == "AgregarCargoTarjeta")
-            //{
-            //    AgregarCargoTarjeta(txtClienteTarjeta.Text.Trim(), txtNumTarjeta.Text.Trim(), txtNoAutorizacionTarjeta.Text.Trim());
-            //}
+            if (Request.Form["__EVENTTARGET"] == "ConsultaClienteCheque")
+            {
+                if (txtClienteCheque.Text != string.Empty)
+                {
+                    RegistroPago RegPago = new RegistroPago();
+                    DataTable dt = RegPago.DatosCliente(int.Parse(txtClienteCheque.Text));
+                    if (dt!=null)
+                    {
+                        if (dt.Rows.Count >0)      
+
+                        HiddenNomCteCheque.Value= dt.Rows[0]["Nombre"].ToString().Trim();                        
+                    }
+
+                }
+            }
+
+
+
+            if (Request.Form["__EVENTTARGET"] == "ConsultaClienteVale")
+            {
+                if (txtClienteVale.Text != string.Empty)
+                {
+                    RegistroPago RegPago = new RegistroPago();
+                    DataTable dt = RegPago.DatosCliente(int.Parse(txtClienteVale.Text));
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                           
+                            HiddenNomCteVale.Value= dt.Rows[0]["Nombre"].ToString().Trim();
+                    }
+
+                }
+            }
 
 
 

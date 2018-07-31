@@ -25,6 +25,9 @@
         var FolioPrimerReg ='<%= Session["PrimerRegTDC"] %>';
         var HiddenPagosOtraRuta='<%= HiddenPagosOtraRuta.Value %>';
         var HiddenTDCDupliado='<%= HiddenTDCDupliado.Value %>';
+        var NombreClienteCheque='<%= HiddenNomCteCheque.Value %>'; 
+        var NombreClienteVale='<%= HiddenNomCteVale.Value %>'; 
+    
 
         
 
@@ -113,6 +116,39 @@
                 document.getElementById('Transfer').style.display = 'inherit';   
          
             }
+            
+             if (NombreClienteCheque!='' )
+            {
+             document.getElementById('ctl00_MainPlaceHolder_txtNombreClienteCheque').value=NombreClienteCheque;
+             document.getElementById('cheque').style.display = 'inherit';
+              document.getElementById('Transfer').style.display = 'none';  
+              document.getElementById('AnticipoUC').style.display = 'none';
+              document.getElementById('Transfer').style.display = 'none'; 
+              document.getElementById('tarjeta').style.display = 'none'; 
+             NombreClienteCheque='';
+            }
+            else
+            {
+                document.getElementById('cheque').style.display = 'none';
+            }
+
+         if (NombreClienteVale!='' )
+            {
+              document.getElementById('ctl00_MainPlaceHolder_txtValeNombre').value=NombreClienteVale;
+              document.getElementById('vale').style.display = 'inherit';
+              document.getElementById('AnticipoUC').style.display = 'none';
+              document.getElementById('Transfer').style.display = 'none'; 
+              document.getElementById('tarjeta').style.display = 'none'; 
+
+              NombreClienteVale='';
+            }
+             else
+            {
+                document.getElementById('vale').style.display = 'none';
+            }
+
+            
+
         });
 
         
@@ -364,50 +400,20 @@
     <script type="text/javascript">
         function ConsultaClienteCheque(TipoPago) {
 
-            var IdCliente = '';
-
-            switch (TipoPago) {
-                case "cheque":
-                    IdCliente = $("#<%=txtClienteCheque.ClientID%>")[0].value;
-                    $("#<%=txtNombreClienteCheque.ClientID%>")[0].value = '';
-                    sTipoPago='cheque'
-                    break;
-
-                case "vale":
-                    IdCliente = $("#<%=txtClienteVale.ClientID%>")[0].value;
-                    $("#<%=txtValeNombre.ClientID%>")[0].value = '';
-                    sTipoPago = 'vale';
-                default:
-            }     
-
-            if (IdCliente == '')
-                return;
-
-       $.ajax({
-           type: "POST",
-           url: "FormaPago.aspx/ConsultaClienteCheque",
-           data: '{NumCte: "' + IdCliente + '" }',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: OnSuccess,
-                failure: function (response) {
-                    alert(response.d);
-                }
-            });
-        }
-        function OnSuccess(response) {
-            var obj = JSON.parse(response.d);
-            $.each(obj, function (key, value) {
-                if (sTipoPago == 'cheque')
+            if (TipoPago=='cheque')
                 {
-                    $("#<%=txtNombreClienteCheque.ClientID%>")[0].value = value.Nombre;
+                     javascript: __doPostBack('ConsultaClienteCheque', '');
                 }
-                if (sTipoPago == 'vale')
-                {
-                  $("#<%=txtValeNombre.ClientID%>")[0].value =  value.Nombre;
-                }
-            });
+
+
+          if (TipoPago=='vale')
+            {
+                 javascript: __doPostBack('ConsultaClienteVale', '');
+             }
         }
+
+
+
     </script>
 
     <script src="Scripts/jsUpdateProgress.js" type="text/javascript"></script>
@@ -430,6 +436,8 @@
                 <asp:HiddenField ID="HiddenInputNumPagos" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenTDCDupliado" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenPagosOtraRuta" runat="server" Value="" />
+                <asp:HiddenField ID="HiddenNomCteCheque" runat="server" Value="" />
+                <asp:HiddenField ID="HiddenNomCteVale" runat="server" Value="" />
 
                 <div style="text-align: left; height: 650px; width: 1000px; vertical-align: top;">
                     <table style="vertical-align: top; height: 650px;">

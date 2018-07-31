@@ -172,7 +172,8 @@
                 document.getElementById('ctl00_MainPlaceHolder_wucDetalleFormaPago1_txtNombre').focus();
             }
 
-             if (NombreClienteCheque!='' )
+
+               if (NombreClienteCheque!='' )
             {        
 
               document.getElementById('cheque').style.display = 'inherit';
@@ -198,8 +199,6 @@
             {
                 document.getElementById('cheque').style.display = 'none';
             }
-
-
 
          if (NombreClienteVale!='' )
             {
@@ -237,8 +236,7 @@
            if (NumCte != '' && NomCteTarjeta == '' && HiddenInput == 'ConsultaTPV')
             {
                   alert('¡El cliente no existe!');
-            }
-
+            }      
            
 
                    

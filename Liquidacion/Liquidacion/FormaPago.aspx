@@ -210,10 +210,6 @@
               //  document.getElementById('lblTitulo').style.value = 'Transferencia'; 
             
             }
-
-
-
-
             if (activo == 'Anticipo') {
 
                 document.getElementById('AnticipoUC').style.display = 'inherit';
@@ -223,12 +219,12 @@
             }
             $("input[type='text']:visible:enabled:first").focus();
             
-            $("input[type='text'], textarea, input[type='password']").each(
-                function () {
-                    $(this).val('');
+            //$("input[type='text'], textarea, input[type='password']").each(
+            //    function () {
+            //        $(this).val('');
 
-                }
-            );
+            //    }
+            //);
 
             
         }

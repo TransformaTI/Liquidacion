@@ -61,6 +61,7 @@ public partial class FormaPago : System.Web.UI.Page
             HiddenTDCDupliado.Value = "No";
             HiddenInput.Value = string.Empty;
 
+
             if (Request.Form["__EVENTTARGET"] == "ConsultaTPV")
             {
 

@@ -177,7 +177,6 @@
                 document.getElementById('vale').style.display = 'none';
             }    
 
-
             if (NumCteAnticipo != '' && NomCteAnticipo == '' && HiddenInput=='ConsultaCteAnticipo')
             {
                 alert('¡El cliente no existe!');

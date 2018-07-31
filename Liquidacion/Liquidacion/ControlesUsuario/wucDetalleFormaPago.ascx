@@ -3,6 +3,9 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc2" %>
 
 <script type="text/javascript">
+    var NombreCte = '';
+
+
 
     function ValidaMontoSaldo()
     {
@@ -84,19 +87,26 @@
             if (IdCliente == '')
                 return;
 
-       $.ajax({
-           type: "POST",
-           url: "FormaPago.aspx/ConsultaClienteCheque",
-           data: '{NumCte: "' + IdCliente + '" }',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: OnSuccess,
-                failure: function (response) {
-                    alert(response.d);
-                }
-            });
+       //$.ajax({
+       //    type: "POST",
+       //    url: "FormaPago.aspx/ConsultaClienteCheque",
+       //    data: '{NumCte: "' + IdCliente + '" }',
+       //         contentType: "application/json; charset=utf-8",
+       //         dataType: "json",
+       //         success: OnSuccess,
+       //         failure: function (response) {
+       //             alert(response.d);
+       //         }
+       //     });
+
+        
+
+
+
         }
-        function OnSuccess(response) {
+    function OnSuccess(response) {
+
+            alert('consulta');
             var obj = JSON.parse(response.d);
             $.each(obj, function (key, value) {
                 if (sTipoPago == 'transferencia')
@@ -107,7 +117,8 @@
                 {
                   $("#<%=txtAntNombre.ClientID%>")[0].value =  value.Nombre;
                 }
-            });
+
+        }); 
         }
     </script>
 
@@ -129,7 +140,7 @@
         </td>
         <td style="text-align: left">
             
-            <asp:TextBox ID="txtCliente" Width="150px" runat="server" CssClass="textboxcaptura" onblur="ConsultaCliente('transferencia')"></asp:TextBox>
+            <asp:TextBox ID="txtCliente" Width="150px" runat="server" CssClass="textboxcaptura" onblur="return ConsultaCteTransferencia();"></asp:TextBox>
             <cc2:FilteredTextBoxExtender ID="ftbLector" runat="server" FilterType="Numbers"
                 TargetControlID="txtCliente">
             </cc2:FilteredTextBoxExtender>

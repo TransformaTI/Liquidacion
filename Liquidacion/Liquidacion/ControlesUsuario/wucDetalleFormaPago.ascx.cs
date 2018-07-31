@@ -129,8 +129,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
 
         if ((!Page.IsPostBack) && (Session["FechaAsignacion"] != null))//09/07/2011 ERROR DE CAPTURA DE FECHA
         {
-            txtFecha.Text = Session["FechaAsignacion"].ToString();
-           
+            txtFecha.Text = Session["FechaAsignacion"].ToString();           
         }
 
         if (Session["dsLiquidacion"] == null)

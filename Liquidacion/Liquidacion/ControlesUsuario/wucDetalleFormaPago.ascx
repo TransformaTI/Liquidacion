@@ -257,7 +257,6 @@
             </div>
         </td>
         <td>
-
             <cc2:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" FilterType="Numbers"
                 TargetControlID="txtAntCliente"></cc2:FilteredTextBoxExtender>
             <asp:TextBox ID="txtAntCliente" runat="server" CssClass="textboxcaptura" Width="150px" ValidChars="0123456789" onblur="return ConsultaCteAnticipo()" ></asp:TextBox >

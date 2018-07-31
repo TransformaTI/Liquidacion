@@ -133,7 +133,6 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
            
         }
 
-
         if (Session["dsLiquidacion"] == null)
         {
             string path = Server.MapPath("");

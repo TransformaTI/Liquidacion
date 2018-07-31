@@ -3,7 +3,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc2" %>
 
 <script type="text/javascript">
-    document.getElementById("<%= txtCliente.ClientID%>").focus
+<%--    document.getElementById("<%= txtCliente.ClientID%>").focus--%>
 
     function ValidaMontoSaldo()
     {
@@ -63,56 +63,9 @@
 
 </script>
 
-<script type="text/javascript">
-        function ConsultaCliente(TipoPago) {
+ 
 
-            var IdCliente = '';
-
-            switch (TipoPago) {
-                case "transferencia":
-                    IdCliente = $("#<%=txtCliente.ClientID%>")[0].value;
-                    $("#<%=txtNombre.ClientID%>")[0].value = '';
-                    sTipoPago = 'transferencia'
-                    break;
-
-                case "anticipo":
-                    IdCliente = $("#<%=txtAntCliente.ClientID%>")[0].value;
-                    $("#<%=txtAntNombre.ClientID%>")[0].value = '';
-                    sTipoPago = 'anticipo';
-                default:
-            }     
-
-            if (IdCliente == '')
-                return;
-
-       $.ajax({
-           type: "POST",
-           url: "FormaPago.aspx/ConsultaClienteCheque",
-           data: '{NumCte: "' + IdCliente + '" }',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: OnSuccess1,
-                failure: function (response) {
-                    alert(response.d);
-                }
-            });
-        }
-        function OnSuccess1(response) {
-            var obj = JSON.parse(response.d);
-            $.each(obj, function (key, value) {
-                if (sTipoPago == 'transferencia')
-                {
-                    $("#<%=txtNombre.ClientID%>")[0].value = value.Nombre;
-                }
-                if (sTipoPago == 'anticipo')
-                {
-                  $("#<%=txtAntNombre.ClientID%>")[0].value =  value.Nombre;
-                }
-            });
-        }
-    </script>
-
-
+<asp:HiddenField ID="TipoPagoOculto" runat="server" Value="" />
 <div style="text-align: right" id ="Transfer" >
 <asp:Panel ID="pnlTransferencia" runat="server" >
 <table style="background-color: #e1f8e2; height: 360px; width: 900px">
@@ -130,7 +83,7 @@
         </td>
         <td style="text-align: left">
             
-            <asp:TextBox ID="txtCliente" Width="150px" runat="server" CssClass="textboxcaptura" onblur="ConsultaCliente('transferencia')"></asp:TextBox>
+            <asp:TextBox ID="txtCliente" Width="150px" runat="server" CssClass="textboxcaptura" onblur="return ConsultaCteTransferencia()"></asp:TextBox>
             <cc2:FilteredTextBoxExtender ID="ftbLector" runat="server" FilterType="Numbers"
                 TargetControlID="txtCliente">
             </cc2:FilteredTextBoxExtender>
@@ -197,7 +150,7 @@
                 <asp:Label ID="lblNoDocumento" runat="server" CssClass="labeltipopagoforma"
                     Text="No. Referencia:"></asp:Label>
             </div>
-        </t>
+        </td>
         <td style="text-align: left">
             <asp:TextBox ID="txtNoDocumento" Width="150px" runat="server" CssClass="textboxcaptura"></asp:TextBox>
             
@@ -304,7 +257,7 @@
         <td style="text-align: left">
             <cc2:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" FilterType="Numbers"
                 TargetControlID="txtAntCliente"></cc2:FilteredTextBoxExtender>
-            <asp:TextBox ID="txtAntCliente" runat="server" CssClass="textboxcaptura" Width="150px" ValidChars="0123456789" onblur="ConsultaCliente('anticipo')" ></asp:TextBox >
+            <asp:TextBox ID="txtAntCliente" runat="server" CssClass="textboxcaptura" Width="150px" ValidChars="0123456789" onblur="return ConsultaCteAnticipo()" ></asp:TextBox >
             <asp:RequiredFieldValidator ID="rfvAntCliente" runat="server"
                 ControlToValidate="txtAntCliente" Display="None"
                 ErrorMessage="Capturar el No. de Cliente"

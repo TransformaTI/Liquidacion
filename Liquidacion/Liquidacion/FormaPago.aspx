@@ -24,7 +24,8 @@
         var RegistroCobro = '<%= wucDetalleFormaPago1.RegistroCobro%>';
         var FolioPrimerReg ='<%= Session["PrimerRegTDC"] %>';
         var HiddenPagosOtraRuta='<%= HiddenPagosOtraRuta.Value %>';
-        var HiddenTDCDupliado='<%= HiddenTDCDupliado.Value %>';
+        var HiddenTDCDupliado = '<%= HiddenTDCDupliado.Value %>';
+        var segmento = '';
 
         
 
@@ -89,6 +90,11 @@
 
             if (HiddenInputPCT != 'Si' && NumCte != '' && HiddenInput!='ConsultaCteAnticipo' && HiddenTDCDupliado=='' && HiddenPagosOtraRuta==''  ) {
                 alert('No se encontraron pagos de TPV para el cliente, por favor verifique con el área de tarjetas de crédito');
+                segmento = 'tarjeta';  
+
+            }
+            else {
+                segmento = 'tarjeta';                
             }
 
             if (HiddenPagosOtraRuta == 'true')
@@ -96,14 +102,14 @@
                  alert('¡Existen cargos para el cliente que pertenecen a otra ruta !');
             }
 
-
-
-
             if (HiddenInput == "ConsultaCteAnticipo")
             {
                     document.getElementById('AnticipoUC').style.display = 'inherit';
                     document.getElementById('Anticipo').style.display = 'inherit'; 
-                    document.getElementById('Transfer').style.display = 'none';      
+                    document.getElementById('Transfer').style.display = 'none';
+                    segmento='anticipo'
+                
+                    
             }
 
            if (HiddenInput == "TarjetaClienteFalse")
@@ -115,9 +121,24 @@
             {
                 document.getElementById('Anticipo').style.display = 'none'; 
                 document.getElementById('AnticipoUC').style.display = 'inherit';
-                document.getElementById('Transfer').style.display = 'inherit';   
-         
+                document.getElementById('Transfer').style.display = 'inherit';
+                segmento = 'transferencia';
             }
+
+            //$("input[type='text']:visible:enabled:first").focus();
+
+            if (segmento = 'tarjeta') {
+                document.getElementById('<%=txtFechaTarjeta.ClientID%>').focus();
+            }
+            
+            if (segmento = 'anticipo') {
+                document.getElementById('ctl00_MainPlaceHolder_wucDetalleFormaPago1_txtAntNombre').focus();
+            }
+
+            if (segmento = 'transferencia') {
+                document.getElementById('ctl00_MainPlaceHolder_wucDetalleFormaPago1_txtNombre').focus();
+            }
+           
         });
 
         
@@ -187,15 +208,7 @@
             
             }
             $("input[type='text']:visible:enabled:first").focus();
-            
-            //$("input[type='text'], textarea, input[type='password']").each(
-            //    function () {
-            //        $(this).val('');
-
-            //    }
-            //);
-
-            
+                      
         }
 
     </script>
@@ -217,6 +230,7 @@
             if ((document.getElementById('<%=txtClienteTarjeta.ClientID%>').value != "" || document.getElementById('<%=TxtCteAfiliacion.ClientID%>').value != "")
                 && (HiddenInput == '' || HiddenInput == 'SeleccionaPago' || HiddenInput == 'ConsultaTPV')) {
                 javascript: __doPostBack(FormaPago, '');
+
             }
 
         }
@@ -399,10 +413,13 @@
                 if (sTipoPago == 'cheque')
                 {
                     $("#<%=txtNombreClienteCheque.ClientID%>")[0].value = value.Nombre;
+                    $("#<%=txtFechaChueque.ClientID%>")[0].focus();
                 }
                 if (sTipoPago == 'vale')
                 {
-                  $("#<%=txtValeNombre.ClientID%>")[0].value =  value.Nombre;
+                    $("#<%=txtValeNombre.ClientID%>")[0].value = value.Nombre;
+                    $("#<%=txtValeNombre.ClientID%>")[0].focus();
+
                 }
             });
         }

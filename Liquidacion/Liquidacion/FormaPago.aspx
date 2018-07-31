@@ -172,6 +172,35 @@
                 document.getElementById('ctl00_MainPlaceHolder_wucDetalleFormaPago1_txtNombre').focus();
             }
 
+             if (NombreClienteCheque!='' )
+            {        
+
+              document.getElementById('cheque').style.display = 'inherit';
+              document.getElementById('Transfer').style.display = 'none';  
+              document.getElementById('AnticipoUC').style.display = 'none';
+              document.getElementById('Transfer').style.display = 'none'; 
+              document.getElementById('tarjeta').style.display = 'none'; 
+             
+
+              if (NombreClienteCheque != 'CTENOEXISTE')
+                 {
+                     document.getElementById('ctl00_MainPlaceHolder_txtNombreClienteCheque').value = NombreClienteCheque;
+                 }
+                 else
+                {
+                  alert('¡El cliente no existe!');
+                 }
+
+               NombreClienteCheque = '';
+
+            }
+            else
+            {
+                document.getElementById('cheque').style.display = 'none';
+            }
+
+
+
          if (NombreClienteVale!='' )
             {
               

@@ -166,33 +166,22 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         }
         else
         {
-            //if (Request.Form["__EVENTTARGET"].ToString().Contains("ConsultaCteAnticipo"))
-            //{
-            //    LimpiarControles();
-            //    ConsultaSaldos();
-            //    ScriptManager.GetCurrent(this.Page).SetFocus(this.txtAntNombre);
-            //    Session["FormaPago"] = 1;
+            if (Request.Form["__EVENTTARGET"].ToString().Contains("ConsultaCteAnticipo"))
+            {
+                LimpiarControles();
+                ConsultaSaldos();
+            }
+            if (Request.Form["__EVENTTARGET"].ToString().Contains("ConsultaCteTransferencia"))
+            {
+                this.TipoCobro = "22";
+                int ClienteID = 0;
+                if (txtCliente.Text.Trim().Length > 0)
+                {
+                    ClienteID = Convert.ToInt32(txtCliente.Text.Trim());
+                    txtNombre.Text = consultaNombreClienteTransferencia(ClienteID);
+                }
+            }
 
-
-
-            //}
-            //if (Request.Form["__EVENTTARGET"].ToString().Contains("ConsultaCteTransferencia"))
-            //{
-            //    this.TipoCobro = "22";
-            //    int ClienteID = 0;
-            //    if (txtCliente.Text.Trim().Length > 0)
-            //    {
-            //        ClienteID = Convert.ToInt32(txtCliente.Text.Trim());
-            //        txtNombre.Text = consultaNombreClienteTransferencia(ClienteID);
-            //        txtNombre.Focus();
-                     
-            //    }
-            //    ScriptManager.GetCurrent(this.Page).SetFocus(this.txtFecha);
-          
-
-            //   Session["FormaPago"] = 2;
-
-            //}
         }
     }
 

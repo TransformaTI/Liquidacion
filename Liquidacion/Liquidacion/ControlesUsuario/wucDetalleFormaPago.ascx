@@ -2,10 +2,21 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc2" %>
 
+
 <script type="text/javascript">
-    var NombreCte = '';
 
+    function cierraTransferencia()
+    {       
+        document.getElementById('<%= txtNoCuenta.ClientID %>').focus();
+        document.getElementById('ctl00_mostrando').value = '';
+    }
+    function muestraCalendario1() {
+        document.getElementById('ctl00_mostrando').value = 'x';
+    }
+</script>
 
+<script type="text/javascript">
+<%--    document.getElementById("<%= txtCliente.ClientID%>").focus--%>
 
     function ValidaMontoSaldo()
     {
@@ -56,73 +67,12 @@
         {
              document.getElementById("<%= txtAntMonto.ClientID%>").value = Monto[0];
         }
-
-
     }
-
-
-
-
 </script>
 
-<script type="text/javascript">
-        function ConsultaCliente(TipoPago) {
+ 
 
-            var IdCliente = '';
-
-            switch (TipoPago) {
-                case "transferencia":
-                    IdCliente = $("#<%=txtCliente.ClientID%>")[0].value;
-                    $("#<%=txtNombre.ClientID%>")[0].value = '';
-                    sTipoPago = 'transferencia'
-                    break;
-
-                case "anticipo":
-                    IdCliente = $("#<%=txtAntCliente.ClientID%>")[0].value;
-                    $("#<%=txtAntNombre.ClientID%>")[0].value = '';
-                    sTipoPago = 'anticipo';
-                default:
-            }     
-
-            if (IdCliente == '')
-                return;
-
-       //$.ajax({
-       //    type: "POST",
-       //    url: "FormaPago.aspx/ConsultaClienteCheque",
-       //    data: '{NumCte: "' + IdCliente + '" }',
-       //         contentType: "application/json; charset=utf-8",
-       //         dataType: "json",
-       //         success: OnSuccess,
-       //         failure: function (response) {
-       //             alert(response.d);
-       //         }
-       //     });
-
-        
-
-
-
-        }
-    function OnSuccess(response) {
-
-            alert('consulta');
-            var obj = JSON.parse(response.d);
-            $.each(obj, function (key, value) {
-                if (sTipoPago == 'transferencia')
-                {
-                    $("#<%=txtNombre.ClientID%>")[0].value = value.Nombre;
-                }
-                if (sTipoPago == 'anticipo')
-                {
-                  $("#<%=txtAntNombre.ClientID%>")[0].value =  value.Nombre;
-                }
-
-        }); 
-        }
-    </script>
-
-
+<asp:HiddenField ID="TipoPagoOculto" runat="server" Value="" />
 <div style="text-align: right" id ="Transfer" >
 <asp:Panel ID="pnlTransferencia" runat="server" >
 <table style="background-color: #e1f8e2; height: 360px; width: 900px">
@@ -140,7 +90,7 @@
         </td>
         <td style="text-align: left">
             
-            <asp:TextBox ID="txtCliente" Width="150px" runat="server" CssClass="textboxcaptura" onblur="return ConsultaCteTransferencia();"></asp:TextBox>
+            <asp:TextBox ID="txtCliente" Width="150px" runat="server" CssClass="textboxcaptura" onblur="ConsultaCliente('transferencia')"></asp:TextBox>
             <cc2:FilteredTextBoxExtender ID="ftbLector" runat="server" FilterType="Numbers"
                 TargetControlID="txtCliente">
             </cc2:FilteredTextBoxExtender>
@@ -176,7 +126,7 @@
             <div style="float: left;">
                 <asp:TextBox ID="txtFecha" Width="150px" runat="server" Text="" CssClass="calendarTextBox" ></asp:TextBox>
                 <asp:ImageButton runat="Server" ID="btnCalFAsignacion" AlternateText="Clic para mostrar el calendario" ImageUrl="~/Imagenes/Calendar.png" Height="16px" Width="16px" />
-                <cc2:CalendarExtender ID="txtFecha_CalendarExtender" runat="server" TargetControlID="txtFecha" Format="dd/MM/yyyy" PopupButtonID="btnCalFAsignacion"></cc2:CalendarExtender>
+                <cc2:CalendarExtender ID="txtFecha_CalendarExtender" runat="server"  OnClientShown="muestraCalendario1" OnClientHidden="cierraTransferencia" TargetControlID="txtFecha" Format="dd/MM/yyyy" PopupButtonID="btnCalFAsignacion"></cc2:CalendarExtender>
                 <asp:RequiredFieldValidator ID="rfvFechaDoc" runat="server" ControlToValidate="txtFecha" Display="None" ErrorMessage="Capturar la Fecha" ValidationGroup="Guarda"></asp:RequiredFieldValidator>
                 <cc2:ValidatorCalloutExtender ID="vceFecha" runat="server" TargetControlID="rfvFechaDoc"></cc2:ValidatorCalloutExtender>
             </div>
@@ -207,7 +157,7 @@
                 <asp:Label ID="lblNoDocumento" runat="server" CssClass="labeltipopagoforma"
                     Text="No. Referencia:"></asp:Label>
             </div>
-        </t>
+        </td>
         <td style="text-align: left">
             <asp:TextBox ID="txtNoDocumento" Width="150px" runat="server" CssClass="textboxcaptura"></asp:TextBox>
             

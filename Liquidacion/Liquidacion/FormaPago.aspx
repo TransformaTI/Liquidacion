@@ -6,8 +6,34 @@
 <%@ Register Src="~/ControlesUsuario/wucDetalleFormaPago.ascx" TagPrefix="ucDetallePago" TagName="wucDetalleFormaPago" %>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainPlaceHolder" runat="server">
+    <%--  --%>
+    <script type="text/javascript">
+    function cierraCheque()
+    { 
+        document.getElementById('<%= txtNumCuenta.ClientID %>').focus();
+        document.getElementById('ctl00_mostrando').value = '';
+    }
 
-    
+    function cierraVale()
+    {       
+        document.getElementById('<%= ddlProveedor.ClientID %>').focus()
+        document.getElementById('ctl00_mostrando').value = '';
+    }
+
+    function cierraTarjeta()
+    {       
+        document.getElementById('<%= ddlTAfiliacion.ClientID %>').focus();
+        document.getElementById('ctl00_mostrando').value = '';
+    }
+
+    function muestraCalendario()
+    {
+        document.getElementById('ctl00_mostrando').value='x';
+    }
+
+
+    </script>
+
     <script type="text/javascript" language="javascript">  
 
 
@@ -24,13 +50,9 @@
         var RegistroCobro = '<%= wucDetalleFormaPago1.RegistroCobro%>';
         var FolioPrimerReg ='<%= Session["PrimerRegTDC"] %>';
         var HiddenPagosOtraRuta='<%= HiddenPagosOtraRuta.Value %>';
-        var HiddenTDCDupliado='<%= HiddenTDCDupliado.Value %>';
-        var NombreClienteCheque='<%= HiddenNomCteCheque.Value %>'; 
-        var NombreClienteVale='<%= HiddenNomCteVale.Value %>'; 
-        var NombreClienteTrans='<%= wucDetalleFormaPago1.NombreClienteTrans %>'; 
-        var NumCteTrans = '<%= wucDetalleFormaPago1.TxtIdCliente.Text %>';
-        var NomCteAnticipo='<%=wucDetalleFormaPago1.NombreCteAnticipo != null ? wucDetalleFormaPago1.NombreCteAnticipo.Trim():"" %>';
-        var NumCteAnticipo='<%=wucDetalleFormaPago1.TxtAntIdCliente.Text != null ? wucDetalleFormaPago1.TxtAntIdCliente.Text.ToString().Trim():"" %>';
+        var HiddenTDCDupliado = '<%= HiddenTDCDupliado.Value %>';
+        var segmento = '';
+
         
 
         //Validaciones  On load
@@ -89,6 +111,11 @@
 
             if (HiddenInputPCT != 'Si' && NumCte != '' && HiddenInput!='ConsultaCteAnticipo' && HiddenTDCDupliado=='' && HiddenPagosOtraRuta==''  ) {
                 alert('No se encontraron pagos de TPV para el cliente, por favor verifique con el área de tarjetas de crédito');
+                segmento = 'tarjeta';  
+
+            }
+            else {
+                segmento = 'tarjeta';                
             }
 
             if (HiddenPagosOtraRuta == 'true')
@@ -96,14 +123,14 @@
                  alert('¡Existen cargos para el cliente que pertenecen a otra ruta . No se encontraron pagos de TPV que corresponda a la ruta y autotanque, porfavor verifique con el área de tarjetas de crédito.!');
             }
 
-
-
-
             if (HiddenInput == "ConsultaCteAnticipo")
             {
                     document.getElementById('AnticipoUC').style.display = 'inherit';
                     document.getElementById('Anticipo').style.display = 'inherit'; 
-                    document.getElementById('Transfer').style.display = 'none';      
+                    document.getElementById('Transfer').style.display = 'none';
+                    segmento='anticipo'
+                
+                    
             }
 
            if (HiddenInput == "TarjetaClienteFalse")
@@ -115,74 +142,24 @@
             {
                 document.getElementById('Anticipo').style.display = 'none'; 
                 document.getElementById('AnticipoUC').style.display = 'inherit';
-                document.getElementById('Transfer').style.display = 'inherit';   
-         
+                document.getElementById('Transfer').style.display = 'inherit';
+                segmento = 'transferencia';
+            }
+
+            //$("input[type='text']:visible:enabled:first").focus();
+
+            if (segmento = 'tarjeta') {
+                document.getElementById('<%=txtFechaTarjeta.ClientID%>').focus();
             }
             
-             if (NombreClienteCheque!='' )
-            {        
-
-              document.getElementById('cheque').style.display = 'inherit';
-              document.getElementById('Transfer').style.display = 'none';  
-              document.getElementById('AnticipoUC').style.display = 'none';
-              document.getElementById('Transfer').style.display = 'none'; 
-              document.getElementById('tarjeta').style.display = 'none'; 
-             
-
-              if (NombreClienteCheque != 'CTENOEXISTE')
-                 {
-                     document.getElementById('ctl00_MainPlaceHolder_txtNombreClienteCheque').value = NombreClienteCheque;
-                 }
-                 else
-                {
-                  alert('¡El cliente no existe!');
-                 }
-
-               NombreClienteCheque = '';
-
-            }
-            else
-            {
-                document.getElementById('cheque').style.display = 'none';
+            if (segmento = 'anticipo') {
+                document.getElementById('ctl00_MainPlaceHolder_wucDetalleFormaPago1_txtAntNombre').focus();
             }
 
-         if (NombreClienteVale!='' )
-            {
-              
-              document.getElementById('vale').style.display = 'inherit';
-              document.getElementById('AnticipoUC').style.display = 'none';
-              document.getElementById('Transfer').style.display = 'none'; 
-              document.getElementById('tarjeta').style.display = 'none'; 
-
-             if (NombreClienteVale != 'CTENOEXISTE')
-             {
-                document.getElementById('ctl00_MainPlaceHolder_txtValeNombre').value=NombreClienteVale;
-             }
-             else
-             {
-               alert('¡El cliente no existe!');
-             }
-              NombreClienteVale='';
+            if (segmento = 'transferencia') {
+                document.getElementById('ctl00_MainPlaceHolder_wucDetalleFormaPago1_txtNombre').focus();
             }
-             else
-            {
-                document.getElementById('vale').style.display = 'none';
-            }    
-
-
-            if (NumCteAnticipo != '' && NomCteAnticipo == '')
-            {
-                alert('¡El cliente no existe!');
-            }  
-
-            if (NumCteTrans != '' && NombreClienteTrans == '')
-            {
-                  alert('¡El cliente no existe!');
-            }  
-
-                   
-            
-
+           
         });
 
         
@@ -222,6 +199,7 @@
         };
 
          function toggle(display, activo, inactivo, inactivoA, control) {
+             document.getElementById('ctl00_mostrando').value = ''
              
             document.getElementById('tarjeta').style.display = 'none';
             document.getElementById('cheque').style.display = 'none';
@@ -253,15 +231,7 @@
             
             }
             $("input[type='text']:visible:enabled:first").focus();
-            
-            //$("input[type='text'], textarea, input[type='password']").each(
-            //    function () {
-            //        $(this).val('');
-
-            //    }
-            //);
-
-            
+                      
         }
 
     </script>
@@ -283,6 +253,7 @@
             if ((document.getElementById('<%=txtClienteTarjeta.ClientID%>').value != "" || document.getElementById('<%=TxtCteAfiliacion.ClientID%>').value != "")
                 && (HiddenInput == '' || HiddenInput == 'SeleccionaPago' || HiddenInput == 'ConsultaTPV')) {
                 javascript: __doPostBack(FormaPago, '');
+
             }
 
         }
@@ -437,14 +408,34 @@
                 }
 
 
-          if (TipoPago=='vale')
-            {
-                 javascript: __doPostBack('ConsultaClienteVale', '');
-             }
+       $.ajax({
+           type: "POST",
+           url: "FormaPago.aspx/ConsultaClienteCheque",
+           data: '{NumCte: "' + IdCliente + '" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: OnSuccess,
+                failure: function (response) {
+                    alert(response.d);
+                }
+            });
         }
+        function OnSuccess(response) {
+            var obj = JSON.parse(response.d);
+            $.each(obj, function (key, value) {
+                if (sTipoPago == 'cheque')
+                {
+                    $("#<%=txtNombreClienteCheque.ClientID%>")[0].value = value.Nombre;
+                    $("#<%=txtFechaChueque.ClientID%>")[0].focus();
+                }
+                if (sTipoPago == 'vale')
+                {
+                    $("#<%=txtValeNombre.ClientID%>")[0].value = value.Nombre;
+                    $("#<%=txtValeNombre.ClientID%>")[0].focus();
 
-
-
+                }
+            });
+        }
     </script>
 
     <script src="Scripts/jsUpdateProgress.js" type="text/javascript"></script>
@@ -608,7 +599,7 @@
                                                                 ControlToValidate="txtFechaChueque" Display="None"
                                                                 ErrorMessage="Capturar la Fecha" Font-Size="11px" ValidationGroup="Cheque"></asp:RequiredFieldValidator>
                                                             <ccR:CalendarExtender ID="cpChequeFechaDocto_CalendarExtender" runat="server"
-                                                                PopupButtonID="imgCalendario" TargetControlID="txtFechaChueque" Format="dd/MM/yyyy">
+                                                                PopupButtonID="imgCalendario" OnClientShown="muestraCalendario" OnClientHidden="cierraCheque" TargetControlID="txtFechaChueque" Format="dd/MM/yyyy">
                                                             </ccR:CalendarExtender>
                                                             <ccR:ValidatorCalloutExtender ID="vceChequeFecha" runat="server"
                                                                 TargetControlID="rfvFecha">
@@ -743,8 +734,8 @@
                                                         <td>
                                                             <asp:TextBox ID="txtFechaTarjeta" runat="server" CssClass="textboxcaptura"
                                                                 ReadOnly="True" AutoPostBack="false"></asp:TextBox>
-                                                            <ccR:CalendarExtender ID="txtFechaTarjeta_CalendarExtender" runat="server"
-                                                                Format="dd/MM/yyyy" PopupButtonID="imgCalendario0"
+                                                            <ccR:CalendarExtender ID="txtFechaTarjeta_CalendarExtender" runat="server" OnClientHidden="cierraTarjeta"
+                                                                Format="dd/MM/yyyy" PopupButtonID="imgCalendario0"  OnClientShown="muestraCalendario" 
                                                                 TargetControlID="txtFechaTarjeta">
                                                             </ccR:CalendarExtender>
                                                             <asp:ImageButton ID="imgCalendario0" runat="server"
@@ -990,8 +981,8 @@
                                                         </td>
                                                         <td>
                                                             <asp:TextBox ID="txtValeFecha" runat="server" CssClass="WarningLabels"></asp:TextBox>
-                                                            <ccR:CalendarExtender ID="txtValeFecha_CalendarExtender" runat="server"
-                                                                PopupButtonID="imgValeCalendario" TargetControlID="txtValeFecha">
+                                                            <ccR:CalendarExtender ID="txtValeFecha_CalendarExtender" runat="server" OnClientHidden="cierraVale"
+                                                                PopupButtonID="imgValeCalendario"  OnClientShown="muestraCalendario"  TargetControlID="txtValeFecha">
                                                             </ccR:CalendarExtender>
                                                             <asp:Image ID="imgValeCalendario" runat="server"
                                                                 ImageUrl="~/Imagenes/Calendar.png" />

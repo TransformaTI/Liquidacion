@@ -310,6 +310,8 @@ public partial class FormaPago : System.Web.UI.Page
             Session["FechaAsignacion"].ToString();
         }
 
+        
+
     }
 
 

@@ -8,8 +8,7 @@
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainPlaceHolder" runat="server">
 
     
-    <script type="text/javascript" language="javascript">  
-
+    <script type="text/javascript" language="javascript"> 
 
         //Variables
         var respuesta = false;

@@ -44,6 +44,7 @@ public partial class FormaPago : System.Web.UI.Page
     string pagoActivo;
     #endregion
 
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)

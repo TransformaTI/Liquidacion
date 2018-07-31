@@ -90,7 +90,7 @@
         </td>
         <td style="text-align: left">
             
-            <asp:TextBox ID="txtCliente" Width="150px" runat="server" CssClass="textboxcaptura" onblur="ConsultaCliente('transferencia')"></asp:TextBox>
+            <asp:TextBox ID="txtCliente" Width="150px" runat="server" CssClass="textboxcaptura" onblur="return ConsultaCteTransferencia();"></asp:TextBox>
             <cc2:FilteredTextBoxExtender ID="ftbLector" runat="server" FilterType="Numbers"
                 TargetControlID="txtCliente">
             </cc2:FilteredTextBoxExtender>

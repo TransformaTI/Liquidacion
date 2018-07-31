@@ -6,8 +6,34 @@
 <%@ Register Src="~/ControlesUsuario/wucDetalleFormaPago.ascx" TagPrefix="ucDetallePago" TagName="wucDetalleFormaPago" %>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainPlaceHolder" runat="server">
+    <%--  --%>
+    <script type="text/javascript">
+    function cierraCheque()
+    { 
+        document.getElementById('<%= txtNumCuenta.ClientID %>').focus();
+        document.getElementById('ctl00_mostrando').value = '';
+    }
 
-    
+    function cierraVale()
+    {       
+        document.getElementById('<%= ddlProveedor.ClientID %>').focus()
+        document.getElementById('ctl00_mostrando').value = '';
+    }
+
+    function cierraTarjeta()
+    {       
+        document.getElementById('<%= ddlTAfiliacion.ClientID %>').focus();
+        document.getElementById('ctl00_mostrando').value = '';
+    }
+
+    function muestraCalendario()
+    {
+        document.getElementById('ctl00_mostrando').value='x';
+    }
+
+
+    </script>
+
     <script type="text/javascript" language="javascript">  
 
 
@@ -178,6 +204,7 @@
         };
 
          function toggle(display, activo, inactivo, inactivoA, control) {
+             document.getElementById('ctl00_mostrando').value = ''
              
             document.getElementById('tarjeta').style.display = 'none';
             document.getElementById('cheque').style.display = 'none';
@@ -584,7 +611,7 @@
                                                                 ControlToValidate="txtFechaChueque" Display="None"
                                                                 ErrorMessage="Capturar la Fecha" Font-Size="11px" ValidationGroup="Cheque"></asp:RequiredFieldValidator>
                                                             <ccR:CalendarExtender ID="cpChequeFechaDocto_CalendarExtender" runat="server"
-                                                                PopupButtonID="imgCalendario" TargetControlID="txtFechaChueque" Format="dd/MM/yyyy">
+                                                                PopupButtonID="imgCalendario" OnClientShown="muestraCalendario" OnClientHidden="cierraCheque" TargetControlID="txtFechaChueque" Format="dd/MM/yyyy">
                                                             </ccR:CalendarExtender>
                                                             <ccR:ValidatorCalloutExtender ID="vceChequeFecha" runat="server"
                                                                 TargetControlID="rfvFecha">
@@ -719,8 +746,8 @@
                                                         <td>
                                                             <asp:TextBox ID="txtFechaTarjeta" runat="server" CssClass="textboxcaptura"
                                                                 ReadOnly="True" AutoPostBack="false"></asp:TextBox>
-                                                            <ccR:CalendarExtender ID="txtFechaTarjeta_CalendarExtender" runat="server"
-                                                                Format="dd/MM/yyyy" PopupButtonID="imgCalendario0"
+                                                            <ccR:CalendarExtender ID="txtFechaTarjeta_CalendarExtender" runat="server" OnClientHidden="cierraTarjeta"
+                                                                Format="dd/MM/yyyy" PopupButtonID="imgCalendario0"  OnClientShown="muestraCalendario" 
                                                                 TargetControlID="txtFechaTarjeta">
                                                             </ccR:CalendarExtender>
                                                             <asp:ImageButton ID="imgCalendario0" runat="server"
@@ -966,8 +993,8 @@
                                                         </td>
                                                         <td>
                                                             <asp:TextBox ID="txtValeFecha" runat="server" CssClass="WarningLabels"></asp:TextBox>
-                                                            <ccR:CalendarExtender ID="txtValeFecha_CalendarExtender" runat="server"
-                                                                PopupButtonID="imgValeCalendario" TargetControlID="txtValeFecha">
+                                                            <ccR:CalendarExtender ID="txtValeFecha_CalendarExtender" runat="server" OnClientHidden="cierraVale"
+                                                                PopupButtonID="imgValeCalendario"  OnClientShown="muestraCalendario"  TargetControlID="txtValeFecha">
                                                             </ccR:CalendarExtender>
                                                             <asp:Image ID="imgValeCalendario" runat="server"
                                                                 ImageUrl="~/Imagenes/Calendar.png" />

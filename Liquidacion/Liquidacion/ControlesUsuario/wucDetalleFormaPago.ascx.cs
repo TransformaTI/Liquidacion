@@ -122,6 +122,25 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         get { return registroCobro; }
         set { registroCobro = value; }
     }
+
+    private string nombreclientetrans;
+
+    public string NombreClienteTrans
+    {
+        get { return nombreclientetrans; }
+        set { nombreclientetrans = value; }
+    }
+
+    private string nombreCteAnticipo;
+
+    public string NombreCteAnticipo
+    {
+        get { return nombreCteAnticipo; }
+        set { nombreCteAnticipo = value; }
+    }
+
+
+
     #endregion
 
     protected void Page_Load(object sender, EventArgs e)
@@ -179,6 +198,8 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                 {
                     ClienteID = Convert.ToInt32(txtCliente.Text.Trim());
                     txtNombre.Text = consultaNombreClienteTransferencia(ClienteID);
+                    NombreClienteTrans = txtNombre.Text;
+
                 }
             }
 
@@ -600,6 +621,9 @@ private void LlenaDropDowns()
 
 
                     this.txtAntNombre.Text = _datosCliente.Nombre;
+                    NombreCteAnticipo = _datosCliente.Nombre;
+
+
                     LstSaldos.DataSource = _datosCliente.SaldosCliente;
                     LstSaldos.DataTextField = "Saldo";
                     LstSaldos.DataValueField = "Clave";
@@ -607,6 +631,8 @@ private void LlenaDropDowns()
                     pnlAnticipo.Visible = true;
                 }
             }
+
+           
         }
         catch (Exception ex)
         {

@@ -27,8 +27,10 @@
         var HiddenTDCDupliado='<%= HiddenTDCDupliado.Value %>';
         var NombreClienteCheque='<%= HiddenNomCteCheque.Value %>'; 
         var NombreClienteVale='<%= HiddenNomCteVale.Value %>'; 
-    
-
+        var NombreClienteTrans='<%= wucDetalleFormaPago1.NombreClienteTrans %>'; 
+        var NumCteTrans = '<%= wucDetalleFormaPago1.TxtIdCliente.Text %>';
+        var NomCteAnticipo='<%=wucDetalleFormaPago1.NombreCteAnticipo != null ? wucDetalleFormaPago1.NombreCteAnticipo.Trim():"" %>';
+        var NumCteAnticipo='<%=wucDetalleFormaPago1.TxtAntIdCliente.Text != null ? wucDetalleFormaPago1.TxtAntIdCliente.Text.ToString().Trim():"" %>';
         
 
         //Validaciones  On load
@@ -118,14 +120,26 @@
             }
             
              if (NombreClienteCheque!='' )
-            {
-             document.getElementById('ctl00_MainPlaceHolder_txtNombreClienteCheque').value=NombreClienteCheque;
-             document.getElementById('cheque').style.display = 'inherit';
+            {        
+
+              document.getElementById('cheque').style.display = 'inherit';
               document.getElementById('Transfer').style.display = 'none';  
               document.getElementById('AnticipoUC').style.display = 'none';
               document.getElementById('Transfer').style.display = 'none'; 
               document.getElementById('tarjeta').style.display = 'none'; 
-             NombreClienteCheque='';
+             
+
+              if (NombreClienteCheque != 'CTENOEXISTE')
+                 {
+                     document.getElementById('ctl00_MainPlaceHolder_txtNombreClienteCheque').value = NombreClienteCheque;
+                 }
+                 else
+                {
+                  alert('¡El cliente no existe!');
+                 }
+
+               NombreClienteCheque = '';
+
             }
             else
             {
@@ -134,19 +148,39 @@
 
          if (NombreClienteVale!='' )
             {
-              document.getElementById('ctl00_MainPlaceHolder_txtValeNombre').value=NombreClienteVale;
+              
               document.getElementById('vale').style.display = 'inherit';
               document.getElementById('AnticipoUC').style.display = 'none';
               document.getElementById('Transfer').style.display = 'none'; 
               document.getElementById('tarjeta').style.display = 'none'; 
 
+             if (NombreClienteVale != 'CTENOEXISTE')
+             {
+                document.getElementById('ctl00_MainPlaceHolder_txtValeNombre').value=NombreClienteVale;
+             }
+             else
+             {
+               alert('¡El cliente no existe!');
+             }
               NombreClienteVale='';
             }
              else
             {
                 document.getElementById('vale').style.display = 'none';
-            }
+            }    
 
+
+            if (NumCteAnticipo != '' && NomCteAnticipo == '')
+            {
+                alert('¡El cliente no existe!');
+            }  
+
+            if (NumCteTrans != '' && NombreClienteTrans == '')
+            {
+                  alert('¡El cliente no existe!');
+            }  
+
+                   
             
 
         });
@@ -207,9 +241,10 @@
                 document.getElementById('AnticipoUC').style.display = 'inherit';
                 document.getElementById('Transfer').style.display = 'inherit';
                 document.getElementById('Anticipo').style.display = 'none'; 
-              //  document.getElementById('lblTitulo').style.value = 'Transferencia'; 
-            
+           
             }
+
+
             if (activo == 'Anticipo') {
 
                 document.getElementById('AnticipoUC').style.display = 'inherit';

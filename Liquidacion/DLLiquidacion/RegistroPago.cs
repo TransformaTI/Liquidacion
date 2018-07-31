@@ -109,7 +109,7 @@ namespace SigametLiquidacion
       tipoEfectivo = 5,
       tipoTarjeta = 6,
       tipoDescuento = 12,
-      tipoVale = 16,
+      tipoVale = 2,
       transferencia =10,
       anticipo = 21 
     }

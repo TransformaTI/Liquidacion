@@ -127,9 +127,15 @@ public partial class FormaPago : System.Web.UI.Page
                     DataTable dt = RegPago.DatosCliente(int.Parse(txtClienteCheque.Text));
                     if (dt!=null)
                     {
-                        if (dt.Rows.Count >0)      
+                        if (dt.Rows.Count >0)
+                        {
+                            HiddenNomCteCheque.Value= dt.Rows[0]["Nombre"].ToString().Trim();
+                        }
+                        else
+                        {
+                            HiddenNomCteCheque.Value = "CTENOEXISTE";
+                        }
 
-                        HiddenNomCteCheque.Value= dt.Rows[0]["Nombre"].ToString().Trim();                        
                     }
 
                 }
@@ -146,8 +152,14 @@ public partial class FormaPago : System.Web.UI.Page
                     if (dt != null)
                     {
                         if (dt.Rows.Count > 0)
-                           
+                        {
                             HiddenNomCteVale.Value= dt.Rows[0]["Nombre"].ToString().Trim();
+                        }
+                        else
+                        {
+                            HiddenNomCteVale.Value = "CTENOEXISTE";
+                        }
+                        
                     }
 
                 }
@@ -1085,7 +1097,6 @@ else
             {
                 refPago = ds.Tables["CobroPedido"].Rows[i]["Anio"].ToString().TrimEnd() + ds.Tables["CobroPedido"].Rows[i]["Celula"].ToString().TrimEnd() + ds.Tables["CobroPedido"].Rows[i]["Pedido"].ToString().TrimEnd();
 
-                //refPed = dtPagos.Rows[i]["Pedido"].ToString().TrimEnd();
 
                 for (int j = 0; j <= ds.Tables["Pedidos"].Rows.Count - 1; j++)
                 {

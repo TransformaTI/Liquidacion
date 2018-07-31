@@ -91,13 +91,13 @@
            data: '{NumCte: "' + IdCliente + '" }',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: OnSuccess,
+                success: OnSuccess1,
                 failure: function (response) {
                     alert(response.d);
                 }
             });
         }
-        function OnSuccess(response) {
+        function OnSuccess1(response) {
             var obj = JSON.parse(response.d);
             $.each(obj, function (key, value) {
                 if (sTipoPago == 'transferencia')

@@ -57,6 +57,9 @@ public partial class FormaPago : System.Web.UI.Page
         {
             HiddenNomCteCheque.Value = string.Empty;
             HiddenNomCteVale.Value = string.Empty;
+            HiddenInputPCT.Value = "No";
+            HiddenTDCDupliado.Value = "No";
+            HiddenInput.Value = string.Empty;
 
             if (Request.Form["__EVENTTARGET"] == "ConsultaTPV")
             {
@@ -1245,8 +1248,9 @@ else
 
         Session["TDCdisponibles"] = null;
         Session["PrimerRegTDC"] = null;
-        HiddenInputPCT.Value = string.Empty;
-        HiddenTDCDupliado.Value = string.Empty;
+        
+        HiddenTDCDupliado.Value = "No";
+
 
 
         dtDatosControlUsuario.Columns.Add("TipoCobro", typeof(string));
@@ -1268,6 +1272,10 @@ else
                 {
                    
                     txtNombreClienteTarjeta.Text= dtPagosConTarjeta.Rows[0]["Nombrecliente"].ToString();
+                }
+                else
+                {
+
                 }
             }
             //Session["PrimerRegTDC"] = dtPagosConTarjeta.Rows[0]["Folio"].ToString();

@@ -31,6 +31,7 @@
         var NumCteTrans = '<%= wucDetalleFormaPago1.TxtIdCliente.Text %>';
         var NomCteAnticipo='<%=wucDetalleFormaPago1.NombreCteAnticipo != null ? wucDetalleFormaPago1.NombreCteAnticipo.Trim():"" %>';
         var NumCteAnticipo='<%=wucDetalleFormaPago1.TxtAntIdCliente.Text != null ? wucDetalleFormaPago1.TxtAntIdCliente.Text.ToString().Trim():"" %>';
+        var NomCteTarjeta='<%= txtNombreClienteTarjeta.Text.Trim() %>';
         
 
         //Validaciones  On load
@@ -85,9 +86,16 @@
                 }
             }
 
+            alert('HiddenInputPCT='+HiddenInputPCT);
+            alert('NumCte='+NumCte);
+            alert('HiddenInput='+HiddenInput);
+            alert('HiddenTDCDupliado='+HiddenTDCDupliado);
+            alert('HiddenPagosOtraRuta='+HiddenPagosOtraRuta);
+            
+//HiddenInputPCT != 'Si' && HiddenInputPCT!= '' &&
 
 
-            if (HiddenInputPCT != 'Si' && NumCte != '' && HiddenInput!='ConsultaCteAnticipo' && HiddenTDCDupliado=='' && HiddenPagosOtraRuta==''  ) {
+            if ( HiddenInputPCT== 'No' && NumCte != '' && HiddenInput!='ConsultaCteAnticipo' && (HiddenTDCDupliado=='' || HiddenTDCDupliado=='No') && HiddenPagosOtraRuta=='' && NomCteTarjeta!='' && HiddenInput == 'ConsultaTPV') {
                 alert('No se encontraron pagos de TPV para el cliente, por favor verifique con el área de tarjetas de crédito');
             }
 
@@ -170,15 +178,22 @@
             }    
 
 
-            if (NumCteAnticipo != '' && NomCteAnticipo == '')
+            if (NumCteAnticipo != '' && NomCteAnticipo == '' && HiddenInput=='ConsultaCteAnticipo')
             {
                 alert('¡El cliente no existe!');
             }  
 
-            if (NumCteTrans != '' && NombreClienteTrans == '')
+            if (NumCteTrans != '' && NombreClienteTrans == '' && HiddenInput == 'ConsultaCteTransferencia')
             {
                   alert('¡El cliente no existe!');
             }  
+
+           if (NumCte != '' && NomCteTarjeta == '' && HiddenInput == 'ConsultaTPV')
+            {
+                  alert('¡El cliente no existe!');
+            }
+
+           
 
                    
             

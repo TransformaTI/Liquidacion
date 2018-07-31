@@ -85,11 +85,7 @@
                 }
             }
 
-            alert('HiddenInputPCT='+HiddenInputPCT);
-            alert('NumCte='+NumCte);
-            alert('HiddenInput='+HiddenInput);
-            alert('HiddenTDCDupliado='+HiddenTDCDupliado);
-            alert('HiddenPagosOtraRuta='+HiddenPagosOtraRuta);
+
             
 //HiddenInputPCT != 'Si' && HiddenInputPCT!= '' &&
 

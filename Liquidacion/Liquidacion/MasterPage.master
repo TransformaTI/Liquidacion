@@ -6,7 +6,46 @@
 
 
  <script type="text/javascript">
-   
+     (function ($) {
+         $.fn.hasEvent = function (event) {
+             if (!this.length || !event) {
+                 return false;
+             }
+             event = (event + '').split('.');
+             var d = $._data ? $._data($(this)[0], 'events') : $(this).data('events'),
+                 a = [],
+                 e = event[0],
+                 n = event[1],
+                 x = 0,
+                 y, z;
+             if (d && e == '') {
+                 for (y in d) {
+                     for (z in d[y]) {
+                         if (d[y][z].namespace == n) {
+                             a[x] = y;
+                             x++;
+                         }
+                     }
+                 }
+                 if (!a.length) {
+                     return false;
+                 }
+                 return a;
+             }
+             if (d && d[e]) {
+                 if (n) {
+                     for (y in d[e]) {
+                         if (d[e][y].namespace == n) {
+                             return true
+                         }
+                     }
+                     return false;
+                 }
+                 return true;
+             }
+             return false;
+         };
+     })(jQuery);
 
      // Catch the keydown for the entire document
      $(document).keydown(function (e) {
@@ -22,7 +61,15 @@
 
          function enterKey() {
              if (e.which === 13 && !self.is('textarea')) { // [Enter] key
+                   self.has
 
+                 if (self.is('input:image')) {                     
+                     if (self.hasEvent("click")) {
+                         self.trigger("click");
+                         focusable = form.find('input,a,select,button,textarea').filter(':visible');
+                     }
+                 }
+                     
                  // If not a regular hyperlink/button/textarea
                  if ($.inArray(self, focusable) && (!self.is('a')) && (!self.is('button'))) {
                      // Then prevent the default [Enter] key behaviour from submitting the form
@@ -39,6 +86,8 @@
          if (e.shiftKey) { enterKey() } else { enterKey() }
      });
 </script>
+
+
 
 
 <head id="Head1" runat="server">

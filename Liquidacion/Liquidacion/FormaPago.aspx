@@ -162,13 +162,13 @@
             }
             
             if (segmento = 'anticipo') {
-                document.getElementById('ctl00_MainPlaceHolder_wucDetalleFormaPago1_txtAntNombre').focus();
+                document.getElementById('ctl00_MainPlaceHolder_wucDetalleFormaPago1_LstSaldos').focus();
             }
 
 
 
             if (segmento = 'transferencia') {
-                document.getElementById('ctl00_MainPlaceHolder_wucDetalleFormaPago1_txtNombre').focus();
+                document.getElementById('ctl00_MainPlaceHolder_wucDetalleFormaPago1_txtFecha').focus();
             }
 
 
@@ -184,11 +184,15 @@
 
               if (NombreClienteCheque != 'CTENOEXISTE')
                  {
-                     document.getElementById('ctl00_MainPlaceHolder_txtNombreClienteCheque').value = NombreClienteCheque;
+                    document.getElementById('ctl00_MainPlaceHolder_txtNombreClienteCheque').value = NombreClienteCheque;
+                    document.getElementById('ctl00_MainPlaceHolder_txtFechaChueque').focus();
                  }
                  else
                 {
                   alert('¡El cliente no existe!');
+                  document.getElementById('ctl00_MainPlaceHolder_txtClienteCheque').value = '';
+                  document.getElementById('ctl00_MainPlaceHolder_txtClienteCheque').focus();
+                 
                  }
 
                NombreClienteCheque = '';
@@ -209,11 +213,16 @@
 
              if (NombreClienteVale != 'CTENOEXISTE')
              {
-                document.getElementById('ctl00_MainPlaceHolder_txtValeNombre').value=NombreClienteVale;
+                 document.getElementById('ctl00_MainPlaceHolder_txtValeNombre').value = NombreClienteVale;
+                 document.getElementById('ctl00_MainPlaceHolder_txtValeFecha').focus();
              }
              else
              {
-               alert('¡El cliente no existe!');
+                 alert('¡El cliente no existe!');
+                 document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').value = '';
+                 document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').focus();
+
+
              }
               NombreClienteVale='';
             }

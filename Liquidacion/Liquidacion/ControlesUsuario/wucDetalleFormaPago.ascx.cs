@@ -614,18 +614,9 @@ private void LlenaDropDowns()
                             }
                             }
                         }
-
-
-
                     }
-
-
-
-
-
                     this.txtAntNombre.Text = _datosCliente.Nombre;
                     NombreCteAnticipo = _datosCliente.Nombre;
-
 
                     LstSaldos.DataSource = _datosCliente.SaldosCliente;
                     LstSaldos.DataTextField = "Saldo";

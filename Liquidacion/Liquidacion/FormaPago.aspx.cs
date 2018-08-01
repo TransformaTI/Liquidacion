@@ -112,6 +112,7 @@ public partial class FormaPago : System.Web.UI.Page
             if (Request.Form["__EVENTTARGET"] == "ConsultaCteAnticipo")
             {
                 HiddenInput.Value = "ConsultaCteAnticipo";
+                
             }
 
 
@@ -124,6 +125,7 @@ public partial class FormaPago : System.Web.UI.Page
             {
                 if (txtClienteCheque.Text != string.Empty)
                 {
+                    
                     RegistroPago RegPago = new RegistroPago();
                     DataTable dt = RegPago.DatosCliente(int.Parse(txtClienteCheque.Text));
                     if (dt!=null)
@@ -134,7 +136,7 @@ public partial class FormaPago : System.Web.UI.Page
                         }
                         else
                         {
-                            HiddenNomCteCheque.Value = "CTENOEXISTE";
+                            HiddenNomCteCheque.Value = "CTENOEXISTE";         
                         }
 
                     }
@@ -669,7 +671,7 @@ public partial class FormaPago : System.Web.UI.Page
         try
         {
             
-if (AgregarCargoTarjeta(txtClienteTarjeta.Text.Trim(),txtNumTarjeta.Text.Trim(),txtNoAutorizacionTarjeta.Text.Trim()))
+            if (AgregarCargoTarjeta(txtClienteTarjeta.Text.Trim(),txtNumTarjeta.Text.Trim(),txtNoAutorizacionTarjeta.Text.Trim()))
            {
 
                 if ((DataSet)(Session["dsLiquidacion"]) == null)
@@ -1292,16 +1294,19 @@ else
 
             foreach (DataRow row in dtPagosConTarjeta.Rows)
             {
-                if(true) //(Session["Ruta"].ToString()== row["Ruta"].ToString() && Session["Autotanque"].ToString() == row["Autotanque"].ToString() )
+                
+                
+                //if(true) //(Session["Ruta"].ToString()== row["Ruta"].ToString() && Session["Autotanque"].ToString() == row["Autotanque"].ToString() )
+                if (!row.IsNull("Año"))
                     {
                           dtDatosControlUsuario.Rows.Add(row["TipoCobroDescripcion"].ToString(), row["NumeroTarjeta"].ToString(), row["NombreBanco"].ToString(), row["Autorizacion"].ToString(), row["Importe"].ToString(), row["Observacion"].ToString(), row["Año"].ToString(), row["Folio"].ToString());
                           PagosDeRuta = PagosDeRuta + 1;
                         
                     }
-                else if (row["Folio"].ToString()!=string.Empty && row["Folio"].ToString() !="0")
-                    {
-                        PagosOtraRuta = PagosOtraRuta + 1;
-                    }
+                //else if (row["Folio"].ToString()!=string.Empty && row["Folio"].ToString() !="0")
+                //    {
+                //        PagosOtraRuta = PagosOtraRuta + 1;
+                //    }
 
 
 

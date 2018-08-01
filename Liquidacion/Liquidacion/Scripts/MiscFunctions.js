@@ -39,6 +39,8 @@ function SeleccionarControlSiguiente(charCode, nextControlName)
 {    
     if (charCode == 13)
     {   
+       
+        console.log(nextControlName);
         document.getElementById(nextControlName).focus();
         return true;
     }

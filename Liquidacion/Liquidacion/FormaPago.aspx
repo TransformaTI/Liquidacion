@@ -482,7 +482,7 @@
 
 
     <script type="text/javascript">
-        function ConsultaClienteCheque(TipoPago) {
+             function ConsultaClienteCheque(TipoPago) {
 
             if (TipoPago=='cheque')
                 {
@@ -490,33 +490,10 @@
                 }
 
 
-       $.ajax({
-           type: "POST",
-           url: "FormaPago.aspx/ConsultaClienteCheque",
-           data: '{NumCte: "' + IdCliente + '" }',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: OnSuccess,
-                failure: function (response) {
-                    alert(response.d);
-                }
-            });
-        }
-        function OnSuccess(response) {
-            var obj = JSON.parse(response.d);
-            $.each(obj, function (key, value) {
-                if (sTipoPago == 'cheque')
-                {
-                    $("#<%=txtNombreClienteCheque.ClientID%>")[0].value = value.Nombre;
-                    $("#<%=txtFechaChueque.ClientID%>")[0].focus();
-                }
-                if (sTipoPago == 'vale')
-                {
-                    $("#<%=txtValeNombre.ClientID%>")[0].value = value.Nombre;
-                    $("#<%=txtValeNombre.ClientID%>")[0].focus();
-
-                }
-            });
+          if (TipoPago=='vale')
+            {
+                 javascript: __doPostBack('ConsultaClienteVale', '');
+             }
         }
     </script>
 

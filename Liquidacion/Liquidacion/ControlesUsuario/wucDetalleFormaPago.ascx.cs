@@ -199,6 +199,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                 {
                     ClienteID = Convert.ToInt32(txtCliente.Text.Trim());
                     txtNombre.Text = consultaNombreClienteTransferencia(ClienteID);
+                    NombreClienteTrans = txtNombre.Text;
                     txtNombre.Focus();
 
                 }

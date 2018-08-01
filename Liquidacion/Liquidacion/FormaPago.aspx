@@ -51,7 +51,6 @@
         var HiddenPagosOtraRuta='<%= HiddenPagosOtraRuta.Value %>';
         var HiddenTDCDupliado = '<%= HiddenTDCDupliado.Value %>';
         var segmento = '';
-
         var NombreClienteCheque='<%= HiddenNomCteCheque.Value %>'; 
         var NombreClienteVale='<%= HiddenNomCteVale.Value %>'; 
         var NombreClienteTrans='<%= wucDetalleFormaPago1.NombreClienteTrans %>'; 
@@ -227,6 +226,7 @@
             {
                 alert('¡El cliente no existe!');
             }  
+            
 
             if (NumCteTrans != '' && NombreClienteTrans == '' && HiddenInput == 'ConsultaCteTransferencia')
             {
@@ -236,8 +236,7 @@
            if (NumCte != '' && NomCteTarjeta == '' && HiddenInput == 'ConsultaTPV')
             {
                   alert('¡El cliente no existe!');
-            }      
-           
+            }        
 
                    
             

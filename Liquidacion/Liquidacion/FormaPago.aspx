@@ -484,15 +484,18 @@
              function ConsultaClienteCheque(TipoPago) {
 
             if (TipoPago=='cheque')
-                {
-                     javascript: __doPostBack('ConsultaClienteCheque', '');
-                }
-
-
-          if (TipoPago=='vale')
             {
-                 javascript: __doPostBack('ConsultaClienteVale', '');
-             }
+                javascript: __doPostBack('ConsultaClienteCheque', '');
+                var fechaCheque = document.getElementById('ctl00_MainPlaceHolder_txtFechaChueque');
+                fechaCheque.focus();
+            }
+
+            if (TipoPago=='vale')
+            {
+                javascript: __doPostBack('ConsultaClienteVale', '');
+                var fechaCheque = document.getElementById('ctl00_MainPlaceHolder_txtValeFecha');
+                fechaCheque.focus();
+            }
         }
     </script>
 

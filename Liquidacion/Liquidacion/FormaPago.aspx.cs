@@ -65,8 +65,6 @@ public partial class FormaPago : System.Web.UI.Page
 
             if (Request.Form["__EVENTTARGET"] == "ConsultaTPV")
             {
-
-
                 HiddenInput.Value = "ConsultaTPV";
                 if (txtClienteTarjeta.Text != string.Empty)
                 {
@@ -85,8 +83,6 @@ public partial class FormaPago : System.Web.UI.Page
                     imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
                     chkLocal.Enabled = txtNoAutorizacionTarjeta.Text == string.Empty ? true : false;
                 }
-
-        
             }
 
             if (Request.Form["__EVENTTARGET"] == "ConsultaTPV-Trans")
@@ -142,7 +138,6 @@ public partial class FormaPago : System.Web.UI.Page
                         }
 
                     }
-
                 }
             }
 
@@ -168,6 +163,7 @@ public partial class FormaPago : System.Web.UI.Page
                     }
 
                 }
+
             }
 
 
@@ -1296,7 +1292,7 @@ else
 
             foreach (DataRow row in dtPagosConTarjeta.Rows)
             {
-                if (Session["Ruta"].ToString()== row["Ruta"].ToString() && Session["Autotanque"].ToString() == row["Autotanque"].ToString() )
+                if(true) //(Session["Ruta"].ToString()== row["Ruta"].ToString() && Session["Autotanque"].ToString() == row["Autotanque"].ToString() )
                     {
                           dtDatosControlUsuario.Rows.Add(row["TipoCobroDescripcion"].ToString(), row["NumeroTarjeta"].ToString(), row["NombreBanco"].ToString(), row["Autorizacion"].ToString(), row["Importe"].ToString(), row["Observacion"].ToString(), row["Año"].ToString(), row["Folio"].ToString());
                           PagosDeRuta = PagosDeRuta + 1;

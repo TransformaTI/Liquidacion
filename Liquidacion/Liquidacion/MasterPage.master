@@ -55,39 +55,54 @@
              // Set the form by the current item in focus
              form = self.parents('form:eq(0)'),
              focusable;
+         var saltos = 1;
 
          // Array of Indexable/Tab-able items
-         focusable = form.find('input,a,select,button,textarea').filter(':visible').filter(':enabled');
+         focusable = form.find('input,a,select,button,textarea').filter(':visible').filter(':enabled')
+         ;
+
+
+
 
          function enterKey() {
              if (e.which === 13) { // [Enter] key
                 
-                 if (self.is('input:image')) {
+                 if (self.is('input:image')) {                     
                      if (document.getElementById('ctl00_mostrando').value == '') {
                          if (self.hasEvent("click")) {
-                             self.trigger("click");
-                             focusable = form.find('input,a,select,button,textarea').filter(':visible').filter(':enabled');;
+                            self.trigger("click");
+                            focusable = form.find('input,a,select,button,textarea').filter(':visible').filter(':enabled');
                          }
                     }
                      
+                 }
+                 else {
+                     document.getElementById('ctl00_mostrando').value = '';
                  }
                      
                  // If not a regular hyperlink/button/textarea
                  if ($.inArray(self, focusable) && (!self.is('a')) && (!self.is('button'))) {
                      // Then prevent the default [Enter] key behaviour from submitting the form
                      e.preventDefault();
-                     
 
                  } // Otherwise follow the link/button as by design, or put new line in textarea
 
                  // Focus on the next item (either previous or next depending on shift)
                  if (document.getElementById('ctl00_mostrando').value != '') {
-                     focusable.eq(focusable.index(self) + (e.shiftKey ? -1 : 2)).focus();
-                     document.getElementById('ctl00_mostrando').value = ''
+                     saltos = 2;
+                     document.getElementById('ctl00_mostrando').value = '';
                  }
-                 else{
-                     focusable.eq(focusable.index(self) + (e.shiftKey ? -1 : 1)).focus();
+
+                 if (self.attr('name')=='ctl00$MainPlaceHolder$txtFechaChueque' ||
+                    self.attr('name')=='ctl00$MainPlaceHolder$txtFechaTarjeta' ||
+                    self.attr('name')=='ctl00$MainPlaceHolder$TxtFechaDocTran' ||
+                    self.attr('name')=='ctl00$MainPlaceHolder$wucDetalleFormaPago1$txtFecha') {
+                     saltos = 2;
                  }
+
+                
+
+                 focusable.eq(focusable.index(self) + (e.shiftKey ? -1 : saltos)).focus();
                  
 
                  return false;

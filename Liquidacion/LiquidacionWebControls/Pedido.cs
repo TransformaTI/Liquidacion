@@ -796,7 +796,7 @@ namespace SigametLiquidacion.WebControls
             this.txtNumeroCliente.Attributes.Add("onfocus", "SetSelected(" + this.txtNumeroCliente.UniqueID + ");");
             this.txtNumeroCliente.CssClass = "ClientTextBox";
             this.Controls.Add((Control) this.txtNumeroCliente);
-            this.btnConsultaCliente.Attributes.Add("onclick", "return doNumeroClienteSubmit(" + '\'' + this.txtNumeroCliente.UniqueID + '\'' + "," + '\'' + this._mensajeCapturaCliente + '\'' + ");");
+            this.btnConsultaCliente.Attributes.Add("onclick", "return doNumeroClienteSubmit(" + '\'' + this.txtNumeroCliente.ClientID + '\'' + "," + '\'' + this._mensajeCapturaCliente + '\'' + ");");
             this.btnConsultaCliente.SkinID = "btnBuscarCliente";
             this.btnConsultaCliente.AlternateText = "BUSCAR";
             this.btnConsultaCliente.ID = "btnConsultaCliente";
@@ -964,13 +964,14 @@ namespace SigametLiquidacion.WebControls
         {
             this.Controls.Add((Control) new LiteralControl("<TD>"));
             this.txtLitros.CssClass = CssClass;
+            this.txtLitros.Text = "0";
             this.Controls.Add((Control) this.txtLitros);
             this.Controls.Add((Control) new LiteralControl("</TD>"));
             if (this._parametros == null || !Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("CapturaRemision"))))
             {
                 return;
             }
-            this.txtNumeroRemision.Attributes.Add("onkeypress", "return validarRemision(" + '\'' + this._serieRemisionRuta.Trim().ToUpper() + '\'' + ", " + '\'' + this.txtNumeroRemision.UniqueID + '\'' + ", " + Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("ValidarSerieRemision"))).ToString().ToLower() + ", event, " + '\'' + this.txtLitros.UniqueID + '\'' + ");");
+            this.txtNumeroRemision.Attributes.Add("onkeypress", "return validarRemision(" + '\'' + this._serieRemisionRuta.Trim().ToUpper() + '\'' + ", " + '\'' + this.txtNumeroRemision.UniqueID + '\'' + ", " + Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("ValidarSerieRemision"))).ToString().ToLower() + ", event, " + '\'' + this.txtLitros.ClientID + '\'' + ");");
         }
         
         private void controlCapturaPrecio(string CssClass)
@@ -996,9 +997,10 @@ namespace SigametLiquidacion.WebControls
             this.txtImporte.Enabled = false;
             this.txtImporte.ReadOnly = true;
             this.txtImporte.CssClass = CssClass;
+            this.txtImporte.Text = "0";
             this.Controls.Add((Control) this.txtImporte);
-            this.txtLitros.Attributes.Add("onchange", "return calcularImporte(" + '\'' + this.txtLitros.UniqueID + '\'' + "," + '\'' + this.ddpPrecio.UniqueID + '\'' + "," + '\'' + this.txtImporte.UniqueID + '\'' + ");");
-            this.ddpPrecio.Attributes.Add("onchange", "return calcularImporte(" + '\'' + this.txtLitros.UniqueID + '\'' + "," + '\'' + this.ddpPrecio.UniqueID + '\'' + "," + '\'' + this.txtImporte.UniqueID + '\'' + ");");
+            this.txtLitros.Attributes.Add("onchange", "return calcularImporte(" + '\'' + this.txtLitros.ClientID + '\'' + "," + '\'' + this.ddpPrecio.ClientID + '\'' + "," + '\'' + this.txtImporte.ClientID + '\'' + ");");
+            this.ddpPrecio.Attributes.Add("onchange", "return calcularImporte(" + '\'' + this.txtLitros.ClientID + '\'' + "," + '\'' + this.ddpPrecio.ClientID + '\'' + "," + '\'' + this.txtImporte.ClientID + '\'' + ");");
             this.Controls.Add((Control) new LiteralControl("</TD>"));
         }
         
@@ -1044,7 +1046,7 @@ namespace SigametLiquidacion.WebControls
             this.Controls.Add((Control) new LiteralControl("</td>"));
             this.Controls.Add((Control) new LiteralControl("</tr>"));
             this.btnRemover.Attributes.Add("onclick", "return confirm('¿Desea Eliminar el Pedido?')");
-            this.txtLitros.Attributes.Add("onkeypress", "return ComboKeyPress(event, " + '\'' + this.ddpFormaPago.UniqueID + '\'' + ", " + '\'' + this.btnAceptar.UniqueID + '\'' + ");");
+            this.txtLitros.Attributes.Add("onkeypress", "return ComboKeyPress(event, " + '\'' + this.ddpFormaPago.ClientID + '\'' + ", " + '\'' + this.btnAceptar.UniqueID + '\'' + ");");
             this.ddpFormaPago.Attributes.Add("onkeypress", "return ComboKeyPress(event, " + '\'' + this.btnAceptar.UniqueID + '\'' + ", " + '\'' + this.btnAceptar.UniqueID + '\'' + ");");
         }
         
@@ -1066,7 +1068,7 @@ namespace SigametLiquidacion.WebControls
             this.Controls.Add((Control) new LiteralControl("</tr>"));
             this.Controls.Add((Control) new LiteralControl("<tr>"));
             this.controlCapturaLitros("HorizontalLayoutCapturable");
-            this.txtLitros.Attributes.Add("onkeypress", "return onKeyPress_OnlyDecimalDigits(event," + '\'' + this.txtLitros.UniqueID + '\'' + ", " + '\'' + this.ddpPrecio.UniqueID + '\'' + ");");
+            this.txtLitros.Attributes.Add("onkeypress", "return onKeyPress_OnlyDecimalDigits(event," + '\'' + this.txtLitros.ClientID + '\'' + ", " + '\'' + this.ddpPrecio.ClientID + '\'' + ");");
             this.txtLitros.Attributes.Add("onfocus", "SetSelected(" + this.txtLitros.ClientID + ");");
             this.controlCapturaPrecio("HorizontalLayoutCapturable");
             this.controlCapturaImporte("HorizontalLayoutCapturable");
@@ -1401,8 +1403,8 @@ namespace SigametLiquidacion.WebControls
                         }
                     }
 
-                    this.ddpPrecio.Attributes.Add("onchange", "validarDescuento(" + '\'' + this.txtLitros.UniqueID + '\'' + ", " + '\'' +
-                        this.txtImporte.UniqueID + '\'' + ", " + '\'' + this.ddpPrecio.UniqueID + '\'' + ", " + this.ddpPrecio.ClientID + ", " +
+                    this.ddpPrecio.Attributes.Add("onchange", "validarDescuento(" + '\'' + this.txtLitros.ClientID + '\'' + ", " + '\'' +
+                        this.txtImporte.ClientID + '\'' + ", " + '\'' + this.ddpPrecio.ClientID + '\'' + ", " + this.ddpPrecio.ClientID + ", " +
                         this._precioMinimo.ToString() + ", " + (this._cliente.Descuento > new Decimal(0)).ToString().ToLower() + ", " + '\'' +
                         "El precio seleccionado no corresponde al descuento del cliente, Verifique." + '\'' + ", " + '\'' +
                         "Este cliente no tiene descuento autorizado, debe liquidar con el precio vigente." + '\'' + ");");

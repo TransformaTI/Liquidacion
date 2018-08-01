@@ -165,7 +165,7 @@
                 ControlToValidate="txtNoDocumento" Display="None"
                 ErrorMessage="Capturar el No. Documento"
                 ValidationGroup="Guarda"></asp:RequiredFieldValidator>
-            <cc2:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="txtNoDocumento" FilterType="Numbers"></cc2:FilteredTextBoxExtender>
+            <cc2:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="txtNoDocumento" FilterType="Custom,LowercaseLetters,UppercaseLetters,Numbers"></cc2:FilteredTextBoxExtender>
             <cc2:ValidatorCalloutExtender ID="vceNoDocumento" runat="server"
                 TargetControlID="rfvNoDocumento">
             </cc2:ValidatorCalloutExtender>

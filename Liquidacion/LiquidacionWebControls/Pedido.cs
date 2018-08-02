@@ -98,6 +98,7 @@ namespace SigametLiquidacion.WebControls
 
         private byte _longitudSerie;
         private byte _longitudRemision;
+       
         
         public string URLImagenBotonBusquedaCliente
         {
@@ -492,7 +493,14 @@ namespace SigametLiquidacion.WebControls
         public bool ConsultaCteOnChange
         {
             get { return consultaCteOnChange; }
-            set { consultaCteOnChange = value; }
+            set { consultaCteOnChange = value;
+
+                if (ConsultaCteOnChange == true && Page.IsPostBack )
+                {
+                    this.txtNumeroCliente.Attributes.Add("onchange", "return DoPostback();");
+                }
+
+            }
         }
 
 
@@ -810,7 +818,16 @@ namespace SigametLiquidacion.WebControls
             if (ConsultaCteOnChange==true)
             {
                 this.txtNumeroCliente.Attributes.Add("onchange", "return DoPostback();");
+                
+                
             }
+            else
+            {
+                
+            }
+
+
+
 
             this.Controls.Add((Control) this.txtNumeroCliente);
 
@@ -1539,6 +1556,7 @@ namespace SigametLiquidacion.WebControls
             this._cliente = (SigametLiquidacion.Cliente) null;
             this._pedido = (SigametLiquidacion.Pedido) null;
             this.btnAceptar.Enabled = false;
+            
         }
         
         private void formaPagoContado()

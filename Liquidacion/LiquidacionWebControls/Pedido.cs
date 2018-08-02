@@ -487,6 +487,15 @@ namespace SigametLiquidacion.WebControls
             }
         }
 
+        private bool consultaCteOnChange;
+
+        public bool ConsultaCteOnChange
+        {
+            get { return consultaCteOnChange; }
+            set { consultaCteOnChange = value; }
+        }
+
+
         public event EventHandler ClickAceptar;
         
         public event EventHandler ClickCancelar;
@@ -774,6 +783,7 @@ namespace SigametLiquidacion.WebControls
             this.btnAceptar.Click += new ImageClickEventHandler(this.btnAceptar_Click);
             this.btnCancelar.Click += new ImageClickEventHandler(this.btnCancelar_Click);
             this.btnRemover.Click += new ImageClickEventHandler(this.btnDesasignar_Click);
+            this.txtNumeroCliente.TextChanged += new EventHandler(txtNumeroCliente_TextChanged);
             this.ConfiguracionTabOrder();
         }
         
@@ -793,15 +803,23 @@ namespace SigametLiquidacion.WebControls
             this.Controls.Add((Control) new LiteralControl("</td>"));
             this.Controls.Add((Control) new LiteralControl("<td>"));
             this.Controls.Add((Control) new LiteralControl("<div style='vertical-align:middle'>"));
-            this.txtNumeroCliente.Attributes.Add("onfocus", "SetSelected(" + this.txtNumeroCliente.UniqueID + ");");
+
+            this.txtNumeroCliente.Attributes.Add("onfocus", "SetSelected(" + this.txtNumeroCliente.ClientID + ");");
             this.txtNumeroCliente.CssClass = "ClientTextBox";
+            
+            if (ConsultaCteOnChange==true)
+            {
+                this.txtNumeroCliente.Attributes.Add("onchange", "return DoPostback();");
+            }
+
             this.Controls.Add((Control) this.txtNumeroCliente);
+
             this.btnConsultaCliente.Attributes.Add("onclick", "return doNumeroClienteSubmit(" + '\'' + this.txtNumeroCliente.ClientID + '\'' + "," + '\'' + this._mensajeCapturaCliente + '\'' + ");");
             this.btnConsultaCliente.SkinID = "btnBuscarCliente";
             this.btnConsultaCliente.AlternateText = "BUSCAR";
             this.btnConsultaCliente.ID = "btnConsultaCliente";
             this.Controls.Add((Control) this.btnConsultaCliente);
-            this.txtNumeroCliente.Attributes.Add("onkeypress", "return keyPressNumeroCliente(event, " + '\'' + this.txtNumeroCliente.UniqueID + '\'' + ", " + '\'' + this.btnConsultaCliente.UniqueID + '\'' + ");");
+            this.txtNumeroCliente.Attributes.Add("onkeypress", "return keyPressNumeroCliente(event, " + '\'' + this.txtNumeroCliente.ClientID + '\'' + ", " + '\'' + this.btnConsultaCliente.ClientID + '\'' + ");");
             this.Controls.Add((Control) new LiteralControl("</div>"));
             this.Controls.Add((Control) new LiteralControl("</td>"));
             this.Controls.Add((Control) new LiteralControl("</tr>"));
@@ -811,7 +829,7 @@ namespace SigametLiquidacion.WebControls
             this.Controls.Add((Control) new LiteralControl("<td style=" + '\'' + "font-weight: bold;" + '\'' + ">"));
             this.lnkCambiarCliente.Text = "Cambiar cliente";
             this.lnkCambiarCliente.Visible = false;
-            this.lnkCambiarCliente.Attributes.Add("onclick", "return doNumeroClienteSubmit(" + '\'' + this.txtNumeroCliente.UniqueID + '\'' + "," + '\'' + this._mensajeCapturaCliente + '\'' + ");");
+            this.lnkCambiarCliente.Attributes.Add("onclick", "return doNumeroClienteSubmit(" + '\'' + this.txtNumeroCliente.ClientID + '\'' + "," + '\'' + this._mensajeCapturaCliente + '\'' + ");");
             this.lnkCambiarCliente.Click += new EventHandler(this.lnkCambiarCliente_click);
             this.Controls.Add((Control) this.lnkCambiarCliente);
             this.Controls.Add((Control) new LiteralControl("</td>"));
@@ -1156,7 +1174,16 @@ namespace SigametLiquidacion.WebControls
             }
             this.cargaDatosCliente(Convert.ToInt32(this.txtNumeroCliente.Text));
         }
-        
+
+        protected void txtNumeroCliente_TextChanged(object sender, EventArgs e)
+        {
+            if (this.txtNumeroCliente.Text.Length <= 0)
+            {
+                return;
+            }
+            this.cargaDatosCliente(Convert.ToInt32(this.txtNumeroCliente.Text));
+        }
+
         private void btnAceptar_Click(object sender, ImageClickEventArgs e)
         {
             try

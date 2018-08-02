@@ -68,9 +68,12 @@ public partial class Liquidacion : System.Web.UI.Page
                 nuevoPedido.LongitudRemision = AutoTanqueTurno1.LongitudRemision;
 
                 btnTerminar.Attributes.Add("onclick", "return confirm('¿Desea finalizar la captura de la liquidación?')");
-               // btnPagos.Attributes.Add("onclick", "return confirm('¿Desea Continuar?')");
-            
-            
+            // btnPagos.Attributes.Add("onclick", "return confirm('¿Desea Continuar?')");
+
+               nuevoPedido.ConsultaCteOnChange = true;
+
+
+
         }
         else
         {

@@ -246,13 +246,7 @@
             {
                   alert('¡El cliente no existe!');
             }        
-
-                   
-            
-
-        });
-
-        
+        });        
 
          function onlyNumbers(evt) {
           evt = (evt) ? evt : window.event;

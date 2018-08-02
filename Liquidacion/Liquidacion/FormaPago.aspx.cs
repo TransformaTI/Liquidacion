@@ -683,7 +683,7 @@ public partial class FormaPago : System.Web.UI.Page
 
                 dr["IdPago"] = 1; //Consecutivo
                 dr["Referencia"] = txtNoAutorizacionTarjeta.Text;
-                dr["NumeroCuenta"] = txtNoAutorizacionTarjeta.Text;
+                dr["NumeroCuenta"] = txtNumTarjeta.Text.Trim();
 
                 dr["FechaCheque"] = txtFechaTarjeta.Text;
                 dr["Cliente"] = txtClienteTarjeta.Text;
@@ -733,7 +733,7 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["IdPago"] = idConsecutivo; //Consecutivo
                 Session["idCobroConsec"] = idConsecutivo;
                 dr["Referencia"] = txtNoAutorizacionTarjeta.Text;
-                dr["NumeroCuenta"] = txtNoAutorizacionTarjeta.Text;
+                dr["NumeroCuenta"] = txtNumTarjeta.Text;
 
                 dr["FechaCheque"] = txtFechaTarjeta.Text;
                 dr["Cliente"] = txtClienteTarjeta.Text;
@@ -1091,6 +1091,7 @@ else
         decimal importeAbono;
         DataTable dtEliminar = new DataTable();
         DataRow[] drArray;
+        DataTable dtCargoTarjeta;
         Decimal impTotal;
 
         try
@@ -1118,49 +1119,86 @@ else
             drArray = ds.Tables["CobroPedido"].Select("IdPago = '" + pagoActivo.ToString() + "'", null);
             foreach (DataRow dr in drArray)
             {
+
                 ds.Tables["CobroPedido"].Rows.Remove(dr);
             }
+
+
             drArray = null;
             //Eliminar de la tabla de Cobro el cobro capturado y actualizar tabla
             drArray = ds.Tables["Cobro"].Select("IdPago = '" + pagoActivo.ToString() + "'", null);
 
+
+
+            string tipoPago;
+            String clientePago;
+            string tarjetaPago;
+            string autorizacionPago;
+
+
             foreach (DataRow dr in drArray)
             {
+                tipoPago = dr["NombreTipoCobro"].ToString().Trim();
+
+                if (tipoPago == "TARJETA") {
+                    dtCargoTarjeta = (DataTable)(Session["CargoTarjeta"]);                
+
+                    clientePago = dr["Cliente"].ToString().Trim();
+                    tarjetaPago = dr["NumeroCuenta"].ToString().Trim();
+                    autorizacionPago = dr["Referencia"].ToString().Trim();
+
+                    DataRow[] filas = dtCargoTarjeta.Select("Cliente = '" + clientePago + "' AND Tarjeta = '" + tarjetaPago + "' AND Autorizacion='" + autorizacionPago + "'");
+
+                    foreach (DataRow fila in filas) {
+                        dtCargoTarjeta.Rows.Remove(fila);
+                    }
+                    if (dtCargoTarjeta.Rows.Count > 0) {
+                        (Session["CargoTarjeta"]) = dtCargoTarjeta;
+                    }
+                    else {
+                        (Session["CargoTarjeta"]) = null;
+                    }                   
+                }
                 ds.Tables["Cobro"].Rows.Remove(dr);
             }
 
 
-            Session["dsLiquidacion"] = ds;
-            if (ds.Tables["Cobro"].Rows.Count > 0)
-            {
-                //   Response.Redirect("GenerarPago.aspx");
+            (Session["dsLiquidacion"]) = ds;
+            Response.Redirect("FormaPago.aspx");
 
-                lblCobros.Visible = true;
-                //imgExpandCollapse.Visible = true;
+            //if (ds.Tables["Cobro"].Rows.Count > 0)
+            //{
+            //    //   Response.Redirect("GenerarPago.aspx");
 
-                TitlePanel.Visible = true;
-                ContentPanel.Visible = true;
+            //    lblCobros.Visible = true;
+            //    //imgExpandCollapse.Visible = true;
 
-                gvPagoGenerado.DataSource = ds.Tables["Cobro"];
-                gvPagoGenerado.DataBind();
-               // imbResumen.Visible = true;
-            }
-            else
-            {
-                lblCobros.Visible = false;
-                //imgExpandCollapse.Visible = false;
+            //    TitlePanel.Visible = true;
+            //    ContentPanel.Visible = true;
 
-                TitlePanel.Visible = false;
-                ContentPanel.Visible = false;
+            //    gvPagoGenerado.DataSource = ds.Tables["Cobro"];
+            //    gvPagoGenerado.DataBind();
+            //    // imbResumen.Visible = true;
+            //}
+            //else
+            //{
+            //    lblCobros.Visible = false;
+            //    //imgExpandCollapse.Visible = false;
 
-                gvPagoGenerado.DataSource = null;
-                gvPagoGenerado.DataBind();
+            //    TitlePanel.Visible = false;
+            //    ContentPanel.Visible = false;
 
-                //imbResumen.Visible = false;
-            }
+            //    gvPagoGenerado.DataSource = null;
+            //    gvPagoGenerado.DataBind();
+
+            //    //imbResumen.Visible = false;
+            //}
 
         }
-        catch { throw; }
+        catch (Exception ex)
+        { 
+           throw ex; 
+        }
     }
     protected void imbResumen_Click(object sender, ImageClickEventArgs e)
     {
@@ -1633,6 +1671,8 @@ else
                     dr["Cliente"] = Cliente;
                     dr["Tarjeta"] = Tarjeta;
                     dr["Autorizacion"] = Autorizacion;
+
+                    
 
                     dtCargoTarjeta.Rows.Add(dr);
                    // ds.Tables.Add(dtCargoTarjeta);

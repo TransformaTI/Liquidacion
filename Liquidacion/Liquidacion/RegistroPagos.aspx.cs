@@ -66,27 +66,67 @@ public partial class RegistroPagos : System.Web.UI.Page
                         DataTable dtPedidosNoParientes = (DataTable)Session["dtPedidos"];
                         ds.Tables.Remove("Pedidos");
                         dtPedidosNoParientes.TableName = "Pedidos";
-                      
+                        DataTable LiqPagoAnticipado = ds != null ? ds.Tables["LiqPagoAnticipado"] : null;
 
                         //actuliza saldo de pgos anticipados 
                         DataTable dtPedidosParientes = (DataTable)(Session["PedidosParientes"]);
 
-                        if (dtPedidosParientes != null)
+                        //if (dtPedidosParientes != null)
+                        //{
+                        //    foreach (DataRow item in dtPedidosNoParientes.Rows)
+                        //    {
+                        //        //foreach (DataRow row in dtPedidosParientes.Rows)
+                        //        //{
+                        //        //    if (item["Pedido"].ToString().Trim() == row["Pedido"].ToString().Trim())
+                        //        //    {
+                        //                item.BeginEdit();
+                        //                  if (LiqPagoAnticipado!=null)
+                        //                    {
+                        //                         item["Saldo"] = decimal.Parse(item["Saldo"].ToString()) - decimal.Parse(LiqPagoAnticipado.Compute("sum(Monto)", "PEDIDO=" + item["Pedido"].ToString()).ToString()); // row["Saldo"];
+                        //                    }
+                        //                    item.EndEdit();
+                        //        //    }
+
+                        //        //}
+                        //    }
+                        //}
+
+                        if (dtPedidosNoParientes != null &&  !Page.IsPostBack)
                         {
                             foreach (DataRow item in dtPedidosNoParientes.Rows)
                             {
-                                foreach (DataRow row in dtPedidosParientes.Rows)
+                                decimal Saldo = decimal.Parse(item["Total"].ToString());
+          
+                                if (ds!=null)
                                 {
-                                    if (item["Pedido"].ToString().Trim() == row["Pedido"].ToString().Trim())
+                                    if (ds.Tables["CobroPedido"]!=null)
                                     {
-                                        item.BeginEdit();
-                                        item["Saldo"] = row["Saldo"];
-                                        item.EndEdit();
+                                            foreach (DataRow row in ds.Tables["CobroPedido"].Rows)
+                                        {
+                                            if (row["Pedido"].ToString().Trim() == item["Pedido"].ToString().Trim())
+                                            {
+                                                Saldo = Saldo - decimal.Parse(row["total"].ToString());
+                                            }
+
+                                        }
                                     }
 
                                 }
-                            }
+
+                                item.BeginEdit();
+                                item["Saldo"] = Saldo;                                    
+                            item.EndEdit();
+
+
+
                         }
+                        }
+
+
+
+
+
+
 
 
                         ds.Tables.Add(dtPedidosNoParientes);

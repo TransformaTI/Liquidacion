@@ -93,13 +93,36 @@ public partial class GenerarPago : System.Web.UI.Page
         }
     }
     protected void imbGuardar_Click(object sender, ImageClickEventArgs e)
-    {    
+    {
+        DataTable dtPedidosEf = new DataTable();
+        dtPedidosEf = ((DataTable)(Session["dtPedidos"]));
 
         try
         {
+            dtPedidosEf = ((DataTable)(Session["dtPedidos"]));
+            DataSet dsPagos = (DataSet)(Session["dsLiquidacion"]);
+            DataTable LiqPagoAnticipado = dsPagos != null ? dsPagos.Tables["LiqPagoAnticipado"] : null;
+
+            if (dtPedidosEf != null && LiqPagoAnticipado != null)
+            {
+                foreach (DataRow item in dtPedidosEf.Rows)
+                {
+                    foreach (DataRow row in LiqPagoAnticipado.Rows)
+                    {
+                        if (row["Pedidos"].ToString().Contains(item["Pedido"].ToString()))
+                        {
+                            item.BeginEdit();
+                            item["Saldo"] = decimal.Parse(item["Saldo"].ToString()) - decimal.Parse(row["Monto"].ToString());
+                            item.EndEdit();
+                        }
+
+                    }
+                }
+            }
 
 
-           rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dsPagos.Tables["Pedidos"], dsPagos.Tables["Cobro"], dsPagos.Tables["CobroPedido"], dtResumenLiquidacion, dsPagos.Tables["LiqPagoAnticipado"]);
+
+            rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dsPagos.Tables["Pedidos"], dsPagos.Tables["Cobro"], dsPagos.Tables["CobroPedido"], dtResumenLiquidacion, dsPagos.Tables["LiqPagoAnticipado"]);
             Session["dsLiquidacion"] = null; // MCC  se limpia la session de liquidacion despues de registrar el pago  2018 05 31
             Session["CargoTarjeta"] = null;
             Session["TDCdisponibles"] = null;

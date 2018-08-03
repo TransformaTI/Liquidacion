@@ -103,26 +103,41 @@ public partial class GenerarPago : System.Web.UI.Page
             DataSet dsPagos = (DataSet)(Session["dsLiquidacion"]);
             DataTable LiqPagoAnticipado = dsPagos != null ? dsPagos.Tables["LiqPagoAnticipado"] : null;
 
-            if (dtPedidosEf != null && LiqPagoAnticipado != null)
+     
+            // actualiza saldos antes de guardar pagos
+            if (dtPedidosEf != null )
             {
                 foreach (DataRow item in dtPedidosEf.Rows)
                 {
-                    foreach (DataRow row in LiqPagoAnticipado.Rows)
+                    decimal Saldo = decimal.Parse(item["Total"].ToString());
+
+                    if (dsPagos != null)
                     {
-                        if (row["Pedidos"].ToString().Contains(item["Pedido"].ToString()))
+                        if (dsPagos.Tables["CobroPedido"] != null)
                         {
-                            item.BeginEdit();
-                            item["Saldo"] = decimal.Parse(item["Saldo"].ToString()) - decimal.Parse(row["Monto"].ToString());
-                            item.EndEdit();
+                            foreach (DataRow row in dsPagos.Tables["CobroPedido"].Rows)
+                            {
+                                if (row["Pedido"].ToString().Trim() == item["Pedido"].ToString().Trim())
+                                {
+                                    Saldo = Saldo - decimal.Parse(row["total"].ToString());
+                                }
+
+                            }
                         }
 
                     }
+
+                    item.BeginEdit();
+                    item["Saldo"] = Saldo;
+                    item.EndEdit();
+
+
                 }
             }
 
 
 
-            rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dsPagos.Tables["Pedidos"], dsPagos.Tables["Cobro"], dsPagos.Tables["CobroPedido"], dtResumenLiquidacion, dsPagos.Tables["LiqPagoAnticipado"]);
+            rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dtPedidosEf, dsPagos.Tables["Cobro"], dsPagos.Tables["CobroPedido"], dtResumenLiquidacion, dsPagos.Tables["LiqPagoAnticipado"]);
             Session["dsLiquidacion"] = null; // MCC  se limpia la session de liquidacion despues de registrar el pago  2018 05 31
             Session["CargoTarjeta"] = null;
             Session["TDCdisponibles"] = null;

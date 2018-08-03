@@ -795,40 +795,36 @@ else
             DataSet dsPagos = (DataSet)(Session["dsLiquidacion"]);
             DataTable LiqPagoAnticipado = dsPagos != null ? dsPagos.Tables["LiqPagoAnticipado"] : null;
 
-            //DataTable dtPedidosParientes =( DataTable)(Session["PedidosParientes"]);
+      
 
-            // if (dtPedidosParientes!=null)
-            // {
-            //     foreach (DataRow item in dtPedidosEf.Rows)
-            //     {
-            //         foreach (DataRow row in dtPedidosParientes.Rows)
-            //         {
-            //             if (item["Pedido"].ToString().Trim()== row["Pedido"].ToString().Trim())
-            //             {
-            //                 item.BeginEdit();
-            //                 item["Saldo"] = row ["Saldo"];
-            //                 item.EndEdit();
-            //             }
-
-            //         }
-            //     }
-            // }
-
-
-            if (dtPedidosEf != null && LiqPagoAnticipado!=null)
+            //actuliza saldos antes de liquidacion 
+            if (dtPedidosEf != null && !Page.IsPostBack)
             {
                 foreach (DataRow item in dtPedidosEf.Rows)
                 {
-                    foreach (DataRow row in LiqPagoAnticipado.Rows)
+                    decimal Saldo = decimal.Parse(item["Total"].ToString());
+
+                    if (dsPagos != null)
                     {
-                        if ( row["Pedidos"].ToString().Contains(item["Pedido"].ToString()))
+                        if (dsPagos.Tables["CobroPedido"] != null)
                         {
-                            item.BeginEdit();
-                            item["Saldo"] =decimal.Parse(item["Saldo"].ToString())- decimal.Parse(row["Monto"].ToString());
-                            item.EndEdit();
+                            foreach (DataRow row in dsPagos.Tables["CobroPedido"].Rows)
+                            {
+                                if (row["Pedido"].ToString().Trim() == item["Pedido"].ToString().Trim())
+                                {
+                                    Saldo = Saldo - decimal.Parse(row["total"].ToString());
+                                }
+
+                            }
                         }
 
                     }
+
+                    item.BeginEdit();
+                    item["Saldo"] = Saldo;
+                    item.EndEdit();
+
+
                 }
             }
 

@@ -68,29 +68,10 @@ public partial class RegistroPagos : System.Web.UI.Page
                         dtPedidosNoParientes.TableName = "Pedidos";
                         DataTable LiqPagoAnticipado = ds != null ? ds.Tables["LiqPagoAnticipado"] : null;
 
-                        //actuliza saldo de pgos anticipados 
+      
                         DataTable dtPedidosParientes = (DataTable)(Session["PedidosParientes"]);
 
-                        //if (dtPedidosParientes != null)
-                        //{
-                        //    foreach (DataRow item in dtPedidosNoParientes.Rows)
-                        //    {
-                        //        //foreach (DataRow row in dtPedidosParientes.Rows)
-                        //        //{
-                        //        //    if (item["Pedido"].ToString().Trim() == row["Pedido"].ToString().Trim())
-                        //        //    {
-                        //                item.BeginEdit();
-                        //                  if (LiqPagoAnticipado!=null)
-                        //                    {
-                        //                         item["Saldo"] = decimal.Parse(item["Saldo"].ToString()) - decimal.Parse(LiqPagoAnticipado.Compute("sum(Monto)", "PEDIDO=" + item["Pedido"].ToString()).ToString()); // row["Saldo"];
-                        //                    }
-                        //                    item.EndEdit();
-                        //        //    }
-
-                        //        //}
-                        //    }
-                        //}
-
+                        // actualiza saldos 
                         if (dtPedidosNoParientes != null &&  !Page.IsPostBack)
                         {
                             foreach (DataRow item in dtPedidosNoParientes.Rows)
@@ -115,18 +96,11 @@ public partial class RegistroPagos : System.Web.UI.Page
 
                                 item.BeginEdit();
                                 item["Saldo"] = Saldo;                                    
-                            item.EndEdit();
+                                item.EndEdit();
 
 
-
+                            }
                         }
-                        }
-
-
-
-
-
-
 
 
                         ds.Tables.Add(dtPedidosNoParientes);

@@ -798,7 +798,7 @@ else
       
 
             //actuliza saldos antes de liquidacion 
-            if (dtPedidosEf != null && !Page.IsPostBack)
+            if (dtPedidosEf != null )
             {
                 foreach (DataRow item in dtPedidosEf.Rows)
                 {

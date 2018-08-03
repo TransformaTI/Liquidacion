@@ -267,8 +267,6 @@ public partial class FormaPago : System.Web.UI.Page
         #endregion
 
 
-
-
         if (Session["dsLiquidacion"] == null)
         {
             string path = Server.MapPath("");
@@ -276,10 +274,15 @@ public partial class FormaPago : System.Web.UI.Page
         }
         else
         {
+
+            RevisaPagos();
             ds = (DataSet)(Session["dsLiquidacion"]);
+
+            
             if (((DataSet)(Session["dsLiquidacion"])).Tables.Contains("Cobro"))
                 if (ds.Tables["Cobro"].Rows.Count > 0)
             {
+                
                 lblCobros.Visible = true;
                 imgExpandCollapse.Visible = true;
                 //imbResumen.Visible = true;
@@ -317,6 +320,96 @@ public partial class FormaPago : System.Web.UI.Page
 
     }
 
+    private void RevisaPagos()
+    {
+        try
+        {
+            DataSet ds = new DataSet();
+
+            if (Session["dsLiquidacion"] != null)
+            {
+                
+                DataRow[] drArrayCobros;
+                DataRow[] drArrayCobroPedidos;
+                ds = (DataSet)(Session["dsLiquidacion"]);
+
+                if (ds.Tables.Contains("Cobro"))
+                {
+                    if (ds.Tables["Cobro"].Rows.Count > 0)
+                    {
+                        drArrayCobros = ds.Tables["Cobro"].Select();
+                        foreach (DataRow filaCobro in drArrayCobros)
+                        {
+                            drArrayCobroPedidos = ds.Tables["CobroPedido"].Select("IdPago = '" + filaCobro["IdPago"].ToString() + "'", null);
+
+                            if (drArrayCobroPedidos.Length == 0)
+                            {
+                                ds.Tables["Cobro"].Rows.Remove(filaCobro);
+                            }
+                        }
+                    }
+                    (Session["dsLiquidacion"]) = ds;
+                }
+            }
+
+            if (Session["CargoTarjeta"] != null) {
+
+                DataTable dtCargoTarjeta;
+                String clientePago;
+                string tarjetaPago;
+                string autorizacionPago;
+                Boolean hayCobros=false;
+
+               
+                dtCargoTarjeta = (DataTable)(Session["CargoTarjeta"]);
+                if (Session["dsLiquidacion"] != null){
+                    ds = (DataSet)(Session["dsLiquidacion"]);
+                    if (ds.Tables.Contains("Cobro"))
+                    {
+                        if (ds.Tables["Cobro"].Rows.Count > 0)
+                        {
+                            hayCobros = true;
+                        }
+                    }
+                }
+                    
+                DataRow[] drArrayTarjetas;
+                DataRow[] drArrayCobros;                
+
+                drArrayTarjetas = dtCargoTarjeta.Select();
+
+                foreach (DataRow filaTarjeta in drArrayTarjetas)
+                {
+                    if (hayCobros)
+                    {
+                        clientePago = filaTarjeta["Cliente"].ToString().Trim();
+                        tarjetaPago = filaTarjeta["Tarjeta"].ToString().Trim();
+                        autorizacionPago = filaTarjeta["Autorizacion"].ToString().Trim();
+
+                        drArrayCobros = ds.Tables["Cobro"].Select("Cliente = '" + clientePago + "' AND NumeroCuenta = '" + tarjetaPago + "' AND Referencia='" + autorizacionPago + "'");
+
+                        if (drArrayCobros.Length == 0)
+                        {
+                            dtCargoTarjeta.Rows.Remove(filaTarjeta);
+                        }
+                    }
+
+                    else
+                    {
+                        dtCargoTarjeta.Rows.Remove(filaTarjeta);
+                    }
+                        
+                }
+                (Session["CargoTarjeta"]) = dtCargoTarjeta;
+            }
+                   
+
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
 
 
     #region "Funcs and Subs"
@@ -670,6 +763,7 @@ public partial class FormaPago : System.Web.UI.Page
     {
         try
         {
+            RevisaPagos();
             
             if (AgregarCargoTarjeta(txtClienteTarjeta.Text.Trim(),txtNumTarjeta.Text.Trim(),txtNoAutorizacionTarjeta.Text.Trim()))
            {
@@ -1092,6 +1186,10 @@ else
         DataTable dtEliminar = new DataTable();
         DataRow[] drArray;
         DataTable dtCargoTarjeta;
+        string tipoPago;
+        String clientePago;
+        string tarjetaPago;
+        string autorizacionPago;
         Decimal impTotal;
 
         try
@@ -1130,10 +1228,7 @@ else
 
 
 
-            string tipoPago;
-            String clientePago;
-            string tarjetaPago;
-            string autorizacionPago;
+            
 
 
             foreach (DataRow dr in drArray)
@@ -1290,9 +1385,6 @@ else
         Session["PrimerRegTDC"] = null;
         
         HiddenTDCDupliado.Value = "No";
-
-
-
         dtDatosControlUsuario.Columns.Add("TipoCobro", typeof(string));
         dtDatosControlUsuario.Columns.Add("Tarjeta", typeof(string));
         dtDatosControlUsuario.Columns.Add("Banco", typeof(string));
@@ -1313,10 +1405,7 @@ else
                    
                     txtNombreClienteTarjeta.Text= dtPagosConTarjeta.Rows[0]["Nombrecliente"].ToString();
                 }
-                else
-                {
-
-                }
+                
             }
             //Session["PrimerRegTDC"] = dtPagosConTarjeta.Rows[0]["Folio"].ToString();
         }
@@ -1373,11 +1462,6 @@ else
             }
 
 
-
-
-
-
-
             //   if (Session["Ruta"].ToString() != dtPagosConTarjetaSelec[0]["Ruta"].ToString()
             //||
             //Session["Autotanque"].ToString() != dtPagosConTarjetaSelec[0]["Autotanque"].ToString()
@@ -1405,10 +1489,6 @@ else
             HiddenInputPCT.Value = "No";
             titNoAut.Visible = true;
             titNoAutNum.Visible = true;
-            
-
-
-
         }
 
         HiddenInputNumPagos.Value = Session["TDCdisponibles"]!=null? Session["TDCdisponibles"].ToString():"0";
@@ -1430,12 +1510,8 @@ else
         ddTipTarjeta.Enabled = ddTipTarjeta.SelectedIndex == 0 ? true : false;
         chkLocal.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
         txtObservacionesTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
-        imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
-        
+        imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;        
     }
-
-
-
 
     /// <summary>
     /// 
@@ -1444,10 +1520,7 @@ else
     private void CargaPrimerRegistro(string sFormaPago)
     {
         string afiliacion = "";
-        ListItem liAfiliacion = null;
-
-
-       
+        ListItem liAfiliacion = null;       
 
         switch (sFormaPago)
         {
@@ -1460,21 +1533,17 @@ else
                     {
                         DataRow[] dtPagosPrimerRegistro = dtPagosConTarjeta.Select("Folio=" + Session["PrimerRegTDC"].ToString());
 
-                txtNombreClienteTarjeta.Text = dtPagosPrimerRegistro[0]["NombreCliente"].ToString();
-                txtNoAutorizacionTarjeta.Text = dtPagosPrimerRegistro[0]["Autorizacion"].ToString();
-                txtFechaTarjeta.Text = dtPagosPrimerRegistro[0]["FAlta"].ToString() != "" ? DateTime.Parse(dtPagosPrimerRegistro[0]["FAlta"].ToString()).ToShortDateString() : "";
-                txtNumTarjeta.Text = dtPagosPrimerRegistro[0]["NumeroTarjeta"].ToString();
-                ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosPrimerRegistro[0]["Nombrebanco"].ToString().Trim()));
-                ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosPrimerRegistro[0]["Nombrebanco"].ToString().Trim()));
-                txtImporteTarjeta.Text = dtPagosPrimerRegistro[0]["Importe"].ToString().Replace("$", "");
-                txtObservacionesTarjeta.Text = dtPagosPrimerRegistro[0]["Observacion"].ToString();
-                ddlTAfiliacion.SelectedIndex = ddlTAfiliacion.Items.IndexOf(ddlTAfiliacion.Items.FindByValue(dtPagosPrimerRegistro[0]["Afiliacion"].ToString()));
-                chkLocal.Checked = bool.Parse(dtPagosPrimerRegistro[0]["local"].ToString());
-                ddTipTarjeta.SelectedIndex = dtPagosPrimerRegistro[0]["TipoTarjeta"].ToString() != null ? ddTipTarjeta.Items.IndexOf(ddTipTarjeta.Items.FindByValue(dtPagosPrimerRegistro[0]["TipoTarjeta"].ToString())) : 0;
-
-
-
-
+                        txtNombreClienteTarjeta.Text = dtPagosPrimerRegistro[0]["NombreCliente"].ToString();
+                        txtNoAutorizacionTarjeta.Text = dtPagosPrimerRegistro[0]["Autorizacion"].ToString();
+                        txtFechaTarjeta.Text = dtPagosPrimerRegistro[0]["FAlta"].ToString() != "" ? DateTime.Parse(dtPagosPrimerRegistro[0]["FAlta"].ToString()).ToShortDateString() : "";
+                        txtNumTarjeta.Text = dtPagosPrimerRegistro[0]["NumeroTarjeta"].ToString();
+                        ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosPrimerRegistro[0]["Nombrebanco"].ToString().Trim()));
+                        ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosPrimerRegistro[0]["Nombrebanco"].ToString().Trim()));
+                        txtImporteTarjeta.Text = dtPagosPrimerRegistro[0]["Importe"].ToString().Replace("$", "");
+                        txtObservacionesTarjeta.Text = dtPagosPrimerRegistro[0]["Observacion"].ToString();
+                        ddlTAfiliacion.SelectedIndex = ddlTAfiliacion.Items.IndexOf(ddlTAfiliacion.Items.FindByValue(dtPagosPrimerRegistro[0]["Afiliacion"].ToString()));
+                        chkLocal.Checked = bool.Parse(dtPagosPrimerRegistro[0]["local"].ToString());
+                        ddTipTarjeta.SelectedIndex = dtPagosPrimerRegistro[0]["TipoTarjeta"].ToString() != null ? ddTipTarjeta.Items.IndexOf(ddTipTarjeta.Items.FindByValue(dtPagosPrimerRegistro[0]["TipoTarjeta"].ToString())) : 0;
                     }
                 }
                 break;
@@ -1615,7 +1684,7 @@ else
                 txtImporteTarjeta.Text = string.Empty;
                 txtObservacionesTarjeta.Text = string.Empty;
                 ddBancoTarjeta.SelectedIndex = -1;
-                ddTipoTarjeta.SelectedIndex = -1;
+                ddTipTarjeta.SelectedIndex = -1;
                 
                 break;
 

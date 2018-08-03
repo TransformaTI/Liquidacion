@@ -99,8 +99,7 @@
                     self.attr('name')=='ctl00$MainPlaceHolder$wucDetalleFormaPago1$txtFecha') {
                      saltos = 2;
                  }
-
-                
+                                 
 
                  focusable.eq(focusable.index(self) + (e.shiftKey ? -1 : saltos)).focus();
                  

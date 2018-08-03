@@ -314,12 +314,19 @@
                 document.getElementById('Transfer').style.display = 'none';     
             
             }
+
+            if (activo = 'tarjeta') {
+                document.getElementById('ctl00_MainPlaceHolder_txtClienteTarjeta').value = ""
+                
+                
+            }
+
             $("input[type='text']:visible:enabled:first").focus();
                       
         }
 
     </script>
-
+    
     <script type="text/javascript">
         function confirmar(button) {
 
@@ -334,10 +341,16 @@
         //Consulta Pagos Con tarjeta mcc 2018 05 10
         function ConsultaPagosTPV(FormaPago) {
 
-            if ((document.getElementById('<%=txtClienteTarjeta.ClientID%>').value != "" || document.getElementById('<%=TxtCteAfiliacion.ClientID%>').value != "")
-                && (HiddenInput == '' || HiddenInput == 'SeleccionaPago' || HiddenInput == 'ConsultaTPV')) {
-                javascript: __doPostBack(FormaPago, '');
+            if (document.getElementById('<%=txtClienteTarjeta.ClientID%>').value == "") {               
+                HiddenInput == ''
 
+            }
+            else{
+                if ((document.getElementById('<%=txtClienteTarjeta.ClientID%>').value != "" || document.getElementById('<%=TxtCteAfiliacion.ClientID%>').value != "")
+                    && (HiddenInput == '' || HiddenInput == 'SeleccionaPago' || HiddenInput == 'ConsultaTPV')) {
+                    javascript: __doPostBack(FormaPago, '');
+
+                }
             }
 
         }
@@ -375,11 +388,6 @@
                  return false;
             }
 
-<%--            if (document.getElementById('<%=txtNombreClienteTarjeta.ClientID%>').value == "")
-            {
-                alert('El nombre del cliente es requerido');
-                 return false;
-            }--%>
 
 
 

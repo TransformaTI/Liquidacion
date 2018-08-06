@@ -807,10 +807,10 @@ namespace SigametLiquidacion.WebControls
             this.txtNumeroCliente.Attributes.Add("onfocus", "SetSelected(" + this.txtNumeroCliente.ClientID + ");");
             this.txtNumeroCliente.CssClass = "ClientTextBox";
             
-            if (ConsultaCteOnChange==true)
-            {
+            //if (ConsultaCteOnChange==true)
+            //{
                 this.txtNumeroCliente.Attributes.Add("onchange", "return DoPostback();");
-            }
+            //}
 
             this.Controls.Add((Control) this.txtNumeroCliente);
 

@@ -48,6 +48,7 @@ public partial class Liquidacion : System.Web.UI.Page
                 //Carga los parámetros generales para la liquidacion 
                 _parametros = new Parametros(1, 1, 22);
                 Session["Parametros"] = _parametros;
+                Session["desasigna"] = "";
 
                 CargaPedidos(Convert.ToInt16(Session["AñoAtt"]), Convert.ToInt32(Session["Folio"]));
 
@@ -205,6 +206,7 @@ public partial class Liquidacion : System.Web.UI.Page
             ListaPedidos1.Remark = true;
             ListaPedidos1.DataSource = AutoTanqueTurno1.ListaPedidos;
 
+            Session["desasignado"] = "x";
             nuevoPedido.Focus();
         }
         catch (Exception ex)
@@ -273,6 +275,7 @@ public partial class Liquidacion : System.Web.UI.Page
             {
                 nuevoPedido.Focus();
             }
+            Session["desasignado"] = "";
         }
         catch (Exception ex)
         {
@@ -286,12 +289,20 @@ public partial class Liquidacion : System.Web.UI.Page
     protected void nuevoPedido_ClickCancelar(object sender, EventArgs e)
     {
         ListaPedidos1.Restablecer();
+        Session["desasignado"] = "";
     }
 
     protected void nuevoPedido_DesasignarPedido(object sender, EventArgs e)
     {
         try
         {
+            string _desasigna = Convert.ToString(Session["desasignado"]);
+            if (_desasigna == "")
+            {
+                lblMensaje.Text = "Seleccione primero un pedido";
+                return;
+            }
+
             //Si es un pedido programado verifica que no haya notas blancas para el mismo cliente
             if ((nuevoPedido.TipoPedido.ToString() == "2") || (nuevoPedido.TipoPedido.ToString() == "1")) 
             {
@@ -309,6 +320,7 @@ public partial class Liquidacion : System.Web.UI.Page
 
             nuevoPedido.DesasignaPedido(AutoTanqueTurno1.CurrentRow(nuevoPedido.SourceRow));
             AutoTanqueTurno1.DesasignacionPedido(nuevoPedido.SourceRow);
+            Session["desasignado"] = "";
 
         }
 

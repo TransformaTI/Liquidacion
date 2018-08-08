@@ -57,6 +57,8 @@
               <xs:element name="FechaDeposito" msprop:Generator_UserColumnName="FechaDeposito" msprop:Generator_ColumnPropNameInRow="FechaDeposito" msprop:Generator_ColumnVarNameInTable="columnFechaDeposito" msprop:Generator_ColumnPropNameInTable="FechaDepositoColumn" type="xs:string" minOccurs="0" />
               <xs:element name="BancoOrigen" msprop:Generator_UserColumnName="BancoOrigen" msprop:Generator_ColumnPropNameInRow="BancoOrigen" msprop:Generator_ColumnVarNameInTable="columnBancoOrigen" msprop:Generator_ColumnPropNameInTable="BancoOrigenColumn" type="xs:string" minOccurs="0" />
               <xs:element name="NombreTipoCobro" msprop:Generator_UserColumnName="NombreTipoCobro" msprop:Generator_ColumnPropNameInRow="NombreTipoCobro" msprop:Generator_ColumnVarNameInTable="columnNombreTipoCobro" msprop:Generator_ColumnPropNameInTable="NombreTipoCobroColumn" type="xs:string" minOccurs="0" />
+			  <xs:element name="ProveedorNombre" msprop:Generator_UserColumnName="ProveedorNombre" msprop:Generator_ColumnPropNameInRow="ProveedorNombre" msprop:Generator_ColumnVarNameInTable="columnProveedorNombre" msprop:Generator_ColumnPropNameInTable="ProveedorNombreColumn" type="xs:string" minOccurs="0" />
+			  <xs:element name="TipoValeDescripcion" msprop:Generator_UserColumnName="TipoValeDescripcion" msprop:Generator_ColumnPropNameInRow="TipoValeDescripcion" msprop:Generator_ColumnVarNameInTable="columnTipoValeDescripcion" msprop:Generator_ColumnPropNameInTable="TipoValeDescripcionColumn" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

@@ -547,10 +547,10 @@ public partial class FormaPago : System.Web.UI.Page
                 //dr["NumeroCuenta"] = txtFolioVale.Text;
 
 
-         
+
 
                 dr["IdPago"] = idConsecutivo; //Consecutivo
-                dr["FechaCheque"] = txtValeFecha.Text; 
+                dr["FechaCheque"] = txtValeFecha.Text;
                 dr["Cliente"] = txtClienteVale.Text;
                 dr["Banco"] = " ";
                 dr["Referencia"] = 0;
@@ -576,6 +576,9 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["NombreTipoCobro"] = "VALE";
                 dr["Banco"] = 0;
 
+                dr["ProveedorNombre"] = ddlProveedor.SelectedItem.Text;
+                dr["TipoValeDescripcion"] = ddlTipoVale.SelectedItem.Text;
+
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtValeImporte.Text);
                // dr["IdCobro"] = 0;
 
@@ -587,6 +590,8 @@ public partial class FormaPago : System.Web.UI.Page
                 Session["idCobroConsec"] = idConsecutivo;
 
                 Session["FormaPago"] = "Vale";
+
+
             
             }
             else
@@ -628,6 +633,8 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["BancoOrigen"] = 0;
                 dr["NombreTipoCobro"] = "VALE";
                 dr["Banco"] = 0;
+                dr["ProveedorNombre"] = ddlProveedor.SelectedItem.Text;
+                dr["TipoValeDescripcion"] = ddlTipoVale.SelectedItem.Text;
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtValeImporte.Text);
 
                 dtCobro.Rows.Add(dr);
@@ -692,6 +699,9 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["BancoOrigen"] = 0;
                 dr["NombreTipoCobro"] = "CHEQUE";
 
+                dr["ProveedorNombre"] = "";
+                dr["TipoValeDescripcion"] = "";
+
                 dtCobro.Rows.Add(dr);
                 //Subo a Session la tabla creada
                 //Session["TablaCobro"] = dtCobro;
@@ -742,6 +752,9 @@ public partial class FormaPago : System.Web.UI.Page
 
                 dr["BancoOrigen"] = 0;
                 dr["NombreTipoCobro"] = "CHEQUE";
+
+                dr["ProveedorNombre"] = "";
+                dr["TipoValeDescripcion"] = "";
 
                 dtCobro.Rows.Add(dr);
 
@@ -803,7 +816,11 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["BancoOrigen"] = ddlBancoOrigen.SelectedItem.Text;
                 dr["NombreTipoCobro"] = "TARJETA";
 
-                dtCobro.Rows.Add(dr);
+                dr["ProveedorNombre"] = "";
+                dr["TipoValeDescripcion"] = "";
+
+
+                    dtCobro.Rows.Add(dr);
                 //Subo a Session la tabla creada
                 //Session["TablaCobro"] = dtCobro;
                 Session["dsLiquidacion"] = dtCobro.DataSet;
@@ -851,6 +868,9 @@ public partial class FormaPago : System.Web.UI.Page
 
                 dr["BancoOrigen"] = ddlBancoOrigen.SelectedItem.Text;
                 dr["NombreTipoCobro"] = "TARJETA";
+
+                dr["ProveedorNombre"] = "";
+                dr["TipoValeDescripcion"] = "";
 
                 dtCobro.Rows.Add(dr);
 

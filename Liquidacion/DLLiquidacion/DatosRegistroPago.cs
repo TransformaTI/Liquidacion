@@ -557,7 +557,7 @@ namespace SigametLiquidacion
 
                 for (int index1 = 0; index1 <= dtPago.Rows.Count - 1; ++index1)
                 {
-                    SqlParameter[] sqlParameterArray = new SqlParameter[16]
+                    SqlParameter[] sqlParameterArray = new SqlParameter[18]
                     {
                         new SqlParameter("@NumeroCheque", (object) dtPago.Rows[index1]["Referencia"].ToString()),
                         new SqlParameter("@Total",liqPagoAnticipado!=null?(object) Convert.ToDecimal(dtDetallePago.Rows[index1]["Total"]): (object) Convert.ToDecimal(dtPago.Rows[index1]["Total"])),
@@ -574,7 +574,9 @@ namespace SigametLiquidacion
                         new SqlParameter("@TPV", (object) dtPago.Rows[index1]["TPV"].ToString()),
                         new SqlParameter("@BancoTarjeta", (object) Convert.ToInt16(dtPago.Rows[index1]["Banco"].ToString())),
                         new SqlParameter("@AñoCobro", SqlDbType.SmallInt),
-                        null
+                        null,
+                        new SqlParameter("@Referencia", (object) dtPago.Rows[index1]["ProveedorNombre"].ToString()),
+                        new SqlParameter("@NumeroCuentaDestino", (object) dtPago.Rows[index1]["TipoValeDescripcion"].ToString()),
                     };
                     sqlParameterArray[14].Direction = ParameterDirection.Output;
                     sqlParameterArray[15] = new SqlParameter("@Cobro", SqlDbType.Int);

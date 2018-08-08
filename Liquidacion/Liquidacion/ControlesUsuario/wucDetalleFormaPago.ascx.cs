@@ -288,6 +288,8 @@ private void LlenaDropDowns()
 
                 dr["BancoOrigen"] = 0;
                 dr["NombreTipoCobro"] = "TRANSFERENCIA";
+                dr["ProveedorNombre"] = "";
+                dr["TipoValeDescripcion"] = "";
 
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtImporte.Text); ;
 
@@ -336,6 +338,9 @@ private void LlenaDropDowns()
                 dr["BancoOrigen"] = 0;
                 dr["NombreTipoCobro"] = "TRANSFERENCIA";
                 dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.transferencia);
+                dr["ProveedorNombre"] = "";
+                dr["TipoValeDescripcion"] = "";
+
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtImporte.Text); ;
 
                 dtCobro.Rows.Add(dr);
@@ -413,6 +418,8 @@ private void LlenaDropDowns()
                 dr["BancoOrigen"] = 0;
                 dr["NombreTipoCobro"] = "ANTICIPO";
                 dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.anticipo);
+                dr["ProveedorNombre"] = "";
+                dr["TipoValeDescripcion"] = "";
 
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtAntMonto.Text); ;
 
@@ -461,6 +468,8 @@ private void LlenaDropDowns()
 
                 dr["BancoOrigen"] = 0;
                 dr["NombreTipoCobro"] = "ANTICIPO";
+                dr["ProveedorNombre"] = "";
+                dr["TipoValeDescripcion"] = "";
 
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtAntMonto.Text); ;
 

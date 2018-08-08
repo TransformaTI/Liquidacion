@@ -12,6 +12,8 @@ using System.Drawing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
+
 namespace SigametLiquidacion.WebControls
 {
     [ToolboxData("<{0}:Pedido runat=server></{0}:Pedido>")]
@@ -1172,16 +1174,19 @@ namespace SigametLiquidacion.WebControls
             {
                 return;
             }
-            this.cargaDatosCliente(Convert.ToInt32(this.txtNumeroCliente.Text));
+            
+
         }
 
         protected void txtNumeroCliente_TextChanged(object sender, EventArgs e)
         {
+            
+            
             if (this.txtNumeroCliente.Text.Length <= 0)
             {
                 return;
             }
-            this.cargaDatosCliente(Convert.ToInt32(this.txtNumeroCliente.Text));
+            this.cargaDatosCliente(Convert.ToInt32(this.txtNumeroCliente.Text), sender, e);
         }
 
         private void btnAceptar_Click(object sender, ImageClickEventArgs e)
@@ -1330,8 +1335,19 @@ namespace SigametLiquidacion.WebControls
             return (byte) 5;
         }
         
-        private void cargaDatosCliente(int Cliente)
-        {      
+        private void cargaDatosCliente(int Cliente, object sender, EventArgs e)
+        {
+
+            string _buscando = Convert.ToString(System.Web.HttpContext.Current.Session["buscandoCliente"]);
+
+            if (_buscando == "x")
+            {
+                this.btnCancelar_Click(sender, null);
+
+                return;
+            }
+
+
             if (this._tipoOperacionCaptura != TipoOperacionPedido.EdicionPedidoConciliado)
             {
                 string text = this.txtNumeroRemision.Text;
@@ -1490,6 +1506,7 @@ namespace SigametLiquidacion.WebControls
                         this.txtImporte.Text = (Convert.ToDecimal(this.txtLitros.Text) * Convert.ToDecimal(this.ddpPrecio.SelectedValue)).ToString();
                     }
                 }
+                System.Web.HttpContext.Current.Session["buscandoCliente"] = "x";
                 this.btnAceptar.Enabled = true;
             }
             else

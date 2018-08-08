@@ -49,6 +49,7 @@ public partial class Liquidacion : System.Web.UI.Page
                 _parametros = new Parametros(1, 1, 22);
                 Session["Parametros"] = _parametros;
                 Session["desasigna"] = "";
+                Session["buscandoCliente"] = "";
 
                 CargaPedidos(Convert.ToInt16(Session["AñoAtt"]), Convert.ToInt32(Session["Folio"]));
 
@@ -80,6 +81,9 @@ public partial class Liquidacion : System.Web.UI.Page
         {
             _catalogos = (Catalogos)Session["Catalogos"];
             _parametros = (Parametros)Session["Parametros"];
+
+            string _buscando = Convert.ToString(Session["buscandoCliente"]);
+            
         }
         if (AutoTanqueTurno1.OperadorAsignado == true)
         {
@@ -196,6 +200,9 @@ public partial class Liquidacion : System.Web.UI.Page
     {
         try
         {
+            Session["desasignado"] = "x";
+            Session["buscandoCliente"] = "x";
+
             AutoTanqueTurno1.RecorridoListaPedidos(AutoTanqueTurno1.CurrentRow(ListaPedidos1.ClickedRow));
 
             lblControlPedido.Text = "Edición del pedido " +
@@ -206,7 +213,7 @@ public partial class Liquidacion : System.Web.UI.Page
             ListaPedidos1.Remark = true;
             ListaPedidos1.DataSource = AutoTanqueTurno1.ListaPedidos;
 
-            Session["desasignado"] = "x";
+
             nuevoPedido.Focus();
         }
         catch (Exception ex)
@@ -236,7 +243,7 @@ public partial class Liquidacion : System.Web.UI.Page
             //        Page.RegisterClientScriptBlock("Confirmacion", "confirm('Existen pedidos capturados para este cliente. ¿Desea Continuar?')");
             //    }
             //}
-
+            Session["buscandoCliente"] = "";
             if (nuevoPedido.TipoOperacion == TipoOperacionPedido.EdicionPedidoConciliado)
             {
                 AutoTanqueTurno1.EdicionPedido(nuevoPedido.SourceRow, nuevoPedido.Cliente, nuevoPedido.Nombre,
@@ -290,6 +297,10 @@ public partial class Liquidacion : System.Web.UI.Page
     {
         ListaPedidos1.Restablecer();
         Session["desasignado"] = "";
+        Session["buscandoCliente"] = "";
+        nuevoPedido.Focus();
+
+
     }
 
     protected void nuevoPedido_DesasignarPedido(object sender, EventArgs e)
@@ -351,6 +362,7 @@ public partial class Liquidacion : System.Web.UI.Page
             AutoTanqueTurno1.DesasignacionPedido(nuevoPedido.SourceRow);
             ListaPedidos1.DataSource = AutoTanqueTurno1.ListaPedidos;
             ConsultaResumenLiquidacion();
+            Session["buscandoCliente"] = "";
         }
         catch (Exception ex)
         {

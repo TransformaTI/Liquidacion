@@ -214,7 +214,7 @@ public partial class Liquidacion : System.Web.UI.Page
         try
         {
             Session["desasignado"] = "x";
-            Session["buscandoCliente"] = "x";
+            Session["buscandoCliente"] = "";
 
             AutoTanqueTurno1.RecorridoListaPedidos(AutoTanqueTurno1.CurrentRow(ListaPedidos1.ClickedRow));
 

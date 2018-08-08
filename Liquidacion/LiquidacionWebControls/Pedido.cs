@@ -716,6 +716,7 @@ namespace SigametLiquidacion.WebControls
             }
             if (this._permitirCaptura)
             {
+ 
                 return;
             }
             this.enableCaptureControls(false);
@@ -1050,7 +1051,7 @@ namespace SigametLiquidacion.WebControls
             this.Controls.Add((Control) this.btnAceptar);
             if (this._parametros != null)
             {
-                this.btnAceptar.Attributes.Add("onclick", "return validacionCamposRequeridos(" + '\'' + this.txtLitros.UniqueID + '\'' + "," + '\'' + this._mensajeCapturaLitros + '\'' + ", " + '\'' + this.btnAceptar.UniqueID + '\'' + ", " + Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("CapturaRemision"))).ToString().ToLower() + ", " + '\'' + this.txtNumeroRemision.UniqueID + '\'' + ", " + '\'' + "Debe capturar el número de remisión." + '\'' + ", " + '\'' + this.imgDecoration.UniqueID + '\'' + ");");
+                this.btnAceptar.Attributes.Add("onclick", "return validacionCamposRequeridos(" + '\'' + this.txtLitros.ClientID + '\'' + "," + '\'' + this._mensajeCapturaLitros + '\'' + ", " + '\'' + this.btnAceptar.ClientID + '\'' + ", " + Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("CapturaRemision"))).ToString().ToLower() + ", " + '\'' + this.txtNumeroRemision.ClientID + '\'' + ", " + '\'' + "Debe capturar el número de remisión." + '\'' + ", " + '\'' + this.imgDecoration.ClientID + '\'' + ");");
             }
             this.Controls.Add((Control) new LiteralControl("</td>"));
             this.Controls.Add((Control) new LiteralControl("<td>"));
@@ -1174,7 +1175,8 @@ namespace SigametLiquidacion.WebControls
             {
                 return;
             }
-            
+
+            this.cargaDatosCliente(Convert.ToInt32(this.txtNumeroCliente.Text), sender, e);
 
         }
 
@@ -1549,8 +1551,8 @@ namespace SigametLiquidacion.WebControls
             this._tipoOperacionCaptura = TipoOperacionPedido.CapturaNuevoPedido;
             this.txtNumeroCliente.Text = string.Empty;
             this.txtNumeroCliente.Enabled = true;
-            this.txtLitros.Text = string.Empty;
             this.lblValorDescuento.Text = string.Empty;
+            this.txtLitros.Text = string.Empty;
             this.txtNumeroRemision.Text = string.Empty;
             this.lnkCambiarCliente.Visible = false;
             this._cliente = (SigametLiquidacion.Cliente) null;
@@ -1577,6 +1579,7 @@ namespace SigametLiquidacion.WebControls
             this.txtLitros.Enabled = Enable;
             this.ddpPrecio.Enabled = Enable;
             this.ddpFormaPago.Enabled = Enable;
+            this.btnAceptar.Enabled= Enable;
         }
         
         private string consultaTipoPedido(byte TipoPedido)

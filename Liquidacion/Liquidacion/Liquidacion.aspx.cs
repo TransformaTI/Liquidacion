@@ -28,16 +28,21 @@ public partial class Liquidacion : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-         if (!Convert.ToBoolean(Session["Iniciada"]))
+        bool IsPageRefresh = false;
+
+        if (!Convert.ToBoolean(Session["Iniciada"]))
         {
             Response.Redirect("Login.aspx");
         }
 
         if (!Page.IsPostBack)
         {
-            
-                //RAMPACRRR
-                if (Request.QueryString["FormaLiquidacion"] != null)
+            ViewState["ViewStateId"] = System.Guid.NewGuid().ToString();
+
+            Session["SessionId"] = ViewState["ViewStateId"].ToString();
+
+            //RAMPACRRR
+            if (Request.QueryString["FormaLiquidacion"] != null)
                 {
                     AutoTanqueTurno1.FormaLiquidacion = Request.QueryString["FormaLiquidacion"].ToString();
                 }
@@ -82,8 +87,13 @@ public partial class Liquidacion : System.Web.UI.Page
             _catalogos = (Catalogos)Session["Catalogos"];
             _parametros = (Parametros)Session["Parametros"];
 
-            string _buscando = Convert.ToString(Session["buscandoCliente"]);
-            
+            if (ViewState["ViewStateId"].ToString() != Session["SessionId"].ToString())
+            {
+                IsPageRefresh = true;
+            }
+
+            Session["SessionId"] = System.Guid.NewGuid().ToString();
+            ViewState["ViewStateId"] = Session["SessionId"].ToString();
         }
         if (AutoTanqueTurno1.OperadorAsignado == true)
         {
@@ -94,6 +104,9 @@ public partial class Liquidacion : System.Web.UI.Page
             nuevoPedido.Enabled = false;
         }
         lblMensaje.Text = string.Empty;
+        if(IsPageRefresh) {
+            ReordenarLista("Litros");
+        }
     }
     protected void Page_PreRender(object sender, EventArgs e)
     {
@@ -283,6 +296,7 @@ public partial class Liquidacion : System.Web.UI.Page
                 nuevoPedido.Focus();
             }
             Session["desasignado"] = "";
+            nuevoPedido_ClickCancelar(sender, e);
         }
         catch (Exception ex)
         {
@@ -299,6 +313,7 @@ public partial class Liquidacion : System.Web.UI.Page
         Session["desasignado"] = "";
         Session["buscandoCliente"] = "";
         nuevoPedido.Focus();
+        Response.Redirect(Request.RawUrl);
 
 
     }
@@ -332,6 +347,7 @@ public partial class Liquidacion : System.Web.UI.Page
             nuevoPedido.DesasignaPedido(AutoTanqueTurno1.CurrentRow(nuevoPedido.SourceRow));
             AutoTanqueTurno1.DesasignacionPedido(nuevoPedido.SourceRow);
             Session["desasignado"] = "";
+            nuevoPedido_ClickCancelar(sender, e);
 
         }
 

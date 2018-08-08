@@ -539,10 +539,10 @@ public partial class Liquidacion : System.Web.UI.Page
         //    ClientScript.RegisterStartupScript(this.GetType(), "Diferencia", "<script language=javascript> confirm('Hay una diferencia de litraje. ¿Desea continuar?'); </script>");
         //    //Page.RegisterStartupScript("Diferencia de Litraje", "<script language=javascript> alert('Hay una diferencia de litraje. ¿Desea continuar?'); </script>");
         //}
-        //if (AutoTanqueTurno1.LitrosLiquidados != AutoTanqueTurno1.TotalLitros)
-        //    _cuadrado = false;
-        //else
-        //    _cuadrado = true;
+        if (AutoTanqueTurno1.LitrosLiquidados != AutoTanqueTurno1.TotalLitros)
+            _conciliacion = false;
+        else
+            _conciliacion = true;
 
 
         //if (!_cuadrado)

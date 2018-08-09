@@ -361,6 +361,8 @@ namespace SigametLiquidacion
                 dtPago.Columns.Add(new DataColumn("FechaDeposito"));
                 dtPago.Columns.Add(new DataColumn("BancoOrigen"));
                 dtPago.Columns.Add(new DataColumn("NombreTipoCobro"));
+                dtPago.Columns.Add(new DataColumn("ProveedorNombre"));
+                dtPago.Columns.Add(new DataColumn("TipoValeDescripcion"));
                 dtDetallePago = new DataTable();
                 dtDetallePago.Columns.Add(new DataColumn("IdPago"));
                 dtDetallePago.Columns.Add(new DataColumn("Pedido"));
@@ -396,6 +398,8 @@ namespace SigametLiquidacion
                     row1["FechaDeposito"] = (object)DateTime.Now.Date;
                     row1["BancoOrigen"] = (object)0;
                     row1["NombreTipoCobro"] = (object)"EFECTIVO";
+                    row1["ProveedorNombre"] = (object)"";
+                    row1["TipoValeDescripcion"] = (object)"";
                     row1.EndEdit();
                     dtPago.Rows.Add(row1);
                 }
@@ -468,6 +472,8 @@ namespace SigametLiquidacion
                             dtPago.Columns.Add(new DataColumn("FechaDeposito"));
                             dtPago.Columns.Add(new DataColumn("BancoOrigen"));
                             dtPago.Columns.Add(new DataColumn("NombreTipoCobro"));
+                            dtPago.Columns.Add(new DataColumn("ProveedorNombre"));
+                            dtPago.Columns.Add(new DataColumn("TipoValeDescripcion"));
                             dtDetallePago = new DataTable();
                             dtDetallePago.Columns.Add(new DataColumn("IdPago"));
                             dtDetallePago.Columns.Add(new DataColumn("Pedido"));
@@ -500,6 +506,8 @@ namespace SigametLiquidacion
                         row["FechaDeposito"] = (object)DateTime.Now.Date;
                         row["BancoOrigen"] = (object)0;
                         row["NombreTipoCobro"] = (object)"DESCUENTO";
+                        row["ProveedorNombre"] = "";
+                        row["TipoValeDescripcion"] = "";
                         row.EndEdit();
                         dtPago.Rows.Add(row);
                     }

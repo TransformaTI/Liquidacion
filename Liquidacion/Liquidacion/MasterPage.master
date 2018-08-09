@@ -2,6 +2,120 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
+ <script src="Scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
+
+
+ <script type="text/javascript">
+     (function ($) {
+         $.fn.hasEvent = function (event) {
+             if (!this.length || !event) {
+                 return false;
+             }
+             event = (event + '').split('.');
+             var d = $._data ? $._data($(this)[0], 'events') : $(this).data('events'),
+                 a = [],
+                 e = event[0],
+                 n = event[1],
+                 x = 0,
+                 y, z;
+             if (d && e == '') {
+                 for (y in d) {
+                     for (z in d[y]) {
+                         if (d[y][z].namespace == n) {
+                             a[x] = y;
+                             x++;
+                         }
+                     }
+                 }
+                 if (!a.length) {
+                     return false;
+                 }
+                 return a;
+             }
+             if (d && d[e]) {
+                 if (n) {
+                     for (y in d[e]) {
+                         if (d[e][y].namespace == n) {
+                             return true
+                         }
+                     }
+                     return false;
+                 }
+                 return true;
+             }
+             return false;
+         };
+     })(jQuery);
+
+     // Catch the keydown for the entire document
+     $(document).keydown(function (e) {
+
+         // Set self as the current item in focus
+         var self = $(':focus'),
+             // Set the form by the current item in focus
+             form = self.parents('form:eq(0)'),
+             focusable;
+         var saltos = 1;
+
+         // Array of Indexable/Tab-able items
+         focusable = form.find('input,a,select,button,textarea').filter(':visible').filter(':enabled') ;
+         
+
+
+         function enterKey() {
+             if (e.which === 13) { // [Enter] key
+                
+                 if (self.is('input:image')) {                     
+                     if (document.getElementById('ctl00_mostrando').value == '') {
+                         if (self.hasEvent("click")) {
+                            self.trigger("click");
+                            focusable = form.find('input,a,select,button,textarea').filter(':visible').filter(':enabled');
+                         }
+                    }
+                     
+                 }
+                 else {
+                     document.getElementById('ctl00_mostrando').value = '';
+                 }
+                     
+                 // If not a regular hyperlink/button/textarea
+                 if ($.inArray(self, focusable) && (!self.is('a')) && (!self.is('button'))) {
+                     // Then prevent the default [Enter] key behaviour from submitting the form
+                     e.preventDefault();
+
+                 } // Otherwise follow the link/button as by design, or put new line in textarea
+
+                 // Focus on the next item (either previous or next depending on shift)
+                 if (document.getElementById('ctl00_mostrando').value != '') {
+                     saltos = 2;
+                     document.getElementById('ctl00_mostrando').value = '';
+                 }
+
+                 if (self.attr('name')=='ctl00$MainPlaceHolder$txtFechaChueque' ||
+                    self.attr('name')=='ctl00$MainPlaceHolder$txtFechaTarjeta' ||
+                    self.attr('name')=='ctl00$MainPlaceHolder$TxtFechaDocTran' ||
+                    self.attr('name')=='ctl00$MainPlaceHolder$wucDetalleFormaPago1$txtFecha') {
+                     saltos = 2;
+                 }
+                                 
+
+                 focusable.eq(focusable.index(self) + (e.shiftKey ? -1 : saltos)).focus();
+                 
+
+                 return false;
+             }
+         }
+         // We need to capture the [Shift] key and check the [Enter] key either way.
+         if (e.shiftKey) { enterKey() } else { enterKey() }
+     });
+
+     function cerrarsession()
+     {
+         return true;
+     }
+
+
+</script>
 
 
 
@@ -19,14 +133,18 @@
     <link href="ElementoPedido.css" rel="stylesheet" type="text/css" />
     
     <script src="Scripts/MiscControlFunctions.js" type="text/javascript"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>  <%--mcc 2018 05 21--%>
+    <script type="text/javascript" src="/Scripts/jquery.min.js"></script>  <%--mcc 2018 05 21--%>
     
     <title>Liquidacion de Ruta</title>
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+
+<body >
+
+                
     <form id="form1" runat="server" style="text-align:center">
+        <asp:HiddenField ID="mostrando" runat="server" Value="" />
         <div style="text-align:left;width:1100px;height:750px">
             <table cellspacing="0" style="width:100%;height:100%">
                 <tr style="height:75px">
@@ -40,7 +158,7 @@
                             <tr style="height:27px;background-image:url(images/bg2.png);background-repeat:repeat-x;">
                                 <td valign="middle" style="height:auto">
                                     <asp:ImageButton ID="btnSelFolio" runat="server" 
-                                        ImageUrl="~/Images/btnSelFolio.png" onclick="btnSelFolio_Click" CausesValidation="false"/>
+                                        ImageUrl="~/Images/btnSelFolio.png" onclick="btnSelFolio_Click"/>
                                 </td>
                                 <td>
                                     <asp:SiteMapDataSource runat="server" ID="dataSouceMenu" SiteMapProvider="SiteMapPrincipal" />
@@ -72,6 +190,13 @@
                             <div style="width:100%;height:100%">
                             </div>
                         </asp:ContentPlaceHolder>                
+                    </td>
+                </tr>
+                <tr>
+                    <td style="height:50px">
+                        <div style="width:100%;height:100%">
+                            <asp:Label ID="lblVersion" runat="server" Text="    Ver. 2.0.31" CssClass="etiquetaVersion"></asp:Label>
+                        </div>             
                     </td>
                 </tr>
             </table>           

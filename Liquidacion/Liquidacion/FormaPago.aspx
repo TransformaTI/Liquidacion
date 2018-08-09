@@ -1,14 +1,40 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="FormaPago.aspx.cs" Inherits="FormaPago" Title="Untitled Page" Theme="Theme1" UICulture="es" Culture="es-MX" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="FormaPago.aspx.cs" Inherits="FormaPago" Title="Captura de formas de pago" Theme="Theme1" UICulture="es" Culture="es-MX" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ccR" %>
 
 <%@ Register Src="~/ControlesUsuario/wucConsultaCargoTarjetaCliente.ascx" TagPrefix="uc1" TagName="wucConsultaCargoTarjetaCliente" %>
+<%@ Register Src="~/ControlesUsuario/wucDetalleFormaPago.ascx" TagPrefix="ucDetallePago" TagName="wucDetalleFormaPago" %>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainPlaceHolder" runat="server">
+    <%--  --%>
+    <script type="text/javascript">
+    function cierraCheque()
+    { 
+        document.getElementById('<%= txtNumCuenta.ClientID %>').focus();
+        document.getElementById('ctl00_mostrando').value = '';
+    }
 
+    function cierraVale()
+    {       
+        document.getElementById('<%= ddlProveedor.ClientID %>').focus()
+        document.getElementById('ctl00_mostrando').value = '';
+    }
+
+    function cierraTarjeta()
+    {       
+        document.getElementById('<%= ddlTAfiliacion.ClientID %>').focus();
+        document.getElementById('ctl00_mostrando').value = '';
+    }
+
+    function muestraCalendario()
+    {
+        document.getElementById('ctl00_mostrando').value='x';
+    }
+
+
+    </script>
 
     <script type="text/javascript" language="javascript">  
-
 
         //Variables
         var respuesta = false;
@@ -17,12 +43,32 @@
         var HiddenInput = '<%= HiddenInput.Value %>';   // mcc 2018 05 10
         var HiddenInputPCT = '<%= HiddenInputPCT.Value %>';   // mcc 2018 05 10
         var NumCte = '<%= txtClienteTarjeta.Text %>'; // mcc 2018 05 10
-        var NumPagos = '<%=HiddenInputNumPagos.Value  %>'; // mcc 2018 05 10
+        var NumPagos = '<%=Session["TDCdisponibles"]!=null?Session["TDCdisponibles"].ToString():"0" %>'; // mcc 2018 05 10
         var Ruta = '<%=Session["Ruta"]%>';
         var sTipoPago = '';
+        var RegistroCobro = '<%= wucDetalleFormaPago1.RegistroCobro%>';
+        var FolioPrimerReg ='<%= Session["PrimerRegTDC"] %>';
+        var HiddenPagosOtraRuta='<%= HiddenPagosOtraRuta.Value %>';
+        var HiddenTDCDupliado = '<%= HiddenTDCDupliado.Value %>';
+        var segmento = '';
+        var NombreClienteCheque='<%= HiddenNomCteCheque.Value %>'; 
+        var NombreClienteVale='<%= HiddenNomCteVale.Value %>'; 
+        var NombreClienteTrans='<%= wucDetalleFormaPago1.NombreClienteTrans %>'; 
+        var NumCteTrans = '<%= wucDetalleFormaPago1.TxtIdCliente.Text %>';
+        var NomCteAnticipo='<%=wucDetalleFormaPago1.NombreCteAnticipo != null ? wucDetalleFormaPago1.NombreCteAnticipo.Trim():"" %>';
+        var NumCteAnticipo='<%=wucDetalleFormaPago1.TxtAntIdCliente.Text != null ? wucDetalleFormaPago1.TxtAntIdCliente.Text.ToString().Trim():"" %>';
+
+        var NomCteTarjeta='<%= txtNombreClienteTarjeta.Text.Trim() %>';
+        
 
         //Validaciones  On load
         document.addEventListener("DOMContentLoaded", function () { // mcc 2018 05 10
+
+            if (RegistroCobro == 'Si')
+            {
+                window.location='RegistroPagos.aspx'
+            }
+
 
             if (HiddenInput == 'ConsultaTPV' || HiddenInput == 'SeleccionaPago') {
                 document.getElementById('tarjeta').style.display = 'inherit';
@@ -32,84 +78,255 @@
                 document.getElementById('transferencia').style.display = 'inherit';
             }
 
-            if (HiddenInputPCT == 'Si' && (HiddenInput == 'ConsultaTPV' || HiddenInput == 'ConsultaTPV-Trans') && NumPagos != '1') {
+            
+            if (HiddenInputPCT == 'Si' && (HiddenInput == 'ConsultaTPV' || HiddenInput == 'ConsultaTPV-Trans') && FolioPrimerReg != '0') {
                 var respuesta = confirm(smMensajeCargo);
-
+                var bandera = document.getElementById('ctl00_MainPlaceHolder_hfCargoTarjetaEncontrado');
+                bandera.value = respuesta;
+                if (respuesta == false)
+                {
+                    document.getElementById('ctl00_MainPlaceHolder_txtFechaTarjeta').value = '';
+                    document.getElementById('ctl00_MainPlaceHolder_txtFechaTarjeta').readOnly = false;
+                    document.getElementById('ctl00_MainPlaceHolder_imgCalendario0').disabled = false;
+                    document.getElementById('ctl00_MainPlaceHolder_txtNoAutorizacionTarjeta').value = '';
+                    document.getElementById('ctl00_MainPlaceHolder_txtNoAutorizacionTarjeta').readOnly = false;
+                    document.getElementById('ctl00_MainPlaceHolder_txtNumTarjeta').value = '';
+                    document.getElementById('ctl00_MainPlaceHolder_txtNumTarjeta').readOnly = false;
+                    document.getElementById('ctl00_MainPlaceHolder_txtImporteTarjeta').value = '';
+                    document.getElementById('ctl00_MainPlaceHolder_txtImporteTarjeta').readOnly = false;
+                    document.getElementById('ctl00_MainPlaceHolder_txtObservacionesTarjeta').value = '';
+                    document.getElementById('ctl00_MainPlaceHolder_txtObservacionesTarjeta').readOnly = false;
+                    document.getElementById('ctl00_MainPlaceHolder_ddTipTarjeta').selectedIndex = "0";
+                    document.getElementById('ctl00_MainPlaceHolder_ddTipTarjeta').disabled = false;
+                    document.getElementById('ctl00_MainPlaceHolder_ddBancoTarjeta').selectedIndex = "0";
+                    document.getElementById('ctl00_MainPlaceHolder_ddBancoTarjeta').disabled = false;
+                    document.getElementById('ctl00_MainPlaceHolder_ddlBancoOrigen').selectedIndex = "0";
+                    document.getElementById('ctl00_MainPlaceHolder_ddlBancoOrigen').disabled = false;
+                    document.getElementById('ctl00_MainPlaceHolder_chkLocal').checked = false;
+                    document.getElementById('ctl00_MainPlaceHolder_chkLocal').disabled = false;
+                    document.getElementById('ctl00_MainPlaceHolder_ddlTAfiliacion').selectedIndex = "0";
+                    document.getElementById('ctl00_MainPlaceHolder_ddlTAfiliacion').disabled = false;
+                }
+                
                 if (respuesta == true) {
                     ShowModalPopup();
                 }
             }
 
-            else if (HiddenInputPCT != 'Si' && NumCte != '') {
+
+            
+//HiddenInputPCT != 'Si' && HiddenInputPCT!= '' &&
+
+
+            if ( HiddenInputPCT== 'No' && NumCte != '' && HiddenInput!='ConsultaCteAnticipo' && (HiddenTDCDupliado=='' || HiddenTDCDupliado=='No') && HiddenPagosOtraRuta=='' && NomCteTarjeta!='' && HiddenInput == 'ConsultaTPV') {
                 alert('No se encontraron pagos de TPV para el cliente, por favor verifique con el área de tarjetas de crédito');
+                segmento = 'tarjeta';  
+
+            }
+            else {
+                segmento = 'tarjeta';                
+            }
+
+            if (HiddenPagosOtraRuta == 'true')
+            {
+                 alert('¡Existen cargos para el cliente que pertenecen a otra ruta . No se encontraron pagos de TPV que corresponda a la ruta y autotanque, porfavor verifique con el área de tarjetas de crédito.!');
+            }
+
+            if (HiddenInput == "ConsultaCteAnticipo")
+            {
+                    document.getElementById('AnticipoUC').style.display = 'inherit';
+                    document.getElementById('Anticipo').style.display = 'inherit'; 
+                    document.getElementById('Transfer').style.display = 'none';
+                    segmento='anticipo'
+                
+                    
+            }
+
+           if (HiddenInput == "TarjetaClienteFalse")
+           {
+              document.getElementById('terjeta').style.display = 'inherit';
+            }
+
+            if (HiddenInput == "ConsultaCteTransferencia")
+            {
+                document.getElementById('Anticipo').style.display = 'none'; 
+                document.getElementById('AnticipoUC').style.display = 'inherit';
+                document.getElementById('Transfer').style.display = 'inherit';
+                segmento = 'transferencia';
+            }
+
+            //$("input[type='text']:visible:enabled:first").focus();
+
+            if (segmento = 'tarjeta') {
+                document.getElementById('<%=txtFechaTarjeta.ClientID%>').focus();
+            }
+            
+            if (segmento = 'anticipo') {
+                document.getElementById('ctl00_MainPlaceHolder_wucDetalleFormaPago1_LstSaldos').focus();
             }
 
 
 
-        });
+            if (segmento = 'transferencia') {
+                document.getElementById('ctl00_MainPlaceHolder_wucDetalleFormaPago1_txtFecha').focus();
+            }
 
 
+               if (NombreClienteCheque!='' )
+            {        
 
-    function onlyNumbers(evt) {
-     evt = (evt) ? evt : window.event;
-        var charCode = (evt.which) ? evt.which : evt.keyCode;
-     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+              document.getElementById('cheque').style.display = 'inherit';
+              document.getElementById('Transfer').style.display = 'none';  
+              document.getElementById('AnticipoUC').style.display = 'none';
+              document.getElementById('Transfer').style.display = 'none'; 
+              document.getElementById('tarjeta').style.display = 'none'; 
+             
 
-         return false;
-     }
-     return true;
+              if (NombreClienteCheque != 'CTENOEXISTE')
+                 {
+                    document.getElementById('ctl00_MainPlaceHolder_txtNombreClienteCheque').value = NombreClienteCheque;
+                    document.getElementById('ctl00_MainPlaceHolder_txtFechaChueque').focus();
+                 }
+                 else
+                {
+                  alert('¡El cliente no existe!');
+                  document.getElementById('ctl00_MainPlaceHolder_txtClienteCheque').value = '';
+                  document.getElementById('ctl00_MainPlaceHolder_txtClienteCheque').focus();
+                 
+                 }
+
+               NombreClienteCheque = '';
+
+            }
+            else
+            {
+                document.getElementById('cheque').style.display = 'none';
+            }
+
+         if (NombreClienteVale!='' )
+            {
+              
+              document.getElementById('vale').style.display = 'inherit';
+              document.getElementById('AnticipoUC').style.display = 'none';
+              document.getElementById('Transfer').style.display = 'none'; 
+              document.getElementById('tarjeta').style.display = 'none'; 
+
+             if (NombreClienteVale != 'CTENOEXISTE')
+             {
+                 document.getElementById('ctl00_MainPlaceHolder_txtValeNombre').value = NombreClienteVale;
+                 document.getElementById('ctl00_MainPlaceHolder_txtValeFecha').focus();
+             }
+             else
+             {
+                 alert('¡El cliente no existe!');
+                 document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').value = '';
+                 document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').focus();
+
+
+             }
+              NombreClienteVale='';
+            }
+             else
+            {
+                document.getElementById('vale').style.display = 'none';
+            }    
+
+            if (NumCteAnticipo != '' && NomCteAnticipo == '' && HiddenInput=='ConsultaCteAnticipo')
+            {
+                alert('¡El cliente no existe!');
+            }  
+            
+
+            if (NumCteTrans != '' && NombreClienteTrans == '' && HiddenInput == 'ConsultaCteTransferencia')
+            {
+                  alert('¡El cliente no existe!');
+            }  
+
+           if (NumCte != '' && NomCteTarjeta == '' && HiddenInput == 'ConsultaTPV')
+            {
+                  alert('¡El cliente no existe!');
+            }        
+        });        
+
+         function onlyNumbers(evt) {
+          evt = (evt) ? evt : window.event;
+             var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+
+              return false;
+          }
+          return true;
+             }
+
+        function onlyNumbersDecimals(evt) {
+          evt = (evt) ? evt : window.event;
+             var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if (charCode > 31 && (charCode < 46  || charCode > 57 || charCode == 47 )) {
+
+              return false;
+          }
+            return true;
         }
 
-   function onlyNumbersDecimals(evt) {
-     evt = (evt) ? evt : window.event;
-        var charCode = (evt.which) ? evt.which : evt.keyCode;
-     if (charCode > 31 && (charCode < 46  || charCode > 57 || charCode == 47 )) {
+         function isAlphaNumeric(str) {
+          var code, i, len;
+        
+          for (i = 0, len = str.length; i < len; i++) {
+            code = str.charCodeAt(i);
+            if (!(code > 47 && code < 58) && // numeric (0-9)
+                !(code > 64 && code < 91) && // upper alpha (A-Z)
+                !(code > 96 && code < 123)) { // lower alpha (a-z)
+              return false;
+            }
+          }
+          return true;
+        };
 
-         return false;
-     }
-     return true;
- }
-
-      
-
-
-
-    </script>
-    <script type="text/javascript">
-
-  
-    function toggle(display, activo, inactivo, inactivoA, control) {
-
-        document.getElementById('tarjeta').style.display = 'none';
-        document.getElementById('cheque').style.display = 'none';
-        document.getElementById('vale').style.display = 'none';
-        document.getElementById('transferencia').style.display = 'none';
+         function toggle(display, activo, inactivo, inactivoA, control) {
+             document.getElementById('ctl00_mostrando').value = ''
+             
+            document.getElementById('tarjeta').style.display = 'none';
+            document.getElementById('cheque').style.display = 'none';
+            document.getElementById('vale').style.display = 'none';
+            document.getElementById('Transfer').style.display = 'none';
+            document.getElementById('Anticipo').style.display = 'none';
+            document.getElementById('AnticipoUC').style.display = 'none';
 
 
-        document.getElementById(activo).style.display = (
-            document.getElementById(activo).style.display == 'none') ? 'block' : 'none';
+            document.getElementById(activo).style.display = (
+                document.getElementById(activo).style.display == 'none') ? 'block' : 'none';
 
-        document.getElementById(inactivo).style.display = 'none';
-        document.getElementById(inactivoA).style.display = 'none';
+            document.getElementById(inactivo).style.display = 'none';
+            document.getElementById(inactivoA).style.display = 'none';
 
-        if (activo == 'transferencia') {
+            if (activo == 'Transfer') {
+                document.getElementById('AnticipoUC').style.display = 'inherit';
+                document.getElementById('Transfer').style.display = 'inherit';
+                document.getElementById('Anticipo').style.display = 'none'; 
+           
+            }
 
-            document.getElementById('transferencia').style.display = 'inherit';
+
+            if (activo == 'Anticipo') {
+
+                document.getElementById('AnticipoUC').style.display = 'inherit';
+                   document.getElementById('Anticipo').style.display = 'inherit'; 
+                document.getElementById('Transfer').style.display = 'none';     
+            
+            }
+
+            if (activo = 'tarjeta') {
+                document.getElementById('ctl00_MainPlaceHolder_txtClienteTarjeta').value = ""
+                
+                
+            }
+
+            $("input[type='text']:visible:enabled:first").focus();
+                      
         }
-    }
 
     </script>
-    <script type="text/javascript">
-       <!--
-    function firstFocus(control) {
-
-        document.getElementById(activo).focus();
-        return true;
-    }
-
-       //-->
-    </script>
-
+    
     <script type="text/javascript">
         function confirmar(button) {
 
@@ -124,11 +341,22 @@
         //Consulta Pagos Con tarjeta mcc 2018 05 10
         function ConsultaPagosTPV(FormaPago) {
 
-            if ((document.getElementById('<%=txtClienteTarjeta.ClientID%>').value != "" || document.getElementById('<%=TxtCteAfiliacion.ClientID%>').value != "")
-                && (HiddenInput == '' || HiddenInput == 'SeleccionaPago' || HiddenInput == 'ConsultaTPV')) {
-                javascript: __doPostBack(FormaPago, '');
+            if (document.getElementById('<%=txtClienteTarjeta.ClientID%>').value == "") {               
+                HiddenInput == ''
+
+            }
+            else{
+                if ((document.getElementById('<%=txtClienteTarjeta.ClientID%>').value != "" || document.getElementById('<%=TxtCteAfiliacion.ClientID%>').value != "")
+                    && (HiddenInput == '' || HiddenInput == 'SeleccionaPago' || HiddenInput == 'ConsultaTPV')) {
+                    javascript: __doPostBack(FormaPago, '');
+
+                }
             }
 
+        }
+
+        function AgregarCargoTarjeta() {
+            javascript: __doPostBack('AgregarCargoTarjeta', '');
         }
 
         function ConsultaPagosSeleccion(FormaPago, Llave) {
@@ -136,6 +364,8 @@
 
 
         }
+
+
 
         function ShowModalPopup() {
             $find("mpe").show();
@@ -147,6 +377,64 @@
             return false;
         }
 
+
+
+        function ValidaCamposTDC()
+        {
+            
+            if (document.getElementById('<%=txtClienteTarjeta.ClientID%>').value == "")
+            {
+                alert('Capture el número de cliente');
+                 return false;
+            }
+
+
+
+
+            if (document.getElementById('<%=HiddenInputPCT.ClientID%>').value == "No" ||   document.getElementById('<%=HiddenInputPCT.ClientID%>').value== "")
+            {
+
+               if (document.getElementById('<%= ddlTAfiliacion.ClientID %>').selectedIndex == "0")
+                {
+                    alert('Seleccione una afiliación');
+                    return false;
+                }
+                if (document.getElementById('<%=txtNoAutorizacionTarjeta.ClientID%>').value == "")
+                {
+                        alert('Capture el número de Autorizacion');
+                        return false;
+                }
+
+                if (document.getElementById('<%=txtNoAutorizacionTarjetaConfirm.ClientID%>').value == "")
+                {
+                        alert('Confirme el número de autorización');
+                        return false; 
+                }
+                if (document.getElementById('<%=txtNoAutorizacionTarjetaConfirm.ClientID%>').value != document.getElementById('<%=txtNoAutorizacionTarjeta.ClientID%>').value)
+                {
+                    alert('Los números de autorización no coinciden');
+                    return false;
+                }
+                if (document.getElementById('<%=ddBancoTarjeta.ClientID%>').selectedIndex == "0")
+                {
+                    alert('Seleccione un banco de la tarjeta');
+                    return false;
+                }
+                if (document.getElementById('<%=ddlBancoOrigen.ClientID%>').selectedIndex == "0")
+                {
+                    alert('Seleccione un banco origen');
+                    return false;
+                }
+                if (document.getElementById('<%=txtImporteTarjeta.ClientID%>').value == "")
+                {
+                    alert('Capture el Importe');
+                    return false;
+                }
+        
+
+
+            }  
+        }
 
     </script>
 
@@ -179,10 +467,10 @@
                 ctrDocumento.value = str.substring(24, 31);
             }
         }
-        function test(txtCliente) {
-            var test = document.getElementById(txtCliente).value;
-            alert(test);
-        }
+        //function test(txtCliente) {
+        //    var test = document.getElementById(txtCliente).value;
+        //    alert(test);
+        //}
     </script>
     <script type="text/javascript"> 
         function txtImagenTipoCobro(tipo) {
@@ -204,61 +492,22 @@
 
 
     <script type="text/javascript">
-        function ConsultaClienteCheque(TipoPago) {
+             function ConsultaClienteCheque(TipoPago) {
 
-            var IdCliente = '';
+            if (TipoPago=='cheque')
+            {
+                javascript: __doPostBack('ConsultaClienteCheque', '');
+                var fechaCheque = document.getElementById('ctl00_MainPlaceHolder_txtFechaChueque');
+                fechaCheque.focus();
+            }
 
-            switch (TipoPago) {
-                case "cheque":
-                    IdCliente = $("#<%=txtClienteCheque.ClientID%>")[0].value;
-                    $("#<%=txtNombreClienteCheque.ClientID%>")[0].value = '';
-                    sTipoPago='cheque'
-                    break;
-
-                case "vale":
-                    IdCliente = $("#<%=txtClienteVale.ClientID%>")[0].value;
-                    $("#<%=txtValeNombre.ClientID%>")[0].value = '';
-                    sTipoPago = 'vale';
-                default:
-            }     
-
-            if (IdCliente == '')
-                return;
-
-       $.ajax({
-           type: "POST",
-           url: "FormaPago.aspx/ConsultaClienteCheque",
-           data: '{NumCte: "' + IdCliente + '" }',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: OnSuccess,
-                failure: function (response) {
-                    alert(response.d);
-                }
-            });
+            if (TipoPago=='vale')
+            {
+                javascript: __doPostBack('ConsultaClienteVale', '');
+                var fechaCheque = document.getElementById('ctl00_MainPlaceHolder_txtValeFecha');
+                fechaCheque.focus();
+            }
         }
-        function OnSuccess(response) {
-            var obj = JSON.parse(response.d);
-            $.each(obj, function (key, value) {
-                if (sTipoPago == 'cheque')
-                {
-                    $("#<%=txtNombreClienteCheque.ClientID%>")[0].value = value.Nombre;
-                }
-                if (sTipoPago == 'vale')
-                {
-                  $("#<%=txtValeNombre.ClientID%>")[0].value =  value.Nombre;
-                }
-
-
-
-            });
-
-
-
-
-        }
-
-
     </script>
 
     <script src="Scripts/jsUpdateProgress.js" type="text/javascript"></script>
@@ -275,9 +524,15 @@
         </asp:ScriptManager>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" EnableViewState="true">
             <ContentTemplate>
+                <asp:HiddenField ID="hfCargoTarjetaEncontrado" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenInput" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenInputPCT" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenInputNumPagos" runat="server" Value="" />
+                <asp:HiddenField ID="HiddenTDCDupliado" runat="server" Value="" />
+                <asp:HiddenField ID="HiddenPagosOtraRuta" runat="server" Value="" />
+                <asp:HiddenField ID="HiddenNomCteCheque" runat="server" Value="" />
+                <asp:HiddenField ID="HiddenNomCteVale" runat="server" Value="" />
+
                 <div style="text-align: left; height: 650px; width: 1000px; vertical-align: top;">
                     <table style="vertical-align: top; height: 650px;">
                         <tr>
@@ -285,47 +540,47 @@
                                 <table style="vertical-align: top;">
                                     <tr>
                                         <td>
-                                            <asp:Image ID="imgCheque" runat="server"
-                                                ImageUrl="~/Images/imgCapturarCheque.png" />
+                                            <asp:Image ID="imgCheque" runat="server" Height="26px" Width="137px" 
+                                                ImageUrl="~/Images/imgCapturarCheque.png"  />
 
                                         </td>
                                         <tr>
                                             <td>
-                                                <asp:Image ID="imgTarjeta" runat="server"
+                                                <asp:Image ID="imgTarjeta" runat="server" Height="26px" Width="137px" 
                                                     ImageUrl="~/Images/imgCapturarTarjeta.png" />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <asp:Image ID="ImgTransferencia" runat="server"
+                                                <asp:Image ID="ImgTransferencia" runat="server" Height="26px" Width="137px" 
                                                     ImageUrl="~/Images/imgCapturarTrans.png" />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <asp:Image ID="imgVale" runat="server"
-                                                    ImageUrl="~/Images/imgVale.png" Height="26px" Width="138px" />
+                                                <asp:Image ID="imgVale" runat="server" Height="26px" Width="137px" 
+                                                    ImageUrl="~/Images/imgCapturarVale.png"  />
                                             </td>
                                         </tr>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:Image ID="ImgAnticipo" runat="server"
+                                            <asp:Image ID="ImgAnticipo" runat="server" Height="26px" Width="137px" 
                                                 ImageUrl="~/Images/imgCapturarAnticipo.png" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:ImageButton ID="imbEfectivo" runat="server" Height="26px"
-                                                ImageUrl="~/Images/imgEfectivo.png" OnClick="imbEfectivo_Click"
-                                                Width="138px" />
+                                            <asp:ImageButton ID="imbEfectivo" runat="server"  Height="26px" Width="137px" 
+                                                ImageUrl="~/Images/imgPagoEfectivo.png" OnClick="imbEfectivo_Click"
+                                                 />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:ImageButton ID="imbCancelar" runat="server" Height="25px"
+                                            <asp:ImageButton ID="imbCancelar" runat="server" Height="26px" Width="137px" 
                                                 ImageUrl="~/Images/imgCancelarPagos.png" OnClick="imbCancelar_Click"
-                                                Width="137px" />
+                                                />
 
                                         </td>
                                     </tr>
@@ -341,6 +596,7 @@
                                             <asp:Label ID="lblError" runat="server" CssClass="labeltipopagoforma" ForeColor="Red"></asp:Label>
                                         </td>
                                     </tr>
+                                
                         </tr>
                     </table>
                     </td>
@@ -381,7 +637,7 @@
                                                                 CssClass="labeltipopagoforma" Font-Size="11px"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox ID="txtClienteCheque" runat="server" CssClass="textboxcaptura" Text="1"></asp:TextBox>
+                                                            <asp:TextBox ID="txtClienteCheque" runat="server" CssClass="textboxcaptura" ></asp:TextBox>
                                                             <ccR:FilteredTextBoxExtender ID="ftxCliente" runat="server" TargetControlID="txtClienteCheque" FilterType="Numbers"></ccR:FilteredTextBoxExtender>
                                                         </td>
                                                     </tr>
@@ -410,13 +666,12 @@
                                                         <td>
                                                             <asp:TextBox ID="txtFechaChueque" runat="server" CssClass="textboxcaptura"
                                                                 ReadOnly="False"></asp:TextBox>
-                                                            <asp:ImageButton ID="imgCalendario" runat="server"
-                                                                ImageUrl="~/Imagenes/Calendar.png" />
+                                                            <asp:ImageButton ID="imgCalendario" runat="server" ImageUrl="~/Imagenes/Calendar.png" />
                                                             <asp:RequiredFieldValidator ID="rfvFecha" runat="server"
                                                                 ControlToValidate="txtFechaChueque" Display="None"
                                                                 ErrorMessage="Capturar la Fecha" Font-Size="11px" ValidationGroup="Cheque"></asp:RequiredFieldValidator>
                                                             <ccR:CalendarExtender ID="cpChequeFechaDocto_CalendarExtender" runat="server"
-                                                                PopupButtonID="imgCalendario" TargetControlID="txtFechaChueque" Format="dd/MM/yyyy">
+                                                                PopupButtonID="imgCalendario" OnClientShown="muestraCalendario" OnClientHidden="cierraCheque" TargetControlID="txtFechaChueque" Format="dd/MM/yyyy">
                                                             </ccR:CalendarExtender>
                                                             <ccR:ValidatorCalloutExtender ID="vceChequeFecha" runat="server"
                                                                 TargetControlID="rfvFecha">
@@ -502,6 +757,7 @@
                                     </tr>
                                     <tr>
                                         <td valign="top">
+                                            <%-- =====      TARJETA     ===== --%>
                                             <div id="tarjeta" style="display: none; vertical-align: top">
                                                 <table style="background-color: #e1f8e2; height: 360px; width: 900px">
 
@@ -511,6 +767,7 @@
                                                                 Text="Tarjeta"></asp:Label>
                                                         </td>
                                                     </tr>
+                                                    <%-- Cliente --%>
                                                     <tr>
                                                         <td class="style1">
                                                             <asp:Label ID="lblCLiente" runat="server" CssClass="labeltipopagoforma"
@@ -521,7 +778,7 @@
 
                                                             <asp:RequiredFieldValidator ID="rfvCliente0" runat="server"
                                                                 ControlToValidate="txtClienteTarjeta" Display="None"
-                                                                ErrorMessage="Capturar No Cliente y Click en Buscar" Font-Size="11px"
+                                                                ErrorMessage="Capturar número de cliente y clic en buscar" Font-Size="11px"
                                                                 ValidationGroup="TarjetaCliente"></asp:RequiredFieldValidator>
                                                             <ccR:ValidatorCalloutExtender ID="vceTarjetaCliente" runat="server"
                                                                 TargetControlID="rfvCliente0">
@@ -529,6 +786,7 @@
                                                             <ccR:FilteredTextBoxExtender ID="ftbClienteTC" runat="server" TargetControlID="txtClienteTarjeta" FilterType="Numbers"></ccR:FilteredTextBoxExtender>
                                                         </td>
                                                     </tr>
+                                                    <%-- Nombre --%>
                                                     <tr>
                                                         <td class="style1">
                                                             <asp:Label ID="lblNombre" runat="server" CssClass="labeltipopagoforma"
@@ -539,6 +797,7 @@
                                                                 Width="200px" ReadOnly="True"></asp:TextBox>
                                                         </td>
                                                     </tr>
+                                                    <%-- Fecha documento --%>
                                                     <tr>
                                                         <td class="style1">
                                                             <asp:Label ID="lblFechaCheque0" runat="server" CssClass="labeltipopagoforma"
@@ -546,9 +805,9 @@
                                                         </td>
                                                         <td>
                                                             <asp:TextBox ID="txtFechaTarjeta" runat="server" CssClass="textboxcaptura"
-                                                                ReadOnly="False" AutoPostBack="false"></asp:TextBox>
-                                                            <ccR:CalendarExtender ID="txtFechaTarjeta_CalendarExtender" runat="server"
-                                                                Format="dd/MM/yyyy" PopupButtonID="imgCalendario0"
+                                                                ReadOnly="True" AutoPostBack="false"></asp:TextBox>
+                                                            <ccR:CalendarExtender ID="txtFechaTarjeta_CalendarExtender" runat="server" OnClientHidden="cierraTarjeta"
+                                                                Format="dd/MM/yyyy" PopupButtonID="imgCalendario0"  OnClientShown="muestraCalendario" 
                                                                 TargetControlID="txtFechaTarjeta">
                                                             </ccR:CalendarExtender>
                                                             <asp:ImageButton ID="imgCalendario0" runat="server"
@@ -560,16 +819,54 @@
                                                                 runat="server" TargetControlID="rfvFecha0">
                                                             </ccR:ValidatorCalloutExtender>
                                                         </td>
-
                                                     </tr>
+                                                    <%-- Afiliación --%>
                                                     <tr>
                                                         <td class="style1">
-                                                            <asp:Label ID="lblTCAutorizacion" runat="server" CssClass="labeltipopagoforma"
+                                                            <asp:Label ID="Label17" runat="server" CssClass="labeltipopagoforma"
+                                                                Text="Afiliación:"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:DropDownList ID="ddlTAfiliacion" runat="server" CssClass="textboxcaptura"
+                                                                Width="200px" Enabled="false">
+                                                            </asp:DropDownList>
+                                                            <asp:RequiredFieldValidator ID="rfvTAfiliacion" runat="server"
+                                                                ControlToValidate="ddlTAfiliacion" Display="None"
+                                                                ErrorMessage="Seleccione la afiliación"
+                                                                ValidationGroup="Tarjeta" InitialValue="0"></asp:RequiredFieldValidator>
+                                                            <ccR:ValidatorCalloutExtender ID="vceTAfiliacion" runat="server"
+                                                                TargetControlID="rfvTAfiliacion">
+                                                            </ccR:ValidatorCalloutExtender>
+                                                        </td>
+                                                    </tr>
+                                                    <%-- Tipo tarjeta --%>
+                                                    <tr>
+                                                        <td class="style1">
+                                                            <asp:Label ID="Label16" runat="server" CssClass="labeltipopagoforma"
+                                                                Text="Tipo Tarjeta:"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:DropDownList ID="ddTipTarjeta" runat="server" CssClass="textboxcaptura" enabled="false"
+                                                                Width="200px">
+                                                            </asp:DropDownList>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
+                                                                ControlToValidate="ddTipTarjeta" Display="None"
+                                                                ErrorMessage="Seleccione el Tipo Tarjeta"
+                                                                ValidationGroup="Tarjeta" InitialValue="0"></asp:RequiredFieldValidator>
+                                                            <ccR:ValidatorCalloutExtender ID="ValidatorCalloutExtender6" runat="server"
+                                                                TargetControlID="rfvTipoTarjeta">
+                                                            </ccR:ValidatorCalloutExtender>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="style1">
+                                                            <asp:Label ID="lblTCAutorizacion" runat="server" CssClass="labeltipopagoforma"  
                                                                 Text="No Autorización:"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox ID="txtNoAutorizacionTarjeta" runat="server" CssClass="textboxcaptura"
-                                                                Width="100px"></asp:TextBox>
+                                                            <asp:TextBox ID="txtNoAutorizacionTarjeta" runat="server" CssClass="textboxcaptura"  ReadOnly="true" 
+                                                                Width="100px" AutoPostBack="false"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="rfvTDAutorizacion" runat="server"
                                                                 ControlToValidate="txtNoAutorizacionTarjeta" Display="None"
                                                                 ErrorMessage="Capturar Número de Autorización"
@@ -577,16 +874,40 @@
                                                             <ccR:ValidatorCalloutExtender ID="vceAutorizacion" runat="server"
                                                                 TargetControlID="rfvTDAutorizacion">
                                                             </ccR:ValidatorCalloutExtender>
-                                                            <ccR:FilteredTextBoxExtender ID="ftbTDAutorizacion" runat="server" TargetControlID="txtNoAutorizacionTarjeta" FilterType="Numbers"></ccR:FilteredTextBoxExtender>
+                                                            <ccR:FilteredTextBoxExtender ID="ftbTDAutorizacion" runat="server" TargetControlID="txtNoAutorizacionTarjeta" FilterType="Custom,LowercaseLetters,UppercaseLetters,Numbers" ValidChars="" ></ccR:FilteredTextBoxExtender>
                                                         </td>
+                                                    </tr>
+                                                          <tr id ="ConfirmAut">
+   
+                                                        <td class="style1">
+                                                          <div id="titNoAut" runat="server">
+                                                            <asp:Label ID="Label13" runat="server" CssClass="labeltipopagoforma"
+                                                                Text="No Autorización:"></asp:Label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div runat="server" id="titNoAutNum">
+                                                            <asp:TextBox ID="txtNoAutorizacionTarjetaConfirm" runat="server" CssClass="textboxcaptura"
+                                                                Width="100px"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+                                                                ControlToValidate="txtNoAutorizacionTarjeta" Display="None"
+                                                                ErrorMessage="Capturar Número de Autorización"
+                                                                ValidationGroup="Tarjeta"></asp:RequiredFieldValidator>
+                                                            <ccR:ValidatorCalloutExtender ID="ValidatorCalloutExtender5" runat="server"
+                                                                TargetControlID="RequiredFieldValidator1">
+                                                            </ccR:ValidatorCalloutExtender>
+                                                            <ccR:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server" TargetControlID="txtNoAutorizacionTarjetaConfirm" FilterType="Custom,LowercaseLetters,UppercaseLetters,Numbers" ValidChars=""></ccR:FilteredTextBoxExtender>
+                                                        </div>
+                                                        </td>
+                                                             
                                                     </tr>
                                                     <tr>
                                                         <td class="style1">
-                                                            <asp:Label ID="lblTCNoTarjeta" runat="server" CssClass="labeltipopagoforma"
+                                                            <asp:Label ID="lblTCNoTarjeta" runat="server" CssClass="labeltipopagoforma"  ReadOnly="true" 
                                                                 Text="No de Tarjeta:"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox ID="txtNumTarjeta" runat="server" CssClass="textboxcaptura"
+                                                            <asp:TextBox ID="txtNumTarjeta" runat="server" CssClass="textboxcaptura" ReadOnly="true"
                                                                 Width="100px"></asp:TextBox>
                                                             <%--   <asp:RequiredFieldValidator ID="rfvNumTarjeta" runat="server" 
                                                         ControlToValidate="txtNumTarjeta" Display="None" 
@@ -604,7 +925,7 @@
                                                         </td>
                                                         <td>
                                                             <asp:DropDownList ID="ddBancoTarjeta" runat="server" CssClass="textboxcaptura"
-                                                                Width="200px">
+                                                                Width="200px" readonly="true" enabled="false">
                                                             </asp:DropDownList>
                                                             <asp:RequiredFieldValidator ID="rfvBancoTarjeta" runat="server"
                                                                 ControlToValidate="ddBancoTarjeta" Display="None"
@@ -623,8 +944,8 @@
 
                                                         </td>
                                                         <td>
-                                                            <asp:DropDownList ID="ddlBancoOrigen" runat="server" CssClass="textboxcaptura"
-                                                                Width="200px">
+                                                            <asp:DropDownList ID="ddlBancoOrigen" runat="server" CssClass="textboxcaptura" readonly="true"
+                                                                Width="200px" enabled="false">
                                                             </asp:DropDownList>
                                                             <asp:RequiredFieldValidator ID="rfvBancoOrigen" runat="server"
                                                                 ControlToValidate="ddlBancoOrigen" Display="None"
@@ -645,7 +966,7 @@
 
                                                         </td>
                                                         <td>
-                                                            <asp:CheckBox ID="chkLocal" runat="server" CssClass="textboxcaptura" Text="Local" />
+                                                            <asp:CheckBox ID="chkLocal" runat="server" CssClass="textboxcaptura" Text="Local"  enabled="false"/>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -654,7 +975,7 @@
                                                                 Text="Importe:"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox ID="txtImporteTarjeta" runat="server" CssClass="textboxcaptura"></asp:TextBox>
+                                                            <asp:TextBox ID="txtImporteTarjeta" runat="server" CssClass="textboxcaptura"  ReadOnly="true" ></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="rfvTDImporte" runat="server"
                                                                 ControlToValidate="txtImporteTarjeta" Display="None" ErrorMessage="Capturar Importe"
                                                                 Font-Size="11px" ValidationGroup="Tarjeta"></asp:RequiredFieldValidator>
@@ -670,7 +991,7 @@
                                                                 CssClass="labeltipopagoforma" Text="Observaciones:"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox ID="txtObservacionesTarjeta" runat="server" CssClass="textboxcaptura"
+                                                            <asp:TextBox ID="txtObservacionesTarjeta" runat="server" CssClass="textboxcaptura"  ReadOnly="true" 
                                                                 Height="75px" Width="300px" TextMode="MultiLine"></asp:TextBox>
                                                         </td>
                                                     </tr>
@@ -732,8 +1053,8 @@
                                                         </td>
                                                         <td>
                                                             <asp:TextBox ID="txtValeFecha" runat="server" CssClass="WarningLabels"></asp:TextBox>
-                                                            <ccR:CalendarExtender ID="txtValeFecha_CalendarExtender" runat="server"
-                                                                PopupButtonID="imgValeCalendario" TargetControlID="txtValeFecha">
+                                                            <ccR:CalendarExtender ID="txtValeFecha_CalendarExtender" runat="server" OnClientHidden="cierraVale"
+                                                                PopupButtonID="imgValeCalendario"  OnClientShown="muestraCalendario"  TargetControlID="txtValeFecha">
                                                             </ccR:CalendarExtender>
                                                             <asp:Image ID="imgValeCalendario" runat="server"
                                                                 ImageUrl="~/Imagenes/Calendar.png" />
@@ -832,7 +1153,7 @@
                     <table style="vertical-align: top; width: 534px;">
                         <tr>
                             <td valign="top">
-                                <div id="transferencia" style="display: none; vertical-align: top">
+                                <div id="transferenciaOld" style="display: none; vertical-align: top">
                                     <table style="background-color: #e1f8e2; height: 360px; width: 900px">
 
                                         <tr>
@@ -875,7 +1196,7 @@
                                                     Text="Fecha documento:"></asp:Label>
                                             </td>
                                             <td>
-                                                <asp:TextBox ID="TxtFechaDocTrans" runat="server" CssClass="textboxcaptura"
+                                                <asp:TextBox ID="TxtFechaDocTrans" runat="server" CssClass="textboxcaptura" 
                                                     ReadOnly="False" AutoPostBack="false"></asp:TextBox>
 
                                                 <asp:ImageButton ID="ImageButtonCal" runat="server"
@@ -1010,6 +1331,20 @@
                                             <td></td>
                                         </tr>
                                     </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                                        <table style="vertical-align: top; width: 534px;">
+                        <tr>
+                            <td valign="top">
+                                <div id="AnticipoUC" style="display: none; vertical-align: top">
+                                    <ucDetallePago:wucDetalleFormaPago runat="server" id="wucDetalleFormaPago1" /> 
+                                    <%--<asp:ImageButton ID="btnAntAceptar" runat="server"
+                                        OnClick="btnAceptarAnticipo_Click" ImageUrl="~/Images/btnAceptar.png"
+                                        SkinID="btnAceptar" ValidationGroup="GuardaAnt" />--%>
                                 </div>
                             </td>
                         </tr>
@@ -1152,7 +1487,6 @@
             <table style="width: 100%; align-content: center; background-color: aliceblue; border: thin">
                 <tr style="align-content: center;">
                     <td style="text-align: center">
-                        <asp:Button ID="Button1" runat="server" Text="Cerrar" OnClientClick="return HideModalPopup()" />
                     </td>
 
                 </tr>

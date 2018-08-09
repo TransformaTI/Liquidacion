@@ -15,8 +15,11 @@ public partial class MasterPage : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        btnCerrarSesion.Attributes.Add("onclick", "return cerrarsession();");
+
 	if (Session["dsLiquidacion"] != null)
         {
+            if (((DataSet)(Session["dsLiquidacion"])).Tables.Contains("Cobro")) 
             if (((DataSet)(Session["dsLiquidacion"])).Tables["Cobro"].Rows.Count > 0)
             {
                 btnSelFolio.Attributes.Add("onclick", "return confirm('Al regresar a Seleccion de Ruta los Pagos Capturados se perderán. ¿Desea Continuar?')");

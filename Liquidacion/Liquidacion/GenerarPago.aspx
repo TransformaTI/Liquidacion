@@ -6,13 +6,45 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainPlaceHolder" Runat="Server">
   <script type="text/javascript" language="javascript">       
-    var ModalProgress ='<%= ModalProgress.ClientID %>';        
+      var ModalProgress = '<%= ModalProgress.ClientID %>'; 
+      var Saldo = '<%= HiddenSaldo.Value %>'; 
+      var sMensajeSaldos = 'El cliente tiene saldos a favor ¿ Desea continuar?';
+      var sMensajeConfirmacion='¿Desea guardar y Cerrar la liquidacion?'
+      
+      
+      function ValidaSaldo() {     
+          
+
+          var respuestaConfirm = confirm(sMensajeConfirmacion);
+          if (respuestaConfirm == false)
+               {
+                 return false;
+               }
+          else
+          {
+            
+              if (parseFloat(Saldo.toString()) > 0)
+              {
+                     var respuesta = confirm(sMensajeSaldos);
+
+                       if (respuesta == false)
+                       {
+                           return false;
+                       }
+
+              
+              }
+          }
+      }
+
+
  </script> 
  <script src="Scripts/jsUpdateProgress.js" type="text/javascript"></script>
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
      <asp:UpdatePanel ID="UpdatePanel1" runat="server" >
   <ContentTemplate> 
+      <asp:HiddenField ID="HiddenSaldo" runat="server" Value="" />
     <div style="text-align:center">
    <table style="width:1000px;">
    <tr>

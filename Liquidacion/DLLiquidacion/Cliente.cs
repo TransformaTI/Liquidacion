@@ -40,6 +40,9 @@ namespace SigametLiquidacion
         private string _usuario;
         private string _urlGateway;
          
+        
+        private DataTable _dtSaldosCliente;
+
         public bool Encontrado
         {
             get
@@ -47,7 +50,7 @@ namespace SigametLiquidacion
                 return this._encontrado;
             }
         }
-        
+
         public int NumeroCliente
         {
             get
@@ -55,7 +58,7 @@ namespace SigametLiquidacion
                 return this._cliente;
             }
         }
-        
+
         public string Nombre
         {
             get
@@ -63,7 +66,7 @@ namespace SigametLiquidacion
                 return this._nombre;
             }
         }
-        
+
         public string Direccion
         {
             get
@@ -71,7 +74,7 @@ namespace SigametLiquidacion
                 return this._direccion;
             }
         }
-        
+
         public short Celula
         {
             get
@@ -79,7 +82,7 @@ namespace SigametLiquidacion
                 return this._celula;
             }
         }
-        
+
         public short Ruta
         {
             get
@@ -87,7 +90,7 @@ namespace SigametLiquidacion
                 return this._ruta;
             }
         }
-        
+
         public byte TipoCartera
         {
             get
@@ -95,7 +98,7 @@ namespace SigametLiquidacion
                 return this._tipoCartera;
             }
         }
-        
+
         public string DescripcionTipoCartera
         {
             get
@@ -103,7 +106,7 @@ namespace SigametLiquidacion
                 return this._descripcionTipoCartera;
             }
         }
-        
+
         public Decimal LimiteCredito
         {
             get
@@ -111,7 +114,7 @@ namespace SigametLiquidacion
                 return this._limiteCredito;
             }
         }
-        
+
         public Decimal Saldo
         {
             get
@@ -119,7 +122,7 @@ namespace SigametLiquidacion
                 return this._saldo;
             }
         }
-        
+
         public Decimal SaldoClienteMovimiento
         {
             get
@@ -139,7 +142,7 @@ namespace SigametLiquidacion
                 return this._limiteDisponible;
             }
         }
-        
+
         public byte TipoCreditoCliente
         {
             get
@@ -147,7 +150,7 @@ namespace SigametLiquidacion
                 return this._tipoCreditoCliente;
             }
         }
-        
+
         public string ClasificacionCartera
         {
             get
@@ -155,7 +158,7 @@ namespace SigametLiquidacion
                 return this._tipoCarteraCliente;
             }
         }
-        
+
         public bool CreditoAutorizado
         {
             get
@@ -163,7 +166,7 @@ namespace SigametLiquidacion
                 return this._creditoAutorizado;
             }
         }
-        
+
         public bool LimiteCreditoExcedido
         {
             get
@@ -171,7 +174,7 @@ namespace SigametLiquidacion
                 return this._limiteCreditoExcedido;
             }
         }
-        
+
         public Decimal Descuento
         {
             get
@@ -179,7 +182,7 @@ namespace SigametLiquidacion
                 return this._descuento;
             }
         }
-        
+
         public string DescripcionDescuento
         {
             get
@@ -187,7 +190,7 @@ namespace SigametLiquidacion
                 return this._descripcionDescuento;
             }
         }
-        
+
         public byte ZonaEconomica
         {
             get
@@ -211,7 +214,9 @@ namespace SigametLiquidacion
                 this._fSuministro = value;
             }
         }
-        
+
+       
+
         //20-07-2015
         public decimal PrecioCliente
         {
@@ -388,7 +393,7 @@ namespace SigametLiquidacion
             //    this._encontrado = false;
             //}
         }
-        
+
         public bool ClienteLiquidado(short AñoAtt, int Folio, int Cliente)
         {
             DatosCliente datosCliente = new DatosCliente(this._cliente, this._fSuministro);
@@ -400,6 +405,27 @@ namespace SigametLiquidacion
             {
                 throw ex;
             }
+        }
+
+        public void  ConsultaSaldosAFavor(int cliente,string statusMovimiento, int folioMovimiento, int anioMovimiento)
+        {
+            DataTable saldoCliente = new DataTable();
+            DatosCliente datosCliente = new DatosCliente(0,DateTime.Now);
+            try
+            {
+                saldoCliente = datosCliente.ConsultaSaldosAFavor(cliente, statusMovimiento, folioMovimiento, anioMovimiento);
+                if (saldoCliente.Rows.Count >0)
+                {
+                    this._nombre = Convert.ToString(saldoCliente.Rows[0]["Nombre"]);
+                //this._saldo = this._saldo = Convert.ToDecimal(saldoCliente.Rows[0]["Saldo"]);
+                SaldosCliente = saldoCliente;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }

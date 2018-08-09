@@ -39,6 +39,8 @@ function SeleccionarControlSiguiente(charCode, nextControlName)
 {    
     if (charCode == 13)
     {   
+       
+        console.log(nextControlName);
         document.getElementById(nextControlName).focus();
         return true;
     }
@@ -129,8 +131,16 @@ function getObj(name)
     }
 }
 
+function DoPostback()
+{
+    javascript: __doPostBack('ConsultaPedido', '');
+}
+
+
+
 function doNumeroClienteSubmit(name, message)
 {
+
     if (document.getElementById(name).value.length > 0)
     {
         return true;
@@ -164,6 +174,8 @@ function validacionCamposRequeridos(TextBoxLitros, MensajeLitros, BtnAceptar, Va
 
 function calcularImporte(ctrlLitros, ctrlPrecio, ctrlImporte)
 {
+
+	
     if (document.getElementById(ctrlLitros).value != ".")
     {
         document.getElementById(ctrlImporte).value = (document.getElementById(ctrlLitros).value * document.getElementById(ctrlPrecio).value);

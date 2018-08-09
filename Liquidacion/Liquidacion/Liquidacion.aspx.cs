@@ -28,16 +28,21 @@ public partial class Liquidacion : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-         if (!Convert.ToBoolean(Session["Iniciada"]))
+        bool IsPageRefresh = false;
+
+        if (!Convert.ToBoolean(Session["Iniciada"]))
         {
             Response.Redirect("Login.aspx");
         }
 
         if (!Page.IsPostBack)
         {
-            
-                //RAMPACRRR
-                if (Request.QueryString["FormaLiquidacion"] != null)
+            ViewState["ViewStateId"] = System.Guid.NewGuid().ToString();
+
+            Session["SessionId"] = ViewState["ViewStateId"].ToString();
+
+            //RAMPACRRR
+            if (Request.QueryString["FormaLiquidacion"] != null)
                 {
                     AutoTanqueTurno1.FormaLiquidacion = Request.QueryString["FormaLiquidacion"].ToString();
                 }
@@ -48,6 +53,8 @@ public partial class Liquidacion : System.Web.UI.Page
                 //Carga los parámetros generales para la liquidacion 
                 _parametros = new Parametros(1, 1, 22);
                 Session["Parametros"] = _parametros;
+                Session["desasigna"] = "";
+                Session["buscandoCliente"] = "";
 
                 CargaPedidos(Convert.ToInt16(Session["AñoAtt"]), Convert.ToInt32(Session["Folio"]));
 
@@ -68,14 +75,27 @@ public partial class Liquidacion : System.Web.UI.Page
                 nuevoPedido.LongitudRemision = AutoTanqueTurno1.LongitudRemision;
 
                 btnTerminar.Attributes.Add("onclick", "return confirm('¿Desea finalizar la captura de la liquidación?')");
-               // btnPagos.Attributes.Add("onclick", "return confirm('¿Desea Continuar?')");
-            
-            
+            // btnPagos.Attributes.Add("onclick", "return confirm('¿Desea Continuar?')");
+
+               nuevoPedido.ConsultaCteOnChange = true;
+
+
+
+
+
         }
         else
         {
             _catalogos = (Catalogos)Session["Catalogos"];
             _parametros = (Parametros)Session["Parametros"];
+
+            if (ViewState["ViewStateId"].ToString() != Session["SessionId"].ToString())
+            {
+                IsPageRefresh = true;
+            }
+
+            Session["SessionId"] = System.Guid.NewGuid().ToString();
+            ViewState["ViewStateId"] = Session["SessionId"].ToString();
         }
         if (AutoTanqueTurno1.OperadorAsignado == true)
         {
@@ -86,6 +106,9 @@ public partial class Liquidacion : System.Web.UI.Page
             nuevoPedido.Enabled = false;
         }
         lblMensaje.Text = string.Empty;
+        if(IsPageRefresh) {
+            ReordenarLista("Litros");
+        }
     }
     protected void Page_PreRender(object sender, EventArgs e)
     {
@@ -122,6 +145,7 @@ public partial class Liquidacion : System.Web.UI.Page
         AutoTanqueTurno1.Usuario = _usuario;
 
         nuevoPedido.AutoTanque = AutoTanqueTurno1.Autotanque;
+        Session["Autotanque"] = AutoTanqueTurno1.Autotanque; // mcc 2018 09-09-2018
         nuevoPedido.Usuario = _usuario;
 
         //Carga de precios de acuerdo a los datos de pedido
@@ -193,6 +217,9 @@ public partial class Liquidacion : System.Web.UI.Page
     {
         try
         {
+            Session["desasignado"] = "x";
+            Session["buscandoCliente"] = "";
+
             AutoTanqueTurno1.RecorridoListaPedidos(AutoTanqueTurno1.CurrentRow(ListaPedidos1.ClickedRow));
 
             lblControlPedido.Text = "Edición del pedido " +
@@ -202,6 +229,7 @@ public partial class Liquidacion : System.Web.UI.Page
                 AutoTanqueTurno1.CurrentRow(ListaPedidos1.ClickedRow));
             ListaPedidos1.Remark = true;
             ListaPedidos1.DataSource = AutoTanqueTurno1.ListaPedidos;
+
 
             nuevoPedido.Focus();
         }
@@ -232,7 +260,7 @@ public partial class Liquidacion : System.Web.UI.Page
             //        Page.RegisterClientScriptBlock("Confirmacion", "confirm('Existen pedidos capturados para este cliente. ¿Desea Continuar?')");
             //    }
             //}
-
+            Session["buscandoCliente"] = "";
             if (nuevoPedido.TipoOperacion == TipoOperacionPedido.EdicionPedidoConciliado)
             {
                 AutoTanqueTurno1.EdicionPedido(nuevoPedido.SourceRow, nuevoPedido.Cliente, nuevoPedido.Nombre,
@@ -271,6 +299,8 @@ public partial class Liquidacion : System.Web.UI.Page
             {
                 nuevoPedido.Focus();
             }
+            Session["desasignado"] = "";
+            nuevoPedido_ClickCancelar(sender, e);
         }
         catch (Exception ex)
         {
@@ -284,12 +314,25 @@ public partial class Liquidacion : System.Web.UI.Page
     protected void nuevoPedido_ClickCancelar(object sender, EventArgs e)
     {
         ListaPedidos1.Restablecer();
+        Session["desasignado"] = "";
+        Session["buscandoCliente"] = "";
+        nuevoPedido.Focus();
+        Response.Redirect(Request.RawUrl);
+
+
     }
 
     protected void nuevoPedido_DesasignarPedido(object sender, EventArgs e)
     {
         try
         {
+            string _desasigna = Convert.ToString(Session["desasignado"]);
+            if (_desasigna == "")
+            {
+                lblMensaje.Text = "Seleccione primero un pedido";
+                return;
+            }
+
             //Si es un pedido programado verifica que no haya notas blancas para el mismo cliente
             if ((nuevoPedido.TipoPedido.ToString() == "2") || (nuevoPedido.TipoPedido.ToString() == "1")) 
             {
@@ -307,6 +350,8 @@ public partial class Liquidacion : System.Web.UI.Page
 
             nuevoPedido.DesasignaPedido(AutoTanqueTurno1.CurrentRow(nuevoPedido.SourceRow));
             AutoTanqueTurno1.DesasignacionPedido(nuevoPedido.SourceRow);
+            Session["desasignado"] = "";
+            nuevoPedido_ClickCancelar(sender, e);
 
         }
 
@@ -337,6 +382,7 @@ public partial class Liquidacion : System.Web.UI.Page
             AutoTanqueTurno1.DesasignacionPedido(nuevoPedido.SourceRow);
             ListaPedidos1.DataSource = AutoTanqueTurno1.ListaPedidos;
             ConsultaResumenLiquidacion();
+            Session["buscandoCliente"] = "";
         }
         catch (Exception ex)
         {
@@ -497,10 +543,10 @@ public partial class Liquidacion : System.Web.UI.Page
         //    ClientScript.RegisterStartupScript(this.GetType(), "Diferencia", "<script language=javascript> confirm('Hay una diferencia de litraje. ¿Desea continuar?'); </script>");
         //    //Page.RegisterStartupScript("Diferencia de Litraje", "<script language=javascript> alert('Hay una diferencia de litraje. ¿Desea continuar?'); </script>");
         //}
-        //if (AutoTanqueTurno1.LitrosLiquidados != AutoTanqueTurno1.TotalLitros)
-        //    _cuadrado = false;
-        //else
-        //    _cuadrado = true;
+        if (AutoTanqueTurno1.LitrosLiquidados != AutoTanqueTurno1.TotalLitros)
+            _conciliacion = false;
+        else
+            _conciliacion = true;
 
 
         //if (!_cuadrado)

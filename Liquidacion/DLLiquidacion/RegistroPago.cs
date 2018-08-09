@@ -24,6 +24,7 @@ namespace SigametLiquidacion
     private DataTable dtAfiliaciones = new DataTable();
     private DataTable dtProveedores = new DataTable();
     private DataTable dtTipoVale = new DataTable();
+    private DataTable dtPedidosLiqAnticipado = new DataTable();
 
    public DataTable ListaPedidos()
     {
@@ -32,7 +33,16 @@ namespace SigametLiquidacion
       return this.dtPedidos;
     }
 
-    public DataTable ListaBancos()
+
+    public DataTable PedidosLiquidacion(int Cliente, int Folio)
+    {
+            this._datos.CargaPedidosLiquidacion(Cliente, Folio);
+            this.dtPedidosLiqAnticipado = this._datos.PedidosLiquidacion;
+            return this.dtPedidosLiqAnticipado;
+    }
+
+
+        public DataTable ListaBancos()
     {
       this._datos.CargaBancos();
       this.dtBancos = this._datos.Bancos;
@@ -83,10 +93,15 @@ namespace SigametLiquidacion
         }
 
 
-        public void GuardaPagos(string Usuario, DataTable dtPedidos, DataTable dtPago, DataTable dtDetallePago, DataTable dtResumenLiquidacion)
+        public void GuardaPagos(string Usuario, DataTable dtPedidos, DataTable dtPago, DataTable dtDetallePago, DataTable dtResumenLiquidacion, DataTable liqPagoAnticipado = null)
     {
-      this._datos.GuardaPagos(Usuario, dtPedidos, dtPago, dtDetallePago, dtResumenLiquidacion);
+      this._datos.GuardaPagos(Usuario, dtPedidos, dtPago, dtDetallePago, dtResumenLiquidacion, liqPagoAnticipado);
     }
+
+        public void InsertaMovimientoAConciliar(int folioMovimiento, int anioMovimiento, int anioCobro, int cobro, decimal monto, string status)
+        {
+            this._datos.InsertaMovimientoAConciliar(folioMovimiento, anioMovimiento, anioCobro, cobro, monto, status);
+        }
 
     public enum TipoPago
     {
@@ -94,7 +109,9 @@ namespace SigametLiquidacion
       tipoEfectivo = 5,
       tipoTarjeta = 6,
       tipoDescuento = 12,
-      tipoVale = 16,
+      tipoVale = 2,
+      transferencia =10,
+      anticipo = 21 
     }
   }
 }

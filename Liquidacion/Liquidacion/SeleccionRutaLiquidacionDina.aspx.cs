@@ -217,13 +217,14 @@ public partial class SeleccionRutaLiquidacionDina : System.Web.UI.Page
                 ibl.AñoAtt = añoAtt;
                 ibl.Folio = folio;
                 ibl.Tipo = tipo;
+                ibl.Autotanque = autotanque;
 
                 //Para determinar si se deben descargar registros de la tarjeta rampac
                 ibl.FormaLiquidacion = FormaLiquidacion;
 
                 ibl.StatusLiquidacion = StatusLiquidacion;
 
-                ibl.Autotanque = autotanque;
+               // ibl.Autotanque = autotanque;
 
 
                 switch (status)

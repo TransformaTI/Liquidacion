@@ -39,7 +39,8 @@ public partial class Login : System.Web.UI.Page
         Session["Iniciada"] = _seguridad.SesionIniciada;
         Session["Privilegios"] = _seguridad;
         Session["Usuario"] = txtUserName.Text;
-        
+        Session["dsLiquidacion"] = null;
+        Session["CargoTarjeta"] = null;
         //Response.Redirect("selFolio.aspx");
         Response.Redirect("SeleccionRutaLiquidacionDina.aspx");
     }

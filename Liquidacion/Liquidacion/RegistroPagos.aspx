@@ -5,10 +5,34 @@
     </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainPlaceHolder" Runat="Server">
-    <%--<script type="text/javascript" language="javascript">       
-    var ModalProgress ='<%= ModalProgress.ClientID %>';        
- </script>  --%>
- <%--<script src="Scripts/jsUpdateProgress.js" type="text/javascript"></script>--%>
+          <asp:HiddenField ID="HiddenSaldo" runat="server" Value="" />
+
+
+      <script type="text/javascript" language="javascript"> 
+        var sMensajeSaldos = 'El cliente tiene saldos a favor ¿ Desea continuar?';
+          var Saldo = 0;
+
+          function ValidaSaldos() { 
+
+                      if (parseFloat(Saldo.toString()) > 0)
+                      {
+                             var respuesta = confirm(sMensajeSaldos);
+
+                               if (respuesta == false)
+                               {
+                                   return false;
+                               }
+
+              
+                      }
+          
+      }      
+          
+        
+      
+    
+
+     </script> 
  
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>    

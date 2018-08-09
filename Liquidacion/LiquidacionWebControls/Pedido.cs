@@ -12,6 +12,8 @@ using System.Drawing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
+
 namespace SigametLiquidacion.WebControls
 {
     [ToolboxData("<{0}:Pedido runat=server></{0}:Pedido>")]
@@ -93,7 +95,9 @@ namespace SigametLiquidacion.WebControls
         private Decimal _precioMaximo;
         private Decimal _precioMinimo;
         private Decimal _descuento;
-        
+        private string _imageButtonEnviarURL;
+
+
         private byte _longitudSerie;
         private byte _longitudRemision;
         
@@ -472,7 +476,28 @@ namespace SigametLiquidacion.WebControls
                 _longitudSerie = value;
             }
         }
-        
+
+        public string ImageButtonEnviarURL
+        {
+            get
+            {
+                return this._imageButtonEnviarURL;
+            }
+            set
+            {
+                this._imageButtonEnviarURL = value;
+            }
+        }
+
+        private bool consultaCteOnChange;
+
+        public bool ConsultaCteOnChange
+        {
+            get { return consultaCteOnChange; }
+            set { consultaCteOnChange = value; }
+        }
+
+
         public event EventHandler ClickAceptar;
         
         public event EventHandler ClickCancelar;
@@ -691,6 +716,7 @@ namespace SigametLiquidacion.WebControls
             }
             if (this._permitirCaptura)
             {
+ 
                 return;
             }
             this.enableCaptureControls(false);
@@ -760,6 +786,7 @@ namespace SigametLiquidacion.WebControls
             this.btnAceptar.Click += new ImageClickEventHandler(this.btnAceptar_Click);
             this.btnCancelar.Click += new ImageClickEventHandler(this.btnCancelar_Click);
             this.btnRemover.Click += new ImageClickEventHandler(this.btnDesasignar_Click);
+            this.txtNumeroCliente.TextChanged += new EventHandler(txtNumeroCliente_TextChanged);
             this.ConfiguracionTabOrder();
         }
         
@@ -779,15 +806,23 @@ namespace SigametLiquidacion.WebControls
             this.Controls.Add((Control) new LiteralControl("</td>"));
             this.Controls.Add((Control) new LiteralControl("<td>"));
             this.Controls.Add((Control) new LiteralControl("<div style='vertical-align:middle'>"));
-            this.txtNumeroCliente.Attributes.Add("onfocus", "SetSelected(" + this.txtNumeroCliente.UniqueID + ");");
+
+            this.txtNumeroCliente.Attributes.Add("onfocus", "SetSelected(" + this.txtNumeroCliente.ClientID + ");");
             this.txtNumeroCliente.CssClass = "ClientTextBox";
+            
+            //if (ConsultaCteOnChange==true)
+            //{
+                this.txtNumeroCliente.Attributes.Add("onchange", "return DoPostback();");
+            //}
+
             this.Controls.Add((Control) this.txtNumeroCliente);
-            this.btnConsultaCliente.Attributes.Add("onclick", "return doNumeroClienteSubmit(" + '\'' + this.txtNumeroCliente.UniqueID + '\'' + "," + '\'' + this._mensajeCapturaCliente + '\'' + ");");
+
+            this.btnConsultaCliente.Attributes.Add("onclick", "return doNumeroClienteSubmit(" + '\'' + this.txtNumeroCliente.ClientID + '\'' + "," + '\'' + this._mensajeCapturaCliente + '\'' + ");");
             this.btnConsultaCliente.SkinID = "btnBuscarCliente";
             this.btnConsultaCliente.AlternateText = "BUSCAR";
             this.btnConsultaCliente.ID = "btnConsultaCliente";
             this.Controls.Add((Control) this.btnConsultaCliente);
-            this.txtNumeroCliente.Attributes.Add("onkeypress", "return keyPressNumeroCliente(event, " + '\'' + this.txtNumeroCliente.UniqueID + '\'' + ", " + '\'' + this.btnConsultaCliente.UniqueID + '\'' + ");");
+            this.txtNumeroCliente.Attributes.Add("onkeypress", "return keyPressNumeroCliente(event, " + '\'' + this.txtNumeroCliente.ClientID + '\'' + ", " + '\'' + this.btnConsultaCliente.ClientID + '\'' + ");");
             this.Controls.Add((Control) new LiteralControl("</div>"));
             this.Controls.Add((Control) new LiteralControl("</td>"));
             this.Controls.Add((Control) new LiteralControl("</tr>"));
@@ -797,7 +832,7 @@ namespace SigametLiquidacion.WebControls
             this.Controls.Add((Control) new LiteralControl("<td style=" + '\'' + "font-weight: bold;" + '\'' + ">"));
             this.lnkCambiarCliente.Text = "Cambiar cliente";
             this.lnkCambiarCliente.Visible = false;
-            this.lnkCambiarCliente.Attributes.Add("onclick", "return doNumeroClienteSubmit(" + '\'' + this.txtNumeroCliente.UniqueID + '\'' + "," + '\'' + this._mensajeCapturaCliente + '\'' + ");");
+            this.lnkCambiarCliente.Attributes.Add("onclick", "return doNumeroClienteSubmit(" + '\'' + this.txtNumeroCliente.ClientID + '\'' + "," + '\'' + this._mensajeCapturaCliente + '\'' + ");");
             this.lnkCambiarCliente.Click += new EventHandler(this.lnkCambiarCliente_click);
             this.Controls.Add((Control) this.lnkCambiarCliente);
             this.Controls.Add((Control) new LiteralControl("</td>"));
@@ -950,13 +985,14 @@ namespace SigametLiquidacion.WebControls
         {
             this.Controls.Add((Control) new LiteralControl("<TD>"));
             this.txtLitros.CssClass = CssClass;
+            this.txtLitros.Text = "0";
             this.Controls.Add((Control) this.txtLitros);
             this.Controls.Add((Control) new LiteralControl("</TD>"));
             if (this._parametros == null || !Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("CapturaRemision"))))
             {
                 return;
             }
-            this.txtNumeroRemision.Attributes.Add("onkeypress", "return validarRemision(" + '\'' + this._serieRemisionRuta.Trim().ToUpper() + '\'' + ", " + '\'' + this.txtNumeroRemision.UniqueID + '\'' + ", " + Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("ValidarSerieRemision"))).ToString().ToLower() + ", event, " + '\'' + this.txtLitros.UniqueID + '\'' + ");");
+            this.txtNumeroRemision.Attributes.Add("onkeypress", "return validarRemision(" + '\'' + this._serieRemisionRuta.Trim().ToUpper() + '\'' + ", " + '\'' + this.txtNumeroRemision.UniqueID + '\'' + ", " + Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("ValidarSerieRemision"))).ToString().ToLower() + ", event, " + '\'' + this.txtLitros.ClientID + '\'' + ");");
         }
         
         private void controlCapturaPrecio(string CssClass)
@@ -982,9 +1018,10 @@ namespace SigametLiquidacion.WebControls
             this.txtImporte.Enabled = false;
             this.txtImporte.ReadOnly = true;
             this.txtImporte.CssClass = CssClass;
+            this.txtImporte.Text = "0";
             this.Controls.Add((Control) this.txtImporte);
-            this.txtLitros.Attributes.Add("onchange", "return calcularImporte(" + '\'' + this.txtLitros.UniqueID + '\'' + "," + '\'' + this.ddpPrecio.UniqueID + '\'' + "," + '\'' + this.txtImporte.UniqueID + '\'' + ");");
-            this.ddpPrecio.Attributes.Add("onchange", "return calcularImporte(" + '\'' + this.txtLitros.UniqueID + '\'' + "," + '\'' + this.ddpPrecio.UniqueID + '\'' + "," + '\'' + this.txtImporte.UniqueID + '\'' + ");");
+            this.txtLitros.Attributes.Add("onchange", "return calcularImporte(" + '\'' + this.txtLitros.ClientID + '\'' + "," + '\'' + this.ddpPrecio.ClientID + '\'' + "," + '\'' + this.txtImporte.ClientID + '\'' + ");");
+            this.ddpPrecio.Attributes.Add("onchange", "return calcularImporte(" + '\'' + this.txtLitros.ClientID + '\'' + "," + '\'' + this.ddpPrecio.ClientID + '\'' + "," + '\'' + this.txtImporte.ClientID + '\'' + ");");
             this.Controls.Add((Control) new LiteralControl("</TD>"));
         }
         
@@ -1014,7 +1051,7 @@ namespace SigametLiquidacion.WebControls
             this.Controls.Add((Control) this.btnAceptar);
             if (this._parametros != null)
             {
-                this.btnAceptar.Attributes.Add("onclick", "return validacionCamposRequeridos(" + '\'' + this.txtLitros.UniqueID + '\'' + "," + '\'' + this._mensajeCapturaLitros + '\'' + ", " + '\'' + this.btnAceptar.UniqueID + '\'' + ", " + Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("CapturaRemision"))).ToString().ToLower() + ", " + '\'' + this.txtNumeroRemision.UniqueID + '\'' + ", " + '\'' + "Debe capturar el número de remisión." + '\'' + ", " + '\'' + this.imgDecoration.UniqueID + '\'' + ");");
+                this.btnAceptar.Attributes.Add("onclick", "return validacionCamposRequeridos(" + '\'' + this.txtLitros.ClientID + '\'' + "," + '\'' + this._mensajeCapturaLitros + '\'' + ", " + '\'' + this.btnAceptar.ClientID + '\'' + ", " + Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("CapturaRemision"))).ToString().ToLower() + ", " + '\'' + this.txtNumeroRemision.ClientID + '\'' + ", " + '\'' + "Debe capturar el número de remisión." + '\'' + ", " + '\'' + this.imgDecoration.ClientID + '\'' + ");");
             }
             this.Controls.Add((Control) new LiteralControl("</td>"));
             this.Controls.Add((Control) new LiteralControl("<td>"));
@@ -1030,7 +1067,7 @@ namespace SigametLiquidacion.WebControls
             this.Controls.Add((Control) new LiteralControl("</td>"));
             this.Controls.Add((Control) new LiteralControl("</tr>"));
             this.btnRemover.Attributes.Add("onclick", "return confirm('¿Desea Eliminar el Pedido?')");
-            this.txtLitros.Attributes.Add("onkeypress", "return ComboKeyPress(event, " + '\'' + this.ddpFormaPago.UniqueID + '\'' + ", " + '\'' + this.btnAceptar.UniqueID + '\'' + ");");
+            this.txtLitros.Attributes.Add("onkeypress", "return ComboKeyPress(event, " + '\'' + this.ddpFormaPago.ClientID + '\'' + ", " + '\'' + this.btnAceptar.UniqueID + '\'' + ");");
             this.ddpFormaPago.Attributes.Add("onkeypress", "return ComboKeyPress(event, " + '\'' + this.btnAceptar.UniqueID + '\'' + ", " + '\'' + this.btnAceptar.UniqueID + '\'' + ");");
         }
         
@@ -1052,7 +1089,7 @@ namespace SigametLiquidacion.WebControls
             this.Controls.Add((Control) new LiteralControl("</tr>"));
             this.Controls.Add((Control) new LiteralControl("<tr>"));
             this.controlCapturaLitros("HorizontalLayoutCapturable");
-            this.txtLitros.Attributes.Add("onkeypress", "return onKeyPress_OnlyDecimalDigits(event," + '\'' + this.txtLitros.UniqueID + '\'' + ", " + '\'' + this.ddpPrecio.UniqueID + '\'' + ");");
+            this.txtLitros.Attributes.Add("onkeypress", "return onKeyPress_OnlyDecimalDigits(event," + '\'' + this.txtLitros.ClientID + '\'' + ", " + '\'' + this.ddpPrecio.ClientID + '\'' + ");");
             this.txtLitros.Attributes.Add("onfocus", "SetSelected(" + this.txtLitros.ClientID + ");");
             this.controlCapturaPrecio("HorizontalLayoutCapturable");
             this.controlCapturaImporte("HorizontalLayoutCapturable");
@@ -1084,8 +1121,9 @@ namespace SigametLiquidacion.WebControls
             this.Controls.Add((Control) new LiteralControl("<tr>"));
             this.escribirEtiquetaLitros("TagFieldLabels");
             this.controlCapturaLitros("MediumNumericText");
-            this.imgDecoration.Width = (Unit) 1;
-            this.imgDecoration.Width = (Unit) 1;
+            this.imgDecoration.Width = (Unit) 20;
+            this.imgDecoration.Width = (Unit) 20;
+            this.imgDecoration.ImageUrl = this._imageButtonEnviarURL;            
             this.imgDecoration.Attributes.Add("onkeypress", "return btnDecorationUnSubmit();");
             this.Controls.Add((Control) this.imgDecoration);
             this.Controls.Add((Control) new LiteralControl("</tr>"));
@@ -1137,9 +1175,22 @@ namespace SigametLiquidacion.WebControls
             {
                 return;
             }
-            this.cargaDatosCliente(Convert.ToInt32(this.txtNumeroCliente.Text));
+
+            this.cargaDatosCliente(Convert.ToInt32(this.txtNumeroCliente.Text), sender, e);
+
         }
-        
+
+        protected void txtNumeroCliente_TextChanged(object sender, EventArgs e)
+        {
+            
+            
+            if (this.txtNumeroCliente.Text.Length <= 0)
+            {
+                return;
+            }
+            this.cargaDatosCliente(Convert.ToInt32(this.txtNumeroCliente.Text), sender, e);
+        }
+
         private void btnAceptar_Click(object sender, ImageClickEventArgs e)
         {
             try
@@ -1286,8 +1337,19 @@ namespace SigametLiquidacion.WebControls
             return (byte) 5;
         }
         
-        private void cargaDatosCliente(int Cliente)
-        {      
+        private void cargaDatosCliente(int Cliente, object sender, EventArgs e)
+        {
+
+            string _buscando = Convert.ToString(System.Web.HttpContext.Current.Session["buscandoCliente"]);
+
+            if (_buscando == "x")
+            {
+                this.btnCancelar_Click(sender, null);
+
+                return;
+            }
+
+
             if (this._tipoOperacionCaptura != TipoOperacionPedido.EdicionPedidoConciliado)
             {
                 string text = this.txtNumeroRemision.Text;
@@ -1386,8 +1448,8 @@ namespace SigametLiquidacion.WebControls
                         }
                     }
 
-                    this.ddpPrecio.Attributes.Add("onchange", "validarDescuento(" + '\'' + this.txtLitros.UniqueID + '\'' + ", " + '\'' +
-                        this.txtImporte.UniqueID + '\'' + ", " + '\'' + this.ddpPrecio.UniqueID + '\'' + ", " + this.ddpPrecio.ClientID + ", " +
+                    this.ddpPrecio.Attributes.Add("onchange", "validarDescuento(" + '\'' + this.txtLitros.ClientID + '\'' + ", " + '\'' +
+                        this.txtImporte.ClientID + '\'' + ", " + '\'' + this.ddpPrecio.ClientID + '\'' + ", " + this.ddpPrecio.ClientID + ", " +
                         this._precioMinimo.ToString() + ", " + (this._cliente.Descuento > new Decimal(0)).ToString().ToLower() + ", " + '\'' +
                         "El precio seleccionado no corresponde al descuento del cliente, Verifique." + '\'' + ", " + '\'' +
                         "Este cliente no tiene descuento autorizado, debe liquidar con el precio vigente." + '\'' + ");");
@@ -1446,6 +1508,7 @@ namespace SigametLiquidacion.WebControls
                         this.txtImporte.Text = (Convert.ToDecimal(this.txtLitros.Text) * Convert.ToDecimal(this.ddpPrecio.SelectedValue)).ToString();
                     }
                 }
+                System.Web.HttpContext.Current.Session["buscandoCliente"] = "x";
                 this.btnAceptar.Enabled = true;
             }
             else
@@ -1488,8 +1551,8 @@ namespace SigametLiquidacion.WebControls
             this._tipoOperacionCaptura = TipoOperacionPedido.CapturaNuevoPedido;
             this.txtNumeroCliente.Text = string.Empty;
             this.txtNumeroCliente.Enabled = true;
-            this.txtLitros.Text = string.Empty;
             this.lblValorDescuento.Text = string.Empty;
+            this.txtLitros.Text = string.Empty;
             this.txtNumeroRemision.Text = string.Empty;
             this.lnkCambiarCliente.Visible = false;
             this._cliente = (SigametLiquidacion.Cliente) null;
@@ -1516,6 +1579,7 @@ namespace SigametLiquidacion.WebControls
             this.txtLitros.Enabled = Enable;
             this.ddpPrecio.Enabled = Enable;
             this.ddpFormaPago.Enabled = Enable;
+            this.btnAceptar.Enabled= Enable;
         }
         
         private string consultaTipoPedido(byte TipoPedido)

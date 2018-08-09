@@ -270,34 +270,52 @@ namespace SigametLiquidacion
 
     public void CancelacionCobros(short AñoAtt, int Folio)
     {
-      DataTable dataTable = this.ConsultaCobrosCancelacion(AñoAtt, Folio);
-      try
-      {
-        this._dataAccess.OpenConnection();
-        this._dataAccess.BeginTransaction();
-        if (dataTable.Rows.Count > 0)
+        DataTable dataTable = this.ConsultaCobrosCancelacion(AñoAtt, Folio);
+        try
         {
-          foreach (DataRow dataRow in (InternalDataCollectionBase) dataTable.Rows)
-          {
-            this.EliminaCobroPedido(Convert.ToInt16(dataRow["AñoCobro"]), Convert.ToInt32(dataRow["Cobro"]));
-            this.EliminaCobro(Convert.ToInt16(dataRow["AñoCobro"]), Convert.ToInt32(dataRow["Cobro"]));
-          }
+            this._dataAccess.OpenConnection();
+            this._dataAccess.BeginTransaction();
+            if (dataTable.Rows.Count > 0)
+            {
+                foreach (DataRow dataRow in (InternalDataCollectionBase) dataTable.Rows)
+                {
+                    this.EliminaMovimientoAConciliarCobro(Convert.ToInt16(dataRow["AñoCobro"]), Convert.ToInt32(dataRow["Cobro"]));
+                    this.EliminaCobroPedido(Convert.ToInt16(dataRow["AñoCobro"]), Convert.ToInt32(dataRow["Cobro"]));
+                    this.EliminaCobro(Convert.ToInt16(dataRow["AñoCobro"]), Convert.ToInt32(dataRow["Cobro"]));
+                }
+            }
+            this.EliminaEficienciaNegativa(AñoAtt, Folio);
+            this.ReactivaAutoTanqueTurno(AñoAtt, Folio);
+            //this._dataAccess.get_Transaction().Commit();
+            this._dataAccess.Transaction.Commit();
         }
-        this.EliminaEficienciaNegativa(AñoAtt, Folio);
-        this.ReactivaAutoTanqueTurno(AñoAtt, Folio);
-        //this._dataAccess.get_Transaction().Commit();
-        this._dataAccess.Transaction.Commit();
-      }
-      catch (Exception ex)
-      {
-        //this._dataAccess.get_Transaction().Rollback();
-        this._dataAccess.Transaction.Rollback();
-        throw ex;
-      }
-      finally
-      {
-        this._dataAccess.CloseConnection();
-      }
+        catch (Exception ex)
+        {
+            //this._dataAccess.get_Transaction().Rollback();
+            this._dataAccess.Transaction.Rollback();
+            throw ex;
+        }
+        finally
+        {
+            this._dataAccess.CloseConnection();
+        }
+    }
+
+    public void EliminaMovimientoAConciliarCobro(short AñoCobro, int Cobro)
+    {
+        SqlParameter[] sqlParameterArray = new SqlParameter[2]
+        {
+            new SqlParameter("@AñoCobro", (object) AñoCobro),
+            new SqlParameter("@Cobro", (object) Cobro)
+        };
+        try
+        {
+            this._dataAccess.ModifyData("spLIQ2EliminarMovimientoAConciliarCobro", CommandType.StoredProcedure, sqlParameterArray);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
     }
 
     public void EliminaCobroPedido(short AñoCobro, int Cobro)

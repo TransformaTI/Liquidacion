@@ -99,6 +99,17 @@ function onKeyPress_OnlyDigits(evt)
 
 </script>--%>
 
+    <script type="text/javascript" language="javascript">  
+
+      
+        //Validaciones  On load
+        document.addEventListener("DOMContentLoaded", function () { // mcc 2018 05 10         
+
+            $("input[type='text']:visible:enabled:first").focus();                      
+        })
+
+    </script>
+
 <div style="text-align:center">
       
 <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
@@ -195,7 +206,9 @@ function onKeyPress_OnlyDigits(evt)
                                                 ondesasignarpedido="nuevoPedido_DesasignarPedido" 
                                                 OnCambiarClientePedidoLiquidado="nuevoPedido_CambiarCliente"
                                                 OnActualizarCliente="nuevoPedido1_Actualizar"
-                                                PermitirCaptura="True" onerror="ListaPedidos1_Error"/>
+                                                PermitirCaptura="True" onerror="ListaPedidos1_Error" 
+                                                ImageButtonEnviarURL="~/images/new-sms.png"
+                                                />
                                         </td>
                                     </tr>
                                 </table>

@@ -161,6 +161,8 @@ public partial class Liquidacion : System.Web.UI.Page
                 AutoTanqueTurno1.AltaInicioLiquidacionFolio();
             }
 
+           
+         
             AutoTanqueTurno1.CargarListaPedidos();
 
             if (!(AutoTanqueTurno1.LiquidacionIniciada(ref _usuario,
@@ -551,6 +553,8 @@ public partial class Liquidacion : System.Web.UI.Page
         //{
         //    btnPagos.Attributes.Add("onclick", "return confirm('La liquidacion tiene diferencia con el totalizador. ¿Desea Continuar?')");
         //}
+        //string hola;
+        //hola = Convert.ToString( Session["Usuario"]);
 
         if (_conciliacion)
         {
@@ -559,6 +563,7 @@ public partial class Liquidacion : System.Web.UI.Page
                 if (!(AutoTanqueTurno1.SuministrosPorFormaDePago("CONTADO").Rows.Count > 0))
                 {
                     DatosRegistroPago _datos = new DatosRegistroPago();
+                    _datos.Usuario = Convert.ToString(Session["Usuario"]);
                     _datos.ActualizaTerminado(AutoTanqueTurno1.ResumenLiquidacionFinal(Convert.ToString(Session["Usuario"])));
                     btnPagos.Visible = false;
                     imbReporte_Click(sender, e);

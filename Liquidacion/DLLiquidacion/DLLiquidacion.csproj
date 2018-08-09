@@ -71,6 +71,9 @@
     <Reference Include="DocumentosBSR">
       <HintPath>..\Liquidacion\Bin\DocumentosBSR.dll</HintPath>
     </Reference>
+    <Reference Include="RTGMGateway">
+      <HintPath>..\..\..\RTGMGateway\RTGMGateway\bin\Debug\RTGMGateway.dll</HintPath>
+    </Reference>
     <Reference Include="SGDAC">
       <HintPath>..\Liquidacion\Bin\SGDAC.dll</HintPath>
     </Reference>

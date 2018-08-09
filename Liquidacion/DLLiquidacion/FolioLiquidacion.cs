@@ -344,6 +344,7 @@ namespace SigametLiquidacion
         
         public void ConsultaPedidos()
         {
+            this._datosFolio.Usuario = _usuario;
             this._datosFolio.ConsultaListaPedidos(this._añoAtt, this._folio, this._dtListaPedido);
             if (!Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("DescuentoProntoPago"))))
             {            

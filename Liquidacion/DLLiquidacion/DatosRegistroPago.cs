@@ -10,19 +10,20 @@ using System.Data.SqlClient;
 
 namespace SigametLiquidacion
 {
-    public class DatosRegistroPago : Datos
-    {
-        #region variables
-        private DataTable dtPedidos;
-        private DataTable dtBancos;
-        private DataTable dtCliente;
-        private DataTable dtPromociones;
-        private DataTable dtAutoTanque;
-        private DataTable dtPagosConTarjeta;
-        private DataTable dtAfiliaciones;
-        private DataTable dtProveedores;
-        private DataTable dtTipoVale;
-        private DataTable dtPedidosLiq; 
+  public class DatosRegistroPago : Datos
+  {
+   #region variables
+    private DataTable dtPedidos;
+    private DataTable dtBancos;
+    private DataTable dtCliente;
+    private DataTable dtPromociones;
+    private DataTable dtAutoTanque;
+    private DataTable dtPagosConTarjeta;
+    private DataTable dtAfiliaciones;
+    private DataTable dtProveedores;
+    private DataTable dtTipoVale;
+    private string _usuario; 
+    private DataTable dtPedidosLiq; 
 
         #endregion
         #region propiedades
@@ -102,6 +103,19 @@ namespace SigametLiquidacion
 
         }
 
+       public string Usuario
+        {
+            get
+            {
+                return _usuario;
+            }
+
+            set
+            {
+                _usuario = value;
+            }
+        }
+
         public DataTable PedidosLiquidacion
         {
             get
@@ -110,7 +124,6 @@ namespace SigametLiquidacion
             }
 
         }
-
         #endregion
 
 
@@ -156,6 +169,16 @@ namespace SigametLiquidacion
             };
             this.dtPagosConTarjeta = new DataTable();
             this._dataAccess.LoadData(this.dtPagosConTarjeta, "spCBConsultarCargoTarjetaCliente", CommandType.StoredProcedure, sqlParameterArray, true);
+            this.dtPagosConTarjeta.Columns.Add("NombreCliente", typeof(String));
+
+            Cliente _cliente = new SigametLiquidacion.Cliente(NumCliente, 0 );
+            _cliente.ConsultaDatosCliente();
+
+            foreach (DataRow row in dtPagosConTarjeta.Rows)
+            {
+                row["NombreCliente"] = _cliente.Nombre;
+            }
+
         }
 
         public void CargaProveedores()

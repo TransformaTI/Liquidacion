@@ -5,6 +5,7 @@
 // Assembly location: C:\Proyectos\SigametLiquidacion\DLLiquidacion.dll
 
 using DocumentosBSR;
+using RTGMGateway;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -14,7 +15,23 @@ namespace SigametLiquidacion
   [Serializable]
   internal class DatosFolio : Datos
   {
-    public DatosFolio(short AñoAtt, int Folio)
+
+    private string _usuario;
+
+        public string Usuario
+        {
+            get
+            {
+                return _usuario;
+            }
+
+            set
+            {
+                _usuario = value;
+            }
+        }
+
+        public DatosFolio(short AñoAtt, int Folio)
     {
       this._AñoAtt = AñoAtt;
       this._Folio = Folio;
@@ -25,28 +42,65 @@ namespace SigametLiquidacion
       return this.ConsultaDatosPorFolio("spLiq2ConsultaDatosFolio", CommandType.StoredProcedure);
     }
 
-    public void ConsultaListaPedidos(short AñoAtt, int Folio, DataTable ListaPedidos)
+    //public RTGMCore.DireccionEntrega obtenDireccionEntrega(int Cliente)
+    //{
+    //    RTGMCore.DireccionEntrega objDireccionEntega = new RTGMCore.DireccionEntrega();
+    //    try
+    //    {
+
+
+    //        RTGMGateway.RTGMGateway objGateway = new RTGMGateway.RTGMGateway();
+    //        objGateway.URLServicio = @"http://192.168.1.30:88/GasMetropolitanoRuntimeService.svc";
+    //        SolicitudGateway objRequest = new SolicitudGateway
+    //        {
+    //            Fuente = RTGMCore.Fuente.Sigamet,
+    //            IDCliente = Cliente,
+
+    //        };
+    //        objDireccionEntega = objGateway.buscarDireccionEntrega(objRequest);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //       // throw ex;
+    //    }
+    //    return objDireccionEntega;
+
+    //}
+
+        public void ConsultaListaPedidos(short AñoAtt, int Folio, DataTable ListaPedidos)
     {
       SqlParameter[] sqlParameterArray = new SqlParameter[2]
       {
         new SqlParameter("@AñoAtt", (object) AñoAtt),
         new SqlParameter("@Folio", (object) Folio)
       };
+
       try
       {
         this._dataAccess.OpenConnection();
         SqlDataReader sqlDataReader = this._dataAccess.LoadData("spLIQ2ConsultaPedidosFolio", CommandType.StoredProcedure, sqlParameterArray);
         int num = 0;
+               
         while (sqlDataReader.Read())
         {
           ++num;
           DataRow row = ListaPedidos.NewRow();
+
+          
+            
+          Cliente clienteTemp = new Cliente(int.Parse(sqlDataReader["Cliente"].ToString()), 1) ;
+          clienteTemp.ConsultaNombreCliente();
+
+
+//          objDireccionEntega = obtenDireccionEntrega();
+
           row["ID"] = (object) num;
           row["Cliente"] = sqlDataReader["Cliente"];
           row["Celula"] = sqlDataReader["Celula"];
           row["AñoPed"] = sqlDataReader["AñoPed"];
           row["Pedido"] = sqlDataReader["Pedido"];
-          row["Nombre"] = sqlDataReader["Nombre"];
+          //row["Nombre"] = sqlDataReader["Nombre"];
+          row["Nombre"] = clienteTemp.Nombre;
           row["PedidoReferencia"] = sqlDataReader["PedidoReferencia"];
           row["Litros"] = sqlDataReader["Litros"];
           row["Precio"] = sqlDataReader["Precio"];

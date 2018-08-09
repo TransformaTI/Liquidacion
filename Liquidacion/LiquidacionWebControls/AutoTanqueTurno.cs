@@ -40,6 +40,8 @@ namespace SigametLiquidacion.WebControls
     private FolioLiquidacion _folioLiquidacion;
     private Tripulacion _tripulacion;
 
+    private string _usuarioSistema;
+
     public short AñoAtt
     {
       get
@@ -173,6 +175,7 @@ namespace SigametLiquidacion.WebControls
       set
       {
         this._folioLiquidacion.Usuario = value;
+        this._usuarioSistema= value;
       }
     }
 
@@ -268,7 +271,9 @@ namespace SigametLiquidacion.WebControls
         }
     }
 
-    public event EventHandler CierreLiquidacion;
+      
+
+        public event EventHandler CierreLiquidacion;
 
     protected virtual void OnCierreLiquidacion(EventArgs e)
     {
@@ -411,6 +416,7 @@ namespace SigametLiquidacion.WebControls
 
     public void CargarListaPedidos()
     {
+      this._folioLiquidacion.Usuario = _usuarioSistema;
       this._folioLiquidacion.ConsultaPedidos();
       if (this._folioLiquidacion.Status.Trim().ToUpper() == "CIERRE" && this.FormaLiquidacion == "AUTOMATICA")
         this._folioLiquidacion.DescargaSuministros(TipoOperacionDescarga.Rampac);

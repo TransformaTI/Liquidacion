@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLLiquidacion", "..\..\..\..\..\..\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\DLLiquidacion.csproj", "{2A7F0835-420F-4917-AF00-A1FA0A00DD05}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLLiquidacion", "DLLiquidacion\DLLiquidacion.csproj", "{2A7F0835-420F-4917-AF00-A1FA0A00DD05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiquidacionWebControls", "..\..\..\..\..\..\Proyectos\SigametLiquidacion\Liquidacion\LiquidacionWebControls\LiquidacionWebControls.csproj", "{823729BB-252E-4475-BBAD-A1F493656B3C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiquidacionWebControls", "LiquidacionWebControls\LiquidacionWebControls.csproj", "{823729BB-252E-4475-BBAD-A1F493656B3C}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Liquidacion", "..\..\..\..\..\..\Proyectos\SigametLiquidacion\Liquidacion\Liquidacion\", "{E8877B7F-4C1E-46F8-A9D1-B7C7D95906F3}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Liquidacion", "Liquidacion\", "{E8877B7F-4C1E-46F8-A9D1-B7C7D95906F3}"
 	ProjectSection(WebsiteProperties) = preProject
 		SccProjectName = "SAK"
 		SccAuxPath = "SAK"
@@ -15,21 +15,21 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Liquidacion", "..\..\..\..\
 		SccProvider = "SAK"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_8080"
-		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\Proyectos\SigametLiquidacion\Liquidacion\Liquidacion\"
+		Debug.AspNetCompiler.PhysicalPath = "Liquidacion\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51835\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/localhost_8080"
-		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\Proyectos\SigametLiquidacion\Liquidacion\Liquidacion\"
+		Release.AspNetCompiler.PhysicalPath = "Liquidacion\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51835\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "8080"
-		SlnRelativePath = "..\..\..\..\..\..\Proyectos\SigametLiquidacion\Liquidacion\Liquidacion\"
+		SlnRelativePath = "Liquidacion\"
 	EndProjectSection
 EndProject
 Global

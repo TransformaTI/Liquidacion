@@ -19,7 +19,20 @@ namespace SigametLiquidacion
     [NonSerialized]
     private DatosParametros _datos;
 
-    public Parametros(short Corporativo, short Sucursal, short Modulo)
+        public short Modulo
+        {
+            get
+            {
+                return _modulo;
+            }
+
+            set
+            {
+                _modulo = value;
+            }
+        }
+
+        public Parametros(short Corporativo, short Sucursal, short Modulo)
     {
       this._corporativo = Corporativo;
       this._sucursal = Sucursal;

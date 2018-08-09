@@ -88,8 +88,8 @@ namespace SigametLiquidacion
 
           
             
-          Cliente clienteTemp = new Cliente(int.Parse(sqlDataReader["Cliente"].ToString()), 1, _usuario) ;
-          clienteTemp.ConsultaDatosCliente();
+          Cliente clienteTemp = new Cliente(int.Parse(sqlDataReader["Cliente"].ToString()), 1) ;
+          clienteTemp.ConsultaNombreCliente();
 
 
 //          objDireccionEntega = obtenDireccionEntrega();

@@ -649,7 +649,7 @@ private void LlenaDropDowns()
         string NombreCliente = "";
         try
         {
-            Cliente objCliente = new Cliente(ClienteID);
+            Cliente objCliente = new Cliente(ClienteID,0);
             NombreCliente = objCliente.Nombre;
         }
         catch (Exception ex)

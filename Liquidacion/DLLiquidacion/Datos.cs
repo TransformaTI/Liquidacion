@@ -18,10 +18,22 @@ namespace SigametLiquidacion
   {
     protected short _AñoAtt;
     protected int _Folio;
+    protected string _conexion;
+
     [NonSerialized]
     protected DAC _dataAccess;
 
-    public Datos()
+        public string Conexion
+        {
+            get
+            {
+                return _conexion;
+            }
+
+           
+        }
+
+        public Datos()
     {
       this.DataCompInitialize();
     }
@@ -29,7 +41,8 @@ namespace SigametLiquidacion
     public void DataCompInitialize()
     {
       TextReader textReader = (TextReader) new StreamReader(HttpContext.Current.Server.MapPath("Conexion.txt"));
-      this._dataAccess = new DAC(new SqlConnection(textReader.ReadLine()));
+     _conexion = textReader.ReadLine();
+      this._dataAccess = new DAC(new SqlConnection(_conexion));
       textReader.Close();
     }
 

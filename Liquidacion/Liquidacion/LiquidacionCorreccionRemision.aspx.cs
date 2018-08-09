@@ -44,7 +44,7 @@ public partial class LiquidacionCorreccionRemision : System.Web.UI.Page
             lblFolio.Text = _pedido.AñoAtt + " - " + _pedido.FolioAtt;
             lblFSuministro.Text = _pedido.FechaSuministro.ToShortDateString();
 
-            _cliente = new SigametLiquidacion.Cliente(_pedido.Cliente, 7, "ESPERA");
+            _cliente = new SigametLiquidacion.Cliente(_pedido.Cliente, 7);
             _cliente.ConsultaDatosCliente();
             lblCliente.Text = _cliente.NumeroCliente.ToString();
             lblNombre.Text = _cliente.Nombre;

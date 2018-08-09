@@ -171,7 +171,7 @@ namespace SigametLiquidacion
             this._dataAccess.LoadData(this.dtPagosConTarjeta, "spCBConsultarCargoTarjetaCliente", CommandType.StoredProcedure, sqlParameterArray, true);
             this.dtPagosConTarjeta.Columns.Add("NombreCliente", typeof(String));
 
-            Cliente _cliente = new SigametLiquidacion.Cliente(NumCliente, 0, _usuario );
+            Cliente _cliente = new SigametLiquidacion.Cliente(NumCliente, 0 );
             _cliente.ConsultaDatosCliente();
 
             foreach (DataRow row in dtPagosConTarjeta.Rows)

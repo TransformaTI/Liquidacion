@@ -27,7 +27,9 @@ namespace SigametLiquidacion
         public DatosCliente(int Cliente)
         {
             this._cliente = Cliente;
+            
         }
+
         public DatosCliente(int Cliente, DateTime FSuministro)
         {
             this._cliente = Cliente;
@@ -55,6 +57,12 @@ namespace SigametLiquidacion
 
             return NombreCliente;
         }
+
+        public string obtenerCadenaConexion()
+        {
+            return Conexion;
+        }
+
 
         public DataTable ConsultaSaldosAFavor(int cliente,string statusMovimiento, int folioMovimiento, int anioMovimiento)
         {

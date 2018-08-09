@@ -1,3 +1,7 @@
 Liquidacion/.vs/Liquidacion/v15/Server/sqlite3/storage.ide-wal
 Liquidacion/.vs/Liquidacion/v15/Server/sqlite3/storage.ide-shm
 Liquidacion/.vs/Liquidacion/DesignTimeBuild/.dtbcache
+*.dll
+*.cache
+*.dll
+*.dll

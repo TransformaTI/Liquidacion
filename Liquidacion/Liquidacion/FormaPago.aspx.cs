@@ -1414,8 +1414,6 @@ else
         dtDatosControlUsuario.Columns.Add("Anio", typeof(string));
         dtDatosControlUsuario.Columns.Add("Folio", typeof(string));
 
-        rp.Usuario = Convert.ToString(Session["Usuario"]); 
-
         if (sFormaPago == "tarjeta")
         {
             dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text), Ruta, Autotanque);

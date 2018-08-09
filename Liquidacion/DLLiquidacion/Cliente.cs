@@ -39,6 +39,9 @@ namespace SigametLiquidacion
         private decimal _precioCliente;
         private string _usuario;
         private string _urlGateway;
+        private byte _modulo;
+        private string _cadenaConexion;
+        
          
         
         private DataTable _dtSaldosCliente;
@@ -215,7 +218,20 @@ namespace SigametLiquidacion
             }
         }
 
-       
+        public DataTable SaldosCliente
+        {
+            get
+            {
+                return this._dtSaldosCliente;
+            }
+            set
+            {
+                this._dtSaldosCliente = value;
+            }
+
+        }
+
+
 
         //20-07-2015
         public decimal PrecioCliente
@@ -226,47 +242,126 @@ namespace SigametLiquidacion
             }
         }
                 
-        public Cliente(int Cliente, byte ClaveCreditoAutorizado, string usuario)
+        public Cliente(int Cliente, byte ClaveCreditoAutorizado)
         {
+            Parametros _parametros = (Parametros)System.Web.HttpContext.Current.Session["parametros"] ;
+            this._usuario = (string)System.Web.HttpContext.Current.Session["Usuario"]; 
+            this._modulo =(byte) _parametros.Modulo;
+            this._urlGateway = "";
+
+            try
+            {
+                _urlGateway = (String)_parametros.ValorParametro("URLGateway");
+            }
+            catch (Exception ex)
+            {
+
+            }
+
             this._cliente = Cliente;
             this._claveCreditoAutorizado = ClaveCreditoAutorizado;
-           this._usuario = usuario;
+            DatosCliente datosCliente = new DatosCliente(Cliente);
+            this._cadenaConexion = datosCliente.obtenerCadenaConexion();
+
         }
         
         public void ConsultaDatosCliente()
         {
-            //DatosCliente datosCliente = new DatosCliente(this._cliente, this._fSuministro);
-            //try
-            //{
-            //    this.dtDatosCliente = datosCliente.ConsultaCliente();
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw ex;
-            //}
-            this.asignacionDatosCliente(this.dtDatosCliente);
+            
+
+            if (_urlGateway=="") {
+                DatosCliente datosCliente = new DatosCliente(this._cliente);
+                try
+                {
+                    this.dtDatosCliente = datosCliente.ConsultaCliente();
+                    this.asignacionDatosCliente(this.dtDatosCliente);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+            else
+            {
+                this.asignacionDatosClienteGateway();
+            }
+            
         }
 
+        public void ConsultaNombreCliente()
+        {
+            if (_urlGateway == "")
+            {
+                DatosCliente datosCliente = new DatosCliente(this._cliente);
+                try
+                {
+                    _nombre = datosCliente.consultaNombreCliente(this._cliente);
+               
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+            else
+            {
+                this.asignacionNombreClienteGateway();
+            }
+        }
+
+
+        private void asignacionDatosCliente(DataTable DatosCliente)
+        {
+            if (DatosCliente != null && DatosCliente.Rows.Count > 0)
+            {
+                foreach (DataRow dataRow in DatosCliente.Rows)
+                {
+                    this._encontrado = true;
+                    this._nombre = Convert.ToString(dataRow["Nombre"]);
+                    this._direccion = Convert.ToString(dataRow["DireccionCompleta"]);
+                    this._celula = Convert.ToInt16(dataRow["Celula"]);
+                    this._ruta = Convert.ToInt16(dataRow["Ruta"]);
+                    this._tipoCartera = Convert.ToByte(dataRow["Cartera"]);
+                    this._descripcionTipoCartera = Convert.ToString(dataRow["DescripcionCartera"]);
+                    this._limiteCredito = Convert.ToDecimal(dataRow["MaxImporteCredito"]);
+                    this._saldo = Convert.ToDecimal(dataRow["Saldo"]);
+                    this._limiteDisponible = this._limiteCredito - this._saldo - this._saldoClienteMovimiento;
+                    this._tipoCreditoCliente = Convert.ToByte(dataRow["TipoCreditoCliente"]);
+                    this._tipoCarteraCliente = Convert.ToString(dataRow["ClasificacionCartera"]);
+                    this._creditoAutorizado = (int)this._tipoCartera == (int)this._claveCreditoAutorizado;
+                    this._limiteCreditoExcedido = !(this._limiteDisponible > new Decimal(0));
+                    this._descuento = Convert.ToDecimal(dataRow["Descuento"]);
+                    this._descripcionDescuento = Convert.ToString(dataRow["TipoDescuento"]);
+
+                    this._zonaEconomica = dataRow["ZonaEconomica"] == DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dataRow["ZonaEconomica"]);//Se asignará automáticamente la zona económica 0 para clientes sin zona económica.
+
+                    this._precioCliente = dataRow["Precio"] == DBNull.Value ? Convert.ToDecimal(0) : Convert.ToDecimal(dataRow["Precio"]);//Para consultar el precio del cliente de acuerdo a la zona económica.
+                }
+            }
+            else
+            {
+                this._encontrado = false;
+            }
+        }
         public RTGMCore.DireccionEntrega obtenDireccionEntrega(int Cliente)
         {
             RTGMCore.DireccionEntrega objDireccionEntega = new RTGMCore.DireccionEntrega();
             try
             {
-                RTGMGateway.RTGMGateway objGateway = new RTGMGateway.RTGMGateway();
+                RTGMGateway.RTGMGateway objGateway = new RTGMGateway.RTGMGateway(_modulo, _cadenaConexion);
                 objGateway.URLServicio = _urlGateway;
                 SolicitudGateway objRequest = new SolicitudGateway
                 {
-                    Fuente = RTGMCore.Fuente.Sigamet,
-                    IDCliente = Cliente,
-                    IDEmpresa=1
-
+                    IDCliente = Cliente
                 };
                 objDireccionEntega = objGateway.buscarDireccionEntrega(objRequest);
             }
             catch (Exception ex)
             {
                 //throw ex;
-                objDireccionEntega.Nombre = "Error "+_usuario;
+                objDireccionEntega.Nombre = "Error "+ex.Message;
             }
             return objDireccionEntega;
 
@@ -281,14 +376,11 @@ namespace SigametLiquidacion
                 //string hola;
                 //hola = Convert.ToString(Session["Usuario"]);
 
-                RTGMGateway.RTGMGateway objGateway = new RTGMGateway.RTGMGateway();
+                RTGMGateway.RTGMGateway objGateway = new RTGMGateway.RTGMGateway(_modulo, _cadenaConexion);
                 objGateway.URLServicio = _urlGateway;
                 SolicitudGateway objRequest = new SolicitudGateway
                 {
-                    Fuente = RTGMCore.Fuente.Sigamet,
-                    IDCliente = Cliente,
-                    IDEmpresa=1
-
+                    IDCliente = Cliente                   
                 };
                 objCondicionCredito = objGateway.buscarCondicionesCredito(objRequest);
             }
@@ -300,14 +392,32 @@ namespace SigametLiquidacion
 
         }
 
-
-
-        private void asignacionDatosCliente(DataTable DatosCliente)
+        private void asignacionNombreClienteGateway()
         {
-            DatosCliente datosCliente = new DatosCliente(this._cliente, this._fSuministro);
             try
             {
-                _urlGateway = datosCliente.obtenURLGateway(_usuario);
+                RTGMCore.DireccionEntrega objDireccionEntega = obtenDireccionEntrega(this._cliente);
+               
+                this._encontrado = true;
+                this._nombre = objDireccionEntega.Nombre;   
+            }
+            catch (Exception ex)
+            {
+                this._nombre = "Error " + ex.Message;
+                this._encontrado = true;
+
+                //this._encontrado = false;
+            }
+
+        }
+
+
+
+        private void asignacionDatosClienteGateway()
+        {           
+            try
+            {
+
                 RTGMCore.DireccionEntrega objDireccionEntega = obtenDireccionEntrega(this._cliente);
                 RTGMCore.CondicionesCredito objCondicionCredito = obtenCondicionesCredito(this._cliente);
 
@@ -349,7 +459,16 @@ namespace SigametLiquidacion
 
                 this._zonaEconomica = Convert.ToByte(objDireccionEntega.ZonaEconomica.IDZonaEconomomica);
 
-                this._precioCliente = objDireccionEntega.PrecioPorDefecto.ValorPrecio.Value;
+                try
+                {
+                    this._precioCliente = objDireccionEntega.PrecioPorDefecto.ValorPrecio.Value;
+                }
+                catch
+                {
+                    this._precioCliente = 0;
+                }
+
+                    
 
 
             }
@@ -361,38 +480,9 @@ namespace SigametLiquidacion
                 //this._encontrado = false;
             }
 
-
-            //if (DatosCliente != null && DatosCliente.Rows.Count > 0)
-            //{
-            //    foreach (DataRow dataRow in DatosCliente.Rows)
-            //    {
-            //        this._encontrado = true;
-            //        this._nombre = Convert.ToString(dataRow["Nombre"]);
-            //        this._direccion = Convert.ToString(dataRow["DireccionCompleta"]);
-            //        this._celula = Convert.ToInt16(dataRow["Celula"]);
-            //        this._ruta = Convert.ToInt16(dataRow["Ruta"]);
-            //        this._tipoCartera = Convert.ToByte(dataRow["Cartera"]);
-            //        this._descripcionTipoCartera = Convert.ToString(dataRow["DescripcionCartera"]);
-            //        this._limiteCredito = Convert.ToDecimal(dataRow["MaxImporteCredito"]);
-            //        this._saldo = Convert.ToDecimal(dataRow["Saldo"]);
-            //        this._limiteDisponible = this._limiteCredito - this._saldo - this._saldoClienteMovimiento;
-            //        this._tipoCreditoCliente = Convert.ToByte(dataRow["TipoCreditoCliente"]);
-            //        this._tipoCarteraCliente = Convert.ToString(dataRow["ClasificacionCartera"]);
-            //        this._creditoAutorizado = (int)this._tipoCartera == (int)this._claveCreditoAutorizado;
-            //        this._limiteCreditoExcedido = !(this._limiteDisponible > new Decimal(0));
-            //        this._descuento = Convert.ToDecimal(dataRow["Descuento"]);
-            //        this._descripcionDescuento = Convert.ToString(dataRow["TipoDescuento"]);
-
-            //        this._zonaEconomica = dataRow["ZonaEconomica"] == DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dataRow["ZonaEconomica"]);//Se asignará automáticamente la zona económica 0 para clientes sin zona económica.
-
-            //        this._precioCliente = dataRow["Precio"] == DBNull.Value ? Convert.ToDecimal(0) : Convert.ToDecimal(dataRow["Precio"]);//Para consultar el precio del cliente de acuerdo a la zona económica.
-            //    }
-            //}
-            //else
-            //{
-            //    this._encontrado = false;
-            //}
         }
+
+        
 
         public bool ClienteLiquidado(short AñoAtt, int Folio, int Cliente)
         {
@@ -417,8 +507,8 @@ namespace SigametLiquidacion
                 if (saldoCliente.Rows.Count >0)
                 {
                     this._nombre = Convert.ToString(saldoCliente.Rows[0]["Nombre"]);
-                //this._saldo = this._saldo = Convert.ToDecimal(saldoCliente.Rows[0]["Saldo"]);
-                SaldosCliente = saldoCliente;
+                    //this._saldo = this._saldo = Convert.ToDecimal(saldoCliente.Rows[0]["Saldo"]);
+                    SaldosCliente = saldoCliente;
                 }
             }
             catch (Exception ex)

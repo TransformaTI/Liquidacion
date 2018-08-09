@@ -778,7 +778,7 @@ public partial class FormaPago : System.Web.UI.Page
         {
             RevisaPagos();
             
-            if (AgregarCargoTarjeta(txtClienteTarjeta.Text.Trim(),txtNumTarjeta.Text.Trim(),txtNoAutorizacionTarjeta.Text.Trim()))
+            if (AgregarCargoTarjeta(int.Parse(ddBancoTarjeta.SelectedValue),txtClienteTarjeta.Text.Trim(),txtNumTarjeta.Text.Trim(),txtNoAutorizacionTarjeta.Text.Trim()))
            {
 
                 if ((DataSet)(Session["dsLiquidacion"]) == null)
@@ -1742,8 +1742,19 @@ else
 
 
 
+    private bool revisaCargoTarjeta(int banco, string Tarjeta, string Autorizacion) {
+        bool encontrado = false;
 
-    private bool AgregarCargoTarjeta(string Cliente,string Tarjeta, string Autorizacion)
+        CobroTarjeta objCobroTarjeta = new CobroTarjeta(banco, Autorizacion, Tarjeta);
+
+        objCobroTarjeta.consulta();
+
+        encontrado = objCobroTarjeta.Encontrado;
+
+        return encontrado;
+    }
+
+    private bool AgregarCargoTarjeta(int Banco, string Cliente,string Tarjeta, string Autorizacion)
     {
         bool Return = false;
         DataRow dr=null;
@@ -1751,24 +1762,32 @@ else
 
         try
         {
+            
 
-            if (Session["CargoTarjeta"] != null)
-            {
-                dtCargoTarjeta =(DataTable) (Session["CargoTarjeta"]);                  
+            if(revisaCargoTarjeta( Banco, Tarjeta, Autorizacion)){
+              
+                    Return = false;
+                    HiddenTDCDupliado.Value = "true";
+
+            }
+            else {
+                if (Session["CargoTarjeta"] != null)
+                {
+                    dtCargoTarjeta = (DataTable)(Session["CargoTarjeta"]);
 
                     dr = dtCargoTarjeta.NewRow();
                     dr["Cliente"] = Cliente;
                     dr["Tarjeta"] = Tarjeta;
                     dr["Autorizacion"] = Autorizacion;
 
-                    
+
 
                     dtCargoTarjeta.Rows.Add(dr);
-                   // ds.Tables.Add(dtCargoTarjeta);
+                    // ds.Tables.Add(dtCargoTarjeta);
                     (Session["CargoTarjeta"]) = dtCargoTarjeta; ;
                     Return = true;
                     HiddenTDCDupliado.Value = "false";
-            }
+                }
 
                 else
                 {
@@ -1785,7 +1804,11 @@ else
                     (Session["CargoTarjeta"]) = dtCargoTarjeta;
                     Return = true;
                     HiddenTDCDupliado.Value = "false";
+                }
             }
+                
+
+           
          
         }
         catch (Exception ex )

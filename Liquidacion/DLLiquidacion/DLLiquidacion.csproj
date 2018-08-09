@@ -81,6 +81,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clase_Reporte.cs" />
+    <Compile Include="CobroTarjeta.cs" />
+    <Compile Include="DatosCobroTarjeta.cs" />
     <Compile Include="FolioLiquidacion.cs" />
     <Compile Include="RegistroBitacora.cs" />
     <Compile Include="AdministracionUsuarios.cs" />

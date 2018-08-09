@@ -160,9 +160,6 @@ public partial class FormaPago : System.Web.UI.Page
 
         #endregion
 
-
-
-
         if (Session["dsLiquidacion"] == null)
         {
             string path = Server.MapPath("");

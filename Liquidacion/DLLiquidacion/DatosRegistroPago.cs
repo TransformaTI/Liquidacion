@@ -169,7 +169,7 @@ namespace SigametLiquidacion
             };
             this.dtPagosConTarjeta = new DataTable();
             this._dataAccess.LoadData(this.dtPagosConTarjeta, "spCBConsultarCargoTarjetaCliente", CommandType.StoredProcedure, sqlParameterArray, true);
-            this.dtPagosConTarjeta.Columns.Add("NombreCliente", typeof(String));
+            //this.dtPagosConTarjeta.Columns.Add("NombreCliente", typeof(String));
 
             Cliente _cliente = new SigametLiquidacion.Cliente(NumCliente, 0 );
             _cliente.ConsultaDatosCliente();

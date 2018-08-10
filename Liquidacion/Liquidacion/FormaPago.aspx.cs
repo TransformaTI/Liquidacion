@@ -1779,6 +1779,7 @@ else
                     dr["Cliente"] = Cliente;
                     dr["Tarjeta"] = Tarjeta;
                     dr["Autorizacion"] = Autorizacion;
+                    dr["Banco"] = Banco;
 
 
 
@@ -1796,10 +1797,11 @@ else
                     dtCargoTarjeta.Columns.Add("Cliente", typeof(string));
                     dtCargoTarjeta.Columns.Add("Tarjeta", typeof(string));
                     dtCargoTarjeta.Columns.Add("Autorizacion", typeof(string));
-                    dtCargoTarjeta.PrimaryKey = new DataColumn[] { dtCargoTarjeta.Columns["Cliente"], dtCargoTarjeta.Columns["Tarjeta"], dtCargoTarjeta.Columns["Autorizacion"] };
+                    dtCargoTarjeta.Columns.Add("Banco", typeof(string));
+                    dtCargoTarjeta.PrimaryKey = new DataColumn[] { dtCargoTarjeta.Columns["Tarjeta"], dtCargoTarjeta.Columns["Autorizacion"], dtCargoTarjeta.Columns["Banco"]};
 
 
-                    dtCargoTarjeta.Rows.Add(Cliente, Tarjeta, Autorizacion);
+                    dtCargoTarjeta.Rows.Add(Cliente, Tarjeta, Autorizacion, Banco);
                     //ds.Tables.Add(dtCargoTarjeta);
                     (Session["CargoTarjeta"]) = dtCargoTarjeta;
                     Return = true;
@@ -1812,7 +1814,7 @@ else
         }
         catch (Exception ex )
         {
-            if (ex.Message.Contains("Cliente, Tarjeta, Autorizacion"))
+            if (ex.Message.Contains("Tarjeta, Autorizacion, Banco"))
             {
                 Return = false;
             HiddenTDCDupliado.Value = "true";

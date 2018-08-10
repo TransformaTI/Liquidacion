@@ -259,8 +259,8 @@ public partial class FormaPago : System.Web.UI.Page
 
         txtNoAutorizacionTarjetaConfirm.Attributes.Add("onkeypress", "return isAlphaNumeric(event)");
 
-
-       // txtNumTarjeta.Attributes.Add("onblur", "return AgregarCargoTarjeta('AgregarCargoTarjeta')");
+        imbResumen.Attributes.Add("onclick", "imbResumenClick()");         
+        // txtNumTarjeta.Attributes.Add("onblur", "return AgregarCargoTarjeta('AgregarCargoTarjeta')");
 
 
 
@@ -285,7 +285,7 @@ public partial class FormaPago : System.Web.UI.Page
                 
                 lblCobros.Visible = true;
                 imgExpandCollapse.Visible = true;
-                //imbResumen.Visible = true;
+                imbResumen.Visible = true;
 
                 TitlePanel.Visible = true;
                 ContentPanel.Visible = true;
@@ -304,7 +304,7 @@ public partial class FormaPago : System.Web.UI.Page
                 gvPagoGenerado.DataSource = null;
                 gvPagoGenerado.DataBind();
 
-               // imbResumen.Visible = false;
+                imbResumen.Visible = false;
             }
         }
 
@@ -1319,6 +1319,8 @@ else
     {
         Response.Redirect("GenerarPago.aspx");
     }
+
+ 
     /// <summary>
     /// 
     /// </summary>

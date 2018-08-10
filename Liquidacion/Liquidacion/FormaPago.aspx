@@ -280,14 +280,7 @@
             }
           }
           return true;
-         };
-
-         function imbResumenClick()
-         {
-             window.location = 'GenerarPago.aspx';
-          //   Response.Redirect("GenerarPago.aspx");
-         }
-
+        };
 
          function toggle(display, activo, inactivo, inactivoA, control) {
              document.getElementById('ctl00_mostrando').value = ''
@@ -593,8 +586,8 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:Image ID="imbResumen" runat="server" Height="25px" Visible="False"
-                                                ImageUrl="~/Images/captPagos.png" 
+                                            <asp:ImageButton ID="imbResumen" runat="server" Height="25px"
+                                                ImageUrl="~/Images/captPagos.png" OnClick="imbResumen_Click" Visible="False"
                                                 Width="74px" />
                                         </td>
                                     </tr>

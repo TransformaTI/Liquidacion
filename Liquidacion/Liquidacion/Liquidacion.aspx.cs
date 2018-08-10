@@ -108,6 +108,8 @@ public partial class Liquidacion : System.Web.UI.Page
         lblMensaje.Text = string.Empty;
         if(IsPageRefresh) {
             ReordenarLista("Litros");
+            Session["desasigna"] = "";
+            Session["buscandoCliente"] = "";
         }
     }
     protected void Page_PreRender(object sender, EventArgs e)

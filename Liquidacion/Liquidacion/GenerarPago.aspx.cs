@@ -35,25 +35,34 @@ public partial class GenerarPago : System.Web.UI.Page
         dsPagos = (DataSet)(Session["dsLiquidacion"]);
 
         //dtPagosGenerados = (DataTable)(Session["TablaCobro"]);
-        gvPagoGenerado.DataSource = dsPagos.Tables["Cobro"];
-        gvPagoGenerado.DataBind();
-
-        //dtDetallePago = (DataTable)(Session["dtPagos"]);
-        //Va a Mostrar por Default el Detalle del Pago Activo
-        string pagoSeleccionado = Session["idCobroConsec"].ToString();
-        //DataView vistaPagoActivo = new DataView(dtDetallePago);
-        DataView vistaPagoActivo = new DataView(dsPagos.Tables["CobroPedido"]);
-        vistaPagoActivo.RowFilter = "IdPago = " + pagoSeleccionado;
         
+        if(dsPagos !=null && dsPagos.Tables["Cobro"] != null) {
+            gvPagoGenerado.DataSource = dsPagos.Tables["Cobro"];
+            gvPagoGenerado.DataBind();
 
-        dlDetallePago.DataSource = vistaPagoActivo;
-        dlDetallePago.DataBind();
+            //dtDetallePago = (DataTable)(Session["dtPagos"]);
+            //Va a Mostrar por Default el Detalle del Pago Activo
+            string pagoSeleccionado = Session["idCobroConsec"].ToString();
+            //DataView vistaPagoActivo = new DataView(dtDetallePago);
+            DataView vistaPagoActivo = new DataView(dsPagos.Tables["CobroPedido"]);
+            vistaPagoActivo.RowFilter = "IdPago = " + pagoSeleccionado;
 
-        DataTable Cobro = dsPagos.Tables["Cobro"];
-        if (Cobro!=null)
-        {
-            HiddenSaldo.Value = Cobro.Compute("Sum(Saldo)","").ToString();
+
+            dlDetallePago.DataSource = vistaPagoActivo;
+            dlDetallePago.DataBind();
+
+            DataTable Cobro = dsPagos.Tables["Cobro"];
+            if (Cobro != null)
+            {
+                HiddenSaldo.Value = Cobro.Compute("Sum(Saldo)", "").ToString();
+            }
         }
+        else {
+            Response.Write("<script>alert('No hay pagos a mostrar')</script>");
+
+        } 
+       
+        
 
 
 

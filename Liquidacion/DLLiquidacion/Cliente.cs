@@ -270,7 +270,7 @@ namespace SigametLiquidacion
             
 
             if (_urlGateway=="") {
-                DatosCliente datosCliente = new DatosCliente(this._cliente);
+                DatosCliente datosCliente = new DatosCliente(this._cliente, _fSuministro);
                 try
                 {
                     this.dtDatosCliente = datosCliente.ConsultaCliente();

@@ -650,6 +650,7 @@ private void LlenaDropDowns()
         try
         {
             Cliente objCliente = new Cliente(ClienteID,0);
+            objCliente.ConsultaNombreCliente();
             NombreCliente = objCliente.Nombre;
         }
         catch (Exception ex)

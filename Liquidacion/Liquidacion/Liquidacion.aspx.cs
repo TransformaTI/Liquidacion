@@ -299,10 +299,11 @@ public partial class Liquidacion : System.Web.UI.Page
 
             if (!(ListaPedidos1.SiguientePedido(pedidoActual)))
             {
+                Session["desasignado"] = "";
+                nuevoPedido_ClickCancelar(sender, e);
                 nuevoPedido.Focus();
             }
-            Session["desasignado"] = "";
-            nuevoPedido_ClickCancelar(sender, e);
+           
         }
         catch (Exception ex)
         {

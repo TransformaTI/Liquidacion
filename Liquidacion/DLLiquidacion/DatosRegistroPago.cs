@@ -172,7 +172,7 @@ namespace SigametLiquidacion
             //this.dtPagosConTarjeta.Columns.Add("NombreCliente", typeof(String));
 
             Cliente _cliente = new SigametLiquidacion.Cliente(NumCliente, 0 );
-            _cliente.ConsultaDatosCliente();
+            _cliente.ConsultaNombreCliente();
 
             foreach (DataRow row in dtPagosConTarjeta.Rows)
             {

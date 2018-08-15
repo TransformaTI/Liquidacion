@@ -603,7 +603,7 @@ label_10:
         if(!sqlDataReader.HasRows) 
         {
             sqlDataReader.Close();
-            throw new Exception("No se encontro pedido");
+            throw new Exception("No se encontró pedido");
         }
         sqlDataReader.Close();
 
@@ -659,7 +659,7 @@ label_10:
         if(!sqlDataReader.HasRows) 
         {
             sqlDataReader.Close();
-            throw new Exception("No se encontro pedido");
+            throw new Exception("No se encontró pedido");
         }
          sqlDataReader.Close();
       }

@@ -13,6 +13,8 @@ public partial class LiquidacionCorreccionRemision : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        _parametros = new SigametLiquidacion.Parametros(1, 1, 22);
+        Session["Parametros"] = _parametros;
 
     }
 
@@ -45,6 +47,7 @@ public partial class LiquidacionCorreccionRemision : System.Web.UI.Page
             lblFSuministro.Text = _pedido.FechaSuministro.ToShortDateString();
 
             _cliente = new SigametLiquidacion.Cliente(_pedido.Cliente, 7);
+            _cliente.FSuministro = _pedido.FechaSuministro.Date;
             _cliente.ConsultaDatosCliente();
             lblCliente.Text = _cliente.NumeroCliente.ToString();
             lblNombre.Text = _cliente.Nombre;

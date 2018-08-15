@@ -600,7 +600,13 @@ label_10:
           this._consecutivoOrigen = Convert.ToInt32(sqlDataReader["ConsecutivoOrigen"]);
           this._factura = Convert.ToString(sqlDataReader["Factura"]);
         }
+        if(!sqlDataReader.HasRows) 
+        {
+            sqlDataReader.Close();
+            throw new Exception("No se encontro pedido");
+        }
         sqlDataReader.Close();
+
       }
       catch (Exception ex)
       {
@@ -648,7 +654,14 @@ label_10:
           this._consecutivoOrigen = Convert.ToInt32(sqlDataReader["ConsecutivoOrigen"]);
           this._factura = Convert.ToString(sqlDataReader["Factura"]);
         }
-        sqlDataReader.Close();
+       
+
+        if(!sqlDataReader.HasRows) 
+        {
+            sqlDataReader.Close();
+            throw new Exception("No se encontro pedido");
+        }
+         sqlDataReader.Close();
       }
       catch (Exception ex)
       {

@@ -606,7 +606,7 @@ namespace SigametLiquidacion
                         new SqlParameter("@BancoTarjeta", (object) Convert.ToInt16(dtPago.Rows[index1]["Banco"].ToString())),
                         new SqlParameter("@AñoCobro", SqlDbType.SmallInt),
                         null,
-                        new SqlParameter("@Referencia", (object) dtPago.Rows[index1]["ProveedorNombre"].ToString()),
+                        new SqlParameter("@Referencia", (object) dtPago.Rows[index1]["Referencia"].ToString()),
                         new SqlParameter("@NumeroCuentaDestino", (object) dtPago.Rows[index1]["TipoValeDescripcion"].ToString()),
                     };
                     sqlParameterArray[14].Direction = ParameterDirection.Output;

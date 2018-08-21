@@ -789,7 +789,7 @@ public partial class FormaPago : System.Web.UI.Page
                 dr = dtCobro.NewRow();
 
                 dr["IdPago"] = 1; //Consecutivo
-                dr["Referencia"] = txtNoAutorizacionTarjeta.Text;
+                dr["Referencia"] = ddlTAfiliacion.SelectedItem.Text; // txtNoAutorizacionTarjeta.Text;
                 dr["NumeroCuenta"] = txtNumTarjeta.Text.Trim();
 
                 dr["FechaCheque"] = txtFechaTarjeta.Text;

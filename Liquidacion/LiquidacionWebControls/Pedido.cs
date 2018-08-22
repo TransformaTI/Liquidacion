@@ -1376,7 +1376,7 @@ namespace SigametLiquidacion.WebControls
             if (this._cliente.Encontrado)
             {
                 this.enableCaptureControls(true);
-                this.lblNombreCliente.Text = this._cliente.Nombre;
+                this.lblNombreCliente.Text = this._cliente.Nombre!=null? this._cliente.Nombre:"";
                 this.lblDireccionCliente.Text = this._cliente.Direccion;
                 this.txtNumeroCliente.Enabled = false;
                 this.lblCelulaRuta.Text = "Célula: " + this._cliente.Celula.ToString() + " Ruta: " + this._cliente.Ruta.ToString();
@@ -1454,7 +1454,7 @@ namespace SigametLiquidacion.WebControls
                         "El precio seleccionado no corresponde al descuento del cliente, Verifique." + '\'' + ", " + '\'' +
                         "Este cliente no tiene descuento autorizado, debe liquidar con el precio vigente." + '\'' + ");");
                 }
-                this.lblCarteraCredito.Text = this._cliente.DescripcionTipoCartera.ToUpper().Trim();
+                this.lblCarteraCredito.Text = this._cliente.DescripcionTipoCartera != null ? this._cliente.DescripcionTipoCartera.ToUpper().Trim():"" ;
                 if (!this._cliente.CreditoAutorizado)
                 {
                     this.lblCarteraCredito.ForeColor = Color.Red;

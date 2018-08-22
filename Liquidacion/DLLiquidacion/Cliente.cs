@@ -421,23 +421,27 @@ namespace SigametLiquidacion
                 RTGMCore.DireccionEntrega objDireccionEntega = obtenDireccionEntrega(this._cliente);
                 RTGMCore.CondicionesCredito objCondicionCredito = obtenCondicionesCredito(this._cliente);
 
+      
                 this._encontrado = true;
-                this._nombre = objDireccionEntega.Nombre;
-                this._direccion = objDireccionEntega.DireccionCompleta;
-                this._celula = Convert.ToInt16(objDireccionEntega.ZonaSuministro.IDZona);
-                this._ruta =  short.Parse(objDireccionEntega.Ruta.IDRuta.ToString());
-                this._tipoCartera = Convert.ToByte(objDireccionEntega.CondicionesCredito.IDCartera);                                   
 
-                this._descripcionTipoCartera = objCondicionCredito.CarteraDescripcion;
-                this._limiteCredito = objCondicionCredito.LimiteCredito.Value;
-                this._saldo = objCondicionCredito.Saldo.Value;
+                this._nombre = objDireccionEntega.Nombre!=null? objDireccionEntega.Nombre:string.Empty;
+                this._direccion = objDireccionEntega.DireccionCompleta!=null?objDireccionEntega.DireccionCompleta:string.Empty;
+                this._celula = objDireccionEntega.ZonaSuministro!=null? Convert.ToInt16(objDireccionEntega.ZonaSuministro.IDZona): Convert.ToInt16(0);
+                this._ruta = objDireccionEntega.Ruta!=null? short.Parse(objDireccionEntega.Ruta.IDRuta.ToString()): short.Parse("0");
+                this._tipoCartera = objDireccionEntega.CondicionesCredito!=null? Convert.ToByte(objDireccionEntega.CondicionesCredito.IDCartera): byte.Parse("0");                                   
+
+                this._descripcionTipoCartera = objCondicionCredito!=null? objCondicionCredito.CarteraDescripcion:string.Empty;
+                this._limiteCredito = objCondicionCredito!=null ? objCondicionCredito.LimiteCredito.Value : 0;
+                this._saldo = objCondicionCredito!=null? objCondicionCredito.Saldo.Value:0;
                 this._limiteDisponible = this._limiteCredito - this._saldo - this._saldoClienteMovimiento;
-                this._tipoCreditoCliente = Convert.ToByte(objDireccionEntega.CondicionesCredito.IDClasificacionCredito);
+                this._tipoCreditoCliente = objDireccionEntega.CondicionesCredito!=null?Convert.ToByte(objDireccionEntega.CondicionesCredito.IDClasificacionCredito):byte.Parse("0");
 
-                this._tipoCarteraCliente = objDireccionEntega.CondicionesCredito.CarteraDescripcion;
+                this._tipoCarteraCliente = objCondicionCredito != null ? objDireccionEntega.CondicionesCredito.CarteraDescripcion:string.Empty;
                 this._creditoAutorizado = (int)this._tipoCartera == (int)this._claveCreditoAutorizado;
                 this._limiteCreditoExcedido = !(this._limiteDisponible > new Decimal(0));
-                
+            
+
+
                 try
                 {
                     this._descuento = objDireccionEntega.Descuentos[0].ImporteDescuento;
@@ -455,9 +459,18 @@ namespace SigametLiquidacion
                 {
                     this._descripcionDescuento = "";
                 }
-                
 
-                this._zonaEconomica = Convert.ToByte(objDireccionEntega.ZonaEconomica.IDZonaEconomomica);
+                try
+                {
+                    this._zonaEconomica = Convert.ToByte(objDireccionEntega.ZonaEconomica.IDZonaEconomomica);
+                }
+                catch 
+                {
+
+                    this._zonaEconomica = 0;
+                }
+
+                
 
                 try
                 {

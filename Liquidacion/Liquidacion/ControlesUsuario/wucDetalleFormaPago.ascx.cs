@@ -373,6 +373,7 @@ private void LlenaDropDowns()
             dtLiqAnticipo.Columns.Add("AñoCobro", typeof(String));
             dtLiqAnticipo.Columns.Add("Monto", typeof(decimal));
             dtLiqAnticipo.Columns.Add("Pedidos", typeof(String));
+            dtLiqAnticipo.Columns.Add("IdPago", typeof(String));
         }
         
         try
@@ -482,7 +483,7 @@ private void LlenaDropDowns()
             if (ds.Tables["LiqPagoAnticipado"]!=null)
                 dtLiqAnticipo = ds.Tables["LiqPagoAnticipado"];
 
-            dtLiqAnticipo.Rows.Add(LstSaldos.SelectedValue.ToString().Split('/')[0], LstSaldos.SelectedValue.ToString().Split('/')[1], LstSaldos.SelectedValue.ToString().Split('/')[2], Convert.ToDecimal(this.txtAntMonto.Text),"");
+            dtLiqAnticipo.Rows.Add(LstSaldos.SelectedValue.ToString().Split('/')[0], LstSaldos.SelectedValue.ToString().Split('/')[1], LstSaldos.SelectedValue.ToString().Split('/')[2], Convert.ToDecimal(this.txtAntMonto.Text),"",idConsecutivo);
 
             //if (ds.Tables.Contains("Pedidos"))
             //{

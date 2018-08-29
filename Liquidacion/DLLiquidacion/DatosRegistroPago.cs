@@ -617,6 +617,15 @@ namespace SigametLiquidacion
                     int num1 = Convert.ToInt32(sqlParameterArray[15].Value);
                     int num2 = (int)Convert.ToInt16(sqlParameterArray[14].Value);
                     cobro = num1;
+
+
+                    if (liqPagoAnticipado != null && dtPago.Rows[index1]["NombreTipoCobro"].ToString().Contains("ANTICIPO"))
+                    {
+                        decimal Totalpedidos = decimal.Parse(liqPagoAnticipado.Compute("Sum(Monto)", "IdPago="+ dtPago.Rows[index1]["IdPago"].ToString().Trim()).ToString());
+                        InsertaMovimientoAConciliar(int.Parse(liqPagoAnticipado.Rows[0]["Folio"].ToString()), int.Parse(liqPagoAnticipado.Rows[0]["AñoMovimiento"].ToString()), int.Parse(DateTime.Now.Year.ToString()), cobro, Totalpedidos, "EMITIDO");
+                    }
+
+
                     for (int index2 = 0; index2 <= dtDetallePago.Rows.Count - 1; ++index2)
                     {
                         if (dtPago.Rows[index1]["IdPago"].ToString() == dtDetallePago.Rows[index2]["idPago"].ToString())
@@ -637,11 +646,7 @@ namespace SigametLiquidacion
                 }
                 this.ActualizaTerminado(dtResumenLiquidacion);
 
-                if (liqPagoAnticipado != null)
-                {
-                    decimal Totalpedidos = decimal.Parse(liqPagoAnticipado.Compute("Sum(Monto)", "").ToString());
-                    InsertaMovimientoAConciliar(int.Parse(liqPagoAnticipado.Rows[0]["Folio"].ToString()), int.Parse(liqPagoAnticipado.Rows[0]["AñoMovimiento"].ToString()), int.Parse(DateTime.Now.Year.ToString()), cobro, Totalpedidos, "EMITIDO");
-                }
+             
 
                 //this._dataAccess.get_Transaction().Commit();
 

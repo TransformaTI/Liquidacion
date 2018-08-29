@@ -107,12 +107,34 @@ public partial class GenerarPago : System.Web.UI.Page
         try
         {
 
+           DataTable dtPedidosEf = ((DataTable)(Session["dtPedidos"]));
 
-           rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dsPagos.Tables["Pedidos"], dsPagos.Tables["Cobro"], dsPagos.Tables["CobroPedido"], dtResumenLiquidacion, dsPagos.Tables["LiqPagoAnticipado"]);
+            DataTable dtPedidosParientes = (DataTable)(Session["PedidosParientes"]);
+
+            if (dtPedidosParientes != null)
+            {
+                foreach (DataRow item in dtPedidosEf.Rows)
+                {
+                    foreach (DataRow row in dtPedidosParientes.Rows)
+                    {
+                        if (item["Pedido"].ToString().Trim() == row["Pedido"].ToString().Trim())
+                        {
+                            item.BeginEdit();
+                            item["Saldo"] = row["Saldo"];
+                            item.EndEdit();
+                        }
+
+                    }
+                }
+            }
+
+
+            rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dtPedidosEf, dsPagos.Tables["Cobro"], dsPagos.Tables["CobroPedido"], dtResumenLiquidacion, dsPagos.Tables["LiqPagoAnticipado"]);
             Session["dsLiquidacion"] = null; // MCC  se limpia la session de liquidacion despues de registrar el pago  2018 05 31
             Session["CargoTarjeta"] = null;
             Session["TDCdisponibles"] = null;
             Session["PrimerRegTDC"] = null;
+            Session["PedidosParientes"] = null;
             Response.Redirect("ReporteLiquidacion.aspx");
             
 

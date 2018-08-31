@@ -843,7 +843,7 @@ public partial class FormaPago : System.Web.UI.Page
 
                 dr["IdPago"] = idConsecutivo; //Consecutivo
                 Session["idCobroConsec"] = idConsecutivo;
-                dr["Referencia"] = txtNoAutorizacionTarjeta.Text;
+                dr["Referencia"] = ddlTAfiliacion.SelectedItem.Text; ;
                 dr["NumeroCuenta"] = txtNumTarjeta.Text;
 
                 dr["FechaCheque"] = txtFechaTarjeta.Text;

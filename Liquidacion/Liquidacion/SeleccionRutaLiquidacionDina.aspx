@@ -31,7 +31,7 @@
                                                 <asp:ImageButton runat="Server" ID="btnCalFAsignacion" ImageUrl="~/images/Calendar_scheduleHS.png" AlternateText="Click to show calendar" />
                                                 <asp:ImageButton ID="btnCargaRutas" runat="server" Height="16px" 
                                                     ImageUrl="~/Images/search_start.png" AlternateText="Consultar rutas" 
-                                                     style="width: 16px"/>
+                                                     style="width: 16px" OnClick="btnCargaRutas_Click"/>
                                                 <asp:Label ID="lblError" runat="server" CssClass="textboxcaptura" 
                                                     ForeColor="Red" Text=""></asp:Label>
                                             </td>

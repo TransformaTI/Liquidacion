@@ -402,4 +402,9 @@ public partial class SeleccionRutaLiquidacionDina : System.Web.UI.Page
     {
         Response.Redirect("Liquidacion.aspx");
     }
+
+    protected void btnCargaRutas_Click(object sender, ImageClickEventArgs e)
+    {
+
+    }
 }

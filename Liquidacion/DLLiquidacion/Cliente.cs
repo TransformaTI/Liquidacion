@@ -246,7 +246,7 @@ namespace SigametLiquidacion
         {
             Parametros _parametros = (Parametros)System.Web.HttpContext.Current.Session["parametros"] ;
             this._usuario = (string)System.Web.HttpContext.Current.Session["Usuario"]; 
-            this._modulo =(byte) _parametros.Modulo;
+            this._modulo = _parametros!=null?(byte) _parametros.Modulo: (byte)0;
             this._urlGateway = "";
 
             try

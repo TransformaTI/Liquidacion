@@ -15,3 +15,5 @@ C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacio
 C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.csproj.CopyComplete
 C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.dll
 C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.pdb
+C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
+C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\bin\Debug\CrystalDecisions.Shared.dll

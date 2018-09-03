@@ -128,6 +128,10 @@ public partial class FormaPago : System.Web.UI.Page
                     
                     RegistroPago RegPago = new RegistroPago();
                     DataTable dt = RegPago.DatosCliente(int.Parse(txtClienteCheque.Text));
+
+
+
+
                     if (dt!=null)
                     {
                         if (dt.Rows.Count >0)
@@ -1337,6 +1341,7 @@ else
             dtPagosConTarjetaSelec = dtPagosConTarjeta.Select("Folio=" + clave[1].ToString());
 
             txtNombreClienteTarjeta.Text = dtPagosConTarjetaSelec[0]["NombreCliente"].ToString();
+
             txtNoAutorizacionTarjeta.Text = dtPagosConTarjetaSelec[0]["Autorizacion"].ToString();
             txtNumTarjeta.Text = dtPagosConTarjetaSelec[0]["NumeroTarjeta"].ToString();
             ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString().Trim()));

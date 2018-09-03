@@ -147,12 +147,41 @@ namespace SigametLiquidacion
 
         public void CargaCliente(int Cliente)
         {
-            SqlParameter[] sqlParameterArray = new SqlParameter[1]
-            {
-        new SqlParameter("@Cliente", (object) Cliente)
-            };
+            string FuenteCRM = string.Empty;
+            string NombreCliente = string.Empty;
+
+            Parametros _parametros = (Parametros)System.Web.HttpContext.Current.Session["parametros"];
+            FuenteCRM = (String)_parametros.ValorParametro("FuenteCRM");
             this.dtCliente = new DataTable();
-            this._dataAccess.LoadData(this.dtCliente, "spLIQ2ConsultaDatosCliente", CommandType.StoredProcedure, sqlParameterArray, true);
+
+            if (FuenteCRM == "SIGAMET")
+            {
+
+                   SqlParameter[] sqlParameterArray = new SqlParameter[1]
+                    {
+                new SqlParameter("@Cliente", (object) Cliente)
+                    };
+
+                    this._dataAccess.LoadData(this.dtCliente, "spLIQ2ConsultaDatosCliente", CommandType.StoredProcedure, sqlParameterArray, true);
+            }
+            else
+              {
+               
+
+                Cliente _cliente = new SigametLiquidacion.Cliente(Cliente, 0);
+                 _cliente.ConsultaNombreCliente();
+
+                if (_cliente.Nombre != null)
+                {
+                    dtCliente.Columns.Add(new DataColumn("Nombre", typeof(string)));
+                    NombreCliente = _cliente.Nombre != null? _cliente.Nombre.ToString():"";
+                    dtCliente.Rows.Add(NombreCliente);
+                }
+
+            }
+
+           
+
         }
         /// <summary>
         /// Devuelve datatable con pagos de tarjeta del cliente

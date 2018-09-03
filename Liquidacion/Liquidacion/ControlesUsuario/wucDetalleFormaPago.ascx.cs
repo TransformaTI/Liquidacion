@@ -571,62 +571,73 @@ private void LlenaDropDowns()
             
             if (_datosCliente!=null)
             {
-                if (_datosCliente.SaldosCliente!=null)
+                if (_datosCliente.SaldosCliente != null)
                 {
-                    
-                    if (dsLiq!=null)
+
+                    if (dsLiq != null)
                     {
                         dt = dsLiq.Tables["CobroPedido"];
                         dtLiq = dsLiq.Tables["LiqPagoAnticipado"];
-                        dtCobroPedido= dsLiq.Tables["CobroPedido"];
+                        dtCobroPedido = dsLiq.Tables["CobroPedido"];
                         dtCobroLiq = dsLiq.Tables["Cobro"];
 
                         foreach (DataRow dr in _datosCliente.SaldosCliente.Rows)
+                        {
+
+                            if (dtLiq != null)
                             {
-                            
-                            if  (dtLiq != null)
-                                {
                                 drSaldo = dtLiq.Select("Folio=" + dr["FolioMovimiento"].ToString() + " AND AñoMovimiento=" + dr["AñoMovimiento"].ToString());
                                 foreach (DataRow row in drSaldo)
                                 {
-                                  if (dsLiq.Tables["CobroPedido"]!=null)
-                                {
-                                    if (dsLiq.Tables["CobroPedido"].Rows.Count >0 )
+                                    if (dsLiq.Tables["CobroPedido"] != null)
                                     {
-                                       foreach(DataRow rpedido in dtCobroPedido.Rows)
+                                        if (dsLiq.Tables["CobroPedido"].Rows.Count > 0)
                                         {
+                                            foreach (DataRow rpedido in dtCobroPedido.Rows)
+                                            {
                                                 //DataTable dt = new DataTable();
-                                                drCobro = dtCobroLiq.Select("IDPAGO='"+ rpedido["IdPago"]+ "' AND NombreTipoCobro='ANTICIPO'");
+                                                drCobro = dtCobroLiq.Select("IDPAGO='" + rpedido["IdPago"] + "' AND NombreTipoCobro='ANTICIPO'");
                                                 //DataTable dtPagosAnticipo = drCobro.Count() > 0 ? drCobro.CopyToDataTable():null ;
 
                                                 foreach (DataRow rcobro in drCobro)
                                                 {
-                                                    if (row["Pedidos"].ToString().Contains(rpedido["Pedido"].ToString()) )
+                                                    if (row["Pedidos"].ToString().Contains(rpedido["Pedido"].ToString()))
                                                     {
-                                                        TotalPedidos = TotalPedidos + decimal.Parse(rpedido["Total"].ToString());                                               
-                                                
+                                                        TotalPedidos = TotalPedidos + decimal.Parse(rpedido["Total"].ToString());
+
                                                     }
                                                 }
                                             }
-                                        
+
+                                        }
+                                    }
+
+                                    NuevoSaldo = decimal.Parse(dr["MontoSaldo"].ToString()) - TotalPedidos; ;
+                                    if (NuevoSaldo > 0)
+                                    {
+                                        dr["Saldo"] = "$" + NuevoSaldo.ToString() + ", Año " + dr["AñoMovimiento"] + " Folio " + dr["FolioMovimiento"];
+                                    }
+                                    else
+                                    {
+                                        dr.Delete();
                                     }
                                 }
-                                  
-                                   NuevoSaldo = decimal.Parse(dr["MontoSaldo"].ToString()) - TotalPedidos; ;
-                                if (NuevoSaldo >0)
-                                {
-                                    dr["Saldo"] = "$" + NuevoSaldo.ToString() + ", Año " + dr["AñoMovimiento"] + " Folio " + dr["FolioMovimiento"];
-                                }
-                                else
-                                {
-                                    dr.Delete();
-                                }
-                            }
                             }
                         }
                     }
-                    this.txtAntNombre.Text = _datosCliente.Nombre;
-                    NombreCteAnticipo = _datosCliente.Nombre;
+
+                    Cliente objCliente = new Cliente(Convert.ToInt32(this.txtAntCliente.Text), 0);
+                    objCliente.ConsultaNombreCliente();
+             
+
+                    foreach (DataRow row in _datosCliente.SaldosCliente.Rows)
+                    {
+                        row["Nombre"] = objCliente.Nombre;
+                    }
+
+
+                    this.txtAntNombre.Text = objCliente.Nombre;
+                    NombreCteAnticipo = objCliente.Nombre;
 
                     LstSaldos.DataSource = _datosCliente.SaldosCliente;
                     LstSaldos.DataTextField = "Saldo";

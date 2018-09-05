@@ -424,8 +424,8 @@ namespace SigametLiquidacion
       
                 this._encontrado = true;
 
-                this._nombre = objDireccionEntega.Nombre!=null? objDireccionEntega.Nombre:string.Empty;
-                this._direccion = objDireccionEntega.DireccionCompleta!=null?objDireccionEntega.DireccionCompleta:string.Empty;
+                this._nombre = objDireccionEntega.Nombre!=null? objDireccionEntega.Nombre:"SIN INFORMACIÓN EN CRM";
+                this._direccion = objDireccionEntega.DireccionCompleta!=null?objDireccionEntega.DireccionCompleta: "SIN INFORMACIÓN EN CRM";
                 this._celula = objDireccionEntega.ZonaSuministro!=null? Convert.ToInt16(objDireccionEntega.ZonaSuministro.IDZona): Convert.ToInt16(0);
                 this._ruta = objDireccionEntega.Ruta!=null? short.Parse(objDireccionEntega.Ruta.IDRuta.ToString()): short.Parse("0");
                 this._tipoCartera = objDireccionEntega.CondicionesCredito!=null? Convert.ToByte(objDireccionEntega.CondicionesCredito.IDCartera): byte.Parse("0");                                   

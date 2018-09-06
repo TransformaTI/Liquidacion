@@ -1195,7 +1195,11 @@ namespace SigametLiquidacion.WebControls
         {
             try
             {
-                this._pedido.ReinitDataComp();
+                if (this._pedido != null)
+                {
+                    this._pedido.ReinitDataComp();
+                }
+
             }
             catch (Exception ex)
             {

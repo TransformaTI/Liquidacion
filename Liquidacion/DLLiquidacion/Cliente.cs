@@ -399,7 +399,7 @@ namespace SigametLiquidacion
                 RTGMCore.DireccionEntrega objDireccionEntega = obtenDireccionEntrega(this._cliente);
                
                 this._encontrado = true;
-                this._nombre = objDireccionEntega.Nombre;   
+                this._nombre = objDireccionEntega.Nombre!=null? objDireccionEntega.Nombre:"SIN INFORMACIÓN EN CRM";   
             }
             catch (Exception ex)
             {

@@ -110,6 +110,9 @@ namespace SigametLiquidacion
           row["Status"] = (object) "CONCILIADO";
           row["FolioRemision"] = sqlDataReader["FolioRemision"];
           row["ConsecutivoOrigen"] = sqlDataReader["ConsecutivoOrigen"];
+          row["IdCRM"] = clienteTemp.IdPedidoCRM;
+
+
           ListaPedidos.Rows.Add(row);
         }
         sqlDataReader.Close();

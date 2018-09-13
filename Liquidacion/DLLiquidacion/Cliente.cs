@@ -6,7 +6,9 @@
 
 using RTGMGateway;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using NUnit.Framework;
 
 namespace SigametLiquidacion
 {
@@ -231,6 +233,15 @@ namespace SigametLiquidacion
 
         }
 
+        private int _IdPedidoCRM;
+
+        public int IdPedidoCRM
+        {
+            get { return _IdPedidoCRM; }
+            set { _IdPedidoCRM = value; }
+        }
+
+
 
 
         //20-07-2015
@@ -383,6 +394,8 @@ namespace SigametLiquidacion
                     IDCliente = Cliente                   
                 };
                 objCondicionCredito = objGateway.buscarCondicionesCredito(objRequest);
+            
+
             }
             catch (Exception ex)
             {
@@ -399,7 +412,8 @@ namespace SigametLiquidacion
                 RTGMCore.DireccionEntrega objDireccionEntega = obtenDireccionEntrega(this._cliente);
                
                 this._encontrado = true;
-                this._nombre = objDireccionEntega.Nombre!=null? objDireccionEntega.Nombre:"SIN INFORMACIÓN EN CRM";   
+                this._nombre = objDireccionEntega.Nombre!=null? objDireccionEntega.Nombre:"SIN INFORMACIÓN EN CRM";
+                this.IdPedidoCRM = ObtenerIdCRM(107); //objDireccionEntega.IDDireccionEntrega
             }
             catch (Exception ex)
             {
@@ -421,7 +435,9 @@ namespace SigametLiquidacion
                 RTGMCore.DireccionEntrega objDireccionEntega = obtenDireccionEntrega(this._cliente);
                 RTGMCore.CondicionesCredito objCondicionCredito = obtenCondicionesCredito(this._cliente);
 
-      
+                
+
+
                 this._encontrado = true;
 
                 this._nombre = objDireccionEntega.Nombre!=null? objDireccionEntega.Nombre:"SIN INFORMACIÓN EN CRM";
@@ -439,7 +455,7 @@ namespace SigametLiquidacion
                 this._tipoCarteraCliente = objCondicionCredito != null ? objDireccionEntega.CondicionesCredito.CarteraDescripcion:string.Empty;
                 this._creditoAutorizado = (int)this._tipoCartera == (int)this._claveCreditoAutorizado;
                 this._limiteCreditoExcedido = !(this._limiteDisponible > new Decimal(0));
-            
+   
 
 
                 try
@@ -495,7 +511,45 @@ namespace SigametLiquidacion
 
         }
 
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="IDDireccionEntrega"></param>
+        /// <returns></returns>
+        private int ObtenerIdCRM(int IDDireccionEntrega)
+        {
+            bool respuestaExitosa = false;
+
+            int IdReturn = 0;
+        RTGMPedidoGateway objPedidoGateway = new RTGMPedidoGateway(_modulo, _cadenaConexion);
+        objPedidoGateway.URLServicio = _urlGateway;
+            List<RTGMCore.Pedido> objPedido = new List<RTGMCore.Pedido>();
+
+        SolicitudPedidoGateway objRequest = new SolicitudPedidoGateway
+        {
+            TipoConsultaPedido = RTGMCore.TipoConsultaPedido.RegistroPedido
+            ,
+            IDDireccionEntrega= IDDireccionEntrega
+        };
+
+            try
+            {
+                objPedido = objPedidoGateway.buscarPedidos(objRequest);
+                Assert.IsNotNull(objPedido[0]);
+                Assert.True(objPedido[0].Success);
+            }
+            catch (Exception)
+            {
+                respuestaExitosa = false;
+            }
+
+            //Utilerias.Exportar(objRequest, objPedido, objPedidoGateway.Fuente, respuestaExitosa, EnumMetodoWS.ConsultarPedidos);
+            IdReturn =int.Parse( objPedido[0].IDPedido.ToString());
+
+            return IdReturn;
+        }
+
+
 
         public bool ClienteLiquidado(short AñoAtt, int Folio, int Cliente)
         {

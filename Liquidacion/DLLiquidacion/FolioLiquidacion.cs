@@ -336,6 +336,7 @@ namespace SigametLiquidacion
             this._dtListaPedido.Columns.Add("ConsecutivoOrigen", Type.GetType("System.Int64"));
             this._dtListaPedido.Columns.Add("ObservacionesConciliacion", Type.GetType("System.String"));
             this._dtListaPedido.Columns.Add("Descuento", Type.GetType("System.Decimal"));
+            this._dtListaPedido.Columns.Add("IdCRM", Type.GetType("System.Int64"));
             this._dtListaPedido.PrimaryKey = new DataColumn[1]
             {
                 this._dtListaPedido.Columns["ID"]
@@ -727,6 +728,7 @@ namespace SigametLiquidacion
                 if (this._catalogos.ListaTipoCobro.Rows.Count > 0)
                 {
                     dataRow.BeginEdit();
+                    
                     dataRow["FormaPagoDescripcion"] = (object) this._catalogos.ListaTipoCobro.Rows.Find(dataRow["FormaPago"])["TipoPago"].ToString().Trim();
                     dataRow.EndEdit();
                 }

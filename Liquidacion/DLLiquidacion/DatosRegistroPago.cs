@@ -673,6 +673,22 @@ namespace SigametLiquidacion
 
 
                 }
+
+                for (int index2 = 0; index2 <= dtPedidos.Rows.Count - 1; ++index2)
+                {
+                    this._dataAccess.ModifyData("spLIQ2ActualizaDatosCRM", CommandType.StoredProcedure, new SqlParameter[5]
+                           {
+                                new SqlParameter("@Anio", (object) Convert.ToInt32(dtResumenLiquidacion.Rows[0]["AñoAtt"])),
+                                new SqlParameter("@Folio", (object) Convert.ToInt32(dtResumenLiquidacion.Rows[0]["Folio"])),
+                                 new SqlParameter("@Cliente", (object) Convert.ToInt32(dtPedidos.Rows[index2]["Cliente"])),
+                                new SqlParameter("@IdCRM", (object) Convert.ToInt32(dtPedidos.Rows[index2]["IdCRM"])),
+                                new SqlParameter("@Consecutivo", (object) Convert.ToInt32(dtPedidos.Rows[index2]["ConsecutivoOrigen"]))
+                                
+                          });
+
+                }
+
+
                 this.ActualizaTerminado(dtResumenLiquidacion);
 
              

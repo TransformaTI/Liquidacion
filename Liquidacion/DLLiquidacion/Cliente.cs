@@ -413,7 +413,7 @@ namespace SigametLiquidacion
                
                 this._encontrado = true;
                 this._nombre = objDireccionEntega.Nombre!=null? objDireccionEntega.Nombre:"SIN INFORMACIÓN EN CRM";
-                this.IdPedidoCRM = ObtenerIdCRM(107); //objDireccionEntega.IDDireccionEntrega
+                this.IdPedidoCRM = ObtenerIdCRM(this._cliente); //objDireccionEntega.IDDireccionEntrega
             }
             catch (Exception ex)
             {
@@ -528,15 +528,17 @@ namespace SigametLiquidacion
         SolicitudPedidoGateway objRequest = new SolicitudPedidoGateway
         {
             TipoConsultaPedido = RTGMCore.TipoConsultaPedido.RegistroPedido
-            ,
-            IDDireccionEntrega= IDDireccionEntrega
+            ,IDDireccionEntrega= IDDireccionEntrega
         };
 
             try
             {
                 objPedido = objPedidoGateway.buscarPedidos(objRequest);
-                Assert.IsNotNull(objPedido[0]);
-                Assert.True(objPedido[0].Success);
+                if (objPedido.Count >0)
+                {
+                    Assert.IsNotNull(objPedido[0]);
+                    Assert.True(objPedido[0].Success);
+                }
             }
             catch (Exception)
             {
@@ -544,7 +546,10 @@ namespace SigametLiquidacion
             }
 
             //Utilerias.Exportar(objRequest, objPedido, objPedidoGateway.Fuente, respuestaExitosa, EnumMetodoWS.ConsultarPedidos);
-            IdReturn =int.Parse( objPedido[0].IDPedido.ToString());
+            if (objPedido.Count > 0)
+            {
+                IdReturn =int.Parse( objPedido[0].IDPedido.ToString());
+            }
 
             return IdReturn;
         }

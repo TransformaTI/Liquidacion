@@ -918,6 +918,9 @@ namespace SigametLiquidacion
             dataTable.Columns.Add("Pedido", Type.GetType("System.Int32"));
             dataTable.Columns.Add("Descripcion", Type.GetType("System.String"));
             dataTable.Columns.Add("Descuento", Type.GetType("System.Decimal"));
+            dataTable.Columns.Add("IdCRM", Type.GetType("System.Int32"));
+            dataTable.Columns.Add("ConsecutivoOrigen", Type.GetType("System.Int32"));
+
             foreach (DataRow dataRow in (InternalDataCollectionBase) this._dtListaPedido.Rows)
             {
                 if ((int) Convert.ToByte(dataRow["FormaPago"]) == 5 && Convert.ToString(dataRow["Status"]) == "CONCILIADO")
@@ -934,6 +937,9 @@ namespace SigametLiquidacion
                     row["Pedido"] = dataRow["Pedido"];
                     row["Descripcion"] = (object) ("Pedido: " + Convert.ToString(dataRow["PedidoReferencia"]) + " Cliente: " + Convert.ToString(dataRow["Cliente"]) + " " + Convert.ToString(dataRow["Nombre"]) + " Litros: " + Convert.ToString(dataRow["Litros"]));
                     row["Descuento"] = dataRow["Descuento"];
+                    row["IdCRM"] = dataRow["IdCRM"];
+                    row["ConsecutivoOrigen"] = dataRow["ConsecutivoOrigen"];
+
                     row.EndEdit();
                     dataTable.Rows.Add(row);
                 }

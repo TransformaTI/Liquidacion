@@ -8,7 +8,7 @@ using RTGMGateway;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using NUnit.Framework;
+//using NUnit.Framework;
 
 namespace SigametLiquidacion
 {
@@ -536,8 +536,8 @@ namespace SigametLiquidacion
                 objPedido = objPedidoGateway.buscarPedidos(objRequest);
                 if (objPedido.Count >0)
                 {
-                    Assert.IsNotNull(objPedido[0]);
-                    Assert.True(objPedido[0].Success);
+                    /*Assert.IsNotNull(objPedido[0]);
+                    Assert.True(objPedido[0].Success);*/
                 }
             }
             catch (Exception)

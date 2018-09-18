@@ -729,7 +729,7 @@ namespace SigametLiquidacion
                 {
                     dataRow.BeginEdit();
                     
-                    dataRow["FormaPagoDescripcion"] = (object) this._catalogos.ListaTipoCobro.Rows.Find(dataRow["FormaPago"])["TipoPago"].ToString().Trim();
+                    dataRow["FormaPagoDescripcion"] = this._catalogos.ListaTipoCobro.Rows.Find(dataRow["FormaPago"])!=null?(object) this._catalogos.ListaTipoCobro.Rows.Find(dataRow["FormaPago"])["TipoPago"].ToString().Trim():"SIN DESCRIPCIÓN";
                     dataRow.EndEdit();
                 }
             }

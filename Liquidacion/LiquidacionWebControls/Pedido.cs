@@ -1377,6 +1377,11 @@ namespace SigametLiquidacion.WebControls
             {
                 this._pedido = (SigametLiquidacion.Pedido)null;
             }
+
+          
+
+
+
             if (this._cliente.Encontrado)
             {
                 this.enableCaptureControls(true);
@@ -1520,6 +1525,17 @@ namespace SigametLiquidacion.WebControls
                 this.lblMensajeRutaDiferente.ForeColor = Color.Red;
                 this.lblMensajeRutaDiferente.Text = "NO SE ENCONTRÓ EL CLIENTE ESPECIFICADO";
             }
+
+            if (this._cliente.TipoPago.Trim().ToUpper() == "CREDITO")
+            {
+                this.enableCaptureControls(true);
+            }
+            else
+            {
+                this.enableCaptureControls(false);
+            }
+
+
         }
         
         private void clearInfo()

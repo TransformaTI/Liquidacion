@@ -43,6 +43,7 @@ namespace SigametLiquidacion
         private string _urlGateway;
         private byte _modulo;
         private string _cadenaConexion;
+        private string _TipoPago;
         
          
         
@@ -240,6 +241,14 @@ namespace SigametLiquidacion
             get { return _IdPedidoCRM; }
             set { _IdPedidoCRM = value; }
         }
+
+
+        public string TipoPago
+        {
+            get { return _TipoPago; }
+            set { _TipoPago = value; }
+        }
+
 
 
 
@@ -455,7 +464,7 @@ namespace SigametLiquidacion
                 this._tipoCarteraCliente = objCondicionCredito != null ? objDireccionEntega.CondicionesCredito.CarteraDescripcion:string.Empty;
                 this._creditoAutorizado = (int)this._tipoCartera == (int)this._claveCreditoAutorizado;
                 this._limiteCreditoExcedido = !(this._limiteDisponible > new Decimal(0));
-   
+                this.TipoPago = objDireccionEntega.ConfiguracionSuministro.TipoPago;
 
 
                 try

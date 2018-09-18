@@ -1526,13 +1526,14 @@ namespace SigametLiquidacion.WebControls
                 this.lblMensajeRutaDiferente.Text = "NO SE ENCONTRÓ EL CLIENTE ESPECIFICADO";
             }
 
-            if (this._cliente.TipoPago.Trim().ToUpper() == "CREDITO")
+
+            if (this._cliente.TipoPago.Trim().ToUpper() == "SIN CRÉDITO")
             {
-                this.enableCaptureControls(true);
+                this.enableCaptureControls(false);
             }
             else
             {
-                this.enableCaptureControls(false);
+                this.enableCaptureControls(true);
             }
 
 

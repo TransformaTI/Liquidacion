@@ -464,9 +464,8 @@ namespace SigametLiquidacion
                 this._tipoCarteraCliente = objCondicionCredito != null ? objDireccionEntega.CondicionesCredito.CarteraDescripcion:string.Empty;
                 this._creditoAutorizado = (int)this._tipoCartera == (int)this._claveCreditoAutorizado;
                 this._limiteCreditoExcedido = !(this._limiteDisponible > new Decimal(0));
-                this.TipoPago = objDireccionEntega.ConfiguracionSuministro.TipoPago;
-
-
+                this.TipoPago = objDireccionEntega.CondicionesCredito.CarteraDescripcion!=null? objDireccionEntega.CondicionesCredito.CarteraDescripcion:"";
+                
                 try
                 {
                     this._descuento = objDireccionEntega.Descuentos[0].ImporteDescuento;

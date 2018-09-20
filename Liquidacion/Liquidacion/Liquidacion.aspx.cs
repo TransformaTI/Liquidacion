@@ -416,16 +416,14 @@ public partial class Liquidacion : System.Web.UI.Page
  
     private void ConsultaResumenLiquidacion()
     {
+
         DataTable resumenPedidos = AutoTanqueTurno1.SuministrosPorFormaDePago("CONTADO");
         if (resumenPedidos.Rows.Count > 0)
         {
             ResumenLiquidacion1.LitrosContado = Convert.ToDouble(resumenPedidos.Compute("SUM(Litros)", ""));
             ResumenLiquidacion1.ImporteContado = Convert.ToDecimal(resumenPedidos.Compute("SUM(Importe)", ""));
         }
-        else
-        {
-            lblMessageCenter.Text = "Cierre de liquidación";
-        }
+        
 
         resumenPedidos = AutoTanqueTurno1.SuministrosPorFormaDePago("CREDITO");
         if (resumenPedidos.Rows.Count > 0)
@@ -445,6 +443,10 @@ public partial class Liquidacion : System.Web.UI.Page
         {
             ResumenLiquidacion1.LitrosTotal = Convert.ToDouble(AutoTanqueTurno1.ListaPedidos.Compute("SUM(Litros)", ""));
             ResumenLiquidacion1.ImporteTotal = Convert.ToDecimal(AutoTanqueTurno1.ListaPedidos.Compute("SUM(Importe)", ""));
+        }
+        else
+        {
+            lblMessageCenter.Text = "Cierre de liquidación";
         }
 
         if (AutoTanqueTurno1.PedidosFiltrados("CONCILIADO").Rows.Count > 0)

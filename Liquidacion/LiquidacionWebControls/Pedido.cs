@@ -1519,6 +1519,19 @@ namespace SigametLiquidacion.WebControls
                 }
                 System.Web.HttpContext.Current.Session["buscandoCliente"] = "x";
                 this.btnAceptar.Enabled = true;
+                //if (this._cliente.TipoPago.Trim().ToUpper() == "SIN CRÉDITO")
+                //{
+                //    this.enableCaptureControls(false);
+                //}
+                //else
+                //{
+                //    this.enableCaptureControls(true);
+                //}
+
+                this.enableCaptureControls(true);
+                this.ddpFormaPago.Enabled = this._cliente.CreditoAutorizado;
+                
+
             }
             else
             {
@@ -1527,15 +1540,7 @@ namespace SigametLiquidacion.WebControls
             }
 
 
-            if (this._cliente.TipoPago.Trim().ToUpper() == "SIN CRÉDITO")
-            {
-                this.enableCaptureControls(false);
-            }
-            else
-            {
-                this.enableCaptureControls(true);
-            }
-
+            
 
         }
         

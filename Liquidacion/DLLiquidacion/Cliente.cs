@@ -444,7 +444,19 @@ namespace SigametLiquidacion
                 RTGMCore.DireccionEntrega objDireccionEntega = obtenDireccionEntrega(this._cliente);
                 RTGMCore.CondicionesCredito objCondicionCredito = obtenCondicionesCredito(this._cliente);
 
-                
+                if (objDireccionEntega.Message!=null)
+                {
+                    if (objDireccionEntega.Message.Contains("La consulta no produjo resultados con los parametros indicados"))
+                    {
+                        this._encontrado = false;
+                        return;
+                    }
+
+                }
+
+
+
+
 
 
                 this._encontrado = true;

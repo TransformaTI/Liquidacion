@@ -570,7 +570,7 @@ public partial class Liquidacion : System.Web.UI.Page
                     DatosRegistroPago _datos = new DatosRegistroPago();
                     _datos.Usuario = Convert.ToString(Session["Usuario"]);
                     _datos.ActualizaTerminado(AutoTanqueTurno1.ResumenLiquidacionFinal(Convert.ToString(Session["Usuario"])));
-                    _datos.ActualizaDatosCRM(AutoTanqueTurno1.PedidosContado, AutoTanqueTurno1.ResumenLiquidacionFinal(Convert.ToString(Session["Usuario"]));
+                    _datos.ActualizaDatosCRM(AutoTanqueTurno1.PedidosContado, AutoTanqueTurno1.ResumenLiquidacionFinal(Convert.ToString(Session["Usuario"])));
                     
                     btnPagos.Visible = false;
                     imbReporte_Click(sender, e);

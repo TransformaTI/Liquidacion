@@ -6,9 +6,12 @@
 
 using DocumentosBSR;
 using RTGMGateway;
+using SGDAC;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
+using System.Web;
 
 namespace SigametLiquidacion
 {
@@ -77,7 +80,16 @@ namespace SigametLiquidacion
 
       try
       {
-        this._dataAccess.OpenConnection();
+        if (this._dataAccess==null)
+         {
+                    TextReader textReader = (TextReader)new StreamReader(HttpContext.Current.Server.MapPath("Conexion.txt"));
+                _conexion = textReader.ReadLine();
+                this._dataAccess = new DAC(new SqlConnection(_conexion));
+                textReader.Close();
+         };
+          this._dataAccess.OpenConnection();       
+            
+
         SqlDataReader sqlDataReader = this._dataAccess.LoadData("spLIQ2ConsultaPedidosFolio", CommandType.StoredProcedure, sqlParameterArray);
         int num = 0;
                

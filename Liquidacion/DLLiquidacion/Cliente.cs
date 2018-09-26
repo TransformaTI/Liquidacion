@@ -416,18 +416,40 @@ namespace SigametLiquidacion
 
         private void asignacionNombreClienteGateway()
         {
+            Boolean eleva = false;
             try
             {
                 RTGMCore.DireccionEntrega objDireccionEntega = obtenDireccionEntrega(this._cliente);
-               
+
+                if (objDireccionEntega.Message != null)
+                {
+                    if (objDireccionEntega.Message.Contains("La consulta no produjo resultados con los parametros indicados"))
+                    {
+                        this._encontrado = false;
+                        return;
+                    }
+                    else
+                    {
+                        eleva = true;
+                        throw new Exception(objDireccionEntega.Message);
+                    }
+                }
+
                 this._encontrado = true;
                 this._nombre = objDireccionEntega.Nombre!=null? objDireccionEntega.Nombre:"SIN INFORMACIÓN EN CRM";
                 this.IdPedidoCRM = ObtenerIdCRM(this._cliente); //objDireccionEntega.IDDireccionEntrega
             }
             catch (Exception ex)
             {
-                this._nombre = "Error " + ex.Message;
-                this._encontrado = true;
+                if (eleva)
+                {
+                    throw new Exception(ex.Message);
+                }
+                else
+                {
+                    this._nombre = "Error " + ex.Message;
+                    this._encontrado = true;
+                }
 
                 //this._encontrado = false;
             }
@@ -437,7 +459,8 @@ namespace SigametLiquidacion
 
 
         private void asignacionDatosClienteGateway()
-        {           
+        {
+            Boolean eleva = false;  
             try
             {
                 RTGMCore.DireccionEntrega objDireccionEntega = obtenDireccionEntrega(this._cliente);
@@ -450,6 +473,10 @@ namespace SigametLiquidacion
                     {
                         this._encontrado = false;
                         return;
+                    }
+                    else {
+                        eleva = true;
+                        throw new Exception(objDireccionEntega.Message);
                     }
 
                 }
@@ -518,8 +545,14 @@ namespace SigametLiquidacion
             }
             catch (Exception ex)
             {
-                this._nombre ="Error "+ex.Message;
-                this._encontrado= true;
+                if (eleva) {
+                    throw new Exception(ex.Message);
+                }
+                else {
+                    this._nombre = "Error " + ex.Message;
+                    this._encontrado = true;
+                }
+             
 
                 //this._encontrado = false;
             }

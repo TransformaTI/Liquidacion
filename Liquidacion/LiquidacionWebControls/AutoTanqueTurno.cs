@@ -88,6 +88,10 @@ namespace SigametLiquidacion.WebControls
       {
         return this._folioLiquidacion.ListaPedidos;
       }
+        set
+        {
+            this._folioLiquidacion.ListaPedidos = value;
+        }
     }
 
     public short Celula

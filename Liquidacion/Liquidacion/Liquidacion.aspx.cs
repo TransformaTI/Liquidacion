@@ -301,6 +301,8 @@ public partial class Liquidacion : System.Web.UI.Page
             {
                 Session["desasignado"] = "";
                 nuevoPedido_ClickCancelar(sender, e);
+
+              
                 nuevoPedido.Focus();
             }
            
@@ -320,7 +322,7 @@ public partial class Liquidacion : System.Web.UI.Page
         Session["desasignado"] = "";
         Session["buscandoCliente"] = "";
         nuevoPedido.Focus();
-        Response.Redirect(Request.RawUrl);
+        //Response.Redirect(Request.RawUrl);
 
 
     }

@@ -440,9 +440,9 @@ namespace SigametLiquidacion
         {           
             try
             {
-
                 RTGMCore.DireccionEntrega objDireccionEntega = obtenDireccionEntrega(this._cliente);
-                RTGMCore.CondicionesCredito objCondicionCredito = obtenCondicionesCredito(this._cliente);
+                RTGMCore.CondicionesCredito objCondicionCredito = objDireccionEntega.CondicionesCredito;
+               // RTGMCore.CondicionesCredito objCondicionCredito = obtenCondicionesCredito(this._cliente);
 
                 if (objDireccionEntega.Message!=null)
                 {
@@ -453,11 +453,6 @@ namespace SigametLiquidacion
                     }
 
                 }
-
-
-
-
-
 
                 this._encontrado = true;
 

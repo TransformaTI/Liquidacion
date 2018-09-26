@@ -52,6 +52,10 @@ namespace SigametLiquidacion
             {
                 return this._dtListaPedido;
             }
+            set
+            {
+                this._dtListaPedido = value;
+            }
         }
         
         public short AñoAtt

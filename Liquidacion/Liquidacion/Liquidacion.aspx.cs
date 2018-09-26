@@ -78,11 +78,6 @@ public partial class Liquidacion : System.Web.UI.Page
             // btnPagos.Attributes.Add("onclick", "return confirm('¿Desea Continuar?')");
 
                nuevoPedido.ConsultaCteOnChange = true;
-
-
-
-
-
         }
         else
         {
@@ -106,7 +101,12 @@ public partial class Liquidacion : System.Web.UI.Page
             nuevoPedido.Enabled = false;
         }
         lblMensaje.Text = string.Empty;
-        if(IsPageRefresh) {
+        if (IsPageRefresh)
+        {
+            DataTable ListaTemp = (DataTable)Session["ListaPedidos"];
+            AutoTanqueTurno1.ListaPedidos = ListaTemp;
+            ListaPedidos1.DataSource = AutoTanqueTurno1.ListaPedidos;
+
             ReordenarLista("Litros");
             Session["desasigna"] = "";
             Session["buscandoCliente"] = "";
@@ -203,6 +203,8 @@ public partial class Liquidacion : System.Web.UI.Page
 
             ListaPedidos1.DataSource = AutoTanqueTurno1.ListaPedidos;
 
+            Session["ListaPedidos"] = AutoTanqueTurno1.ListaPedidos;
+
             nuevoPedido.ParametrosRuta = _params;
             nuevoPedido.FechaSuministro = _params.Fecha;
             //
@@ -289,6 +291,7 @@ public partial class Liquidacion : System.Web.UI.Page
             int pedidoActual = nuevoPedido.SourceRow;
 
             ListaPedidos1.DataSource = AutoTanqueTurno1.ListaPedidos;
+            Session["ListaPedidos"] = AutoTanqueTurno1.ListaPedidos;
             nuevoPedido.RestoreComponent();
             lblControlPedido.Text = string.Empty;
 
@@ -300,9 +303,7 @@ public partial class Liquidacion : System.Web.UI.Page
             if (!(ListaPedidos1.SiguientePedido(pedidoActual)))
             {
                 Session["desasignado"] = "";
-                nuevoPedido_ClickCancelar(sender, e);
-
-              
+                nuevoPedido_ClickCancelar(sender, e);              
                 nuevoPedido.Focus();
             }
            

@@ -1431,6 +1431,12 @@ else
                    
                     txtNombreClienteTarjeta.Text= dtPagosConTarjeta.Rows[0]["Nombrecliente"].ToString();
                 }
+                else {
+                    Cliente clienteTemp = new Cliente(int.Parse(txtClienteTarjeta.Text), 0);
+                    clienteTemp.ConsultaNombreCliente();
+                    txtNombreClienteTarjeta.Text =clienteTemp.Nombre;
+                }
+                
                 
             }
             //Session["PrimerRegTDC"] = dtPagosConTarjeta.Rows[0]["Folio"].ToString();

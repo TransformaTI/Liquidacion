@@ -373,7 +373,7 @@ namespace SigametLiquidacion
             {
                 RTGMGateway.RTGMGateway objGateway = new RTGMGateway.RTGMGateway(_modulo, _cadenaConexion);
                 objGateway.URLServicio = _urlGateway;
-                objGateway.TiempoEspera = 1;
+                objGateway.TiempoEspera = 30;
                 SolicitudGateway objRequest = new SolicitudGateway
                 {
                     IDCliente = Cliente

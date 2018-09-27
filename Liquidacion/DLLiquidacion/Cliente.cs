@@ -317,7 +317,7 @@ namespace SigametLiquidacion
                 try
                 {
                     _nombre = datosCliente.consultaNombreCliente(this._cliente);
-               
+
                 }
                 catch (Exception ex)
                 {
@@ -367,21 +367,50 @@ namespace SigametLiquidacion
         }
         public RTGMCore.DireccionEntrega obtenDireccionEntrega(int Cliente)
         {
+            Boolean _eleva = false;
             RTGMCore.DireccionEntrega objDireccionEntega = new RTGMCore.DireccionEntrega();
             try
             {
                 RTGMGateway.RTGMGateway objGateway = new RTGMGateway.RTGMGateway(_modulo, _cadenaConexion);
                 objGateway.URLServicio = _urlGateway;
+                objGateway.TiempoEspera = 1;
                 SolicitudGateway objRequest = new SolicitudGateway
                 {
                     IDCliente = Cliente
                 };
                 objDireccionEntega = objGateway.buscarDireccionEntrega(objRequest);
+                if (objDireccionEntega.Message != null)
+                {
+                    if (objDireccionEntega.Message.Contains("La consulta no produjo resultados con los parametros indicados"))
+                    {
+                        this._encontrado = false;
+                        return objDireccionEntega;
+                    }
+                    else
+                    {
+                        _eleva = true;
+                        throw new Exception(objDireccionEntega.Message);
+                    }
+                }
             }
+            catch (RTGMTimeoutException tex)
+            {
+                _eleva = true;
+                throw new Exception(tex.Mensaje);               
+            }                
             catch (Exception ex)
             {
-                //throw ex;
-                objDireccionEntega.Nombre = "Error "+ex.Message;
+                if (_eleva)
+                {
+                    throw new Exception(ex.Message);
+                }
+                else
+                {
+                    
+                this._nombre = "Error " + ex.Message;
+                this._encontrado = true;
+                  
+                }
             }
             return objDireccionEntega;
 
@@ -416,11 +445,17 @@ namespace SigametLiquidacion
 
         private void asignacionNombreClienteGateway()
         {
-            Boolean eleva = false;
+            Boolean _eleva = false;
             try
             {
                 RTGMCore.DireccionEntrega objDireccionEntega = obtenDireccionEntrega(this._cliente);
-
+                
+                if (objDireccionEntega==null)
+                {
+                    _eleva = true;
+                    throw new Exception("El CRM no devolvió datos");
+                }    
+                
                 if (objDireccionEntega.Message != null)
                 {
                     if (objDireccionEntega.Message.Contains("La consulta no produjo resultados con los parametros indicados"))
@@ -430,7 +465,7 @@ namespace SigametLiquidacion
                     }
                     else
                     {
-                        eleva = true;
+                        _eleva = true;
                         throw new Exception(objDireccionEntega.Message);
                     }
                 }
@@ -439,19 +474,22 @@ namespace SigametLiquidacion
                 this._nombre = objDireccionEntega.Nombre!=null? objDireccionEntega.Nombre:"SIN INFORMACIÓN EN CRM";
                 this.IdPedidoCRM = ObtenerIdCRM(this._cliente); //objDireccionEntega.IDDireccionEntrega
             }
+            catch (RTGMTimeoutException tex)
+            {               
+                throw new Exception(tex.Mensaje);
+            }
             catch (Exception ex)
             {
-                if (eleva)
+                if (_eleva || ex.Message.Contains("tiempo de espera"))
                 {
                     throw new Exception(ex.Message);
                 }
                 else
-                {
+                {                   
                     this._nombre = "Error " + ex.Message;
-                    this._encontrado = true;
-                }
+                    this._encontrado = true;                 
 
-                //this._encontrado = false;
+                }
             }
 
         }
@@ -460,12 +498,18 @@ namespace SigametLiquidacion
 
         private void asignacionDatosClienteGateway()
         {
-            Boolean eleva = false;  
+            Boolean _eleva = false;  
             try
             {
                 RTGMCore.DireccionEntrega objDireccionEntega = obtenDireccionEntrega(this._cliente);
                 RTGMCore.CondicionesCredito objCondicionCredito = objDireccionEntega.CondicionesCredito;
-               // RTGMCore.CondicionesCredito objCondicionCredito = obtenCondicionesCredito(this._cliente);
+                // RTGMCore.CondicionesCredito objCondicionCredito = obtenCondicionesCredito(this._cliente);
+
+                if (objDireccionEntega == null)
+                {
+                    _eleva = true;
+                    throw new Exception("El CRM no devolvió datos");
+                }
 
                 if (objDireccionEntega.Message!=null)
                 {
@@ -475,7 +519,7 @@ namespace SigametLiquidacion
                         return;
                     }
                     else {
-                        eleva = true;
+                        _eleva = true;
                         throw new Exception(objDireccionEntega.Message);
                     }
 
@@ -539,20 +583,19 @@ namespace SigametLiquidacion
                     this._precioCliente = 0;
                 }
 
-                    
-
-
             }
             catch (Exception ex)
             {
-                if (eleva) {
+                if (_eleva || ex.Message.Contains("tiempo de espera"))
+                {
                     throw new Exception(ex.Message);
                 }
-                else {
+                else
+                {                   
                     this._nombre = "Error " + ex.Message;
-                    this._encontrado = true;
+                    this._encontrado = true;    
                 }
-             
+
 
                 //this._encontrado = false;
             }

@@ -85,22 +85,36 @@ namespace SigametLiquidacion
         {
           ++num;
           DataRow row = ListaPedidos.NewRow();
-
-          
             
-          Cliente clienteTemp = new Cliente(int.Parse(sqlDataReader["Cliente"].ToString()), 1) ;
-          clienteTemp.ConsultaNombreCliente();
 
+          string nombreCliente;
+          Cliente clienteTemp = new Cliente(int.Parse(sqlDataReader["Cliente"].ToString()), 1);
+          try
+            {
+                
+                clienteTemp.ConsultaNombreCliente();
+                if (clienteTemp.Encontrado) {
+                    nombreCliente = clienteTemp.Nombre;
+                }
+                else {
+                    nombreCliente = "Cliente no encontrado";
+                }
+                
+           }  
+           catch (Exception ex)
+           {
+                        nombreCliente = ex.Message;
+            }
 
-//          objDireccionEntega = obtenDireccionEntrega();
+            //          objDireccionEntega = obtenDireccionEntrega();
 
-          row["ID"] = (object) num;
+            row["ID"] = (object) num;
           row["Cliente"] = sqlDataReader["Cliente"];
           row["Celula"] = sqlDataReader["Celula"];
           row["AñoPed"] = sqlDataReader["AñoPed"];
           row["Pedido"] = sqlDataReader["Pedido"];
           //row["Nombre"] = sqlDataReader["Nombre"];
-          row["Nombre"] = clienteTemp.Nombre;
+          row["Nombre"] = nombreCliente;
           row["PedidoReferencia"] = sqlDataReader["PedidoReferencia"];
           row["Litros"] = sqlDataReader["Litros"];
           row["Precio"] = sqlDataReader["Precio"];

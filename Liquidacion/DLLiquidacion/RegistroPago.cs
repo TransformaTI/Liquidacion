@@ -6,6 +6,8 @@
 
 using System;
 using System.Data;
+using System.Web;
+using System.Web.UI;
 
 namespace SigametLiquidacion
 {
@@ -51,9 +53,20 @@ namespace SigametLiquidacion
 
     public DataTable DatosCliente(int Cliente)
     {
-      this._datos.CargaCliente(Cliente);
-      this.dtCliente = this._datos.Cliente;
-      return this.dtCliente;
+      
+        try
+        {
+            this._datos.CargaCliente(Cliente);
+            this.dtCliente = this._datos.Cliente;
+            return this.dtCliente;
+        }
+        catch (Exception ex)
+        {
+                Page page = HttpContext.Current.CurrentHandler as Page;
+                ScriptManager.RegisterClientScriptBlock(page, typeof(Page), "MyScript", "alert('"+ ex.Message+"');", true);
+                return null;
+        }  
+
     }
 
     public DataTable Promociones()

@@ -1371,6 +1371,9 @@ namespace SigametLiquidacion.WebControls
             catch (Exception ex)
             {
                 this.lblMensajeConciliacion.Text = "Error " + ex.Message;
+                System.Web.HttpContext.Current.Session["desasignado"] = "";
+                System.Web.HttpContext.Current.Session["buscandoCliente"] = "";
+                this.txtNumeroCliente.Focus();
                 return;
             }
             if (this._tipoOperacionCaptura != TipoOperacionPedido.EdicionPedidoConciliado)
@@ -1537,6 +1540,7 @@ namespace SigametLiquidacion.WebControls
             {
                 this.lblMensajeRutaDiferente.ForeColor = Color.Red;
                 this.lblMensajeRutaDiferente.Text = "NO SE ENCONTRÓ EL CLIENTE ESPECIFICADO";
+ 
             }
 
 

@@ -129,9 +129,6 @@ public partial class FormaPago : System.Web.UI.Page
                     RegistroPago RegPago = new RegistroPago();
                     DataTable dt = RegPago.DatosCliente(int.Parse(txtClienteCheque.Text));
 
-
-
-
                     if (dt!=null)
                     {
                         if (dt.Rows.Count >0)
@@ -1432,9 +1429,17 @@ else
                     txtNombreClienteTarjeta.Text= dtPagosConTarjeta.Rows[0]["Nombrecliente"].ToString();
                 }
                 else {
-                    Cliente clienteTemp = new Cliente(int.Parse(txtClienteTarjeta.Text), 0);
-                    clienteTemp.ConsultaNombreCliente();
-                    txtNombreClienteTarjeta.Text =clienteTemp.Nombre;
+                    try
+                    {
+                        Cliente clienteTemp = new Cliente(int.Parse(txtClienteTarjeta.Text), 0);
+                        clienteTemp.ConsultaNombreCliente();
+                        txtNombreClienteTarjeta.Text = clienteTemp.Nombre;
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }    
+                  
                 }
                 
                 

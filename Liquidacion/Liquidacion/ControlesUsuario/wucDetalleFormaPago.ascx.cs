@@ -626,24 +626,34 @@ private void LlenaDropDowns()
                         }
                     }
 
-                    Cliente objCliente = new Cliente(Convert.ToInt32(this.txtAntCliente.Text), 0);
-                    objCliente.ConsultaNombreCliente();
-             
-
-                    foreach (DataRow row in _datosCliente.SaldosCliente.Rows)
+                    try
                     {
-                        row["Nombre"] = objCliente.Nombre;
+
+                        Cliente objCliente = new Cliente(Convert.ToInt32(this.txtAntCliente.Text), 0);
+                        objCliente.ConsultaNombreCliente();
+
+
+                        foreach (DataRow row in _datosCliente.SaldosCliente.Rows)
+                        {
+                            row["Nombre"] = objCliente.Nombre;
+                        }
+
+
+                        this.txtAntNombre.Text = objCliente.Nombre;
+                        NombreCteAnticipo = objCliente.Nombre;
+
+                        LstSaldos.DataSource = _datosCliente.SaldosCliente;
+                        LstSaldos.DataTextField = "Saldo";
+                        LstSaldos.DataValueField = "Clave";
+                        LstSaldos.DataBind();
+                        pnlAnticipo.Visible = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Page page = HttpContext.Current.CurrentHandler as Page;
+                        ScriptManager.RegisterClientScriptBlock(page, typeof(Page), "MyScript", "alert('" + ex.Message + "');", true);
                     }
 
-
-                    this.txtAntNombre.Text = objCliente.Nombre;
-                    NombreCteAnticipo = objCliente.Nombre;
-
-                    LstSaldos.DataSource = _datosCliente.SaldosCliente;
-                    LstSaldos.DataTextField = "Saldo";
-                    LstSaldos.DataValueField = "Clave";
-                    LstSaldos.DataBind();
-                    pnlAnticipo.Visible = true;
                 }
             }
 
@@ -667,7 +677,8 @@ private void LlenaDropDowns()
         }
         catch (Exception ex)
         {
-            throw ex;
+            Page page = HttpContext.Current.CurrentHandler as Page;
+            ScriptManager.RegisterClientScriptBlock(page, typeof(Page), "MyScript", "alert('" + ex.Message + "');", true);
         } 
         finally
         {

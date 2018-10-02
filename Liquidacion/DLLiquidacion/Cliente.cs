@@ -543,6 +543,7 @@ namespace SigametLiquidacion
                 this._creditoAutorizado = (int)this._tipoCartera == (int)this._claveCreditoAutorizado;
                 this._limiteCreditoExcedido = !(this._limiteDisponible > new Decimal(0));
                 this.TipoPago = objDireccionEntega.CondicionesCredito.CarteraDescripcion!=null? objDireccionEntega.CondicionesCredito.CarteraDescripcion:"";
+                this.IdPedidoCRM = ObtenerIdCRM(this._cliente);
                 
                 try
                 {
@@ -639,7 +640,7 @@ namespace SigametLiquidacion
             //Utilerias.Exportar(objRequest, objPedido, objPedidoGateway.Fuente, respuestaExitosa, EnumMetodoWS.ConsultarPedidos);
             if (objPedido.Count > 0)
             {
-                IdReturn =int.Parse( objPedido[0].IDPedido.ToString());
+                IdReturn = objPedido[0].EstatusPedido != "SURTIDO" ? int.Parse(objPedido[0].IDPedido.ToString()):0 ;
             }
 
             return IdReturn;

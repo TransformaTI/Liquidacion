@@ -377,8 +377,8 @@ namespace SigametLiquidacion
                 }
             }
         }
-        
-        public void AltaPedido(int Cliente, short Celula, short AñoPed, int NumeroPedido, string Nombre, string PedidoReferencia, double Litros, Decimal Precio, Decimal Importe, byte FormaPago, byte TipoPedido, string Status, int Origen, int ConsecutivoOrigen, string FolioRemision, string ObservacionesConciliacion, Decimal Descuento)
+
+        public void AltaPedido(int Cliente, short Celula, short AñoPed, int NumeroPedido, string Nombre, string PedidoReferencia, double Litros, Decimal Precio, Decimal Importe, byte FormaPago, byte TipoPedido, string Status, int Origen, int ConsecutivoOrigen, string FolioRemision, string ObservacionesConciliacion, Decimal Descuento, Int64 IdCRM=0)
         {
             int num = 0;
             if (this._dtListaPedido.Rows.Count > 0)
@@ -386,25 +386,26 @@ namespace SigametLiquidacion
                 num = (int)this._dtListaPedido.Compute("MAX(ID)", (string)null) + 1;
             }
             DataRow row = this._dtListaPedido.NewRow();
-            row["ID"] = (object) num;
-            row["Celula"] = (object) Celula;
-            row["AñoPed"] = (object) AñoPed;
-            row["Pedido"] = (object) NumeroPedido;
-            row["Cliente"] = (object) Cliente;
-            row["Nombre"] = (object) Nombre;
-            row["PedidoReferencia"] = (object) PedidoReferencia;
-            row["Litros"] = (object) Litros;
-            row["Precio"] = (object) Precio;
-            row["Importe"] = (object) Importe;
-            row["FormaPago"] = (object) FormaPago;
-            row["TipoPedido"] = (object) TipoPedido;
-            row["Status"] = (object) Status;
-            row["Origen"] = (object) Origen;
-            row["ConsecutivoOrigen"] = (object) ConsecutivoOrigen;
-            row["FormaPagoDescripcion"] = (object) this._catalogos.ListaTipoCobro.Rows.Find((object) FormaPago)["TipoPago"].ToString().Trim();
-            row["FolioRemision"] = (object) FolioRemision;
-            row["ObservacionesConciliacion"] = (object) ObservacionesConciliacion;
-            row["Descuento"] = (object) Descuento;
+            row["ID"] = (object)num;
+            row["Celula"] = (object)Celula;
+            row["AñoPed"] = (object)AñoPed;
+            row["Pedido"] = (object)NumeroPedido;
+            row["Cliente"] = (object)Cliente;
+            row["Nombre"] = (object)Nombre;
+            row["PedidoReferencia"] = (object)PedidoReferencia;
+            row["Litros"] = (object)Litros;
+            row["Precio"] = (object)Precio;
+            row["Importe"] = (object)Importe;
+            row["FormaPago"] = (object)FormaPago;
+            row["TipoPedido"] = (object)TipoPedido;
+            row["Status"] = (object)Status;
+            row["Origen"] = (object)Origen;
+            row["ConsecutivoOrigen"] = (object)ConsecutivoOrigen;
+            row["FormaPagoDescripcion"] = (object)this._catalogos.ListaTipoCobro.Rows.Find((object)FormaPago)["TipoPago"].ToString().Trim();
+            row["FolioRemision"] = (object)FolioRemision;
+            row["ObservacionesConciliacion"] = (object)ObservacionesConciliacion;
+            row["Descuento"] = (object)Descuento;
+            row["IdCRM"] = (object)IdCRM;
             this._dtListaPedido.Rows.Add(row);
         }
         
@@ -589,7 +590,7 @@ namespace SigametLiquidacion
                             this.AltaPedido(Cliente2.NumeroCliente, pedido.Celula, pedido.AñoPed, pedido.NumeroPedido, Cliente2.Nombre,
                                 pedido.PedidoReferencia, pedido.Litros, pedido.Precio, pedido.Importe, pedido.FormaPago,
                                 pedido.TipoPedido, "CONCILIADO", Convert.ToInt32((object)TipoDescarga), ConsecutivoOrigen, folioRemision > 0 ? folioRemision.ToString() : string.Empty,
-                                string.Empty, Descuento);
+                                string.Empty, Descuento, Cliente2.IdPedidoCRM);
                         }
                         catch (Exception ex)
                         {

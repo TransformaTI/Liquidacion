@@ -594,7 +594,7 @@ namespace SigametLiquidacion
                 else
                 {                   
                     this._nombre = "Error " + ex.Message;
-                    this._encontrado = true;    
+                    this._encontrado = false;                    
                 }
 
 

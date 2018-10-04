@@ -245,12 +245,15 @@ public partial class Liquidacion : System.Web.UI.Page
 
     protected void nuevoPedido1_Actualizar(object sender, EventArgs e)
     {
-        //modularizar con listapedidos1_editarelemento
-        lblControlPedido.Text = "Edición del pedido " +
+        if (AutoTanqueTurno1.CurrentRow(nuevoPedido.SourceRow)!=null)
+        {
+            //modularizar con listapedidos1_editarelemento
+            lblControlPedido.Text = "Edición del pedido " +
             Convert.ToString(AutoTanqueTurno1.CurrentRow(nuevoPedido.SourceRow)["PedidoReferencia"]);
-        nuevoPedido.ConsultaDetallePedido(TipoOperacionPedido.EdicionPedidoConciliado, AutoTanqueTurno1.CurrentRow(nuevoPedido.SourceRow));
-        ConsultaResumenLiquidacion();
-        nuevoPedido.Focus();
+            nuevoPedido.ConsultaDetallePedido(TipoOperacionPedido.EdicionPedidoConciliado, AutoTanqueTurno1.CurrentRow(nuevoPedido.SourceRow));
+            ConsultaResumenLiquidacion();
+            nuevoPedido.Focus();
+        }
     }
 
     protected void nuevoPedido_ClickAceptar(object sender, EventArgs e)

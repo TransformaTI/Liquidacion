@@ -23,3 +23,17 @@ C:\Proyectos\SigametLiquidacion\Liquidacion\LiquidacionWebControls\obj\Debug\Liq
 C:\Proyectos\SigametLiquidacion\Liquidacion\LiquidacionWebControls\obj\Debug\LiquidacionWebControls.pdb
 C:\Proyectos\SigametLiquidacion\Liquidacion\LiquidacionWebControls\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
 C:\Proyectos\SigametLiquidacion\Liquidacion\LiquidacionWebControls\bin\Debug\CrystalDecisions.Shared.dll
+C:\Desarrollo\Liquidacion\Liquidacion\LiquidacionWebControls\bin\Debug\LiquidacionWebControls.dll
+C:\Desarrollo\Liquidacion\Liquidacion\LiquidacionWebControls\bin\Debug\LiquidacionWebControls.pdb
+C:\Desarrollo\Liquidacion\Liquidacion\LiquidacionWebControls\bin\Debug\DLLiquidacion.dll
+C:\Desarrollo\Liquidacion\Liquidacion\LiquidacionWebControls\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
+C:\Desarrollo\Liquidacion\Liquidacion\LiquidacionWebControls\bin\Debug\CrystalDecisions.Shared.dll
+C:\Desarrollo\Liquidacion\Liquidacion\LiquidacionWebControls\bin\Debug\SGDAC.dll
+C:\Desarrollo\Liquidacion\Liquidacion\LiquidacionWebControls\bin\Debug\RTGMGateway.dll
+C:\Desarrollo\Liquidacion\Liquidacion\LiquidacionWebControls\bin\Debug\DocumentosBSR.dll
+C:\Desarrollo\Liquidacion\Liquidacion\LiquidacionWebControls\bin\Debug\DLLiquidacion.pdb
+C:\Desarrollo\Liquidacion\Liquidacion\LiquidacionWebControls\obj\Debug\LiquidacionWebControls.csprojAssemblyReference.cache
+C:\Desarrollo\Liquidacion\Liquidacion\LiquidacionWebControls\obj\Debug\LiquidacionWebControls.csproj.CoreCompileInputs.cache
+C:\Desarrollo\Liquidacion\Liquidacion\LiquidacionWebControls\obj\Debug\LiquidacionWebControls.csproj.CopyComplete
+C:\Desarrollo\Liquidacion\Liquidacion\LiquidacionWebControls\obj\Debug\LiquidacionWebControls.dll
+C:\Desarrollo\Liquidacion\Liquidacion\LiquidacionWebControls\obj\Debug\LiquidacionWebControls.pdb

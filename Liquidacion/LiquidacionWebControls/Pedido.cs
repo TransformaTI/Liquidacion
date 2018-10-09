@@ -1210,7 +1210,10 @@ namespace SigametLiquidacion.WebControls
             {
                 try
                 {
-                    this._pedido.ConsultaPedido();
+                    if (this._pedido != null)
+                    {
+                        this._pedido.ConsultaPedido();
+                    }
                 }
                 catch (Exception ex)
                 {

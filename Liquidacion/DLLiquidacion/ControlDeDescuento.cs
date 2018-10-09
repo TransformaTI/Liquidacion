@@ -41,7 +41,10 @@ namespace SigametLiquidacion
           {
               try
               {
-                  precioMinimo = Convert.ToDecimal(ListaPrecios.Compute("MAX(Precio)", "ZonaEconomica = " + ZonaEconomica.ToString()));
+                    if (ListaPrecios.Compute("MAX(Precio)", "ZonaEconomica = " + ZonaEconomica.ToString()) != System.DBNull.Value)
+                    {
+                        precioMinimo = Convert.ToDecimal(ListaPrecios.Compute("MAX(Precio)", "ZonaEconomica = " + ZonaEconomica.ToString()));
+                    }
               }
               catch (Exception ex)
               {

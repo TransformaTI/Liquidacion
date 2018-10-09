@@ -577,7 +577,10 @@ namespace SigametLiquidacion
 
                 try
                 {
-                    this._precioCliente = objDireccionEntega.PrecioPorDefecto.ValorPrecio.Value;
+                    if (objDireccionEntega.PrecioPorDefecto != null)
+                    {
+                        this._precioCliente = objDireccionEntega.PrecioPorDefecto.ValorPrecio.Value;
+                    }
                 }
                 catch
                 {

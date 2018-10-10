@@ -1428,6 +1428,9 @@ namespace SigametLiquidacion.WebControls
                     {
                         this._precioMinimo = ControlDeDescuento.Instance.PrecioAutorizado(this.dtListaPrecios, this._cliente.Descuento, this._cliente.ZonaEconomica);
                         this.ddpPrecio.Items.Add(new ListItem(string.Format("{0:0.0000}", (object) this._precioMinimo), string.Format("{0:0.0000}", (object) this._precioMinimo)));
+
+                        this.ddpPrecio.SelectedIndex = ddpPrecio.Items.IndexOf(ddpPrecio.Items.FindByText((this._precioMinimo.ToString())));
+
                         if (Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("LiqSelPrecioDescuento"))))
                         {
                             this.ddpPrecio.SelectedValue = string.Format("{0:0.0000}", (object)this._precioMinimo);
@@ -1462,6 +1465,8 @@ namespace SigametLiquidacion.WebControls
                             this.ddpPrecio.SelectedValue = string.Format("{0:0.0000}", (object)this._precioMinimo);
                         }
                     }
+
+                    this.ddpPrecio.SelectedIndex = ddpPrecio.Items.IndexOf(ddpPrecio.Items.FindByText((string.Format("{0:0.0000}", (object)this._precioMinimo))));
 
                     this.ddpPrecio.Attributes.Add("onchange", "validarDescuento(" + '\'' + this.txtLitros.ClientID + '\'' + ", " + '\'' +
                         this.txtImporte.ClientID + '\'' + ", " + '\'' + this.ddpPrecio.ClientID + '\'' + ", " + this.ddpPrecio.ClientID + ", " +
@@ -1647,18 +1652,22 @@ namespace SigametLiquidacion.WebControls
         
         public void publicarPedido()
         {
-            this.lblNumeroPedido.Text = this._pedido.PedidoReferencia + " " + this.consultaTipoPedido(this._pedido.TipoPedido);
-            string folioRemision = string.Empty;
-            if (this._pedido.FolioRemision != 0)
+            if (this._pedido.TipoPedido!=null)
             {
-                //TODO: Parametrizar relleno y tamaño si se usa remisión SGC
-                folioRemision = this._pedido.FolioRemision.ToString().PadLeft(_longitudRemision, '0');
+                    this.lblNumeroPedido.Text = this._pedido.PedidoReferencia + " " + this.consultaTipoPedido(this._pedido.TipoPedido);
+                string folioRemision = string.Empty;
+                if (this._pedido.FolioRemision != 0)
+                {
+                    //TODO: Parametrizar relleno y tamaño si se usa remisión SGC
+                    folioRemision = this._pedido.FolioRemision.ToString().PadLeft(_longitudRemision, '0');
+                }
+                if (folioRemision.Trim().Length <= 0)
+                {
+                    return;
+                }
+                this.txtNumeroRemision.Text = this._pedido.SerieRemision + folioRemision;
+
             }
-            if (folioRemision.Trim().Length <= 0)
-            {
-                return;
-            }
-            this.txtNumeroRemision.Text = this._pedido.SerieRemision + folioRemision;
         }
         
         public void DesasignaPedido(DataRow CurrentRow)

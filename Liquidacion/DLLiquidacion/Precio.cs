@@ -63,11 +63,14 @@ namespace SigametLiquidacion
         {      
             DataTable dataTable = this.dtListaPrecios.Clone();
             this._precioVigente = Convert.ToDecimal(this.dtListaPrecios.Compute("MAX(Precio)", "ClaseRuta = " + this._claseRuta.ToString()));
+            DataRow[] dr = dtListaPrecios.Select("precio="+ _precioVigente.ToString());
+
             if (!this._preciosMultiples)
             {
                 DataRow row = dataTable.NewRow();
                 row.BeginEdit();
                 row["Precio"] = (object) this._precioVigente;
+                row["ZonaEconomica"] = (object)dr[0]["ZonaEconomica"];
                 row.EndEdit();
                 dataTable.Rows.Add(row);
             }

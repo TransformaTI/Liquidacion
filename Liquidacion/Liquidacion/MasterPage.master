@@ -198,7 +198,7 @@
                 <tr>
                     <td style="height:50px">
                         <div style="width:100%;height:100%">
-                            <asp:Label ID="lblVersion" runat="server" Text="    Ver. 2.0.59" CssClass="etiquetaVersion"></asp:Label>
+                            <asp:Label ID="lblVersion" runat="server" Text="    Ver. 2.0.60" CssClass="etiquetaVersion"></asp:Label>
                         </div>             
                     </td>
                 </tr>

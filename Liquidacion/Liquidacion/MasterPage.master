@@ -137,6 +137,17 @@
     
     <script src="Scripts/MiscControlFunctions.js" type="text/javascript"></script>
     <script type="text/javascript" src="/Scripts/jquery.min.js"></script>  <%--mcc 2018 05 21--%>
+
+    <script src="Scripts/alertifyjs/alertify.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="Scripts/alertifyjs/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="Scripts/alertifyjs/css/themes/default.min.css"/>
+    <!-- Semantic UI theme -->
+    <link rel="stylesheet" href="Scripts/alertifyjs/css/themes/semantic.min.css"/>
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="Scripts/alertifyjs/css/themes/bootstrap.min.css"/>
     
     <title>Liquidacion de Ruta</title>
     <asp:ContentPlaceHolder id="head" runat="server">

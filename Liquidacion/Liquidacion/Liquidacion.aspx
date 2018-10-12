@@ -6,9 +6,11 @@
     
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainPlaceHolder" runat="server">
 
-<script type="text/jscript" src="Scripts/MiscControlFunctions.js"></script>
-<script type="text/jscript" src="Scripts/MiscFunctions.js"></script>
-<script type="text/jscript" src="Scripts/ValidacionConciliacion.js"></script>
+    <script type="text/jscript" src="Scripts/MiscControlFunctions.js"></script>
+    <script type="text/jscript" src="Scripts/MiscFunctions.js"></script>
+    <script type="text/jscript" src="Scripts/ValidacionConciliacion.js"></script>
+
+
 <%--<script type="text/jscript">
 function SeleccionarControlSiguiente(charCode, nextControlName)
 {    

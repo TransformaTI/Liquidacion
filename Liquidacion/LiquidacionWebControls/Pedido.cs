@@ -1198,7 +1198,7 @@ namespace SigametLiquidacion.WebControls
             {
                 this.txtNumeroCliente.Text = "";
                 ClientScriptManager cs = Page.ClientScript;
-                cs.RegisterClientScriptBlock(typeof(Page), "myscript", "alert('El número de contrato introducido es incorrecto.')", true);
+                cs.RegisterClientScriptBlock(typeof(Page), "myscript", "alertify.alert('Error','El número de contrato introducido es incorrecto.', function(){ alertify.error('Error de usuario'); })", true);
             }
         }
 

@@ -1190,7 +1190,16 @@ namespace SigametLiquidacion.WebControls
             {
                 return;
             }
-            this.cargaDatosCliente(Convert.ToInt32(this.txtNumeroCliente.Text), sender, e);
+            try
+            {
+                this.cargaDatosCliente(Convert.ToInt32(this.txtNumeroCliente.Text), sender, e);
+            }
+            catch(OverflowException ex)
+            {
+                this.txtNumeroCliente.Text = "";
+                ClientScriptManager cs = Page.ClientScript;
+                cs.RegisterClientScriptBlock(typeof(Page), "myscript", "alert('El número de contrato introducido es incorrecto.')", true);
+            }
         }
 
         private void btnAceptar_Click(object sender, ImageClickEventArgs e)

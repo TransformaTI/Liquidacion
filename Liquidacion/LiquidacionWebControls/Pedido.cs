@@ -100,6 +100,7 @@ namespace SigametLiquidacion.WebControls
 
         private byte _longitudSerie;
         private byte _longitudRemision;
+        private bool buscandocte = false;
         
         public string URLImagenBotonBusquedaCliente
         {
@@ -773,6 +774,7 @@ namespace SigametLiquidacion.WebControls
         
         protected override void CreateChildControls()
         {
+
             switch (this._tipoLayOutControl)
             {
                 case TipoLayoutControl.LayoutHorizontal:
@@ -822,7 +824,7 @@ namespace SigametLiquidacion.WebControls
             this.btnConsultaCliente.AlternateText = "BUSCAR";
             this.btnConsultaCliente.ID = "btnConsultaCliente";
             this.Controls.Add((Control) this.btnConsultaCliente);
-            this.txtNumeroCliente.Attributes.Add("onkeypress", "return keyPressNumeroCliente(event, " + '\'' + this.txtNumeroCliente.ClientID + '\'' + ", " + '\'' + this.btnConsultaCliente.ClientID + '\'' + ");");
+            this.txtNumeroCliente.Attributes.Add("onkeypress", "return keyPressNumeroCliente(event, " + '\'' + this.txtNumeroCliente.ClientID + '\'' + ", " + '\'' + this.txtNumeroRemision.ClientID + '\'' + ");");
             this.Controls.Add((Control) new LiteralControl("</div>"));
             this.Controls.Add((Control) new LiteralControl("</td>"));
             this.Controls.Add((Control) new LiteralControl("</tr>"));

@@ -1,4 +1,6 @@
-﻿function onKeyPress_OnlyDigits(evt)
+﻿var enters = '0';
+
+function onKeyPress_OnlyDigits(evt)
 {
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -19,8 +21,12 @@ function keyPressNumeroCliente(evt, txtNumeroCliente, btnConsultaCliente)
         var charCode = (evt.which) ? evt.which : evt.keyCode;
         if (charCode == 13)
         {
+            debugger;
+            confirm('Consultar');
+            
             if (document.getElementById(txtNumeroCliente).value.length > 0)
             {
+                
                 SeleccionarControlSiguiente(charCode, btnConsultaCliente);
             }
             else
@@ -133,6 +139,7 @@ function getObj(name)
 
 function DoPostback()
 {
+
     javascript: __doPostBack('ConsultaPedido', '');
 }
 
@@ -140,6 +147,7 @@ function DoPostback()
 
 function doNumeroClienteSubmit(name, message)
 {
+    confirm('Consultar');
 
     if (document.getElementById(name).value.length > 0)
     {

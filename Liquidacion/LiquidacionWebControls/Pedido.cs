@@ -1198,7 +1198,7 @@ namespace SigametLiquidacion.WebControls
         //{
         //    if (e. == 13)
         //    {
-        
+
         //        e.Handled = true;
         //    }
         //}
@@ -1211,18 +1211,19 @@ namespace SigametLiquidacion.WebControls
 
 
                 if (this.txtNumeroCliente.Text.Length <= 0)
-            {
-                return;
-            }
-            try
-            {
-                this.cargaDatosCliente(Convert.ToInt32(this.txtNumeroCliente.Text), sender, e);
-            }
-            catch(OverflowException ex)
-            {
-                this.txtNumeroCliente.Text = "";
-                ClientScriptManager cs = Page.ClientScript;
-                cs.RegisterClientScriptBlock(typeof(Page), "myscript", "alertify.alert('Error','El número de contrato introducido es incorrecto.', function(){ alertify.error('Error de usuario'); })", true);
+                {
+                    return;
+                }
+                try
+                {
+                    this.cargaDatosCliente(Convert.ToInt32(this.txtNumeroCliente.Text), sender, e);
+                }
+                catch (OverflowException ex)
+                {
+                    this.txtNumeroCliente.Text = "";
+                    ClientScriptManager cs = Page.ClientScript;
+                    cs.RegisterClientScriptBlock(typeof(Page), "myscript", "alertify.alert('Error','El número de contrato introducido es incorrecto.', function(){ alertify.error('Error de usuario'); })", true);
+                }
             }
         }
 

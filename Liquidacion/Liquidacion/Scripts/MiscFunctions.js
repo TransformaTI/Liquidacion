@@ -1,5 +1,4 @@
-﻿var enters = '0';
-
+﻿
 function onKeyPress_OnlyDigits(evt)
 {
     evt = (evt) ? evt : window.event;
@@ -147,7 +146,7 @@ function DoPostback()
 
 function doNumeroClienteSubmit(name, message)
 {
-    confirm('Consultar');
+  
 
     if (document.getElementById(name).value.length > 0)
     {

@@ -789,6 +789,10 @@ namespace SigametLiquidacion.WebControls
             this.btnCancelar.Click += new ImageClickEventHandler(this.btnCancelar_Click);
             this.btnRemover.Click += new ImageClickEventHandler(this.btnDesasignar_Click);
             this.txtNumeroCliente.TextChanged += new EventHandler(txtNumeroCliente_TextChanged);
+            this.txtNumeroCliente.AutoPostBack = true;
+            System.Web.HttpContext.Current.Session["buscandoCliente"] = "";
+
+
             this.ConfiguracionTabOrder();
         }
         
@@ -814,12 +818,12 @@ namespace SigametLiquidacion.WebControls
             
             //if (ConsultaCteOnChange==true)
             //{
-                this.txtNumeroCliente.Attributes.Add("onchange", "return DoPostback();");
+               // this.txtNumeroCliente.Attributes.Add("onblur", "return DoPostback('"+ this.btnConsultaCliente.ClientID+ "');");
             //}
 
             this.Controls.Add((Control) this.txtNumeroCliente);
 
-            this.btnConsultaCliente.Attributes.Add("onclick", "return doNumeroClienteSubmit(" + '\'' + this.txtNumeroCliente.ClientID + '\'' + "," + '\'' + this._mensajeCapturaCliente + '\'' + ");");
+            this.btnConsultaCliente.Attributes.Add("onclick", "return doNumeroClienteSubmit(" + '\'' + this.txtNumeroCliente.ClientID + '\'' + "," + '\'' + this._mensajeCapturaCliente + '\'' + "," + '\'' + "" + '\''+");");
             this.btnConsultaCliente.SkinID = "btnBuscarCliente";
             this.btnConsultaCliente.AlternateText = "BUSCAR";
             this.btnConsultaCliente.ID = "btnConsultaCliente";
@@ -834,7 +838,7 @@ namespace SigametLiquidacion.WebControls
             this.Controls.Add((Control) new LiteralControl("<td style=" + '\'' + "font-weight: bold;" + '\'' + ">"));
             this.lnkCambiarCliente.Text = "Cambiar cliente";
             this.lnkCambiarCliente.Visible = false;
-            this.lnkCambiarCliente.Attributes.Add("onclick", "return doNumeroClienteSubmit(" + '\'' + this.txtNumeroCliente.ClientID + '\'' + "," + '\'' + this._mensajeCapturaCliente + '\'' + ");");
+            this.lnkCambiarCliente.Attributes.Add("onclick", "return doNumeroClienteSubmit(" + '\'' + this.txtNumeroCliente.ClientID + '\'' + "," + '\'' + this._mensajeCapturaCliente + '\'' + "," + '\'' + this.btnConsultaCliente.ClientID + '\'' + ");");
             this.lnkCambiarCliente.Click += new EventHandler(this.lnkCambiarCliente_click);
             this.Controls.Add((Control) this.lnkCambiarCliente);
             this.Controls.Add((Control) new LiteralControl("</td>"));
@@ -1173,24 +1177,46 @@ namespace SigametLiquidacion.WebControls
         
         private void btnConsultaCliente_Click(object sender, ImageClickEventArgs e)
         {
-            if (this.txtNumeroCliente.Text.Length <= 0)
+            string _buscando = Convert.ToString(System.Web.HttpContext.Current.Session["buscandoCliente"]);
+            if (_buscando != "x")
+            {
+
+                if (this.txtNumeroCliente.Text.Length <= 0)
+                    {
+                        return;
+                    }
+
+            this.cargaDatosCliente(Convert.ToInt32(this.txtNumeroCliente.Text), sender, e);
+            }
+            else
             {
                 return;
             }
-
-            this.cargaDatosCliente(Convert.ToInt32(this.txtNumeroCliente.Text), sender, e);
-
         }
+
+        //private void textBox1_KeyDown(object sender, EventArgs e)
+        //{
+        //    if (e. == 13)
+        //    {
+        
+        //        e.Handled = true;
+        //    }
+        //}
 
         protected void txtNumeroCliente_TextChanged(object sender, EventArgs e)
         {
-            
-            
-            if (this.txtNumeroCliente.Text.Length <= 0)
+            string _buscando = Convert.ToString(System.Web.HttpContext.Current.Session["buscandoCliente"]);
+            if (_buscando != "x")
+            {
+
+
+                if (this.txtNumeroCliente.Text.Length <= 0)
             {
                 return;
             }
             this.cargaDatosCliente(Convert.ToInt32(this.txtNumeroCliente.Text), sender, e);
+            }
+
         }
 
         private void btnAceptar_Click(object sender, ImageClickEventArgs e)
@@ -1350,6 +1376,7 @@ namespace SigametLiquidacion.WebControls
         {
 
             string _buscando = Convert.ToString(System.Web.HttpContext.Current.Session["buscandoCliente"]);
+
 
             if (_buscando == "x")
             {

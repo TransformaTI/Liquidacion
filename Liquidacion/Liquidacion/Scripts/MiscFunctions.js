@@ -20,8 +20,7 @@ function keyPressNumeroCliente(evt, txtNumeroCliente, btnConsultaCliente)
         var charCode = (evt.which) ? evt.which : evt.keyCode;
         if (charCode == 13)
         {
-            debugger;
-            confirm('Consultar');
+
             
             if (document.getElementById(txtNumeroCliente).value.length > 0)
             {

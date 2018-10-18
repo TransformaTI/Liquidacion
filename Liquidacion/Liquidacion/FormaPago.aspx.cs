@@ -612,7 +612,7 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["FechaCheque"] = txtValeFecha.Text;
                 dr["Cliente"] = txtClienteVale.Text;
                 dr["Banco"] = " ";
-                dr["Referencia"] = 0;
+                dr["Referencia"] = ddlProveedor.SelectedItem.Text;
                 dr["NumeroCuenta"] = 0;
 
                 dr["Importe"] = (Convert.ToDouble(txtValeImporte.Text) * rp.dbIVA);

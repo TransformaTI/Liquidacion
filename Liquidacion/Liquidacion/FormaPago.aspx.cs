@@ -314,6 +314,7 @@ public partial class FormaPago : System.Web.UI.Page
             txtFechaChueque.Text = Session["FechaAsignacion"].ToString();
             txtValeFecha.Text = Session["FechaAsignacion"].ToString();
             txtFechaTarjeta.Text = Session["FechaAsignacion"].ToString();
+            TxtFechaCobro.Text=Session["FechaAsignacion"].ToString();
             Session["FechaAsignacion"].ToString();
         }
 
@@ -670,6 +671,9 @@ public partial class FormaPago : System.Web.UI.Page
                 //Genera Registro del Cobro con Cheque
 
                 dtCobro = ds.Tables["Cobro"];
+
+
+                dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
                 DataRow dr;
                 dr = dtCobro.NewRow();
 
@@ -702,6 +706,7 @@ public partial class FormaPago : System.Web.UI.Page
 
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
+                dr["FechaCobro"] = TxtFechaCobro.Text;
 
                 dtCobro.Rows.Add(dr);
                 //Subo a Session la tabla creada

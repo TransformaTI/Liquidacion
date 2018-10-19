@@ -684,6 +684,29 @@
                                                             </ccR:ValidatorCalloutExtender>
                                                         </td>
                                                     </tr>
+
+                                                    <tr>
+                                                        <td class="style1">
+                                                            <asp:Label ID="Label18" runat="server" Text="Fecha Cobro:"
+                                                                CssClass="labeltipopagoforma"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:TextBox ID="TxtFechaCobro" runat="server" CssClass="textboxcaptura"
+                                                                ReadOnly="False"></asp:TextBox>
+                                                            <asp:ImageButton ID="imgCalendarioCobro" runat="server" ImageUrl="~/Imagenes/Calendar.png" />
+                                                            <asp:RequiredFieldValidator ID="rfvFechaCobro" runat="server"
+                                                                ControlToValidate="txtFechaChueque" Display="None"
+                                                                ErrorMessage="Capturar la Fecha Cobro" Font-Size="11px" ValidationGroup="Cheque"></asp:RequiredFieldValidator>
+                                                            <ccR:CalendarExtender ID="CalendarExtender2" runat="server"
+                                                                PopupButtonID="imgCalendarioCobro" OnClientShown="muestraCalendario" OnClientHidden="cierraCheque" TargetControlID="TxtFechaCobro" Format="dd/MM/yyyy">
+                                                            </ccR:CalendarExtender>
+                                                            <ccR:ValidatorCalloutExtender ID="vceChequeFechaCobro" runat="server"
+                                                                TargetControlID="rfvFechaCobro">
+                                                            </ccR:ValidatorCalloutExtender>
+                                                        </td>
+                                                    </tr>
+
+
                                                     <tr>
                                                         <td class="style1">
                                                             <asp:Label ID="lblNuCuentaCheque" runat="server" CssClass="labeltipopagoforma"

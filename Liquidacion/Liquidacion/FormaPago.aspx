@@ -747,7 +747,7 @@
                                                     <tr>
                                                         <td class="style1">
                                                             <asp:Label ID="Label8" runat="server" Text="Importe:"
-                                                                CssClass="labeltipopagoforma"></asp:Label>
+                                                                CssClass="labeltipopagoforma"></asp:Label> 
                                                         </td>
                                                         <td>
                                                             <asp:TextBox ID="txtImporteCheque" runat="server" CssClass="textboxcaptura"></asp:TextBox>

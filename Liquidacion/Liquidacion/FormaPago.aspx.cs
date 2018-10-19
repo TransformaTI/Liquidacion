@@ -708,6 +708,7 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["TipoValeDescripcion"] = "";
                 dr["FechaCobro"] = TxtFechaCobro.Text;
 
+
                 dtCobro.Rows.Add(dr);
                 //Subo a Session la tabla creada
                 //Session["TablaCobro"] = dtCobro;

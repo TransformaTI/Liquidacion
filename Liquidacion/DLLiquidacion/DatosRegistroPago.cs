@@ -649,6 +649,7 @@ namespace SigametLiquidacion
                     cobro = num1;
 
 
+
                     if (liqPagoAnticipado != null && dtPago.Rows[index1]["NombreTipoCobro"].ToString().Contains("ANTICIPO"))
                     {
                         decimal Totalpedidos = decimal.Parse(liqPagoAnticipado.Compute("Sum(Monto)", "IdPago="+ dtPago.Rows[index1]["IdPago"].ToString().Trim()).ToString());

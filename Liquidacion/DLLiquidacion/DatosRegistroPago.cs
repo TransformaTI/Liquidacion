@@ -601,6 +601,10 @@ namespace SigametLiquidacion
         public void GuardaPagos(string Usuario, DataTable dtPedidos, DataTable dtPago=null, DataTable dtDetallePago=null, DataTable dtResumenLiquidacion=null, DataTable liqPagoAnticipado=null)
         {
             int cobro = 0;
+            string Fcobro ;
+
+            
+
             try
             {
 
@@ -615,8 +619,28 @@ namespace SigametLiquidacion
                 this._dataAccess.OpenConnection();
                 this._dataAccess.BeginTransaction();
 
+
+
                 for (int index1 = 0; index1 <= dtPago.Rows.Count - 1; ++index1)
                 {
+                    if (dtPago.Columns.Contains("FechaCobro"))
+                    {
+                        if  (dtPago.Rows[index1]["FechaCobro"].ToString()!=string.Empty)
+                            {
+                             Fcobro = dtPago.Rows[index1]["FechaCobro"].ToString();
+                            }
+                        else
+                        {
+                            Fcobro =null;
+                        }
+
+                    }
+                    else
+                    {
+                        Fcobro= null;
+                    }
+
+
                     SqlParameter[] sqlParameterArray = new SqlParameter[19]
                     {
                         new SqlParameter("@NumeroCheque", (object) dtPago.Rows[index1]["Referencia"].ToString()),
@@ -637,8 +661,20 @@ namespace SigametLiquidacion
                         null,
                         new SqlParameter("@Referencia", (object) dtPago.Rows[index1]["Referencia"].ToString()),
                         new SqlParameter("@NumeroCuentaDestino", (object) dtPago.Rows[index1]["TipoValeDescripcion"].ToString()),
-                        new SqlParameter("@Fcobro", (object) dtPago.Rows[index1]["FechaCobro"].ToString()),
-                    };
+
+                        new SqlParameter("@Fcobro", (object)DBNull.Value)
+                   
+
+
+
+                };
+                    if (Fcobro!=null)
+                    {
+                        sqlParameterArray[18].Value = (object)Convert.ToDateTime(Fcobro);
+                    }
+
+
+
                     sqlParameterArray[14].Direction = ParameterDirection.Output;
                     sqlParameterArray[15] = new SqlParameter("@Cobro", SqlDbType.Int);
                     sqlParameterArray[15].Direction = ParameterDirection.Output;

@@ -6,7 +6,7 @@
 <%@ Register Src="~/ControlesUsuario/wucDetalleFormaPago.ascx" TagPrefix="ucDetallePago" TagName="wucDetalleFormaPago" %>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainPlaceHolder" runat="server">
-    <%--  --%>
+    <%--  --%>a
     <script type="text/javascript">
     function cierraCheque()
     { 
@@ -111,6 +111,8 @@
                 if (respuesta == true) {
                     ShowModalPopup();
                 }
+
+
             }
 
 
@@ -440,6 +442,26 @@
 
 
             }  
+
+            function ValidaFechasCheque()
+            {
+                alert('VALIDACIONES');
+    <%--             var FechaCheque = new Date('<%=Convert.ToDateTime(txtFechaChueque.Text).Year%>','<%=Convert.ToDateTime(txtFechaChueque.Text).Month%>', '<%=Convert.ToDateTime(txtFechaChueque.Text).Day%>');
+                var FechaCobro = new Date('<%=Convert.ToDateTime(TxtFechaCobro.Text).Year%>', '<%=Convert.ToDateTime(TxtFechaCobro.Text).Month%>', '<%=Convert.ToDateTime(TxtFechaCobro.Text).Day%>'); //Year, Month, Date
+
+             if (FechaCheque >= FechaCobro) {
+
+                   return true;
+
+                 }else {
+
+                  alert('La fecha de cobro debe ser mayor igual que la fecha del documento');
+                   return false;
+
+                 }--%>
+
+            }
+
         }
 
     </script>
@@ -774,7 +796,7 @@
                                                     <tr>
                                                         <td class="style1">&nbsp;</td>
                                                         <td>
-                                                            <asp:ImageButton ID="imbAceptar" runat="server"
+                                                            <asp:ImageButton ID="imbAceptar" runat="server" 
                                                                 SkinID="btnAceptar" OnClick="imbAceptar_Click"
                                                                 ValidationGroup="Cheque" Height="25px" Width="25px" />
 

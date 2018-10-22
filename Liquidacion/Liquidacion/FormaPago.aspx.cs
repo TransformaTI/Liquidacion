@@ -260,8 +260,11 @@ public partial class FormaPago : System.Web.UI.Page
 
         txtNoAutorizacionTarjetaConfirm.Attributes.Add("onkeypress", "return isAlphaNumeric(event)");
 
-        imbResumen.Attributes.Add("onclick", "imbResumenClick()");         
-        // txtNumTarjeta.Attributes.Add("onblur", "return AgregarCargoTarjeta('AgregarCargoTarjeta')");
+        imbResumen.Attributes.Add("onclick", "imbResumenClick()");
+
+        //imbAceptar.Attributes.Add("onclick", "return ValidaFechasCheque()");
+
+
 
 
 
@@ -664,6 +667,11 @@ public partial class FormaPago : System.Web.UI.Page
         try
         {
 
+            if (Convert.ToDateTime(TxtFechaCobro.Text) >= Convert.ToDateTime(txtFechaChueque.Text))
+                {
+
+
+
             if ((DataSet)(Session["dsLiquidacion"]) == null)
             {
 
@@ -773,6 +781,14 @@ public partial class FormaPago : System.Web.UI.Page
                 Session["FormaPago"] = "cheque";
             }
             Response.Redirect("RegistroPagos.aspx");
+
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "ErrorCheque", "document.getElementById('cheque').style.display = 'inherit';alert('¡la fecha de cobro debe ser igual o mayor a la fecha del documento!');", true);
+                return;
+            }
+
         }
         catch (Exception ex)
         {

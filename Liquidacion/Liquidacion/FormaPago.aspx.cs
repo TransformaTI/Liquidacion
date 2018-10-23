@@ -736,7 +736,8 @@ public partial class FormaPago : System.Web.UI.Page
                 DataRow dr;
                 int idConsecutivo;
                 dtCobro = ((DataSet)(Session["dsLiquidacion"])).Tables["Cobro"];
-                dr = dtCobro.NewRow();
+                dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
+                    dr = dtCobro.NewRow();
 
                 idConsecutivo = ((Int32)(Session["idCobroConsec"]) + 1);
 
@@ -770,8 +771,9 @@ public partial class FormaPago : System.Web.UI.Page
 
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
+                dr["FechaCobro"] = TxtFechaCobro.Text;
 
-                dtCobro.Rows.Add(dr);
+                    dtCobro.Rows.Add(dr);
 
                 importeOperacion = Convert.ToDecimal(txtImporteCheque.Text);
                 Session["ImporteOperacion"] = importeOperacion;

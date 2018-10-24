@@ -37,7 +37,7 @@ public partial class FormaPago : System.Web.UI.Page
     int PagosOtraRuta = 0;
     int Pagos = 0;
     DataTable dtDatosControlUsuario = new DataTable();
-
+    bool HidePagos = false;
 
 
 
@@ -82,6 +82,7 @@ public partial class FormaPago : System.Web.UI.Page
                     txtObservacionesTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
                     imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
                     chkLocal.Enabled = txtNoAutorizacionTarjeta.Text == string.Empty ? true : false;
+
                 }
             }
 
@@ -105,7 +106,11 @@ public partial class FormaPago : System.Web.UI.Page
                 }
                 else
                 {
-                    MuestraPagoSeleccionado(Request.Form["__EVENTTARGET"].ToString());
+                    if (HidePagos==false)
+                    {
+                        MuestraPagoSeleccionado(Request.Form["__EVENTTARGET"].ToString());
+                    }
+
                 }
             }
 
@@ -1481,22 +1486,14 @@ else
      
 
             foreach (DataRow row in dtPagosConTarjeta.Rows)
-            {
+            {                
                 
-                
-                //if(true) //(Session["Ruta"].ToString()== row["Ruta"].ToString() && Session["Autotanque"].ToString() == row["Autotanque"].ToString() )
                 if (!row.IsNull("Año"))
                     {
                           dtDatosControlUsuario.Rows.Add(row["TipoCobroDescripcion"].ToString(), row["NumeroTarjeta"].ToString(), row["NombreBanco"].ToString(), row["Autorizacion"].ToString(), row["Importe"].ToString(), row["Observacion"].ToString(), row["Año"].ToString(), row["Folio"].ToString());
                           PagosDeRuta = PagosDeRuta + 1;
                         
                     }
-                //else if (row["Folio"].ToString()!=string.Empty && row["Folio"].ToString() !="0")
-                //    {
-                //        PagosOtraRuta = PagosOtraRuta + 1;
-                //    }
-
-
 
             }
             wucConsultaCargoTarjetaCliente1.sFormaPago = sFormaPago;
@@ -1899,5 +1896,10 @@ else
     protected void txtNoAutorizacionTarjeta_TextChanged(object sender, EventArgs e)
     {
        // AgregarCargoTarjeta(txtClienteTarjeta.Text.Trim(), txtNumTarjeta.Text.Trim(), txtNoAutorizacionTarjeta.Text.Trim());
+    }
+
+    protected void btnHide_Click(object sender, EventArgs e)
+    {
+        HidePagos = true;
     }
 }   

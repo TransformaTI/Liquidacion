@@ -1523,6 +1523,13 @@
                     </td>
 
                 </tr>
+
+                 <tr style="align-content: center;">
+                    <td style="text-align: right">
+                 <asp:Button ID="btnHide" runat="server" width="100px"  Text="Cerrar" Font-Bold="true"  OnClientClick="return HideModalPopup()"  OnClick="btnHide_Click" BackColor="#E4EBAB"/>
+                    </td>
+
+                </tr>
                 <tr style="align-content: center;">
                     <td style="text-align: center">
                         <b>CARGOS DEL MISMO CLIENTE </b>

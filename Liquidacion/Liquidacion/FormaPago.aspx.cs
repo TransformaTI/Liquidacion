@@ -482,6 +482,8 @@ public partial class FormaPago : System.Web.UI.Page
             TipoTarjeta.Add("0", "Seleccione");
             TipoTarjeta.Add("19", "Tarjeta de Débito");
             TipoTarjeta.Add("6", "Tarjeta de Crédito");
+            TipoTarjeta.Add("22", "Tarjeta de Servicio");
+
 
             ddTipoTarjeta.DataSource = TipoTarjeta;
             ddTipoTarjeta.DataTextField = "Value";

@@ -11,7 +11,6 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using System.IO;
-
 using SigametLiquidacion;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
@@ -812,8 +811,11 @@ public partial class FormaPago : System.Web.UI.Page
             {
                 //Genera Registro del Cobro con Cheque
                 dtCobro = ds.Tables["Cobro"];
-                DataRow dr;
+                dtCobro.Columns.Add("NumCheque", typeof(System.String));
+
+                    DataRow dr;
                 dr = dtCobro.NewRow();
+                
 
                 dr["IdPago"] = 1; //Consecutivo
                 dr["Referencia"] = ddlTAfiliacion.SelectedItem.Text; // txtNoAutorizacionTarjeta.Text;
@@ -845,6 +847,8 @@ public partial class FormaPago : System.Web.UI.Page
 
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
+                dr["NumCheque"] = txtNoAutorizacionTarjeta.Text;
+                    
 
 
                     dtCobro.Rows.Add(dr);
@@ -864,7 +868,13 @@ public partial class FormaPago : System.Web.UI.Page
                 DataRow dr;
                 int idConsecutivo;
                 dtCobro = ((DataSet)(Session["dsLiquidacion"])).Tables["Cobro"];
-                dr = dtCobro.NewRow();
+                    if (!dtCobro.Columns.Contains("NumCheque"))
+                    {
+
+                        dtCobro.Columns.Add("NumCheque", typeof(System.String));
+                    }
+
+                    dr = dtCobro.NewRow();
 
                 idConsecutivo = ((Int32)(Session["idCobroConsec"]) + 1);
 
@@ -898,8 +908,9 @@ public partial class FormaPago : System.Web.UI.Page
 
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
+                dr["NumCheque"] = txtNoAutorizacionTarjeta.Text;
 
-                dtCobro.Rows.Add(dr);
+                    dtCobro.Rows.Add(dr);
 
                 importeOperacion = Convert.ToDecimal(txtImporteTarjeta.Text);
                 Session["idCliente"] = txtClienteTarjeta.Text;

@@ -602,6 +602,7 @@ namespace SigametLiquidacion
         {
             int cobro = 0;
             string Fcobro ;
+            string NumCheque = string.Empty;
 
             
 
@@ -641,9 +642,30 @@ namespace SigametLiquidacion
                     }
 
 
+                    if (dtPago.Columns.Contains("NumCheque"))
+                    {
+                        if (dtPago.Rows[index1]["NumCheque"].ToString() != string.Empty)
+                        {
+                            NumCheque = dtPago.Rows[index1]["NumCheque"].ToString();
+                        }
+                        else
+                        {
+                            NumCheque = null;
+                        }
+
+                    }
+                    else
+                    {
+                        NumCheque = null;
+                    }
+
+
+
+
+
                     SqlParameter[] sqlParameterArray = new SqlParameter[19]
                     {
-                        new SqlParameter("@NumeroCheque", (object) dtPago.Rows[index1]["Referencia"].ToString()),
+                        new SqlParameter("@NumeroCheque", (object)DBNull.Value),
                         new SqlParameter("@Total",(object) Convert.ToDecimal(dtPago.Rows[index1]["Total"])),
                         new SqlParameter("@Saldo", (object) Convert.ToDecimal(dtPago.Rows[index1]["Saldo"])),
                         new SqlParameter("@NumeroCuenta", (object) dtPago.Rows[index1]["NumeroCuenta"].ToString()),
@@ -671,6 +693,11 @@ namespace SigametLiquidacion
                     if (Fcobro!=null)
                     {
                         sqlParameterArray[18].Value = (object)Convert.ToDateTime(Fcobro);
+                    }
+
+                    if (NumCheque != null)
+                    {
+                        sqlParameterArray[0].Value = (object)NumCheque;
                     }
 
 

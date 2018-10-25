@@ -1,35 +1,35 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLLiquidacion", "DLLiquidacion\DLLiquidacion.csproj", "{2A7F0835-420F-4917-AF00-A1FA0A00DD05}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiquidacionWebControls", "LiquidacionWebControls\LiquidacionWebControls.csproj", "{823729BB-252E-4475-BBAD-A1F493656B3C}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Liquidacion", "Liquidacion\", "{E8877B7F-4C1E-46F8-A9D1-B7C7D95906F3}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite1", "Liquidacion\", "{3DDD0C0C-7F7C-45A0-AA15-AF3A9E8DA7EF}"
 	ProjectSection(WebsiteProperties) = preProject
 		SccProjectName = "SAK"
 		SccAuxPath = "SAK"
 		SccLocalPath = "SAK"
 		SccProvider = "SAK"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_8080"
-		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\Proyectos\SigametLiquidacion\Liquidacion\Liquidacion\"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_51835"
+		Debug.AspNetCompiler.PhysicalPath = "Liquidacion\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51835\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_8080"
-		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\Proyectos\SigametLiquidacion\Liquidacion\Liquidacion\"
+		Release.AspNetCompiler.VirtualPath = "/localhost_51835"
+		Release.AspNetCompiler.PhysicalPath = "Liquidacion\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51835\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "8080"
-		SlnRelativePath = "..\..\..\..\..\..\Proyectos\SigametLiquidacion\Liquidacion\Liquidacion\"
+		SlnRelativePath = "Liquidacion\"
 	EndProjectSection
 EndProject
 Global
@@ -46,12 +46,15 @@ Global
 		{823729BB-252E-4475-BBAD-A1F493656B3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{823729BB-252E-4475-BBAD-A1F493656B3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{823729BB-252E-4475-BBAD-A1F493656B3C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E8877B7F-4C1E-46F8-A9D1-B7C7D95906F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E8877B7F-4C1E-46F8-A9D1-B7C7D95906F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E8877B7F-4C1E-46F8-A9D1-B7C7D95906F3}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{E8877B7F-4C1E-46F8-A9D1-B7C7D95906F3}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{3DDD0C0C-7F7C-45A0-AA15-AF3A9E8DA7EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DDD0C0C-7F7C-45A0-AA15-AF3A9E8DA7EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DDD0C0C-7F7C-45A0-AA15-AF3A9E8DA7EF}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DDD0C0C-7F7C-45A0-AA15-AF3A9E8DA7EF}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {10537D6F-1FE1-4711-9094-5EE2E6AA3D04}
 	EndGlobalSection
 EndGlobal

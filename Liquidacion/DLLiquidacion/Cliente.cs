@@ -318,6 +318,12 @@ namespace SigametLiquidacion
                 {
                     _nombre = datosCliente.consultaNombreCliente(this._cliente);
 
+                    if (_nombre.Trim()!=string.Empty)
+                    {
+                        _encontrado = true;
+                    }
+
+
                 }
                 catch (Exception ex)
                 {

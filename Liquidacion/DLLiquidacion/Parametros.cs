@@ -48,7 +48,16 @@ namespace SigametLiquidacion
 
     public object ValorParametro(string Parametro)
     {
-      return this._parametros.Rows.Find((object) Parametro)["Valor"];
+            try
+            {
+                return this._parametros.Rows.Find((object)Parametro)["Valor"];
+            }
+            catch (NullReferenceException ex)
+            {
+
+                return "";
+            }
+      
     }
   }
 }

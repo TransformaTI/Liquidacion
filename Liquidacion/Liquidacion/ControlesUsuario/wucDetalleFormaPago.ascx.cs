@@ -401,20 +401,33 @@ private void LlenaDropDowns()
         
         try
         {
-            //ConsultaPedidosCliente();
 
-            //ds = (DataSet)(Session["dsLiquidacion"]);
             int idConsecutivo = Session["idCobroConsec"] != null ? ((Int32)(Session["idCobroConsec"]) + 1) : 1;
 
             if ((DataSet)(Session["dsLiquidacion"]) != null)
             {
-                //Session["idCobroConsec"] = ((Int32)(Session["idCobroConsec"]) + 1);
+
                 dtCobro = ((DataSet)(Session["dsLiquidacion"])).Tables["Cobro"];
+
+
+
+                if (!dtCobro.Columns.Contains("FechaCobro"))
+                {
+
+                    dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
+                }
+
+
+                if (!dtCobro.Columns.Contains("NumCheque"))
+                {
+
+                    dtCobro.Columns.Add("NumCheque", typeof(System.String));
+                }
+
                 DataRow dr;
                 dr = dtCobro.NewRow();
 
-                //dr["IdCobro"] = 0;
-                //dr["IdPago"] = ((Int32)(Session["idCobroConsec"]) + 1); ; //Consecutivo
+
                 dr["IdPago"] = idConsecutivo; //Consecutivo
                 dr["Referencia"] =0;
                 dr["NumeroCuenta"] = 0;
@@ -457,8 +470,12 @@ private void LlenaDropDowns()
             else
             {
                 //Genera Registro del Cobro con Cheque
-                //Session["idCobroConsec"] = 1;
+
                 dtCobro = ds.Tables["Cobro"];
+
+                dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
+                dtCobro.Columns.Add("NumCheque", typeof(System.String));
+
                 DataRow dr;
                 dr = dtCobro.NewRow();
 
@@ -508,12 +525,7 @@ private void LlenaDropDowns()
 
             dtLiqAnticipo.Rows.Add(LstSaldos.SelectedValue.ToString().Split('/')[0], LstSaldos.SelectedValue.ToString().Split('/')[1], LstSaldos.SelectedValue.ToString().Split('/')[2], Convert.ToDecimal(this.txtAntMonto.Text),"",idConsecutivo);
 
-            //if (ds.Tables.Contains("Pedidos"))
-            //{
-            //    ds.Tables.Remove("Pedidos");
-            //}
-            //dtPedidos.TableName = "Pedidos";
-            //ds.Tables.Add(dtPedidos);
+
             ActualizarSaldoPedidos();
 
             if (ds.Tables.Contains("LiqPagoAnticipado"))

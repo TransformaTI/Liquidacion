@@ -6,6 +6,7 @@ using System.Data;
 using System.IO;
 using System.Web.UI;
 using System.Web;
+using System.Diagnostics;
 
 namespace SigametLiquidacion
 {
@@ -18,7 +19,7 @@ namespace SigametLiquidacion
 
 
 
-            message += string.Format("Time: {0}", DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt"));
+            message += "|"+ string.Format("Time: {0}", DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt"));
             message += "|" + Folio.ToString();
             message += "|" + añoFolio.ToString();
             message += "|" + OrigenInfo.ToString();
@@ -42,34 +43,46 @@ namespace SigametLiquidacion
 
             }
 
-
-
-            message += "|" + OrigenInfo;
-
-            if (File.Exists(System.Web.Hosting.HostingEnvironment.MapPath("~/LogOperacion.txt")))
+            try
             {
-                string path = System.Web.Hosting.HostingEnvironment.MapPath("~/LogOperacion.txt");
-                using (StreamWriter writer = new StreamWriter(path, true))
-                {
 
-                    writer.WriteLine(message);
-                    writer.Close();
+                if (File.Exists(System.Web.Hosting.HostingEnvironment.MapPath("~/LogOperacion.txt")))
+                {
+                    string path = System.Web.Hosting.HostingEnvironment.MapPath("~/LogOperacion.txt");
+                    using (StreamWriter writer = new StreamWriter(path, true))
+                    {
+
+                        writer.WriteLine(message);
+                        writer.Close();
+
+                    }
+                }
+                else
+                {
+                    string path = System.Web.Hosting.HostingEnvironment.MapPath("~/LogOperacion.txt");
+                    using (StreamWriter writer = new StreamWriter(path, true))
+                    {
+                        writer.WriteLine(Encabezado);
+                        writer.WriteLine(message);
+                        writer.Close();
+
+                    }
+
 
                 }
+
+
             }
-            else
-                 {
-                        string path = System.Web.Hosting.HostingEnvironment.MapPath("~/LogOperacion.txt");
-                        using (StreamWriter writer = new StreamWriter(path, true))
-                        {
-                            writer.WriteLine(Encabezado);
-                            writer.WriteLine(message);
-                            writer.Close();
+            catch (Exception e)
+            {
+                if (!EventLog.SourceExists("LiquidacionWeb"))
+                {
+                    EventLog.CreateEventSource("LiquidacionWeb", "Application");
+                }
+                EventLog.WriteEntry("LiquidacionWeb", e.Message,EventLogEntryType.Information);
+            }
+                                 
 
-                        }
-
-
-                 }
 
         }
 

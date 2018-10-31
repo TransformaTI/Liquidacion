@@ -90,6 +90,7 @@
     <Compile Include="CobroTarjeta.cs" />
     <Compile Include="DatosCobroTarjeta.cs" />
     <Compile Include="FolioLiquidacion.cs" />
+    <Compile Include="LogOperacion.cs" />
     <Compile Include="RegistroBitacora.cs" />
     <Compile Include="AdministracionUsuarios.cs" />
     <Compile Include="Seguridad.cs" />

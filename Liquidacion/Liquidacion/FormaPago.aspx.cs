@@ -551,12 +551,9 @@ public partial class FormaPago : System.Web.UI.Page
 
                 dtCobro = ds.Tables["Cobro"];
                 DataRow dr;
+                dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
+                dtCobro.Columns.Add("NumCheque", typeof(System.String));
                 dr = dtCobro.NewRow();
-
-                //dr["IdCobro"] = 0; //Consecutivo
-                //dr["Referencia"] = txtFolioVale.Text;
-                //dr["NumeroCuenta"] = txtFolioVale.Text;
-
 
 
 
@@ -610,6 +607,21 @@ public partial class FormaPago : System.Web.UI.Page
                 //Genera Registro del Cobro con Vale
 
                 dtCobro = ((DataSet)(Session["dsLiquidacion"])).Tables["Cobro"];
+
+
+                if (!dtCobro.Columns.Contains("FechaCobro"))
+                {
+
+                    dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
+                }
+
+                if (!dtCobro.Columns.Contains("NumCheque"))
+                {
+
+                    dtCobro.Columns.Add("NumCheque", typeof(System.String));
+                }
+
+          
                 DataRow dr;
                 dr = dtCobro.NewRow();
 
@@ -688,7 +700,8 @@ public partial class FormaPago : System.Web.UI.Page
 
 
                 dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
-                DataRow dr;
+                dtCobro.Columns.Add("NumCheque", typeof(System.String));
+                 DataRow dr;
                 dr = dtCobro.NewRow();
 
                 dr["IdPago"] = 1; //Consecutivo
@@ -742,7 +755,18 @@ public partial class FormaPago : System.Web.UI.Page
                 DataRow dr;
                 int idConsecutivo;
                 dtCobro = ((DataSet)(Session["dsLiquidacion"])).Tables["Cobro"];
-                dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
+
+                if (!dtCobro.Columns.Contains("FechaCobro"))
+                    {
+
+                        dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
+                }
+                if (!dtCobro.Columns.Contains("NumCheque"))
+                    {
+
+                        dtCobro.Columns.Add("NumCheque", typeof(System.String));
+                }
+       
                     dr = dtCobro.NewRow();
 
                 idConsecutivo = ((Int32)(Session["idCobroConsec"]) + 1);
@@ -805,6 +829,7 @@ public partial class FormaPago : System.Web.UI.Page
     }
     protected void imbAceptarTDC_Click(object sender, ImageClickEventArgs e)
     {
+    
         try
         {
             RevisaPagos();
@@ -816,7 +841,8 @@ public partial class FormaPago : System.Web.UI.Page
             {
                 //Genera Registro del Cobro con Cheque
                 dtCobro = ds.Tables["Cobro"];
-                dtCobro.Columns.Add("NumCheque", typeof(System.String));
+                    dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
+                    dtCobro.Columns.Add("NumCheque", typeof(System.String));
 
                     DataRow dr;
                 dr = dtCobro.NewRow();
@@ -848,13 +874,14 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["FechaDeposito"] = DateTime.Now.Date;
 
                 dr["BancoOrigen"] = ddlBancoOrigen.SelectedItem.Text;
-                dr["NombreTipoCobro"] = "TARJETA";
+                dr["NombreTipoCobro"] = ddTipTarjeta.SelectedItem.Text;
 
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
                 dr["NumCheque"] = txtNoAutorizacionTarjeta.Text;
-                    
 
+                    LogOperacion LOG = new LogOperacion();
+                    LOG.EscribeLogOperacionRow(dr, Convert.ToInt32(Session["Folio"]), Convert.ToInt32(Session["AñoAtt"]), "ForasPago");
 
                     dtCobro.Rows.Add(dr);
                 //Subo a Session la tabla creada
@@ -866,18 +893,38 @@ public partial class FormaPago : System.Web.UI.Page
                 importeOperacion = Convert.ToDecimal(txtImporteTarjeta.Text);
                 Session["ImporteOperacion"] = importeOperacion;
                 Session["FormaPago"] = "TDC";
-            }
-            else
+
+
+
+
+
+
+
+
+                }
+                else
             {
                 //Genera Registro del Cobro con Cheque
                 DataRow dr;
                 int idConsecutivo;
                 dtCobro = ((DataSet)(Session["dsLiquidacion"])).Tables["Cobro"];
+               
+
+
+
+                    if (!dtCobro.Columns.Contains("FechaCobro"))
+                    {
+
+                        dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
+                    }
+
+
                     if (!dtCobro.Columns.Contains("NumCheque"))
                     {
 
                         dtCobro.Columns.Add("NumCheque", typeof(System.String));
                     }
+
 
                     dr = dtCobro.NewRow();
 
@@ -909,11 +956,14 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["FechaDeposito"] = DateTime.Now.Date;
 
                 dr["BancoOrigen"] = ddlBancoOrigen.SelectedItem.Text;
-                dr["NombreTipoCobro"] = "TARJETA";
+                dr["NombreTipoCobro"] = ddTipTarjeta.SelectedItem.Text;
 
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
                 dr["NumCheque"] = txtNoAutorizacionTarjeta.Text;
+
+                    LogOperacion LOG = new LogOperacion();
+                    LOG.EscribeLogOperacionRow(dr, Convert.ToInt32(Session["Folio"]), Convert.ToInt32(Session["AñoAtt"]), "ForasPago");
 
                     dtCobro.Rows.Add(dr);
 

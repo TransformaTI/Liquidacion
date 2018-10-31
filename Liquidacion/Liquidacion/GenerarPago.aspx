@@ -65,13 +65,28 @@
                         <ItemStyle HorizontalAlign="Center" ForeColor="Black"/>
                         
                     </asp:CommandField>
-                    <asp:BoundField DataField="IdPago" HeaderText="Pago" ItemStyle-HorizontalAlign="Center"/>
-                    <asp:BoundField DataField="Cliente" HeaderText="Cliente" ItemStyle-HorizontalAlign="Center"/>
-                    <asp:BoundField DataField="Banco" HeaderText="Banco" ItemStyle-HorizontalAlign="Center"/>
-                    <asp:BoundField DataField="total" HeaderText="Total" DataFormatString="{0:C}" ItemStyle-HorizontalAlign="Center"/>
-                    <asp:BoundField DataField="FechaAlta" HtmlEncode="false" HeaderText="Fecha Alta" DataFormatString="{0:d}"  ItemStyle-HorizontalAlign="Center"/>
-                    <asp:BoundField DataField="Referencia" HeaderText="Referencia" ItemStyle-HorizontalAlign="Center"/>
-                    <asp:BoundField DataField="NombreTipoCobro" HeaderText="Tipo Cobro" ItemStyle-HorizontalAlign="Center"/>
+                    <asp:BoundField DataField="IdPago" HeaderText="Pago" ItemStyle-HorizontalAlign="Center">
+                    <ItemStyle HorizontalAlign="Center" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="Cliente" HeaderText="Cliente" ItemStyle-HorizontalAlign="Center">
+                    <ItemStyle HorizontalAlign="Center" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="Banco" HeaderText="Banco" ItemStyle-HorizontalAlign="Center">
+                    <ItemStyle HorizontalAlign="Center" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="total" HeaderText="Total" DataFormatString="{0:C}" ItemStyle-HorizontalAlign="Center">
+                    <ItemStyle HorizontalAlign="Center" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="FechaAlta" HtmlEncode="false" HeaderText="Fecha Alta" DataFormatString="{0:d}"  ItemStyle-HorizontalAlign="Center">
+                    <ItemStyle HorizontalAlign="Center" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="Referencia" HeaderText="Referencia" ItemStyle-HorizontalAlign="Center">
+                    <ItemStyle HorizontalAlign="Center" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="NombreTipoCobro" HeaderText="Tipo Cobro" ItemStyle-HorizontalAlign="Center">
+                    <ItemStyle HorizontalAlign="Center" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="NumCheque" HeaderText="Autorización" />
                 </Columns>
                 <RowStyle CssClass="RowStyle" />
                 <PagerStyle CssClass="PagerStyle" /> 

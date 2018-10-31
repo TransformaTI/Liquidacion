@@ -37,6 +37,19 @@ public partial class GenerarPago : System.Web.UI.Page
         //dtPagosGenerados = (DataTable)(Session["TablaCobro"]);
         
         if(dsPagos !=null && dsPagos.Tables["Cobro"] != null) {
+
+            DataRow[] drp= dsPagos.Tables["Cobro"].Select("TipoCobro = 'Tarjeta de Débito' or TipoCobro = 'Tarjeta de Crédito' or TipoCobro = 'Tarjeta de Servicio'");
+            //DataTable DtTarjeta = drp.CopyToDataTable();
+            //if (DtTarjeta.Rows.Count >0)
+            //{
+            //    gvPagoGenerado.Columns[8].Visible = true;
+            //}
+            //else
+            //{
+            //    gvPagoGenerado.Columns[8].Visible = false;
+            //}
+
+
             gvPagoGenerado.DataSource = dsPagos.Tables["Cobro"];
             gvPagoGenerado.DataBind();
 

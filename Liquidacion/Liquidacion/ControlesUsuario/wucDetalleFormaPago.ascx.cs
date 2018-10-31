@@ -257,7 +257,23 @@ private void LlenaDropDowns()
             if ((DataSet)(Session["dsLiquidacion"]) != null)
             {
                 dtCobro = ((DataSet)(Session["dsLiquidacion"])).Tables["Cobro"];
-                
+
+
+
+                if (!dtCobro.Columns.Contains("FechaCobro"))
+                {
+
+                    dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
+                }
+
+
+                if (!dtCobro.Columns.Contains("NumCheque"))
+                {
+
+                    dtCobro.Columns.Add("NumCheque", typeof(System.String));
+                }
+
+
                 DataRow dr;
                 dr = dtCobro.NewRow();
 
@@ -307,6 +323,13 @@ private void LlenaDropDowns()
                 //Genera Registro del Cobro con Cheque
                 //Session["idCobroConsec"] = 1;
                 dtCobro = ds.Tables["Cobro"];
+
+
+                dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
+                dtCobro.Columns.Add("NumCheque", typeof(System.String));
+
+
+
                 DataRow dr;
                 dr = dtCobro.NewRow();
 

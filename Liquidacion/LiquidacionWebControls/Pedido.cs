@@ -1375,7 +1375,10 @@ namespace SigametLiquidacion.WebControls
         {
             if (this.ddpFormaPago.SelectedValue.Trim().ToUpper() == "CREDITO")
             {
-                return (byte)6; //this._cliente.TipoCreditoCliente;
+                if (this._cliente != null)
+                {
+                    return (byte)this._cliente.TipoCreditoCliente;
+                }
             }
             return (byte) 5;
         }

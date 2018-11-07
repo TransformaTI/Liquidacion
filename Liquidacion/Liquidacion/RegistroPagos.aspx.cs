@@ -629,20 +629,16 @@ public partial class RegistroPagos : System.Web.UI.Page
     {
         try
         {
-
-
             DataRow[] CobrosPedido = ds.Tables["CobroPedido"].Select("IdPago = '" + Session["idCobroConsec"].ToString() + "'");
             //DataRow[] CobrosPedido = ds.Tables["CobroPedido"].Select();
             if (CobrosPedido.Length > 0)
-
-            
-                Response.Redirect("GenerarPago.aspx");
+                Response.Redirect("GenerarPago.aspx", false);
             else
                 lblError.Text = "Debe Capturar Abonos para el Pago";
         }
         catch (Exception ex)
         {
-            lblError.Text = ex.Message;
+            //lblError.Text = ex.Message;
         }
     }
     protected void imbCancelarAbonos_Click(object sender, ImageClickEventArgs e)

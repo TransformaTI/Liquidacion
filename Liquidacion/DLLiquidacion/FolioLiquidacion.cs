@@ -281,8 +281,24 @@ namespace SigametLiquidacion
                 this._celula = Convert.ToInt16(dataRow["Celula"]);
                 this._ruta = Convert.ToInt16(dataRow["Ruta"]);
                 this._status = Convert.ToString(dataRow["StatusLogistica"]);
-                this._totalizadorInicial = Convert.ToDouble(dataRow["TotalizadorInicial"]);
-                this._totalizadorFinal = Convert.ToDouble(dataRow["TotalizadorFinal"]);
+                if(dataRow["TotalizadorInicial"] == DBNull.Value)
+                {
+                    this._totalizadorInicial = 0;
+                }
+                else
+                {
+                    this._totalizadorInicial = Convert.ToDouble(dataRow["TotalizadorInicial"]);
+                }
+
+                if(dataRow["TotalizadorFinal"] == DBNull.Value)
+                {
+                    this._totalizadorFinal = 0;
+                }
+                else
+                {
+                    this._totalizadorFinal = Convert.ToDouble(dataRow["TotalizadorFinal"]);
+                }
+                
                 this._diferenciaTotalizador = Convert.ToDouble(dataRow["LitrosLiquidados"]);
                 this._serieRemision = Convert.ToString(dataRow["SerieRemision"]);
                 this._preciosMultiples = Convert.ToBoolean(dataRow["MultiplesPrecios"]);

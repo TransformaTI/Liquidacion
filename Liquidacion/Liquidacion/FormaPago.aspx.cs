@@ -684,143 +684,134 @@ public partial class FormaPago : System.Web.UI.Page
     {
         try
         {
-
-            if (Convert.ToDateTime(TxtFechaCobro.Text) >= Convert.ToDateTime(txtFechaChueque.Text))
+            /*if (Convert.ToDateTime(TxtFechaCobro.Text) >= Convert.ToDateTime(txtFechaChueque.Text))
+            {*/
+                if ((DataSet)(Session["dsLiquidacion"]) == null)
                 {
+                    //CreateTableCobro();
+                    //Genera Registro del Cobro con Cheque
+                    dtCobro = ds.Tables["Cobro"];
 
+                    dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
+                    dtCobro.Columns.Add("NumCheque", typeof(System.String));
+                     DataRow dr;
+                    dr = dtCobro.NewRow();
 
+                    dr["IdPago"] = 1; //Consecutivo
+                    dr["Referencia"] = txtNumeroCheque.Text;
+                    dr["NumeroCuenta"] = txtNumCuenta.Text;
 
-            if ((DataSet)(Session["dsLiquidacion"]) == null)
-            {
+                    dr["FechaCheque"] = txtFechaChueque.Text;
+                    dr["Cliente"] = txtClienteCheque.Text;
+                    dr["Banco"] = ddChequeBanco.SelectedValue;
 
-                //CreateTableCobro();
-                //Genera Registro del Cobro con Cheque
+                    dr["Importe"] = (Convert.ToDouble((txtImporteCheque.Text.ToString().Replace("$", ""))) * rp.dbIVA);
+                    dr["Impuesto"] = (Convert.ToDouble((txtImporteCheque.Text.ToString().Replace("$", ""))) * rp.dbIVA);
+                    dr["Total"] = txtImporteCheque.Text; //CHECK THIS
 
-                dtCobro = ds.Tables["Cobro"];
+                    dr["Saldo"] = 0;
+                    dr["Observaciones"] = txtObservacionesChueque.Text;
+                    dr["Status"] = "EMITIDO"; //CHECK THIS 
 
+                    dr["FechaAlta"] = DateTime.Now.Date.ToString("dd/MM/yyyy");
+                    dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.tipoCheque);
+                    dr["Usuario"] = Convert.ToString(Session["Usuario"]); ;
 
-                dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
-                dtCobro.Columns.Add("NumCheque", typeof(System.String));
-                 DataRow dr;
-                dr = dtCobro.NewRow();
+                    dr["SaldoAFavor"] = 0;
+                    dr["TPV"] = 0;
+                    dr["FechaDeposito"] = txtFechaChueque.Text;
 
-                dr["IdPago"] = 1; //Consecutivo
-                dr["Referencia"] = txtNumeroCheque.Text;
-                dr["NumeroCuenta"] = txtNumCuenta.Text;
+                    dr["BancoOrigen"] = 0;
+                    dr["NombreTipoCobro"] = "CHEQUE";
 
-                dr["FechaCheque"] = txtFechaChueque.Text;
-                dr["Cliente"] = txtClienteCheque.Text;
-                dr["Banco"] = ddChequeBanco.SelectedValue;
+                    dr["ProveedorNombre"] = "";
+                    dr["TipoValeDescripcion"] = "";
+                    dr["FechaCobro"] = TxtFechaCobro.Text;
 
-                dr["Importe"] = (Convert.ToDouble((txtImporteCheque.Text.ToString().Replace("$", ""))) * rp.dbIVA);
-                dr["Impuesto"] = (Convert.ToDouble((txtImporteCheque.Text.ToString().Replace("$", ""))) * rp.dbIVA);
-                dr["Total"] = txtImporteCheque.Text; //CHECK THIS
+                    dr["NumCheque"] = txtNumeroCheque.Text;
 
-                dr["Saldo"] = 0;
-                dr["Observaciones"] = txtObservacionesChueque.Text;
-                dr["Status"] = "EMITIDO"; //CHECK THIS 
+                    dtCobro.Rows.Add(dr);
+                    //Subo a Session la tabla creada
+                    //Session["TablaCobro"] = dtCobro;
+                    Session["dsLiquidacion"] = dtCobro.DataSet;
 
-                dr["FechaAlta"] = DateTime.Now.Date.ToString("dd/MM/yyyy");
-                dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.tipoCheque);
-                dr["Usuario"] = Convert.ToString(Session["Usuario"]); ;
+                    //Subo a Session el consecutivo actual para posteriores capturas de pagos
+                    Session["idCobroConsec"] = 1;
+                    importeOperacion = Convert.ToDecimal(txtImporteCheque.Text);
+                    Session["ImporteOperacion"] = importeOperacion;
 
-                dr["SaldoAFavor"] = 0;
-                dr["TPV"] = 0;
-                dr["FechaDeposito"] = txtFechaChueque.Text;
-
-                dr["BancoOrigen"] = 0;
-                dr["NombreTipoCobro"] = "CHEQUE";
-
-                dr["ProveedorNombre"] = "";
-                dr["TipoValeDescripcion"] = "";
-                dr["FechaCobro"] = TxtFechaCobro.Text;
-
-
-                dtCobro.Rows.Add(dr);
-                //Subo a Session la tabla creada
-                //Session["TablaCobro"] = dtCobro;
-                Session["dsLiquidacion"] = dtCobro.DataSet;
-
-                //Subo a Session el consecutivo actual para posteriores capturas de pagos
-                Session["idCobroConsec"] = 1;
-                importeOperacion = Convert.ToDecimal(txtImporteCheque.Text);
-                Session["ImporteOperacion"] = importeOperacion;
-
-                Session["idCliente"] = txtClienteCheque.Text;
-                Session["FormaPago"] = "cheque";
-            }
-            else
-            {
-                //Genera Registro del Cobro con Cheque
-                DataRow dr;
-                int idConsecutivo;
-                dtCobro = ((DataSet)(Session["dsLiquidacion"])).Tables["Cobro"];
-
-                if (!dtCobro.Columns.Contains("FechaCobro"))
-                    {
-
-                        dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
+                    Session["idCliente"] = txtClienteCheque.Text;
+                    Session["FormaPago"] = "cheque";
                 }
-                if (!dtCobro.Columns.Contains("NumCheque"))
-                    {
+                else
+                {
+                    //Genera Registro del Cobro con Cheque
+                    DataRow dr;
+                    int idConsecutivo;
+                    dtCobro = ((DataSet)(Session["dsLiquidacion"])).Tables["Cobro"];
 
-                        dtCobro.Columns.Add("NumCheque", typeof(System.String));
-                }
+                    if (!dtCobro.Columns.Contains("FechaCobro"))
+                    {
+                            dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
+                    }
+                    if (!dtCobro.Columns.Contains("NumCheque"))
+                    {
+                            dtCobro.Columns.Add("NumCheque", typeof(System.String));
+                    }
        
                     dr = dtCobro.NewRow();
 
-                idConsecutivo = ((Int32)(Session["idCobroConsec"]) + 1);
+                    idConsecutivo = ((Int32)(Session["idCobroConsec"]) + 1);
 
-                dr["IdPago"] = idConsecutivo; //Consecutivo
-                Session["idCobroConsec"] = idConsecutivo;
-                dr["Referencia"] = txtNumeroCheque.Text;
-                dr["NumeroCuenta"] = txtNumCuenta.Text;
+                    dr["IdPago"] = idConsecutivo; //Consecutivo
+                    Session["idCobroConsec"] = idConsecutivo;
+                    dr["Referencia"] = txtNumeroCheque.Text;
+                    dr["NumeroCuenta"] = txtNumCuenta.Text;
 
-                dr["FechaCheque"] = txtFechaChueque.Text;
-                dr["Cliente"] = txtClienteCheque.Text;
-                dr["Banco"] = ddChequeBanco.SelectedValue;
+                    dr["FechaCheque"] = txtFechaChueque.Text;
+                    dr["Cliente"] = txtClienteCheque.Text;
+                    dr["Banco"] = ddChequeBanco.SelectedValue;
 
-                dr["Importe"] = (Convert.ToDouble(txtImporteCheque.Text.ToString().Replace("$", "")) * rp.dbIVA);
-                dr["Impuesto"] = (Convert.ToDouble(txtImporteCheque.Text.ToString().Replace("$", "")) * rp.dbIVA);
-                dr["Total"] = txtImporteCheque.Text; //CHECK THIS
+                    dr["Importe"] = (Convert.ToDouble(txtImporteCheque.Text.ToString().Replace("$", "")) * rp.dbIVA);
+                    dr["Impuesto"] = (Convert.ToDouble(txtImporteCheque.Text.ToString().Replace("$", "")) * rp.dbIVA);
+                    dr["Total"] = txtImporteCheque.Text; //CHECK THIS
 
-                dr["Saldo"] = 0;
-                dr["Observaciones"] = txtObservacionesChueque.Text;
-                dr["Status"] = "EMITIDO"; //CHECK THIS 
+                    dr["Saldo"] = 0;
+                    dr["Observaciones"] = txtObservacionesChueque.Text;
+                    dr["Status"] = "EMITIDO"; //CHECK THIS 
 
-                dr["FechaAlta"] = DateTime.Now.Date.ToString("dd/MM/yyyy");
-                dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.tipoCheque);
-                dr["Usuario"] = Convert.ToString(Session["Usuario"]); ;
+                    dr["FechaAlta"] = DateTime.Now.Date.ToString("dd/MM/yyyy");
+                    dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.tipoCheque);
+                    dr["Usuario"] = Convert.ToString(Session["Usuario"]); ;
 
-                dr["SaldoAFavor"] = 0;
-                dr["TPV"] = 0;
-                dr["FechaDeposito"] = txtFechaChueque.Text;
+                    dr["SaldoAFavor"] = 0;
+                    dr["TPV"] = 0;
+                    dr["FechaDeposito"] = txtFechaChueque.Text;
 
-                dr["BancoOrigen"] = 0;
-                dr["NombreTipoCobro"] = "CHEQUE";
+                    dr["BancoOrigen"] = 0;
+                    dr["NombreTipoCobro"] = "CHEQUE";
 
-                dr["ProveedorNombre"] = "";
-                dr["TipoValeDescripcion"] = "";
-                dr["FechaCobro"] = TxtFechaCobro.Text;
+                    dr["ProveedorNombre"] = "";
+                    dr["TipoValeDescripcion"] = "";
+                    dr["FechaCobro"] = TxtFechaCobro.Text;
+                    dr["NumCheque"] = txtNumeroCheque.Text;
 
                     dtCobro.Rows.Add(dr);
 
-                importeOperacion = Convert.ToDecimal(txtImporteCheque.Text);
-                Session["ImporteOperacion"] = importeOperacion;
+                    importeOperacion = Convert.ToDecimal(txtImporteCheque.Text);
+                    Session["ImporteOperacion"] = importeOperacion;
 
-                Session["idCliente"] = txtClienteCheque.Text;
-                Session["dsLiquidacion"] = dtCobro.DataSet;
-                Session["FormaPago"] = "cheque";
-            }
-            Response.Redirect("RegistroPagos.aspx");
-
-            }
+                    Session["idCliente"] = txtClienteCheque.Text;
+                    Session["dsLiquidacion"] = dtCobro.DataSet;
+                    Session["FormaPago"] = "cheque";
+                }
+                Response.Redirect("RegistroPagos.aspx");
+            /*}
             else
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "ErrorCheque", "document.getElementById('cheque').style.display = 'inherit';alert('¡la fecha de cobro debe ser igual o mayor a la fecha del documento!');", true);
                 return;
-            }
-
+            }*/
         }
         catch (Exception ex)
         {

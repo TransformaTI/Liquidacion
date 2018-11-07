@@ -134,20 +134,37 @@
     </tr>
     <tr>
         <td class="style1">
+            Banco Origen</td>
+        <td style="text-align: left">
+            <asp:DropDownList ID="ddlBancoOrigen" runat="server" Height="25" Width="200px">
+                <asp:ListItem>Promoción 1</asp:ListItem>
+                <asp:ListItem>Promoción 2</asp:ListItem>
+                <asp:ListItem>Promoción 3</asp:ListItem>
+                <asp:ListItem>Promoción 4</asp:ListItem>
+                <asp:ListItem>Promoción 5</asp:ListItem>
+            </asp:DropDownList>
+        </td>
+    </tr>
+    <tr>
+        <td class="style1">Cuenta Origen</td>
+        <td style="text-align: left">
+            <asp:TextBox ID="TxtCtaOrigen" runat="server" CssClass="TxtCtaOrigen" onblur="return ConsultaCteTransferencia();" Width="150px"></asp:TextBox>
+            <cc2:FilteredTextBoxExtender ID="TxtCtaOrigen_FilteredTextBoxExtender" runat="server" FilterType="Numbers" TargetControlID="TxtCtaOrigen">
+            </cc2:FilteredTextBoxExtender>
+        </td>
+    </tr>
+    <tr>
+        <td class="style1">
             <div>
-                <asp:Label ID="lblNoCuenta" runat="server" CssClass="labeltipopagoforma"
-                    Text="No. Cuenta:"></asp:Label>
+                <asp:Label ID="lblNoCuenta" runat="server" CssClass="labeltipopagoforma" Text="No. Cuenta:"></asp:Label>
             </div>
         </td>
         <td style="text-align: left">
-            <asp:TextBox ID="txtNoCuenta" Width="150px" runat="server" CssClass="textboxcaptura" OnTextChanged="txtNoCuenta_TextChanged"></asp:TextBox>
-            <cc2:FilteredTextBoxExtender ID="ftbNumCuenta" runat="server" TargetControlID="txtNoCuenta" FilterType="Numbers"></cc2:FilteredTextBoxExtender>
-            <asp:RequiredFieldValidator ID="rfvNoCuenta" runat="server"
-                ControlToValidate="txtNoCuenta" Display="None"
-                ErrorMessage="Capturar el  No. Cuenta"
-                ValidationGroup="Guarda"></asp:RequiredFieldValidator>
-            <cc2:ValidatorCalloutExtender ID="vceNoCuenta" runat="server"
-                TargetControlID="rfvNoCuenta">
+            <asp:TextBox ID="txtNoCuenta" runat="server" CssClass="textboxcaptura" OnTextChanged="txtNoCuenta_TextChanged" Width="150px"></asp:TextBox>
+            <cc2:FilteredTextBoxExtender ID="ftbNumCuenta" runat="server" FilterType="Numbers" TargetControlID="txtNoCuenta">
+            </cc2:FilteredTextBoxExtender>
+            <asp:RequiredFieldValidator ID="rfvNoCuenta" runat="server" ControlToValidate="txtNoCuenta" Display="None" ErrorMessage="Capturar el  No. Cuenta" ValidationGroup="Guarda"></asp:RequiredFieldValidator>
+            <cc2:ValidatorCalloutExtender ID="vceNoCuenta" runat="server" TargetControlID="rfvNoCuenta">
             </cc2:ValidatorCalloutExtender>
         </td>
     </tr>
@@ -175,7 +192,7 @@
         <td class="style1">
             <div>
                 <asp:Label ID="lblBanco" runat="server" CssClass="labeltipopagoforma"
-                    Text="Banco:"></asp:Label>
+                    Text="Banco Destino:"></asp:Label>
             </div>
         </td>
         <td style="text-align: left">
@@ -193,20 +210,25 @@
     </tr>
     <tr>
         <td class="style1">
+            Cuenta Destino</td>
+        <td style="text-align: left">
+            <asp:TextBox ID="txtCtaDestino" runat="server" CssClass="TxtCtaOrigen" onblur="return ConsultaCteTransferencia();" Width="150px"></asp:TextBox>
+            <cc2:FilteredTextBoxExtender ID="txtCtaDestino_FilteredTextBoxExtender" runat="server" FilterType="Numbers" TargetControlID="txtCtaDestino">
+            </cc2:FilteredTextBoxExtender>
+        </td>
+    </tr>
+    <tr>
+        <td class="style1">
             <div>
-                <asp:Label ID="lblImporte" runat="server" CssClass="labeltipopagoforma"
-                    Text="Importe:"></asp:Label>
+                <asp:Label ID="lblImporte" runat="server" CssClass="labeltipopagoforma" Text="Importe:"></asp:Label>
             </div>
         </td>
         <td style="text-align: left">
-            <asp:TextBox ID="txtImporte" runat="server" Width="150px" CssClass="textboxcaptura"></asp:TextBox>
-            <cc2:FilteredTextBoxExtender ID="ftbImporte" runat="server" TargetControlID="txtImporte" FilterType="Custom" ValidChars="0123456789./"></cc2:FilteredTextBoxExtender>
-            <asp:RequiredFieldValidator ID="rfvImporte" runat="server"
-                ControlToValidate="txtImporte" Display="None"
-                ErrorMessage="Capturar Importe"
-                ValidationGroup="Guarda"></asp:RequiredFieldValidator>
-            <cc2:ValidatorCalloutExtender ID="vceImporte" runat="server"
-                TargetControlID="rfvImporte">
+            <asp:TextBox ID="txtImporte" runat="server" CssClass="textboxcaptura" Width="150px"></asp:TextBox>
+            <cc2:FilteredTextBoxExtender ID="ftbImporte" runat="server" FilterType="Custom" TargetControlID="txtImporte" ValidChars="0123456789./">
+            </cc2:FilteredTextBoxExtender>
+            <asp:RequiredFieldValidator ID="rfvImporte" runat="server" ControlToValidate="txtImporte" Display="None" ErrorMessage="Capturar Importe" ValidationGroup="Guarda"></asp:RequiredFieldValidator>
+            <cc2:ValidatorCalloutExtender ID="vceImporte" runat="server" TargetControlID="rfvImporte">
             </cc2:ValidatorCalloutExtender>
         </td>
     </tr>

@@ -6,6 +6,7 @@
 
 using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Web;
 using System.Web.UI;
 
@@ -27,6 +28,7 @@ namespace SigametLiquidacion
     private DataTable dtProveedores = new DataTable();
     private DataTable dtTipoVale = new DataTable();
     private DataTable dtPedidosLiqAnticipado = new DataTable();
+    private DataTable dtCtasBanco = new DataTable();
 
    public DataTable ListaPedidos()
     {
@@ -49,6 +51,14 @@ namespace SigametLiquidacion
       this.dtBancos = this._datos.Bancos;
       return this.dtBancos;
     }
+
+   public DataTable ListaCtasBanco(int EmpresaContable)
+   {
+      this._datos.CargaCuentaBanco(EmpresaContable);
+      this.dtCtasBanco = this._datos.CuentasBanco;
+      return this.dtCtasBanco;
+    }
+
 
     public DataTable DatosCliente(int Cliente)
     {

@@ -58,7 +58,8 @@
         var NomCteAnticipo='<%=wucDetalleFormaPago1.NombreCteAnticipo != null ? wucDetalleFormaPago1.NombreCteAnticipo.Trim():"" %>';
         var NumCteAnticipo='<%=wucDetalleFormaPago1.TxtAntIdCliente.Text != null ? wucDetalleFormaPago1.TxtAntIdCliente.Text.ToString().Trim():"" %>';
 
-        var NomCteTarjeta='<%= txtNombreClienteTarjeta.Text.Trim() %>';
+        var NomCteTarjeta = '<%= txtNombreClienteTarjeta.Text.Trim() %>';
+        var PostBack_trasferencia='<%=wucDetalleFormaPago1.PostBack != null ? wucDetalleFormaPago1.PostBack:"" %>';
         
 
         //Validaciones  On load
@@ -74,7 +75,7 @@
                 document.getElementById('tarjeta').style.display = 'inherit';
             }
 
-            if (HiddenInput == 'ConsultaTPV-Trans' || HiddenInput == 'SeleccionaPago-Trans') {
+            if (HiddenInput == 'ConsultaTPV-Trans' || HiddenInput == 'SeleccionaPago-Trans'  ) {
                 document.getElementById('transferencia').style.display = 'inherit';
             }
 
@@ -134,7 +135,7 @@
                  alert('¡Existen cargos para el cliente que pertenecen a otra ruta . No se encontraron pagos de TPV que corresponda a la ruta y autotanque, porfavor verifique con el área de tarjetas de crédito.!');
             }
 
-            if (HiddenInput == "ConsultaCteAnticipo")
+            if (HiddenInput == "ConsultaCteAnticipo" )
             {
                     document.getElementById('AnticipoUC').style.display = 'inherit';
                     document.getElementById('Anticipo').style.display = 'inherit'; 
@@ -144,12 +145,17 @@
                     
             }
 
+
+            
+
+
+
            if (HiddenInput == "TarjetaClienteFalse")
            {
               document.getElementById('terjeta').style.display = 'inherit';
             }
 
-            if (HiddenInput == "ConsultaCteTransferencia")
+            if (HiddenInput == "ConsultaCteTransferencia" ||  PostBack_trasferencia=='CuentasBancarias')
             {
                 document.getElementById('Anticipo').style.display = 'none'; 
                 document.getElementById('AnticipoUC').style.display = 'inherit';
@@ -157,7 +163,7 @@
                 segmento = 'transferencia';
             }
 
-            //$("input[type='text']:visible:enabled:first").focus();
+
 
             if (segmento = 'tarjeta') {
                 document.getElementById('<%=txtFechaTarjeta.ClientID%>').focus();

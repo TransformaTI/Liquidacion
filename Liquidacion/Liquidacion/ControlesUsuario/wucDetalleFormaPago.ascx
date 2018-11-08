@@ -7,7 +7,7 @@
 
     function cierraTransferencia()
     {       
-        document.getElementById('<%= txtNoCuenta.ClientID %>').focus();
+       <%-- document.getElementById('<%= txtNoCuenta.ClientID %>').focus();--%>
         document.getElementById('ctl00_mostrando').value = '';
     }
     function muestraCalendario1() {
@@ -68,6 +68,12 @@
              document.getElementById("<%= txtAntMonto.ClientID%>").value = Monto[0];
         }
     }
+
+    function CuentasBancarias() {
+         javascript: __doPostBack('CuentasBancarias');
+    }
+
+
 </script>
 
  
@@ -134,7 +140,8 @@
     </tr>
     <tr>
         <td class="style1">
-            Banco Origen</td>
+            <asp:Label ID="lblFecha0" runat="server" CssClass="labeltipopagoforma" Text="Banco Origen:"></asp:Label>
+        </td>
         <td style="text-align: left">
             <asp:DropDownList ID="ddlBancoOrigen" runat="server" Height="25" Width="200px">
                 <asp:ListItem>Promoción 1</asp:ListItem>
@@ -146,26 +153,13 @@
         </td>
     </tr>
     <tr>
-        <td class="style1">Cuenta Origen</td>
+        <td class="style1">
+            <asp:Label ID="lblFecha1" runat="server" CssClass="labeltipopagoforma" Text="Cuenta Origen:"></asp:Label>
+        </td>
         <td style="text-align: left">
             <asp:TextBox ID="TxtCtaOrigen" runat="server" CssClass="TxtCtaOrigen" onblur="return ConsultaCteTransferencia();" Width="150px"></asp:TextBox>
             <cc2:FilteredTextBoxExtender ID="TxtCtaOrigen_FilteredTextBoxExtender" runat="server" FilterType="Numbers" TargetControlID="TxtCtaOrigen">
             </cc2:FilteredTextBoxExtender>
-        </td>
-    </tr>
-    <tr>
-        <td class="style1">
-            <div>
-                <asp:Label ID="lblNoCuenta" runat="server" CssClass="labeltipopagoforma" Text="No. Cuenta:"></asp:Label>
-            </div>
-        </td>
-        <td style="text-align: left">
-            <asp:TextBox ID="txtNoCuenta" runat="server" CssClass="textboxcaptura" OnTextChanged="txtNoCuenta_TextChanged" Width="150px"></asp:TextBox>
-            <cc2:FilteredTextBoxExtender ID="ftbNumCuenta" runat="server" FilterType="Numbers" TargetControlID="txtNoCuenta">
-            </cc2:FilteredTextBoxExtender>
-            <asp:RequiredFieldValidator ID="rfvNoCuenta" runat="server" ControlToValidate="txtNoCuenta" Display="None" ErrorMessage="Capturar el  No. Cuenta" ValidationGroup="Guarda"></asp:RequiredFieldValidator>
-            <cc2:ValidatorCalloutExtender ID="vceNoCuenta" runat="server" TargetControlID="rfvNoCuenta">
-            </cc2:ValidatorCalloutExtender>
         </td>
     </tr>
     <tr>
@@ -196,25 +190,30 @@
             </div>
         </td>
         <td style="text-align: left">
-            <asp:DropDownList ID="ddlBanco" Width="200px" runat="server"  Height="25">
-                <asp:ListItem>Promoción 1</asp:ListItem>
-                <asp:ListItem>Promoción 2</asp:ListItem>
-                <asp:ListItem>Promoción 3</asp:ListItem>
-                <asp:ListItem>Promoción 4</asp:ListItem>
-                <asp:ListItem>Promoción 5</asp:ListItem>
+            <asp:DropDownList ID="ddlBancoDestino" Width="200px" runat="server"  Height="25" OnSelectedIndexChanged="ddlBancoDestino_SelectedIndexChanged" AutoPostBack="True">
             </asp:DropDownList>
-
-
-
+            &nbsp;<asp:RequiredFieldValidator ControlToValidate="ddlBancoDestino" 
+                    ValidationGroup="Guarda" 
+                    InitialValue="0" 
+                    Display="dynamic" 
+                    ErrorMessage='* Seleccione un Banco Destino' 
+                    runat="server"/>
         </td>
     </tr>
     <tr>
         <td class="style1">
             Cuenta Destino</td>
         <td style="text-align: left">
-            <asp:TextBox ID="txtCtaDestino" runat="server" CssClass="TxtCtaOrigen" onblur="return ConsultaCteTransferencia();" Width="150px"></asp:TextBox>
-            <cc2:FilteredTextBoxExtender ID="txtCtaDestino_FilteredTextBoxExtender" runat="server" FilterType="Numbers" TargetControlID="txtCtaDestino">
-            </cc2:FilteredTextBoxExtender>
+
+            <asp:DropDownList ID="ddlCtaDestino" runat="server" Height="25" Width="200px">
+
+            </asp:DropDownList>
+            &nbsp;<asp:RequiredFieldValidator ControlToValidate="ddlCtaDestino" 
+                    ValidationGroup="Guarda" 
+                    InitialValue="0" 
+                    Display="dynamic" 
+                    ErrorMessage='* Seleccione una cuenta Destino' 
+                    runat="server"/>
         </td>
     </tr>
     <tr>

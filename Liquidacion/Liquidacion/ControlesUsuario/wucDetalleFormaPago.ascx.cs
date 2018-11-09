@@ -184,7 +184,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         {
             LlenaDropDowns();
 
-           // TxtCtaOrigen.Attributes.Add("onblur", "return OnblurCtaOrigen();");
+            TxtCtaOrigen.Attributes.Add("onblur", "return OnblurCtaOrigen();");
             
             this.lblTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Transferencia electrónica de fondos" : this.Titulo;
             this.lblAntTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Aplicación de anticipo" : this.Titulo;
@@ -227,6 +227,17 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
 
 
             }
+
+
+            if (Request.Form["__EVENTTARGET"].ToString().Contains("OnblurCtaOrigen"))
+            {
+                CargaCadenaConexion();
+
+                HiddenCtaOrigenValida.Value = Ctaorigen.validarExpresionRegular(3, TxtCtaOrigen.Text, conexion).ToString();
+                PostBack = "CuentasBancarias";
+            }
+
+
 
             if (Request.Form["__EVENTTARGET"].ToString().Contains("CuentasBancarias"))
             {
@@ -924,7 +935,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
 
     protected void TxtCtaOrigen_TextChanged(object sender, EventArgs e)
     {
-        CargaCadenaConexion();
-        HiddenCtaOrigenValida.Value = Ctaorigen.validarExpresionRegular(3, TxtCtaOrigen.Text, conexion).ToString();
+        //CargaCadenaConexion();
+        //HiddenCtaOrigenValida.Value = Ctaorigen.validarExpresionRegular(3, TxtCtaOrigen.Text, conexion).ToString();
     }
 }

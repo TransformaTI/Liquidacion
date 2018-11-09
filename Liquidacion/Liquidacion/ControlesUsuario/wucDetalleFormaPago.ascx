@@ -79,7 +79,7 @@
 
     function ValidaCuentaOrigen() {
         var CtaOrigenValida = "<%=HiddenCtaOrigenValida.Value%>"
-        alert(CtaOrigenValida);
+
         if (CtaOrigenValida=='True')
             { 
             return true;

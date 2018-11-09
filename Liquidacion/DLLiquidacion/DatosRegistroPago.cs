@@ -708,7 +708,7 @@ namespace SigametLiquidacion
 
 
 
-                    SqlParameter[] sqlParameterArray = new SqlParameter[19]
+                    SqlParameter[] sqlParameterArray = new SqlParameter[21]
                     {
                         new SqlParameter("@NumeroCheque", (object)DBNull.Value),
                         new SqlParameter("@Total",(object) Convert.ToDecimal(dtPago.Rows[index1]["Total"])),
@@ -724,13 +724,14 @@ namespace SigametLiquidacion
                         new SqlParameter("@SaldoAFavor", (object) dtPago.Rows[index1]["SaldoAFavor"].ToString()),
                         new SqlParameter("@TPV", (object) dtPago.Rows[index1]["TPV"].ToString()),
                         new SqlParameter("@BancoTarjeta", (object) Convert.ToInt16(dtPago.Rows[index1]["Banco"].ToString())),
-                        new SqlParameter("@AñoCobro", SqlDbType.SmallInt),
-                        null,
+                        new SqlParameter("@AñoCobro", SqlDbType.SmallInt),null,
                         new SqlParameter("@Referencia", (object) dtPago.Rows[index1]["Referencia"].ToString()),
                         //new SqlParameter("@NumeroCuentaDestino", (object) dtPago.Rows[index1]["TipoValeDescripcion"].ToString()),
                         new SqlParameter("@NumeroCuentaDestino", (object) dtPago.Rows[index1]["TipoValeDescripcion"].ToString()),
-                        new SqlParameter("@Fcobro", (object)DBNull.Value)
-                   
+                        new SqlParameter("@Fcobro", (object)DBNull.Value),
+                        new SqlParameter("@BancoOrigen", (object)DBNull.Value),
+                        new SqlParameter("@OrigenCobro", (object)"LW")
+
 
 
 
@@ -749,6 +750,12 @@ namespace SigametLiquidacion
                     {
                         sqlParameterArray[17].Value = (object)CtaDestino;
                     }
+
+                    if (dtPago.Rows[index1]["TipoCobro"].ToString().Trim()=="10")
+                    {
+                        sqlParameterArray[19].Value = (object)Convert.ToInt16(dtPago.Rows[index1]["BancoOrigen"].ToString());
+                    }
+
 
 
 

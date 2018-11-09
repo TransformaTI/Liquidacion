@@ -8,6 +8,8 @@ using SigametLiquidacion;
 using System.Data;
 using SigametLiquidacion;
 using System.Web.Script.Serialization;
+using FormasPago;
+using System.IO;
 
 public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.Web.UI.UserControl
 {
@@ -32,7 +34,9 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
     DataTable dt;
     DataTable dtCobroLiq;
      string _PostBack;
-
+    private bool _CtaOrigenValida;
+    private Cuenta Ctaorigen = new FormasPago.Cuenta();
+    private string conexion = string.Empty;
 
 
 
@@ -146,6 +150,13 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         set { _PostBack = value; }
     }
 
+    
+
+    public bool CtaOrigenValida
+    {
+        get { return _CtaOrigenValida; }
+        set { _CtaOrigenValida = value; }
+    }
 
 
     #endregion
@@ -172,6 +183,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         if (!Page.IsPostBack)
         {
             LlenaDropDowns();
+            
                         
             this.lblTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Transferencia electrónica de fondos" : this.Titulo;
             this.lblAntTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Aplicación de anticipo" : this.Titulo;
@@ -284,10 +296,27 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         txtNombre.Text = string.Empty;
     }
 
+    private string CargaCadenaConexion()
+    {    
+        if ( conexion==string.Empty)
+        {
+            TextReader textReader = (TextReader)new StreamReader(HttpContext.Current.Server.MapPath("Conexion.txt"));
+        conexion = textReader.ReadLine();
+        }
+
+        return conexion;
+    }
+
+    public bool ValidaCtaOrigen()
+    {
+        CargaCadenaConexion();
+        return Ctaorigen.validarExpresionRegular(3, TxtCtaOrigen.Text, conexion);
+    }
 
 
 
-private void LlenaDropDowns()
+
+    private void LlenaDropDowns()
     {
         DataTable dtBancos = new DataTable();
         
@@ -361,7 +390,7 @@ private void LlenaDropDowns()
 
                 dr["IdPago"] = idConsecutivo; //Consecutivo
                 dr["Referencia"] = this.txtNoDocumento.Text;
-                dr["NumeroCuenta"] = this.txtNoDocumento.Text;
+                dr["NumeroCuenta"] = ddlCtaDestino.SelectedValue.ToString();
 
                 dr["FechaCheque"] = this.txtFecha.Text;
                 dr["Cliente"] = this.txtCliente.Text;
@@ -387,7 +416,7 @@ private void LlenaDropDowns()
                 dr["NombreTipoCobro"] = "TRANSFERENCIA";
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
-                dr["CtaDestino"] = ddlCtaDestino.SelectedValue;
+                dr["CtaDestino"] = TxtCtaOrigen.Text.ToString();
 
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtImporte.Text); ;
 
@@ -419,7 +448,7 @@ private void LlenaDropDowns()
                 //dr["IdPago"] = ((Int32)(Session["idCobroConsec"] == null ? 0 : Session["idCobroConsec"]) + 1); ; //Consecutivo
                 dr["IdPago"] = idConsecutivo; //Consecutivo
                 dr["Referencia"] = this.txtNoDocumento.Text;
-                dr["NumeroCuenta"] = this.txtNoDocumento.Text;
+                dr["NumeroCuenta"] = ddlCtaDestino.SelectedValue.ToString();
 
                 dr["FechaCheque"] = this.txtFecha.Text;
                 dr["Cliente"] = this.txtCliente.Text;
@@ -446,7 +475,7 @@ private void LlenaDropDowns()
                 dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.transferencia);
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
-                dr["CtaDestino"] = ddlCtaDestino.SelectedValue;
+                dr["CtaDestino"] = TxtCtaOrigen.Text.ToString();
 
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtImporte.Text); ;
 
@@ -894,5 +923,11 @@ private void LlenaDropDowns()
 
 
 
+    }
+
+    protected void TxtCtaOrigen_TextChanged(object sender, EventArgs e)
+    {
+        CargaCadenaConexion();
+        HiddenCtaOrigenValida.Value = Ctaorigen.validarExpresionRegular(3, TxtCtaOrigen.Text, conexion).ToString();
     }
 }

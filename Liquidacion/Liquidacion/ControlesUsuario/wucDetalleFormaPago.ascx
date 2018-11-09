@@ -73,6 +73,23 @@
          javascript: __doPostBack('CuentasBancarias');
     }
 
+    function ValidaCuentaOrigen() {
+        var CtaOrigenValida = "<%=HiddenCtaOrigenValida.Value%>"
+        alert(CtaOrigenValida);
+        if (CtaOrigenValida=='True')
+            { 
+            return true;
+                }
+            else
+            {
+                alert('¡La cuenta origen es invalida!');
+                return false;
+            }
+        }
+
+
+
+
 
 </script>
 
@@ -144,11 +161,7 @@
         </td>
         <td style="text-align: left">
             <asp:DropDownList ID="ddlBancoOrigen" runat="server" Height="25" Width="200px">
-                <asp:ListItem>Promoción 1</asp:ListItem>
-                <asp:ListItem>Promoción 2</asp:ListItem>
-                <asp:ListItem>Promoción 3</asp:ListItem>
-                <asp:ListItem>Promoción 4</asp:ListItem>
-                <asp:ListItem>Promoción 5</asp:ListItem>
+                
             </asp:DropDownList>
         </td>
     </tr>
@@ -157,7 +170,7 @@
             <asp:Label ID="lblFecha1" runat="server" CssClass="labeltipopagoforma" Text="Cuenta Origen:"></asp:Label>
         </td>
         <td style="text-align: left">
-            <asp:TextBox ID="TxtCtaOrigen" runat="server" CssClass="TxtCtaOrigen" onblur="return ConsultaCteTransferencia();" Width="150px"></asp:TextBox>
+            <asp:TextBox ID="TxtCtaOrigen" runat="server" CssClass="TxtCtaOrigen" onblur="return ConsultaCteTransferencia();" Width="150px" OnTextChanged="TxtCtaOrigen_TextChanged"></asp:TextBox>
             <cc2:FilteredTextBoxExtender ID="TxtCtaOrigen_FilteredTextBoxExtender" runat="server" FilterType="Numbers" TargetControlID="TxtCtaOrigen">
             </cc2:FilteredTextBoxExtender>
         </td>
@@ -251,7 +264,7 @@
         <td></td>
         <td>
             <asp:ImageButton ID="btnbAceptar" runat="server"
-                OnClick="btnAceptar_Click"
+                OnClick="btnAceptar_Click" OnClientClick="return ValidaCuentaOrigen();"
                 SkinID="btnAceptar" ValidationGroup="Guarda" style=" margin-left: 0px;" ImageUrl="~/Images/btnAceptar.png" />
         </td>
     </tr>
@@ -376,5 +389,6 @@
 </asp:Panel>
     <asp:HiddenField ID="HiddenInputUC" runat="server" Value="" />
       <asp:HiddenField ID="HiddenInputRegPago" runat="server" Value="" />  
+    <asp:HiddenField ID="HiddenCtaOrigenValida" runat="server" Value="" />  
     <br />
  </div>

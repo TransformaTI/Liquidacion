@@ -183,8 +183,9 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         if (!Page.IsPostBack)
         {
             LlenaDropDowns();
+
+           // TxtCtaOrigen.Attributes.Add("onblur", "return OnblurCtaOrigen();");
             
-                        
             this.lblTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Transferencia electrónica de fondos" : this.Titulo;
             this.lblAntTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Aplicación de anticipo" : this.Titulo;
 
@@ -919,10 +920,6 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
     protected void ddlBancoDestino_SelectedIndexChanged(object sender, EventArgs e)
     {
         PostBack = "CuentasBancarias";
-
-
-
-
     }
 
     protected void TxtCtaOrigen_TextChanged(object sender, EventArgs e)

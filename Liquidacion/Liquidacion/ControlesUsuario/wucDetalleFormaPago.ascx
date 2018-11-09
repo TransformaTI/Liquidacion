@@ -73,6 +73,10 @@
          javascript: __doPostBack('CuentasBancarias');
     }
 
+       function OnblurCtaOrigen() {
+         javascript: __doPostBack('OnblurCtaOrigen');
+    }
+
     function ValidaCuentaOrigen() {
         var CtaOrigenValida = "<%=HiddenCtaOrigenValida.Value%>"
         alert(CtaOrigenValida);

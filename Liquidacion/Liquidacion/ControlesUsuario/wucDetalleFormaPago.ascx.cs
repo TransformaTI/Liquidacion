@@ -306,6 +306,7 @@ private void LlenaDropDowns()
                 dr["NombreTipoCobro"] = "TRANSFERENCIA";
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
+                dr["NumCheque"] = this.txtNoCuenta.Text;
 
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtImporte.Text); ;
 
@@ -363,6 +364,7 @@ private void LlenaDropDowns()
                 dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.transferencia);
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
+                dr["NumCheque"] = this.txtNoCuenta.Text;
 
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtImporte.Text); ;
 

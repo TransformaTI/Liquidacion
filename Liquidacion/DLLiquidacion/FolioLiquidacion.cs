@@ -837,7 +837,7 @@ namespace SigametLiquidacion
             double num = 0.0;
             if (this._dtListaPedido.Rows.Count > 0)
             {
-                num = Convert.ToDouble(this._dtListaPedido.Compute("SUM(Litros)", ""));
+                num = Convert.ToDouble(_dtListaPedido.Compute("Sum(Litros)", "").ToString());
             }
             return num;
         }

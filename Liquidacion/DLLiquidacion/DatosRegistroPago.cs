@@ -748,7 +748,7 @@ namespace SigametLiquidacion
                                 new SqlParameter("@Cliente", (object) Convert.ToInt32(dtPedidos.Rows[index2]["Cliente"])),
                                 new SqlParameter("@IdCRM", (object) Convert.ToInt32(dtPedidos.Rows[index2]["IdCRM"])),
                                 new SqlParameter("@Consecutivo", (object) Convert.ToInt32(dtPedidos.Rows[index2]["ConsecutivoOrigen"])),
-                                new SqlParameter("@Pedido", (object) dtDetallePago.Rows[index2]["Pedido"].ToString())
+                                new SqlParameter("@Pedido", (object) dtPedidos.Rows[index2]["Pedido"].ToString())
 
                           });
 

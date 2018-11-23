@@ -83,10 +83,10 @@
                     <asp:BoundField DataField="Referencia" HeaderText="Referencia" ItemStyle-HorizontalAlign="Center">
                     <ItemStyle HorizontalAlign="Center" />
                     </asp:BoundField>
+                    <asp:BoundField DataField="NumCheque" HeaderText="Autorización" />
                     <asp:BoundField DataField="NombreTipoCobro" HeaderText="Tipo Cobro" ItemStyle-HorizontalAlign="Center">
                     <ItemStyle HorizontalAlign="Center" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="NumCheque" HeaderText="Autorización" />
                 </Columns>
                 <RowStyle CssClass="RowStyle" />
                 <PagerStyle CssClass="PagerStyle" /> 

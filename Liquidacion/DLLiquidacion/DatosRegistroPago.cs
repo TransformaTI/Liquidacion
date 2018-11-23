@@ -23,7 +23,8 @@ namespace SigametLiquidacion
     private DataTable dtProveedores;
     private DataTable dtTipoVale;
     private string _usuario; 
-    private DataTable dtPedidosLiq; 
+    private DataTable dtPedidosLiq;
+    private DataTable DtCuentasBanco;
 
         #endregion
         #region propiedades
@@ -124,6 +125,15 @@ namespace SigametLiquidacion
             }
 
         }
+
+
+
+        public DataTable CuentasBanco
+        {
+            get { return DtCuentasBanco; }
+            set { DtCuentasBanco = value; }
+        }
+
         #endregion
 
 
@@ -138,6 +148,20 @@ namespace SigametLiquidacion
             this.dtBancos = new DataTable();
             this._dataAccess.LoadData(this.dtBancos, "spLIQ2ConsultaBancos", CommandType.StoredProcedure, (SqlParameter[])null, true);
         }
+        
+        public void CargaCuentaBanco(int EmpresaContable)
+        {
+            SqlParameter[] sqlParameterArray = new SqlParameter[1]
+                {
+                new SqlParameter("@EmpresaContable", (object) EmpresaContable)
+                };
+
+            this.DtCuentasBanco = new DataTable();
+            this._dataAccess.LoadData(this.DtCuentasBanco, "spSSCuentaBanco ", CommandType.StoredProcedure, sqlParameterArray, true);
+
+
+        }
+
 
         public void CargaPromociones()
         {
@@ -603,8 +627,9 @@ namespace SigametLiquidacion
             int cobro = 0;
             string Fcobro ;
             string NumCheque = string.Empty;
+            string CtaDestino = string.Empty;
 
-            
+
 
             try
             {
@@ -661,9 +686,29 @@ namespace SigametLiquidacion
 
 
 
+                    if (dtPago.Columns.Contains("CtaDestino"))
+                    {
+                        if (dtPago.Rows[index1]["CtaDestino"].ToString() != string.Empty)
+                        {
+                            CtaDestino = dtPago.Rows[index1]["CtaDestino"].ToString();
+                        }
+                        else
+                        {
+                            CtaDestino = null;
+                        }
+
+                    }
+                    else
+                    {
+                        CtaDestino = null;
+                    }
 
 
-                    SqlParameter[] sqlParameterArray = new SqlParameter[19]
+
+
+
+
+                    SqlParameter[] sqlParameterArray = new SqlParameter[21]
                     {
                         new SqlParameter("@NumeroCheque", (object)DBNull.Value),
                         new SqlParameter("@Total",(object) Convert.ToDecimal(dtPago.Rows[index1]["Total"])),
@@ -679,13 +724,14 @@ namespace SigametLiquidacion
                         new SqlParameter("@SaldoAFavor", (object) dtPago.Rows[index1]["SaldoAFavor"].ToString()),
                         new SqlParameter("@TPV", (object) dtPago.Rows[index1]["TPV"].ToString()),
                         new SqlParameter("@BancoTarjeta", (object) Convert.ToInt16(dtPago.Rows[index1]["Banco"].ToString())),
-                        new SqlParameter("@AñoCobro", SqlDbType.SmallInt),
-                        null,
+                        new SqlParameter("@AñoCobro", SqlDbType.SmallInt),null,
                         new SqlParameter("@Referencia", (object) dtPago.Rows[index1]["Referencia"].ToString()),
+                        //new SqlParameter("@NumeroCuentaDestino", (object) dtPago.Rows[index1]["TipoValeDescripcion"].ToString()),
                         new SqlParameter("@NumeroCuentaDestino", (object) dtPago.Rows[index1]["TipoValeDescripcion"].ToString()),
+                        new SqlParameter("@Fcobro", (object)DBNull.Value),
+                        new SqlParameter("@BancoOrigen", (object)DBNull.Value),
+                        new SqlParameter("@OrigenCobro", (object)"LW")
 
-                        new SqlParameter("@Fcobro", (object)DBNull.Value)
-                   
 
 
 
@@ -699,6 +745,18 @@ namespace SigametLiquidacion
                     {
                         sqlParameterArray[0].Value = (object)NumCheque;
                     }
+
+                    if (CtaDestino != null)
+                    {
+                        sqlParameterArray[17].Value = (object)CtaDestino;
+                    }
+
+                    if (dtPago.Rows[index1]["TipoCobro"].ToString().Trim()=="10")
+                    {
+                        sqlParameterArray[19].Value = (object)Convert.ToInt16(dtPago.Rows[index1]["BancoOrigen"].ToString());
+                    }
+
+
 
 
 

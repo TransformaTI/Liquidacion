@@ -8,6 +8,8 @@ using SigametLiquidacion;
 using System.Data;
 using SigametLiquidacion;
 using System.Web.Script.Serialization;
+using FormasPago;
+using System.IO;
 
 public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.Web.UI.UserControl
 {
@@ -31,6 +33,10 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
     DataTable dtLiq, dtCobroPedido;
     DataTable dt;
     DataTable dtCobroLiq;
+     string _PostBack;
+    private bool _CtaOrigenValida;
+    private Cuenta Ctaorigen = new FormasPago.Cuenta();
+    private string conexion = string.Empty;
 
 
 
@@ -138,7 +144,19 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         get { return nombreCteAnticipo; }
         set { nombreCteAnticipo = value; }
     }
+    public string PostBack
+    {
+        get { return _PostBack; }
+        set { _PostBack = value; }
+    }
 
+    
+
+    public bool CtaOrigenValida
+    {
+        get { return _CtaOrigenValida; }
+        set { _CtaOrigenValida = value; }
+    }
 
 
     #endregion
@@ -148,7 +166,8 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
 
         if ((!Page.IsPostBack) && (Session["FechaAsignacion"] != null))//09/07/2011 ERROR DE CAPTURA DE FECHA
         {
-            txtFecha.Text = Session["FechaAsignacion"].ToString();           
+            txtFecha.Text = Session["FechaAsignacion"].ToString();
+            ddlBancoDestino.Attributes.Add("onchange", "return CuentasBancarias();");
         }
 
         if (Session["dsLiquidacion"] == null)
@@ -164,7 +183,9 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         if (!Page.IsPostBack)
         {
             LlenaDropDowns();
-                        
+
+            TxtCtaOrigen.Attributes.Add("onblur", "return OnblurCtaOrigen();");
+            
             this.lblTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Transferencia electrónica de fondos" : this.Titulo;
             this.lblAntTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Aplicación de anticipo" : this.Titulo;
 
@@ -206,6 +227,70 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
 
 
             }
+
+
+            if (Request.Form["__EVENTTARGET"].ToString().Contains("OnblurCtaOrigen"))
+            {
+                CargaCadenaConexion();
+
+                HiddenCtaOrigenValida.Value = Ctaorigen.validarExpresionRegular(3, TxtCtaOrigen.Text, conexion).ToString();
+                PostBack = "CuentasBancarias";
+            }
+
+
+
+            if (Request.Form["__EVENTTARGET"].ToString().Contains("CuentasBancarias"))
+            {
+                DataTable dtCtasBanco = new DataTable();
+                DataTable DtCuentasBanco = new DataTable();
+
+                try
+                {
+                   
+
+                    dtCtasBanco = rp.ListaCtasBanco(0);
+                     DtCuentasBanco = dtCtasBanco.Select("Banco=" + "'" + ddlBancoDestino.SelectedValue + "'").CopyToDataTable();
+
+
+
+                    if (DtCuentasBanco.Rows.Count > 0)
+                    {
+
+                        ddlCtaDestino.DataSource = DtCuentasBanco;
+                        ddlCtaDestino.DataTextField = "CuentaBanco";
+                        ddlCtaDestino.DataValueField = "CuentaBanco";
+                        ddlCtaDestino.DataBind();
+                        ddlCtaDestino.Items.Insert(0, new ListItem("- Seleccione -", "0"));
+                        ddlCtaDestino.SelectedIndex = 0;
+                    }
+
+                    else
+
+                    {
+                        ddlCtaDestino.Items.Clear();
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    if (ex.Source.Contains("System.Data.DataSetExtensions"))
+                    {
+                        ddlCtaDestino.Items.Clear();
+                        
+                    }
+
+                    else
+                    {
+                        throw;
+                    }
+
+
+                }
+
+               
+            }
+
         }
     }
 
@@ -223,22 +308,54 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         txtNombre.Text = string.Empty;
     }
 
+    private string CargaCadenaConexion()
+    {    
+        if ( conexion==string.Empty)
+        {
+            TextReader textReader = (TextReader)new StreamReader(HttpContext.Current.Server.MapPath("Conexion.txt"));
+        conexion = textReader.ReadLine();
+        }
+
+        return conexion;
+    }
+
+    public bool ValidaCtaOrigen()
+    {
+        CargaCadenaConexion();
+        return Ctaorigen.validarExpresionRegular(3, TxtCtaOrigen.Text, conexion);
+    }
 
 
 
-private void LlenaDropDowns()
+
+    private void LlenaDropDowns()
     {
         DataTable dtBancos = new DataTable();
         
+        
         try
-        {
+        {            
+
+
             dtBancos = rp.ListaBancos();
-            ddlBanco.DataSource = dtBancos;
-            ddlBanco.DataTextField = "Nombre";
-            ddlBanco.DataValueField = "Banco";
-            ddlBanco.DataBind();
-            ddlBanco.Items.Insert(0, new ListItem("- Seleccione -", "0"));
-            ddlBanco.SelectedIndex = 0;
+            
+
+            ddlBancoOrigen.DataSource = dtBancos;
+            ddlBancoOrigen.DataTextField = "Nombre";
+            ddlBancoOrigen.DataValueField = "Banco";
+            ddlBancoOrigen.DataBind();
+            ddlBancoOrigen.Items.Insert(0, new ListItem("- Seleccione -", "0"));
+            ddlBancoOrigen.SelectedIndex = 0;
+
+
+            ddlBancoDestino.DataSource = dtBancos;
+            ddlBancoDestino.DataTextField = "Nombre";
+            ddlBancoDestino.DataValueField = "Banco";
+            ddlBancoDestino.DataBind();
+            ddlBancoDestino.Items.Insert(0, new ListItem("- Seleccione -", "0"));
+            ddlBancoDestino.SelectedIndex = 0;
+
+  
 
         }
         catch (Exception ex)
@@ -273,18 +390,23 @@ private void LlenaDropDowns()
                     dtCobro.Columns.Add("NumCheque", typeof(System.String));
                 }
 
+                if (!dtCobro.Columns.Contains("CtaDestino"))
+                {
+
+                    dtCobro.Columns.Add("CtaDestino", typeof(System.String));
+                }
+
 
                 DataRow dr;
                 dr = dtCobro.NewRow();
 
-                //dr["IdPago"] = ((Int32)(Session["idCobroConsec"] == null ? 0: Session["idCobroConsec"]) + 1); ; //Consecutivo
                 dr["IdPago"] = idConsecutivo; //Consecutivo
                 dr["Referencia"] = this.txtNoDocumento.Text;
-                dr["NumeroCuenta"] = this.txtNoDocumento.Text;
+                dr["NumeroCuenta"] = ddlCtaDestino.SelectedValue.ToString();
 
                 dr["FechaCheque"] = this.txtFecha.Text;
                 dr["Cliente"] = this.txtCliente.Text;
-                dr["Banco"] = ddlBanco.SelectedValue; 
+                dr["Banco"] = ddlBancoDestino.SelectedValue; 
 
                 dr["Importe"] = (Convert.ToDouble(this.txtImporte.Text));
                 dr["Impuesto"] = (Convert.ToDouble(this.txtImporte.Text) * rp.dbIVA);
@@ -302,10 +424,11 @@ private void LlenaDropDowns()
                 dr["TPV"] = 0;
                 dr["FechaDeposito"] = this.txtFecha.Text;
 
-                dr["BancoOrigen"] = 0;
+                dr["BancoOrigen"] = ddlBancoOrigen.SelectedValue.ToString();
                 dr["NombreTipoCobro"] = "TRANSFERENCIA";
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
+                dr["CtaDestino"] = TxtCtaOrigen.Text.ToString();
 
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtImporte.Text); ;
 
@@ -327,6 +450,7 @@ private void LlenaDropDowns()
 
                 dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
                 dtCobro.Columns.Add("NumCheque", typeof(System.String));
+                dtCobro.Columns.Add("CtaDestino", typeof(System.String));
 
 
 
@@ -336,11 +460,11 @@ private void LlenaDropDowns()
                 //dr["IdPago"] = ((Int32)(Session["idCobroConsec"] == null ? 0 : Session["idCobroConsec"]) + 1); ; //Consecutivo
                 dr["IdPago"] = idConsecutivo; //Consecutivo
                 dr["Referencia"] = this.txtNoDocumento.Text;
-                dr["NumeroCuenta"] = this.txtNoDocumento.Text;
+                dr["NumeroCuenta"] = ddlCtaDestino.SelectedValue.ToString();
 
                 dr["FechaCheque"] = this.txtFecha.Text;
                 dr["Cliente"] = this.txtCliente.Text;
-                dr["Banco"] = ddlBanco.SelectedValue;
+                dr["Banco"] = ddlBancoDestino.SelectedValue;
 
                 dr["Importe"] = (Convert.ToDouble(this.txtImporte.Text) );
                 dr["Impuesto"] = (Convert.ToDouble(this.txtImporte.Text) * rp.dbIVA);
@@ -358,11 +482,12 @@ private void LlenaDropDowns()
                 dr["TPV"] = 0;
                 dr["FechaDeposito"] = this.txtFecha.Text;
 
-                dr["BancoOrigen"] = 0;
+                dr["BancoOrigen"] = ddlBancoOrigen.SelectedValue.ToString();
                 dr["NombreTipoCobro"] = "TRANSFERENCIA";
                 dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.transferencia);
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
+                dr["CtaDestino"] = TxtCtaOrigen.Text.ToString();
 
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtImporte.Text); ;
 
@@ -801,5 +926,16 @@ private void LlenaDropDowns()
             ds.Tables.Remove("Pedidos");
             ds.Tables.Add(dtPedidos);
         }
+    }
+
+    protected void ddlBancoDestino_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        PostBack = "CuentasBancarias";
+    }
+
+    protected void TxtCtaOrigen_TextChanged(object sender, EventArgs e)
+    {
+        //CargaCadenaConexion();
+        //HiddenCtaOrigenValida.Value = Ctaorigen.validarExpresionRegular(3, TxtCtaOrigen.Text, conexion).ToString();
     }
 }

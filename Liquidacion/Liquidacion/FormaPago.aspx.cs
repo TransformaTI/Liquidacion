@@ -175,6 +175,8 @@ public partial class FormaPago : System.Web.UI.Page
 
 
 
+
+
         }
         else
         {

@@ -25,3 +25,4 @@ C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.cspr
 C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.csproj.CopyComplete
 C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.dll
 C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.pdb
+C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.csprojAssemblyReference.cache

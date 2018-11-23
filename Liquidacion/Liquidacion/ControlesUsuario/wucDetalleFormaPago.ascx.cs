@@ -428,8 +428,8 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                 dr["NombreTipoCobro"] = "TRANSFERENCIA";
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
-dr["CtaDestino"] = TxtCtaOrigen.Text.ToString();
-dr["NumCheque"] = this.txtNoCuenta.Text;
+                dr["CtaDestino"] = TxtCtaOrigen.Text.ToString();
+                //dr["NumCheque"] = this.txtNoCuenta.Text;
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtImporte.Text); ;
 
                 dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.transferencia);
@@ -487,8 +487,8 @@ dr["NumCheque"] = this.txtNoCuenta.Text;
                 dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.transferencia);
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
-		dr["CtaDestino"] = TxtCtaOrigen.Text.ToString();
-		dr["NumCheque"] = this.txtNoCuenta.Text;
+		        dr["CtaDestino"] = TxtCtaOrigen.Text.ToString();
+		        //dr["NumCheque"] = this.txtNoCuenta.Text;
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtImporte.Text); ;
 
                 dtCobro.Rows.Add(dr);

@@ -533,6 +533,7 @@ namespace SigametLiquidacion
 
                 this._encontrado = true;
 
+              
                 this._nombre = objDireccionEntega.Nombre!=null? objDireccionEntega.Nombre:"SIN INFORMACIÓN EN CRM";
                 this._direccion = objDireccionEntega.DireccionCompleta!=null?objDireccionEntega.DireccionCompleta: "SIN INFORMACIÓN EN CRM";
                 this._celula = objDireccionEntega.ZonaSuministro!=null? Convert.ToInt16(objDireccionEntega.ZonaSuministro.IDZona): Convert.ToInt16(0);
@@ -543,7 +544,7 @@ namespace SigametLiquidacion
                 this._limiteCredito = objCondicionCredito!=null ? objCondicionCredito.LimiteCredito.Value : 0;
                 this._saldo = objCondicionCredito!=null? objCondicionCredito.Saldo.Value:0;
                 this._limiteDisponible = this._limiteCredito - this._saldo - this._saldoClienteMovimiento;
-                this._tipoCreditoCliente = objDireccionEntega.CondicionesCredito!=null?Convert.ToByte(objDireccionEntega.CondicionesCredito.IDClasificacionCredito):byte.Parse("0");
+                this._tipoCreditoCliente = objDireccionEntega.CondicionesCredito!=null?Convert.ToByte(objDireccionEntega.CondicionesCredito.IDFormaPagoLiquidacion) :byte.Parse("0");
 
                 this._tipoCarteraCliente = objCondicionCredito != null ? objDireccionEntega.CondicionesCredito.CarteraDescripcion:string.Empty;
                 this._creditoAutorizado = (int)this._tipoCartera == (int)this._claveCreditoAutorizado;

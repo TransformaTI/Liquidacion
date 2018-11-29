@@ -71,7 +71,7 @@
     <Reference Include="DocumentosBSR">
       <HintPath>..\Liquidacion\Bin\DocumentosBSR.dll</HintPath>
     </Reference>
-    <Reference Include="RTGMGateway, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="RTGMGateway, Version=1.16.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Gateway\RTGMGateway\bin\Debug\RTGMGateway.dll</HintPath>
     </Reference>

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using SigametLiquidacion;
 using System.Data;
-using SigametLiquidacion;
 using System.Web.Script.Serialization;
 using FormasPago;
 using System.IO;
@@ -184,7 +182,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         {
             LlenaDropDowns();
 
-            TxtCtaOrigen.Attributes.Add("onblur", "return OnblurCtaOrigen();");
+            //TxtCtaOrigen.Attributes.Add("onblur", "return OnblurCtaOrigen();");
             
             this.lblTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Transferencia electrónica de fondos" : this.Titulo;
             this.lblAntTitulo.Text = string.IsNullOrEmpty(this.Titulo) ? "Aplicación de anticipo" : this.Titulo;
@@ -229,13 +227,13 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
             }
 
 
-            if (Request.Form["__EVENTTARGET"].ToString().Contains("OnblurCtaOrigen"))
-            {
-                CargaCadenaConexion();
+            //if (Request.Form["__EVENTTARGET"].ToString().Contains("OnblurCtaOrigen"))
+            //{
+            //    CargaCadenaConexion();
 
-                HiddenCtaOrigenValida.Value = Ctaorigen.validarExpresionRegular(3, TxtCtaOrigen.Text, conexion).ToString();
-                PostBack = "CuentasBancarias";
-            }
+            //    HiddenCtaOrigenValida.Value = Ctaorigen.validarExpresionRegular(3, TxtCtaOrigen.Text, conexion).ToString();
+            //    PostBack = "CuentasBancarias";
+            //}
 
 
 
@@ -308,22 +306,24 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         txtNombre.Text = string.Empty;
     }
 
-    private string CargaCadenaConexion()
-    {    
-        if ( conexion==string.Empty)
-        {
-            TextReader textReader = (TextReader)new StreamReader(HttpContext.Current.Server.MapPath("Conexion.txt"));
-        conexion = textReader.ReadLine();
-        }
+    //private string CargaCadenaConexion()
+    //{    
+    //    if ( conexion==string.Empty)
+    //    {
+    //        TextReader textReader = (TextReader)new StreamReader(HttpContext.Current.Server.MapPath("Conexion.txt"));
+    //    conexion = textReader.ReadLine();
+    //    }
 
-        return conexion;
-    }
+    //    return conexion;
+    //}
 
-    public bool ValidaCtaOrigen()
-    {
-        CargaCadenaConexion();
-        return Ctaorigen.validarExpresionRegular(3, TxtCtaOrigen.Text, conexion);
-    }
+    //public bool ValidaCtaOrigen()
+    //{
+    //    CargaCadenaConexion();
+    //    return Ctaorigen.validarExpresionRegular(3, TxtCtaOrigen.Text, conexion);
+    //}
+
+    
 
 
 

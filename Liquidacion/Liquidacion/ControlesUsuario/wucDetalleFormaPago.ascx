@@ -73,30 +73,63 @@
          javascript: __doPostBack('CuentasBancarias');
     }
 
-       function OnblurCtaOrigen() {
-         javascript: __doPostBack('OnblurCtaOrigen');
-    }
-
+    //   function OnblurCtaOrigen() {
+    //     javascript: __doPostBack('OnblurCtaOrigen');
+    //}
+    
+</script>
+<script type="text/javascript">
     function ValidaCuentaOrigen() {
-        var CtaOrigenValida = "<%=HiddenCtaOrigenValida.Value%>"
+        var CtaOrigenValida = $("#<%=HiddenCtaOrigenValida.ClientID%>")[0].value;
 
-        if (CtaOrigenValida=='True')
-            { 
-            return true;
-                }
-            else
-            {
-                alert('¡La cuenta origen es invalida!');
-                return false;
-            }
-        }
-
-
-
-
-
+    if (CtaOrigenValida == 'True') {
+        return true;
+    }
+    else {
+        alert('¡La cuenta origen es invalida!');
+        return false;
+    }
+}
 </script>
 
+<script src="Scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+        function revisaCuentaOrigen() {
+
+            var cuenta = '';
+
+            cuenta = $("#<%=TxtCtaOrigen.ClientID%>")[0].value;
+
+            if (cuenta == '')
+                $("#<%=HiddenCtaOrigenValida.ClientID%>")[0].value="False"
+            
+
+            $.ajax({
+                type: "POST",
+                url: "FormaPago.aspx/revisaCuentaOrigen",
+                data: '{cuenta: "' + cuenta + '" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resultado) {                            // función que va a ejecutar si el pedido fue exitoso
+                var res = resultado.d;
+
+                $("#<%=HiddenCtaOrigenValida.ClientID%>")[0].value = res;
+
+<%--                    alert($("#<%=HiddenCtaOrigenValida.ClientID%>")[0].value);--%>
+                },
+                error: function (r) {
+                    alert(r.responseText);
+                },
+                failure: function (r) {
+                    alert(r.responseText);
+                }
+            });
+
+        }
+
+</script>
+<%--<script src="Scripts/jsUpdateProgress.js" type="text/javascript"></script>
+    <script src="Scripts/MiscFunctions.js" type="text/javascript"></script>--%>
  
 
 <asp:HiddenField ID="TipoPagoOculto" runat="server" Value="" />
@@ -174,7 +207,7 @@
             <asp:Label ID="lblFecha1" runat="server" CssClass="labeltipopagoforma" Text="Cuenta Origen:"></asp:Label>
         </td>
         <td style="text-align: left">
-            <asp:TextBox ID="TxtCtaOrigen" runat="server" CssClass="TxtCtaOrigen" onblur="return ConsultaCteTransferencia();" Width="150px" OnTextChanged="TxtCtaOrigen_TextChanged"></asp:TextBox>
+            <asp:TextBox ID="TxtCtaOrigen" runat="server" CssClass="TxtCtaOrigen" onblur="return revisaCuentaOrigen()" Width="150px" ></asp:TextBox>
             <cc2:FilteredTextBoxExtender ID="TxtCtaOrigen_FilteredTextBoxExtender" runat="server" FilterType="Numbers" TargetControlID="TxtCtaOrigen">
             </cc2:FilteredTextBoxExtender>
         </td>

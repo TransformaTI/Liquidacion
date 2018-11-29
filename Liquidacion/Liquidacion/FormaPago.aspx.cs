@@ -43,6 +43,19 @@ public partial class FormaPago : System.Web.UI.Page
     string pagoActivo;
     #endregion
 
+    [System.Web.Services.WebMethod]
+    public static string revisaCuentaOrigen(string cuenta)
+    {
+        TextReader textReader = (TextReader)new StreamReader(HttpContext.Current.Server.MapPath("Conexion.txt"));
+        string conexionTemp = textReader.ReadLine();
+
+        FormasPago.Cuenta cuentaOrigen = new FormasPago.Cuenta();
+
+        string resultado = cuentaOrigen.validarExpresionRegular(3, cuenta, conexionTemp).ToString();
+
+
+        return resultado;
+    }
 
     protected void Page_Load(object sender, EventArgs e)
     {

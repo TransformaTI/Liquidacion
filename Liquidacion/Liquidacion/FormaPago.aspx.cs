@@ -743,7 +743,7 @@ public partial class FormaPago : System.Web.UI.Page
                     dr["TipoValeDescripcion"] = "";
                     dr["FechaCobro"] = TxtFechaCobro.Text;
 
-                    dr["NumCheque"] = txtNumCuenta.Text; /* txtNumeroCheque.Text;*/
+                    dr["NumCheque"] =  txtNumeroCheque.Text;
 
                     dtCobro.Rows.Add(dr);
                     //Subo a Session la tabla creada
@@ -809,7 +809,7 @@ public partial class FormaPago : System.Web.UI.Page
                     dr["ProveedorNombre"] = "";
                     dr["TipoValeDescripcion"] = "";
                     dr["FechaCobro"] = TxtFechaCobro.Text;
-                    dr["NumCheque"] = txtNumCuenta.Text; /*txtNumeroCheque.Text;*/ 
+                    dr["NumCheque"] = txtNumeroCheque.Text;
 
                 dtCobro.Rows.Add(dr);
 

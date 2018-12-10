@@ -277,7 +277,7 @@ namespace SigametLiquidacion
             {
 
             }
-            this._urlGateway = "";
+           
             this._cliente = Cliente;
             this._claveCreditoAutorizado = ClaveCreditoAutorizado;
             DatosCliente datosCliente = new DatosCliente(Cliente);

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Linq;
 
 namespace SigametLiquidacion
 {
@@ -39,12 +40,15 @@ namespace SigametLiquidacion
         private bool _validarRemisionLiquidada;
         private bool _validarRemisionExistente;
         private bool _folioRemisionAutomaticoRuta;
-      
+
+        private List<Cliente> ListaClientes = new List<Cliente>();
+
         //26-05-2015 - parámetro usar serie
         private bool _remisionUsaSerie;
         
         private byte _longitudSerieNota;
         private byte _longitudFolioNota;
+        private string _cadenaConexion;
         
         public DataTable ListaPedidos
         {
@@ -362,33 +366,80 @@ namespace SigametLiquidacion
                 this._dtListaPedido.Columns["ID"]
             };
         }
-        
+
+        private void ConsultarDirecciones(int IDDireccionEntrega)
+        {
+
+            Cliente cliente = new Cliente(IDDireccionEntrega, (byte)7, this._parametros, _usuario, _cadenaConexion);
+            cliente.FSuministro = Fecha;
+            cliente.ConsultaDatosCliente();
+
+            ListaClientes.Add(cliente);
+        }
+
         public void ConsultaPedidos()
         {
+            List<int> clientesDistintos = new List<int>();
+            Cliente cliente = new Cliente(0,7);
+            
+            List< RTGMCore.DireccionEntrega > ListaDireccionesEntrega = new List<RTGMCore.DireccionEntrega>();
+
             this._datosFolio.Usuario = _usuario;
+            
             this._datosFolio.ConsultaListaPedidos(this._añoAtt, this._folio, this._dtListaPedido);
-            if (!Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("DescuentoProntoPago"))))
-            {            
-                return;
+
+            _cadenaConexion = cliente.ObtenCadenaConexion();
+
+            clientesDistintos.Add(0);
+
+            foreach (DataRow dataRow in (InternalDataCollectionBase)this._dtListaPedido.Rows)
+            {
+                int _clienteTemp = Convert.ToInt32(dataRow["Cliente"]);
+
+                if (!clientesDistintos.Contains(_clienteTemp))
+                {
+                    clientesDistintos.Add(_clienteTemp);
+                }
             }
+
+            if (clientesDistintos.Count > 0)
+            {
+                System.Threading.Tasks.Parallel.ForEach(clientesDistintos, x => ConsultarDirecciones(x));
+            }
+
+            //if (!Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("DescuentoProntoPago"))))
+            //{
+            //    return;
+            //}
+
+
             foreach (DataRow dataRow in (InternalDataCollectionBase) this._dtListaPedido.Rows)
             {
-                Cliente cliente = new Cliente(Convert.ToInt32(dataRow["Cliente"]), (byte) 7);
-                cliente.ConsultaDatosCliente();
-                dataRow["Descuento"] = !cliente.Encontrado ? (object) 0 : (object) (cliente.Descuento * Convert.ToDecimal(dataRow["Litros"]));
-                if ((int) Convert.ToInt16(this._parametros.ValorParametro("LiqPrecioNeto")) == 0)
+                int idCliente = Convert.ToInt32(dataRow["Cliente"]);
+                                
+                cliente=ListaClientes.FirstOrDefault(x => x.NumeroCliente== idCliente);
+               
+                
+                dataRow["IdCRM"] = cliente.IdPedidoCRM;
+                dataRow["Nombre"] = cliente.Nombre;
+               
+                if (!Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("DescuentoProntoPago"))))
                 {
-                    Precio precio = new Precio(this._claseRuta, this._fecha, this._preciosMultiples);
-                    DataTable dataTable = new DataTable();                
-                    Decimal num1 = ControlDeDescuento.Instance.PrecioAutorizado(precio.ListaPrecios(), cliente.Descuento, cliente.ZonaEconomica);                
-                    if (Convert.ToDecimal(dataRow["Precio"]) == num1)
+                    dataRow["Descuento"] = !cliente.Encontrado ? (object)0 : (object)(cliente.Descuento * Convert.ToDecimal(dataRow["Litros"]));
+                    if ((int)Convert.ToInt16(this._parametros.ValorParametro("LiqPrecioNeto")) == 0)
                     {
-                        dataRow["Descuento"] = (object) 0;
-                    }
-                    else
-                    {
-                        dataRow["Descuento"] = (object) (cliente.Descuento * Convert.ToDecimal(dataRow["Litros"]));
-                        Decimal num2 = cliente.Descuento * Convert.ToDecimal(dataRow["Litros"]);
+                        Precio precio = new Precio(this._claseRuta, this._fecha, this._preciosMultiples);
+                        DataTable dataTable = new DataTable();
+                        Decimal num1 = ControlDeDescuento.Instance.PrecioAutorizado(precio.ListaPrecios(), cliente.Descuento, cliente.ZonaEconomica);
+                        if (Convert.ToDecimal(dataRow["Precio"]) == num1)
+                        {
+                            dataRow["Descuento"] = (object)0;
+                        }
+                        else
+                        {
+                            dataRow["Descuento"] = (object)(cliente.Descuento * Convert.ToDecimal(dataRow["Litros"]));
+                            Decimal num2 = cliente.Descuento * Convert.ToDecimal(dataRow["Litros"]);
+                        }
                     }
                 }
             }
@@ -483,6 +534,7 @@ namespace SigametLiquidacion
         public void DescargaSuministros(TipoOperacionDescarga TipoDescarga)
         {
             ControlDeCredito.Instance.Parametros = this._parametros;
+            Cliente Cliente2;
             ControlDeDescuento.Instance.Parametros = this._parametros;
             bool folioRemisionAutomatico = Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("FolioRemisionAutomatico")));
             Precio precio = Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("MultipesZonasEconomicas"))) ?
@@ -509,11 +561,14 @@ namespace SigametLiquidacion
                 string FormaPago = (string) dataRow["FormaPago"];
                 Decimal Precio = (Decimal) dataRow["Precio"];
                 Decimal TotalPedido = (Decimal) dataRow["Importe"];
-                Cliente Cliente2 = new Cliente(Cliente1, (byte) 7);
+               
 
-                Cliente2.FSuministro = Fecha;//21-07-15 Consulta de precio de acuerdo a la zona económica del cliente.
+                //Cliente2.FSuministro = Fecha;//21-07-15 Consulta de precio de acuerdo a la zona económica del cliente.
 
-                Cliente2.ConsultaDatosCliente();
+                //Cliente2.ConsultaDatosCliente();
+                
+
+                Cliente2= ListaClientes.FirstOrDefault(x => x.NumeroCliente == Cliente1);
                 int folioRemision = 0;
                 string folioRemisionCompleto = string.Empty;
                 if (folioRemisionAutomatico && this._folioRemisionAutomaticoRuta)

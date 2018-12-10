@@ -261,7 +261,32 @@ namespace SigametLiquidacion
                 return _precioCliente;
             }
         }
-                
+
+        public Cliente(int Cliente, byte ClaveCreditoAutorizado, Parametros _parametros, string usuario, string _cadena)
+        {
+           
+            this._usuario = usuario;
+            this._modulo = _parametros != null ? (byte)_parametros.Modulo : (byte)0;
+            this._urlGateway = "";
+
+            try
+            {
+                _urlGateway = (String)_parametros.ValorParametro("URLGateway");
+            }
+            catch (Exception ex)
+            {
+
+            }
+            this._urlGateway = "";
+            this._cliente = Cliente;
+            this._claveCreditoAutorizado = ClaveCreditoAutorizado;
+            DatosCliente datosCliente = new DatosCliente(Cliente);
+
+            this._cadenaConexion = _cadena;
+            
+
+        }
+
         public Cliente(int Cliente, byte ClaveCreditoAutorizado)
         {
             Parametros _parametros = (Parametros)System.Web.HttpContext.Current.Session["parametros"] ;
@@ -284,13 +309,23 @@ namespace SigametLiquidacion
             this._cadenaConexion = datosCliente.obtenerCadenaConexion();
 
         }
-        
+
+
+        public string ObtenCadenaConexion()
+        {
+
+            DatosCliente datosCliente = new DatosCliente(_cliente);
+            return datosCliente.obtenerCadenaConexion();
+
+        }
+
         public void ConsultaDatosCliente()
         {
             
 
             if (_urlGateway=="") {
                 DatosCliente datosCliente = new DatosCliente(this._cliente, _fSuministro);
+                datosCliente.generaConexion(_cadenaConexion);
                 try
                 {
                     this.dtDatosCliente = datosCliente.ConsultaCliente();

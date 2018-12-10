@@ -19,11 +19,12 @@ namespace SigametLiquidacion
     protected short _AñoAtt;
     protected int _Folio;
     protected string _conexion;
+   
 
-    [NonSerialized]
+        [NonSerialized]
     protected DAC _dataAccess;
 
-        public string Conexion
+        protected string Conexion
         {
             get
             {
@@ -33,9 +34,35 @@ namespace SigametLiquidacion
            
         }
 
+        
+
+        //public string Conexion
+        //{
+        //    get
+        //    {
+        //        return _conexion;
+        //    }
+
+
+        //}
+        public void generaConexion(string conexion)
+        {            
+            _conexion = conexion;
+            this._dataAccess = new DAC(new SqlConnection(_conexion));            
+        }
+
         public Datos()
     {
-      this.DataCompInitialize();
+           
+            try
+            {
+                this.DataCompInitialize();
+            }
+            catch
+            {
+               
+            }
+      
     }
 
     public void DataCompInitialize()

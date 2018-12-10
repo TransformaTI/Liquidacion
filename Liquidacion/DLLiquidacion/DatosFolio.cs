@@ -67,7 +67,7 @@ namespace SigametLiquidacion
 
     //}
 
-        public void ConsultaListaPedidos(short AñoAtt, int Folio, DataTable ListaPedidos)
+      public void ConsultaListaPedidos(short AñoAtt, int Folio, DataTable ListaPedidos)
     {
       SqlParameter[] sqlParameterArray = new SqlParameter[2]
       {
@@ -87,26 +87,26 @@ namespace SigametLiquidacion
           DataRow row = ListaPedidos.NewRow();
             
 
-          string nombreCliente;
-          Cliente clienteTemp = new Cliente(int.Parse(sqlDataReader["Cliente"].ToString()), 1);
-          try
-            {
+          //string nombreCliente="";
+          //Cliente clienteTemp = new Cliente(int.Parse(sqlDataReader["Cliente"].ToString()), 1);
+          //try
+          //  {
                 
-                clienteTemp.ConsultaNombreCliente();
-                if (clienteTemp.Encontrado) {
-                    nombreCliente = clienteTemp.Nombre;
-                }
-                else {
-                    nombreCliente = "Cliente no encontrado";
-                }
+          //      clienteTemp.ConsultaNombreCliente();
+          //      if (clienteTemp.Encontrado) {
+          //          nombreCliente = clienteTemp.Nombre;
+          //      }
+          //      else {
+          //          nombreCliente = "Cliente no encontrado";
+          //      }
                 
-           }  
-           catch (Exception ex)
-           {
-                        nombreCliente = ex.Message;
-            }
+          // }  
+          // catch (Exception ex)
+          // {
+          //              nombreCliente = ex.Message;
+          //  }
 
-            //          objDireccionEntega = obtenDireccionEntrega();
+          //  //          objDireccionEntega = obtenDireccionEntrega();
 
             row["ID"] = (object) num;
           row["Cliente"] = sqlDataReader["Cliente"];
@@ -114,7 +114,7 @@ namespace SigametLiquidacion
           row["AñoPed"] = sqlDataReader["AñoPed"];
           row["Pedido"] = sqlDataReader["Pedido"];
           //row["Nombre"] = sqlDataReader["Nombre"];
-          row["Nombre"] = nombreCliente;
+          row["Nombre"] = "";
           row["PedidoReferencia"] = sqlDataReader["PedidoReferencia"];
           row["Litros"] = sqlDataReader["Litros"];
           row["Precio"] = sqlDataReader["Precio"];
@@ -124,7 +124,7 @@ namespace SigametLiquidacion
           row["Status"] = (object) "CONCILIADO";
           row["FolioRemision"] = sqlDataReader["FolioRemision"];
           row["ConsecutivoOrigen"] = sqlDataReader["ConsecutivoOrigen"];
-          row["IdCRM"] = clienteTemp.IdPedidoCRM;
+          row["IdCRM"] = 0;
 
 
           ListaPedidos.Rows.Add(row);

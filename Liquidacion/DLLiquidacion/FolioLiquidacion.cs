@@ -590,9 +590,12 @@ namespace SigametLiquidacion
                     this._serieRemision = serieNotaRemision;
                     folioRemision = Convert.ToInt32(folioNotaRemision);
                 }
-                if (Cliente2.Encontrado && Cliente2.NumeroCliente > 0)
+
+                if (Cliente2!=null)
                 {
-                    string ObservacionesConciliacion = string.Empty;
+                    if (Cliente2.Encontrado && Cliente2.NumeroCliente > 0)
+                    {
+                        string ObservacionesConciliacion = string.Empty;
                     bool creditoAutorizado = true;
                     if (!ControlDeCredito.Instance.AutorizacionCredito(ControlDeCredito.Instance.AsignarFormaPago(FormaPago, "CRÉDITO", Cliente2.TipoCreditoCliente), TotalPedido, ControlDeCredito.Instance.ResumenSaldoCliente(Cliente2.NumeroCliente, this._dtListaPedido), Cliente2, this.Tripulacion.LimiteCreditoDisponible(ControlDeCredito.Instance.ResumenSaldoTipoCobro((byte)9, this._dtListaPedido, "CONCILIADO"))))
                     {
@@ -671,6 +674,7 @@ namespace SigametLiquidacion
                     else
                     {
                         this.AltaPedido(Cliente1, (short)0, (short)0, 0, Cliente2.Nombre, string.Empty, Convert.ToDouble(dataRow["Litros"]), Precio, (Decimal)dataRow["Litros"] * Precio, ControlDeCredito.Instance.AsignarFormaPago(FormaPago, "CRÉDITO", Cliente2.TipoCreditoCliente), (byte)0, "ERROR", Convert.ToInt32((object)TipoDescarga), ConsecutivoOrigen, string.Empty, ObservacionesConciliacion, new Decimal(0));
+                    }
                     }
                 }
                 else

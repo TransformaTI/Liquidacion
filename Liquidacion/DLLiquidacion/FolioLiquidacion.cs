@@ -679,6 +679,7 @@ namespace SigametLiquidacion
                 }
                 else
                 {
+
                     this.AltaPedido(Cliente1, (short)0, (short)0, 0, string.Empty, string.Empty,
                         Convert.ToDouble(dataRow["Litros"]), Precio, (Decimal)dataRow["Litros"] * Precio, (byte)5, (byte)0,
                         "PENDIENTE", Convert.ToInt32((object)TipoDescarga), ConsecutivoOrigen,

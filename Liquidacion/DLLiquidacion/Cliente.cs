@@ -589,7 +589,11 @@ namespace SigametLiquidacion
                 
                 try
                 {
-                    this._descuento = objDireccionEntega.Descuentos[0].ImporteDescuento;
+                    if (objDireccionEntega.Descuentos.Exists(x => x.Status.Trim() == "ACTIVO"))
+                    {
+                        int indice = objDireccionEntega.Descuentos.FindIndex(X => X.Status.Trim() == "ACTIVO");
+                        this._descuento = objDireccionEntega.Descuentos[indice].ImporteDescuento;
+                            }
                 }
                 catch
                 {

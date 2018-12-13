@@ -26,3 +26,19 @@ C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.cspr
 C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.dll
 C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.pdb
 C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.csprojAssemblyReference.cache
+C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\DLLiquidacion.dll
+C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\DLLiquidacion.pdb
+C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\CrystalDecisions.Web.dll
+C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\DocumentosBSR.dll
+C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\RTGMGateway.dll
+C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\SGDAC.dll
+C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\CrystalDecisions.ReportSource.dll
+C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\log4net.dll
+C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\stdole.dll
+C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\RTGMGateway.pdb
+C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\RTGMGateway.dll.config
+C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\log4net.xml
+C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.csproj.CoreCompileInputs.cache
+C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.csproj.CopyComplete
+C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.dll
+C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.pdb

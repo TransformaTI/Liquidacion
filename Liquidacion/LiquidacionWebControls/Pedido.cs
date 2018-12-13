@@ -6,9 +6,11 @@
 
 using SigametLiquidacion;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -101,7 +103,8 @@ namespace SigametLiquidacion.WebControls
         private byte _longitudSerie;
         private byte _longitudRemision;
         private bool buscandocte = false;
-        
+        private List<Cliente> _listaClientes;
+
         public string URLImagenBotonBusquedaCliente
         {
             get
@@ -498,6 +501,18 @@ namespace SigametLiquidacion.WebControls
             set { consultaCteOnChange = value; }
         }
 
+        public List<Cliente> ListaClientes
+        {
+            get
+            {
+                return _listaClientes;
+            }
+
+            set
+            {
+                _listaClientes = value;
+            }
+        }
 
         public event EventHandler ClickAceptar;
         
@@ -1194,21 +1209,12 @@ namespace SigametLiquidacion.WebControls
             }
         }
 
-        //private void textBox1_KeyDown(object sender, EventArgs e)
-        //{
-        //    if (e. == 13)
-        //    {
-
-        //        e.Handled = true;
-        //    }
-        //}
 
         protected void txtNumeroCliente_TextChanged(object sender, EventArgs e)
         {
             string _buscando = Convert.ToString(System.Web.HttpContext.Current.Session["buscandoCliente"]);
             if (_buscando != "x")
             {
-
 
                 if (this.txtNumeroCliente.Text.Length <= 0)
                 {
@@ -1385,7 +1391,7 @@ namespace SigametLiquidacion.WebControls
         
         private void cargaDatosCliente(int Cliente, object sender, EventArgs e)
         {
-
+            ListaClientes= (List<Cliente>)System.Web.HttpContext.Current.Session["ListaClientes"];
             string _buscando = Convert.ToString(System.Web.HttpContext.Current.Session["buscandoCliente"]);
 
 
@@ -1403,13 +1409,23 @@ namespace SigametLiquidacion.WebControls
                 this.clearInfo();
                 this.txtNumeroRemision.Text = text;
             }
-            this._cliente = new SigametLiquidacion.Cliente(Cliente, this._claveCreditoAutorizado);
-
-            this._cliente.FSuministro = FechaSuministro;//21-07-15 Consulta del precio de acuerdo a la zona económica del cliente
+           
 
             try
             {
-                this._cliente.ConsultaDatosCliente();
+                this._cliente = ListaClientes.FirstOrDefault(x => x.NumeroCliente == Cliente);
+
+                if (this._cliente == null)
+                { 
+                    this._cliente = new SigametLiquidacion.Cliente(Cliente, this._claveCreditoAutorizado);
+                    this._cliente.FSuministro = FechaSuministro;//21-07-15 Consulta del precio de acuerdo a la zona económica del cliente
+                    this._cliente.ConsultaDatosCliente();
+                    ListaClientes.Add(this._cliente);
+                    System.Web.HttpContext.Current.Session["ListaClientes"] = ListaClientes;
+
+                }
+
+               
             }
             catch (Exception ex)
             {

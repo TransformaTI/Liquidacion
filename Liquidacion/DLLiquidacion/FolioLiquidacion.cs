@@ -407,10 +407,8 @@ namespace SigametLiquidacion
                 System.Threading.Tasks.Parallel.ForEach(clientesDistintos, x => ConsultarDirecciones(x));
             }
 
-            //if (!Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("DescuentoProntoPago"))))
-            //{
-            //    return;
-            //}
+
+            System.Web.HttpContext.Current.Session["ListaClientes"] = ListaClientes;
 
 
             foreach (DataRow dataRow in (InternalDataCollectionBase) this._dtListaPedido.Rows)

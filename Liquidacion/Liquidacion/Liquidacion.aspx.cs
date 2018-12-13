@@ -16,6 +16,7 @@ using System.Web.Services;
 
 using SigametLiquidacion;
 using System.Data.SqlClient;
+using System.Collections.Generic;
 
 public partial class Liquidacion : System.Web.UI.Page
 {
@@ -164,8 +165,11 @@ public partial class Liquidacion : System.Web.UI.Page
             }
 
            
-         
+
             AutoTanqueTurno1.CargarListaPedidos();
+
+            nuevoPedido.ListaClientes = (List<Cliente>)Session["ListaClientes"];
+    
 
             if (!(AutoTanqueTurno1.LiquidacionIniciada(ref _usuario,
                 Convert.ToInt16(Session["AñoAtt"]), Convert.ToInt32(Session["Folio"]))))

@@ -380,7 +380,7 @@ namespace SigametLiquidacion
                 foreach (DataRow dataRow in DatosCliente.Rows)
                 {
                     this._encontrado = true;
-                    this._nombre = Convert.ToString(dataRow["Nombre"]);
+                    this._nombre = Convert.ToString(dataRow["Nombre"]).ToUpper();
                     this._direccion = Convert.ToString(dataRow["DireccionCompleta"]);
                     this._celula = Convert.ToInt16(dataRow["Celula"]);
                     this._ruta = Convert.ToInt16(dataRow["Ruta"]);
@@ -569,7 +569,7 @@ namespace SigametLiquidacion
                 this._encontrado = true;
 
               
-                this._nombre = objDireccionEntega.Nombre!=null? objDireccionEntega.Nombre:"SIN INFORMACIÓN EN CRM";
+                this._nombre = objDireccionEntega.Nombre!=null? objDireccionEntega.Nombre.ToUpper():"SIN INFORMACIÓN EN CRM";
                 this._direccion = objDireccionEntega.DireccionCompleta!=null?objDireccionEntega.DireccionCompleta: "SIN INFORMACIÓN EN CRM";
                 this._celula = objDireccionEntega.ZonaSuministro!=null? Convert.ToInt16(objDireccionEntega.ZonaSuministro.IDZona): Convert.ToInt16(0);
                 this._ruta = objDireccionEntega.Ruta!=null? short.Parse(objDireccionEntega.Ruta.IDRuta.ToString()): short.Parse("0");

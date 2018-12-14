@@ -619,8 +619,9 @@ namespace SigametLiquidacion
 
                 if (Cliente2!=null)
                 {
-                    if (Cliente2.Encontrado && Cliente2.NumeroCliente > 0)
-                    {
+                   // if (Cliente2.Encontrado && Cliente2.NumeroCliente > 0)
+                        if (Cliente2.Encontrado)
+                        {
                         string ObservacionesConciliacion = string.Empty;
                     bool creditoAutorizado = true;
                     if (!ControlDeCredito.Instance.AutorizacionCredito(ControlDeCredito.Instance.AsignarFormaPago(FormaPago, "CRÉDITO", Cliente2.TipoCreditoCliente), TotalPedido, ControlDeCredito.Instance.ResumenSaldoCliente(Cliente2.NumeroCliente, this._dtListaPedido), Cliente2, this.Tripulacion.LimiteCreditoDisponible(ControlDeCredito.Instance.ResumenSaldoTipoCobro((byte)9, this._dtListaPedido, "CONCILIADO"))))

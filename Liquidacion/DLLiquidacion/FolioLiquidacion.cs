@@ -532,13 +532,15 @@ namespace SigametLiquidacion
         public void DescargaSuministros(TipoOperacionDescarga TipoDescarga)
         {
             ControlDeCredito.Instance.Parametros = this._parametros;
+            List<int> clientesDistintos = new List<int>();
+
             Cliente Cliente2;
             ControlDeDescuento.Instance.Parametros = this._parametros;
             bool folioRemisionAutomatico = Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("FolioRemisionAutomatico")));
             Precio precio = Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("MultipesZonasEconomicas"))) ?
-                new Precio((int) this._ruta, this._claseRuta, this._fecha, this._preciosMultiples) :
+                new Precio((int)this._ruta, this._claseRuta, this._fecha, this._preciosMultiples) :
                 new Precio(this._claseRuta, this._fecha, this._preciosMultiples);
-            
+
             if (this._status == "LIQUIDADO" || this._status == "LIQCAJA")
             {
                 return;
@@ -552,6 +554,32 @@ namespace SigametLiquidacion
             {
                 ListaPedidos = this.AgruparSuministros(ListaPedidos);
             }
+
+            foreach (DataRow dataRow in ListaPedidos.Rows)
+            {
+                int Cliente1 = (int)dataRow["Cliente"];
+
+                Cliente2 = ListaClientes.FirstOrDefault(x => x.NumeroCliente == Cliente1);
+
+                if (Cliente2 == null)
+                {
+                    if (!clientesDistintos.Contains(Cliente1))
+                    {
+                        clientesDistintos.Add(Cliente1);
+
+                    }
+                }
+
+            }
+
+            if (clientesDistintos.Count > 0)
+            {
+                System.Threading.Tasks.Parallel.ForEach(clientesDistintos, x => ConsultarDirecciones(x));
+            }
+
+
+            System.Web.HttpContext.Current.Session["ListaClientes"] = ListaClientes;
+
             foreach (DataRow dataRow in ListaPedidos.Rows)
             {
                 int Cliente1 = (int) dataRow["Cliente"];

@@ -10,7 +10,6 @@
     <script type="text/jscript" src="Scripts/MiscFunctions.js"></script>
     <script type="text/jscript" src="Scripts/ValidacionConciliacion.js"></script>
 
-
 <%--<script type="text/jscript">
 function SeleccionarControlSiguiente(charCode, nextControlName)
 {    

@@ -673,7 +673,7 @@ namespace SigametLiquidacion.WebControls
                     }
                     this.asignarDatosClientePedidoLiquidado(this._pedido.Cliente);
                     this.asignarDatosPedidoLiquidado();
-                    this.lnkCambiarCliente.Visible = true;
+                    //this.lnkCambiarCliente.Visible = true;
                     break;
                 case "PENDIENTE":
                     this._tipoOperacionCaptura = TipoOperacionPedido.EdicionNuevoPedido;
@@ -730,12 +730,15 @@ namespace SigametLiquidacion.WebControls
                     this.lnkCambiarCliente.Visible = true;
                     break;
             }
+            txtNumeroCliente.Enabled = true;
+           
             if (this._permitirCaptura)
             {
  
                 return;
             }
             this.enableCaptureControls(false);
+
         }
         
         private void asignarDatosPedidoLiquidado()
@@ -804,7 +807,10 @@ namespace SigametLiquidacion.WebControls
             this.btnCancelar.Click += new ImageClickEventHandler(this.btnCancelar_Click);
             this.btnRemover.Click += new ImageClickEventHandler(this.btnDesasignar_Click);
             this.txtNumeroCliente.TextChanged += new EventHandler(txtNumeroCliente_TextChanged);
+            
+
             this.txtNumeroCliente.AutoPostBack = true;
+           
             System.Web.HttpContext.Current.Session["buscandoCliente"] = "";
 
 
@@ -830,11 +836,13 @@ namespace SigametLiquidacion.WebControls
 
             this.txtNumeroCliente.Attributes.Add("onfocus", "SetSelected(" + this.txtNumeroCliente.ClientID + ");");
             this.txtNumeroCliente.CssClass = "ClientTextBox";
-            
+
             //if (ConsultaCteOnChange==true)
             //{
-               // this.txtNumeroCliente.Attributes.Add("onblur", "return DoPostback('"+ this.btnConsultaCliente.ClientID+ "');");
+            //   this.txtNumeroCliente.Attributes.Add("onblur", "return DoPostback('"+ this.btnConsultaCliente.ClientID+ "');");
             //}
+
+           
 
             this.Controls.Add((Control) this.txtNumeroCliente);
 
@@ -1197,16 +1205,18 @@ namespace SigametLiquidacion.WebControls
             {
 
                 if (this.txtNumeroCliente.Text.Length <= 0)
-                    {
-                        return;
-                    }
+                {
+                    return;
+                }
 
-            this.cargaDatosCliente(Convert.ToInt32(this.txtNumeroCliente.Text), sender, e);
+                 this.cargaDatosCliente(Convert.ToInt32(this.txtNumeroCliente.Text), sender, e);
+                this.Focus();
             }
             else
             {
                 return;
             }
+
         }
 
 
@@ -1231,6 +1241,7 @@ namespace SigametLiquidacion.WebControls
                     cs.RegisterClientScriptBlock(typeof(Page), "myscript", "alertify.alert('Error','El número de contrato introducido es incorrecto.', function(){ alertify.error('Error de usuario'); })", true);
                 }
             }
+            this.Focus();
         }
 
         private void btnAceptar_Click(object sender, ImageClickEventArgs e)
@@ -1764,6 +1775,13 @@ namespace SigametLiquidacion.WebControls
             {
                 this.txtNumeroCliente.Focus();
             }
+        }
+
+        public void FocusTextCliente()
+        {
+        
+                this.txtNumeroCliente.Focus();
+           
         }
 
         public void SetAlternateFocus()

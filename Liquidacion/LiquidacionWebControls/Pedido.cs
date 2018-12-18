@@ -673,7 +673,7 @@ namespace SigametLiquidacion.WebControls
                     }
                     this.asignarDatosClientePedidoLiquidado(this._pedido.Cliente);
                     this.asignarDatosPedidoLiquidado();
-                    //this.lnkCambiarCliente.Visible = true;
+                    this.lnkCambiarCliente.Visible = true;
                     break;
                 case "PENDIENTE":
                     this._tipoOperacionCaptura = TipoOperacionPedido.EdicionNuevoPedido;
@@ -730,7 +730,7 @@ namespace SigametLiquidacion.WebControls
                     this.lnkCambiarCliente.Visible = true;
                     break;
             }
-            txtNumeroCliente.Enabled = true;
+          //  txtNumeroCliente.Enabled = true;
            
             if (this._permitirCaptura)
             {
@@ -1777,12 +1777,12 @@ namespace SigametLiquidacion.WebControls
             }
         }
 
-        public void FocusTextCliente()
-        {
+        //public void FocusTextCliente()
+        //{
         
-                this.txtNumeroCliente.Focus();
+        //        this.txtNumeroCliente.Focus();
            
-        }
+        //}
 
         public void SetAlternateFocus()
         {

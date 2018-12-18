@@ -239,7 +239,7 @@ public partial class Liquidacion : System.Web.UI.Page
             ListaPedidos1.DataSource = AutoTanqueTurno1.ListaPedidos;
 
 
-            nuevoPedido.FocusTextCliente();
+            nuevoPedido.Focus();
             
         }
         catch (Exception ex)

@@ -178,18 +178,18 @@ namespace SigametLiquidacion
             FuenteCRM = (String)_parametros.ValorParametro("FuenteCRM");
             this.dtCliente = new DataTable();
 
-            if (FuenteCRM == "SIGAMET")
-            {
+            //if (FuenteCRM == "SIGAMET")
+            //{
 
-                   SqlParameter[] sqlParameterArray = new SqlParameter[1]
-                    {
-                new SqlParameter("@Cliente", (object) Cliente)
-                    };
+            //       SqlParameter[] sqlParameterArray = new SqlParameter[1]
+            //        {
+            //    new SqlParameter("@Cliente", (object) Cliente)
+            //        };
 
-                    this._dataAccess.LoadData(this.dtCliente, "spLIQ2ConsultaDatosCliente", CommandType.StoredProcedure, sqlParameterArray, true);
-            }
-            else
-              {
+            //        this._dataAccess.LoadData(this.dtCliente, "spLIQ2ConsultaDatosCliente", CommandType.StoredProcedure, sqlParameterArray, true);
+            //}
+            //else
+            //  {
                
 
                 Cliente _cliente = new SigametLiquidacion.Cliente(Cliente, 0);
@@ -202,7 +202,7 @@ namespace SigametLiquidacion
                     dtCliente.Rows.Add(NombreCliente);
                 }
 
-            }
+            //}
 
            
 

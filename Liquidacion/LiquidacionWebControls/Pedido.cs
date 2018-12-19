@@ -1241,7 +1241,7 @@ namespace SigametLiquidacion.WebControls
                     cs.RegisterClientScriptBlock(typeof(Page), "myscript", "alertify.alert('Error','El número de contrato introducido es incorrecto.', function(){ alertify.error('Error de usuario'); })", true);
                 }
             }
-            this.Focus();
+           
         }
 
         private void btnAceptar_Click(object sender, ImageClickEventArgs e)

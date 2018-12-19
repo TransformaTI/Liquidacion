@@ -677,8 +677,9 @@ namespace SigametLiquidacion
                 objPedido = objPedidoGateway.buscarPedidos(objRequest);
                 if (objPedido.Count >0)
                 {
-                    /*Assert.IsNotNull(objPedido[0]);
-                    Assert.True(objPedido[0].Success);*/
+                  
+                    IdReturn = objPedido[0].EstatusPedido != "SURTIDO" ? int.Parse(objPedido[0].IDPedido.ToString()) : 0;
+                  
                 }
             }
             catch (Exception)
@@ -687,10 +688,7 @@ namespace SigametLiquidacion
             }
 
             //Utilerias.Exportar(objRequest, objPedido, objPedidoGateway.Fuente, respuestaExitosa, EnumMetodoWS.ConsultarPedidos);
-            if (objPedido.Count > 0)
-            {
-                IdReturn = objPedido[0].EstatusPedido != "SURTIDO" ? int.Parse(objPedido[0].IDPedido.ToString()):0 ;
-            }
+
 
             return IdReturn;
         }

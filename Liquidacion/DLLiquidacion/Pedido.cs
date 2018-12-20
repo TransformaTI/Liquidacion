@@ -38,8 +38,9 @@ namespace SigametLiquidacion
     private bool _descuentoAplicado;
     private Decimal _importeDescuentoAplicado;
     public string _factura;
+    private int _idPedidoCRM;
 
-    public bool DescuentoAplicado
+        public bool DescuentoAplicado
     {
       get
       {
@@ -321,7 +322,20 @@ namespace SigametLiquidacion
       }
     }
 
-    public Pedido(int Cliente)
+        public int IdPedidoCRM
+        {
+            get
+            {
+                return _idPedidoCRM;
+            }
+
+            set
+            {
+                _idPedidoCRM = value;
+            }
+        }
+
+        public Pedido(int Cliente)
     {
       this._cliente = Cliente;
       this._datosPedido = new DatosPedido(this._cliente);
@@ -430,6 +444,7 @@ namespace SigametLiquidacion
       this._datosPedido.ConsecutivoOrigen = this._consecutivoOrigen;
       this._datosPedido.DescuentoAplicado = this._descuentoAplicado;
       this._datosPedido.ImporteDescuentoAplicado = this._importeDescuentoAplicado;
+      this._datosPedido.IdPedidoCRM = this._idPedidoCRM;
       try
       {
         return this._datosPedido.LiquidaPedido();
@@ -497,11 +512,11 @@ namespace SigametLiquidacion
       this._datosPedido.DataCompInitialize();
     }
 
-    public void AltaPedido(short AñoAtt, int Folio, short CelulaCliente, short RutaCliente, DateTime Fecha, string Usuario)
+    public void AltaPedido(short AñoAtt, int Folio, short CelulaCliente, short RutaCliente, DateTime Fecha, string Usuario, int IdPedidoCRM)
     {
       try
       {
-        this._datosPedido.AltaPedido(AñoAtt, Folio, CelulaCliente, RutaCliente, Fecha, Usuario);
+        this._datosPedido.AltaPedido(AñoAtt, Folio, CelulaCliente, RutaCliente, Fecha, Usuario, IdPedidoCRM);
         this._celula = this._datosPedido.Celula;
         this._añoPed = this._datosPedido.AñoPed;
         this._pedido = this._datosPedido.Pedido;

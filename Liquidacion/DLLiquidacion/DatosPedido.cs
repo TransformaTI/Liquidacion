@@ -39,6 +39,7 @@ namespace SigametLiquidacion
     private bool _descuentoAplicado;
     private Decimal _importeDescuentoAplicado;
     private string _factura;
+    private int _idPedidoCRM;
 
     public bool DescuentoAplicado
     {
@@ -352,7 +353,20 @@ namespace SigametLiquidacion
       }
     }
 
-    public DatosPedido(int Cliente)
+        public int IdPedidoCRM
+        {
+            get
+            {
+                return _idPedidoCRM;
+            }
+
+            set
+            {
+                _idPedidoCRM = value;
+            }
+        }
+
+        public DatosPedido(int Cliente)
     {
       this._cliente = Cliente;
     }
@@ -384,7 +398,7 @@ namespace SigametLiquidacion
     public int LiquidaPedido()
     {
       int num = 0;
-      SqlParameter[] sqlParameterArray = new SqlParameter[20]
+      SqlParameter[] sqlParameterArray = new SqlParameter[21]
       {
         new SqlParameter("@AñoAtt", (object) this._AñoAtt),
         new SqlParameter("@Folio", (object) this._Folio),
@@ -406,7 +420,8 @@ namespace SigametLiquidacion
         new SqlParameter("@ConsecutivoOrigen", (object) this._consecutivoOrigen),
         //new SqlParameter("@DescuentoAplicado", (object) (bool) (this._descuentoAplicado ? 1 : 0)),
         new SqlParameter("@DescuentoAplicado", (object) (bool) (this._descuentoAplicado ? true : false)),
-        new SqlParameter("@ImporteDescuentoAplicado", (object) this._importeDescuentoAplicado)
+        new SqlParameter("@ImporteDescuentoAplicado", (object) this._importeDescuentoAplicado),
+        new SqlParameter("@IdPedidoCRM", (object) this._idPedidoCRM)
       };
       try
       {
@@ -698,9 +713,9 @@ label_10:
       }
     }
 
-    public void AltaPedido(short AñoAtt, int Folio, short CelulaCliente, short RutaCliente, DateTime Fecha, string Usuario)
+    public void AltaPedido(short AñoAtt, int Folio, short CelulaCliente, short RutaCliente, DateTime Fecha, string Usuario, int IdPedidoCRM)
     {
-      SqlParameter[] sqlParameterArray = new SqlParameter[9]
+      SqlParameter[] sqlParameterArray = new SqlParameter[10]
       {
         new SqlParameter("@Cliente", (object) this._cliente),
         new SqlParameter("@AñoAtt", (object) AñoAtt),
@@ -709,8 +724,9 @@ label_10:
         new SqlParameter("@RutaCliente", (object) RutaCliente),
         new SqlParameter("@Usuario", (object) Usuario),
         new SqlParameter("@Celula", (object) CelulaCliente),
-        new SqlParameter("@Pedido", SqlDbType.Int),
-        null
+        new SqlParameter("@Pedido", SqlDbType.Int),        
+        null,
+        new SqlParameter("@IdPedidoCRM", (object) IdPedidoCRM)
       };
       sqlParameterArray[7].Direction = ParameterDirection.Output;
       sqlParameterArray[8] = new SqlParameter("@AñoPed", SqlDbType.SmallInt);

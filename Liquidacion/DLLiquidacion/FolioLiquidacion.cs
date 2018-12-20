@@ -528,7 +528,7 @@ namespace SigametLiquidacion
         {
             this._dtListaPedido.Rows.Remove(this.CurrentRow(SourceRow));
         }
-        
+
         public void DescargaSuministros(TipoOperacionDescarga TipoDescarga)
         {
             ControlDeCredito.Instance.Parametros = this._parametros;
@@ -538,8 +538,8 @@ namespace SigametLiquidacion
             ControlDeDescuento.Instance.Parametros = this._parametros;
             bool folioRemisionAutomatico = Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("FolioRemisionAutomatico")));
             Precio precio = Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("MultipesZonasEconomicas"))) ?
-                new Precio((int)this._ruta, this._claseRuta, this._fecha, this._preciosMultiples) :
-                new Precio(this._claseRuta, this._fecha, this._preciosMultiples);
+            new Precio((int)this._ruta, this._claseRuta, this._fecha, this._preciosMultiples) :
+            new Precio(this._claseRuta, this._fecha, this._preciosMultiples);
 
             if (this._status == "LIQUIDADO" || this._status == "LIQCAJA")
             {
@@ -582,31 +582,31 @@ namespace SigametLiquidacion
 
             foreach (DataRow dataRow in ListaPedidos.Rows)
             {
-                int Cliente1 = (int) dataRow["Cliente"];
-                int ConsecutivoOrigen = (int) dataRow["Consecutivo"];
-                string FormaPago = (string) dataRow["FormaPago"];
-                Decimal Precio = (Decimal) dataRow["Precio"];
-                Decimal TotalPedido = (Decimal) dataRow["Importe"];
-               
+                int Cliente1 = (int)dataRow["Cliente"];
+                int ConsecutivoOrigen = (int)dataRow["Consecutivo"];
+                string FormaPago = (string)dataRow["FormaPago"];
+                Decimal Precio = (Decimal)dataRow["Precio"];
+                Decimal TotalPedido = (Decimal)dataRow["Importe"];
+
 
                 //Cliente2.FSuministro = Fecha;//21-07-15 Consulta de precio de acuerdo a la zona económica del cliente.
 
                 //Cliente2.ConsultaDatosCliente();
-                
 
-                Cliente2= ListaClientes.FirstOrDefault(x => x.NumeroCliente == Cliente1);
+
+                Cliente2 = ListaClientes.FirstOrDefault(x => x.NumeroCliente == Cliente1);
                 int folioRemision = 0;
                 string folioRemisionCompleto = string.Empty;
                 if (folioRemisionAutomatico && this._folioRemisionAutomaticoRuta)
                 {
                     //TODO: Revisar como parametrizar remisión SGC
                     /*
-                     * SerieDocumento.SeparaSerie(Convert.ToString(dataRow["FolioNota"]));
-                     * //this._serieRemision = SerieDocumento.get_Serie();
-                     * this._serieRemision = SerieDocumento.Serie;
-                     * //num1 = SerieDocumento.get_FolioNota();
-                     * folioRemision = SerieDocumento.FolioNota;
-                     * */
+                        * SerieDocumento.SeparaSerie(Convert.ToString(dataRow["FolioNota"]));
+                        * //this._serieRemision = SerieDocumento.get_Serie();
+                        * this._serieRemision = SerieDocumento.Serie;
+                        * //num1 = SerieDocumento.get_FolioNota();
+                        * folioRemision = SerieDocumento.FolioNota;
+                    * */
                     string folioNotaRemision = Convert.ToString(dataRow["FolioNota"]);
                     //Temporal, para pedidos sin número de contrato
                     folioRemisionCompleto = folioNotaRemision;
@@ -617,105 +617,114 @@ namespace SigametLiquidacion
                     folioRemision = Convert.ToInt32(folioNotaRemision);
                 }
 
-                if (Cliente2!=null)
+                if (Cliente2 != null)
                 {
-                   // if (Cliente2.Encontrado && Cliente2.NumeroCliente > 0)
-                        if (Cliente2.Encontrado)
-                        {
+                    if (Cliente2.Encontrado && Cliente2.NumeroCliente > 0)
+                    //if (Cliente2.Encontrado)
+                    {
                         string ObservacionesConciliacion = string.Empty;
-                    bool creditoAutorizado = true;
-                    if (!ControlDeCredito.Instance.AutorizacionCredito(ControlDeCredito.Instance.AsignarFormaPago(FormaPago, "CRÉDITO", Cliente2.TipoCreditoCliente), TotalPedido, ControlDeCredito.Instance.ResumenSaldoCliente(Cliente2.NumeroCliente, this._dtListaPedido), Cliente2, this.Tripulacion.LimiteCreditoDisponible(ControlDeCredito.Instance.ResumenSaldoTipoCobro((byte)9, this._dtListaPedido, "CONCILIADO"))))
-                    {
-                        creditoAutorizado = false;
-                        ObservacionesConciliacion = "Crédito no autorizado";
-                    }
-                    if (!ControlDeDescuento.Instance.DescuentoAutorizado(Cliente2, (Decimal)dataRow["Precio"], precio.ListaPrecios()))
-                    {
-                        creditoAutorizado = false;
-                        //22-07-2015 - Selección del precio de acuerdo a la zona económica del cliente.
-                        creditoAutorizado = ((Decimal)dataRow["Precio"] == Cliente2.PrecioCliente);
+                        bool creditoAutorizado = true;
+                        if (!ControlDeCredito.Instance.AutorizacionCredito(ControlDeCredito.Instance.AsignarFormaPago(FormaPago, "CRÉDITO", Cliente2.TipoCreditoCliente), TotalPedido, ControlDeCredito.Instance.ResumenSaldoCliente(Cliente2.NumeroCliente, this._dtListaPedido), Cliente2, this.Tripulacion.LimiteCreditoDisponible(ControlDeCredito.Instance.ResumenSaldoTipoCobro((byte)9, this._dtListaPedido, "CONCILIADO"))))
+                        {
+                            creditoAutorizado = false;
+                            ObservacionesConciliacion = "Crédito no autorizado";
+                        }
+                        if (!ControlDeDescuento.Instance.DescuentoAutorizado(Cliente2, (Decimal)dataRow["Precio"], precio.ListaPrecios()))
+                        {
+                            creditoAutorizado = false;
+                            //22-07-2015 - Selección del precio de acuerdo a la zona económica del cliente.
+                            creditoAutorizado = ((Decimal)dataRow["Precio"] == Cliente2.PrecioCliente);
 
-                        if (!creditoAutorizado)
-                        {
-                            ObservacionesConciliacion = "Descuento no autorizado (Surtido a $ " + ((Decimal)dataRow["Precio"]).ToString("0.00") + "/lt )";
+                            if (!creditoAutorizado)
+                            {
+                                ObservacionesConciliacion = "Descuento no autorizado (Surtido a $ " + ((Decimal)dataRow["Precio"]).ToString("0.00") + "/lt )";
+                            }
                         }
-                    }
-                    if (creditoAutorizado)
-                    {
-                        Pedido pedido = new Pedido(Cliente2.NumeroCliente);
-                        bool pedidoActivo = false;
-                        try
+                        if (creditoAutorizado)
                         {
-                            pedidoActivo = pedido.ConsultaPedidoActivo();
-                        }
-                        catch (Exception ex)
-                        {
-                        }
-                        if (!pedidoActivo)
-                        {
+                            Pedido pedido = new Pedido(Cliente2.NumeroCliente);
+                            bool pedidoActivo = false;
                             try
                             {
-                                pedido.AltaPedido(this._añoAtt, this._folio, Cliente2.Celula, Cliente2.Ruta, this._fecha, this._usuario);
-                                pedido.ConsultaPedidoActivo();
+                                pedidoActivo = pedido.ConsultaPedidoActivo();
                             }
                             catch (Exception ex)
                             {
                             }
-                        }
-                        pedido.AñoAtt = this._añoAtt;
-                        pedido.FolioAtt = this._folio;
-                        pedido.Litros = Convert.ToDouble(dataRow["Litros"]);
-                        pedido.FechaSuministro = this._fecha;
-                        pedido.Precio = Precio;
-                        pedido.RutaSuministro = this._ruta;
-                        pedido.AutoTanque = this._autoTanque;
-                        pedido.FormaPago = ControlDeCredito.Instance.AsignarFormaPago(FormaPago, "CRÉDITO", Cliente2.TipoCreditoCliente);
-                        pedido.TipoDescarga = TipoDescarga;
-                        pedido.ConsecutivoOrigen = ConsecutivoOrigen;
-                        if (folioRemision > 0)
-                        {
-                            pedido.SerieRemision = this._serieRemision;
-                            pedido.FolioRemision = folioRemision;
-                        }
-                        Decimal num2 = new Decimal(0);
-                        Decimal Descuento = !Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("DescuentoProntoPago"))) ? new Decimal(0) : Convert.ToDecimal(pedido.Litros) * Cliente2.Descuento;
-                        if ((int)Convert.ToInt16(this._parametros.ValorParametro("LiqPrecioNeto")) == 0)
-                        {
-                            Descuento = !(pedido.Precio < precio.PrecioVigente) ? (!Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("DescuentoProntoPago"))) ? new Decimal(0) : Convert.ToDecimal(pedido.Litros) * Cliente2.Descuento) : new Decimal(0);
-                        }
-                        pedido.ImporteDescuentoAplicado = Convert.ToDecimal(pedido.Litros) * Cliente2.Descuento;
-                        pedido.DescuentoAplicado = Descuento == new Decimal(0) && pedido.ImporteDescuentoAplicado > new Decimal(0);
-                        try
-                        {
-                            pedido.LiquidaPedido();
-                            this.AltaPedido(Cliente2.NumeroCliente, pedido.Celula, pedido.AñoPed, pedido.NumeroPedido, Cliente2.Nombre,
+                            if (!pedidoActivo)
+                            {
+                                try
+                                {
+                                    pedido.AltaPedido(this._añoAtt, this._folio, Cliente2.Celula, Cliente2.Ruta, this._fecha, this._usuario, Cliente2.IdPedidoCRM);
+                                    pedido.ConsultaPedidoActivo();
+                                }
+                                catch (Exception ex)
+                                {
+                                }
+                            }
+                            pedido.AñoAtt = this._añoAtt;
+                            pedido.FolioAtt = this._folio;
+                            pedido.Litros = Convert.ToDouble(dataRow["Litros"]);
+                            pedido.FechaSuministro = this._fecha;
+                            pedido.Precio = Precio;
+                            pedido.RutaSuministro = this._ruta;
+                            pedido.AutoTanque = this._autoTanque;
+                            pedido.FormaPago = ControlDeCredito.Instance.AsignarFormaPago(FormaPago, "CRÉDITO", Cliente2.TipoCreditoCliente);
+                            pedido.TipoDescarga = TipoDescarga;
+                            pedido.ConsecutivoOrigen = ConsecutivoOrigen;
+                            if (folioRemision > 0)
+                            {
+                                pedido.SerieRemision = this._serieRemision;
+                                pedido.FolioRemision = folioRemision;
+                            }
+                            Decimal num2 = new Decimal(0);
+                            Decimal Descuento = !Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("DescuentoProntoPago"))) ? new Decimal(0) : Convert.ToDecimal(pedido.Litros) * Cliente2.Descuento;
+                            if ((int)Convert.ToInt16(this._parametros.ValorParametro("LiqPrecioNeto")) == 0)
+                            {
+                                Descuento = !(pedido.Precio < precio.PrecioVigente) ? (!Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("DescuentoProntoPago"))) ? new Decimal(0) : Convert.ToDecimal(pedido.Litros) * Cliente2.Descuento) : new Decimal(0);
+                            }
+                            pedido.ImporteDescuentoAplicado = Convert.ToDecimal(pedido.Litros) * Cliente2.Descuento;
+                            pedido.DescuentoAplicado = Descuento == new Decimal(0) && pedido.ImporteDescuentoAplicado > new Decimal(0);
+                            try
+                            {
+                                pedido.LiquidaPedido();
+                                this.AltaPedido(Cliente2.NumeroCliente, pedido.Celula, pedido.AñoPed, pedido.NumeroPedido, Cliente2.Nombre,
                                 pedido.PedidoReferencia, pedido.Litros, pedido.Precio, pedido.Importe, pedido.FormaPago,
                                 pedido.TipoPedido, "CONCILIADO", Convert.ToInt32((object)TipoDescarga), ConsecutivoOrigen, folioRemision > 0 ? folioRemision.ToString() : string.Empty,
                                 string.Empty, Descuento, Cliente2.IdPedidoCRM);
+                            }
+                            catch (Exception ex)
+                            {
+                                Trace.Write((object)ex);
+                            }
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            Trace.Write((object)ex);
+                            this.AltaPedido(Cliente1, (short)0, (short)0, 0, Cliente2.Nombre, string.Empty, Convert.ToDouble(dataRow["Litros"]), Precio, (Decimal)dataRow["Litros"] * Precio, ControlDeCredito.Instance.AsignarFormaPago(FormaPago, "CRÉDITO", Cliente2.TipoCreditoCliente), (byte)0, "ERROR", Convert.ToInt32((object)TipoDescarga), ConsecutivoOrigen, string.Empty, ObservacionesConciliacion, new Decimal(0));
                         }
                     }
                     else
                     {
-                        this.AltaPedido(Cliente1, (short)0, (short)0, 0, Cliente2.Nombre, string.Empty, Convert.ToDouble(dataRow["Litros"]), Precio, (Decimal)dataRow["Litros"] * Precio, ControlDeCredito.Instance.AsignarFormaPago(FormaPago, "CRÉDITO", Cliente2.TipoCreditoCliente), (byte)0, "ERROR", Convert.ToInt32((object)TipoDescarga), ConsecutivoOrigen, string.Empty, ObservacionesConciliacion, new Decimal(0));
-                    }
+
+                        this.AltaPedido(Cliente1, (short)0, (short)0, 0, string.Empty, string.Empty,
+                        Convert.ToDouble(dataRow["Litros"]), Precio, (Decimal)dataRow["Litros"] * Precio, (byte)5, (byte)0,
+                        "PENDIENTE", Convert.ToInt32((object)TipoDescarga), ConsecutivoOrigen,
+                        folioRemision > 0 ? folioRemisionCompleto : string.Empty,
+                        string.Empty, new Decimal(0));
                     }
                 }
                 else
                 {
 
                     this.AltaPedido(Cliente1, (short)0, (short)0, 0, string.Empty, string.Empty,
-                        Convert.ToDouble(dataRow["Litros"]), Precio, (Decimal)dataRow["Litros"] * Precio, (byte)5, (byte)0,
-                        "PENDIENTE", Convert.ToInt32((object)TipoDescarga), ConsecutivoOrigen,
-                        folioRemision > 0 ? folioRemisionCompleto : string.Empty,
-                        string.Empty, new Decimal(0));
+                    Convert.ToDouble(dataRow["Litros"]), Precio, (Decimal)dataRow["Litros"] * Precio, (byte)5, (byte)0,
+                    "PENDIENTE", Convert.ToInt32((object)TipoDescarga), ConsecutivoOrigen,
+                    folioRemision > 0 ? folioRemisionCompleto : string.Empty,
+                    string.Empty, new Decimal(0));
                 }
             }
         }
-        
+
         public DataRow CurrentRow(int Row)
         {
             return this._dtListaPedido.Rows.Find((object) Row);

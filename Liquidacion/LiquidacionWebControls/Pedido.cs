@@ -299,8 +299,18 @@ namespace SigametLiquidacion.WebControls
             {
                 return this._cliente.NumeroCliente;
             }
+
+            
         }
-        
+
+        public int IdPedidoCRM
+        {
+            get
+            {
+                return this._cliente.IdPedidoCRM;
+            }
+        }
+
         public string Nombre
         {
             get
@@ -1333,6 +1343,7 @@ namespace SigametLiquidacion.WebControls
             }
             this._pedido.ImporteDescuentoAplicado = Convert.ToDecimal(this._pedido.Litros) * this._cliente.Descuento;
             this._pedido.DescuentoAplicado = this._descuento == new Decimal(0) && this._pedido.ImporteDescuentoAplicado > new Decimal(0);
+            this._pedido.IdPedidoCRM = this.IdPedidoCRM;
             ControlDeRemisiones controlDeRemisiones = new ControlDeRemisiones();
             bool notaValida;
             bool notaExistente;
@@ -1696,7 +1707,7 @@ namespace SigametLiquidacion.WebControls
         {
             try
             {
-                this._pedido.AltaPedido(this._añoAtt, this._folio, this._cliente.Celula, this._cliente.Ruta, this._fechaSuministro, this._usuario);
+                this._pedido.AltaPedido(this._añoAtt, this._folio, this._cliente.Celula, this._cliente.Ruta, this._fechaSuministro, this._usuario, this._cliente.IdPedidoCRM);
                 this._pedido.ConsultaPedidoActivo();
                 this.publicarPedido();
             }

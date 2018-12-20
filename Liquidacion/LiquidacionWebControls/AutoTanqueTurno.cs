@@ -398,9 +398,9 @@ namespace SigametLiquidacion.WebControls
       this.lblLimiteCreditoOperador.Text = this._tripulacion.LimiteCreditoOperador.ToString("C");
     }
 
-    public void AltaPedido(int Cliente, short Celula, short AñoPed, int Pedido, string Nombre, string PedidoReferencia, double Litros, Decimal Precio, Decimal Importe, byte FormaPago, byte TipoPedido, string Status, string FolioRemision, Decimal Descuento)
+    public void AltaPedido(int Cliente, short Celula, short AñoPed, int Pedido, string Nombre, string PedidoReferencia, double Litros, Decimal Precio, Decimal Importe, byte FormaPago, byte TipoPedido, string Status, string FolioRemision, Decimal Descuento, int PedidoCRM)
     {
-      this._folioLiquidacion.AltaPedido(Cliente, Celula, AñoPed, Pedido, Nombre, PedidoReferencia, Litros, Precio, Importe, FormaPago, TipoPedido, Status, 0, 0, FolioRemision, string.Empty, Descuento);
+      this._folioLiquidacion.AltaPedido(Cliente, Celula, AñoPed, Pedido, Nombre, PedidoReferencia, Litros, Precio, Importe, FormaPago, TipoPedido, Status, 0, 0, FolioRemision, string.Empty, Descuento,PedidoCRM);
     }
 
     public void EdicionPedido(int SourceRow, int Cliente, string Nombre, string PedidoReferencia, double Litros, Decimal Precio, Decimal Importe, byte FormaPago, string FolioRemision, Decimal Descuento)

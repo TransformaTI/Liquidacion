@@ -38,8 +38,9 @@ namespace SigametLiquidacion
     private bool _descuentoAplicado;
     private Decimal _importeDescuentoAplicado;
     public string _factura;
+    private int _idPedidoCRM;
 
-    public bool DescuentoAplicado
+        public bool DescuentoAplicado
     {
       get
       {
@@ -321,7 +322,20 @@ namespace SigametLiquidacion
       }
     }
 
-    public Pedido(int Cliente)
+        public int IdPedidoCRM
+        {
+            get
+            {
+                return _idPedidoCRM;
+            }
+
+            set
+            {
+                _idPedidoCRM = value;
+            }
+        }
+
+        public Pedido(int Cliente)
     {
       this._cliente = Cliente;
       this._datosPedido = new DatosPedido(this._cliente);
@@ -430,6 +444,7 @@ namespace SigametLiquidacion
       this._datosPedido.ConsecutivoOrigen = this._consecutivoOrigen;
       this._datosPedido.DescuentoAplicado = this._descuentoAplicado;
       this._datosPedido.ImporteDescuentoAplicado = this._importeDescuentoAplicado;
+      this._datosPedido.IdPedidoCRM = this._idPedidoCRM;
       try
       {
         return this._datosPedido.LiquidaPedido();

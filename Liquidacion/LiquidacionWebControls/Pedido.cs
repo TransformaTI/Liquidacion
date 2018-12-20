@@ -1343,6 +1343,7 @@ namespace SigametLiquidacion.WebControls
             }
             this._pedido.ImporteDescuentoAplicado = Convert.ToDecimal(this._pedido.Litros) * this._cliente.Descuento;
             this._pedido.DescuentoAplicado = this._descuento == new Decimal(0) && this._pedido.ImporteDescuentoAplicado > new Decimal(0);
+            this._pedido.IdPedidoCRM = this.IdPedidoCRM;
             ControlDeRemisiones controlDeRemisiones = new ControlDeRemisiones();
             bool notaValida;
             bool notaExistente;

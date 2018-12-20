@@ -585,7 +585,7 @@ namespace SigametLiquidacion
                 this._creditoAutorizado = (int)this._tipoCartera == (int)this._claveCreditoAutorizado;
                 this._limiteCreditoExcedido = !(this._limiteDisponible > new Decimal(0));
                 this.TipoPago = objDireccionEntega.CondicionesCredito.CarteraDescripcion!=null? objDireccionEntega.CondicionesCredito.CarteraDescripcion:"";
-                this.IdPedidoCRM = ObtenerIdCRM(this._cliente);
+                this.IdPedidoCRM = 0;// ObtenerIdCRM(this._cliente);
                 
                 try
                 {

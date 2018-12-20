@@ -513,7 +513,7 @@ namespace SigametLiquidacion
 
                 this._encontrado = true;
                 this._nombre = objDireccionEntega.Nombre!=null? objDireccionEntega.Nombre:"SIN INFORMACIÓN EN CRM";
-                this.IdPedidoCRM = ObtenerIdCRM(this._cliente); //objDireccionEntega.IDDireccionEntrega
+                this.IdPedidoCRM = 0;//ObtenerIdCRM(this._cliente); //objDireccionEntega.IDDireccionEntrega
             }
             catch (RTGMTimeoutException tex)
             {               

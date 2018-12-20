@@ -283,7 +283,7 @@ public partial class Liquidacion : System.Web.UI.Page
             {
                 AutoTanqueTurno1.AltaPedido(nuevoPedido.Cliente, nuevoPedido.CelulaPedido, nuevoPedido.AñoPedido, nuevoPedido.NumeroPedido,
                     nuevoPedido.Nombre, nuevoPedido.PedidoReferencia, nuevoPedido.Litros, nuevoPedido.Precio, nuevoPedido.Importe,
-                    nuevoPedido.FormaPago, nuevoPedido.TipoPedido, "CONCILIADO", nuevoPedido.FolioRemision, nuevoPedido.Descuento);
+                    nuevoPedido.FormaPago, nuevoPedido.TipoPedido, "CONCILIADO", nuevoPedido.FolioRemision, nuevoPedido.Descuento, nuevoPedido.IdPedidoCRM);
             }
             else if (nuevoPedido.TipoOperacion == TipoOperacionPedido.EdicionNuevoPedido ||
                 nuevoPedido.TipoOperacion == TipoOperacionPedido.EdicionPedidoInconsistente)

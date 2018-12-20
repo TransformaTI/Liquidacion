@@ -655,7 +655,7 @@ namespace SigametLiquidacion
                         {
                             try
                             {
-                                pedido.AltaPedido(this._añoAtt, this._folio, Cliente2.Celula, Cliente2.Ruta, this._fecha, this._usuario);
+                                pedido.AltaPedido(this._añoAtt, this._folio, Cliente2.Celula, Cliente2.Ruta, this._fecha, this._usuario,Cliente2.IdPedidoCRM);
                                 pedido.ConsultaPedidoActivo();
                             }
                             catch (Exception ex)

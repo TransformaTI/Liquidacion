@@ -299,8 +299,18 @@ namespace SigametLiquidacion.WebControls
             {
                 return this._cliente.NumeroCliente;
             }
+
+            
         }
-        
+
+        public int IdPedidoCRM
+        {
+            get
+            {
+                return this._cliente.IdPedidoCRM;
+            }
+        }
+
         public string Nombre
         {
             get
@@ -1696,7 +1706,7 @@ namespace SigametLiquidacion.WebControls
         {
             try
             {
-                this._pedido.AltaPedido(this._añoAtt, this._folio, this._cliente.Celula, this._cliente.Ruta, this._fechaSuministro, this._usuario);
+                this._pedido.AltaPedido(this._añoAtt, this._folio, this._cliente.Celula, this._cliente.Ruta, this._fechaSuministro, this._usuario, this._cliente.IdPedidoCRM);
                 this._pedido.ConsultaPedidoActivo();
                 this.publicarPedido();
             }

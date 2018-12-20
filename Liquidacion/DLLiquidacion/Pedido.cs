@@ -497,11 +497,11 @@ namespace SigametLiquidacion
       this._datosPedido.DataCompInitialize();
     }
 
-    public void AltaPedido(short AñoAtt, int Folio, short CelulaCliente, short RutaCliente, DateTime Fecha, string Usuario)
+    public void AltaPedido(short AñoAtt, int Folio, short CelulaCliente, short RutaCliente, DateTime Fecha, string Usuario, int IdPedidoCRM)
     {
       try
       {
-        this._datosPedido.AltaPedido(AñoAtt, Folio, CelulaCliente, RutaCliente, Fecha, Usuario);
+        this._datosPedido.AltaPedido(AñoAtt, Folio, CelulaCliente, RutaCliente, Fecha, Usuario, IdPedidoCRM);
         this._celula = this._datosPedido.Celula;
         this._añoPed = this._datosPedido.AñoPed;
         this._pedido = this._datosPedido.Pedido;

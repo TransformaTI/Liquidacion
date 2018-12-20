@@ -698,9 +698,9 @@ label_10:
       }
     }
 
-    public void AltaPedido(short AñoAtt, int Folio, short CelulaCliente, short RutaCliente, DateTime Fecha, string Usuario)
+    public void AltaPedido(short AñoAtt, int Folio, short CelulaCliente, short RutaCliente, DateTime Fecha, string Usuario, int IdPedidoCRM)
     {
-      SqlParameter[] sqlParameterArray = new SqlParameter[9]
+      SqlParameter[] sqlParameterArray = new SqlParameter[10]
       {
         new SqlParameter("@Cliente", (object) this._cliente),
         new SqlParameter("@AñoAtt", (object) AñoAtt),
@@ -709,8 +709,9 @@ label_10:
         new SqlParameter("@RutaCliente", (object) RutaCliente),
         new SqlParameter("@Usuario", (object) Usuario),
         new SqlParameter("@Celula", (object) CelulaCliente),
-        new SqlParameter("@Pedido", SqlDbType.Int),
-        null
+        new SqlParameter("@Pedido", SqlDbType.Int),        
+        null,
+        new SqlParameter("@IdPedidoCRM", (object) IdPedidoCRM)
       };
       sqlParameterArray[7].Direction = ParameterDirection.Output;
       sqlParameterArray[8] = new SqlParameter("@AñoPed", SqlDbType.SmallInt);

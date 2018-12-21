@@ -410,7 +410,7 @@ public partial class FormaPago : System.Web.UI.Page
                         tarjetaPago = filaTarjeta["Tarjeta"].ToString().Trim();
                         autorizacionPago = filaTarjeta["Autorizacion"].ToString().Trim();
 
-                        drArrayCobros = ds.Tables["Cobro"].Select("Cliente = '" + clientePago + "' AND NumeroCuenta = '" + tarjetaPago + "' AND Referencia='" + autorizacionPago + "'");
+                        drArrayCobros = ds.Tables["Cobro"].Select("Cliente = '" + clientePago + "' AND NumeroCuenta = '" + tarjetaPago + "' AND Numcheque='" + autorizacionPago + "'");
 
                         if (drArrayCobros.Length == 0)
                         {

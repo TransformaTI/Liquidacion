@@ -496,6 +496,15 @@ namespace SigametLiquidacion
 
         private void CobroDescuentos(string Usuario, DataTable dtPedidos, ref DataTable dtPago, ref DataTable dtDetallePago)
         {
+            Catalogos Cat = new Catalogos();
+            DataTable DtPrecio = new DataTable();
+            decimal PrecioPedido;
+            decimal PrecioVigente;
+
+            DtPrecio = Cat.ListaPrecios.DefaultView.ToTable("ListaPrecios", 1 != 0, "Precio", "PorcentajeIva");
+            PrecioVigente = decimal.Parse(DtPrecio.Rows[0]["Precio"].ToString());
+
+
             DataRow[] dataRowArray = dtPedidos.Select("Descuento > 0", "Cliente ASC");
             string str = "";
             Decimal num1 = new Decimal(0);
@@ -504,6 +513,9 @@ namespace SigametLiquidacion
                 num2 = dtPago.Rows.Count <= 0 ? 1 : Convert.ToInt32(dtPago.Compute("MAX(IdPago)", (string)null)) + 1;
             foreach (DataRow dataRow1 in dataRowArray)
             {
+                PrecioPedido = decimal.Parse(dataRow1["Total"].ToString()) / decimal.Parse(dataRow1["Litros"].ToString());
+
+
                 if (Convert.ToDecimal(dataRow1["Saldo"]) >= Convert.ToDecimal(dataRow1["Descuento"]))
                 {
                     if (str == dataRow1["Cliente"].ToString())
@@ -559,7 +571,12 @@ namespace SigametLiquidacion
                             dtDetallePago.Columns.Add(new DataColumn("Impuesto"));
                             dtDetallePago.Columns.Add(new DataColumn("Total"));
                         }
-                        Decimal num3 = Convert.ToDecimal(dataRow1["Descuento"]);
+
+           
+
+                        if (PrecioPedido < PrecioVigente)
+                        {
+                            Decimal num3 = Convert.ToDecimal(dataRow1["Descuento"]);
                         DataRow row = dtPago.NewRow();
                         row.BeginEdit();
                         row["IdPago"] = (object)num2;
@@ -586,8 +603,13 @@ namespace SigametLiquidacion
                         row["TipoValeDescripcion"] = "";
                         row.EndEdit();
                         dtPago.Rows.Add(row);
+                        }
                     }
-                    DataRow row1 = dtDetallePago.NewRow();
+
+                    if (PrecioPedido < PrecioVigente)
+                    {
+
+                        DataRow row1 = dtDetallePago.NewRow();
                     row1.BeginEdit();
                     row1["IdPago"] = (object)num2;
                     row1["Pedido"] = dataRow1["Pedido"];
@@ -602,6 +624,9 @@ namespace SigametLiquidacion
                     dataRow1.BeginEdit();
                     dataRow1["Saldo"] = (object)(Convert.ToDecimal(dataRow1["Saldo"]) - Convert.ToDecimal(dataRow1["Descuento"]));
                     dataRow1.EndEdit();
+                    }
+
+
                 }
             }
         }

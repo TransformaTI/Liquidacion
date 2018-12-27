@@ -659,7 +659,7 @@ namespace SigametLiquidacion
             try
             {
 
-                    this.CobroDescuentos(Usuario, dtPedidos, ref dtPago, ref dtDetallePago);
+                    //this.CobroDescuentos(Usuario, dtPedidos, ref dtPago, ref dtDetallePago);
                     this.CobroEnEfectivo(Usuario, dtPedidos, ref dtPago, ref dtDetallePago);
 
                 this.ValidaStatusAutotanqueTurno((int)Convert.ToInt16(dtResumenLiquidacion.Rows[0]["AñoAtt"]), Convert.ToInt32(dtResumenLiquidacion.Rows[0]["Folio"]));

@@ -59,7 +59,8 @@
         var NumCteAnticipo='<%=wucDetalleFormaPago1.TxtAntIdCliente.Text != null ? wucDetalleFormaPago1.TxtAntIdCliente.Text.ToString().Trim():"" %>';
 
         var NomCteTarjeta = '<%= txtNombreClienteTarjeta.Text.Trim() %>';
-        var PostBack_trasferencia='<%=wucDetalleFormaPago1.PostBack != null ? wucDetalleFormaPago1.PostBack:"" %>';
+        var PostBack_trasferencia = '<%=wucDetalleFormaPago1.PostBack != null ? wucDetalleFormaPago1.PostBack:"" %>';
+
         
 
         //Validaciones  On load
@@ -402,6 +403,13 @@
                  return false;
             }
 
+                if (document.getElementById('<%=txtNombreClienteTarjeta.ClientID%>').value == "")
+                 {
+                     alert('¡El cliente no existe, capture un número de cliente valido!');
+                    return false;
+                 }
+        
+
 
 
 
@@ -444,7 +452,8 @@
                     alert('Capture el Importe');
                     return false;
                 }
-        
+
+             
 
 
             }  

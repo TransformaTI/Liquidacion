@@ -108,9 +108,14 @@
                     document.getElementById('ctl00_MainPlaceHolder_chkLocal').disabled = false;
                     document.getElementById('ctl00_MainPlaceHolder_ddlTAfiliacion').selectedIndex = "0";
                     document.getElementById('ctl00_MainPlaceHolder_ddlTAfiliacion').disabled = false;
+                  
+
+
+                    
                 }
                 
                 if (respuesta == true) {
+
                     ShowModalPopup();
                 }
 
@@ -927,11 +932,11 @@
 
                                                     <tr>
                                                         <td class="style1">
-                                                            <asp:Label ID="lblTCAutorizacion" runat="server" CssClass="labeltipopagoforma"  
+                                                            <asp:Label ID="lblTCAutorizacion" runat="server" CssClass="labeltipopagoforma"
                                                                 Text="No Autorización:"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox ID="txtNoAutorizacionTarjeta" runat="server" CssClass="textboxcaptura"  ReadOnly="true" 
+                                                            <asp:TextBox ID="txtNoAutorizacionTarjeta" runat="server" CssClass="textboxcaptura" ReadOnly="true"
                                                                 Width="100px" AutoPostBack="false"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="rfvTDAutorizacion" runat="server"
                                                                 ControlToValidate="txtNoAutorizacionTarjeta" Display="None"
@@ -940,32 +945,32 @@
                                                             <ccR:ValidatorCalloutExtender ID="vceAutorizacion" runat="server"
                                                                 TargetControlID="rfvTDAutorizacion">
                                                             </ccR:ValidatorCalloutExtender>
-                                                            <ccR:FilteredTextBoxExtender ID="ftbTDAutorizacion" runat="server" TargetControlID="txtNoAutorizacionTarjeta" FilterType="Custom,LowercaseLetters,UppercaseLetters,Numbers" ValidChars="" ></ccR:FilteredTextBoxExtender>
+                                                            <ccR:FilteredTextBoxExtender ID="ftbTDAutorizacion" runat="server" TargetControlID="txtNoAutorizacionTarjeta" FilterType="Custom,LowercaseLetters,UppercaseLetters,Numbers" ValidChars=""></ccR:FilteredTextBoxExtender>
                                                         </td>
                                                     </tr>
-                                                          <tr id ="ConfirmAut">
-   
+                                                    <tr id ="ConfirmAut">
+                                                    
                                                         <td class="style1">
-                                                          <div id="titNoAut" runat="server">
-                                                            <asp:Label ID="Label13" runat="server" CssClass="labeltipopagoforma"
-                                                                Text="No Autorización:"></asp:Label>
+                                                            <div id="titNoAut" runat="server">
+                                                                <asp:Label ID="Label13" runat="server" CssClass="labeltipopagoforma"
+                                                                    Text="No Autorización:"></asp:Label>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div runat="server" id="titNoAutNum">
-                                                            <asp:TextBox ID="txtNoAutorizacionTarjetaConfirm" runat="server" CssClass="textboxcaptura"
-                                                                Width="100px"></asp:TextBox>
-                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
-                                                                ControlToValidate="txtNoAutorizacionTarjeta" Display="None"
-                                                                ErrorMessage="Capturar Número de Autorización"
-                                                                ValidationGroup="Tarjeta"></asp:RequiredFieldValidator>
-                                                            <ccR:ValidatorCalloutExtender ID="ValidatorCalloutExtender5" runat="server"
-                                                                TargetControlID="RequiredFieldValidator1">
-                                                            </ccR:ValidatorCalloutExtender>
-                                                            <ccR:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server" TargetControlID="txtNoAutorizacionTarjetaConfirm" FilterType="Custom,LowercaseLetters,UppercaseLetters,Numbers" ValidChars=""></ccR:FilteredTextBoxExtender>
-                                                        </div>
+                                                                <asp:TextBox ID="txtNoAutorizacionTarjetaConfirm" runat="server" CssClass="textboxcaptura"
+                                                                    Width="100px"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+                                                                    ControlToValidate="txtNoAutorizacionTarjeta" Display="None"
+                                                                    ErrorMessage="Capturar Número de Autorización"
+                                                                    ValidationGroup="Tarjeta"></asp:RequiredFieldValidator>
+                                                                <ccR:ValidatorCalloutExtender ID="ValidatorCalloutExtender5" runat="server"
+                                                                    TargetControlID="RequiredFieldValidator1">
+                                                                </ccR:ValidatorCalloutExtender>
+                                                                <ccR:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server" TargetControlID="txtNoAutorizacionTarjetaConfirm" FilterType="Custom,LowercaseLetters,UppercaseLetters,Numbers" ValidChars=""></ccR:FilteredTextBoxExtender>
+                                                            </div>
                                                         </td>
-                                                             
+
                                                     </tr>
                                                     <tr>
                                                         <td class="style1">

@@ -84,6 +84,7 @@ public partial class FormaPago : System.Web.UI.Page
                     ConsultarCargoTarjeta(int.Parse(txtClienteTarjeta.Text), "tarjeta", int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
 
                     txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
+                   
                     txtFechaTarjeta.ReadOnly = txtFechaTarjeta.Text == "" ? false : true;
                     txtNumTarjeta.ReadOnly = txtNumTarjeta.Text == "" ? false : true;
                     txtImporteTarjeta.ReadOnly = txtImporteTarjeta.Text == "" ? false : true;
@@ -94,6 +95,8 @@ public partial class FormaPago : System.Web.UI.Page
                     txtObservacionesTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
                     imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
                     chkLocal.Enabled = txtNoAutorizacionTarjeta.Text == string.Empty ? true : false;
+                    //titNoAut.Visible = !txtNumTarjeta.ReadOnly;
+                    //titNoAutNum.Visible = !txtNumTarjeta.ReadOnly;
 
                 }
             }
@@ -193,8 +196,8 @@ public partial class FormaPago : System.Web.UI.Page
         }
         else
         {
-            titNoAut.Visible = false;
-            titNoAutNum.Visible = false;
+            //titNoAut.Visible = false;
+            //titNoAutNum.Visible = false;
             HiddenInput.Value = "";
             HiddenInputPCT.Value = "";
             LimpiarCampos("tarjeta");
@@ -1600,8 +1603,10 @@ else
 
 
             //}
-            titNoAut.Visible = false;
-            titNoAutNum.Visible = false;
+
+
+            //titNoAut.Visible = true;
+            //titNoAutNum.Visible = true;
 
             if (dtPagosConTarjeta.Rows[0]["Folio"].ToString()=="" || PagosDeRuta==0)
             {
@@ -1638,7 +1643,10 @@ else
         ddTipTarjeta.Enabled = ddTipTarjeta.SelectedIndex == 0 ? true : false;
         chkLocal.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
         txtObservacionesTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
-        imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;        
+        imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
+
+        //titNoAut.Visible = !txtNoAutorizacionTarjeta.ReadOnly;
+        //titNoAutNum.Visible = !txtNoAutorizacionTarjeta.ReadOnly;
     }
 
     /// <summary>
@@ -1663,6 +1671,7 @@ else
 
                         txtNombreClienteTarjeta.Text = dtPagosPrimerRegistro[0]["NombreCliente"].ToString();
                         txtNoAutorizacionTarjeta.Text = dtPagosPrimerRegistro[0]["Autorizacion"].ToString();
+                        txtNoAutorizacionTarjetaConfirm.Text = dtPagosPrimerRegistro[0]["Autorizacion"].ToString();
                         txtFechaTarjeta.Text = dtPagosPrimerRegistro[0]["FAlta"].ToString() != "" ? DateTime.Parse(dtPagosPrimerRegistro[0]["FAlta"].ToString()).ToShortDateString() : "";
                         txtNumTarjeta.Text = dtPagosPrimerRegistro[0]["NumeroTarjeta"].ToString();
                         ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosPrimerRegistro[0]["Nombrebanco"].ToString().Trim()));
@@ -1712,7 +1721,7 @@ else
                                 from c in PagosConTarjeta
                                 join b in Cobros
                                     on
-                                          c.Field<string>("Autorizacion") equals b.Field<string>("referencia")
+                                          c.Field<string>("Autorizacion") equals b.Field<string>("numCheque")
 
                                 into j
                                 from x in j.DefaultIfEmpty()
@@ -1813,7 +1822,10 @@ else
                 txtObservacionesTarjeta.Text = string.Empty;
                 ddBancoTarjeta.SelectedIndex = -1;
                 ddTipTarjeta.SelectedIndex = -1;
-                
+                titNoAut.Visible = true;
+                titNoAutNum.Visible = true;
+
+
                 break;
 
             case "transferencia":

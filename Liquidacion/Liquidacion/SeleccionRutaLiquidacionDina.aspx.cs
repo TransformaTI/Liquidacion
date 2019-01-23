@@ -272,6 +272,7 @@ public partial class SeleccionRutaLiquidacionDina : System.Web.UI.Page
                         break;
                    
                 }
+                ibl.ToolTip = ibl.AlternateText;
                 ibl.Height = 93;
                 ibl.Width = 150;
 

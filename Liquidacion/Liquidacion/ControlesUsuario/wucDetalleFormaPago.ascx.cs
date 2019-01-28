@@ -704,11 +704,14 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
     private void ConsultaPedidosCliente()
     {
         int folio;
+        int añoatt;
 
-        if (Session["Folio"] != null)
+        if (Session["Folio"] != null && Session["AñoAtt"]!=null)
         {
             folio = (Int32)Session["Folio"];
-            dtPedidos = rp.PedidosLiquidacion(int.Parse(txtAntCliente.Text), folio);
+            añoatt =Convert.ToInt32(Session["AñoAtt"].ToString());
+
+            dtPedidos = rp.PedidosLiquidacion(int.Parse(txtAntCliente.Text), folio,añoatt);
             dtPedidos.TableName = "Pedidos";
 
             (Session["PedidosParientes"]) = dtPedidos;

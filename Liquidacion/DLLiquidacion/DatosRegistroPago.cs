@@ -260,13 +260,14 @@ namespace SigametLiquidacion
             this._dataAccess.LoadData(this.dtAfiliaciones, "spLiqConsultaAfiliacion", CommandType.StoredProcedure, sqlParameterArray, true);
         }
 
-        public void CargaPedidosLiquidacion(int Cliente, int Folio)
+        public void CargaPedidosLiquidacion(int Cliente, int Folio, int añoatt)
         {
             //SqlParameter[] sqlParameterArray = new SqlParameter[1]
-            SqlParameter[] sqlParameterArray = new SqlParameter[2]
+            SqlParameter[] sqlParameterArray = new SqlParameter[3]
             {
                 new SqlParameter("@Cliente", Cliente),
-                new SqlParameter("@Folio", Folio)
+                new SqlParameter("@Folio", Folio),
+                new SqlParameter("@añoatt", añoatt)
             };
 
             this.dtPedidosLiq = new DataTable();
@@ -799,7 +800,7 @@ namespace SigametLiquidacion
                     if (liqPagoAnticipado != null && dtPago.Rows[index1]["NombreTipoCobro"].ToString().Contains("ANTICIPO"))
                     {
                         decimal Totalpedidos = decimal.Parse(liqPagoAnticipado.Compute("Sum(Monto)", "IdPago="+ dtPago.Rows[index1]["IdPago"].ToString().Trim()).ToString());
-                        InsertaMovimientoAConciliar(int.Parse(liqPagoAnticipado.Rows[0]["Folio"].ToString()), int.Parse(liqPagoAnticipado.Rows[0]["AñoMovimiento"].ToString()), int.Parse(DateTime.Now.Year.ToString()), cobro, Totalpedidos, "EMITIDO");
+                        InsertaMovimientoAConciliar(int.Parse(liqPagoAnticipado.Rows[index1]["Folio"].ToString()), int.Parse(liqPagoAnticipado.Rows[index1]["AñoMovimiento"].ToString()), int.Parse(DateTime.Now.Year.ToString()), cobro, Totalpedidos, "EMITIDO");
                     }
 
 

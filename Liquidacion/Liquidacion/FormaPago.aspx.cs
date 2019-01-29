@@ -46,12 +46,23 @@ public partial class FormaPago : System.Web.UI.Page
     [System.Web.Services.WebMethod]
     public static string revisaCuentaOrigen(string cuenta)
     {
-        TextReader textReader = (TextReader)new StreamReader(HttpContext.Current.Server.MapPath("Conexion.txt"));
-        string conexionTemp = textReader.ReadLine();
+        string resultado = string.Empty;
 
-        FormasPago.Cuenta cuentaOrigen = new FormasPago.Cuenta();
+        if (cuenta!=string.Empty)
+        {
+                    TextReader textReader = (TextReader)new StreamReader(HttpContext.Current.Server.MapPath("Conexion.txt"));
+                string conexionTemp = textReader.ReadLine();
 
-        string resultado = cuentaOrigen.validarExpresionRegular(3, cuenta, conexionTemp).ToString();
+                FormasPago.Cuenta cuentaOrigen = new FormasPago.Cuenta();
+
+             resultado = cuentaOrigen.validarExpresionRegular(3, cuenta, conexionTemp).ToString();
+
+        }
+
+        else
+        {
+            resultado = "True";
+        }
 
 
         return resultado;

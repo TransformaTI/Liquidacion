@@ -429,14 +429,16 @@ namespace SigametLiquidacion
                         Precio precio = new Precio(this._claseRuta, this._fecha, this._preciosMultiples);
                         DataTable dataTable = new DataTable();
                         Decimal num1 = ControlDeDescuento.Instance.PrecioAutorizado(precio.ListaPrecios(), cliente.Descuento, cliente.ZonaEconomica);
-                        if (Convert.ToDecimal(dataRow["Precio"]) == num1)
+                        if (Convert.ToDecimal(dataRow["Precio"]) == num1 || Convert.ToDecimal(dataRow["Precio"]) == precio.PrecioVigente)
                         {
                             dataRow["Descuento"] = (object)0;
                         }
                         else
                         {
-                            dataRow["Descuento"] = (object)(cliente.Descuento * Convert.ToDecimal(dataRow["Litros"]));
+                           
+                                dataRow["Descuento"] = (object)(cliente.Descuento * Convert.ToDecimal(dataRow["Litros"]));
                             Decimal num2 = cliente.Descuento * Convert.ToDecimal(dataRow["Litros"]);
+                        
                         }
                     }
                 }

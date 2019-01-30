@@ -100,8 +100,8 @@
 
             cuenta = $("#<%=TxtCtaOrigen.ClientID%>")[0].value;
 
-            if (cuenta == '')
-                $("#<%=HiddenCtaOrigenValida.ClientID%>")[0].value="False"
+<%--            if (cuenta == '')
+                $("#<%=HiddenCtaOrigenValida.ClientID%>")[0].value="False"--%>
             
 
             $.ajax({

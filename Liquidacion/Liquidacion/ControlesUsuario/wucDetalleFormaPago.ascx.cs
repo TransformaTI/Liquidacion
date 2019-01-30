@@ -746,10 +746,10 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
 
                         foreach (DataRow dr in _datosCliente.SaldosCliente.Rows)
                         {
-
+                            TotalPedidos = 0;
                             if (dtLiq != null)
                             {
-                                drSaldo = dtLiq.Select("Folio=" + dr["FolioMovimiento"].ToString() + " AND AñoMovimiento=" + dr["AñoMovimiento"].ToString());
+                                drSaldo = dtLiq.Select("Folio='" + dr["FolioMovimiento"].ToString().Trim() + "' AND AñoMovimiento='" + dr["AñoMovimiento"].ToString().Trim()+"'");
                                 foreach (DataRow row in drSaldo)
                                 {
                                     if (dsLiq.Tables["CobroPedido"] != null)
@@ -759,12 +759,12 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                                             foreach (DataRow rpedido in dtCobroPedido.Rows)
                                             {
                                                 //DataTable dt = new DataTable();
-                                                drCobro = dtCobroLiq.Select("IDPAGO='" + rpedido["IdPago"] + "' AND NombreTipoCobro='ANTICIPO'");
+                                                drCobro = dtCobroLiq.Select("IDPAGO='" + rpedido["IdPago"] + "' AND NombreTipoCobro='ANTICIPO'" );
                                                 //DataTable dtPagosAnticipo = drCobro.Count() > 0 ? drCobro.CopyToDataTable():null ;
 
                                                 foreach (DataRow rcobro in drCobro)
                                                 {
-                                                    if (row["Pedidos"].ToString().Contains(rpedido["Pedido"].ToString()))
+                                                    if (row["Pedidos"].ToString().Contains(rpedido["Pedido"].ToString()) && row["IdPago"].ToString().Trim()== rpedido["IdPago"].ToString().Trim())
                                                     {
                                                         TotalPedidos = TotalPedidos + decimal.Parse(rpedido["Total"].ToString());
 

@@ -654,6 +654,7 @@ namespace SigametLiquidacion
             string Fcobro ;
             string NumCheque = string.Empty;
             string CtaDestino = string.Empty;
+            int indexAnticipado = 0;
 
 
 
@@ -797,10 +798,19 @@ namespace SigametLiquidacion
 
 
 
-                    if (liqPagoAnticipado != null && dtPago.Rows[index1]["NombreTipoCobro"].ToString().Contains("ANTICIPO"))
+                    if (liqPagoAnticipado != null && dtPago.Rows[index1]["NombreTipoCobro"].ToString().Contains("ANTICIPO") )
                     {
                         decimal Totalpedidos = decimal.Parse(liqPagoAnticipado.Compute("Sum(Monto)", "IdPago="+ dtPago.Rows[index1]["IdPago"].ToString().Trim()).ToString());
-                        InsertaMovimientoAConciliar(int.Parse(liqPagoAnticipado.Rows[index1]["Folio"].ToString()), int.Parse(liqPagoAnticipado.Rows[index1]["AñoMovimiento"].ToString()), int.Parse(DateTime.Now.Year.ToString()), cobro, Totalpedidos, "EMITIDO");
+
+                        foreach (DataRow Anticipo in liqPagoAnticipado.Rows)
+                        {
+                            if (Anticipo["IdPago"].ToString().Trim() == dtPago.Rows[index1]["IdPago"].ToString().Trim())
+                            {
+                                indexAnticipado = liqPagoAnticipado.Rows.IndexOf(Anticipo);
+                            InsertaMovimientoAConciliar(int.Parse(liqPagoAnticipado.Rows[indexAnticipado]["Folio"].ToString()), int.Parse(liqPagoAnticipado.Rows[indexAnticipado]["AñoMovimiento"].ToString()), int.Parse(DateTime.Now.Year.ToString()), cobro, Totalpedidos, "EMITIDO");
+                            }
+                        }
+                       
                     }
 
 

@@ -244,28 +244,31 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
 
                 try
                 {
-                   
+                    ddlCtaDestino.Items.Clear();
 
-                    dtCtasBanco = rp.ListaCtasBanco(0);
-                     DtCuentasBanco = dtCtasBanco.Select("Banco=" + "'" + ddlBancoDestino.SelectedValue + "'").CopyToDataTable();
+                    dtCtasBanco = rp.ListaCtasBanco(int.Parse(Session["corporativo"].ToString()));
+                  
 
-
-
-                    if (DtCuentasBanco.Rows.Count > 0)
+                  if (DtCuentasBanco!=null)
                     {
+                        DtCuentasBanco = dtCtasBanco.Select("Banco=" + "'" + ddlBancoDestino.SelectedValue + "'").CopyToDataTable();
 
-                        ddlCtaDestino.DataSource = DtCuentasBanco;
-                        ddlCtaDestino.DataTextField = "CuentaBanco";
-                        ddlCtaDestino.DataValueField = "CuentaBanco";
-                        ddlCtaDestino.DataBind();
-                        ddlCtaDestino.Items.Insert(0, new ListItem("- Seleccione -", "0"));
-                        ddlCtaDestino.SelectedIndex = 0;
-                    }
+                        if (DtCuentasBanco.Rows.Count > 0)
+                            {
 
-                    else
+                                ddlCtaDestino.DataSource = DtCuentasBanco;
+                                ddlCtaDestino.DataTextField = "CuentaBanco";
+                                ddlCtaDestino.DataValueField = "CuentaBanco";
+                                ddlCtaDestino.DataBind();
+                                ddlCtaDestino.Items.Insert(0, new ListItem("- Seleccione -", "0"));
+                                ddlCtaDestino.SelectedIndex = 0;
+                            }
 
-                    {
-                        ddlCtaDestino.Items.Clear();
+                            else
+
+                            {
+                                ddlCtaDestino.Items.Clear();
+                            }
                     }
 
 

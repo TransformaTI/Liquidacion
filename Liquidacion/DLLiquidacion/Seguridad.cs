@@ -37,7 +37,16 @@ namespace SigametLiquidacion
       }
     }
 
-    public Seguridad(short Modulo, string Usuario, string Contrasenia)
+     public  DataTable Usuario
+        {
+            get
+      {
+        return this.dtUsuario;
+      }
+        }
+
+
+        public Seguridad(short Modulo, string Usuario, string Contrasenia)
     {
       this._modulo = Modulo;
       this._usuario = Usuario;

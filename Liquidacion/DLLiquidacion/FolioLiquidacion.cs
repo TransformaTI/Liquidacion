@@ -416,20 +416,26 @@ namespace SigametLiquidacion
                 int idCliente = Convert.ToInt32(dataRow["Cliente"]);
                                 
                 cliente=ListaClientes.FirstOrDefault(x => x.NumeroCliente== idCliente);
-               
-                
-                dataRow["IdCRM"] = cliente.IdPedidoCRM;
-                dataRow["Nombre"] = cliente.Nombre;
+
+
+                dataRow["IdCRM"] = cliente!= null ? cliente.IdPedidoCRM:0 ;
+
+                dataRow["Nombre"] = cliente != null ? cliente.Nombre : ""; 
                
                 if (!Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("DescuentoProntoPago"))))
                 {
-                    dataRow["Descuento"] = !cliente.Encontrado ? (object)0 : (object)(cliente.Descuento * Convert.ToDecimal(dataRow["Litros"]));
+                    if (cliente!=null)
+                    {
+                        dataRow["Descuento"] = !cliente.Encontrado ? (object)0 : (object)(cliente.Descuento * Convert.ToDecimal(dataRow["Litros"]));
+                    }
+
+
                     if ((int)Convert.ToInt16(this._parametros.ValorParametro("LiqPrecioNeto")) == 0)
                     {
                         Precio precio = new Precio(this._claseRuta, this._fecha, this._preciosMultiples);
                         DataTable dataTable = new DataTable();
                         Decimal num1 = ControlDeDescuento.Instance.PrecioAutorizado(precio.ListaPrecios(), cliente.Descuento, cliente.ZonaEconomica);
-                        if (Convert.ToDecimal(dataRow["Precio"]) == num1 || Convert.ToDecimal(dataRow["Precio"]) == precio.PrecioVigente)
+                        if (Convert.ToDecimal(dataRow["Precio"]) == num1 )
                         {
                             dataRow["Descuento"] = (object)0;
                         }

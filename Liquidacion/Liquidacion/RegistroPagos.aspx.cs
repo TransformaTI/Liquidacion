@@ -405,7 +405,8 @@ public partial class RegistroPagos : System.Web.UI.Page
                 //Sacamos el saldo con el descuento 
                 try
                 {
-                    saldo = Convert.ToDecimal(gvPedidos.SelectedRow.Cells[8].Text.Replace("$", "")) - Convert.ToDecimal(gvPedidos.SelectedRow.Cells[10].Text.Replace("$", ""));
+                    saldo = Convert.ToDecimal(gvPedidos.SelectedRow.Cells[8].Text.Replace("$", ""));
+                        //- Convert.ToDecimal(gvPedidos.SelectedRow.Cells[10].Text.Replace("$", ""));
                     lblDescuento.Text = "El pedido tiene un descuento por: " + String.Format("{0:0.00}", gvPedidos.SelectedRow.Cells[10].Text);
                     lblDescuento.Visible = true;
                 }

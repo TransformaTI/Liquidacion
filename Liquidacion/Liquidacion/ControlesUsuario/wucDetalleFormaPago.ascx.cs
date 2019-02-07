@@ -246,7 +246,9 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                 {
                     ddlCtaDestino.Items.Clear();
 
-                    dtCtasBanco = rp.ListaCtasBanco(int.Parse(Session["corporativo"].ToString()));
+                    int empresaContable = rp.ObtieneEmpresaContable(int.Parse(Session["corporativo"].ToString()));
+
+                    dtCtasBanco = rp.ListaCtasBanco(empresaContable);
                   
 
                   if (DtCuentasBanco!=null)
@@ -730,6 +732,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         decimal TotalPedidos = 0;
         DataRow[] drSaldo = null;
         DataRow[] drCobro = null;
+        DataRow[] drSaldosCliente = null;
         try
         {
             dsLiq = (DataSet)(Session["dsLiquidacion"]);
@@ -747,7 +750,10 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                         dtCobroPedido = dsLiq.Tables["CobroPedido"];
                         dtCobroLiq = dsLiq.Tables["Cobro"];
 
-                        foreach (DataRow dr in _datosCliente.SaldosCliente.Rows)
+                        drSaldosCliente = _datosCliente.SaldosCliente.Select();
+
+
+                        foreach (DataRow dr in drSaldosCliente)
                         {
                             TotalPedidos = 0;
                             if (dtLiq != null)
@@ -785,12 +791,14 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                                     }
                                     else
                                     {
-                                        dr.Delete();
+                                        _datosCliente.SaldosCliente.Rows.Remove(dr);
+                                        //dr.Delete();
                                     }
                                 }
                             }
                         }
                     }
+
 
                     try
                     {

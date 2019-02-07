@@ -148,7 +148,28 @@ namespace SigametLiquidacion
             this.dtBancos = new DataTable();
             this._dataAccess.LoadData(this.dtBancos, "spLIQ2ConsultaBancos", CommandType.StoredProcedure, (SqlParameter[])null, true);
         }
-        
+
+        public int ObtieneEmpresaContable(int Corporativo)
+        {
+            int resultado = 0;
+
+            SqlParameter[] sqlParameterArray = new SqlParameter[1]
+                           {
+                new SqlParameter("@Corporativo", (object) Corporativo)
+                           };
+
+            DataTable EmpresaContable = new DataTable();
+            this._dataAccess.LoadData(EmpresaContable, "spLIQObtieneEmpresaContable ", CommandType.StoredProcedure, sqlParameterArray, true);
+
+
+            
+            resultado = Convert.ToInt32(EmpresaContable.Rows[0][0]);
+
+            return resultado;
+
+
+        }
+
         public void CargaCuentaBanco(int EmpresaContable)
         {
             SqlParameter[] sqlParameterArray = new SqlParameter[1]

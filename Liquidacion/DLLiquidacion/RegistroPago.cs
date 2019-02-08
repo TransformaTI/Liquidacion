@@ -29,6 +29,7 @@ namespace SigametLiquidacion
     private DataTable dtTipoVale = new DataTable();
     private DataTable dtPedidosLiqAnticipado = new DataTable();
     private DataTable dtCtasBanco = new DataTable();
+    private DataTable dtTipoTarjeta= new DataTable();
 
    public DataTable ListaPedidos()
     {
@@ -113,6 +114,15 @@ namespace SigametLiquidacion
             this.dtTipoVale = this._datos.TipoVale;
             return this.dtTipoVale;
         }
+
+        public DataTable TipoTarjeta()
+        {
+            this._datos.CargaTipoTarjeta();
+            this.dtTipoTarjeta = this._datos.TipoTarjeta;
+            return this.dtTipoTarjeta;
+        }
+
+
 
 
         public void GuardaPagos(string Usuario, DataTable dtPedidos, DataTable dtPago, DataTable dtDetallePago, DataTable dtResumenLiquidacion, DataTable liqPagoAnticipado = null)

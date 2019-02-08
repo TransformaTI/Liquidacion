@@ -468,7 +468,8 @@ public partial class FormaPago : System.Web.UI.Page
     {
         DataTable dtBancos = new DataTable();
         DataTable dtPromocion = new DataTable();
-        Dictionary<string, string> TipoTarjeta = new Dictionary<string, string>();
+        DataTable dtTipoTarjeta = new DataTable();
+        //Dictionary<string, string> TipoTarjeta = new Dictionary<string, string>();
 
         try
         {
@@ -476,6 +477,7 @@ public partial class FormaPago : System.Web.UI.Page
             dtAfiliaciones = rp.Afiliaciones(int.Parse(Session["Ruta"].ToString()));
             dtProveedores = rp.Proveedores();
             dtTipoVale = rp.TipoVale();
+            dtTipoTarjeta=rp.TipoTarjeta();
 
             ddBancoTarjeta.DataSource = dtBancos;
             ddBancoTarjeta.DataTextField = "Nombre";
@@ -512,20 +514,20 @@ public partial class FormaPago : System.Web.UI.Page
 
             // Tipo Tarjeta
 
-            TipoTarjeta.Add("0", "Seleccione");
-            TipoTarjeta.Add("19", "Tarjeta de Débito");
-            TipoTarjeta.Add("6", "Tarjeta de Crédito");
+            //TipoTarjeta.Add("0", "Seleccione");
+            //TipoTarjeta.Add("19", "Tarjeta de Débito");
+            //TipoTarjeta.Add("6", "Tarjeta de Crédito");
             //TipoTarjeta.Add("22", "Tarjeta de Servicio");
 
 
-            ddTipoTarjeta.DataSource = TipoTarjeta;
-            ddTipoTarjeta.DataTextField = "Value";
-            ddTipoTarjeta.DataValueField = "Key";
+            ddTipoTarjeta.DataSource = dtTipoTarjeta;
+            ddTipoTarjeta.DataTextField = "DESCRIPCION";
+            ddTipoTarjeta.DataValueField = "ID";
             ddTipoTarjeta.DataBind();
 
-            ddTipTarjeta.DataSource = TipoTarjeta;
-            ddTipTarjeta.DataTextField = "Value";
-            ddTipTarjeta.DataValueField = "Key";
+            ddTipTarjeta.DataSource = dtTipoTarjeta;
+            ddTipTarjeta.DataTextField = "DESCRIPCION";
+            ddTipTarjeta.DataValueField = "ID";
             ddTipTarjeta.DataBind();
 
             ddlTAfiliacion.DataSource = dtAfiliaciones;

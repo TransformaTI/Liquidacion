@@ -25,6 +25,7 @@ namespace SigametLiquidacion
     private string _usuario; 
     private DataTable dtPedidosLiq;
     private DataTable DtCuentasBanco;
+    private DataTable dtTipoTarjeta;
 
         #endregion
         #region propiedades
@@ -134,6 +135,15 @@ namespace SigametLiquidacion
             set { DtCuentasBanco = value; }
         }
 
+        public DataTable TipoTarjeta
+        {
+            get
+            {
+                return this.dtTipoTarjeta;
+            }
+
+        }
+
         #endregion
 
 
@@ -240,6 +250,9 @@ namespace SigametLiquidacion
             this._dataAccess.LoadData(this.dtProveedores, "spLiqConsultaValeProveedores", CommandType.StoredProcedure, (SqlParameter[])null, true);
 
         }
+
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -248,6 +261,14 @@ namespace SigametLiquidacion
             this.dtTipoVale = new DataTable();
             this._dataAccess.LoadData(this.dtTipoVale, "spLiqConsultaValeTipo", CommandType.StoredProcedure, (SqlParameter[])null, true);
         }
+
+        public void CargaTipoTarjeta()
+        {
+            this.dtTipoTarjeta = new DataTable();
+            this._dataAccess.LoadData(this.dtTipoTarjeta, "spLIQConsultaTipoTarjeta", CommandType.StoredProcedure, (SqlParameter[])null, true);
+
+        }
+
 
         public void CargaAfiliaciones(int Ruta)
         {

@@ -125,9 +125,10 @@ namespace SigametLiquidacion
           row["FolioRemision"] = sqlDataReader["FolioRemision"];
           row["ConsecutivoOrigen"] = sqlDataReader["ConsecutivoOrigen"];
           row["IdCRM"] = 0;
+          row["Descuento"] = sqlDataReader["Descuento"]; ;
 
 
-          ListaPedidos.Rows.Add(row);
+                    ListaPedidos.Rows.Add(row);
         }
         sqlDataReader.Close();
       }

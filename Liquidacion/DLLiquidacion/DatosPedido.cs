@@ -565,7 +565,9 @@ label_10:
           this._serieRemision = Convert.ToString(sqlDataReader["SerieRemision"]);
           this._folioNota = Convert.ToInt32(sqlDataReader["Remision"]);
           this._consecutivoOrigen = Convert.ToInt32(sqlDataReader["ConsecutivoOrigen"]);
-        }
+          this._importeDescuentoAplicado = Convert.ToDecimal(sqlDataReader["Descuento"]);
+
+                }
         sqlDataReader.Close();
       }
       catch (Exception ex)

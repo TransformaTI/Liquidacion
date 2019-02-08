@@ -1256,6 +1256,8 @@ namespace SigametLiquidacion.WebControls
 
         private void btnAceptar_Click(object sender, ImageClickEventArgs e)
         {
+
+
             try
             {
                 if (this._pedido != null)
@@ -1336,13 +1338,31 @@ namespace SigametLiquidacion.WebControls
             this.txtImporte.Text = this._pedido.Importe.ToString();
             this.btnAceptar.Enabled = false;
             this.lblValorDescuento.Text = this._cliente.Descuento.ToString("C") + " " + this._cliente.DescripcionDescuento;
+
             if ((int) Convert.ToInt16(this._parametros.ValorParametro("LiqPrecioNeto")) == 0)
             {
                 this._precioMinimo = ControlDeDescuento.Instance.PrecioAutorizado(this.dtListaPrecios, this._cliente.Descuento, this._cliente.ZonaEconomica);
+                System.Web.HttpContext.Current.Session["PrecioMinimo"] = this._precioMinimo;
+
                 this._descuento = !(this._pedido.Precio == this._precioMinimo) ? (!Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("DescuentoProntoPago"))) ? new Decimal(0) : Convert.ToDecimal(this._pedido.Litros) * this._cliente.Descuento) : new Decimal(0);
             }
-            this._pedido.ImporteDescuentoAplicado = Convert.ToDecimal(this._pedido.Litros) * this._cliente.Descuento;
-            this._pedido.DescuentoAplicado = this._descuento == new Decimal(0) && this._pedido.ImporteDescuentoAplicado > new Decimal(0);
+
+            decimal PrecioMin = Convert.ToDecimal(System.Web.HttpContext.Current.Session["PrecioMinimo"]);
+            if (this._cliente.Descuento > new Decimal(0) && PrecioMin >0 && PrecioMin == Convert.ToDecimal(this.ddpPrecio.SelectedValue))
+                {
+                this._pedido.ImporteDescuentoAplicado = Convert.ToDecimal(this._pedido.Litros) * this._cliente.Descuento; 
+
+                this._pedido.DescuentoAplicado = true; 
+                
+               }
+            else
+            {
+                this._pedido.ImporteDescuentoAplicado = 0;
+                this._pedido.DescuentoAplicado = false;
+            }
+
+
+
             this._pedido.IdPedidoCRM = this.IdPedidoCRM;
             ControlDeRemisiones controlDeRemisiones = new ControlDeRemisiones();
             bool notaValida;
@@ -1377,6 +1397,8 @@ namespace SigametLiquidacion.WebControls
                 try
                 {
                     this._pedido.LiquidaPedido();
+                   
+                    
                     this._pedido = new SigametLiquidacion.Pedido(this._pedido.Celula, this._pedido.AñoPed, this._pedido.NumeroPedido);
                     this.OnClick((EventArgs) e);
                 }
@@ -1416,6 +1438,7 @@ namespace SigametLiquidacion.WebControls
             ListaClientes= (List<Cliente>)System.Web.HttpContext.Current.Session["ListaClientes"];
             string _buscando = Convert.ToString(System.Web.HttpContext.Current.Session["buscandoCliente"]);
 
+            System.Web.HttpContext.Current.Session["PrecioMinimo"]= 0;
 
             if (_buscando == "x")
             {
@@ -1501,10 +1524,14 @@ namespace SigametLiquidacion.WebControls
                     this.ddpPrecio.DataTextField = "Precio";
                     this.ddpPrecio.DataBind();
                     this._precioMinimo = ControlDeDescuento.Instance.PrecioAutorizado(this.dtListaPrecios, this._cliente.Descuento, this._cliente.ZonaEconomica);
+                    System.Web.HttpContext.Current.Session["PrecioMinimo"] = this._precioMinimo;
 
                     if (this._cliente.Descuento > new Decimal(0))
                     {
                         this._precioMinimo = ControlDeDescuento.Instance.PrecioAutorizado(this.dtListaPrecios, this._cliente.Descuento, this._cliente.ZonaEconomica);
+
+                        System.Web.HttpContext.Current.Session["PrecioMinimo"] = this._precioMinimo;
+
                         this.ddpPrecio.Items.Add(new ListItem(string.Format("{0:0.0000}", (object) this._precioMinimo), string.Format("{0:0.0000}", (object) this._precioMinimo)));
 
                         this.ddpPrecio.SelectedIndex = ddpPrecio.Items.IndexOf(ddpPrecio.Items.FindByText((this._precioMinimo.ToString())));
@@ -1520,6 +1547,7 @@ namespace SigametLiquidacion.WebControls
                         (this._precioMinimo != this._cliente.PrecioCliente))
                     {
                         this._precioMinimo = this._cliente.PrecioCliente;
+                        System.Web.HttpContext.Current.Session["PrecioMinimo"] = this._precioMinimo;
 
                         System.Collections.Generic.List<ListItem> preciosInvalidos = new System.Collections.Generic.List<ListItem>();
                         

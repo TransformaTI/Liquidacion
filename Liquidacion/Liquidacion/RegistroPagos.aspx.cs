@@ -358,8 +358,7 @@ public partial class RegistroPagos : System.Web.UI.Page
             gvRelacionCobro.DataSource = vistaPagoActivo;
             gvRelacionCobro.DataBind();
 
-            pagoActivo = pagoActivo - 1;
-            Session["idCobroConsec"] = pagoActivo;
+    
 
 
 
@@ -370,6 +369,8 @@ public partial class RegistroPagos : System.Web.UI.Page
 
     protected void CancelaRelacionPagoPedido()
     {
+        int pagoActivo = Convert.ToInt32(Session["idCobroConsec"]);
+
         foreach (DataRow pedidos in ds.Tables["CobroPedido"].Rows)
         {
             DataTable dtLiqAnticipo = ds.Tables["LiqPagoAnticipado"];
@@ -378,7 +379,7 @@ public partial class RegistroPagos : System.Web.UI.Page
             {
                 foreach (DataRow row in dtLiqAnticipo.Rows)
                 {
-                    if (Session["PagoEnUsoAnticipo"].ToString() == row["Folio"].ToString() + row["AñoMovimiento"].ToString() && row["Pedidos"].ToString().Contains(pedidos["Pedido"].ToString()))
+                    if (Session["PagoEnUsoAnticipo"].ToString() == row["Folio"].ToString() + row["AñoMovimiento"].ToString() && row["Pedidos"].ToString().Contains(pedidos["Pedido"].ToString()) && row["IdPago"].ToString().Trim() == pagoActivo.ToString().Trim())
                     {
                         row.BeginEdit();
                         row["Pedidos"] = row["Pedidos"].ToString().Replace(pedidos["Pedido"].ToString(), "");
@@ -389,6 +390,9 @@ public partial class RegistroPagos : System.Web.UI.Page
                 ds.Tables.Add(dtLiqAnticipo);
             }
         }
+
+        pagoActivo = pagoActivo - 1;
+        Session["idCobroConsec"] = pagoActivo;
     }
     #endregion
     #region "Handlers"
@@ -507,11 +511,13 @@ public partial class RegistroPagos : System.Web.UI.Page
 
                     DataTable dtLiqAnticipo = ds.Tables["LiqPagoAnticipado"];
 
+                    
+
                     if (dtLiqAnticipo != null)
                     {
                         foreach (DataRow row in dtLiqAnticipo.Rows)
                     {
-                        if (Session["PagoEnUsoAnticipo"].ToString() == row["Folio"].ToString() + row["AñoMovimiento"].ToString())
+                        if (Session["PagoEnUsoAnticipo"].ToString() == row["Folio"].ToString() + row["AñoMovimiento"].ToString() && row["IdPago"].ToString().Trim() == Session["idCobroConsec"].ToString().Trim())
                         {
                             row.BeginEdit();
                             row["Pedidos"] = row["Pedidos"] + ","+ gvPedidos.SelectedRow.Cells[3].Text.TrimEnd();
@@ -568,7 +574,7 @@ public partial class RegistroPagos : System.Web.UI.Page
                         {
                             foreach (DataRow row in dtLiqAnticipo.Rows)
                         {
-                            if (Session["PagoEnUsoAnticipo"].ToString() == row["Folio"].ToString() + row["AñoMovimiento"].ToString())
+                            if (Session["PagoEnUsoAnticipo"].ToString() == row["Folio"].ToString() + row["AñoMovimiento"].ToString() && Session["idCobroConsec"].ToString().Trim()== row["IdPago"].ToString().Trim())
                             {
                                 row.BeginEdit();
                                 row["Pedidos"] = row["Pedidos"] + "," + gvPedidos.SelectedRow.Cells[3].Text.TrimEnd();

@@ -80,6 +80,7 @@
 </script>
 <script type="text/javascript">
     function ValidaCuentaOrigen() {
+        revisaCuentaOrigen();
         var CtaOrigenValida = $("#<%=HiddenCtaOrigenValida.ClientID%>")[0].value;
 
     if (CtaOrigenValida == 'True') {
@@ -97,11 +98,23 @@
         function revisaCuentaOrigen() {
 
             var cuenta = '';
+            var BancoOrigen = '';
 
             cuenta = $("#<%=TxtCtaOrigen.ClientID%>")[0].value;
+            BancoOrigen = $("#<%=ddlBancoOrigen.ClientID%>")[0].value;
 
-            if (cuenta == '')
-                $("#<%=HiddenCtaOrigenValida.ClientID%>")[0].value="False"
+
+            if (cuenta == '' && BancoOrigen=='0')
+                {
+                $("#<%=HiddenCtaOrigenValida.ClientID%>")[0].value = "True"
+                  return;
+            } 
+
+              if (cuenta == '' && BancoOrigen!='0')
+                {
+                $("#<%=HiddenCtaOrigenValida.ClientID%>")[0].value = "False"
+                  return;
+            }    
             
 
             $.ajax({
@@ -207,7 +220,7 @@
             <asp:Label ID="lblFecha1" runat="server" CssClass="labeltipopagoforma" Text="Cuenta Origen:"></asp:Label>
         </td>
         <td style="text-align: left">
-            <asp:TextBox ID="TxtCtaOrigen" runat="server" CssClass="TxtCtaOrigen" onblur="return revisaCuentaOrigen()" Width="150px" ></asp:TextBox>
+            <asp:TextBox ID="TxtCtaOrigen" runat="server" CssClass="TxtCtaOrigen"  Width="150px" ></asp:TextBox>
             <cc2:FilteredTextBoxExtender ID="TxtCtaOrigen_FilteredTextBoxExtender" runat="server" FilterType="Numbers" TargetControlID="TxtCtaOrigen">
             </cc2:FilteredTextBoxExtender>
         </td>

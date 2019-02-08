@@ -6,7 +6,7 @@
 <%@ Register Src="~/ControlesUsuario/wucDetalleFormaPago.ascx" TagPrefix="ucDetallePago" TagName="wucDetalleFormaPago" %>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainPlaceHolder" runat="server">
-    <%--  --%>a
+    <%--  --%>
     <script type="text/javascript">
     function cierraCheque()
     { 

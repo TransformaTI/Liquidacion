@@ -11,6 +11,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using SigametLiquidacion;
+using SigametLiquidacion.WebControls;
 using System.Globalization;
 
 public partial class RegistroPagos : System.Web.UI.Page
@@ -55,6 +56,8 @@ public partial class RegistroPagos : System.Web.UI.Page
                     ds.Tables.Remove("Pedidos");
                     ds.Tables.Add(dtPedidos);
                 }
+
+                
             }
             else
             {
@@ -136,7 +139,12 @@ public partial class RegistroPagos : System.Web.UI.Page
                     i++;
                 }
             }
-            DataView vistaPedidos = new DataView(ds.Tables["Pedidos"]);
+
+
+
+
+
+           DataView vistaPedidos = new DataView(ds.Tables["Pedidos"]);
             vistaPedidos.Sort = "IdOrder DESC";
             gvPedidos.DataSource = vistaPedidos;
             gvPedidos.DataBind();

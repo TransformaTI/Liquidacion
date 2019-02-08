@@ -75,10 +75,12 @@ public partial class Liquidacion : System.Web.UI.Page
                 nuevoPedido.LongitudSerie = AutoTanqueTurno1.LongitudSerie;
                 nuevoPedido.LongitudRemision = AutoTanqueTurno1.LongitudRemision;
 
+
                 btnTerminar.Attributes.Add("onclick", "return confirm('¿Desea finalizar la captura de la liquidación?')");
             // btnPagos.Attributes.Add("onclick", "return confirm('¿Desea Continuar?')");
 
                nuevoPedido.ConsultaCteOnChange = true;
+           
         }
         else
         {
@@ -588,6 +590,9 @@ public partial class Liquidacion : System.Web.UI.Page
                     return;
                 }
 
+
+                FolioLiquidacion Fl = new FolioLiquidacion(Convert.ToInt16(Session["AñoAtt"]), Convert.ToInt32(Session["Folio"]));
+                Fl.ConsultaPedidos();
                 Session["dtPedidos"] = AutoTanqueTurno1.PedidosContado;
                 Session["dtResumenLiquidacion"] = AutoTanqueTurno1.ResumenLiquidacionFinal(Convert.ToString(Session["Usuario"]));
                 Response.Redirect("FormaPago.aspx");

@@ -363,6 +363,9 @@ namespace SigametLiquidacion
       this._fechaSuministro = this._datosPedido.FSuministro;
       this._serieRemision = this._datosPedido.SerieRemision;
       this._folioRemision = this._datosPedido.FolioNota;
+      this.DescuentoAplicado = this._datosPedido.DescuentoAplicado;
+      this.ImporteDescuentoAplicado = this._datosPedido.ImporteDescuentoAplicado;
+      
     }
 
     public Pedido(string PedidoReferencia)
@@ -388,6 +391,7 @@ namespace SigametLiquidacion
       this._serieRemision = this._datosPedido.SerieRemision;
       this._folioRemision = this._datosPedido.FolioNota;
       this._factura = this._datosPedido.Factura;
+       this._descuentoAplicado = this._datosPedido.DescuentoAplicado;
     }
 
     public Pedido(string SerieRemision, int Remision)
@@ -413,6 +417,7 @@ namespace SigametLiquidacion
       this._serieRemision = this._datosPedido.SerieRemision;
       this._folioRemision = this._datosPedido.FolioNota;
       this._factura = this._datosPedido.Factura;
+      this._descuentoAplicado = this._datosPedido.DescuentoAplicado;
     }
 
     public Pedido(TipoOperacionDescarga TipoDescarga, int Consecutivo, short AñoAtt, int Folio)

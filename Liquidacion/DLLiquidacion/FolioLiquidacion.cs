@@ -414,8 +414,14 @@ namespace SigametLiquidacion
             foreach (DataRow dataRow in (InternalDataCollectionBase) this._dtListaPedido.Rows)
             {
                 int idCliente = Convert.ToInt32(dataRow["Cliente"]);
-                                
-                cliente=ListaClientes.FirstOrDefault(x => x.NumeroCliente== idCliente);
+
+                if (ListaClientes != null)
+                {
+                    if (ListaClientes.Count >0)
+                    {
+                        cliente =ListaClientes.FirstOrDefault(x => x.NumeroCliente== idCliente);
+                    }
+                }
 
 
                 dataRow["IdCRM"] = cliente!= null ? cliente.IdPedidoCRM:0 ;
@@ -424,10 +430,12 @@ namespace SigametLiquidacion
                
                 if (!Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("DescuentoProntoPago"))))
                 {
-                    if (cliente!=null)
-                    {
-                        dataRow["Descuento"] = !cliente.Encontrado ? (object)0 : (object)(cliente.Descuento * Convert.ToDecimal(dataRow["Litros"]));
-                    }
+                    //if (cliente!=null)
+                    //{
+                    //    dataRow["Descuento"] = !cliente.Encontrado ? (object)0 : (object)(cliente.Descuento * Convert.ToDecimal(dataRow["Litros"]));
+                    //}
+
+
 
 
                     if ((int)Convert.ToInt16(this._parametros.ValorParametro("LiqPrecioNeto")) == 0)

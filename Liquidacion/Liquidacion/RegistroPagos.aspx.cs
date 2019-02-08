@@ -12,6 +12,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using SigametLiquidacion;
 using SigametLiquidacion.WebControls;
+using System.Globalization;
 
 public partial class RegistroPagos : System.Web.UI.Page
 {
@@ -638,6 +639,50 @@ public partial class RegistroPagos : System.Web.UI.Page
     {
         try
         {
+
+            string formaPago = Convert.ToString(Session["FormaPago"]);
+            decimal _restante;
+            
+            bool convt = decimal.TryParse(lblImportePagoA.Text, NumberStyles.Currency,
+              CultureInfo.CurrentCulture.NumberFormat, out _restante);
+
+            bool _ReglaTPVActiva;
+            decimal _PagoExcesoTPV;
+
+            Parametros _parametros = (Parametros)Session["Parametros"];
+
+            try
+            {
+                _PagoExcesoTPV = Convert.ToDecimal(_parametros.ValorParametro("PagoExcesoTPV"));
+            }
+            catch
+            {
+                _PagoExcesoTPV = 0;
+                
+            }
+
+            try
+            {
+                _ReglaTPVActiva = Convert.ToInt32(_parametros.ValorParametro("ReglaTPVActiva")) == 1;
+            }
+            catch 
+            {
+                _ReglaTPVActiva = false;
+
+            }
+
+            if (formaPago.Equals("TDC"))
+            {
+                if (_ReglaTPVActiva)
+                {
+                    if (_restante > _PagoExcesoTPV)
+                    {
+                        lblError.Text = "Falta por relacionar " + _restante.ToString("N2") + ", y el monto por relacionar supera el monto " +
+                                    "máximo de pago por exceso para tpbv, favor de relacion más" + "documentos";
+                        return;
+                    }
+                }
+            }
             DataRow[] CobrosPedido = ds.Tables["CobroPedido"].Select("IdPago = '" + Session["idCobroConsec"].ToString() + "'");
             //DataRow[] CobrosPedido = ds.Tables["CobroPedido"].Select();
             if (CobrosPedido.Length > 0)

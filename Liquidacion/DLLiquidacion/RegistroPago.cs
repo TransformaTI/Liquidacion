@@ -60,6 +60,14 @@ namespace SigametLiquidacion
       return this.dtCtasBanco;
     }
 
+    public int ObtieneEmpresaContable(int corporativo)
+    {
+            return this._datos.ObtieneEmpresaContable(corporativo);
+            
+
+
+    }
+
 
     public DataTable DatosCliente(int Cliente)
     {

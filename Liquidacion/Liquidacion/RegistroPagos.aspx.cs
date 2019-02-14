@@ -139,13 +139,20 @@ public partial class RegistroPagos : System.Web.UI.Page
                     i++;
                 }
             }
-
-
-
-
-
            DataView vistaPedidos = new DataView(ds.Tables["Pedidos"]);
+
             vistaPedidos.Sort = "IdOrder DESC";
+
+            if (chbTodos.Checked)
+            {
+
+                vistaPedidos.RowFilter = String.Empty;
+
+            }
+            else
+            {
+                vistaPedidos.RowFilter = "Cliente = " + idCliente;
+            }
             gvPedidos.DataSource = vistaPedidos;
             gvPedidos.DataBind();
             lblImportePagoA.Text = String.Format("{0:C}", Convert.ToDecimal(Session["ImporteOperacion"]));
@@ -840,4 +847,28 @@ public partial class RegistroPagos : System.Web.UI.Page
         }
     }
     #endregion
+
+    protected void chbTodos_CheckedChanged(object sender, EventArgs e)
+    {
+
+        DataView vistaPedidos = new DataView(ds.Tables["Pedidos"]);
+
+        String idCliente = Convert.ToString(Session["idCliente"]);
+
+        vistaPedidos.Sort = "IdOrder DESC";
+        if (chbTodos.Checked)
+        {
+           
+            vistaPedidos.RowFilter = String.Empty;
+
+        }
+        else
+        {
+            vistaPedidos.RowFilter = "Cliente = " + idCliente;
+        }
+
+        gvPedidos.DataSource = vistaPedidos;
+        gvPedidos.DataBind();
+        lblImportePagoA.Text = String.Format("{0:C}", Convert.ToDecimal(Session["ImporteOperacion"]));
+    }
 }

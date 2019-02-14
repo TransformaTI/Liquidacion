@@ -40,6 +40,12 @@
   <ContentTemplate> 
    <div style="text-align:center">
    <table style="width:1003px;">
+       <tr>
+           <td colspan="3"align="right">
+
+               <asp:CheckBox ID="chbTodos" runat="server" OnCheckedChanged="chbTodos_CheckedChanged" Text="Todos" AutoPostBack="true"  />
+           </td>
+       </tr>
   <tr>
     <td colspan="3" width="555px" class="EtiquetaCelulaRuta">
     

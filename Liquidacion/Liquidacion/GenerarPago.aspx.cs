@@ -35,10 +35,10 @@ public partial class GenerarPago : System.Web.UI.Page
         dsPagos = (DataSet)(Session["dsLiquidacion"]);
 
         //dtPagosGenerados = (DataTable)(Session["TablaCobro"]);
-        
-        if(dsPagos !=null && dsPagos.Tables["Cobro"] != null) {
 
-            DataRow[] drp= dsPagos.Tables["Cobro"].Select("TipoCobro = 'Tarjeta de Débito' or TipoCobro = 'Tarjeta de Crédito' or TipoCobro = 'Tarjeta de Servicio'");
+        if (dsPagos != null && dsPagos.Tables["Cobro"] != null) {
+
+            DataRow[] drp = dsPagos.Tables["Cobro"].Select("TipoCobro = 'Tarjeta de Débito' or TipoCobro = 'Tarjeta de Crédito' or TipoCobro = 'Tarjeta de Servicio'");
             //DataTable DtTarjeta = drp.CopyToDataTable();
             //if (DtTarjeta.Rows.Count >0)
             //{
@@ -50,7 +50,27 @@ public partial class GenerarPago : System.Web.UI.Page
             //}
 
 
-            gvPagoGenerado.DataSource = dsPagos.Tables["Cobro"];
+            DataTable cobrosTemp = dsPagos.Tables["Cobro"].Copy();
+
+            DataRow[] cobrosTempRows = cobrosTemp.Select();
+
+            int tipoPago;
+            foreach (DataRow fila in cobrosTemp.Rows)
+            {
+                tipoPago = Convert.ToInt32(fila["TipoCobro"]);
+
+                switch(tipoPago)
+                {
+                    case (Int16)(RegistroPago.TipoPago.tipoCheque):
+                        fila["NumCheque"] = fila["NumeroCuenta"];
+                        break;
+                    case (Int16)(RegistroPago.TipoPago.transferencia):
+                        fila["NumCheque"] = fila["NumeroCuenta"];
+                        break;
+                }
+            }            
+
+            gvPagoGenerado.DataSource = cobrosTemp;
             gvPagoGenerado.DataBind();
 
             //dtDetallePago = (DataTable)(Session["dtPagos"]);

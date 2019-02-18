@@ -469,15 +469,16 @@ public partial class RegistroPagos : System.Web.UI.Page
         string PagoEnUso;
 
 
-        if (Session["PagoEnUsoAnticipo"]!=null)
+        if (Session["PagoEnUsoAnticipo"] != null)
+        {
             PagoEnUso = Session["PagoEnUsoAnticipo"].ToString();
+        }
+
 
 
 
         try
         {
-
-
             referencia = gvPedidos.SelectedRow.Cells[2].Text.TrimEnd();
             
             pagoActivo = Session["idCobroConsec"].ToString();
@@ -601,11 +602,6 @@ public partial class RegistroPagos : System.Web.UI.Page
             }
             lblDescuento.Visible = false;
 
-
-          
-
-
-
         }
         catch (Exception ex)
         {
@@ -682,6 +678,15 @@ public partial class RegistroPagos : System.Web.UI.Page
             {
                 _ReglaTPVActiva = false;
 
+            }
+
+            if (formaPago.Equals("Anticipo"))
+            {               
+                if (_restante > 0)
+                {
+                    lblError.Text = "No se permite saldo a favor en una aplicación de anticipo";
+                    return;
+                }                
             }
 
             if (formaPago.Equals("TDC"))

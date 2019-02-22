@@ -18,6 +18,7 @@ namespace SigametLiquidacion
     public double dbIVA = 0.15;
     private DataTable dtPedidos = new DataTable();
     private DataTable dtBancos = new DataTable();
+    private DataTable dtBancosAfiliacion = new DataTable();
     private DataTable dtCliente = new DataTable();
     private DataTable dtUsuarios = new DataTable();
     private DataTable dtCelulas = new DataTable();
@@ -46,14 +47,21 @@ namespace SigametLiquidacion
     }
 
 
-        public DataTable ListaBancos()
+    public DataTable ListaBancos()
     {
       this._datos.CargaBancos();
       this.dtBancos = this._datos.Bancos;
       return this.dtBancos;
     }
 
-   public DataTable ListaCtasBanco(int EmpresaContable)
+        public DataTable ListaBancosAfiliacion()
+        {
+            this._datos.CargaBancosAfiliacion();
+            this.dtBancosAfiliacion = this._datos.BancosAfiliacion;
+            return this.dtBancosAfiliacion;
+        }
+
+        public DataTable ListaCtasBanco(int EmpresaContable)
    {
       this._datos.CargaCuentaBanco(EmpresaContable);
       this.dtCtasBanco = this._datos.CuentasBanco;

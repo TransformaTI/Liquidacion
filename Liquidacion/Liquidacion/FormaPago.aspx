@@ -1,11 +1,13 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="FormaPago.aspx.cs" Inherits="FormaPago" Title="Captura de formas de pago" Theme="Theme1" UICulture="es" Culture="es-MX" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master"  EnableEventValidation="false" AutoEventWireup="true" CodeFile="FormaPago.aspx.cs" Inherits="FormaPago" Title="Captura de formas de pago" Theme="Theme1" UICulture="es" Culture="es-MX" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ccR" %>
 
 <%@ Register Src="~/ControlesUsuario/wucConsultaCargoTarjetaCliente.ascx" TagPrefix="uc1" TagName="wucConsultaCargoTarjetaCliente" %>
 <%@ Register Src="~/ControlesUsuario/wucDetalleFormaPago.ascx" TagPrefix="ucDetallePago" TagName="wucDetalleFormaPago" %>
 
+
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainPlaceHolder" runat="server">
+
     <%--  --%>
     <script type="text/javascript">
     function cierraCheque()
@@ -85,6 +87,8 @@
                 var respuesta = confirm(smMensajeCargo);
                 var bandera = document.getElementById('ctl00_MainPlaceHolder_hfCargoTarjetaEncontrado');
                 bandera.value = respuesta;
+
+              
                 if (respuesta == false)
                 {
                     document.getElementById('ctl00_MainPlaceHolder_txtFechaTarjeta').value = '';
@@ -108,14 +112,15 @@
                     document.getElementById('ctl00_MainPlaceHolder_chkLocal').disabled = false;
                     document.getElementById('ctl00_MainPlaceHolder_ddlTAfiliacion').selectedIndex = "0";
                     document.getElementById('ctl00_MainPlaceHolder_ddlTAfiliacion').disabled = false;
-                  
+<%--                    <%Session["BancoTarjetaSeleccionado"] = "";%>
+                    <%Session["NombreBancoTarjetaSeleccionado"] = "";%>
+                    <%Session["AfiliacionSeleccionada"] = "";%>--%>
 
-
-                    
+                 
                 }
                 
                 if (respuesta == true) {
-
+                
                     ShowModalPopup();
                 }
 
@@ -129,6 +134,8 @@
 
             if ( HiddenInputPCT== 'No' && NumCte != '' && HiddenInput!='ConsultaCteAnticipo' && (HiddenTDCDupliado=='' || HiddenTDCDupliado=='No') && HiddenPagosOtraRuta=='' && NomCteTarjeta!='' && HiddenInput == 'ConsultaTPV') {
                 alert('No se encontraron pagos de TPV para el cliente, por favor verifique con el área de tarjetas de crédito');
+                document.getElementById('ctl00_MainPlaceHolder_ddBancoTarjeta').selectedIndex = "0";
+                document.getElementById('ctl00_MainPlaceHolder_ddBancoTarjeta').disabled = false;
                 segmento = 'tarjeta';  
 
             }
@@ -347,6 +354,8 @@
 
     </script>
     
+   
+
     <script type="text/javascript">
         function confirmar(button) {
 
@@ -560,6 +569,7 @@
 
     <script src="Scripts/jsUpdateProgress.js" type="text/javascript"></script>
     <script src="Scripts/MiscFunctions.js" type="text/javascript"></script>
+
 
     <div style="text-align: center; vertical-align: top;">
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="True">
@@ -891,6 +901,25 @@
                                                             </ccR:ValidatorCalloutExtender>
                                                         </td>
                                                     </tr>
+                                                    <tr>
+                                                        <td class="style1">
+                                                            <asp:Label ID="lblTCBanco" runat="server" CssClass="labeltipopagoforma"
+                                                                Text="Banco:"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:DropDownList ID="ddBancoTarjeta" runat="server" CssClass="textboxcaptura"
+                                                                Width="200px" readonly="true" enabled="false">
+                                                            </asp:DropDownList>
+                                                            <asp:RequiredFieldValidator ID="rfvBancoTarjeta" runat="server"
+                                                                ControlToValidate="ddBancoTarjeta" Display="None"
+                                                                ErrorMessage="Seleccione el Banco"
+                                                                ValidationGroup="Tarjeta" InitialValue="0"></asp:RequiredFieldValidator>
+                                                            <ccR:ValidatorCalloutExtender ID="vceBancoTarjeta" runat="server"
+                                                                TargetControlID="rfvBancoTarjeta">
+                                                            </ccR:ValidatorCalloutExtender>
+                                                        </td>
+
+                                                    </tr>
                                                     <%-- Afiliación --%>
                                                     <tr>
                                                         <td class="style1">
@@ -899,7 +928,7 @@
                                                         </td>
                                                         <td>
                                                             <asp:DropDownList ID="ddlTAfiliacion" runat="server" CssClass="textboxcaptura"
-                                                                Width="200px" Enabled="false">
+                                                                Width="200px" readonly="true" disabled="true">
                                                             </asp:DropDownList>
                                                             <asp:RequiredFieldValidator ID="rfvTAfiliacion" runat="server"
                                                                 ControlToValidate="ddlTAfiliacion" Display="None"
@@ -989,25 +1018,7 @@
                                                             <ccR:FilteredTextBoxExtender ID="ftbNumTarjeta" runat="server" TargetControlID="txtNumTarjeta" FilterType="Numbers"></ccR:FilteredTextBoxExtender>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td class="style1">
-                                                            <asp:Label ID="lblTCBanco" runat="server" CssClass="labeltipopagoforma"
-                                                                Text="Banco:"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:DropDownList ID="ddBancoTarjeta" runat="server" CssClass="textboxcaptura"
-                                                                Width="200px" readonly="true" enabled="false">
-                                                            </asp:DropDownList>
-                                                            <asp:RequiredFieldValidator ID="rfvBancoTarjeta" runat="server"
-                                                                ControlToValidate="ddBancoTarjeta" Display="None"
-                                                                ErrorMessage="Seleccione el Banco"
-                                                                ValidationGroup="Tarjeta" InitialValue="0"></asp:RequiredFieldValidator>
-                                                            <ccR:ValidatorCalloutExtender ID="vceBancoTarjeta" runat="server"
-                                                                TargetControlID="rfvBancoTarjeta">
-                                                            </ccR:ValidatorCalloutExtender>
-                                                        </td>
-
-                                                    </tr>
+                                                    
                                                     <tr>
                                                         <td class="style1">
                                                             <asp:Label ID="lblBancoOrigen" runat="server" CssClass="labeltipopagoforma"
@@ -1080,6 +1091,26 @@
                                                         <td></td>
                                                     </tr>
                                                 </table>
+                                                <ajaxToolkit:CascadingDropDown
+                                                    ID="ccdBancos"
+                                                    runat="server"
+                                                    ServicePath="ServiceCS.asmx"
+                                                    ServiceMethod="GetBancoAfiliaciones"
+                                                    TargetControlID="ddBancoTarjeta"                                                   
+                                                    
+                                                    Category="Banco"/>
+ 
+                                                <ajaxToolkit:CascadingDropDown
+                                                    ID="ccdAfiliaciones"
+                                                    runat="server"
+                                                   ServicePath="ServiceCS.asmx"
+                                                    ServiceMethod="GetAfiliaciones"
+                                                    TargetControlID="ddlTAfiliacion"
+                                                    ParentControlID="ddBancoTarjeta"
+                                                    
+                                                    Category="Afiliacion"
+                                                    EmptyText="- Seleccione -"/>
+                                                 
                                             </div>
                                         </td>
                                     </tr>

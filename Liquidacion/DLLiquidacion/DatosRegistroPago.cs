@@ -15,6 +15,7 @@ namespace SigametLiquidacion
    #region variables
     private DataTable dtPedidos;
     private DataTable dtBancos;
+    private DataTable dtBancosAfiliacion;
     private DataTable dtCliente;
     private DataTable dtPromociones;
     private DataTable dtAutoTanque;
@@ -42,6 +43,14 @@ namespace SigametLiquidacion
             get
             {
                 return this.dtBancos;
+            }
+        }
+
+        public DataTable BancosAfiliacion
+        {
+            get
+            {
+                return this.dtBancosAfiliacion;
             }
         }
 
@@ -157,6 +166,12 @@ namespace SigametLiquidacion
         {
             this.dtBancos = new DataTable();
             this._dataAccess.LoadData(this.dtBancos, "spLIQ2ConsultaBancos", CommandType.StoredProcedure, (SqlParameter[])null, true);
+        }
+
+        public void CargaBancosAfiliacion()
+        {
+            this.dtBancosAfiliacion = new DataTable();
+            this._dataAccess.LoadData(this.dtBancosAfiliacion, "spLIQ2ConsultaBancosDestino", CommandType.StoredProcedure, (SqlParameter[])null, true);
         }
 
         public int ObtieneEmpresaContable(int Corporativo)

@@ -14,12 +14,16 @@ using System.IO;
 using SigametLiquidacion;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
+using System.Web.Services;
+using AjaxControlToolkit;
+using System.Collections.Specialized;
 
 public partial class FormaPago : System.Web.UI.Page
 {
     #region variables
     DataTable dtPedidos = new DataTable();
     RegistroPago rp = new RegistroPago();
+    static RegistroPago rp2 = new RegistroPago();
     DataTable dtCobro = new DataTable();
     Decimal importeOperacion;
     DataSet ds = new DataSet();
@@ -38,7 +42,37 @@ public partial class FormaPago : System.Web.UI.Page
     DataTable dtDatosControlUsuario = new DataTable();
     bool HidePagos = false;
 
+    public class ItemAfiliaciones
+    {
+        int _afiliacion;
+        string _numeroAfiliacion;
 
+        public int Afiliacion
+        {
+            get
+            {
+                return _afiliacion;
+            }
+
+            set
+            {
+                _afiliacion = value;
+            }
+        }
+
+        public string NumeroAfiliacion
+        {
+            get
+            {
+                return _numeroAfiliacion;
+            }
+
+            set
+            {
+                _numeroAfiliacion = value;
+            }
+        }
+    }
 
     string pagoActivo;
     #endregion
@@ -68,13 +102,17 @@ public partial class FormaPago : System.Web.UI.Page
         return resultado;
     }
 
+
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
             LlenaDropDowns();
-            
+
         }
+
+
 
         #region validaciones postback 
         if (Page.IsPostBack)
@@ -92,6 +130,11 @@ public partial class FormaPago : System.Web.UI.Page
                 if (txtClienteTarjeta.Text != string.Empty)
                 {
                     LimpiarCampos("tarjeta");
+
+                    Session["BancoTarjetaSeleccionado"] = "";
+                    Session["NombreBancoTarjetaSeleccionado"] ="";
+                    Session["AfiliacionSeleccionada"] = "";
+
                     ConsultarCargoTarjeta(int.Parse(txtClienteTarjeta.Text), "tarjeta", int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
 
                     txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
@@ -99,9 +142,9 @@ public partial class FormaPago : System.Web.UI.Page
                     txtFechaTarjeta.ReadOnly = txtFechaTarjeta.Text == "" ? false : true;
                     txtNumTarjeta.ReadOnly = txtNumTarjeta.Text == "" ? false : true;
                     txtImporteTarjeta.ReadOnly = txtImporteTarjeta.Text == "" ? false : true;
-                    ddBancoTarjeta.Enabled = ddBancoTarjeta.SelectedIndex == 0 ? true : false;
+                    ddBancoTarjeta.Enabled = txtNumTarjeta.Text == "" ? true : false;
                     ddlBancoOrigen.Enabled = ddlBancoOrigen.SelectedIndex == 0 ? true : false;
-                    ddlTAfiliacion.Enabled = ddlTAfiliacion.SelectedIndex == 0 ? true : false;
+                    ddlTAfiliacion.Enabled = txtNumTarjeta.Text == "" ? true : false;
                     ddTipTarjeta.Enabled = ddTipTarjeta.SelectedIndex == 0 ? true : false;
                     txtObservacionesTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
                     imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
@@ -261,6 +304,8 @@ public partial class FormaPago : System.Web.UI.Page
         txtNumTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + ddBancoTarjeta.UniqueID + (char)39 + ")");
 
         ddBancoTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + ddlBancoOrigen.UniqueID + (char)39 + ")");
+
+
         ddlBancoOrigen.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtImporteTarjeta.UniqueID + (char)39 + ")");
 
         txtImporteTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtObservacionesTarjeta.UniqueID + (char)39 + ")");
@@ -354,7 +399,6 @@ public partial class FormaPago : System.Web.UI.Page
             Session["FechaAsignacion"].ToString();
         }
 
-        
 
     }
 
@@ -464,9 +508,11 @@ public partial class FormaPago : System.Web.UI.Page
             throw ex;
         }
     }
+   
     private void LlenaDropDowns()
     {
         DataTable dtBancos = new DataTable();
+        DataTable dtBancosAfiliacion = new DataTable();
         DataTable dtPromocion = new DataTable();
         DataTable dtTipoTarjeta = new DataTable();
         //Dictionary<string, string> TipoTarjeta = new Dictionary<string, string>();
@@ -474,17 +520,20 @@ public partial class FormaPago : System.Web.UI.Page
         try
         {
             dtBancos = rp.ListaBancos();
+            dtBancosAfiliacion = rp.ListaBancosAfiliacion();
+
+
             dtAfiliaciones = rp.Afiliaciones(int.Parse(Session["Ruta"].ToString()));
             dtProveedores = rp.Proveedores();
             dtTipoVale = rp.TipoVale();
             dtTipoTarjeta=rp.TipoTarjeta();
 
-            ddBancoTarjeta.DataSource = dtBancos;
-            ddBancoTarjeta.DataTextField = "Nombre";
-            ddBancoTarjeta.DataValueField = "Banco";
-            ddBancoTarjeta.DataBind();
-            ddBancoTarjeta.Items.Insert(0, new ListItem("- Seleccione -", "0"));
-            ddBancoTarjeta.SelectedIndex = 0;
+            //ddBancoTarjeta.DataSource = dtBancosAfiliacion;
+            //ddBancoTarjeta.DataTextField = "Nombre";
+            //ddBancoTarjeta.DataValueField = "Banco";
+            //ddBancoTarjeta.DataBind();
+            //ddBancoTarjeta.Items.Insert(0, new ListItem("- Seleccione -", "0"));
+            //ddBancoTarjeta.SelectedIndex = 0;
 
             ddChequeBanco.DataSource = dtBancos;
             ddChequeBanco.DataTextField = "Nombre";
@@ -530,25 +579,26 @@ public partial class FormaPago : System.Web.UI.Page
             ddTipTarjeta.DataValueField = "ID";
             ddTipTarjeta.DataBind();
 
-            ddlTAfiliacion.DataSource = dtAfiliaciones;
-            ddlTAfiliacion.DataTextField = "NumeroAfiliacion";
-            ddlTAfiliacion.DataValueField = "Afiliacion";
-            ddlTAfiliacion.DataBind();
-            ddlTAfiliacion.Items.Insert(0, new ListItem("- Seleccione -", "0"));
-            ddlTAfiliacion.SelectedIndex = 0;
+            //ddlTAfiliacion.DataSource = dtAfiliaciones;
+            //ddlTAfiliacion.DataTextField = "NumeroAfiliacion";
+            //ddlTAfiliacion.DataValueField = "Afiliacion";
+            //ddlTAfiliacion.DataBind();
+            //ddlTAfiliacion.Items.Insert(0, new ListItem("- Seleccione -", "0"));
+            //ddlTAfiliacion.SelectedIndex = 0;
 
-            ddAfiliacion.DataSource = dtAfiliaciones;
-            ddAfiliacion.DataTextField = "NumeroAfiliacion";
-            ddAfiliacion.DataValueField = "Afiliacion";
-            ddAfiliacion.DataBind();
-            ddAfiliacion.Items.Insert(0, new ListItem("- Seleccione -", "0"));
-            ddAfiliacion.SelectedIndex = 0;
+   //         string hola = obtenAfiliaciones(ddBancoTarjeta.SelectedValue);
+
+            //ddAfiliacion.DataSource = obtenAfiliaciones(ddBancoTarjeta.SelectedValue);
+            //ddAfiliacion.DataTextField = "NumeroAfiliacion";
+            //ddAfiliacion.DataValueField = "Afiliacion";
+            //ddAfiliacion.DataBind();          
+            //ddAfiliacion.SelectedIndex = 0;
 
             ddlProveedor.DataSource = dtProveedores;
             ddlProveedor.DataTextField = "NombreProveedor";
             ddlProveedor.DataValueField = "ValeProveedor";
             ddlProveedor.DataBind();
-            ddlProveedor.Items.Insert(0, new ListItem("- Seleccione -", "0"));
+ //           ddlProveedor.Items.Insert(0, new ListItem("- Seleccione -", "0"));
             ddlProveedor.SelectedIndex = 0;
 
             ddlTipoVale.DataSource = dtTipoVale;
@@ -1455,35 +1505,46 @@ else
 
             txtNoAutorizacionTarjeta.Text = dtPagosConTarjetaSelec[0]["Autorizacion"].ToString();
             txtNumTarjeta.Text = dtPagosConTarjetaSelec[0]["NumeroTarjeta"].ToString();
-            ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString()));
-            ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString()));
+
+
+
+            ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByValue(dtPagosConTarjetaSelec[0]["Banco"].ToString()));
+            ddlBancoOrigen.SelectedIndex = ddlBancoOrigen.Items.IndexOf(ddlBancoOrigen.Items.FindByValue(dtPagosConTarjetaSelec[0]["Banco"].ToString()));
+
+
+            Session["BancoTarjetaSeleccionado"] = dtPagosConTarjetaSelec[0]["Banco"].ToString();
+            Session["NombreBancoTarjetaSeleccionado"] = dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString();
+            Session["AfiliacionSeleccionada"] = dtPagosConTarjetaSelec[0]["Afiliacion"].ToString();
+
+
+
+
+            //ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString()));
+            //ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString()));
             txtImporteTarjeta.Text = dtPagosConTarjetaSelec[0]["Importe"].ToString().ToString().Replace("$", "");
             txtObservacionesTarjeta.Text = dtPagosConTarjetaSelec[0]["Observacion"].ToString();
             txtNoAutorizacionTarjeta.ReadOnly = true;
 
-            ddlTAfiliacion.SelectedIndex = ddlTAfiliacion.Items.IndexOf(ddlTAfiliacion.Items.FindByValue(dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString()));
-            
+            //ddlTAfiliacion.SelectedIndex = ddlTAfiliacion.Items.IndexOf(ddlTAfiliacion.Items.FindByValue(dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString()));
+
             ddTipTarjeta.SelectedIndex = ddTipTarjeta.Items.IndexOf(ddTipTarjeta.Items.FindByValue(dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()));// int.Parse(dtPagosConTarjetaSelec[0]["TipoTarjeta"].ToString());
             chkLocal.Checked = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "True" ? true : false;
             txtFechaTarjeta.Text = DateTime.Parse(dtPagosConTarjetaSelec[0]["FAlta"].ToString()).ToShortDateString();
 
-            
+
 
             txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
             txtFechaTarjeta.ReadOnly = txtFechaTarjeta.Text == "" ? false : true;
             txtNumTarjeta.ReadOnly = txtNumTarjeta.Text == "" ? false : true;
             txtImporteTarjeta.ReadOnly = txtImporteTarjeta.Text == "" ? false : true;
-            ddBancoTarjeta.Enabled = ddBancoTarjeta.SelectedIndex == 0 ? true : false;
+            ddBancoTarjeta.Enabled = txtNumTarjeta.Text == "" ? true : false;
             ddlBancoOrigen.Enabled = ddlBancoOrigen.SelectedIndex == 0 ? true : false;
-            ddlTAfiliacion.Enabled = ddlTAfiliacion.SelectedIndex == 0 ? true : false;
+            ddlTAfiliacion.Enabled = txtNumTarjeta.Text == "" ? true : false;
             ddTipTarjeta.Enabled = ddTipTarjeta.SelectedIndex == 0 ? true : false;
             chkLocal.Enabled = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "" ? true : false;
             txtObservacionesTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
             imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
-
-     
-
-
+            
         }
 
 
@@ -1645,14 +1706,16 @@ else
 
         //ddTipTarjeta.SelectedIndex = dtPagosPrimerRegistro[0]["TipoTarjeta"].ToString() != "" ? int.Parse(dtPagosPrimerRegistro[0]["TipoTarjeta"].ToString()) : 0;
 
-       // chkLocal.Checked = dtPagosPrimerRegistro[0]["Local"].ToString() == "True" ? true : false;
+        // chkLocal.Checked = dtPagosPrimerRegistro[0]["Local"].ToString() == "True" ? true : false;
+        ddBancoTarjeta.SelectedIndex = 0;
+        ddlTAfiliacion.SelectedIndex = 0;
         txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
         txtFechaTarjeta.ReadOnly = txtFechaTarjeta.Text == "" ? false : true;
         txtNumTarjeta.ReadOnly = txtNumTarjeta.Text == "" ? false : true;
         txtImporteTarjeta.ReadOnly = txtImporteTarjeta.Text == "" ? false : true;
-        ddBancoTarjeta.Enabled = ddBancoTarjeta.SelectedIndex == 0 ? true : false;
+        ddBancoTarjeta.Enabled = txtNumTarjeta.Text == "" ? true : false;
         ddlBancoOrigen.Enabled = ddlBancoOrigen.SelectedIndex == 0 ? true : false;
-        ddlTAfiliacion.Enabled = ddlTAfiliacion.SelectedIndex == 0 ? true : false;
+        ddlTAfiliacion.Enabled = txtNumTarjeta.Text == "" ? true : false;
         ddTipTarjeta.Enabled = ddTipTarjeta.SelectedIndex == 0 ? true : false;
         chkLocal.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
         txtObservacionesTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
@@ -1997,4 +2060,115 @@ else
     {
         HidePagos = true;
     }
+
+    [WebMethod]
+    public CascadingDropDownNameValue[] GetBancoAfiliaciones(
+        string knownCategoryValues)
+    {
+
+        
+        DataTable tbl = rp2.ListaBancosAfiliacion();
+
+       
+        List<CascadingDropDownNameValue> values =
+            new List<CascadingDropDownNameValue>();
+        foreach (DataRow dr in tbl.Rows)
+        {
+            string Nombre = (string)dr["Nombre"];
+            int Banco = (int)dr["Banco"];
+            values.Add(new CascadingDropDownNameValue(
+              Nombre, Banco.ToString()));
+        }
+        return values.ToArray();
+    }
+
+    [WebMethod]
+    public CascadingDropDownNameValue[] GetAfiliaciones(
+        string knownCategoryValues)
+    {
+
+
+        StringDictionary kv =
+       CascadingDropDown.ParseKnownCategoryValuesString(knownCategoryValues);
+        int iBanco;
+        if (!kv.ContainsKey("Banco") || !Int32.TryParse(kv["Banco"], out iBanco))
+        {
+            return null;
+        }
+
+        DataTable afiliacionesTotal;
+        DataTable tbl = rp2.Afiliaciones(0).Clone();
+
+
+//        tbl.Rows.Add(0, " - Seleccione - ", 0);
+
+
+        try
+        {
+            afiliacionesTotal = rp2.Afiliaciones(0);
+
+            DataRow[] dtAfiliacionesTemp = afiliacionesTotal.Select("Banco =" + iBanco);
+
+            foreach (DataRow fila in dtAfiliacionesTemp)
+            {
+                tbl.ImportRow(fila);
+            }
+
+        }
+        catch (Exception ex)
+        {
+
+        }
+        
+        List<CascadingDropDownNameValue> values =
+            new List<CascadingDropDownNameValue>();
+        foreach (DataRow dr in tbl.Rows)
+        {
+            string NumeroAfiliacion = (string)dr["NumeroAfiliacion"];
+            int Afiliacion = (int)dr["Afiliacion"];
+            values.Add(new CascadingDropDownNameValue(
+              NumeroAfiliacion, Afiliacion.ToString()));
+        }
+        return values.ToArray();
+    }
+
+    [WebMethod]
+    public static List<ItemAfiliaciones> obtenAfiliaciones(string banco)
+    {
+        DataTable afiliacionesTemp = rp2.Afiliaciones(0).Clone();
+        DataTable afiliacionesTotal;
+        afiliacionesTemp.Rows.Add(0, " - Seleccione - ",0);
+
+
+        try
+        {
+            afiliacionesTotal = rp2.Afiliaciones(0);
+
+            DataRow[] dtAfiliacionesTemp = afiliacionesTotal.Select("Banco =" + banco);            
+
+            foreach (DataRow fila in dtAfiliacionesTemp)
+            {
+                afiliacionesTemp.ImportRow(fila);
+            }
+
+        }
+        catch (Exception ex)
+        {
+
+        }
+        List<ItemAfiliaciones> lista = new List<ItemAfiliaciones>();
+        ItemAfiliaciones afiliacion;
+
+        foreach (DataRow fila in afiliacionesTemp.Rows)
+        {
+            afiliacion = new ItemAfiliaciones();
+            afiliacion.Afiliacion = Convert.ToInt32(fila["afiliacion"]);
+            afiliacion.NumeroAfiliacion = Convert.ToString(fila["numeroAfiliacion"]);
+            lista.Add(afiliacion);
+        }
+        
+
+        return lista;
+    }
+    
 }   

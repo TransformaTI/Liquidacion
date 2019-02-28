@@ -430,7 +430,21 @@
             if (document.getElementById('<%=HiddenInputPCT.ClientID%>').value == "No" ||   document.getElementById('<%=HiddenInputPCT.ClientID%>').value== "")
             {
 
-               if (document.getElementById('<%= ddlTAfiliacion.ClientID %>').selectedIndex == "0")
+                var ddlAfiliacion = document.getElementById('<%= ddlTAfiliacion.ClientID %>');
+                var afiliacionSeleccionada = ddlAfiliacion.options[ddlAfiliacion.selectedIndex].value;
+                alert(afiliacionSeleccionada);
+
+                var ddlBanco = document.getElementById('<%= ddBancoTarjeta.ClientID %>');
+                var bancoSeleccionado = ddlBanco.options[ddlBanco.selectedIndex].value;
+                alert(bancoSeleccionado);
+
+                if (bancoSeleccionado == "0")
+                {
+                    alert('Seleccione un banco de la tarjeta');
+                    return false;
+                }
+
+               if (afiliacionSeleccionada == "0")
                 {
                     alert('Seleccione una afiliación');
                     return false;
@@ -451,11 +465,8 @@
                     alert('Los números de autorización no coinciden');
                     return false;
                 }
-                if (document.getElementById('<%=ddBancoTarjeta.ClientID%>').selectedIndex == "0")
-                {
-                    alert('Seleccione un banco de la tarjeta');
-                    return false;
-                }
+
+               
                 if (document.getElementById('<%=ddlBancoOrigen.ClientID%>').selectedIndex == "0")
                 {
                     alert('Seleccione un banco origen');
@@ -928,7 +939,7 @@
                                                         </td>
                                                         <td>
                                                             <asp:DropDownList ID="ddlTAfiliacion" runat="server" CssClass="textboxcaptura"
-                                                                Width="200px" readonly="true" disabled="true">
+                                                                Width="200px" readonly="true"  enabled="false">
                                                             </asp:DropDownList>
                                                             <asp:RequiredFieldValidator ID="rfvTAfiliacion" runat="server"
                                                                 ControlToValidate="ddlTAfiliacion" Display="None"

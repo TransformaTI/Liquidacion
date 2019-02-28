@@ -432,11 +432,11 @@
 
                 var ddlAfiliacion = document.getElementById('<%= ddlTAfiliacion.ClientID %>');
                 var afiliacionSeleccionada = ddlAfiliacion.options[ddlAfiliacion.selectedIndex].value;
-                alert(afiliacionSeleccionada);
+     
 
                 var ddlBanco = document.getElementById('<%= ddBancoTarjeta.ClientID %>');
                 var bancoSeleccionado = ddlBanco.options[ddlBanco.selectedIndex].value;
-                alert(bancoSeleccionado);
+               
 
                 if (bancoSeleccionado == "0")
                 {

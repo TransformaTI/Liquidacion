@@ -11,6 +11,30 @@
     <%--  --%>
     <script type="text/javascript">
     
+          function SetContextKey() {
+        $find('<%=AutoCompleteExtender1.ClientID%>').set_contextKey($get("<%=ddBancoTarjeta.ClientID %>").value+'-'+$get("<%=TxtAfiliacion.ClientID %>").value);
+    }
+
+      function acePopulated(sender, e) {
+
+            var behavior = $find('AutoCompleteEx');
+
+            var target = behavior.get_completionList();
+            if (behavior._currentPrefix != null) {
+                var prefix = behavior._currentPrefix.toLowerCase();
+                var i;
+                for (i = 0; i < target.childNodes.length; i++) {
+                    var sValue = target.childNodes[i].innerHTML.toLowerCase();
+                    if (sValue.indexOf(prefix) != -1) {
+                        var fstr = target.childNodes[i].innerHTML.substring(0, sValue.indexOf(prefix));
+                        var pstr = target.childNodes[i].innerHTML.substring(fstr.length, fstr.length + prefix.length);
+                        var estr = target.childNodes[i].innerHTML.substring(fstr.length + prefix.length, target.childNodes[i].innerHTML.length);
+                        target.childNodes[i].innerHTML = "<div class='autocomplete-item'>" + fstr + '<B>' + pstr + '</B>' + estr + "</div>";
+                    }
+                }
+            }
+
+        }
 
 
 
@@ -73,8 +97,7 @@
         //Validaciones  On load
         document.addEventListener("DOMContentLoaded", function () { // mcc 2018 05 10
 
-  
-
+ 
 
             if (RegistroCobro == 'Si')
             {
@@ -946,12 +969,18 @@
                                                                 Text="Afiliación:"></asp:Label>
                                                         </td>
                                                         <td>
-                                                             <asp:TextBox ID="TxtAfiliacion" runat="server" CssClass="textboxcaptura" AutoCompleteType="Search"></asp:TextBox>
-                                                            <ccR:autocompleteextender servicemethod="SearchAfiliaciones"  
+                                                             <asp:TextBox ID="TxtAfiliacion" runat="server" CssClass="textboxcaptura" onkeyup = "SetContextKey()" ></asp:TextBox>
+                                                            <ccR:autocompleteextender  servicemethod="SearchAfiliaciones"  
                                                                 minimumprefixlength="1"
-                                                                completioninterval="100" enablecaching="false" completionsetcount="10"
-                                                                targetcontrolid="TxtAfiliacion"
-                                                                id="AutoCompleteExtender1" runat="server" firstrowselected="false">
+                                                                completioninterval="100" enablecaching="false" 
+                                                                completionsetcount="100"
+                                                                targetcontrolid="TxtAfiliacion" 
+                                                                id="AutoCompleteExtender1" runat="server" firstrowselected="false"                                                     
+                                                                CompletionListCssClass="completionList"
+                                                                CompletionListItemCssClass="listItem"
+                                                                CompletionListHighlightedItemCssClass="itemHighlighted"
+
+                                                                >
                                                   </ccR:autocompleteextender>
             
                                                             

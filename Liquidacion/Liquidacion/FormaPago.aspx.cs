@@ -41,6 +41,7 @@ public partial class FormaPago : System.Web.UI.Page
     int Pagos = 0;
     DataTable dtDatosControlUsuario = new DataTable();
     bool HidePagos = false;
+    string BancoSeleccionado = "0";
 
     public class ItemAfiliaciones
     {
@@ -109,6 +110,7 @@ public partial class FormaPago : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
             LlenaDropDowns();
+       
 
         }
 
@@ -122,6 +124,8 @@ public partial class FormaPago : System.Web.UI.Page
             HiddenInputPCT.Value = "No";
             HiddenTDCDupliado.Value = "No";
             HiddenInput.Value = string.Empty;
+            
+            BancoSeleccionado = ddBancoTarjeta.SelectedValue.ToString();
 
 
             if (Request.Form["__EVENTTARGET"] == "ConsultaTPV")
@@ -524,6 +528,10 @@ public partial class FormaPago : System.Web.UI.Page
 
 
             dtAfiliaciones = rp.Afiliaciones(int.Parse(Session["Ruta"].ToString()));
+
+  
+
+
             dtProveedores = rp.Proveedores();
             dtTipoVale = rp.TipoVale();
             dtTipoTarjeta=rp.TipoTarjeta();
@@ -1934,6 +1942,30 @@ else
         return DataTableToJSONWithJavaScriptSerializer(dt);
 
 
+    }
+
+
+
+
+    [System.Web.Script.Services.ScriptMethod()]
+    [System.Web.Services.WebMethod]
+    public static List<string> SearchAfiliaciones(string Banco)
+    {
+        List<string> ListaAfiliaciones = new List<string>();
+        DataTable dtAfiliaciones;
+
+
+
+        dtAfiliaciones = rp2.Afiliaciones(0);
+
+
+        foreach (DataRow afiliacion in dtAfiliaciones.Rows)
+        {
+            if (afiliacion["banco"].ToString()== Banco)
+            ListaAfiliaciones.Add(afiliacion["numeroafiliacion"].ToString());
+        }
+
+        return ListaAfiliaciones;
     }
 
 

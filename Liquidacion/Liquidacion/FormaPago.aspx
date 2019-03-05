@@ -10,6 +10,10 @@
 
     <%--  --%>
     <script type="text/javascript">
+    
+
+
+
     function cierraCheque()
     { 
         document.getElementById('<%= txtNumCuenta.ClientID %>').focus();
@@ -63,10 +67,14 @@
         var NomCteTarjeta = '<%= txtNombreClienteTarjeta.Text.Trim() %>';
         var PostBack_trasferencia = '<%=wucDetalleFormaPago1.PostBack != null ? wucDetalleFormaPago1.PostBack:"" %>';
 
+  
         
 
         //Validaciones  On load
         document.addEventListener("DOMContentLoaded", function () { // mcc 2018 05 10
+
+  
+
 
             if (RegistroCobro == 'Si')
             {
@@ -919,7 +927,7 @@
                                                         </td>
                                                         <td>
                                                             <asp:DropDownList ID="ddBancoTarjeta" runat="server" CssClass="textboxcaptura"
-                                                                Width="200px" readonly="true" enabled="false">
+                                                                Width="200px" readonly="true" enabled="false" >
                                                             </asp:DropDownList>
                                                             <asp:RequiredFieldValidator ID="rfvBancoTarjeta" runat="server"
                                                                 ControlToValidate="ddBancoTarjeta" Display="None"
@@ -938,13 +946,24 @@
                                                                 Text="Afiliación:"></asp:Label>
                                                         </td>
                                                         <td>
+                                                             <asp:TextBox ID="TxtAfiliacion" runat="server" CssClass="textboxcaptura" AutoCompleteType="Search"></asp:TextBox>
+                                                            <ccR:autocompleteextender servicemethod="SearchAfiliaciones"  
+                                                                minimumprefixlength="1"
+                                                                completioninterval="100" enablecaching="false" completionsetcount="10"
+                                                                targetcontrolid="TxtAfiliacion"
+                                                                id="AutoCompleteExtender1" runat="server" firstrowselected="false">
+                                                  </ccR:autocompleteextender>
+            
+                                                            
                                                             <asp:DropDownList ID="ddlTAfiliacion" runat="server" CssClass="textboxcaptura"
-                                                                Width="200px" readonly="true"  enabled="false">
+                                                                Width="200px" readonly="true" Visible="false"  enabled="false" >
                                                             </asp:DropDownList>
                                                             <asp:RequiredFieldValidator ID="rfvTAfiliacion" runat="server"
                                                                 ControlToValidate="ddlTAfiliacion" Display="None"
                                                                 ErrorMessage="Seleccione la afiliación"
-                                                                ValidationGroup="Tarjeta" InitialValue="0"></asp:RequiredFieldValidator>
+                                                                ValidationGroup="Tarjeta" InitialValue="0"
+                                                               
+                                                                ></asp:RequiredFieldValidator>
                                                             <ccR:ValidatorCalloutExtender ID="vceTAfiliacion" runat="server"
                                                                 TargetControlID="rfvTAfiliacion">
                                                             </ccR:ValidatorCalloutExtender>

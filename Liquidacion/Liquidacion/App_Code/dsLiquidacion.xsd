@@ -59,6 +59,8 @@
               <xs:element name="NombreTipoCobro" msprop:Generator_ColumnVarNameInTable="columnNombreTipoCobro" msprop:Generator_ColumnPropNameInRow="NombreTipoCobro" msprop:Generator_ColumnPropNameInTable="NombreTipoCobroColumn" msprop:Generator_UserColumnName="NombreTipoCobro" type="xs:string" minOccurs="0" />
               <xs:element name="ProveedorNombre" msprop:Generator_ColumnVarNameInTable="columnProveedorNombre" msprop:Generator_ColumnPropNameInRow="ProveedorNombre" msprop:Generator_ColumnPropNameInTable="ProveedorNombreColumn" msprop:Generator_UserColumnName="ProveedorNombre" type="xs:string" minOccurs="0" />
               <xs:element name="TipoValeDescripcion" msprop:Generator_ColumnVarNameInTable="columnTipoValeDescripcion" msprop:Generator_ColumnPropNameInRow="TipoValeDescripcion" msprop:Generator_ColumnPropNameInTable="TipoValeDescripcionColumn" msprop:Generator_UserColumnName="TipoValeDescripcion" type="xs:string" minOccurs="0" />
+              <xs:element name="AnnioCobroOrigen" msprop:Generator_ColumnVarNameInTable="columnAnnioCobroOrigen" msprop:Generator_ColumnPropNameInRow="AnnioCobroOrigen" msprop:Generator_ColumnPropNameInTable="AnnioCobroOrigenColumn" msprop:Generator_UserColumnName="AnnioCobroOrigen" type="xs:short" default="0" minOccurs="0" />
+              <xs:element name="CobroOrigen" msprop:Generator_ColumnVarNameInTable="columnCobroOrigen" msprop:Generator_ColumnPropNameInRow="CobroOrigen" msprop:Generator_ColumnPropNameInTable="CobroOrigenColumn" msprop:Generator_UserColumnName="CobroOrigen" type="xs:int" default="0" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -80,7 +82,7 @@
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="Cobro_CobroPedido" msdata:parent="Cobro" msdata:child="CobroPedido" msdata:parentkey="IdPago" msdata:childkey="IdPago" msprop:Generator_UserChildTable="CobroPedido" msprop:Generator_ChildPropName="GetCobroPedidoRows" msprop:Generator_UserRelationName="Cobro_CobroPedido" msprop:Generator_RelationVarName="relationCobro_CobroPedido" msprop:Generator_UserParentTable="Cobro" msprop:Generator_ParentPropName="CobroRow" />
+      <msdata:Relationship name="Cobro_CobroPedido" msdata:parent="Cobro" msdata:child="CobroPedido" msdata:parentkey="IdPago" msdata:childkey="IdPago" msprop:Generator_UserChildTable="CobroPedido" msprop:Generator_ChildPropName="GetCobroPedidoRows" msprop:Generator_UserRelationName="Cobro_CobroPedido" msprop:Generator_ParentPropName="CobroRow" msprop:Generator_RelationVarName="relationCobro_CobroPedido" msprop:Generator_UserParentTable="Cobro" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

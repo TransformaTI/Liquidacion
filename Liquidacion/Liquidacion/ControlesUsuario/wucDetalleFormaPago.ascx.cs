@@ -587,6 +587,8 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                 dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.anticipo);
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
+                dr["AnnioCobroOrigen"] = LstSaldos.SelectedValue.ToString().Split('/')[1];
+                dr["CobroOrigen"] = LstSaldos.SelectedValue.ToString().Split('/')[0];
 
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtAntMonto.Text); ;
 
@@ -641,6 +643,8 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                 dr["NombreTipoCobro"] = "ANTICIPO";
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
+                dr["AnnioCobroOrigen"] = LstSaldos.SelectedValue.ToString().Split('/')[1];
+                dr["CobroOrigen"] = LstSaldos.SelectedValue.ToString().Split('/')[0];
 
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtAntMonto.Text); ;
 

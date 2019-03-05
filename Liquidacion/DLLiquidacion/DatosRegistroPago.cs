@@ -712,6 +712,8 @@ namespace SigametLiquidacion
             string NumCheque = string.Empty;
             string CtaDestino = string.Empty;
             int indexAnticipado = 0;
+            Int16 AnnioCobroOrigen = 0;
+            int CobroOrigen = 0;
 
 
 
@@ -735,19 +737,19 @@ namespace SigametLiquidacion
                 {
                     if (dtPago.Columns.Contains("FechaCobro"))
                     {
-                        if  (dtPago.Rows[index1]["FechaCobro"].ToString()!=string.Empty)
-                            {
-                             Fcobro = dtPago.Rows[index1]["FechaCobro"].ToString();
-                            }
+                        if (dtPago.Rows[index1]["FechaCobro"].ToString() != string.Empty)
+                        {
+                            Fcobro = dtPago.Rows[index1]["FechaCobro"].ToString();
+                        }
                         else
                         {
-                            Fcobro =null;
+                            Fcobro = null;
                         }
 
                     }
                     else
                     {
-                        Fcobro= null;
+                        Fcobro = null;
                     }
 
 
@@ -788,11 +790,12 @@ namespace SigametLiquidacion
                     }
 
 
+                    AnnioCobroOrigen = Convert.ToInt16(dtPago.Rows[index1]["AnnioCobroOrigen"].ToString());
+                    CobroOrigen = Convert.ToInt32(dtPago.Rows[index1]["CobroOrigen"].ToString());
 
 
 
-
-                    SqlParameter[] sqlParameterArray = new SqlParameter[21]
+                    SqlParameter[] sqlParameterArray = new SqlParameter[23]
                     {
                         new SqlParameter("@NumeroCheque", (object)DBNull.Value),
                         new SqlParameter("@Total",(object) Convert.ToDecimal(dtPago.Rows[index1]["Total"])),
@@ -814,10 +817,9 @@ namespace SigametLiquidacion
                         new SqlParameter("@NumeroCuentaDestino", (object) dtPago.Rows[index1]["TipoValeDescripcion"].ToString()),
                         new SqlParameter("@Fcobro", (object)DBNull.Value),
                         new SqlParameter("@BancoOrigen", (object)DBNull.Value),
-                        new SqlParameter("@OrigenCobro", (object)"LW")
-
-
-
+                        new SqlParameter("@OrigenCobro", (object)"LW"),
+                        new SqlParameter("@AñoCobroOrigen", (object)DBNull.Value),
+                        new SqlParameter("@CobroOrigen", (object)DBNull.Value)
 
                 };
                     if (Fcobro!=null)
@@ -840,10 +842,18 @@ namespace SigametLiquidacion
                         sqlParameterArray[19].Value = (object)Convert.ToInt16(dtPago.Rows[index1]["BancoOrigen"].ToString());
                     }
 
+                    if (AnnioCobroOrigen!= 0)
+                    {
+                        sqlParameterArray[21].Value = AnnioCobroOrigen;
+                    }
+
+                    if (CobroOrigen != 0)
+                    {
+                        sqlParameterArray[22].Value = CobroOrigen;
+                    }
 
 
-
-
+                    
                     sqlParameterArray[14].Direction = ParameterDirection.Output;
                     sqlParameterArray[15] = new SqlParameter("@Cobro", SqlDbType.Int);
                     sqlParameterArray[15].Direction = ParameterDirection.Output;

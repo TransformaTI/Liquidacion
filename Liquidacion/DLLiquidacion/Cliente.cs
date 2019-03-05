@@ -44,9 +44,11 @@ namespace SigametLiquidacion
         private byte _modulo;
         private string _cadenaConexion;
         private string _TipoPago;
-        
-         
-        
+        Boolean _eleva = false;
+        bool _errorDeServidor;
+
+
+
         private DataTable _dtSaldosCliente;
 
         public bool Encontrado
@@ -539,16 +541,19 @@ namespace SigametLiquidacion
 
         private void asignacionDatosClienteGateway()
         {
-            Boolean _eleva = false;  
+
+            _errorDeServidor = true;
+            _eleva = true;
             try
             {
+              
                 RTGMCore.DireccionEntrega objDireccionEntega = obtenDireccionEntrega(this._cliente);
                 RTGMCore.CondicionesCredito objCondicionCredito = objDireccionEntega.CondicionesCredito;
                 // RTGMCore.CondicionesCredito objCondicionCredito = obtenCondicionesCredito(this._cliente);
-
+                _errorDeServidor = false;
                 if (objDireccionEntega == null)
                 {
-                    _eleva = true;
+                   
                     throw new Exception("El CRM no devolvió datos");
                 }
 
@@ -556,11 +561,12 @@ namespace SigametLiquidacion
                 {
                     if (objDireccionEntega.Message.Contains("La consulta no produjo resultados con los parametros indicados"))
                     {
+                        _eleva = false;
                         this._encontrado = false;
                         return;
                     }
                     else {
-                        _eleva = true;
+                        _errorDeServidor = true;
                         throw new Exception(objDireccionEntega.Message);
                     }
 
@@ -636,6 +642,11 @@ namespace SigametLiquidacion
             }
             catch (Exception ex)
             {
+
+                if (_errorDeServidor)
+                {
+                    throw new Exception("El servidor respondió con error: "+ex.Message);
+                }
                 if (_eleva || ex.Message.Contains("tiempo de espera"))
                 {
                     throw new Exception(ex.Message);

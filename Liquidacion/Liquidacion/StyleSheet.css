@@ -265,3 +265,53 @@ table
 	background-color:#6A6D70;
 		
 }
+
+.completionList {
+    border: solid 1px Gray;
+    margin: 0px;
+    padding: 3px;
+    height: 120px;
+    overflow: auto;
+    background-color: #FFFFFF;
+}
+
+.listItem {
+    color: #FF0000;
+}
+
+.itemHighlighted {
+    background-color: #ADD6FF;
+}
+
+
+.autocomplete_completionListElement {
+    margin: 0px !important;
+    background-color: inherit;
+    color: windowtext;
+    border: buttonshadow;
+    border-width: 1px;
+    border-style: solid;
+    cursor: pointer;
+    overflow: auto;
+    height: 200px;
+    text-align: left;
+    list-style-type: none;
+    padding-left: 1px;
+}
+
+/* AutoComplete highlighted item */
+
+.autocomplete_highlightedListItem {
+    background-color: #aaff90;
+    color: black;
+    padding: 1px;
+    cursor: pointer;
+}
+
+/* AutoComplete item */
+
+.autocomplete_listItem {
+    background-color: window;
+    color: windowtext;
+    padding: 1px;
+}

@@ -42,6 +42,7 @@ public partial class FormaPago : System.Web.UI.Page
     DataTable dtDatosControlUsuario = new DataTable();
     bool HidePagos = false;
 
+
     public class ItemAfiliaciones
     {
         int _afiliacion;
@@ -109,6 +110,7 @@ public partial class FormaPago : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
             LlenaDropDowns();
+       
 
         }
 
@@ -122,6 +124,8 @@ public partial class FormaPago : System.Web.UI.Page
             HiddenInputPCT.Value = "No";
             HiddenTDCDupliado.Value = "No";
             HiddenInput.Value = string.Empty;
+            
+
 
 
             if (Request.Form["__EVENTTARGET"] == "ConsultaTPV")
@@ -524,6 +528,9 @@ public partial class FormaPago : System.Web.UI.Page
 
 
             dtAfiliaciones = rp.Afiliaciones(int.Parse(Session["Ruta"].ToString()));
+
+
+
             dtProveedores = rp.Proveedores();
             dtTipoVale = rp.TipoVale();
             dtTipoTarjeta=rp.TipoTarjeta();
@@ -904,6 +911,8 @@ public partial class FormaPago : System.Web.UI.Page
     
         try
         {
+
+
             RevisaPagos();
             
             if (AgregarCargoTarjeta(int.Parse(ddBancoTarjeta.SelectedValue),txtClienteTarjeta.Text.Trim(),txtNumTarjeta.Text.Trim(),txtNoAutorizacionTarjeta.Text.Trim()))
@@ -911,8 +920,10 @@ public partial class FormaPago : System.Web.UI.Page
 
                 if ((DataSet)(Session["dsLiquidacion"]) == null)
             {
-                //Genera Registro del Cobro con Cheque
-                dtCobro = ds.Tables["Cobro"];
+                 
+
+                    //Genera Registro del Cobro con Cheque
+                    dtCobro = ds.Tables["Cobro"];
                     dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
                     dtCobro.Columns.Add("NumCheque", typeof(System.String));
 
@@ -921,7 +932,7 @@ public partial class FormaPago : System.Web.UI.Page
                 
 
                 dr["IdPago"] = 1; //Consecutivo
-                dr["Referencia"] = ddlTAfiliacion.SelectedItem.Text; // txtNoAutorizacionTarjeta.Text;
+                dr["Referencia"] = TxtAfiliacion.Text;//ddlTAfiliacion.SelectedItem.Text; // txtNoAutorizacionTarjeta.Text;
                 dr["NumeroCuenta"] = txtNumTarjeta.Text.Trim();
 
                 dr["FechaCheque"] = txtFechaTarjeta.Text;
@@ -955,7 +966,7 @@ public partial class FormaPago : System.Web.UI.Page
                     LogOperacion LOG = new LogOperacion();
                     LOG.EscribeLogOperacionRow(dr, Convert.ToInt32(Session["Folio"]), Convert.ToInt32(Session["AñoAtt"]), "ForasPago");
 
-                    dtCobro.Rows.Add(dr);
+                dtCobro.Rows.Add(dr);
                 //Subo a Session la tabla creada
                 //Session["TablaCobro"] = dtCobro;
                 Session["dsLiquidacion"] = dtCobro.DataSet;
@@ -1004,7 +1015,7 @@ public partial class FormaPago : System.Web.UI.Page
 
                 dr["IdPago"] = idConsecutivo; //Consecutivo
                 Session["idCobroConsec"] = idConsecutivo;
-                dr["Referencia"] = ddlTAfiliacion.SelectedItem.Text; ;
+                dr["Referencia"] = TxtAfiliacion.Text;  // ddlTAfiliacion.SelectedItem.Text; ;
                 dr["NumeroCuenta"] = txtNumTarjeta.Text;
 
                 dr["FechaCheque"] = txtFechaTarjeta.Text;
@@ -1732,7 +1743,9 @@ else
     private void CargaPrimerRegistro(string sFormaPago)
     {
         string afiliacion = "";
-        ListItem liAfiliacion = null;       
+        ListItem liAfiliacion = null;
+
+       DataTable dtAfiliacionesTmp = rp.Afiliaciones(int.Parse(Session["Ruta"].ToString()));
 
         switch (sFormaPago)
         {
@@ -1757,6 +1770,11 @@ else
                         ddlTAfiliacion.SelectedIndex = ddlTAfiliacion.Items.IndexOf(ddlTAfiliacion.Items.FindByValue(dtPagosPrimerRegistro[0]["Afiliacion"].ToString()));
                         chkLocal.Checked = bool.Parse(dtPagosPrimerRegistro[0]["local"].ToString());
                         ddTipTarjeta.SelectedIndex = dtPagosPrimerRegistro[0]["TipoTarjeta"].ToString() != null ? ddTipTarjeta.Items.IndexOf(ddTipTarjeta.Items.FindByValue(dtPagosPrimerRegistro[0]["TipoTarjeta"].ToString())) : 0;
+
+                        DataRow drAfiliacion = dtAfiliacionesTmp.Select("afiliacion='" + dtPagosPrimerRegistro[0]["Afiliacion"].ToString() + "'").FirstOrDefault();
+
+                        TxtAfiliacion.Text = drAfiliacion["numeroafiliacion"].ToString();
+                        TxtAfiliacion.ReadOnly = true;
                     }
                 }
                 break;
@@ -1938,6 +1956,38 @@ else
 
 
 
+
+    [System.Web.Script.Services.ScriptMethod()]
+    [System.Web.Services.WebMethod]
+    public static List<string> SearchAfiliaciones(string contextKey)
+    {
+        List<string> ListaAfiliaciones = new List<string>();
+        DataTable dtAfiliaciones;
+        string[] parametros = null;
+        string Banco = string.Empty;
+        string LikeAfiliacion = string.Empty;
+
+        parametros = contextKey.Split('-');
+        Banco = parametros[0];
+        LikeAfiliacion = parametros[1];
+
+        dtAfiliaciones = rp2.Afiliaciones(0);
+
+ 
+
+        foreach (DataRow afiliacion in dtAfiliaciones.Rows)
+        {
+            if (afiliacion["banco"].ToString() == Banco && afiliacion["numeroafiliacion"].ToString().Contains(LikeAfiliacion))
+            {
+                ListaAfiliaciones.Add(afiliacion["numeroafiliacion"].ToString());
+            }
+        }
+
+        return ListaAfiliaciones;
+    }
+
+
+
     private bool revisaCargoTarjeta(int banco, string Tarjeta, string Autorizacion) {
         bool encontrado = false;
 
@@ -2060,6 +2110,8 @@ else
     {
         HidePagos = true;
     }
+
+
 
     [WebMethod]
     public CascadingDropDownNameValue[] GetBancoAfiliaciones(

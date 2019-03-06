@@ -10,6 +10,59 @@
 
     <%--  --%>
     <script type="text/javascript">
+    
+          function SetContextKey() {
+        $find('<%=AutoCompleteExtender1.ClientID%>').set_contextKey($get("<%=ddBancoTarjeta.ClientID %>").value+'-'+$get("<%=TxtAfiliacion.ClientID %>").value);
+        }
+
+
+        function integratorsPopulated(source, eventArgs)
+{
+	if (source._currentPrefix != null)
+	{
+		var list = source.get_completionList();
+		var search = source._currentPrefix.toLowerCase();
+		for (var i = 0; i < list.childNodes.length; i++)
+		{
+			var text = list.childNodes[i].innerHTML;
+			var index = text.toLowerCase().indexOf(search);
+			if (index != -1)
+			{
+				var value = text.substring(0, index);
+				value += '<span style="color:red;font-weight:bold">';
+				value += text.substr(index, search.length);
+				value += '</span>';
+				value += text.substring(index + search.length);
+				list.childNodes[i].innerHTML = value;
+			}
+		}
+	}
+}
+        function ValidaAfiliacion() {
+
+            var afiliaciones=document.getElementById('<%=HiddenAfiliaciones.ClientID %>').value
+
+            var afiliacion = document.getElementById('<%= TxtAfiliacion.ClientID %>').value;
+            var n = afiliaciones.includes(afiliacion, 0);
+
+            alert(afiliaciones);
+            alert(afiliacion);
+            alert(n);
+
+            if (n == -1) 
+            {
+                alert('La afiliación es invalida');
+                return false;
+            }
+            else
+            {
+                return true;
+               }
+
+        }
+
+
+
     function cierraCheque()
     { 
         document.getElementById('<%= txtNumCuenta.ClientID %>').focus();
@@ -63,10 +116,13 @@
         var NomCteTarjeta = '<%= txtNombreClienteTarjeta.Text.Trim() %>';
         var PostBack_trasferencia = '<%=wucDetalleFormaPago1.PostBack != null ? wucDetalleFormaPago1.PostBack:"" %>';
 
+  
         
 
         //Validaciones  On load
         document.addEventListener("DOMContentLoaded", function () { // mcc 2018 05 10
+
+ 
 
             if (RegistroCobro == 'Si')
             {
@@ -601,6 +657,7 @@
                 <asp:HiddenField ID="HiddenPagosOtraRuta" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenNomCteCheque" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenNomCteVale" runat="server" Value="" />
+                <asp:HiddenField ID="HiddenAfiliaciones" runat="server" Value="" />
 
                 <div style="text-align: left; height: 650px; width: 1000px; vertical-align: top;">
                     <table style="vertical-align: top; height: 650px;">
@@ -919,7 +976,7 @@
                                                         </td>
                                                         <td>
                                                             <asp:DropDownList ID="ddBancoTarjeta" runat="server" CssClass="textboxcaptura"
-                                                                Width="200px" readonly="true" enabled="false">
+                                                                Width="200px" readonly="true" enabled="false" >
                                                             </asp:DropDownList>
                                                             <asp:RequiredFieldValidator ID="rfvBancoTarjeta" runat="server"
                                                                 ControlToValidate="ddBancoTarjeta" Display="None"
@@ -938,13 +995,28 @@
                                                                 Text="Afiliación:"></asp:Label>
                                                         </td>
                                                         <td>
+                                                             <asp:TextBox ID="TxtAfiliacion" runat="server" CssClass="textboxcaptura" onkeyup = "SetContextKey()"   ></asp:TextBox>
+                                                            <ccR:autocompleteextender  servicemethod="SearchAfiliaciones"  
+                                                                minimumprefixlength="1"
+                                                                completioninterval="100" enablecaching="false" 
+                                                                completionsetcount="100"
+                                                                targetcontrolid="TxtAfiliacion" 
+                                                                id="AutoCompleteExtender1" runat="server" firstrowselected="false"                                                     
+                                                               
+                                                                OnClientPopulated="integratorsPopulated"
+                                                                >
+                                                  </ccR:autocompleteextender>
+            
+                                                            
                                                             <asp:DropDownList ID="ddlTAfiliacion" runat="server" CssClass="textboxcaptura"
-                                                                Width="200px" readonly="true"  enabled="false">
+                                                                Width="200px" readonly="true" Visible="false"  enabled="false" >
                                                             </asp:DropDownList>
                                                             <asp:RequiredFieldValidator ID="rfvTAfiliacion" runat="server"
                                                                 ControlToValidate="ddlTAfiliacion" Display="None"
                                                                 ErrorMessage="Seleccione la afiliación"
-                                                                ValidationGroup="Tarjeta" InitialValue="0"></asp:RequiredFieldValidator>
+                                                                ValidationGroup="Tarjeta" InitialValue="0"
+                                                               
+                                                                ></asp:RequiredFieldValidator>
                                                             <ccR:ValidatorCalloutExtender ID="vceTAfiliacion" runat="server"
                                                                 TargetControlID="rfvTAfiliacion">
                                                             </ccR:ValidatorCalloutExtender>
@@ -1091,7 +1163,7 @@
                                                     <tr>
                                                         <td>&nbsp;</td>
                                                         <td>
-                                                            <asp:ImageButton ID="imbAceptarTDC" runat="server"
+                                                            <asp:ImageButton ID="imbAceptarTDC" runat="server" 
                                                                 SkinID="btnAceptar"
                                                                 ValidationGroup="Tarjeta" OnClick="imbAceptarTDC_Click" Height="25px"
                                                                 Width="25px" />

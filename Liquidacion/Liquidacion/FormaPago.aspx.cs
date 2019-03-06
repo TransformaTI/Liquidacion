@@ -529,7 +529,6 @@ public partial class FormaPago : System.Web.UI.Page
 
             dtAfiliaciones = rp.Afiliaciones(int.Parse(Session["Ruta"].ToString()));
 
-  
 
 
             dtProveedores = rp.Proveedores();
@@ -933,7 +932,7 @@ public partial class FormaPago : System.Web.UI.Page
                 
 
                 dr["IdPago"] = 1; //Consecutivo
-                 dr["Referencia"] = TxtAfiliacion.Text;//ddlTAfiliacion.SelectedItem.Text; // txtNoAutorizacionTarjeta.Text;
+                dr["Referencia"] = TxtAfiliacion.Text;//ddlTAfiliacion.SelectedItem.Text; // txtNoAutorizacionTarjeta.Text;
                 dr["NumeroCuenta"] = txtNumTarjeta.Text.Trim();
 
                 dr["FechaCheque"] = txtFechaTarjeta.Text;
@@ -967,7 +966,7 @@ public partial class FormaPago : System.Web.UI.Page
                     LogOperacion LOG = new LogOperacion();
                     LOG.EscribeLogOperacionRow(dr, Convert.ToInt32(Session["Folio"]), Convert.ToInt32(Session["AñoAtt"]), "ForasPago");
 
-                    dtCobro.Rows.Add(dr);
+                dtCobro.Rows.Add(dr);
                 //Subo a Session la tabla creada
                 //Session["TablaCobro"] = dtCobro;
                 Session["dsLiquidacion"] = dtCobro.DataSet;
@@ -1974,6 +1973,7 @@ else
 
         dtAfiliaciones = rp2.Afiliaciones(0);
 
+ 
 
         foreach (DataRow afiliacion in dtAfiliaciones.Rows)
         {

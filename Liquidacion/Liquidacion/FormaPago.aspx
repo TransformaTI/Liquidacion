@@ -13,26 +13,51 @@
     
           function SetContextKey() {
         $find('<%=AutoCompleteExtender1.ClientID%>').set_contextKey($get("<%=ddBancoTarjeta.ClientID %>").value+'-'+$get("<%=TxtAfiliacion.ClientID %>").value);
-    }
+        }
 
-      function acePopulated(sender, e) {
 
-            var behavior = $find('AutoCompleteEx');
+        function integratorsPopulated(source, eventArgs)
+{
+	if (source._currentPrefix != null)
+	{
+		var list = source.get_completionList();
+		var search = source._currentPrefix.toLowerCase();
+		for (var i = 0; i < list.childNodes.length; i++)
+		{
+			var text = list.childNodes[i].innerHTML;
+			var index = text.toLowerCase().indexOf(search);
+			if (index != -1)
+			{
+				var value = text.substring(0, index);
+				value += '<span style="color:red;font-weight:bold">';
+				value += text.substr(index, search.length);
+				value += '</span>';
+				value += text.substring(index + search.length);
+				list.childNodes[i].innerHTML = value;
+			}
+		}
+	}
+}
+        function ValidaAfiliacion() {
 
-            var target = behavior.get_completionList();
-            if (behavior._currentPrefix != null) {
-                var prefix = behavior._currentPrefix.toLowerCase();
-                var i;
-                for (i = 0; i < target.childNodes.length; i++) {
-                    var sValue = target.childNodes[i].innerHTML.toLowerCase();
-                    if (sValue.indexOf(prefix) != -1) {
-                        var fstr = target.childNodes[i].innerHTML.substring(0, sValue.indexOf(prefix));
-                        var pstr = target.childNodes[i].innerHTML.substring(fstr.length, fstr.length + prefix.length);
-                        var estr = target.childNodes[i].innerHTML.substring(fstr.length + prefix.length, target.childNodes[i].innerHTML.length);
-                        target.childNodes[i].innerHTML = "<div class='autocomplete-item'>" + fstr + '<B>' + pstr + '</B>' + estr + "</div>";
-                    }
-                }
+            var afiliaciones=document.getElementById('<%=HiddenAfiliaciones.ClientID %>').value
+
+            var afiliacion = document.getElementById('<%= TxtAfiliacion.ClientID %>').value;
+            var n = afiliaciones.includes(afiliacion, 0);
+
+            alert(afiliaciones);
+            alert(afiliacion);
+            alert(n);
+
+            if (n == -1) 
+            {
+                alert('La afiliación es invalida');
+                return false;
             }
+            else
+            {
+                return true;
+               }
 
         }
 
@@ -632,6 +657,7 @@
                 <asp:HiddenField ID="HiddenPagosOtraRuta" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenNomCteCheque" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenNomCteVale" runat="server" Value="" />
+                <asp:HiddenField ID="HiddenAfiliaciones" runat="server" Value="" />
 
                 <div style="text-align: left; height: 650px; width: 1000px; vertical-align: top;">
                     <table style="vertical-align: top; height: 650px;">
@@ -969,17 +995,15 @@
                                                                 Text="Afiliación:"></asp:Label>
                                                         </td>
                                                         <td>
-                                                             <asp:TextBox ID="TxtAfiliacion" runat="server" CssClass="textboxcaptura" onkeyup = "SetContextKey()" ></asp:TextBox>
+                                                             <asp:TextBox ID="TxtAfiliacion" runat="server" CssClass="textboxcaptura" onkeyup = "SetContextKey()"   ></asp:TextBox>
                                                             <ccR:autocompleteextender  servicemethod="SearchAfiliaciones"  
                                                                 minimumprefixlength="1"
                                                                 completioninterval="100" enablecaching="false" 
                                                                 completionsetcount="100"
                                                                 targetcontrolid="TxtAfiliacion" 
                                                                 id="AutoCompleteExtender1" runat="server" firstrowselected="false"                                                     
-                                                                CompletionListCssClass="completionList"
-                                                                CompletionListItemCssClass="listItem"
-                                                                CompletionListHighlightedItemCssClass="itemHighlighted"
-
+                                                               
+                                                                OnClientPopulated="integratorsPopulated"
                                                                 >
                                                   </ccR:autocompleteextender>
             
@@ -1139,7 +1163,7 @@
                                                     <tr>
                                                         <td>&nbsp;</td>
                                                         <td>
-                                                            <asp:ImageButton ID="imbAceptarTDC" runat="server"
+                                                            <asp:ImageButton ID="imbAceptarTDC" runat="server" 
                                                                 SkinID="btnAceptar"
                                                                 ValidationGroup="Tarjeta" OnClick="imbAceptarTDC_Click" Height="25px"
                                                                 Width="25px" />

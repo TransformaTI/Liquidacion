@@ -17,15 +17,6 @@ C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacio
 C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.pdb
 C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
 C:\Proyectos\SigametLiquidacion\Liquidacion\DLLiquidacion\bin\Debug\CrystalDecisions.Shared.dll
-C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\DLLiquidacion.dll
-C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\DLLiquidacion.pdb
-C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\DocumentosBSR.dll
-C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\SGDAC.dll
-C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.csproj.CoreCompileInputs.cache
-C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.csproj.CopyComplete
-C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.dll
-C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.pdb
-C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.csprojAssemblyReference.cache
 C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\DLLiquidacion.dll
 C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\DLLiquidacion.pdb
 C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\CrystalDecisions.Web.dll
@@ -42,3 +33,14 @@ C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacio
 C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.csproj.CopyComplete
 C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.dll
 C:\Users\Iván Trujillo\Documents\Proyectos\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.pdb
+C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\DLLiquidacion.dll
+C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\DLLiquidacion.pdb
+C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\DocumentosBSR.dll
+C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\SGDAC.dll
+C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.csproj.CoreCompileInputs.cache
+C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.csproj.CopyComplete
+C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.dll
+C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\obj\Debug\DLLiquidacion.pdb
+C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
+C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\CrystalDecisions.Shared.dll
+C:\Desarrollo\Liquidacion\Liquidacion\DLLiquidacion\bin\Debug\CrystalDecisions.Web.dll

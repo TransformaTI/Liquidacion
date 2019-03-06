@@ -37,7 +37,13 @@
 			}
 		}
 	}
-}
+        }
+
+
+
+        function AutoCompletedClientItemSelected(source, eventArgs) {   
+            document.getElementById('<%= TxtAfiliacion.ClientID %>').value = eventArgs.get_value();
+    }   
         function ValidaAfiliacion() {
 
             var afiliaciones=document.getElementById('<%=HiddenAfiliaciones.ClientID %>').value
@@ -995,15 +1001,17 @@
                                                                 Text="Afiliación:"></asp:Label>
                                                         </td>
                                                         <td>
-                                                             <asp:TextBox ID="TxtAfiliacion" runat="server" CssClass="textboxcaptura" onkeyup = "SetContextKey()"   ></asp:TextBox>
+                                                             <asp:TextBox ID="TxtAfiliacion" runat="server" CssClass="textboxcaptura" onkeyup = "SetContextKey()"  AutoComplete="off"  ></asp:TextBox>
                                                             <ccR:autocompleteextender  servicemethod="SearchAfiliaciones"  
                                                                 minimumprefixlength="1"
                                                                 completioninterval="100" enablecaching="false" 
                                                                 completionsetcount="100"
                                                                 targetcontrolid="TxtAfiliacion" 
-                                                                id="AutoCompleteExtender1" runat="server" firstrowselected="false"                                                     
-                                                               
+                                                                id="AutoCompleteExtender1" runat="server" 
+                                                                firstrowselected="true"                                                     
+                                                                
                                                                 OnClientPopulated="integratorsPopulated"
+                                                                OnClientItemSelected="AutoCompletedClientItemSelected"
                                                                 >
                                                   </ccR:autocompleteextender>
             

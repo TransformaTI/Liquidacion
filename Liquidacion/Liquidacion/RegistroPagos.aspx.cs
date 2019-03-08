@@ -695,8 +695,8 @@ public partial class RegistroPagos : System.Web.UI.Page
                 {
                     if (_restante > _PagoExcesoTPV)
                     {
-                        lblError.Text = "Falta por relacionar " + _restante.ToString("N2") + ", y el monto por relacionar supera el monto " +
-                                    "máximo de pago por exceso para tpbv, favor de relacion más" + "documentos";
+                        lblError.Text = "Falta por relacionar " + _restante.ToString("N2") + ", el monto por relacionar supera el  " +
+                                    "monto máximo de pago por exceso por tarjeta, favor de seleccionar más documentos.";
                         return;
                     }
                 }

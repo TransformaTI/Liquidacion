@@ -142,7 +142,8 @@ public partial class FormaPago : System.Web.UI.Page
                     ConsultarCargoTarjeta(int.Parse(txtClienteTarjeta.Text), "tarjeta", int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
 
                     txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
-                   
+                    txtNoAutorizacionTarjetaConfirm.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
+
                     txtFechaTarjeta.ReadOnly = txtFechaTarjeta.Text == "" ? false : true;
                     txtNumTarjeta.ReadOnly = txtNumTarjeta.Text == "" ? false : true;
                     txtImporteTarjeta.ReadOnly = txtImporteTarjeta.Text == "" ? false : true;
@@ -1515,6 +1516,7 @@ else
             txtNombreClienteTarjeta.Text = dtPagosConTarjetaSelec[0]["NombreCliente"].ToString();
 
             txtNoAutorizacionTarjeta.Text = dtPagosConTarjetaSelec[0]["Autorizacion"].ToString();
+            txtNoAutorizacionTarjetaConfirm.Text= dtPagosConTarjetaSelec[0]["Autorizacion"].ToString();
             txtNumTarjeta.Text = dtPagosConTarjetaSelec[0]["NumeroTarjeta"].ToString();
 
 
@@ -1530,13 +1532,10 @@ else
 
 
 
-            //ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString()));
-            //ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString()));
             txtImporteTarjeta.Text = dtPagosConTarjetaSelec[0]["Importe"].ToString().ToString().Replace("$", "");
             txtObservacionesTarjeta.Text = dtPagosConTarjetaSelec[0]["Observacion"].ToString();
             txtNoAutorizacionTarjeta.ReadOnly = true;
 
-            //ddlTAfiliacion.SelectedIndex = ddlTAfiliacion.Items.IndexOf(ddlTAfiliacion.Items.FindByValue(dtPagosConTarjeta.Rows[0]["Afiliacion"].ToString()));
 
             ddTipTarjeta.SelectedIndex = ddTipTarjeta.Items.IndexOf(ddTipTarjeta.Items.FindByValue(dtPagosConTarjeta.Rows[0]["TipoTarjeta"].ToString()));// int.Parse(dtPagosConTarjetaSelec[0]["TipoTarjeta"].ToString());
             chkLocal.Checked = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "True" ? true : false;
@@ -1545,6 +1544,8 @@ else
 
 
             txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
+            txtNoAutorizacionTarjetaConfirm.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
+
             txtFechaTarjeta.ReadOnly = txtFechaTarjeta.Text == "" ? false : true;
             txtNumTarjeta.ReadOnly = txtNumTarjeta.Text == "" ? false : true;
             txtImporteTarjeta.ReadOnly = txtImporteTarjeta.Text == "" ? false : true;
@@ -1721,6 +1722,7 @@ else
         ddBancoTarjeta.SelectedIndex = 0;
         ddlTAfiliacion.SelectedIndex = 0;
         txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
+        txtNoAutorizacionTarjetaConfirm.ReadOnly= txtNoAutorizacionTarjetaConfirm.Text == "" ? false : true;
         txtFechaTarjeta.ReadOnly = txtFechaTarjeta.Text == "" ? false : true;
         txtNumTarjeta.ReadOnly = txtNumTarjeta.Text == "" ? false : true;
         txtImporteTarjeta.ReadOnly = txtImporteTarjeta.Text == "" ? false : true;
@@ -1907,6 +1909,7 @@ else
             case "tarjeta":
                 txtNombreClienteTarjeta.Text = string.Empty;
                 txtNoAutorizacionTarjeta.Text = string.Empty;
+                txtNoAutorizacionTarjetaConfirm.Text = String.Empty;
                 txtFechaTarjeta.Text = txtFechaTarjeta.Text = Session["FechaAsignacion"].ToString();
                 txtNumTarjeta.Text = string.Empty;
                 ddlBancoOrigen.SelectedIndex = -1;

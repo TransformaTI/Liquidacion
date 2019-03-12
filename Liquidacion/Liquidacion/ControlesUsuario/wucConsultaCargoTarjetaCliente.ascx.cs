@@ -36,7 +36,7 @@ public partial class ControlesUsuario_wucConsultaCargoTarjetaClienta : System.We
                                                     from c in PagosConTarjeta
                                                     join b in Cobros
                                                         on
-                                                              c.Field<string>("Autorizacion") equals b.Field<string>("referencia")
+                                                              c.Field<string>("Folio") equals b.Field<string>("FolioTPV")
 
                                                     into j
                                                     from x in j.DefaultIfEmpty()
@@ -51,7 +51,7 @@ public partial class ControlesUsuario_wucConsultaCargoTarjetaClienta : System.We
                                                     from c in PagosConTarjeta
                                                     join b in Cobros
                                                         on 
-                                                              c.Field<string>("Autorizacion") equals b.Field<string>("referencia")
+                                                              c.Field<string>("Folio") equals b.Field<string>("FolioTPV")
   
                                                     into j
                                                     from x in j.DefaultIfEmpty()

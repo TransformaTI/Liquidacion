@@ -909,7 +909,7 @@ public partial class FormaPago : System.Web.UI.Page
     }
     protected void imbAceptarTDC_Click(object sender, ImageClickEventArgs e)
     {
-    
+        string FolioAnioPagSel = Session["FolioAnio-PagSel"].ToString();
         try
         {
 
@@ -927,6 +927,9 @@ public partial class FormaPago : System.Web.UI.Page
                     dtCobro = ds.Tables["Cobro"];
                     dtCobro.Columns.Add("FechaCobro", typeof(System.DateTime));
                     dtCobro.Columns.Add("NumCheque", typeof(System.String));
+                    dtCobro.Columns.Add("AnioCargoTPV", typeof(System.String));
+                    dtCobro.Columns.Add("FolioTPV", typeof(System.String));
+
 
                     DataRow dr;
                 dr = dtCobro.NewRow();
@@ -963,6 +966,9 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
                 dr["NumCheque"] = txtNoAutorizacionTarjeta.Text;
+                dr["FolioTPV"] = FolioAnioPagSel.Split('-')[0];
+                dr["AnioCargoTPV"] = FolioAnioPagSel.Split('-')[1];
+
 
                     LogOperacion LOG = new LogOperacion();
                     LOG.EscribeLogOperacionRow(dr, Convert.ToInt32(Session["Folio"]), Convert.ToInt32(Session["AñoAtt"]), "ForasPago");
@@ -1010,6 +1016,17 @@ public partial class FormaPago : System.Web.UI.Page
                     }
 
 
+                    if (!dtCobro.Columns.Contains("AnioCargoTPV"))
+                    {
+                        dtCobro.Columns.Add("AnioCargoTPV", typeof(System.String));
+                    }
+
+                    if (!dtCobro.Columns.Contains("FolioTPV"))
+                    {
+                        dtCobro.Columns.Add("FolioTPV", typeof(System.String));
+                    }
+
+
                     dr = dtCobro.NewRow();
 
                 idConsecutivo = ((Int32)(Session["idCobroConsec"]) + 1);
@@ -1045,6 +1062,8 @@ public partial class FormaPago : System.Web.UI.Page
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
                 dr["NumCheque"] = txtNoAutorizacionTarjeta.Text;
+                dr["FolioTPV"] = FolioAnioPagSel.Split('-')[0];
+                dr["AnioCargoTPV"] = FolioAnioPagSel.Split('-')[1];
 
                     LogOperacion LOG = new LogOperacion();
                     LOG.EscribeLogOperacionRow(dr, Convert.ToInt32(Session["Folio"]), Convert.ToInt32(Session["AñoAtt"]), "ForasPago");
@@ -1518,6 +1537,8 @@ else
             txtNoAutorizacionTarjeta.Text = dtPagosConTarjetaSelec[0]["Autorizacion"].ToString();
             txtNoAutorizacionTarjetaConfirm.Text= dtPagosConTarjetaSelec[0]["Autorizacion"].ToString();
             txtNumTarjeta.Text = dtPagosConTarjetaSelec[0]["NumeroTarjeta"].ToString();
+            ddlTAfiliacion.SelectedIndex = ddlTAfiliacion.Items.IndexOf(ddlTAfiliacion.Items.FindByValue(dtPagosConTarjetaSelec[0]["Afiliacion"].ToString()));
+            TxtAfiliacion.Text = dtPagosConTarjetaSelec[0]["numeroafiliacion"].ToString();
 
 
 
@@ -1528,6 +1549,7 @@ else
             Session["BancoTarjetaSeleccionado"] = dtPagosConTarjetaSelec[0]["Banco"].ToString();
             Session["NombreBancoTarjetaSeleccionado"] = dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString();
             Session["AfiliacionSeleccionada"] = dtPagosConTarjetaSelec[0]["Afiliacion"].ToString();
+            Session["FolioAnio-PagSel"] = dtPagosConTarjetaSelec[0]["Folio"].ToString() + "-" + dtPagosConTarjetaSelec[0]["Año"];
 
 
 
@@ -1538,6 +1560,7 @@ else
 
 
             ddTipTarjeta.SelectedIndex = ddTipTarjeta.Items.IndexOf(ddTipTarjeta.Items.FindByValue(dtPagosConTarjetaSelec[0]["TipoTarjeta"].ToString()));// int.Parse(dtPagosConTarjetaSelec[0]["TipoTarjeta"].ToString());
+            TxtAfiliacion.Text = dtPagosConTarjetaSelec[0]["numeroafiliacion"].ToString();
             chkLocal.Checked = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "True" ? true : false;
             txtFechaTarjeta.Text = DateTime.Parse(dtPagosConTarjetaSelec[0]["FAlta"].ToString()).ToShortDateString();
 
@@ -1766,7 +1789,7 @@ else
                         txtFechaTarjeta.Text = dtPagosPrimerRegistro[0]["FAlta"].ToString() != "" ? DateTime.Parse(dtPagosPrimerRegistro[0]["FAlta"].ToString()).ToShortDateString() : "";
                         txtNumTarjeta.Text = dtPagosPrimerRegistro[0]["NumeroTarjeta"].ToString();
                         ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosPrimerRegistro[0]["Nombrebanco"].ToString().Trim()));
-                        ddlBancoOrigen.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByText(dtPagosPrimerRegistro[0]["Nombrebanco"].ToString().Trim()));
+                        ddlBancoOrigen.SelectedIndex = ddlBancoOrigen.Items.IndexOf(ddlBancoOrigen.Items.FindByText(dtPagosPrimerRegistro[0]["Nombrebanco"].ToString().Trim()));
                         txtImporteTarjeta.Text = dtPagosPrimerRegistro[0]["Importe"].ToString().Replace("$", "");
                         txtObservacionesTarjeta.Text = dtPagosPrimerRegistro[0]["Observacion"].ToString();
                         ddlTAfiliacion.SelectedIndex = ddlTAfiliacion.Items.IndexOf(ddlTAfiliacion.Items.FindByValue(dtPagosPrimerRegistro[0]["Afiliacion"].ToString()));
@@ -1777,6 +1800,10 @@ else
 
                         TxtAfiliacion.Text = drAfiliacion["numeroafiliacion"].ToString();
                         TxtAfiliacion.ReadOnly = true;
+
+                        Session["BancoTarjetaSeleccionado"] = dtPagosPrimerRegistro[0]["Banco"].ToString();
+                        Session["NombreBancoTarjetaSeleccionado"] = dtPagosPrimerRegistro[0]["Nombrebanco"].ToString();
+                        Session["FolioAnio-PagSel"] = dtPagosPrimerRegistro[0]["Folio"].ToString() + "-" + dtPagosPrimerRegistro[0]["Año"];
                     }
                 }
                 break;
@@ -1817,7 +1844,7 @@ else
                                 from c in PagosConTarjeta
                                 join b in Cobros
                                     on
-                                          c.Field<string>("Autorizacion") equals b.Field<string>("numCheque")
+                                          c.Field<string>("Folio") equals b.Field<string>("FolioTPV")
 
                                 into j
                                 from x in j.DefaultIfEmpty()
@@ -1832,7 +1859,7 @@ else
                                                     from c in PagosConTarjeta
                                                     join b in Cobros
                                                         on
-                                                              c.Field<string>("Autorizacion") equals b.Field<string>("referencia")
+                                                              c.Field<string>("Folio") equals b.Field<string>("FolioTPV")
 
 
                                                     into j

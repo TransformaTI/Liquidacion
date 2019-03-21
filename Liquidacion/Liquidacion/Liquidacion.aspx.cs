@@ -29,21 +29,25 @@ public partial class Liquidacion : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        bool IsPageRefresh = false;
-
-        if (!Convert.ToBoolean(Session["Iniciada"]))
+        try
         {
-            Response.Redirect("Login.aspx");
-        }
+            bool IsPageRefresh = false;
 
-        if (!Page.IsPostBack)
-        {
-            ViewState["ViewStateId"] = System.Guid.NewGuid().ToString();
+          
+            
+            if (!Convert.ToBoolean(Session["Iniciada"]))
+            {
+                Response.Redirect("Login.aspx");
+            }
 
-            Session["SessionId"] = ViewState["ViewStateId"].ToString();
+            if (!Page.IsPostBack)
+            {
+                ViewState["ViewStateId"] = System.Guid.NewGuid().ToString();
 
-            //RAMPACRRR
-            if (Request.QueryString["FormaLiquidacion"] != null)
+                Session["SessionId"] = ViewState["ViewStateId"].ToString();
+
+                //RAMPACRRR
+                if (Request.QueryString["FormaLiquidacion"] != null)
                 {
                     AutoTanqueTurno1.FormaLiquidacion = Request.QueryString["FormaLiquidacion"].ToString();
                 }
@@ -77,43 +81,56 @@ public partial class Liquidacion : System.Web.UI.Page
 
 
                 btnTerminar.Attributes.Add("onclick", "return confirm('¿Desea finalizar la captura de la liquidación?')");
-            // btnPagos.Attributes.Add("onclick", "return confirm('¿Desea Continuar?')");
+                // btnPagos.Attributes.Add("onclick", "return confirm('¿Desea Continuar?')");
 
-               nuevoPedido.ConsultaCteOnChange = true;
-           
-        }
-        else
-        {
-            _catalogos = (Catalogos)Session["Catalogos"];
-            _parametros = (Parametros)Session["Parametros"];
+                nuevoPedido.ConsultaCteOnChange = true;
 
-            if (ViewState["ViewStateId"].ToString() != Session["SessionId"].ToString())
-            {
-                IsPageRefresh = true;
             }
+            else
+            {
+                _catalogos = (Catalogos)Session["Catalogos"];
+                _parametros = (Parametros)Session["Parametros"];
 
-            Session["SessionId"] = System.Guid.NewGuid().ToString();
-            ViewState["ViewStateId"] = Session["SessionId"].ToString();
-        }
-        if (AutoTanqueTurno1.OperadorAsignado == true)
-        {
-            ConsultaResumenLiquidacion();
-        }
-        else
-        {
-            nuevoPedido.Enabled = false;
-        }
-        lblMensaje.Text = string.Empty;
-        if (IsPageRefresh)
-        {
-            DataTable ListaTemp = (DataTable)Session["ListaPedidos"];
-            AutoTanqueTurno1.ListaPedidos = ListaTemp;
-            ListaPedidos1.DataSource = AutoTanqueTurno1.ListaPedidos;
+                if (ViewState["ViewStateId"].ToString() != Session["SessionId"].ToString())
+                {
+                    IsPageRefresh = true;
+                }
 
-            ReordenarLista("Litros");
-            Session["desasigna"] = "";
-            Session["buscandoCliente"] = "";
+                Session["SessionId"] = System.Guid.NewGuid().ToString();
+                ViewState["ViewStateId"] = Session["SessionId"].ToString();
+            }
+            if (AutoTanqueTurno1.OperadorAsignado == true)
+            {
+                ConsultaResumenLiquidacion();
+            }
+            else
+            {
+                nuevoPedido.Enabled = false;
+            }
+            lblMensaje.Text = string.Empty;
+            if (IsPageRefresh)
+            {
+                DataTable ListaTemp = (DataTable)Session["ListaPedidos"];
+                AutoTanqueTurno1.ListaPedidos = ListaTemp;
+                ListaPedidos1.DataSource = AutoTanqueTurno1.ListaPedidos;
+
+                ReordenarLista("Litros");
+                Session["desasigna"] = "";
+                Session["buscandoCliente"] = "";
+            }
         }
+        catch (Exception ex)
+        {
+
+            string error= "A ocurrido un error al carga liquidación. Intente de nuevo. Error:" +ex.Message;
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('A ocurrido un error:" + ex.Message + ");", true);
+            //Response.Redirect("SeleccionRutaLiquidacionDina.aspx");
+            ScriptManager.RegisterStartupScript(this, this.GetType(),
+            "alert",
+            "alert('"+error+"');window.location ='SeleccionRutaLiquidacionDina.aspx';",
+            true);
+        }
+        
     }
     protected void Page_PreRender(object sender, EventArgs e)
     {

@@ -536,12 +536,12 @@ public partial class FormaPago : System.Web.UI.Page
             dtTipoVale = rp.TipoVale();
             dtTipoTarjeta=rp.TipoTarjeta();
 
-            //ddBancoTarjeta.DataSource = dtBancosAfiliacion;
-            //ddBancoTarjeta.DataTextField = "Nombre";
-            //ddBancoTarjeta.DataValueField = "Banco";
-            //ddBancoTarjeta.DataBind();
-            //ddBancoTarjeta.Items.Insert(0, new ListItem("- Seleccione -", "0"));
-            //ddBancoTarjeta.SelectedIndex = 0;
+            ddBancoTarjeta.DataSource = dtBancosAfiliacion;
+            ddBancoTarjeta.DataTextField = "Nombre";
+            ddBancoTarjeta.DataValueField = "Banco";
+            ddBancoTarjeta.DataBind();
+            ddBancoTarjeta.Items.Insert(0, new ListItem("- Seleccione -", "0"));
+            ddBancoTarjeta.SelectedIndex = 0;
 
             ddChequeBanco.DataSource = dtBancos;
             ddChequeBanco.DataTextField = "Nombre";
@@ -587,14 +587,14 @@ public partial class FormaPago : System.Web.UI.Page
             ddTipTarjeta.DataValueField = "ID";
             ddTipTarjeta.DataBind();
 
-            //ddlTAfiliacion.DataSource = dtAfiliaciones;
-            //ddlTAfiliacion.DataTextField = "NumeroAfiliacion";
-            //ddlTAfiliacion.DataValueField = "Afiliacion";
-            //ddlTAfiliacion.DataBind();
-            //ddlTAfiliacion.Items.Insert(0, new ListItem("- Seleccione -", "0"));
-            //ddlTAfiliacion.SelectedIndex = 0;
+            ddlTAfiliacion.DataSource = dtAfiliaciones;
+            ddlTAfiliacion.DataTextField = "NumeroAfiliacion";
+            ddlTAfiliacion.DataValueField = "Afiliacion";
+            ddlTAfiliacion.DataBind();
+            ddlTAfiliacion.Items.Insert(0, new ListItem("- Seleccione -", "0"));
+            ddlTAfiliacion.SelectedIndex = 0;
 
-   //         string hola = obtenAfiliaciones(ddBancoTarjeta.SelectedValue);
+            //         string hola = obtenAfiliaciones(ddBancoTarjeta.SelectedValue);
 
             //ddAfiliacion.DataSource = obtenAfiliaciones(ddBancoTarjeta.SelectedValue);
             //ddAfiliacion.DataTextField = "NumeroAfiliacion";
@@ -909,10 +909,24 @@ public partial class FormaPago : System.Web.UI.Page
     }
     protected void imbAceptarTDC_Click(object sender, ImageClickEventArgs e)
     {
-        string FolioAnioPagSel = Session["FolioAnio-PagSel"].ToString();
+        string FolioAnioPagSel;
+
         try
         {
+            FolioAnioPagSel = Session["FolioAnio-PagSel"].ToString();
 
+        }
+        catch
+        {
+            FolioAnioPagSel = "-";
+        }
+        
+
+
+
+        try
+        {
+            
 
             RevisaPagos();
             
@@ -1077,8 +1091,8 @@ public partial class FormaPago : System.Web.UI.Page
             }
             HiddenTDCDupliado.Value = "";
 
-           
-            Response.Redirect("RegistroPagos.aspx");
+    
+                Response.Redirect("RegistroPagos.aspx");
             // your code here.
 
         }
@@ -1546,9 +1560,9 @@ else
             ddlBancoOrigen.SelectedIndex = ddlBancoOrigen.Items.IndexOf(ddlBancoOrigen.Items.FindByValue(dtPagosConTarjetaSelec[0]["Banco"].ToString()));
 
 
-            Session["BancoTarjetaSeleccionado"] = dtPagosConTarjetaSelec[0]["Banco"].ToString();
-            Session["NombreBancoTarjetaSeleccionado"] = dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString();
-            Session["AfiliacionSeleccionada"] = dtPagosConTarjetaSelec[0]["Afiliacion"].ToString();
+            //Session["BancoTarjetaSeleccionado"] = dtPagosConTarjetaSelec[0]["Banco"].ToString();
+            //Session["NombreBancoTarjetaSeleccionado"] = dtPagosConTarjetaSelec[0]["Nombrebanco"].ToString();
+            //Session["AfiliacionSeleccionada"] = dtPagosConTarjetaSelec[0]["Afiliacion"].ToString();
             Session["FolioAnio-PagSel"] = dtPagosConTarjetaSelec[0]["Folio"].ToString() + "-" + dtPagosConTarjetaSelec[0]["Año"];
 
 
@@ -1801,9 +1815,9 @@ else
                         TxtAfiliacion.Text = drAfiliacion["numeroafiliacion"].ToString();
                         TxtAfiliacion.ReadOnly = true;
 
-                        Session["BancoTarjetaSeleccionado"] = dtPagosPrimerRegistro[0]["Banco"].ToString();
-                        Session["NombreBancoTarjetaSeleccionado"] = dtPagosPrimerRegistro[0]["Nombrebanco"].ToString();
-                        Session["FolioAnio-PagSel"] = dtPagosPrimerRegistro[0]["Folio"].ToString() + "-" + dtPagosPrimerRegistro[0]["Año"];
+                        //Session["BancoTarjetaSeleccionado"] = dtPagosPrimerRegistro[0]["Banco"].ToString();
+                        //Session["NombreBancoTarjetaSeleccionado"] = dtPagosPrimerRegistro[0]["Nombrebanco"].ToString();
+                        //Session["FolioAnio-PagSel"] = dtPagosPrimerRegistro[0]["Folio"].ToString() + "-" + dtPagosPrimerRegistro[0]["Año"];
                     }
                 }
                 break;
@@ -1984,7 +1998,25 @@ else
 
     }
 
+    [System.Web.Script.Services.ScriptMethod()]
+    [System.Web.Services.WebMethod]
+    public static string validaAfiliacion(string bancoSeleccionado, string afiliacionSeleccionada)
+    {
+        DataTable dtAfiliaciones;
+        dtAfiliaciones = rp2.Afiliaciones(0);
 
+        string resultado = "0";
+
+        foreach (DataRow afiliacion in dtAfiliaciones.Rows)
+        {
+            if (afiliacion["banco"].ToString().Trim() == bancoSeleccionado && afiliacion["numeroafiliacion"].ToString().Trim() == afiliacionSeleccionada)
+            {
+                resultado = "1";
+            }
+        }
+
+        return resultado;
+    }
 
 
     [System.Web.Script.Services.ScriptMethod()]

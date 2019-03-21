@@ -9,7 +9,11 @@
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainPlaceHolder" runat="server">
 
     <%--  --%>
+
+   
     <script type="text/javascript">
+
+       
     
           function SetContextKey() {
         $find('<%=AutoCompleteExtender1.ClientID%>').set_contextKey($get("<%=ddBancoTarjeta.ClientID %>").value+'-'+$get("<%=TxtAfiliacion.ClientID %>").value);
@@ -41,7 +45,8 @@
 
 
 
-        function AutoCompletedClientItemSelected(source, eventArgs) {   
+        function AutoCompletedClientItemSelected(source, eventArgs) {
+           
             document.getElementById('<%= TxtAfiliacion.ClientID %>').value = eventArgs.get_value();
     }   
         function ValidaAfiliacion() {
@@ -158,6 +163,8 @@
                     document.getElementById('ctl00_MainPlaceHolder_imgCalendario0').disabled = false;
                     document.getElementById('ctl00_MainPlaceHolder_txtNoAutorizacionTarjeta').value = '';
                     document.getElementById('ctl00_MainPlaceHolder_txtNoAutorizacionTarjeta').readOnly = false;
+                    document.getElementById('ctl00_MainPlaceHolder_txtNoAutorizacionTarjetaConfirm').value = '';
+                    document.getElementById('ctl00_MainPlaceHolder_txtNoAutorizacionTarjetaConfirm').readOnly = false;
                     document.getElementById('ctl00_MainPlaceHolder_txtNumTarjeta').value = '';
                     document.getElementById('ctl00_MainPlaceHolder_txtNumTarjeta').readOnly = false;
                     document.getElementById('ctl00_MainPlaceHolder_txtImporteTarjeta').value = '';
@@ -172,11 +179,18 @@
                     document.getElementById('ctl00_MainPlaceHolder_ddlBancoOrigen').disabled = false;
                     document.getElementById('ctl00_MainPlaceHolder_chkLocal').checked = false;
                     document.getElementById('ctl00_MainPlaceHolder_chkLocal').disabled = false;
-                    document.getElementById('ctl00_MainPlaceHolder_ddlTAfiliacion').selectedIndex = "0";
-                    document.getElementById('ctl00_MainPlaceHolder_ddlTAfiliacion').disabled = false;
-<%--                    <%Session["BancoTarjetaSeleccionado"] = "";%>
+                    //document.getElementById('ctl00_MainPlaceHolder_ddlTAfiliacion').selectedIndex = "0";
+                    //document.getElementById('ctl00_MainPlaceHolder_ddlTAfiliacion').disabled = false;
+                    document.getElementById('ctl00_MainPlaceHolder_TxtAfiliacion').value = '';
+                    document.getElementById('ctl00_MainPlaceHolder_TxtAfiliacion').readOnly = false;
+                    document.getElementById('<%=HiddenInputPCT.ClientID%>').value = "No";
+
+                    
+                    <%--                    <%Session["BancoTarjetaSeleccionado"] = "";%>
                     <%Session["NombreBancoTarjetaSeleccionado"] = "";%>
                     <%Session["AfiliacionSeleccionada"] = "";%>--%>
+
+                   
 
                  
                 }
@@ -472,7 +486,7 @@
 
         function ValidaCamposTDC()
         {
-            
+            var afiliacionValida = "1";
             if (document.getElementById('<%=txtClienteTarjeta.ClientID%>').value == "")
             {
                 alert('Capture el número de cliente');
@@ -492,9 +506,8 @@
             if (document.getElementById('<%=HiddenInputPCT.ClientID%>').value == "No" ||   document.getElementById('<%=HiddenInputPCT.ClientID%>').value== "")
             {
 
-                var ddlAfiliacion = document.getElementById('<%= ddlTAfiliacion.ClientID %>');
-                var afiliacionSeleccionada = ddlAfiliacion.options[ddlAfiliacion.selectedIndex].value;
-     
+
+                var afiliacionSeleccionada = document.getElementById('<%=TxtAfiliacion.ClientID%>').value;
 
                 var ddlBanco = document.getElementById('<%= ddBancoTarjeta.ClientID %>');
                 var bancoSeleccionado = ddlBanco.options[ddlBanco.selectedIndex].value;
@@ -506,11 +519,43 @@
                     return false;
                 }
 
-               if (afiliacionSeleccionada == "0")
+                if (afiliacionSeleccionada == "")
                 {
                     alert('Seleccione una afiliación');
                     return false;
                 }
+
+                $.ajax({
+                type: "POST",
+                url: "FormaPago.aspx/validaAfiliacion",
+                data: '{bancoSeleccionado: "' + bancoSeleccionado + '",  afiliacionSeleccionada: "' + afiliacionSeleccionada + '" }',
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                dataType: "json",
+                success: function (response) {
+                    
+                        if (response.d=="0") 
+                        {
+                            alert('Seleccione una afiliación válida');
+                            afiliacionValida = "0";
+                        }
+
+                    },
+                error: function (r) {
+                    alert(r.responseText);
+                    afiliacionValida = "0";
+                },
+                failure: function (r) {
+                    alert(r.responseText);
+                    afiliacionValida = "0";
+                }
+            });
+
+                if (afiliacionValida == "0")
+                {
+                    return false;
+                }
+
                 if (document.getElementById('<%=txtNoAutorizacionTarjeta.ClientID%>').value == "")
                 {
                         alert('Capture el número de Autorizacion');
@@ -1001,20 +1046,29 @@
                                                                 Text="Afiliación:"></asp:Label>
                                                         </td>
                                                         <td>
-                                                             <asp:TextBox ID="TxtAfiliacion" runat="server" CssClass="textboxcaptura" onkeyup = "SetContextKey()"  AutoComplete="off"  ></asp:TextBox>
+                                                             <asp:TextBox ID="TxtAfiliacion" runat="server" CssClass="textboxcaptura"                                                                  
+                                                                 onkeyup = "SetContextKey()"  AutoComplete="off"  ></asp:TextBox>
                                                             <ccR:autocompleteextender  servicemethod="SearchAfiliaciones"  
                                                                 minimumprefixlength="1"
                                                                 completioninterval="100" enablecaching="false" 
                                                                 completionsetcount="100"
                                                                 targetcontrolid="TxtAfiliacion" 
                                                                 id="AutoCompleteExtender1" runat="server" 
-                                                                firstrowselected="true"                                                     
+                                                                firstrowselected="true"                                                                                                          
                                                                 
                                                                 OnClientPopulated="integratorsPopulated"
                                                                 OnClientItemSelected="AutoCompletedClientItemSelected"
                                                                 >
                                                   </ccR:autocompleteextender>
-            
+                                                            <asp:RequiredFieldValidator ID="rfvTDAfiliacion" runat="server"
+                                                                ControlToValidate="TxtAfiliacion" Display="None" ErrorMessage="Capturar Afiliacion"
+                                                                Font-Size="11px" ValidationGroup="Tarjeta"></asp:RequiredFieldValidator>
+                                                                <ccR:ValidatorCalloutExtender ID="vceAfiliacionTarjeta" runat="server"
+                                                                TargetControlID="rfvTDAfiliacion">
+                                                                </ccR:ValidatorCalloutExtender>
+                                                                <ccR:FilteredTextBoxExtender ID="ftbAfiliacionTC" runat="server" TargetControlID="txtAfiliacion" 
+                                                                FilterType="Custom, Numbers" ValidChars="."></ccR:FilteredTextBoxExtender>
+                                                          
                                                             
                                                             <asp:DropDownList ID="ddlTAfiliacion" runat="server" CssClass="textboxcaptura"
                                                                 Width="200px" readonly="true" Visible="false"  enabled="false" >
@@ -1173,7 +1227,9 @@
                                                         <td>
                                                             <asp:ImageButton ID="imbAceptarTDC" runat="server" 
                                                                 SkinID="btnAceptar"
-                                                                ValidationGroup="Tarjeta" OnClick="imbAceptarTDC_Click" Height="25px"
+                                                                ValidationGroup="Tarjeta"
+                                                                causesvalidation="true"
+                                                                OnClick="imbAceptarTDC_Click" Height="25px"
                                                                 Width="25px" />
                                                         </td>
                                                     </tr>
@@ -1182,7 +1238,7 @@
                                                         <td></td>
                                                     </tr>
                                                 </table>
-                                                <ajaxToolkit:CascadingDropDown
+<%--                                                <ajaxToolkit:CascadingDropDown
                                                     ID="ccdBancos"
                                                     runat="server"
                                                     ServicePath="ServiceCS.asmx"
@@ -1200,7 +1256,7 @@
                                                     ParentControlID="ddBancoTarjeta"
                                                     
                                                     Category="Afiliacion"
-                                                    EmptyText="- Seleccione -"/>
+                                                    EmptyText="- Seleccione -"/>--%>
                                                  
                                             </div>
                                         </td>

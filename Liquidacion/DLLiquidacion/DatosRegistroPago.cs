@@ -789,9 +789,11 @@ namespace SigametLiquidacion
                         CtaDestino = null;
                     }
 
-
-                    AnnioCobroOrigen = Convert.ToInt16(dtPago.Rows[index1]["AnnioCobroOrigen"].ToString());
-                    CobroOrigen = Convert.ToInt32(dtPago.Rows[index1]["CobroOrigen"].ToString());
+                    if (dtPago.Columns.Contains("AnnioCobroOrigen") && dtPago.Columns.Contains("CobroOrigen"))
+                    {
+                        AnnioCobroOrigen = Convert.ToInt16(dtPago.Rows[index1]["AnnioCobroOrigen"].ToString());
+                        CobroOrigen = Convert.ToInt32(dtPago.Rows[index1]["CobroOrigen"].ToString());
+                    }
 
 
 
@@ -813,13 +815,14 @@ namespace SigametLiquidacion
                         new SqlParameter("@BancoTarjeta", (object) Convert.ToInt16(dtPago.Rows[index1]["Banco"].ToString())),
                         new SqlParameter("@AñoCobro", SqlDbType.SmallInt),null,
                         new SqlParameter("@Referencia", (object) dtPago.Rows[index1]["Referencia"].ToString()),
-                        //new SqlParameter("@NumeroCuentaDestino", (object) dtPago.Rows[index1]["TipoValeDescripcion"].ToString()),
+                        
                         new SqlParameter("@NumeroCuentaDestino", (object) dtPago.Rows[index1]["TipoValeDescripcion"].ToString()),
                         new SqlParameter("@Fcobro", (object)DBNull.Value),
                         new SqlParameter("@BancoOrigen", (object)DBNull.Value),
                         new SqlParameter("@OrigenCobro", (object)"LW"),
                         new SqlParameter("@AñoCobroOrigen", (object)DBNull.Value),
                         new SqlParameter("@CobroOrigen", (object)DBNull.Value)
+
 
                 };
                     if (Fcobro!=null)
@@ -853,7 +856,8 @@ namespace SigametLiquidacion
                     }
 
 
-                    
+
+
                     sqlParameterArray[14].Direction = ParameterDirection.Output;
                     sqlParameterArray[15] = new SqlParameter("@Cobro", SqlDbType.Int);
                     sqlParameterArray[15].Direction = ParameterDirection.Output;

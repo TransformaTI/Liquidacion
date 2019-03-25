@@ -424,7 +424,8 @@ namespace SigametLiquidacion
                 objDireccionEntega = objGateway.buscarDireccionEntrega(objRequest);
                 if (objDireccionEntega.Message != null)
                 {
-                    if (objDireccionEntega.Message.Contains("La consulta no produjo resultados con los parametros indicados"))
+                    //if (objDireccionEntega.Message.Contains("La consulta no produjo resultados con los parametros indicados"))
+                    if (objDireccionEntega.Message.Contains("La consulta no produjo "))
                     {
                         this._encontrado = false;
                         return objDireccionEntega;
@@ -501,7 +502,8 @@ namespace SigametLiquidacion
                 
                 if (objDireccionEntega.Message != null)
                 {
-                    if (objDireccionEntega.Message.Contains("La consulta no produjo resultados con los parametros indicados"))
+                    if (objDireccionEntega.Message.Contains("La consulta no produjo resultados"))
+                    //if (objDireccionEntega.Message.Contains("La consulta no produjo resultados con los parametros indicados"))
                     {
                         this._encontrado = false;
                         return;
@@ -559,7 +561,8 @@ namespace SigametLiquidacion
 
                 if (objDireccionEntega.Message!=null)
                 {
-                    if (objDireccionEntega.Message.Contains("La consulta no produjo resultados con los parametros indicados"))
+                    if (objDireccionEntega.Message.Contains("La consulta no produjo resultados"))
+                    //if (objDireccionEntega.Message.Contains("La consulta no produjo resultados con los parametros indicados"))
                     {
                         _eleva = false;
                         this._encontrado = false;

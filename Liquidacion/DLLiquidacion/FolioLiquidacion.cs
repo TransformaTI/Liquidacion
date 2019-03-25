@@ -314,8 +314,16 @@ namespace SigametLiquidacion
                 //26-05-2015 - Usar serie para la remisión
                 //TODO: Parametrizar
                 this._remisionUsaSerie = Convert.ToBoolean(dataRow["UsarSerie"]);
-                this._longitudSerieNota = Convert.ToByte(dataRow["LongitudSerie"]);
-                this._longitudFolioNota = Convert.ToByte(dataRow["LongitudFolio"]);
+                if (dataRow["LongitudSerie"] != null)
+                {
+                    this._longitudSerieNota = dataRow["LongitudSerie"].ToString().Length >0 ? Convert.ToByte(dataRow["LongitudSerie"]):(byte)0;
+                }
+
+                if (dataRow["LongitudFolio"] != null)
+                {
+                    this._longitudFolioNota = dataRow["LongitudFolio"].ToString().Length > 0 ? Convert.ToByte(dataRow["LongitudFolio"]):(byte)0;
+                }
+
             }
         }
         

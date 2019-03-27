@@ -6,6 +6,8 @@
 <%@ Register Src="~/ControlesUsuario/wucDetalleFormaPago.ascx" TagPrefix="ucDetallePago" TagName="wucDetalleFormaPago" %>
 
 
+
+
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainPlaceHolder" runat="server">
 
     <%--  --%>
@@ -21,26 +23,26 @@
 
 
         function integratorsPopulated(source, eventArgs)
-{
-	if (source._currentPrefix != null)
-	{
-		var list = source.get_completionList();
-		var search = source._currentPrefix.toLowerCase();
-		for (var i = 0; i < list.childNodes.length; i++)
-		{
-			var text = list.childNodes[i].innerHTML;
-			var index = text.toLowerCase().indexOf(search);
-			if (index != -1)
-			{
-				var value = text.substring(0, index);
-				value += '<span style="color:red;font-weight:bold">';
-				value += text.substr(index, search.length);
-				value += '</span>';
-				value += text.substring(index + search.length);
-				list.childNodes[i].innerHTML = value;
-			}
-		}
-	}
+        {
+	        if (source._currentPrefix != null)
+	        {
+		        var list = source.get_completionList();
+		        var search = source._currentPrefix.toLowerCase();
+		        for (var i = 0; i < list.childNodes.length; i++)
+		        {
+			        var text = list.childNodes[i].innerHTML;
+			        var index = text.toLowerCase().indexOf(search);
+			        if (index != -1)
+			        {
+				        var value = text.substring(0, index);
+				        value += '<span style="color:red;font-weight:bold">';
+				        value += text.substr(index, search.length);
+				        value += '</span>';
+				        value += text.substring(index + search.length);
+				        list.childNodes[i].innerHTML = value;
+			        }
+		        }
+	        }
         }
 
 
@@ -383,7 +385,9 @@
          {
              window.location = 'GenerarPago.aspx';
 
-         }
+        }
+
+    
 
          function toggle(display, activo, inactivo, inactivoA, control) {
              document.getElementById('ctl00_mostrando').value = ''
@@ -472,9 +476,37 @@
 
 
 
+
+        function MuestraAfiliacionesTodas() {
+            SetContextKey();
+
+              var autoComplete = $find('<%=AutoCompleteExtender1.ClientID%>');
+
+                    // To show the popup by JavaScript, following code is necessary.
+                    // [NOTE] This trick is weak if the AutoCompleteExtender is updated.
+                    autoComplete._cache = {};
+                    autoComplete._currentPrefix = null;
+                    autoComplete._textBoxHasFocus = true;
+
+
+                    // save the old minimum prefix length, and set the value 0
+                    var oldMinimumPrefixLength = autoComplete.get_minimumPrefixLength();
+                    autoComplete.set_minimumPrefixLength(0);
+
+
+                    // send the event to show the popup
+                    autoComplete._onTimerTick(null, null);    
+
+                    // restore the old minimum prefix length
+                     autoComplete.set_minimumPrefixLength(oldMinimumPrefixLength);
+
+
+        }
+
+
+
         function ShowModalPopup() {
             $find("mpe").show();
-
             return false;
         }
         function HideModalPopup() {
@@ -1027,7 +1059,7 @@
                                                         </td>
                                                         <td>
                                                             <asp:DropDownList ID="ddBancoTarjeta" runat="server" CssClass="textboxcaptura"
-                                                                Width="200px" readonly="true" enabled="false" >
+                                                                Width="200px" readonly="true" enabled="false"  >
                                                             </asp:DropDownList>
                                                             <asp:RequiredFieldValidator ID="rfvBancoTarjeta" runat="server"
                                                                 ControlToValidate="ddBancoTarjeta" Display="None"
@@ -1047,17 +1079,21 @@
                                                         </td>
                                                         <td>
                                                              <asp:TextBox ID="TxtAfiliacion" runat="server" CssClass="textboxcaptura"                                                                  
-                                                                 onkeyup = "SetContextKey()"  AutoComplete="off"  ></asp:TextBox>
-                                                            <ccR:autocompleteextender  servicemethod="SearchAfiliaciones"  
+                                                                 onkeyup = "SetContextKey()"     AutoComplete="off"  ></asp:TextBox>
+                                                            <ccR:autocompleteextender  
+                                                                servicemethod="SearchAfiliaciones"  
                                                                 minimumprefixlength="1"
-                                                                completioninterval="100" enablecaching="false" 
+                                                                completioninterval="100" 
+                                                                enablecaching="false" 
                                                                 completionsetcount="100"
                                                                 targetcontrolid="TxtAfiliacion" 
-                                                                id="AutoCompleteExtender1" runat="server" 
+                                                                id="AutoCompleteExtender1"
+                                                                runat="server" 
                                                                 firstrowselected="true"                                                                                                          
-                                                                
+                                                                UseContextKey="true"
                                                                 OnClientPopulated="integratorsPopulated"
                                                                 OnClientItemSelected="AutoCompletedClientItemSelected"
+                                                                
                                                                 >
                                                   </ccR:autocompleteextender>
                                                             <asp:RequiredFieldValidator ID="rfvTDAfiliacion" runat="server"
@@ -1067,7 +1103,7 @@
                                                                 TargetControlID="rfvTDAfiliacion">
                                                                 </ccR:ValidatorCalloutExtender>
                                                                 <ccR:FilteredTextBoxExtender ID="ftbAfiliacionTC" runat="server" TargetControlID="txtAfiliacion" 
-                                                                FilterType="Custom, Numbers" ValidChars="."></ccR:FilteredTextBoxExtender>
+                                                                 FilterType="Custom, Numbers" ValidChars="."></ccR:FilteredTextBoxExtender>
                                                           
                                                             
                                                             <asp:DropDownList ID="ddlTAfiliacion" runat="server" CssClass="textboxcaptura"

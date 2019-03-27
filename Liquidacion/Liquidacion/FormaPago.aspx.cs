@@ -310,6 +310,9 @@ public partial class FormaPago : System.Web.UI.Page
 
         ddBancoTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + ddlBancoOrigen.UniqueID + (char)39 + ")");
 
+        ddBancoTarjeta.Attributes.Add("onchange", "return MuestraAfiliacionesTodas()");
+
+
 
         ddlBancoOrigen.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtImporteTarjeta.UniqueID + (char)39 + ")");
 
@@ -344,6 +347,8 @@ public partial class FormaPago : System.Web.UI.Page
         txtNoAutorizacionTarjetaConfirm.Attributes.Add("onkeypress", "return isAlphaNumeric(event)");
 
         imbResumen.Attributes.Add("onclick", "imbResumenClick()");
+
+
 
         //imbAceptar.Attributes.Add("onclick", "return ValidaFechasCheque()");
 
@@ -2031,15 +2036,18 @@ else
 
         parametros = contextKey.Split('-');
         Banco = parametros[0];
-        LikeAfiliacion = parametros[1];
 
-        dtAfiliaciones = rp2.Afiliaciones(0);
+        LikeAfiliacion = parametros[1]!=String.Empty?  parametros[1]:"todos";
 
- 
+        dtAfiliaciones = rp2.Afiliaciones(0); 
 
         foreach (DataRow afiliacion in dtAfiliaciones.Rows)
         {
             if (afiliacion["banco"].ToString() == Banco && afiliacion["numeroafiliacion"].ToString().Contains(LikeAfiliacion))
+            {
+                ListaAfiliaciones.Add(afiliacion["numeroafiliacion"].ToString());
+            }
+            else if (afiliacion["banco"].ToString() == Banco && LikeAfiliacion=="todos")
             {
                 ListaAfiliaciones.Add(afiliacion["numeroafiliacion"].ToString());
             }
@@ -2284,5 +2292,7 @@ else
 
         return lista;
     }
-    
+
+
+   
 }   

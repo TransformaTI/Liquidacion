@@ -510,6 +510,35 @@
             return false;
         }
         function HideModalPopup() {
+
+            document.getElementById('<%=TxtAfiliacion.ClientID%>').disabled = false;
+            document.getElementById('<%=TxtAfiliacion.ClientID%>').readOnly = false;
+
+            document.getElementById('<%=ddBancoTarjeta.ClientID%>').disabled = false;
+            document.getElementById('<%=ddBancoTarjeta.ClientID%>').readOnly = false;
+
+            document.getElementById('<%=txtNoAutorizacionTarjeta.ClientID%>').disabled = false;
+            document.getElementById('<%=txtNoAutorizacionTarjeta .ClientID%>').readOnly = false;
+
+            document.getElementById('<%=txtNoAutorizacionTarjetaConfirm.ClientID%>').disabled = false;
+            document.getElementById('<%=txtNoAutorizacionTarjetaConfirm .ClientID%>').readOnly = false;
+
+            document.getElementById('<%=txtNumTarjeta.ClientID%>').disabled = false;
+            document.getElementById('<%=txtNumTarjeta .ClientID%>').readOnly = false;
+
+            document.getElementById('<%=ddlBancoOrigen.ClientID%>').disabled = false;
+            document.getElementById('<%=ddlBancoOrigen .ClientID%>').readOnly = false;
+
+             document.getElementById('<%=txtClienteTarjeta.ClientID%>').value = '';
+             document.getElementById('<%=txtNombreClienteTarjeta.ClientID%>').value = '';
+            document.getElementById('<%=TxtAfiliacion.ClientID%>').value = '';
+            document.getElementById('<%=txtNoAutorizacionTarjeta.ClientID%>').value = '';
+            document.getElementById('<%=txtNoAutorizacionTarjetaConfirm.ClientID%>').value = '';
+            document.getElementById('<%=txtNumTarjeta.ClientID%>').value = '';
+            document.getElementById('<%= ddTipoTarjeta.ClientID%>').selectedIndex = "0"; 
+            document.getElementById('<%= ddBancoTarjeta.ClientID%>').selectedIndex = "0"; 
+
+            
             $find("mpe").hide();
             return false;
         }

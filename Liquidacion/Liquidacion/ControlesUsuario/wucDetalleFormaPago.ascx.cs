@@ -512,6 +512,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
 
     protected void btnAceptarAnticipo_Click(object sender, EventArgs e)
     {
+       
         DataTable dtLiqAnticipoTmp = new DataTable("LiqPagoAnticipado");
         if (decimal.Parse(txtAntMonto.Text != "" ? txtAntMonto.Text:"0") == 0)
         {
@@ -587,8 +588,8 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                 dr["TipoCobro"] = (Int16)(RegistroPago.TipoPago.anticipo);
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
-                dr["AnnioCobroOrigen"] = LstSaldos.SelectedValue.ToString().Split('/')[1];
-                dr["CobroOrigen"] = LstSaldos.SelectedValue.ToString().Split('/')[0];
+                dr["AnnioCobroOrigen"] = LstSaldos.SelectedValue.ToString().Split('/')[4];
+                dr["CobroOrigen"] = LstSaldos.SelectedValue.ToString().Split('/')[5];
 
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtAntMonto.Text); ;
 
@@ -643,8 +644,8 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                 dr["NombreTipoCobro"] = "ANTICIPO";
                 dr["ProveedorNombre"] = "";
                 dr["TipoValeDescripcion"] = "";
-                dr["AnnioCobroOrigen"] = LstSaldos.SelectedValue.ToString().Split('/')[1];
-                dr["CobroOrigen"] = LstSaldos.SelectedValue.ToString().Split('/')[0];
+                dr["AnnioCobroOrigen"] = LstSaldos.SelectedValue.ToString().Split('/')[4];
+                dr["CobroOrigen"] = LstSaldos.SelectedValue.ToString().Split('/')[5];
 
                 Session["ImporteOperacion"] = Convert.ToDecimal(this.txtAntMonto.Text); ;
 

@@ -2043,11 +2043,11 @@ else
 
         foreach (DataRow afiliacion in dtAfiliaciones.Rows)
         {
-            if (afiliacion["banco"].ToString() == Banco && afiliacion["numeroafiliacion"].ToString().Contains(LikeAfiliacion))
+            if (afiliacion["banco"].ToString().Trim() == Banco.Trim() && afiliacion["numeroafiliacion"].ToString().Contains(LikeAfiliacion))
             {
                 ListaAfiliaciones.Add(afiliacion["numeroafiliacion"].ToString());
             }
-            else if (afiliacion["banco"].ToString() == Banco && LikeAfiliacion=="todos")
+            else if (afiliacion["banco"].ToString().Trim() == Banco.Trim() && LikeAfiliacion.Contains("todos"))
             {
                 ListaAfiliaciones.Add(afiliacion["numeroafiliacion"].ToString());
             }

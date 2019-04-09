@@ -218,8 +218,21 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                 {
                     ClienteID = Convert.ToInt32(txtCliente.Text.Trim());
                     txtNombre.Text = consultaNombreClienteTransferencia(ClienteID);
-                    NombreClienteTrans = txtNombre.Text;
-                    txtNombre.Focus();
+                    if (txtNombre.Text != "INACTIVO")
+                    {
+                        NombreClienteTrans = txtNombre.Text;
+                        txtNombre.Focus();
+                    }
+                    else if (txtNombre.Text == "INACTIVO")
+                    {
+                        NombreClienteTrans = "INACTIVO";
+                         txtNombre.Text=string.Empty;
+                        txtCliente.Focus();
+                        
+                    }
+
+
+
 
                 }
 
@@ -732,6 +745,8 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         {
 
         Cliente _datosCliente = new Cliente(0, 1);
+        Cliente objCliente = new Cliente(Convert.ToInt32(this.txtAntCliente.Text), 0);
+        objCliente.ConsultaNombreCliente();
 
         decimal NuevoSaldo=0;
         decimal TotalPedidos = 0;
@@ -742,7 +757,23 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         {
             dsLiq = (DataSet)(Session["dsLiquidacion"]);
             _datosCliente.ConsultaSaldosAFavor(Convert.ToInt32(this.txtAntCliente.Text),"",0,0);
-            
+
+            if (objCliente.statusCliente.Trim() != "INACTIVO")
+            {
+                this.txtAntNombre.Text = objCliente.Nombre;
+                NombreCteAnticipo = objCliente.Nombre;
+            }
+            else if (objCliente.statusCliente.Trim() == "INACTIVO")
+            {
+
+                NombreCteAnticipo = "INACTIVO";
+            }
+            else
+            {
+
+                NombreCteAnticipo = string.Empty;
+            }
+
             if (_datosCliente!=null)
             {
                 if (_datosCliente.SaldosCliente != null)
@@ -808,8 +839,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                     try
                     {
 
-                        Cliente objCliente = new Cliente(Convert.ToInt32(this.txtAntCliente.Text), 0);
-                        objCliente.ConsultaNombreCliente();
+                        
 
 
                         foreach (DataRow row in _datosCliente.SaldosCliente.Rows)
@@ -817,9 +847,8 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                             row["Nombre"] = objCliente.Nombre;
                         }
 
+                       
 
-                        this.txtAntNombre.Text = objCliente.Nombre;
-                        NombreCteAnticipo = objCliente.Nombre;
 
                         LstSaldos.DataSource = _datosCliente.SaldosCliente;
                         LstSaldos.DataTextField = "Saldo";
@@ -852,7 +881,16 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         {
             Cliente objCliente = new Cliente(ClienteID,0);
             objCliente.ConsultaNombreCliente();
-            NombreCliente = objCliente.Nombre;
+
+            if (objCliente.statusCliente.Trim()!="INACTIVO")
+            {
+                NombreCliente = objCliente.Nombre;
+            }
+            else if (objCliente.statusCliente.Trim() == "INACTIVO")
+            {
+                NombreCliente = "INACTIVO";
+            }
+
         }
         catch (Exception ex)
         {

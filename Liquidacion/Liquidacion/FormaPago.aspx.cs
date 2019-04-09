@@ -210,10 +210,17 @@ public partial class FormaPago : System.Web.UI.Page
 
                     if (dt!=null)
                     {
-                        if (dt.Rows.Count >0)
+                        if (dt.Rows.Count >0 && dt.Rows[0]["estatus"].ToString().Trim()=="ACTIVO")
                         {
+
                             HiddenNomCteCheque.Value= dt.Rows[0]["Nombre"].ToString().Trim();
                         }
+                        else if(dt.Rows.Count > 0 && dt.Rows[0]["estatus"].ToString().Contains("INACTIVO"))
+                        {
+                            HiddenNomCteCheque.Value = "INACTIVO";
+
+                        }
+                        
                         else
                         {
                             HiddenNomCteCheque.Value = "CTENOEXISTE";         
@@ -233,10 +240,16 @@ public partial class FormaPago : System.Web.UI.Page
                     DataTable dt = RegPago.DatosCliente(int.Parse(txtClienteVale.Text));
                     if (dt != null)
                     {
-                        if (dt.Rows.Count > 0)
+                        if (dt.Rows.Count > 0 && dt.Rows[0]["estatus"].ToString().Trim() == "ACTIVO")
                         {
                             HiddenNomCteVale.Value= dt.Rows[0]["Nombre"].ToString().Trim();
                         }
+                        else if (dt.Rows.Count > 0 && dt.Rows[0]["estatus"].ToString().Contains("INACTIVO"))
+                        {
+                            HiddenNomCteCheque.Value = "INACTIVO";
+
+                        }
+
                         else
                         {
                             HiddenNomCteVale.Value = "CTENOEXISTE";
@@ -1663,7 +1676,15 @@ else
                     {
                         Cliente clienteTemp = new Cliente(int.Parse(txtClienteTarjeta.Text), 0);
                         clienteTemp.ConsultaNombreCliente();
-                        txtNombreClienteTarjeta.Text = clienteTemp.Nombre;
+                        if (clienteTemp.statusCliente.Trim()!="INACTIVO")
+                        {
+                            txtNombreClienteTarjeta.Text = clienteTemp.Nombre;
+                        }
+                        else if (clienteTemp.statusCliente.Trim() == "INACTIVO")
+                        {
+                            txtNombreClienteTarjeta.Text = "INACTIVO";
+                        }
+
                     }
                     catch (Exception ex)
                     {

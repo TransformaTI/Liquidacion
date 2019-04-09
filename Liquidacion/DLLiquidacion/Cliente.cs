@@ -46,7 +46,7 @@ namespace SigametLiquidacion
         private string _TipoPago;
         Boolean _eleva = false;
         bool _errorDeServidor;
-
+        private string _statusCliente;
 
 
         private DataTable _dtSaldosCliente;
@@ -264,6 +264,15 @@ namespace SigametLiquidacion
             }
         }
 
+   
+
+        public string statusCliente
+        {
+            get { return _statusCliente; }
+            set { _statusCliente = value; }
+        }
+
+
         public Cliente(int Cliente, byte ClaveCreditoAutorizado, Parametros _parametros, string usuario, string _cadena)
         {
            
@@ -425,7 +434,7 @@ namespace SigametLiquidacion
                 if (objDireccionEntega.Message != null)
                 {
                     //if (objDireccionEntega.Message.Contains("La consulta no produjo resultados con los parametros indicados"))
-                    if (objDireccionEntega.Message.Contains("La consulta no produjo "))
+                    if (objDireccionEntega.Message.Contains("La consulta no produjo ") || objDireccionEntega.Status.Contains("INACTIVO"))
                     {
                         this._encontrado = false;
                         return objDireccionEntega;
@@ -502,7 +511,7 @@ namespace SigametLiquidacion
                 
                 if (objDireccionEntega.Message != null)
                 {
-                    if (objDireccionEntega.Message.Contains("La consulta no produjo resultados"))
+                    if ( objDireccionEntega.Message.Contains("La consulta no produjo resultados") ||  objDireccionEntega.Message.Contains("No se encontraron registros con los parámetros proporcionados") )
                     //if (objDireccionEntega.Message.Contains("La consulta no produjo resultados con los parametros indicados"))
                     {
                         this._encontrado = false;
@@ -517,6 +526,7 @@ namespace SigametLiquidacion
 
                 this._encontrado = true;
                 this._nombre = objDireccionEntega.Nombre!=null? objDireccionEntega.Nombre:"SIN INFORMACIÓN EN CRM";
+                this._statusCliente= objDireccionEntega.Status != null ? objDireccionEntega.Status : "SIN ESTATUS";
                 this.IdPedidoCRM = 0;//ObtenerIdCRM(this._cliente); //objDireccionEntega.IDDireccionEntrega
             }
             catch (RTGMTimeoutException tex)

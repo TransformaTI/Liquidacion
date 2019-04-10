@@ -295,8 +295,9 @@
               else if (NombreClienteCheque == 'INACTIVO')
               {
                   alert('¡Cliente inactivo!');
-                   document.getElementById('ctl00_MainPlaceHolder_txtClienteCheque').value = '';
-                  document.getElementById('ctl00_MainPlaceHolder_txtClienteCheque').focus();
+                  // document.getElementById('ctl00_MainPlaceHolder_txtClienteCheque').value = '';
+                  //document.getElementById('ctl00_MainPlaceHolder_txtClienteCheque').focus();
+                  //document.getElementById('cheque').style.display = 'inherit';
               }
 
                  else
@@ -321,29 +322,34 @@
               document.getElementById('vale').style.display = 'inherit';
               document.getElementById('AnticipoUC').style.display = 'none';
               document.getElementById('Transfer').style.display = 'none'; 
-              document.getElementById('tarjeta').style.display = 'none'; 
+             document.getElementById('tarjeta').style.display = 'none'; 
+             document.getElementById('cheque').style.display = 'none';
 
-             if (NombreClienteVale != 'CTENOEXISTE'  &&  NombreClienteVale!= 'INACTIVO' )
-             {
-                 document.getElementById('ctl00_MainPlaceHolder_txtValeNombre').value = NombreClienteVale;
-                 document.getElementById('ctl00_MainPlaceHolder_txtValeFecha').focus();
-             }
-              else if (NombreClienteVale == 'INACTIVO')
-             {
-                 alert('¡Cliente inactivo!');
-                 document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').value = '';
-                 document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').focus();
-             }
+                         if (NombreClienteVale != 'CTENOEXISTE'  &&  NombreClienteVale!= 'INACTIVO' )
+                         {
+                             document.getElementById('ctl00_MainPlaceHolder_txtValeNombre').value = NombreClienteVale;
+                             document.getElementById('ctl00_MainPlaceHolder_txtValeFecha').focus();
+                         }
+                          else if (NombreClienteVale == 'INACTIVO')
+                         {
+                 
+                    
+                             //document.getElementById('vale').style.display = 'inherit';
+                             //document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').value = '';
+                             //document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').focus();
+                             alert('¡Cliente inactivo!');
+                         }
 
-             else
-             {
-                 alert('¡El cliente no existe!');
-                 document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').value = '';
-                 document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').focus();
+                             else
+                             {
+                                 alert('¡El cliente no existe!');
+               
+                                 document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').value = '';
+                                 document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').focus();
 
 
-             }
-              NombreClienteVale='';
+                             }
+                             NombreClienteVale='';
             }
              else
             {

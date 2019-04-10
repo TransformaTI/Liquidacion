@@ -244,8 +244,10 @@ namespace SigametLiquidacion
                 if (_cliente.Nombre != null)
                 {
                     dtCliente.Columns.Add(new DataColumn("Nombre", typeof(string)));
+                     dtCliente.Columns.Add(new DataColumn("Estatus", typeof(string)));
                     NombreCliente = _cliente.Nombre != null? _cliente.Nombre.ToString():"";
-                    dtCliente.Rows.Add(NombreCliente);
+                    dtCliente.Rows.Add(NombreCliente,_cliente.statusCliente);
+                    
                 }
 
             //}

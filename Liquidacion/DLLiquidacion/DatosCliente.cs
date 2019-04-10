@@ -47,6 +47,7 @@ namespace SigametLiquidacion
                 if (dtNombreCliente.Rows.Count > 0)
                 {
                     NombreCliente = dtNombreCliente.Rows[0]["NOMBRE"].ToString();
+                    
                 }
             }
             catch(Exception ex)

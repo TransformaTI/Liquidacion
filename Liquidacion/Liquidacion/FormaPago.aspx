@@ -209,6 +209,12 @@
             
 //HiddenInputPCT != 'Si' && HiddenInputPCT!= '' &&
 
+            if (NumCte != '' && NomCteTarjeta == 'INACTIVO' && HiddenInput == 'ConsultaTPV')
+              {
+                 document.getElementById('<%= txtNombreClienteTarjeta.ClientID %>').value='' ;
+                  alert('¡Cliente inactivo!');
+
+            } 
 
             if ( HiddenInputPCT== 'No' && NumCte != '' && HiddenInput!='ConsultaCteAnticipo' && (HiddenTDCDupliado=='' || HiddenTDCDupliado=='No') && HiddenPagosOtraRuta=='' && NomCteTarjeta!='' && HiddenInput == 'ConsultaTPV') {
                 alert('No se encontraron pagos de TPV para el cliente, por favor verifique con el área de tarjetas de crédito');
@@ -281,11 +287,19 @@
               document.getElementById('tarjeta').style.display = 'none'; 
              
 
-              if (NombreClienteCheque != 'CTENOEXISTE')
+              if (NombreClienteCheque != 'CTENOEXISTE' &&  NombreClienteCheque!= 'INACTIVO' )
                  {
                     document.getElementById('ctl00_MainPlaceHolder_txtNombreClienteCheque').value = NombreClienteCheque;
                     document.getElementById('ctl00_MainPlaceHolder_txtFechaChueque').focus();
-                 }
+              }
+              else if (NombreClienteCheque == 'INACTIVO')
+              {
+                  alert('¡Cliente inactivo!');
+                  // document.getElementById('ctl00_MainPlaceHolder_txtClienteCheque').value = '';
+                  //document.getElementById('ctl00_MainPlaceHolder_txtClienteCheque').focus();
+                  //document.getElementById('cheque').style.display = 'inherit';
+              }
+
                  else
                 {
                   alert('¡El cliente no existe!');
@@ -308,22 +322,34 @@
               document.getElementById('vale').style.display = 'inherit';
               document.getElementById('AnticipoUC').style.display = 'none';
               document.getElementById('Transfer').style.display = 'none'; 
-              document.getElementById('tarjeta').style.display = 'none'; 
+             document.getElementById('tarjeta').style.display = 'none'; 
+             document.getElementById('cheque').style.display = 'none';
 
-             if (NombreClienteVale != 'CTENOEXISTE')
-             {
-                 document.getElementById('ctl00_MainPlaceHolder_txtValeNombre').value = NombreClienteVale;
-                 document.getElementById('ctl00_MainPlaceHolder_txtValeFecha').focus();
-             }
-             else
-             {
-                 alert('¡El cliente no existe!');
-                 document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').value = '';
-                 document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').focus();
+                         if (NombreClienteVale != 'CTENOEXISTE'  &&  NombreClienteVale!= 'INACTIVO' )
+                         {
+                             document.getElementById('ctl00_MainPlaceHolder_txtValeNombre').value = NombreClienteVale;
+                             document.getElementById('ctl00_MainPlaceHolder_txtValeFecha').focus();
+                         }
+                          else if (NombreClienteVale == 'INACTIVO')
+                         {
+                 
+                    
+                             //document.getElementById('vale').style.display = 'inherit';
+                             //document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').value = '';
+                             //document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').focus();
+                             alert('¡Cliente inactivo!');
+                         }
+
+                             else
+                             {
+                                 alert('¡El cliente no existe!');
+               
+                                 document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').value = '';
+                                 document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').focus();
 
 
-             }
-              NombreClienteVale='';
+                             }
+                             NombreClienteVale='';
             }
              else
             {
@@ -334,6 +360,11 @@
             {
                 alert('¡El cliente no existe!');
             }  
+
+            if (NumCteAnticipo != '' && NomCteAnticipo == 'INACTIVO' && HiddenInput=='ConsultaCteAnticipo')
+            {
+                  alert('¡Cliente inactivo!');
+            }  
             
 
             if (NumCteTrans != '' && NombreClienteTrans == '' && HiddenInput == 'ConsultaCteTransferencia')
@@ -341,10 +372,18 @@
                   alert('¡El cliente no existe!');
             }  
 
+            if (NumCteTrans != '' && NombreClienteTrans == 'INACTIVO' && HiddenInput == 'ConsultaCteTransferencia')
+            {
+                  alert('¡Cliente inactivo!');
+            }  
+
+
            if (NumCte != '' && NomCteTarjeta == '' && HiddenInput == 'ConsultaTPV')
             {
                   alert('¡El cliente no existe!');
-            }        
+            }  
+
+              
         });        
 
          function onlyNumbers(evt) {

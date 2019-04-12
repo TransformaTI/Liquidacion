@@ -571,7 +571,7 @@ namespace SigametLiquidacion
 
                 if (objDireccionEntega.Message!=null)
                 {
-                    if (objDireccionEntega.Message.Contains("La consulta no produjo resultados"))
+                    if (objDireccionEntega.Message.Contains("La consulta no produjo resultados")  || objDireccionEntega.Message.Contains("No se encontraron registros"))
                     //if (objDireccionEntega.Message.Contains("La consulta no produjo resultados con los parametros indicados"))
                     {
                         _eleva = false;
@@ -585,9 +585,13 @@ namespace SigametLiquidacion
 
                 }
 
-                this._encontrado = true;
+                
 
-              
+                this._encontrado = true;
+                this.statusCliente = objDireccionEntega.Status.ToUpper().Trim();
+
+
+
                 this._nombre = objDireccionEntega.Nombre!=null? objDireccionEntega.Nombre.ToUpper():"SIN INFORMACIÓN EN CRM";
                 this._direccion = objDireccionEntega.DireccionCompleta!=null?objDireccionEntega.DireccionCompleta: "SIN INFORMACIÓN EN CRM";
                 this._celula = objDireccionEntega.ZonaSuministro!=null? Convert.ToInt16(objDireccionEntega.ZonaSuministro.IDZona): Convert.ToInt16(0);

@@ -767,6 +767,8 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
             {
 
                 NombreCteAnticipo = "INACTIVO";
+                             
+
             }
             else
             {
@@ -889,6 +891,7 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
             else if (objCliente.statusCliente.Trim() == "INACTIVO")
             {
                 NombreCliente = "INACTIVO";
+               
             }
 
         }

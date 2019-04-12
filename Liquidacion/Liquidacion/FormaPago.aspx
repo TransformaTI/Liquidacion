@@ -5,9 +5,6 @@
 <%@ Register Src="~/ControlesUsuario/wucConsultaCargoTarjetaCliente.ascx" TagPrefix="uc1" TagName="wucConsultaCargoTarjetaCliente" %>
 <%@ Register Src="~/ControlesUsuario/wucDetalleFormaPago.ascx" TagPrefix="ucDetallePago" TagName="wucDetalleFormaPago" %>
 
-
-
-
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainPlaceHolder" runat="server">
 
     <%--  --%>
@@ -212,8 +209,8 @@
             if (NumCte != '' && NomCteTarjeta == 'INACTIVO' && HiddenInput == 'ConsultaTPV')
               {
                  document.getElementById('<%= txtNombreClienteTarjeta.ClientID %>').value='' ;
-                  alert('¡Cliente inactivo!');
-
+                alert('¡Cliente inactivo!');
+                document.getElementById('<%= txtClienteTarjeta.ClientID %>').value='' ;
             } 
 
             if ( HiddenInputPCT== 'No' && NumCte != '' && HiddenInput!='ConsultaCteAnticipo' && (HiddenTDCDupliado=='' || HiddenTDCDupliado=='No') && HiddenPagosOtraRuta=='' && NomCteTarjeta!='' && HiddenInput == 'ConsultaTPV') {
@@ -262,17 +259,17 @@
 
 
 
-            if (segmento = 'tarjeta') {
+            if (segmento == 'tarjeta') {
                 document.getElementById('<%=txtFechaTarjeta.ClientID%>').focus();
             }
             
-            if (segmento = 'anticipo') {
+            if (segmento == 'anticipo') {
                 document.getElementById('ctl00_MainPlaceHolder_wucDetalleFormaPago1_LstSaldos').focus();
             }
 
 
 
-            if (segmento = 'transferencia') {
+            if (segmento == 'transferencia') {
                 document.getElementById('ctl00_MainPlaceHolder_wucDetalleFormaPago1_txtFecha').focus();
             }
 
@@ -295,9 +292,9 @@
               else if (NombreClienteCheque == 'INACTIVO')
               {
                   alert('¡Cliente inactivo!');
-                  // document.getElementById('ctl00_MainPlaceHolder_txtClienteCheque').value = '';
-                  //document.getElementById('ctl00_MainPlaceHolder_txtClienteCheque').focus();
-                  //document.getElementById('cheque').style.display = 'inherit';
+                   document.getElementById('ctl00_MainPlaceHolder_txtClienteCheque').value = '';
+
+                  document.getElementById('cheque').style.display = 'inherit';
               }
 
                  else
@@ -335,9 +332,12 @@
                  
                     
                              //document.getElementById('vale').style.display = 'inherit';
-                             //document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').value = '';
+                             document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').value = '';
                              //document.getElementById('ctl00_MainPlaceHolder_txtClienteVale').focus();
-                             alert('¡Cliente inactivo!');
+                             alert('¡Cliente inactivo!');                         
+
+
+
                          }
 
                              else
@@ -363,18 +363,22 @@
 
             if (NumCteAnticipo != '' && NomCteAnticipo == 'INACTIVO' && HiddenInput=='ConsultaCteAnticipo')
             {
-                  alert('¡Cliente inactivo!');
+                alert('¡Cliente inactivo!');
+                document.getElementById('ctl00_MainPlaceHolder_wucDetalleFormaPago1_txtAntCliente').value = '';
+
             }  
             
 
             if (NumCteTrans != '' && NombreClienteTrans == '' && HiddenInput == 'ConsultaCteTransferencia')
             {
-                  alert('¡El cliente no existe!');
+                alert('¡El cliente no existe!');
+                
             }  
 
             if (NumCteTrans != '' && NombreClienteTrans == 'INACTIVO' && HiddenInput == 'ConsultaCteTransferencia')
             {
-                  alert('¡Cliente inactivo!');
+                alert('¡Cliente inactivo!');
+                document.getElementById('ctl00_MainPlaceHolder_wucDetalleFormaPago1_txtCliente').value = '';
             }  
 
 
@@ -582,7 +586,16 @@
             return false;
         }
 
+        
+        function ValidaCamposCheque() {
+            var afiliacionValida = "1";
+            if (document.getElementById('<%=txtClienteCheque.ClientID%>').value == "") {
+                alert('Capture el número de cliente');
+                return false;
+            }
 
+           
+        }
 
         function ValidaCamposTDC()
         {

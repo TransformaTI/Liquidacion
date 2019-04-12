@@ -1465,6 +1465,12 @@ namespace SigametLiquidacion.WebControls
                     this._cliente = new SigametLiquidacion.Cliente(Cliente, this._claveCreditoAutorizado);
                     this._cliente.FSuministro = FechaSuministro;//21-07-15 Consulta del precio de acuerdo a la zona económica del cliente
                     this._cliente.ConsultaDatosCliente();
+                    if (this._cliente.statusCliente=="INACTIVO")
+                    {
+                        this.lblMensajeRutaDiferente.ForeColor = Color.Red;
+                        this.lblMensajeRutaDiferente.Text = "EL CLIENTE SE ENCUENTRA INACTIVO";
+                        throw new Exception("");
+                    }
                     ListaClientes.Add(this._cliente);
                     System.Web.HttpContext.Current.Session["ListaClientes"] = ListaClientes;
 
@@ -1474,7 +1480,11 @@ namespace SigametLiquidacion.WebControls
             }
             catch (Exception ex)
             {
-                this.lblMensajeConciliacion.Text = "Error " + ex.Message;
+                if (ex.Message!="")
+                {
+                    this.lblMensajeConciliacion.Text = "Error " + ex.Message;
+                }
+                
                 System.Web.HttpContext.Current.Session["desasignado"] = "";
                 System.Web.HttpContext.Current.Session["buscandoCliente"] = "";
                 this.txtNumeroCliente.Focus();

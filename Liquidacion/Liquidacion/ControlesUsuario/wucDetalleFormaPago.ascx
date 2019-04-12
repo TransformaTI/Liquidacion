@@ -20,6 +20,12 @@
 
     function ValidaMontoSaldo()
     {
+        if ($("#<%=txtAntCliente.ClientID%>")[0].value == "")
+        {
+            alert('Capture el número de cliente');
+            return false;
+        }
+
         var listBox = document.getElementById("<%= LstSaldos.ClientID%>");
         var Monto = listBox.options[listBox.selectedIndex].text.split(",");
 
@@ -80,6 +86,12 @@
 </script>
 <script type="text/javascript">
     function ValidaCuentaOrigen() {
+
+        if ($("#<%=txtCliente.ClientID%>")[0].value == "")
+        {
+            alert('Capture el número de cliente');
+            return false;
+        }
         revisaCuentaOrigen();
         var CtaOrigenValida = $("#<%=HiddenCtaOrigenValida.ClientID%>")[0].value;
 

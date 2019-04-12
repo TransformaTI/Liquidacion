@@ -246,7 +246,7 @@ public partial class FormaPago : System.Web.UI.Page
                         }
                         else if (dt.Rows.Count > 0 && dt.Rows[0]["estatus"].ToString().Contains("INACTIVO"))
                         {
-                            HiddenNomCteCheque.Value = "INACTIVO";
+                            HiddenNomCteVale.Value = "INACTIVO";
 
                         }
 
@@ -354,6 +354,7 @@ public partial class FormaPago : System.Web.UI.Page
         TxtCteAfiliacion.Attributes.Add("onblur", "return ConsultaPagosTPV('ConsultaTPV-Trans')");
 
         imbAceptarTDC.Attributes.Add("onclick", "return ValidaCamposTDC()");
+        imbAceptar.Attributes.Add("onclick", "return ValidaCamposCheque()");
 
         txtNoAutorizacionTarjeta.Attributes.Add("onkeypress", "return isAlphaNumeric(event)");
 

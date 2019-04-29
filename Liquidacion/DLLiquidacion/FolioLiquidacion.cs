@@ -643,7 +643,7 @@ namespace SigametLiquidacion
 
                 if (Cliente2 != null)
                 {
-                    if (Cliente2.Encontrado && Cliente2.NumeroCliente > 0)
+                    if (Cliente2.Encontrado && Cliente2.NumeroCliente > 0 && Cliente2.statusCliente !="INACTIVO")
                     //if (Cliente2.Encontrado)
                     {
                         string ObservacionesConciliacion = string.Empty;

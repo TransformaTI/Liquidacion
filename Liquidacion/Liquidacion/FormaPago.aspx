@@ -38,7 +38,8 @@
 				        value += text.substring(index + search.length);
 				        list.childNodes[i].innerHTML = value;
 			        }
-		        }
+                }
+
 	        }
         }
 
@@ -55,9 +56,9 @@
             var afiliacion = document.getElementById('<%= TxtAfiliacion.ClientID %>').value;
             var n = afiliaciones.includes(afiliacion, 0);
 
-            alert(afiliaciones);
-            alert(afiliacion);
-            alert(n);
+            //alert(afiliaciones);
+            //alert(afiliacion);
+            //alert(n);
 
             if (n == -1) 
             {
@@ -130,7 +131,8 @@
         
 
         //Validaciones  On load
-        document.addEventListener("DOMContentLoaded", function () { // mcc 2018 05 10
+        document.addEventListener("DOMContentLoaded", function ()
+        { // mcc 2018 05 10
 
  
 
@@ -237,10 +239,7 @@
                     segmento='anticipo'
                 
                     
-            }
-
-
-            
+            }     
 
 
 
@@ -521,11 +520,14 @@
 
 
         function MuestraAfiliacionesTodas() {
+            
+            document.getElementById('<%=TxtAfiliacion.ClientID%>').focus();
+
             SetContextKey();
 
               var autoComplete = $find('<%=AutoCompleteExtender1.ClientID%>');
 
-                    // To show the popup by JavaScript, following code is necessary.
+                // To show the popup by JavaScript, following code is necessary.
                     // [NOTE] This trick is weak if the AutoCompleteExtender is updated.
                     autoComplete._cache = {};
                     autoComplete._currentPrefix = null;
@@ -541,9 +543,7 @@
                     autoComplete._onTimerTick(null, null);    
 
                     // restore the old minimum prefix length
-                     autoComplete.set_minimumPrefixLength(oldMinimumPrefixLength);
-
-
+                   autoComplete.set_minimumPrefixLength(oldMinimumPrefixLength);                      
         }
 
 
@@ -1139,8 +1139,8 @@
                                                                 Text="Banco:"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:DropDownList ID="ddBancoTarjeta" runat="server" CssClass="textboxcaptura"
-                                                                Width="200px" readonly="true" enabled="false"  >
+                                                            <asp:DropDownList ID="ddBancoTarjeta" runat="server" CssClass="textboxcaptura" 
+                                                                Width="200px" readonly="true" enabled="false"   >
                                                             </asp:DropDownList>
                                                             <asp:RequiredFieldValidator ID="rfvBancoTarjeta" runat="server"
                                                                 ControlToValidate="ddBancoTarjeta" Display="None"

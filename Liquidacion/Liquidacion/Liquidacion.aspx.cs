@@ -121,10 +121,7 @@ public partial class Liquidacion : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-
             string error= "A ocurrido un error al carga liquidación. Intente de nuevo. Error:" +ex.Message;
-            //ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('A ocurrido un error:" + ex.Message + ");", true);
-            //Response.Redirect("SeleccionRutaLiquidacionDina.aspx");
             ScriptManager.RegisterStartupScript(this, this.GetType(),
             "alert",
             "alert('"+error+"');window.location ='SeleccionRutaLiquidacionDina.aspx';",

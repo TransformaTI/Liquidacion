@@ -61,30 +61,38 @@ namespace SigametLiquidacion
         
         public DataTable ListaPrecios()
         {      
-            DataTable dataTable = this.dtListaPrecios.Clone();
-            this._precioVigente = Convert.ToDecimal(this.dtListaPrecios.Compute("MAX(Precio)", "ClaseRuta = " + this._claseRuta.ToString()));
-            DataRow[] dr = dtListaPrecios.Select("precio="+ _precioVigente.ToString());
+            DataTable dataTable = this.dtListaPrecios;
 
-            if (!this._preciosMultiples)
+            if (dataTable.Rows.Count >0)
             {
-                DataRow row = dataTable.NewRow();
-                row.BeginEdit();
-                row["Precio"] = (object) this._precioVigente;
-                row["ZonaEconomica"] = (object)dr[0]["ZonaEconomica"];
-                row.EndEdit();
-                dataTable.Rows.Add(row);
-            }
-            else
-            {
-                foreach (DataRow dataRow in this.dtListaPrecios.Select("", "Precio DESC"))
-                {
-                    DataRow row = dataTable.NewRow();
-                    foreach (DataColumn dataColumn in (InternalDataCollectionBase)this.dtListaPrecios.Columns)
+                this._precioVigente = Convert.ToDecimal(this.dtListaPrecios.Compute("MAX(Precio)", "ClaseRuta = " + this._claseRuta.ToString()));
+            
+           
+
+                    DataRow[] dr = dtListaPrecios.Select("precio="+ _precioVigente.ToString());
+
+                    if (!this._preciosMultiples)
                     {
-                        row[dataColumn.ColumnName] = dataRow[dataColumn.ColumnName];
+                        DataRow row = dataTable.NewRow();
+                        row.BeginEdit();
+                        row["Precio"] = (object) this._precioVigente;
+                        row["ZonaEconomica"] = (object)dr[0]["ZonaEconomica"];
+                        row.EndEdit();
+                        dataTable.Rows.Add(row);
                     }
-                    dataTable.Rows.Add(row);
-                }
+                    else
+                    {
+                        foreach (DataRow dataRow in this.dtListaPrecios.Select("", "Precio DESC"))
+                        {
+                            DataRow row = dataTable.NewRow();
+                            foreach (DataColumn dataColumn in (InternalDataCollectionBase)this.dtListaPrecios.Columns)
+                            {
+                                row[dataColumn.ColumnName] = dataRow[dataColumn.ColumnName];
+                            }
+                            dataTable.Rows.Add(row);
+                        }
+                    }
+
             }
             return dataTable;
         }

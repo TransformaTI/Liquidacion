@@ -170,6 +170,8 @@ public partial class Liquidacion : System.Web.UI.Page
         //Carga de precios de acuerdo a los datos de pedido
         _precios = new Precio(AutoTanqueTurno1.ClaseRuta, AutoTanqueTurno1.Fecha, AutoTanqueTurno1.PreciosMultiples);
 
+
+
         if (_precios.ListaPrecios().Rows.Count > 0)
         {
             nuevoPedido.ListaPrecios = _precios.ListaPrecios();
@@ -232,6 +234,8 @@ public partial class Liquidacion : System.Web.UI.Page
         else
         {
             lblMensaje.Text = "No es posible cargar la lista de Precios";
+
+            throw new System.InvalidOperationException("No es posible cargar la lista de Precios");
         }
     }
     #endregion

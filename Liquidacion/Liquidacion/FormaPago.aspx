@@ -14,7 +14,7 @@
 
        
     
-          function SetContextKey() {
+       function SetContextKey() {
         $find('<%=AutoCompleteExtender1.ClientID%>').set_contextKey($get("<%=ddBancoTarjeta.ClientID %>").value+'-'+$get("<%=TxtAfiliacion.ClientID %>").value);
         }
 
@@ -250,10 +250,12 @@
 
             if (HiddenInput == "ConsultaCteTransferencia" ||  PostBack_trasferencia=='CuentasBancarias')
             {
+
                 document.getElementById('Anticipo').style.display = 'none'; 
                 document.getElementById('AnticipoUC').style.display = 'inherit';
                 document.getElementById('Transfer').style.display = 'inherit';
                 segmento = 'transferencia';
+
             }
 
 
@@ -268,10 +270,16 @@
 
 
 
-            if (segmento == 'transferencia') {
+            if (segmento == 'transferencia' && PostBack_trasferencia=='') {
+         
                 document.getElementById('ctl00_MainPlaceHolder_wucDetalleFormaPago1_txtFecha').focus();
             }
 
+            if (PostBack_trasferencia=='CuentasBancarias' && segmento == 'transferencia')
+             {
+         
+                document.getElementById('ctl00_MainPlaceHolder_wucDetalleFormaPago1_ddlBancoDestino').focus();
+            }
 
                if (NombreClienteCheque!='' )
             {        
@@ -428,6 +436,8 @@
              window.location = 'GenerarPago.aspx';
 
         }
+
+
 
     
 
@@ -588,13 +598,19 @@
 
         
         function ValidaCamposCheque() {
+            
             var afiliacionValida = "1";
             if (document.getElementById('<%=txtClienteCheque.ClientID%>').value == "") {
                 alert('Capture el número de cliente');
                 return false;
-            }
+            }             
 
+            PostBack();
+        }
+
+        function PostBack() {
            
+            javascript: __doPostBack('', '');         
         }
 
         function ValidaCamposTDC()
@@ -1058,8 +1074,8 @@
                                                     <tr>
                                                         <td class="style1">&nbsp;</td>
                                                         <td>
-                                                            <asp:ImageButton ID="imbAceptar" runat="server" 
-                                                                SkinID="btnAceptar" OnClick="imbAceptar_Click"
+                                                            <asp:ImageButton ID="imbAceptar" runat="server"  
+                                                                SkinID="btnAceptar"  OnClick="imbAceptar_Click" 
                                                                 ValidationGroup="Cheque" Height="25px" Width="25px" />
 
                                                         </td>

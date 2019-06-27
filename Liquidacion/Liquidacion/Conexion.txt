@@ -1,2 +1,2 @@
-Data Source=192.168.1.30;Initial Catalog=SIGAMETQA;User ID=ROPIMA;Password=ROPIMA9999;
+Data Source=192.168.1.30;Initial Catalog=SigametQA;User ID=ROPIMA;Password=ROPIMA9999;
 

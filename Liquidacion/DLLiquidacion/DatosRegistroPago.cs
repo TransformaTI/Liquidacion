@@ -310,6 +310,10 @@ namespace SigametLiquidacion
 
         public void CargaAfiliaciones(int Ruta)
         {
+            try
+            {
+
+            
             SqlParameter[] sqlParameterArray = new SqlParameter[1]
              {
                  new SqlParameter("@Ruta",Ruta)
@@ -317,6 +321,14 @@ namespace SigametLiquidacion
 
             this.dtAfiliaciones = new DataTable();
             this._dataAccess.LoadData(this.dtAfiliaciones, "spLiqConsultaAfiliacion", CommandType.StoredProcedure, sqlParameterArray, true);
+             
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         public void CargaPedidosLiquidacion(int Cliente, int Folio, int añoatt)

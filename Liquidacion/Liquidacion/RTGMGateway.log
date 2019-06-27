@@ -80126,3 +80126,4861 @@ System.ComponentModel.Win32Exception (0x80004005): The wait operation timed out
 </DireccionEntregaSIGAMETDatos>
 
 2019-06-27 16:31:57,014 [49] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:04:38,088 [67] INFO  RTGMGateway.RTGMGateway - Creando nueva instancia de RTGMGateway...
+
+2019-06-27 17:04:38,309 [74] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:04:38,313 [74] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:04:38,327 [74] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 0, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:04:39,158 [67] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:04:39,160 [67] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:04:39,163 [67] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 502311467, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:05:02,069 [67] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>07300</CP>
+  <CalleNombre>SIERRAVISTA</CalleNombre>
+  <ColoniaNombre>LINDAVISTA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>502311467</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>0.0000</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>0</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio>76.0000</ConsumoPromedio>
+  <ContratoAprobado>false</ContratoAprobado>
+  <DatosFiscales xsi:type="DatosFiscalesSIGAMETDatos">
+    <ExtensionData />
+    <Class>DatosFiscalesSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <AbreviaturaEstado />
+    <ApellidoMaterno />
+    <ApellidoPaterno />
+    <CP>     </CP>
+    <CURP>                    </CURP>
+    <Calle>                                                                                </Calle>
+    <Colonia>                                                                                </Colonia>
+    <Contacto>                                                            </Contacto>
+    <CopiasCFD>2</CopiasCFD>
+    <Email />
+    <EnvioCFDCorreo xsi:nil="true" />
+    <Estado>                    </Estado>
+    <FormaPagoSAT>99</FormaPagoSAT>
+    <FormaPagoSATDescripcion>Por definir</FormaPagoSATDescripcion>
+    <IDDatosFiscales>0</IDDatosFiscales>
+    <IDEmpresa>1</IDEmpresa>
+    <Municipio>                                        </Municipio>
+    <Nombre />
+    <NumeroCuentaPago />
+    <RFC>XAXX010101000</RFC>
+    <RazonSocial>SIN EMPRESA                                                                                                                                                                                                                                                    </RazonSocial>
+    <SegundoNombre />
+    <Telefono1>                    </Telefono1>
+    <Telefono2>                    </Telefono2>
+    <Telefono3>                    </Telefono3>
+    <TipoPersona>Persona Física</TipoPersona>
+    <UsoCFD>P01</UsoCFD>
+    <UsoCFDDescripcion>Por definir</UsoCFDDescripcion>
+  </DatosFiscales>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>SIERRAVISTA 219  LINDAVISTA, GUSTAVO A MADERO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre>LIMA</EntreCalle1Nombre>
+  <EntreCalle2Nombre>LATACUNGA</EntreCalle2Nombre>
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.49513780</Latitud>
+    <Longitud>-99.12510050</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>35834</IDCalle>
+  <IDClientesRelacionados />
+  <IDColonia>652</IDColonia>
+  <IDDatosFiscales>0</IDDatosFiscales>
+  <IDDireccionEntrega>502311467</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>502311467</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1>23616</IDEntreCalle1>
+  <IDEntreCalle2>23428</IDEntreCalle2>
+  <IDMunicipio>9007</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>GUSTAVO A MADERO</MunicipioNombre>
+  <NoSuministrar>false</NoSuministrar>
+  <Nombre>RESTAURANT LA TOSTADA                                                           </Nombre>
+  <NumExterior>219</NumExterior>
+  <NumInterior>                                                  </NumInterior>
+  <Observaciones>RC</Observaciones>
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>5023114670</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Ruta 052            </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>52</IDRuta>
+    <NumeroRuta>52</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>ACTIVO    </Status>
+  <StatusCalidad>VERIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>3593</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1>               </Telefono1>
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>PARTICULAR</Descripcion>
+    <IDTipoCliente>2</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Célula 201          </Descripcion>
+    <IDZona>201</IDZona>
+    <NumeroZona>201</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:05:02,069 [74] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>00000</CP>
+  <CalleNombre>HERRADURA</CalleNombre>
+  <ColoniaNombre>SIN COLONIA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>0</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>542.9100</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>20</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio xsi:nil="true" />
+  <ContratoAprobado>false</ContratoAprobado>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>HERRADURA   SIN COLONIA, SIN MUNICIPIO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre />
+  <EntreCalle2Nombre />
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.51634360</Latitud>
+    <Longitud>-99.27335880</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>0</IDCalle>
+  <IDClientesRelacionados>
+    <int>0</int>
+    <int>17160</int>
+    <int>406713</int>
+    <int>100071386</int>
+    <int>100075508</int>
+    <int>100075523</int>
+    <int>100075530</int>
+    <int>502343070</int>
+    <int>502552951</int>
+    <int>502577587</int>
+    <int>502725679</int>
+    <int>502730945</int>
+    <int>502730946</int>
+    <int>502748209</int>
+  </IDClientesRelacionados>
+  <IDColonia>0</IDColonia>
+  <IDDatosFiscales xsi:nil="true" />
+  <IDDireccionEntrega>0</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>0</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1 xsi:nil="true" />
+  <IDEntreCalle2 xsi:nil="true" />
+  <IDMunicipio>0</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>SIN MUNICIPIO</MunicipioNombre>
+  <NoSuministrar xsi:nil="true" />
+  <Nombre>Venta al publico                                                                </Nombre>
+  <NumExterior />
+  <NumInterior />
+  <Observaciones />
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>00</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>&lt;Sin Ruta&gt;          </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>0</IDRuta>
+    <NumeroRuta>0</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>INACTIVO  </Status>
+  <StatusCalidad>MODIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>0</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1 />
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>CORPORATIVO</Descripcion>
+    <IDTipoCliente>1</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>SIN CELULA          </Descripcion>
+    <IDZona>0</IDZona>
+    <NumeroZona>0</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:05:02,071 [67] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:05:02,071 [74] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:05:47,271 [78] INFO  RTGMGateway.RTGMGateway - Creando nueva instancia de RTGMGateway...
+
+2019-06-27 17:05:47,288 [61] INFO  RTGMGateway.RTGMGateway - Creando nueva instancia de RTGMGateway...
+
+2019-06-27 17:05:47,527 [78] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:05:47,530 [78] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:05:47,533 [78] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 502311467, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:05:47,603 [61] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:05:47,604 [61] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:05:47,606 [61] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 0, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:05:47,778 [61] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>00000</CP>
+  <CalleNombre>HERRADURA</CalleNombre>
+  <ColoniaNombre>SIN COLONIA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>0</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>542.9100</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>20</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio xsi:nil="true" />
+  <ContratoAprobado>false</ContratoAprobado>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>HERRADURA   SIN COLONIA, SIN MUNICIPIO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre />
+  <EntreCalle2Nombre />
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.51634360</Latitud>
+    <Longitud>-99.27335880</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>0</IDCalle>
+  <IDClientesRelacionados>
+    <int>0</int>
+    <int>17160</int>
+    <int>406713</int>
+    <int>100071386</int>
+    <int>100075508</int>
+    <int>100075523</int>
+    <int>100075530</int>
+    <int>502343070</int>
+    <int>502552951</int>
+    <int>502577587</int>
+    <int>502725679</int>
+    <int>502730945</int>
+    <int>502730946</int>
+    <int>502748209</int>
+  </IDClientesRelacionados>
+  <IDColonia>0</IDColonia>
+  <IDDatosFiscales xsi:nil="true" />
+  <IDDireccionEntrega>0</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>0</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1 xsi:nil="true" />
+  <IDEntreCalle2 xsi:nil="true" />
+  <IDMunicipio>0</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>SIN MUNICIPIO</MunicipioNombre>
+  <NoSuministrar xsi:nil="true" />
+  <Nombre>Venta al publico                                                                </Nombre>
+  <NumExterior />
+  <NumInterior />
+  <Observaciones />
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>00</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>&lt;Sin Ruta&gt;          </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>0</IDRuta>
+    <NumeroRuta>0</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>INACTIVO  </Status>
+  <StatusCalidad>MODIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>0</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1 />
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>CORPORATIVO</Descripcion>
+    <IDTipoCliente>1</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>SIN CELULA          </Descripcion>
+    <IDZona>0</IDZona>
+    <NumeroZona>0</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:05:47,782 [78] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>07300</CP>
+  <CalleNombre>SIERRAVISTA</CalleNombre>
+  <ColoniaNombre>LINDAVISTA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>502311467</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>0.0000</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>0</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio>76.0000</ConsumoPromedio>
+  <ContratoAprobado>false</ContratoAprobado>
+  <DatosFiscales xsi:type="DatosFiscalesSIGAMETDatos">
+    <ExtensionData />
+    <Class>DatosFiscalesSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <AbreviaturaEstado />
+    <ApellidoMaterno />
+    <ApellidoPaterno />
+    <CP>     </CP>
+    <CURP>                    </CURP>
+    <Calle>                                                                                </Calle>
+    <Colonia>                                                                                </Colonia>
+    <Contacto>                                                            </Contacto>
+    <CopiasCFD>2</CopiasCFD>
+    <Email />
+    <EnvioCFDCorreo xsi:nil="true" />
+    <Estado>                    </Estado>
+    <FormaPagoSAT>99</FormaPagoSAT>
+    <FormaPagoSATDescripcion>Por definir</FormaPagoSATDescripcion>
+    <IDDatosFiscales>0</IDDatosFiscales>
+    <IDEmpresa>1</IDEmpresa>
+    <Municipio>                                        </Municipio>
+    <Nombre />
+    <NumeroCuentaPago />
+    <RFC>XAXX010101000</RFC>
+    <RazonSocial>SIN EMPRESA                                                                                                                                                                                                                                                    </RazonSocial>
+    <SegundoNombre />
+    <Telefono1>                    </Telefono1>
+    <Telefono2>                    </Telefono2>
+    <Telefono3>                    </Telefono3>
+    <TipoPersona>Persona Física</TipoPersona>
+    <UsoCFD>P01</UsoCFD>
+    <UsoCFDDescripcion>Por definir</UsoCFDDescripcion>
+  </DatosFiscales>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>SIERRAVISTA 219  LINDAVISTA, GUSTAVO A MADERO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre>LIMA</EntreCalle1Nombre>
+  <EntreCalle2Nombre>LATACUNGA</EntreCalle2Nombre>
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.49513780</Latitud>
+    <Longitud>-99.12510050</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>35834</IDCalle>
+  <IDClientesRelacionados />
+  <IDColonia>652</IDColonia>
+  <IDDatosFiscales>0</IDDatosFiscales>
+  <IDDireccionEntrega>502311467</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>502311467</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1>23616</IDEntreCalle1>
+  <IDEntreCalle2>23428</IDEntreCalle2>
+  <IDMunicipio>9007</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>GUSTAVO A MADERO</MunicipioNombre>
+  <NoSuministrar>false</NoSuministrar>
+  <Nombre>RESTAURANT LA TOSTADA                                                           </Nombre>
+  <NumExterior>219</NumExterior>
+  <NumInterior>                                                  </NumInterior>
+  <Observaciones>RC</Observaciones>
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>5023114670</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Ruta 052            </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>52</IDRuta>
+    <NumeroRuta>52</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>ACTIVO    </Status>
+  <StatusCalidad>VERIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>3593</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1>               </Telefono1>
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>PARTICULAR</Descripcion>
+    <IDTipoCliente>2</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Célula 201          </Descripcion>
+    <IDZona>201</IDZona>
+    <NumeroZona>201</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:05:47,801 [61] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:05:47,804 [78] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:05,948 [61] INFO  RTGMGateway.RTGMGateway - Creando nueva instancia de RTGMGateway...
+
+2019-06-27 17:06:05,954 [74] INFO  RTGMGateway.RTGMGateway - Creando nueva instancia de RTGMGateway...
+
+2019-06-27 17:06:06,164 [61] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:06:06,165 [61] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:06,166 [61] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 0, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:06:06,236 [74] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:06:06,239 [74] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:06,242 [74] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 502311467, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:06:06,506 [61] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>00000</CP>
+  <CalleNombre>HERRADURA</CalleNombre>
+  <ColoniaNombre>SIN COLONIA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>0</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>542.9100</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>20</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio xsi:nil="true" />
+  <ContratoAprobado>false</ContratoAprobado>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>HERRADURA   SIN COLONIA, SIN MUNICIPIO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre />
+  <EntreCalle2Nombre />
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.51634360</Latitud>
+    <Longitud>-99.27335880</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>0</IDCalle>
+  <IDClientesRelacionados>
+    <int>0</int>
+    <int>17160</int>
+    <int>406713</int>
+    <int>100071386</int>
+    <int>100075508</int>
+    <int>100075523</int>
+    <int>100075530</int>
+    <int>502343070</int>
+    <int>502552951</int>
+    <int>502577587</int>
+    <int>502725679</int>
+    <int>502730945</int>
+    <int>502730946</int>
+    <int>502748209</int>
+  </IDClientesRelacionados>
+  <IDColonia>0</IDColonia>
+  <IDDatosFiscales xsi:nil="true" />
+  <IDDireccionEntrega>0</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>0</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1 xsi:nil="true" />
+  <IDEntreCalle2 xsi:nil="true" />
+  <IDMunicipio>0</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>SIN MUNICIPIO</MunicipioNombre>
+  <NoSuministrar xsi:nil="true" />
+  <Nombre>Venta al publico                                                                </Nombre>
+  <NumExterior />
+  <NumInterior />
+  <Observaciones />
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>00</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>&lt;Sin Ruta&gt;          </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>0</IDRuta>
+    <NumeroRuta>0</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>INACTIVO  </Status>
+  <StatusCalidad>MODIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>0</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1 />
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>CORPORATIVO</Descripcion>
+    <IDTipoCliente>1</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>SIN CELULA          </Descripcion>
+    <IDZona>0</IDZona>
+    <NumeroZona>0</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:06:06,509 [61] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:06,553 [74] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>07300</CP>
+  <CalleNombre>SIERRAVISTA</CalleNombre>
+  <ColoniaNombre>LINDAVISTA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>502311467</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>0.0000</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>0</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio>76.0000</ConsumoPromedio>
+  <ContratoAprobado>false</ContratoAprobado>
+  <DatosFiscales xsi:type="DatosFiscalesSIGAMETDatos">
+    <ExtensionData />
+    <Class>DatosFiscalesSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <AbreviaturaEstado />
+    <ApellidoMaterno />
+    <ApellidoPaterno />
+    <CP>     </CP>
+    <CURP>                    </CURP>
+    <Calle>                                                                                </Calle>
+    <Colonia>                                                                                </Colonia>
+    <Contacto>                                                            </Contacto>
+    <CopiasCFD>2</CopiasCFD>
+    <Email />
+    <EnvioCFDCorreo xsi:nil="true" />
+    <Estado>                    </Estado>
+    <FormaPagoSAT>99</FormaPagoSAT>
+    <FormaPagoSATDescripcion>Por definir</FormaPagoSATDescripcion>
+    <IDDatosFiscales>0</IDDatosFiscales>
+    <IDEmpresa>1</IDEmpresa>
+    <Municipio>                                        </Municipio>
+    <Nombre />
+    <NumeroCuentaPago />
+    <RFC>XAXX010101000</RFC>
+    <RazonSocial>SIN EMPRESA                                                                                                                                                                                                                                                    </RazonSocial>
+    <SegundoNombre />
+    <Telefono1>                    </Telefono1>
+    <Telefono2>                    </Telefono2>
+    <Telefono3>                    </Telefono3>
+    <TipoPersona>Persona Física</TipoPersona>
+    <UsoCFD>P01</UsoCFD>
+    <UsoCFDDescripcion>Por definir</UsoCFDDescripcion>
+  </DatosFiscales>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>SIERRAVISTA 219  LINDAVISTA, GUSTAVO A MADERO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre>LIMA</EntreCalle1Nombre>
+  <EntreCalle2Nombre>LATACUNGA</EntreCalle2Nombre>
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.49513780</Latitud>
+    <Longitud>-99.12510050</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>35834</IDCalle>
+  <IDClientesRelacionados />
+  <IDColonia>652</IDColonia>
+  <IDDatosFiscales>0</IDDatosFiscales>
+  <IDDireccionEntrega>502311467</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>502311467</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1>23616</IDEntreCalle1>
+  <IDEntreCalle2>23428</IDEntreCalle2>
+  <IDMunicipio>9007</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>GUSTAVO A MADERO</MunicipioNombre>
+  <NoSuministrar>false</NoSuministrar>
+  <Nombre>RESTAURANT LA TOSTADA                                                           </Nombre>
+  <NumExterior>219</NumExterior>
+  <NumInterior>                                                  </NumInterior>
+  <Observaciones>RC</Observaciones>
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>5023114670</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Ruta 052            </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>52</IDRuta>
+    <NumeroRuta>52</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>ACTIVO    </Status>
+  <StatusCalidad>VERIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>3593</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1>               </Telefono1>
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>PARTICULAR</Descripcion>
+    <IDTipoCliente>2</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Célula 201          </Descripcion>
+    <IDZona>201</IDZona>
+    <NumeroZona>201</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:06:06,556 [74] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:09,403 [74] INFO  RTGMGateway.RTGMGateway - Creando nueva instancia de RTGMGateway...
+
+2019-06-27 17:06:09,410 [61] INFO  RTGMGateway.RTGMGateway - Creando nueva instancia de RTGMGateway...
+
+2019-06-27 17:06:09,633 [74] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:06:09,635 [74] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:09,639 [74] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 0, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:06:09,706 [61] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:06:09,708 [61] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:09,710 [61] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 502311467, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:06:10,006 [74] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>00000</CP>
+  <CalleNombre>HERRADURA</CalleNombre>
+  <ColoniaNombre>SIN COLONIA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>0</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>542.9100</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>20</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio xsi:nil="true" />
+  <ContratoAprobado>false</ContratoAprobado>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>HERRADURA   SIN COLONIA, SIN MUNICIPIO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre />
+  <EntreCalle2Nombre />
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.51634360</Latitud>
+    <Longitud>-99.27335880</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>0</IDCalle>
+  <IDClientesRelacionados>
+    <int>0</int>
+    <int>17160</int>
+    <int>406713</int>
+    <int>100071386</int>
+    <int>100075508</int>
+    <int>100075523</int>
+    <int>100075530</int>
+    <int>502343070</int>
+    <int>502552951</int>
+    <int>502577587</int>
+    <int>502725679</int>
+    <int>502730945</int>
+    <int>502730946</int>
+    <int>502748209</int>
+  </IDClientesRelacionados>
+  <IDColonia>0</IDColonia>
+  <IDDatosFiscales xsi:nil="true" />
+  <IDDireccionEntrega>0</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>0</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1 xsi:nil="true" />
+  <IDEntreCalle2 xsi:nil="true" />
+  <IDMunicipio>0</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>SIN MUNICIPIO</MunicipioNombre>
+  <NoSuministrar xsi:nil="true" />
+  <Nombre>Venta al publico                                                                </Nombre>
+  <NumExterior />
+  <NumInterior />
+  <Observaciones />
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>00</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>&lt;Sin Ruta&gt;          </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>0</IDRuta>
+    <NumeroRuta>0</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>INACTIVO  </Status>
+  <StatusCalidad>MODIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>0</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1 />
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>CORPORATIVO</Descripcion>
+    <IDTipoCliente>1</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>SIN CELULA          </Descripcion>
+    <IDZona>0</IDZona>
+    <NumeroZona>0</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:06:10,008 [74] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:10,078 [61] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>07300</CP>
+  <CalleNombre>SIERRAVISTA</CalleNombre>
+  <ColoniaNombre>LINDAVISTA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>502311467</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>0.0000</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>0</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio>76.0000</ConsumoPromedio>
+  <ContratoAprobado>false</ContratoAprobado>
+  <DatosFiscales xsi:type="DatosFiscalesSIGAMETDatos">
+    <ExtensionData />
+    <Class>DatosFiscalesSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <AbreviaturaEstado />
+    <ApellidoMaterno />
+    <ApellidoPaterno />
+    <CP>     </CP>
+    <CURP>                    </CURP>
+    <Calle>                                                                                </Calle>
+    <Colonia>                                                                                </Colonia>
+    <Contacto>                                                            </Contacto>
+    <CopiasCFD>2</CopiasCFD>
+    <Email />
+    <EnvioCFDCorreo xsi:nil="true" />
+    <Estado>                    </Estado>
+    <FormaPagoSAT>99</FormaPagoSAT>
+    <FormaPagoSATDescripcion>Por definir</FormaPagoSATDescripcion>
+    <IDDatosFiscales>0</IDDatosFiscales>
+    <IDEmpresa>1</IDEmpresa>
+    <Municipio>                                        </Municipio>
+    <Nombre />
+    <NumeroCuentaPago />
+    <RFC>XAXX010101000</RFC>
+    <RazonSocial>SIN EMPRESA                                                                                                                                                                                                                                                    </RazonSocial>
+    <SegundoNombre />
+    <Telefono1>                    </Telefono1>
+    <Telefono2>                    </Telefono2>
+    <Telefono3>                    </Telefono3>
+    <TipoPersona>Persona Física</TipoPersona>
+    <UsoCFD>P01</UsoCFD>
+    <UsoCFDDescripcion>Por definir</UsoCFDDescripcion>
+  </DatosFiscales>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>SIERRAVISTA 219  LINDAVISTA, GUSTAVO A MADERO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre>LIMA</EntreCalle1Nombre>
+  <EntreCalle2Nombre>LATACUNGA</EntreCalle2Nombre>
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.49513780</Latitud>
+    <Longitud>-99.12510050</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>35834</IDCalle>
+  <IDClientesRelacionados />
+  <IDColonia>652</IDColonia>
+  <IDDatosFiscales>0</IDDatosFiscales>
+  <IDDireccionEntrega>502311467</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>502311467</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1>23616</IDEntreCalle1>
+  <IDEntreCalle2>23428</IDEntreCalle2>
+  <IDMunicipio>9007</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>GUSTAVO A MADERO</MunicipioNombre>
+  <NoSuministrar>false</NoSuministrar>
+  <Nombre>RESTAURANT LA TOSTADA                                                           </Nombre>
+  <NumExterior>219</NumExterior>
+  <NumInterior>                                                  </NumInterior>
+  <Observaciones>RC</Observaciones>
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>5023114670</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Ruta 052            </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>52</IDRuta>
+    <NumeroRuta>52</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>ACTIVO    </Status>
+  <StatusCalidad>VERIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>3593</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1>               </Telefono1>
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>PARTICULAR</Descripcion>
+    <IDTipoCliente>2</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Célula 201          </Descripcion>
+    <IDZona>201</IDZona>
+    <NumeroZona>201</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:06:10,079 [61] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:27,773 [67] INFO  RTGMGateway.RTGMGateway - Creando nueva instancia de RTGMGateway...
+
+2019-06-27 17:06:27,779 [78] INFO  RTGMGateway.RTGMGateway - Creando nueva instancia de RTGMGateway...
+
+2019-06-27 17:06:28,186 [67] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:06:28,189 [67] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:28,193 [67] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 502311467, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:06:28,259 [78] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:06:28,261 [78] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:28,266 [78] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 0, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:06:28,658 [67] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>07300</CP>
+  <CalleNombre>SIERRAVISTA</CalleNombre>
+  <ColoniaNombre>LINDAVISTA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>502311467</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>0.0000</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>0</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio>76.0000</ConsumoPromedio>
+  <ContratoAprobado>false</ContratoAprobado>
+  <DatosFiscales xsi:type="DatosFiscalesSIGAMETDatos">
+    <ExtensionData />
+    <Class>DatosFiscalesSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <AbreviaturaEstado />
+    <ApellidoMaterno />
+    <ApellidoPaterno />
+    <CP>     </CP>
+    <CURP>                    </CURP>
+    <Calle>                                                                                </Calle>
+    <Colonia>                                                                                </Colonia>
+    <Contacto>                                                            </Contacto>
+    <CopiasCFD>2</CopiasCFD>
+    <Email />
+    <EnvioCFDCorreo xsi:nil="true" />
+    <Estado>                    </Estado>
+    <FormaPagoSAT>99</FormaPagoSAT>
+    <FormaPagoSATDescripcion>Por definir</FormaPagoSATDescripcion>
+    <IDDatosFiscales>0</IDDatosFiscales>
+    <IDEmpresa>1</IDEmpresa>
+    <Municipio>                                        </Municipio>
+    <Nombre />
+    <NumeroCuentaPago />
+    <RFC>XAXX010101000</RFC>
+    <RazonSocial>SIN EMPRESA                                                                                                                                                                                                                                                    </RazonSocial>
+    <SegundoNombre />
+    <Telefono1>                    </Telefono1>
+    <Telefono2>                    </Telefono2>
+    <Telefono3>                    </Telefono3>
+    <TipoPersona>Persona Física</TipoPersona>
+    <UsoCFD>P01</UsoCFD>
+    <UsoCFDDescripcion>Por definir</UsoCFDDescripcion>
+  </DatosFiscales>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>SIERRAVISTA 219  LINDAVISTA, GUSTAVO A MADERO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre>LIMA</EntreCalle1Nombre>
+  <EntreCalle2Nombre>LATACUNGA</EntreCalle2Nombre>
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.49513780</Latitud>
+    <Longitud>-99.12510050</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>35834</IDCalle>
+  <IDClientesRelacionados />
+  <IDColonia>652</IDColonia>
+  <IDDatosFiscales>0</IDDatosFiscales>
+  <IDDireccionEntrega>502311467</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>502311467</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1>23616</IDEntreCalle1>
+  <IDEntreCalle2>23428</IDEntreCalle2>
+  <IDMunicipio>9007</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>GUSTAVO A MADERO</MunicipioNombre>
+  <NoSuministrar>false</NoSuministrar>
+  <Nombre>RESTAURANT LA TOSTADA                                                           </Nombre>
+  <NumExterior>219</NumExterior>
+  <NumInterior>                                                  </NumInterior>
+  <Observaciones>RC</Observaciones>
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>5023114670</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Ruta 052            </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>52</IDRuta>
+    <NumeroRuta>52</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>ACTIVO    </Status>
+  <StatusCalidad>VERIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>3593</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1>               </Telefono1>
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>PARTICULAR</Descripcion>
+    <IDTipoCliente>2</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Célula 201          </Descripcion>
+    <IDZona>201</IDZona>
+    <NumeroZona>201</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:06:28,660 [67] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:28,793 [78] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>00000</CP>
+  <CalleNombre>HERRADURA</CalleNombre>
+  <ColoniaNombre>SIN COLONIA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>0</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>542.9100</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>20</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio xsi:nil="true" />
+  <ContratoAprobado>false</ContratoAprobado>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>HERRADURA   SIN COLONIA, SIN MUNICIPIO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre />
+  <EntreCalle2Nombre />
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.51634360</Latitud>
+    <Longitud>-99.27335880</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>0</IDCalle>
+  <IDClientesRelacionados>
+    <int>0</int>
+    <int>17160</int>
+    <int>406713</int>
+    <int>100071386</int>
+    <int>100075508</int>
+    <int>100075523</int>
+    <int>100075530</int>
+    <int>502343070</int>
+    <int>502552951</int>
+    <int>502577587</int>
+    <int>502725679</int>
+    <int>502730945</int>
+    <int>502730946</int>
+    <int>502748209</int>
+  </IDClientesRelacionados>
+  <IDColonia>0</IDColonia>
+  <IDDatosFiscales xsi:nil="true" />
+  <IDDireccionEntrega>0</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>0</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1 xsi:nil="true" />
+  <IDEntreCalle2 xsi:nil="true" />
+  <IDMunicipio>0</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>SIN MUNICIPIO</MunicipioNombre>
+  <NoSuministrar xsi:nil="true" />
+  <Nombre>Venta al publico                                                                </Nombre>
+  <NumExterior />
+  <NumInterior />
+  <Observaciones />
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>00</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>&lt;Sin Ruta&gt;          </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>0</IDRuta>
+    <NumeroRuta>0</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>INACTIVO  </Status>
+  <StatusCalidad>MODIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>0</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1 />
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>CORPORATIVO</Descripcion>
+    <IDTipoCliente>1</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>SIN CELULA          </Descripcion>
+    <IDZona>0</IDZona>
+    <NumeroZona>0</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:06:28,796 [78] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:36,433 [67] INFO  RTGMGateway.RTGMGateway - Creando nueva instancia de RTGMGateway...
+
+2019-06-27 17:06:36,436 [78] INFO  RTGMGateway.RTGMGateway - Creando nueva instancia de RTGMGateway...
+
+2019-06-27 17:06:36,649 [67] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:06:36,667 [67] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:36,671 [67] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 502311467, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:06:36,721 [78] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:06:36,722 [78] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:36,723 [78] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 0, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:06:37,030 [67] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>07300</CP>
+  <CalleNombre>SIERRAVISTA</CalleNombre>
+  <ColoniaNombre>LINDAVISTA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>502311467</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>0.0000</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>0</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio>76.0000</ConsumoPromedio>
+  <ContratoAprobado>false</ContratoAprobado>
+  <DatosFiscales xsi:type="DatosFiscalesSIGAMETDatos">
+    <ExtensionData />
+    <Class>DatosFiscalesSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <AbreviaturaEstado />
+    <ApellidoMaterno />
+    <ApellidoPaterno />
+    <CP>     </CP>
+    <CURP>                    </CURP>
+    <Calle>                                                                                </Calle>
+    <Colonia>                                                                                </Colonia>
+    <Contacto>                                                            </Contacto>
+    <CopiasCFD>2</CopiasCFD>
+    <Email />
+    <EnvioCFDCorreo xsi:nil="true" />
+    <Estado>                    </Estado>
+    <FormaPagoSAT>99</FormaPagoSAT>
+    <FormaPagoSATDescripcion>Por definir</FormaPagoSATDescripcion>
+    <IDDatosFiscales>0</IDDatosFiscales>
+    <IDEmpresa>1</IDEmpresa>
+    <Municipio>                                        </Municipio>
+    <Nombre />
+    <NumeroCuentaPago />
+    <RFC>XAXX010101000</RFC>
+    <RazonSocial>SIN EMPRESA                                                                                                                                                                                                                                                    </RazonSocial>
+    <SegundoNombre />
+    <Telefono1>                    </Telefono1>
+    <Telefono2>                    </Telefono2>
+    <Telefono3>                    </Telefono3>
+    <TipoPersona>Persona Física</TipoPersona>
+    <UsoCFD>P01</UsoCFD>
+    <UsoCFDDescripcion>Por definir</UsoCFDDescripcion>
+  </DatosFiscales>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>SIERRAVISTA 219  LINDAVISTA, GUSTAVO A MADERO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre>LIMA</EntreCalle1Nombre>
+  <EntreCalle2Nombre>LATACUNGA</EntreCalle2Nombre>
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.49513780</Latitud>
+    <Longitud>-99.12510050</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>35834</IDCalle>
+  <IDClientesRelacionados />
+  <IDColonia>652</IDColonia>
+  <IDDatosFiscales>0</IDDatosFiscales>
+  <IDDireccionEntrega>502311467</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>502311467</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1>23616</IDEntreCalle1>
+  <IDEntreCalle2>23428</IDEntreCalle2>
+  <IDMunicipio>9007</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>GUSTAVO A MADERO</MunicipioNombre>
+  <NoSuministrar>false</NoSuministrar>
+  <Nombre>RESTAURANT LA TOSTADA                                                           </Nombre>
+  <NumExterior>219</NumExterior>
+  <NumInterior>                                                  </NumInterior>
+  <Observaciones>RC</Observaciones>
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>5023114670</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Ruta 052            </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>52</IDRuta>
+    <NumeroRuta>52</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>ACTIVO    </Status>
+  <StatusCalidad>VERIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>3593</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1>               </Telefono1>
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>PARTICULAR</Descripcion>
+    <IDTipoCliente>2</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Célula 201          </Descripcion>
+    <IDZona>201</IDZona>
+    <NumeroZona>201</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:06:37,034 [67] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:37,098 [78] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>00000</CP>
+  <CalleNombre>HERRADURA</CalleNombre>
+  <ColoniaNombre>SIN COLONIA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>0</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>542.9100</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>20</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio xsi:nil="true" />
+  <ContratoAprobado>false</ContratoAprobado>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>HERRADURA   SIN COLONIA, SIN MUNICIPIO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre />
+  <EntreCalle2Nombre />
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.51634360</Latitud>
+    <Longitud>-99.27335880</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>0</IDCalle>
+  <IDClientesRelacionados>
+    <int>0</int>
+    <int>17160</int>
+    <int>406713</int>
+    <int>100071386</int>
+    <int>100075508</int>
+    <int>100075523</int>
+    <int>100075530</int>
+    <int>502343070</int>
+    <int>502552951</int>
+    <int>502577587</int>
+    <int>502725679</int>
+    <int>502730945</int>
+    <int>502730946</int>
+    <int>502748209</int>
+  </IDClientesRelacionados>
+  <IDColonia>0</IDColonia>
+  <IDDatosFiscales xsi:nil="true" />
+  <IDDireccionEntrega>0</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>0</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1 xsi:nil="true" />
+  <IDEntreCalle2 xsi:nil="true" />
+  <IDMunicipio>0</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>SIN MUNICIPIO</MunicipioNombre>
+  <NoSuministrar xsi:nil="true" />
+  <Nombre>Venta al publico                                                                </Nombre>
+  <NumExterior />
+  <NumInterior />
+  <Observaciones />
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>00</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>&lt;Sin Ruta&gt;          </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>0</IDRuta>
+    <NumeroRuta>0</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>INACTIVO  </Status>
+  <StatusCalidad>MODIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>0</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1 />
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>CORPORATIVO</Descripcion>
+    <IDTipoCliente>1</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>SIN CELULA          </Descripcion>
+    <IDZona>0</IDZona>
+    <NumeroZona>0</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:06:37,099 [78] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:43,335 [74] INFO  RTGMGateway.RTGMGateway - Creando nueva instancia de RTGMGateway...
+
+2019-06-27 17:06:43,489 [74] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:06:43,490 [74] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:43,491 [74] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 502311467, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:06:43,787 [74] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>07300</CP>
+  <CalleNombre>SIERRAVISTA</CalleNombre>
+  <ColoniaNombre>LINDAVISTA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>502311467</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>0.0000</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>0</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio>76.0000</ConsumoPromedio>
+  <ContratoAprobado>false</ContratoAprobado>
+  <DatosFiscales xsi:type="DatosFiscalesSIGAMETDatos">
+    <ExtensionData />
+    <Class>DatosFiscalesSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <AbreviaturaEstado />
+    <ApellidoMaterno />
+    <ApellidoPaterno />
+    <CP>     </CP>
+    <CURP>                    </CURP>
+    <Calle>                                                                                </Calle>
+    <Colonia>                                                                                </Colonia>
+    <Contacto>                                                            </Contacto>
+    <CopiasCFD>2</CopiasCFD>
+    <Email />
+    <EnvioCFDCorreo xsi:nil="true" />
+    <Estado>                    </Estado>
+    <FormaPagoSAT>99</FormaPagoSAT>
+    <FormaPagoSATDescripcion>Por definir</FormaPagoSATDescripcion>
+    <IDDatosFiscales>0</IDDatosFiscales>
+    <IDEmpresa>1</IDEmpresa>
+    <Municipio>                                        </Municipio>
+    <Nombre />
+    <NumeroCuentaPago />
+    <RFC>XAXX010101000</RFC>
+    <RazonSocial>SIN EMPRESA                                                                                                                                                                                                                                                    </RazonSocial>
+    <SegundoNombre />
+    <Telefono1>                    </Telefono1>
+    <Telefono2>                    </Telefono2>
+    <Telefono3>                    </Telefono3>
+    <TipoPersona>Persona Física</TipoPersona>
+    <UsoCFD>P01</UsoCFD>
+    <UsoCFDDescripcion>Por definir</UsoCFDDescripcion>
+  </DatosFiscales>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>SIERRAVISTA 219  LINDAVISTA, GUSTAVO A MADERO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre>LIMA</EntreCalle1Nombre>
+  <EntreCalle2Nombre>LATACUNGA</EntreCalle2Nombre>
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.49513780</Latitud>
+    <Longitud>-99.12510050</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>35834</IDCalle>
+  <IDClientesRelacionados />
+  <IDColonia>652</IDColonia>
+  <IDDatosFiscales>0</IDDatosFiscales>
+  <IDDireccionEntrega>502311467</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>502311467</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1>23616</IDEntreCalle1>
+  <IDEntreCalle2>23428</IDEntreCalle2>
+  <IDMunicipio>9007</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>GUSTAVO A MADERO</MunicipioNombre>
+  <NoSuministrar>false</NoSuministrar>
+  <Nombre>RESTAURANT LA TOSTADA                                                           </Nombre>
+  <NumExterior>219</NumExterior>
+  <NumInterior>                                                  </NumInterior>
+  <Observaciones>RC</Observaciones>
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>5023114670</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Ruta 052            </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>52</IDRuta>
+    <NumeroRuta>52</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>ACTIVO    </Status>
+  <StatusCalidad>VERIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>3593</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1>               </Telefono1>
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>PARTICULAR</Descripcion>
+    <IDTipoCliente>2</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Célula 201          </Descripcion>
+    <IDZona>201</IDZona>
+    <NumeroZona>201</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:06:43,791 [74] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:43,798 [74] INFO  RTGMGateway.RTGMGateway - Creando nueva instancia de RTGMGateway...
+
+2019-06-27 17:06:44,035 [74] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:06:44,036 [74] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:06:44,037 [74] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 502311467, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:06:44,466 [74] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>07300</CP>
+  <CalleNombre>SIERRAVISTA</CalleNombre>
+  <ColoniaNombre>LINDAVISTA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>502311467</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>0.0000</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>0</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio>76.0000</ConsumoPromedio>
+  <ContratoAprobado>false</ContratoAprobado>
+  <DatosFiscales xsi:type="DatosFiscalesSIGAMETDatos">
+    <ExtensionData />
+    <Class>DatosFiscalesSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <AbreviaturaEstado />
+    <ApellidoMaterno />
+    <ApellidoPaterno />
+    <CP>     </CP>
+    <CURP>                    </CURP>
+    <Calle>                                                                                </Calle>
+    <Colonia>                                                                                </Colonia>
+    <Contacto>                                                            </Contacto>
+    <CopiasCFD>2</CopiasCFD>
+    <Email />
+    <EnvioCFDCorreo xsi:nil="true" />
+    <Estado>                    </Estado>
+    <FormaPagoSAT>99</FormaPagoSAT>
+    <FormaPagoSATDescripcion>Por definir</FormaPagoSATDescripcion>
+    <IDDatosFiscales>0</IDDatosFiscales>
+    <IDEmpresa>1</IDEmpresa>
+    <Municipio>                                        </Municipio>
+    <Nombre />
+    <NumeroCuentaPago />
+    <RFC>XAXX010101000</RFC>
+    <RazonSocial>SIN EMPRESA                                                                                                                                                                                                                                                    </RazonSocial>
+    <SegundoNombre />
+    <Telefono1>                    </Telefono1>
+    <Telefono2>                    </Telefono2>
+    <Telefono3>                    </Telefono3>
+    <TipoPersona>Persona Física</TipoPersona>
+    <UsoCFD>P01</UsoCFD>
+    <UsoCFDDescripcion>Por definir</UsoCFDDescripcion>
+  </DatosFiscales>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>SIERRAVISTA 219  LINDAVISTA, GUSTAVO A MADERO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre>LIMA</EntreCalle1Nombre>
+  <EntreCalle2Nombre>LATACUNGA</EntreCalle2Nombre>
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.49513780</Latitud>
+    <Longitud>-99.12510050</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>35834</IDCalle>
+  <IDClientesRelacionados />
+  <IDColonia>652</IDColonia>
+  <IDDatosFiscales>0</IDDatosFiscales>
+  <IDDireccionEntrega>502311467</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>502311467</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1>23616</IDEntreCalle1>
+  <IDEntreCalle2>23428</IDEntreCalle2>
+  <IDMunicipio>9007</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>GUSTAVO A MADERO</MunicipioNombre>
+  <NoSuministrar>false</NoSuministrar>
+  <Nombre>RESTAURANT LA TOSTADA                                                           </Nombre>
+  <NumExterior>219</NumExterior>
+  <NumInterior>                                                  </NumInterior>
+  <Observaciones>RC</Observaciones>
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>5023114670</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Ruta 052            </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>52</IDRuta>
+    <NumeroRuta>52</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>ACTIVO    </Status>
+  <StatusCalidad>VERIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>3593</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1>               </Telefono1>
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>PARTICULAR</Descripcion>
+    <IDTipoCliente>2</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Célula 201          </Descripcion>
+    <IDZona>201</IDZona>
+    <NumeroZona>201</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:06:44,469 [74] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:07:19,111 [78] INFO  RTGMGateway.RTGMGateway - Creando nueva instancia de RTGMGateway...
+
+2019-06-27 17:07:19,263 [78] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:07:19,264 [78] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:07:19,265 [78] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 502311467, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:07:19,567 [78] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>07300</CP>
+  <CalleNombre>SIERRAVISTA</CalleNombre>
+  <ColoniaNombre>LINDAVISTA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>502311467</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>0.0000</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>0</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio>76.0000</ConsumoPromedio>
+  <ContratoAprobado>false</ContratoAprobado>
+  <DatosFiscales xsi:type="DatosFiscalesSIGAMETDatos">
+    <ExtensionData />
+    <Class>DatosFiscalesSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <AbreviaturaEstado />
+    <ApellidoMaterno />
+    <ApellidoPaterno />
+    <CP>     </CP>
+    <CURP>                    </CURP>
+    <Calle>                                                                                </Calle>
+    <Colonia>                                                                                </Colonia>
+    <Contacto>                                                            </Contacto>
+    <CopiasCFD>2</CopiasCFD>
+    <Email />
+    <EnvioCFDCorreo xsi:nil="true" />
+    <Estado>                    </Estado>
+    <FormaPagoSAT>99</FormaPagoSAT>
+    <FormaPagoSATDescripcion>Por definir</FormaPagoSATDescripcion>
+    <IDDatosFiscales>0</IDDatosFiscales>
+    <IDEmpresa>1</IDEmpresa>
+    <Municipio>                                        </Municipio>
+    <Nombre />
+    <NumeroCuentaPago />
+    <RFC>XAXX010101000</RFC>
+    <RazonSocial>SIN EMPRESA                                                                                                                                                                                                                                                    </RazonSocial>
+    <SegundoNombre />
+    <Telefono1>                    </Telefono1>
+    <Telefono2>                    </Telefono2>
+    <Telefono3>                    </Telefono3>
+    <TipoPersona>Persona Física</TipoPersona>
+    <UsoCFD>P01</UsoCFD>
+    <UsoCFDDescripcion>Por definir</UsoCFDDescripcion>
+  </DatosFiscales>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>SIERRAVISTA 219  LINDAVISTA, GUSTAVO A MADERO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre>LIMA</EntreCalle1Nombre>
+  <EntreCalle2Nombre>LATACUNGA</EntreCalle2Nombre>
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.49513780</Latitud>
+    <Longitud>-99.12510050</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>35834</IDCalle>
+  <IDClientesRelacionados />
+  <IDColonia>652</IDColonia>
+  <IDDatosFiscales>0</IDDatosFiscales>
+  <IDDireccionEntrega>502311467</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>502311467</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1>23616</IDEntreCalle1>
+  <IDEntreCalle2>23428</IDEntreCalle2>
+  <IDMunicipio>9007</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>GUSTAVO A MADERO</MunicipioNombre>
+  <NoSuministrar>false</NoSuministrar>
+  <Nombre>RESTAURANT LA TOSTADA                                                           </Nombre>
+  <NumExterior>219</NumExterior>
+  <NumInterior>                                                  </NumInterior>
+  <Observaciones>RC</Observaciones>
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>5023114670</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Ruta 052            </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>52</IDRuta>
+    <NumeroRuta>52</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>ACTIVO    </Status>
+  <StatusCalidad>VERIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>3593</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1>               </Telefono1>
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>PARTICULAR</Descripcion>
+    <IDTipoCliente>2</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Célula 201          </Descripcion>
+    <IDZona>201</IDZona>
+    <NumeroZona>201</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:07:19,569 [78] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:07:19,571 [78] INFO  RTGMGateway.RTGMGateway - Creando nueva instancia de RTGMGateway...
+
+2019-06-27 17:07:19,819 [78] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:07:19,820 [78] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:07:19,821 [78] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 502311467, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:07:20,265 [78] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>07300</CP>
+  <CalleNombre>SIERRAVISTA</CalleNombre>
+  <ColoniaNombre>LINDAVISTA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>502311467</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>0.0000</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>0</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio>76.0000</ConsumoPromedio>
+  <ContratoAprobado>false</ContratoAprobado>
+  <DatosFiscales xsi:type="DatosFiscalesSIGAMETDatos">
+    <ExtensionData />
+    <Class>DatosFiscalesSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <AbreviaturaEstado />
+    <ApellidoMaterno />
+    <ApellidoPaterno />
+    <CP>     </CP>
+    <CURP>                    </CURP>
+    <Calle>                                                                                </Calle>
+    <Colonia>                                                                                </Colonia>
+    <Contacto>                                                            </Contacto>
+    <CopiasCFD>2</CopiasCFD>
+    <Email />
+    <EnvioCFDCorreo xsi:nil="true" />
+    <Estado>                    </Estado>
+    <FormaPagoSAT>99</FormaPagoSAT>
+    <FormaPagoSATDescripcion>Por definir</FormaPagoSATDescripcion>
+    <IDDatosFiscales>0</IDDatosFiscales>
+    <IDEmpresa>1</IDEmpresa>
+    <Municipio>                                        </Municipio>
+    <Nombre />
+    <NumeroCuentaPago />
+    <RFC>XAXX010101000</RFC>
+    <RazonSocial>SIN EMPRESA                                                                                                                                                                                                                                                    </RazonSocial>
+    <SegundoNombre />
+    <Telefono1>                    </Telefono1>
+    <Telefono2>                    </Telefono2>
+    <Telefono3>                    </Telefono3>
+    <TipoPersona>Persona Física</TipoPersona>
+    <UsoCFD>P01</UsoCFD>
+    <UsoCFDDescripcion>Por definir</UsoCFDDescripcion>
+  </DatosFiscales>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>SIERRAVISTA 219  LINDAVISTA, GUSTAVO A MADERO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre>LIMA</EntreCalle1Nombre>
+  <EntreCalle2Nombre>LATACUNGA</EntreCalle2Nombre>
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.49513780</Latitud>
+    <Longitud>-99.12510050</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>35834</IDCalle>
+  <IDClientesRelacionados />
+  <IDColonia>652</IDColonia>
+  <IDDatosFiscales>0</IDDatosFiscales>
+  <IDDireccionEntrega>502311467</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>502311467</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1>23616</IDEntreCalle1>
+  <IDEntreCalle2>23428</IDEntreCalle2>
+  <IDMunicipio>9007</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>GUSTAVO A MADERO</MunicipioNombre>
+  <NoSuministrar>false</NoSuministrar>
+  <Nombre>RESTAURANT LA TOSTADA                                                           </Nombre>
+  <NumExterior>219</NumExterior>
+  <NumInterior>                                                  </NumInterior>
+  <Observaciones>RC</Observaciones>
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>5023114670</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Ruta 052            </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>52</IDRuta>
+    <NumeroRuta>52</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>ACTIVO    </Status>
+  <StatusCalidad>VERIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>3593</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1>               </Telefono1>
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>PARTICULAR</Descripcion>
+    <IDTipoCliente>2</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Célula 201          </Descripcion>
+    <IDZona>201</IDZona>
+    <NumeroZona>201</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:07:20,267 [78] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:07:49,821 [67] INFO  RTGMGateway.RTGMGateway - Creando nueva instancia de RTGMGateway...
+
+2019-06-27 17:07:49,992 [67] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:07:49,994 [67] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:07:49,998 [67] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 502311467, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:07:50,299 [67] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>07300</CP>
+  <CalleNombre>SIERRAVISTA</CalleNombre>
+  <ColoniaNombre>LINDAVISTA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>502311467</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>0.0000</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>0</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio>76.0000</ConsumoPromedio>
+  <ContratoAprobado>false</ContratoAprobado>
+  <DatosFiscales xsi:type="DatosFiscalesSIGAMETDatos">
+    <ExtensionData />
+    <Class>DatosFiscalesSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <AbreviaturaEstado />
+    <ApellidoMaterno />
+    <ApellidoPaterno />
+    <CP>     </CP>
+    <CURP>                    </CURP>
+    <Calle>                                                                                </Calle>
+    <Colonia>                                                                                </Colonia>
+    <Contacto>                                                            </Contacto>
+    <CopiasCFD>2</CopiasCFD>
+    <Email />
+    <EnvioCFDCorreo xsi:nil="true" />
+    <Estado>                    </Estado>
+    <FormaPagoSAT>99</FormaPagoSAT>
+    <FormaPagoSATDescripcion>Por definir</FormaPagoSATDescripcion>
+    <IDDatosFiscales>0</IDDatosFiscales>
+    <IDEmpresa>1</IDEmpresa>
+    <Municipio>                                        </Municipio>
+    <Nombre />
+    <NumeroCuentaPago />
+    <RFC>XAXX010101000</RFC>
+    <RazonSocial>SIN EMPRESA                                                                                                                                                                                                                                                    </RazonSocial>
+    <SegundoNombre />
+    <Telefono1>                    </Telefono1>
+    <Telefono2>                    </Telefono2>
+    <Telefono3>                    </Telefono3>
+    <TipoPersona>Persona Física</TipoPersona>
+    <UsoCFD>P01</UsoCFD>
+    <UsoCFDDescripcion>Por definir</UsoCFDDescripcion>
+  </DatosFiscales>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>SIERRAVISTA 219  LINDAVISTA, GUSTAVO A MADERO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre>LIMA</EntreCalle1Nombre>
+  <EntreCalle2Nombre>LATACUNGA</EntreCalle2Nombre>
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.49513780</Latitud>
+    <Longitud>-99.12510050</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>35834</IDCalle>
+  <IDClientesRelacionados />
+  <IDColonia>652</IDColonia>
+  <IDDatosFiscales>0</IDDatosFiscales>
+  <IDDireccionEntrega>502311467</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>502311467</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1>23616</IDEntreCalle1>
+  <IDEntreCalle2>23428</IDEntreCalle2>
+  <IDMunicipio>9007</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>GUSTAVO A MADERO</MunicipioNombre>
+  <NoSuministrar>false</NoSuministrar>
+  <Nombre>RESTAURANT LA TOSTADA                                                           </Nombre>
+  <NumExterior>219</NumExterior>
+  <NumInterior>                                                  </NumInterior>
+  <Observaciones>RC</Observaciones>
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>5023114670</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Ruta 052            </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>52</IDRuta>
+    <NumeroRuta>52</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>ACTIVO    </Status>
+  <StatusCalidad>VERIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>3593</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1>               </Telefono1>
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>PARTICULAR</Descripcion>
+    <IDTipoCliente>2</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Célula 201          </Descripcion>
+    <IDZona>201</IDZona>
+    <NumeroZona>201</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:07:50,302 [67] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:07:50,308 [67] INFO  RTGMGateway.RTGMGateway - Creando nueva instancia de RTGMGateway...
+
+2019-06-27 17:07:50,552 [67] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:07:50,554 [67] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:07:50,560 [67] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 502311467, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:07:50,861 [67] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>07300</CP>
+  <CalleNombre>SIERRAVISTA</CalleNombre>
+  <ColoniaNombre>LINDAVISTA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>502311467</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>0.0000</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>0</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio>76.0000</ConsumoPromedio>
+  <ContratoAprobado>false</ContratoAprobado>
+  <DatosFiscales xsi:type="DatosFiscalesSIGAMETDatos">
+    <ExtensionData />
+    <Class>DatosFiscalesSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <AbreviaturaEstado />
+    <ApellidoMaterno />
+    <ApellidoPaterno />
+    <CP>     </CP>
+    <CURP>                    </CURP>
+    <Calle>                                                                                </Calle>
+    <Colonia>                                                                                </Colonia>
+    <Contacto>                                                            </Contacto>
+    <CopiasCFD>2</CopiasCFD>
+    <Email />
+    <EnvioCFDCorreo xsi:nil="true" />
+    <Estado>                    </Estado>
+    <FormaPagoSAT>99</FormaPagoSAT>
+    <FormaPagoSATDescripcion>Por definir</FormaPagoSATDescripcion>
+    <IDDatosFiscales>0</IDDatosFiscales>
+    <IDEmpresa>1</IDEmpresa>
+    <Municipio>                                        </Municipio>
+    <Nombre />
+    <NumeroCuentaPago />
+    <RFC>XAXX010101000</RFC>
+    <RazonSocial>SIN EMPRESA                                                                                                                                                                                                                                                    </RazonSocial>
+    <SegundoNombre />
+    <Telefono1>                    </Telefono1>
+    <Telefono2>                    </Telefono2>
+    <Telefono3>                    </Telefono3>
+    <TipoPersona>Persona Física</TipoPersona>
+    <UsoCFD>P01</UsoCFD>
+    <UsoCFDDescripcion>Por definir</UsoCFDDescripcion>
+  </DatosFiscales>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>SIERRAVISTA 219  LINDAVISTA, GUSTAVO A MADERO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre>LIMA</EntreCalle1Nombre>
+  <EntreCalle2Nombre>LATACUNGA</EntreCalle2Nombre>
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.49513780</Latitud>
+    <Longitud>-99.12510050</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>35834</IDCalle>
+  <IDClientesRelacionados />
+  <IDColonia>652</IDColonia>
+  <IDDatosFiscales>0</IDDatosFiscales>
+  <IDDireccionEntrega>502311467</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>502311467</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1>23616</IDEntreCalle1>
+  <IDEntreCalle2>23428</IDEntreCalle2>
+  <IDMunicipio>9007</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>GUSTAVO A MADERO</MunicipioNombre>
+  <NoSuministrar>false</NoSuministrar>
+  <Nombre>RESTAURANT LA TOSTADA                                                           </Nombre>
+  <NumExterior>219</NumExterior>
+  <NumInterior>                                                  </NumInterior>
+  <Observaciones>RC</Observaciones>
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>5023114670</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Ruta 052            </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>52</IDRuta>
+    <NumeroRuta>52</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>ACTIVO    </Status>
+  <StatusCalidad>VERIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>3593</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1>               </Telefono1>
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>PARTICULAR</Descripcion>
+    <IDTipoCliente>2</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Célula 201          </Descripcion>
+    <IDZona>201</IDZona>
+    <NumeroZona>201</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:07:50,864 [67] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:08:31,322 [78] INFO  RTGMGateway.RTGMGateway - Creando nueva instancia de RTGMGateway...
+
+2019-06-27 17:08:31,472 [78] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:08:31,473 [78] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:08:31,475 [78] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 502311467, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:08:31,778 [78] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>07300</CP>
+  <CalleNombre>SIERRAVISTA</CalleNombre>
+  <ColoniaNombre>LINDAVISTA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>502311467</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>0.0000</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>0</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio>76.0000</ConsumoPromedio>
+  <ContratoAprobado>false</ContratoAprobado>
+  <DatosFiscales xsi:type="DatosFiscalesSIGAMETDatos">
+    <ExtensionData />
+    <Class>DatosFiscalesSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <AbreviaturaEstado />
+    <ApellidoMaterno />
+    <ApellidoPaterno />
+    <CP>     </CP>
+    <CURP>                    </CURP>
+    <Calle>                                                                                </Calle>
+    <Colonia>                                                                                </Colonia>
+    <Contacto>                                                            </Contacto>
+    <CopiasCFD>2</CopiasCFD>
+    <Email />
+    <EnvioCFDCorreo xsi:nil="true" />
+    <Estado>                    </Estado>
+    <FormaPagoSAT>99</FormaPagoSAT>
+    <FormaPagoSATDescripcion>Por definir</FormaPagoSATDescripcion>
+    <IDDatosFiscales>0</IDDatosFiscales>
+    <IDEmpresa>1</IDEmpresa>
+    <Municipio>                                        </Municipio>
+    <Nombre />
+    <NumeroCuentaPago />
+    <RFC>XAXX010101000</RFC>
+    <RazonSocial>SIN EMPRESA                                                                                                                                                                                                                                                    </RazonSocial>
+    <SegundoNombre />
+    <Telefono1>                    </Telefono1>
+    <Telefono2>                    </Telefono2>
+    <Telefono3>                    </Telefono3>
+    <TipoPersona>Persona Física</TipoPersona>
+    <UsoCFD>P01</UsoCFD>
+    <UsoCFDDescripcion>Por definir</UsoCFDDescripcion>
+  </DatosFiscales>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>SIERRAVISTA 219  LINDAVISTA, GUSTAVO A MADERO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre>LIMA</EntreCalle1Nombre>
+  <EntreCalle2Nombre>LATACUNGA</EntreCalle2Nombre>
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.49513780</Latitud>
+    <Longitud>-99.12510050</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>35834</IDCalle>
+  <IDClientesRelacionados />
+  <IDColonia>652</IDColonia>
+  <IDDatosFiscales>0</IDDatosFiscales>
+  <IDDireccionEntrega>502311467</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>502311467</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1>23616</IDEntreCalle1>
+  <IDEntreCalle2>23428</IDEntreCalle2>
+  <IDMunicipio>9007</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>GUSTAVO A MADERO</MunicipioNombre>
+  <NoSuministrar>false</NoSuministrar>
+  <Nombre>RESTAURANT LA TOSTADA                                                           </Nombre>
+  <NumExterior>219</NumExterior>
+  <NumInterior>                                                  </NumInterior>
+  <Observaciones>RC</Observaciones>
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>5023114670</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Ruta 052            </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>52</IDRuta>
+    <NumeroRuta>52</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>ACTIVO    </Status>
+  <StatusCalidad>VERIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>3593</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1>               </Telefono1>
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>PARTICULAR</Descripcion>
+    <IDTipoCliente>2</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Célula 201          </Descripcion>
+    <IDZona>201</IDZona>
+    <NumeroZona>201</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:08:31,782 [78] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:08:31,787 [78] INFO  RTGMGateway.RTGMGateway - Creando nueva instancia de RTGMGateway...
+
+2019-06-27 17:08:32,029 [78] INFO  RTGMGateway.RTGMGateway - Instancia de RTGMGateway creada.
+
+2019-06-27 17:08:32,030 [78] INFO  RTGMGateway.RTGMGateway - ===   Inicia ejecución de método buscarDireccionEntrega   ===
+
+2019-06-27 17:08:32,032 [78] INFO  RTGMGateway.RTGMGateway - Inicia llamado a buscarDireccionEntrega, Source: Sigamet, Cliente: 502311467, Empresa: 1, Sucursal: , Telefono: , Calle: , Colonia: , Municipio: , Nombre: , Numero exterior: , Numero interior: , Tipo servicio: , Zona: , Ruta: , Zona económina: , Zona lecturista: , Portatil: False, Usuario: , Referencia: , Autotanque: .
+
+2019-06-27 17:08:32,482 [78] INFO  RTGMGateway.RTGMGateway - <?xml version="1.0" encoding="utf-16"?>
+<DireccionEntregaSIGAMETDatos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionData />
+  <Class>DireccionEntregaSIGAMETDatos</Class>
+  <InternalException />
+  <Method>get_Method</Method>
+  <Success>true</Success>
+  <CP>07300</CP>
+  <CalleNombre>SIERRAVISTA</CalleNombre>
+  <ColoniaNombre>LINDAVISTA</ColoniaNombre>
+  <CondicionesCredito xsi:type="CondicionesCreditoSIGAMETDatos">
+    <ExtensionData />
+    <Class>CondicionesCreditoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <AgendaGestionCobranza />
+    <CarteraDescripcion>Sin Crédito         </CarteraDescripcion>
+    <ClasificacionCredito>NO TIENE CREDITO</ClasificacionCredito>
+    <ColorCobro>Green</ColorCobro>
+    <ColorGestion>Green</ColorGestion>
+    <DiasPago>SIN DIA DE PAGO</DiasPago>
+    <DiasRevision>SIN DIA DE REVISION</DiasRevision>
+    <DificultadCobro>DIFICULTAD 1</DificultadCobro>
+    <DificultadGestion>DIFICULTAD 1</DificultadGestion>
+    <FormaPagoPreferidaDescripcion />
+    <FuenteDatos>Sigamet</FuenteDatos>
+    <HFinAtencionCyC xsi:nil="true" />
+    <HInicioAtencionCyC xsi:nil="true" />
+    <IDCartera>0</IDCartera>
+    <IDClasificacionCredito>1</IDClasificacionCredito>
+    <IDDificultadCobro>1</IDDificultadCobro>
+    <IDDificultadGestion>1</IDDificultadGestion>
+    <IDDireccionEntrega>502311467</IDDireccionEntrega>
+    <IDEmpleadoNomina xsi:nil="true" />
+    <IDEmpresa>1</IDEmpresa>
+    <IDFormaPagoLiquidacion>9</IDFormaPagoLiquidacion>
+    <IDFormaPagoPreferida xsi:nil="true" />
+    <IDResponsableGestion xsi:nil="true" />
+    <IDSupervisorGestion>1330</IDSupervisorGestion>
+    <LimiteCredito>0.0000</LimiteCredito>
+    <ObservacionesCyC />
+    <PlazoCredito>0</PlazoCredito>
+    <Saldo>0.0000</Saldo>
+    <SupervisorGestion xsi:type="EmpleadoSIGAMETDatos">
+      <ExtensionData />
+      <Class>EmpleadoSIGAMETDatos</Class>
+      <InternalException />
+      <Method>get_Method</Method>
+      <Success>false</Success>
+      <IDEmpleado>1330</IDEmpleado>
+      <IDEmpresa>1</IDEmpresa>
+      <NombreCompleto>GUSTAVO GUILLEN BORJA</NombreCompleto>
+      <NumeroEmpleado>1330</NumeroEmpleado>
+    </SupervisorGestion>
+  </CondicionesCredito>
+  <ConfiguracionSuministro xsi:type="ConfiguracionSuministroDatos">
+    <ExtensionData />
+    <Class>ConfiguracionSuministroDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <Ajustes>+03.0                           </Ajustes>
+    <Derechos>0913</Derechos>
+    <RequiereTAG>false</RequiereTAG>
+    <RestriccionGPS>false</RestriccionGPS>
+    <TipoPago>credito</TipoPago>
+  </ConfiguracionSuministro>
+  <ConsumoPromedio>76.0000</ConsumoPromedio>
+  <ContratoAprobado>false</ContratoAprobado>
+  <DatosFiscales xsi:type="DatosFiscalesSIGAMETDatos">
+    <ExtensionData />
+    <Class>DatosFiscalesSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>true</Success>
+    <AbreviaturaEstado />
+    <ApellidoMaterno />
+    <ApellidoPaterno />
+    <CP>     </CP>
+    <CURP>                    </CURP>
+    <Calle>                                                                                </Calle>
+    <Colonia>                                                                                </Colonia>
+    <Contacto>                                                            </Contacto>
+    <CopiasCFD>2</CopiasCFD>
+    <Email />
+    <EnvioCFDCorreo xsi:nil="true" />
+    <Estado>                    </Estado>
+    <FormaPagoSAT>99</FormaPagoSAT>
+    <FormaPagoSATDescripcion>Por definir</FormaPagoSATDescripcion>
+    <IDDatosFiscales>0</IDDatosFiscales>
+    <IDEmpresa>1</IDEmpresa>
+    <Municipio>                                        </Municipio>
+    <Nombre />
+    <NumeroCuentaPago />
+    <RFC>XAXX010101000</RFC>
+    <RazonSocial>SIN EMPRESA                                                                                                                                                                                                                                                    </RazonSocial>
+    <SegundoNombre />
+    <Telefono1>                    </Telefono1>
+    <Telefono2>                    </Telefono2>
+    <Telefono3>                    </Telefono3>
+    <TipoPersona>Persona Física</TipoPersona>
+    <UsoCFD>P01</UsoCFD>
+    <UsoCFDDescripcion>Por definir</UsoCFDDescripcion>
+  </DatosFiscales>
+  <Descuentos />
+  <DigitoVerificador>0</DigitoVerificador>
+  <DireccionCompleta>SIERRAVISTA 219  LINDAVISTA, GUSTAVO A MADERO</DireccionCompleta>
+  <Email />
+  <EntreCalle1Nombre>LIMA</EntreCalle1Nombre>
+  <EntreCalle2Nombre>LATACUNGA</EntreCalle2Nombre>
+  <FAlta xsi:nil="true" />
+  <FactorConversion xsi:nil="true" />
+  <FechaConsulta xsi:nil="true" />
+  <FuenteDatos>Sigamet</FuenteDatos>
+  <Georreferencia>
+    <ExtensionData />
+    <Altitud xsi:nil="true" />
+    <Latitud>19.49513780</Latitud>
+    <Longitud>-99.12510050</Longitud>
+    <MargenError xsi:nil="true" />
+    <Velocidad xsi:nil="true" />
+  </Georreferencia>
+  <IDAutotanque xsi:nil="true" />
+  <IDCalle>35834</IDCalle>
+  <IDClientesRelacionados />
+  <IDColonia>652</IDColonia>
+  <IDDatosFiscales>0</IDDatosFiscales>
+  <IDDireccionEntrega>502311467</IDDireccionEntrega>
+  <IDDireccionEntregaPadre>502311467</IDDireccionEntregaPadre>
+  <IDDireccionEntregaPadreEdificio xsi:nil="true" />
+  <IDEmpresa>1</IDEmpresa>
+  <IDEntreCalle1>23616</IDEntreCalle1>
+  <IDEntreCalle2>23428</IDEntreCalle2>
+  <IDMunicipio>9007</IDMunicipio>
+  <Lada />
+  <MunicipioNombre>GUSTAVO A MADERO</MunicipioNombre>
+  <NoSuministrar>false</NoSuministrar>
+  <Nombre>RESTAURANT LA TOSTADA                                                           </Nombre>
+  <NumExterior>219</NumExterior>
+  <NumInterior>                                                  </NumInterior>
+  <Observaciones>RC</Observaciones>
+  <OrigenCliente>
+    <ExtensionData />
+    <Descripcion>Operador</Descripcion>
+    <IDOrigenCliente>1</IDOrigenCliente>
+  </OrigenCliente>
+  <PrecioPorDefecto>
+    <ExtensionData />
+    <IDEmpresa>1</IDEmpresa>
+    <IDImpuesto>1</IDImpuesto>
+    <IDPrecio>1</IDPrecio>
+    <IDProducto xsi:nil="true" />
+    <IDSucursal xsi:nil="true" />
+    <IDZonaEconomica xsi:nil="true" />
+    <PorcentajeImpuesto xsi:nil="true" />
+    <ValorPrecio>9.7500</ValorPrecio>
+  </PrecioPorDefecto>
+  <ProgramacionSuministro>
+    <ExtensionData />
+    <Class>ProgramacionSuministro</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <DescripcionProgramacion />
+    <IDProgramacion>0</IDProgramacion>
+    <ProgramacionActiva xsi:nil="true" />
+  </ProgramacionSuministro>
+  <QuejaActiva />
+  <Ramo>
+    <ExtensionData />
+    <GiroCliente>
+      <ExtensionData />
+      <Descripcion>HOGAR</Descripcion>
+      <IDGiroCliente>5</IDGiroCliente>
+    </GiroCliente>
+    <IDRamoCliente>6</IDRamoCliente>
+    <RamoClienteDescripcion>HOGAR</RamoClienteDescripcion>
+  </Ramo>
+  <ReferenciaBancaria>5023114670</ReferenciaBancaria>
+  <Ruta xsi:type="RutaSIGAMETDatos">
+    <ExtensionData />
+    <Class>RutaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Ruta 052            </Descripcion>
+    <IDEmpresa>1</IDEmpresa>
+    <IDRuta>52</IDRuta>
+    <NumeroRuta>52</NumeroRuta>
+    <ReporteRAF xsi:nil="true" />
+  </Ruta>
+  <Status>ACTIVO    </Status>
+  <StatusCalidad>VERIFICADO     </StatusCalidad>
+  <SupervisorComercial xsi:type="EmpleadoSIGAMETDatos">
+    <ExtensionData />
+    <Class>EmpleadoSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <IDEmpleado>3593</IDEmpleado>
+    <IDEmpresa>1</IDEmpresa>
+    <NombreCompleto />
+    <NumeroEmpleado>0</NumeroEmpleado>
+  </SupervisorComercial>
+  <Telefono1>               </Telefono1>
+  <Telefono2 />
+  <Telefono3 />
+  <TipoCliente>
+    <ExtensionData />
+    <Descripcion>PARTICULAR</Descripcion>
+    <IDTipoCliente>2</IDTipoCliente>
+  </TipoCliente>
+  <TipoFacturacion>
+    <ExtensionData />
+    <Class>TipoFacturacion</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Sin Facturacion                                             </Descripcion>
+    <IDTipoFacturacion>0</IDTipoFacturacion>
+  </TipoFacturacion>
+  <VIP>false</VIP>
+  <ZonaEconomica>
+    <ExtensionData />
+    <IDZonaEconomomica>0</IDZonaEconomomica>
+  </ZonaEconomica>
+  <ZonaSuministro xsi:type="ZonaSIGAMETDatos">
+    <ExtensionData />
+    <Class>ZonaSIGAMETDatos</Class>
+    <InternalException />
+    <Method>get_Method</Method>
+    <Success>false</Success>
+    <Descripcion>Célula 201          </Descripcion>
+    <IDZona>201</IDZona>
+    <NumeroZona>201</NumeroZona>
+  </ZonaSuministro>
+</DireccionEntregaSIGAMETDatos>
+
+2019-06-27 17:08:32,494 [78] INFO  RTGMGateway.RTGMGateway - ===   Finaliza ejecución de método buscarDireccionEntrega   ===

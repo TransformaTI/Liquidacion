@@ -11,7 +11,8 @@
 
    
     <script type="text/javascript">
-
+        var Letra = '';
+        var IndexBancoSeleccionado = 0;
        
     
        function SetContextKey() {
@@ -71,6 +72,101 @@
                }
 
         }
+
+
+function SeleccionBanco(e){
+    var keynum;
+    var inputtxt = '';
+
+    var Banco = '';
+    var arrBancos = [];
+
+
+
+    $('#' + '<%= ddBancoTarjeta.ClientID %>' + ' > option').each(function () {
+        arrBancos.push($(this).text());
+     });
+
+
+    if (window.event) { // IE     
+        //alert('IE')
+        keynum = e.keyCode;
+    }
+    else if (e.which) { // Netscape/Firefox/Opera                   
+        keynum = e.which;
+         //alert('CHROME')
+    }
+
+
+
+    inputtxt=String.fromCharCode(keynum)
+
+   var letters = /^[A-Za-z]+$/;
+   if(letters.test(inputtxt)   )
+     {
+       Letra = inputtxt;
+   }
+   else if(keynum == '40' || keynum =='38' )
+   {
+       SeleccionaUnBanco(Letra, keynum,  arrBancos);
+   }
+}
+
+        function SeleccionaUnBanco(Letra, keynum, arrBancos) {
+            var IndiceInicial = $('#' + '<%= ddBancoTarjeta.ClientID %>')[0].selectedIndex;
+            var BancoSeleccionado = false;
+            var Banco = ' ';
+
+           
+ 
+            
+
+             if (keynum == '40' || keynum =='38'  || Letra != '')
+             {   
+                
+                    if (IndiceInicial <=arrBancos.length)
+                    {
+
+                        if (keynum == '40' && IndiceInicial>=0)
+                        {
+                             BancoSeleccionado = false;
+                            for (var i = IndiceInicial; i <=arrBancos.length; i++){
+                                Banco = String(arrBancos[i]);
+
+                                        if ( Banco.startsWith(Letra)==true && BancoSeleccionado==false)
+                                        {
+                                            IndexBancoSeleccionado = i;                                 
+                                            
+                                            BancoSeleccionado = true;
+                                        }
+                            }
+                        }
+
+                        else if (keynum == '38' && IndiceInicial>=0 && IndiceInicial<arrBancos.length )
+                        {
+                            BancoSeleccionado = false;
+                              for (var i = IndiceInicial; i >=1; i--){
+                                   
+                                Banco = String(arrBancos[i]);
+
+                                        if ( Banco.startsWith(Letra)==true && BancoSeleccionado==false)
+                                        {
+                                            IndexBancoSeleccionado = i;                                            
+                                            BancoSeleccionado = true;
+                                        }
+                            }
+
+                        }
+
+
+                    }
+            }
+            if (IndexBancoSeleccionado > 0)
+            {
+                document.getElementById('<%= ddBancoTarjeta.ClientID %>').selectedIndex = IndexBancoSeleccionado.toString();
+            }
+        }
+        
 
 
 
@@ -531,7 +627,7 @@
 
         function MuestraAfiliacionesTodas() {
             
-            document.getElementById('<%=TxtAfiliacion.ClientID%>').focus();
+            <%--document.getElementById('<%=TxtAfiliacion.ClientID%>').focus();--%>
 
             SetContextKey();
 

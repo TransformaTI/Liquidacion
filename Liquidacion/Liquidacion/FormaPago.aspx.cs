@@ -325,9 +325,9 @@ public partial class FormaPago : System.Web.UI.Page
 
         ddBancoTarjeta.Attributes.Add("onchange", "return MuestraAfiliacionesTodas()");
 
-        //ddBancoTarjeta.Attributes.Add("onkeypress", "return myKeyPress(event)");
+        ddBancoTarjeta.Attributes.Add("onkeyup", "return SeleccionBanco(event)");
 
-        ddBancoTarjeta.Attributes.Add("onkeyup", "return myKeyPress(event)");
+        ddBancoTarjeta.Attributes.Add("onmousedown", "return SeleccionBanco(event)");
 
 
 

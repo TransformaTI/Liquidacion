@@ -74,7 +74,7 @@
         }
 
 
-function myKeyPress(e){
+function SeleccionBanco(e){
     var keynum;
     var inputtxt = '';
 
@@ -88,12 +88,9 @@ function myKeyPress(e){
      });
 
 
-//    var keycode = e.keyCode;
-//alert(keycode);
-
     if (window.event) { // IE     
         //alert('IE')
-      keynum = e.keyCode;
+        keynum = e.keyCode;
     }
     else if (e.which) { // Netscape/Firefox/Opera                   
         keynum = e.which;
@@ -101,101 +98,73 @@ function myKeyPress(e){
     }
 
 
+
     inputtxt=String.fromCharCode(keynum)
 
-         var letters = /^[A-Za-z]+$/;
+   var letters = /^[A-Za-z]+$/;
    if(letters.test(inputtxt)   )
      {
-       alert('es una letra O FLECHA');
-       Letra = inputtxt
-       SeleccionaUnBanco(Letra, keynum,  arrBancos);
+       Letra = inputtxt;
    }
    else if(keynum == '40' || keynum =='38' )
    {
        SeleccionaUnBanco(Letra, keynum,  arrBancos);
-        }
-
-
-
-    
-
-
-     alert(Letra);
-//    left = 37
-//up = 38
-//right = 39
-//down = 40
- 
- 
-
-      
-
-
-
-
-    //alert(String.fromCharCode(keynum));
-        }
+   }
+}
 
         function SeleccionaUnBanco(Letra, keynum, arrBancos) {
             var IndiceInicial = $('#' + '<%= ddBancoTarjeta.ClientID %>')[0].selectedIndex;
             var BancoSeleccionado = false;
             var Banco = ' ';
 
-            alert('LETRA=' + Letra);
-            alert('indicce=' + IndiceInicial);
-
+           
+ 
             
 
-            //alert(IndiceInicial);
              if (keynum == '40' || keynum =='38'  || Letra != '')
-             {
-            
-                //if (Letra != '' && keynum == '40')
-                //{
-                    if (IndiceInicial < arrBancos.length)
+             {   
+                
+                    if (IndiceInicial <=arrBancos.length)
                     {
-                        //IndiceInicial = IndiceInicial + 1;
-                    
-                        alert('INDEXINICIAL='+IndiceInicial);
 
-
+                        if (keynum == '40' && IndiceInicial>=0)
+                        {
+                             BancoSeleccionado = false;
                             for (var i = IndiceInicial; i <=arrBancos.length; i++){
-                                       // alert(i);
-                                       //alert(arrBancos[i]);
                                 Banco = String(arrBancos[i]);
-                                alert('EMPIEZA='+Banco.startsWith(Letra));
-                                           alert('BancoSeleccionado=' + BancoSeleccionado);
 
                                         if ( Banco.startsWith(Letra)==true && BancoSeleccionado==false)
                                         {
-                                            alert('Si contiene la letra');
-                                            IndexBancoSeleccionado = i;
-                                  
-                                            alert('BancoSeleccionado=' + BancoSeleccionado);
-
-                                                    alert('FOR I='+i);
-                                
-                                alert('BANCO=' + Banco);
-                                alert('LETRA=' + Letra);
+                                            IndexBancoSeleccionado = i;                                 
                                             
                                             BancoSeleccionado = true;
-                                            //alert(BancoSeleccionado);
+                                        }
+                            }
+                        }
+
+                        else if (keynum == '38' && IndiceInicial>=0 && IndiceInicial<arrBancos.length )
+                        {
+                            BancoSeleccionado = false;
+                              for (var i = IndiceInicial; i >=1; i--){
+                                   
+                                Banco = String(arrBancos[i]);
+
+                                        if ( Banco.startsWith(Letra)==true && BancoSeleccionado==false)
+                                        {
+                                            IndexBancoSeleccionado = i;                                            
+                                            BancoSeleccionado = true;
                                         }
                             }
 
+                        }
+
+
                     }
-
-
-                 //}
-
-
-
-          //alert('es una flecha');
-
             }
-                      alert('IndexBancoSeleccionado=' + IndexBancoSeleccionado);
-
-            document.getElementById('<%= ddBancoTarjeta.ClientID %>').selectedIndex =IndexBancoSeleccionado.toString();
+            if (IndexBancoSeleccionado > 0)
+            {
+                document.getElementById('<%= ddBancoTarjeta.ClientID %>').selectedIndex = IndexBancoSeleccionado.toString();
+            }
         }
         
 

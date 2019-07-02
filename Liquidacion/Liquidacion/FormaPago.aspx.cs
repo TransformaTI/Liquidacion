@@ -110,8 +110,8 @@ public partial class FormaPago : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
             LlenaDropDowns();
-       
 
+            txtFechaTarjeta_CalendarExtender.SelectedDate = DateTime.Today;
         }
 
 
@@ -1602,6 +1602,8 @@ else
             chkLocal.Checked = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "True" ? true : false;
             txtFechaTarjeta.Text = DateTime.Parse(dtPagosConTarjetaSelec[0]["FAlta"].ToString()).ToShortDateString();
 
+            txtFechaTarjeta_CalendarExtender.SelectedDate = DateTime.Parse(dtPagosConTarjetaSelec[0]["FAlta"].ToString());
+
 
 
             txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
@@ -1780,10 +1782,12 @@ else
         }
 
         HiddenInputNumPagos.Value = Session["TDCdisponibles"]!=null? Session["TDCdisponibles"].ToString():"0";
-        if (Session["PrimerRegTDC"] != null)
+        if (Session["PrimerRegTDC"] != null && HiddenUsoPagoTarjeta.Value== "true")
         {
             CargaPrimerRegistro(sFormaPago);
         }
+
+
 
         //ddTipTarjeta.SelectedIndex = dtPagosPrimerRegistro[0]["TipoTarjeta"].ToString() != "" ? int.Parse(dtPagosPrimerRegistro[0]["TipoTarjeta"].ToString()) : 0;
 
@@ -1983,7 +1987,7 @@ else
                 txtNombreClienteTarjeta.Text = string.Empty;
                 txtNoAutorizacionTarjeta.Text = string.Empty;
                 txtNoAutorizacionTarjetaConfirm.Text = String.Empty;
-                txtFechaTarjeta.Text = txtFechaTarjeta.Text = Session["FechaAsignacion"].ToString();
+                //txtFechaTarjeta.Text = txtFechaTarjeta.Text = Session["FechaAsignacion"].ToString();
                 txtNumTarjeta.Text = string.Empty;
                 ddlBancoOrigen.SelectedIndex = -1;
                 ddlBancoOrigen.SelectedIndex = -1;

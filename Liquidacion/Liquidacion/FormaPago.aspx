@@ -255,7 +255,7 @@ function SeleccionBanco(e){
               
                 if (respuesta == false)
                 {
-                    document.getElementById('ctl00_MainPlaceHolder_txtFechaTarjeta').value = '';
+                    //document.getElementById('ctl00_MainPlaceHolder_txtFechaTarjeta').value = '';
                     document.getElementById('ctl00_MainPlaceHolder_txtFechaTarjeta').readOnly = false;
                     document.getElementById('ctl00_MainPlaceHolder_imgCalendario0').disabled = false;
                     document.getElementById('ctl00_MainPlaceHolder_txtNoAutorizacionTarjeta').value = '';
@@ -281,11 +281,13 @@ function SeleccionBanco(e){
                     document.getElementById('ctl00_MainPlaceHolder_TxtAfiliacion').value = '';
                     document.getElementById('ctl00_MainPlaceHolder_TxtAfiliacion').readOnly = false;
                     document.getElementById('<%=HiddenInputPCT.ClientID%>').value = "No";
+                    document.getElementById('<%=HiddenUsoPagoTarjeta.ClientID%>').value = "false";
+           
 
                     
-                    <%--                    <%Session["BancoTarjetaSeleccionado"] = "";%>
-                    <%Session["NombreBancoTarjetaSeleccionado"] = "";%>
-                    <%Session["AfiliacionSeleccionada"] = "";%>--%>
+                    
+                    
+
 
                    
 
@@ -293,7 +295,7 @@ function SeleccionBanco(e){
                 }
                 
                 if (respuesta == true) {
-                
+                  document.getElementById('<%=HiddenUsoPagoTarjeta.ClientID%>').value = "true";
                     ShowModalPopup();
                 }
 
@@ -934,6 +936,8 @@ function SeleccionBanco(e){
                 <asp:HiddenField ID="HiddenNomCteCheque" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenNomCteVale" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenAfiliaciones" runat="server" Value="" />
+                <asp:HiddenField ID="HiddenUsoPagoTarjeta" runat="server" Value="" />
+                
 
                 <div style="text-align: left; height: 650px; width: 1000px; vertical-align: top;">
                     <table style="vertical-align: top; height: 650px;">
@@ -1072,8 +1076,8 @@ function SeleccionBanco(e){
                                                             <asp:RequiredFieldValidator ID="rfvFecha" runat="server"
                                                                 ControlToValidate="txtFechaChueque" Display="None"
                                                                 ErrorMessage="Capturar la Fecha" Font-Size="11px" ValidationGroup="Cheque"></asp:RequiredFieldValidator>
-                                                            <ccR:CalendarExtender ID="cpChequeFechaDocto_CalendarExtender" runat="server"
-                                                                PopupButtonID="imgCalendario" OnClientShown="muestraCalendario" OnClientHidden="cierraCheque" TargetControlID="txtFechaChueque" Format="dd/MM/yyyy">
+                                                            <ccR:CalendarExtender ID="cpChequeFechaDocto_CalendarExtender" runat="server" 
+                                                                PopupButtonID="imgCalendario" OnClientShown="muestraCalendario" OnClientHidden="cierraCheque" TargetControlID="txtFechaChueque" Format="dd/MM/yyyy" >
                                                             </ccR:CalendarExtender>
                                                             <ccR:ValidatorCalloutExtender ID="vceChequeFecha" runat="server"
                                                                 TargetControlID="rfvFecha">

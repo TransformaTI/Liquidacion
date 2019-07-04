@@ -321,13 +321,13 @@ public partial class FormaPago : System.Web.UI.Page
        // txtNoAutorizacionTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + txtNumTarjeta.UniqueID + (char)39 + ")");
         txtNumTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + ddBancoTarjeta.UniqueID + (char)39 + ")");
 
-        ddBancoTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + ddlBancoOrigen.UniqueID + (char)39 + ")");
+        ddBancoTarjeta.Attributes.Add("onkeypress", "return NumeroRemisionKeyPress(event, " + (char)39 + TxtAfiliacion.ClientID + (char)39 + ")");
 
-        ddBancoTarjeta.Attributes.Add("onchange", "return MuestraAfiliacionesTodas()");
+        ddBancoTarjeta.Attributes.Add("onchange", "return MuestraAfiliacionesTodas(event)");
 
         ddBancoTarjeta.Attributes.Add("onkeyup", "return SeleccionBanco(event)");
 
-        ddBancoTarjeta.Attributes.Add("onmousedown", "return SeleccionBanco(event)");
+        //ddBancoTarjeta.Attributes.Add("onmousedown", "return SeleccionBanco(event)");
 
 
 

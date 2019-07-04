@@ -13,11 +13,32 @@
     <script type="text/javascript">
         var Letra = '';
         var IndexBancoSeleccionado = 0;
+        var MouseClickBanco = false;
+
+        $('#' + '<%= ddBancoTarjeta.ClientID %>').live('mousedown', function (e) {
+            if ((e.which == 1)) {
+                MouseClickBanco = true;
+            } if ((e.which == 3)) {
+                MouseClickBanco = true;
+            } else if ((e.which == 2)) {
+               
+            }
+
+        });
+
+
+
        
     
-       function SetContextKey() {
-        $find('<%=AutoCompleteExtender1.ClientID%>').set_contextKey($get("<%=ddBancoTarjeta.ClientID %>").value+'-'+$get("<%=TxtAfiliacion.ClientID %>").value);
-        }
+       function SetContextKey(e) {
+           $find('<%=AutoCompleteExtender1.ClientID%>').set_contextKey($get("<%=ddBancoTarjeta.ClientID %>").value + '-' + $get("<%=TxtAfiliacion.ClientID %>").value);
+
+           if (MouseClickBanco == true)
+               {
+                 $('#' + '<%= TxtAfiliacion.ClientID %>').focus();
+                 MouseClickBanco = false;
+               }
+       }
 
 
         function integratorsPopulated(source, eventArgs)
@@ -74,12 +95,16 @@
         }
 
 
+
 function SeleccionBanco(e){
     var keynum;
     var inputtxt = '';
 
     var Banco = '';
     var arrBancos = [];
+
+    //alert(e.button);
+
 
 
 
@@ -94,7 +119,9 @@ function SeleccionBanco(e){
     }
     else if (e.which) { // Netscape/Firefox/Opera                   
         keynum = e.which;
-         //alert('CHROME')
+         //alert('CHROME')       
+
+
     }
 
 
@@ -109,7 +136,8 @@ function SeleccionBanco(e){
    else if(keynum == '40' || keynum =='38' )
    {
        SeleccionaUnBanco(Letra, keynum,  arrBancos);
-   }
+    }    
+
 }
 
         function SeleccionaUnBanco(Letra, keynum, arrBancos) {
@@ -281,15 +309,8 @@ function SeleccionBanco(e){
                     document.getElementById('ctl00_MainPlaceHolder_TxtAfiliacion').value = '';
                     document.getElementById('ctl00_MainPlaceHolder_TxtAfiliacion').readOnly = false;
                     document.getElementById('<%=HiddenInputPCT.ClientID%>').value = "No";
-                    document.getElementById('<%=HiddenUsoPagoTarjeta.ClientID%>').value = "false";
-           
-
-                    
-                    
-                    
-
-
-                   
+                    document.getElementById('<%=HiddenUsoPagoTarjeta.ClientID%>').value = "false";   
+                                              
 
                  
                 }
@@ -627,31 +648,34 @@ function SeleccionBanco(e){
 
 
 
-        function MuestraAfiliacionesTodas() {
-            
-            <%--document.getElementById('<%=TxtAfiliacion.ClientID%>').focus();--%>
+ function MuestraAfiliacionesTodas(e) {
+
 
             SetContextKey();
 
-              var autoComplete = $find('<%=AutoCompleteExtender1.ClientID%>');
+            var autoComplete = $find('<%=AutoCompleteExtender1.ClientID%>');
 
-                // To show the popup by JavaScript, following code is necessary.
-                    // [NOTE] This trick is weak if the AutoCompleteExtender is updated.
-                    autoComplete._cache = {};
-                    autoComplete._currentPrefix = null;
-                    autoComplete._textBoxHasFocus = true;
-
-
-                    // save the old minimum prefix length, and set the value 0
-                    var oldMinimumPrefixLength = autoComplete.get_minimumPrefixLength();
-                    autoComplete.set_minimumPrefixLength(0);
+            // To show the popup by JavaScript, following code is necessary.
+            // [NOTE] This trick is weak if the AutoCompleteExtender is updated.
+            autoComplete._cache = {};
+            autoComplete._currentPrefix = null;
+            autoComplete._textBoxHasFocus = true;
 
 
-                    // send the event to show the popup
-                    autoComplete._onTimerTick(null, null);    
+            // save the old minimum prefix length, and set the value 0
+            var oldMinimumPrefixLength = autoComplete.get_minimumPrefixLength();
+            autoComplete.set_minimumPrefixLength(0);
 
-                    // restore the old minimum prefix length
-                   autoComplete.set_minimumPrefixLength(oldMinimumPrefixLength);                      
+
+            // send the event to show the popup
+            autoComplete._onTimerTick(null, null);
+
+            // restore the old minimum prefix length
+            autoComplete.set_minimumPrefixLength(oldMinimumPrefixLength);
+
+            //alert(event.which);
+<%--            document.getElementById('<%=TxtAfiliacion.ClientID%>').focus();--%>
+    
         }
 
 
@@ -1276,7 +1300,7 @@ function SeleccionBanco(e){
                                                         </td>
                                                         <td>
                                                              <asp:TextBox ID="TxtAfiliacion" runat="server" CssClass="textboxcaptura"                                                                  
-                                                                 onkeyup = "SetContextKey()"     AutoComplete="off"  ></asp:TextBox>
+                                                                 onkeyup = "SetContextKey(event)"     AutoComplete="off"  ></asp:TextBox>
                                                             <ccR:autocompleteextender  
                                                                 servicemethod="SearchAfiliaciones"  
                                                                 minimumprefixlength="1"

@@ -36,6 +36,8 @@ namespace SigametLiquidacion
             this._fSuministro = FSuministro;
         }
 
+        
+
 
         public string consultaNombreCliente(int ClienteID)
         {
@@ -57,6 +59,27 @@ namespace SigametLiquidacion
 
 
             return NombreCliente;
+        }
+
+
+        public string ConsultaStatusCliente(int ClienteID)
+        {
+            string StatusCliente = "";
+            DataTable dtNombreCliente = new DataTable();
+            try
+            {
+                this._dataAccess.LoadData(dtNombreCliente, "SELECT Status FROM CLIENTE WHERE CLIENTE = " + ClienteID.ToString(), CommandType.Text, null, true);
+                if (dtNombreCliente.Rows.Count > 0)
+                {
+                    StatusCliente = dtNombreCliente.Rows[0]["Status"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return StatusCliente;
         }
 
         public string obtenerCadenaConexion()

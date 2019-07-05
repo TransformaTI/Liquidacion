@@ -363,6 +363,7 @@ namespace SigametLiquidacion
                 try
                 {
                     _nombre = datosCliente.consultaNombreCliente(this._cliente);
+                    statusCliente = datosCliente.ConsultaStatusCliente(this._cliente);
 
                     if (_nombre.Trim()!=string.Empty)
                     {

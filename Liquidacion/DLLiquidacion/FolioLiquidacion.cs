@@ -387,6 +387,9 @@ namespace SigametLiquidacion
 
         public void ConsultaPedidos()
         {
+
+            Precio precio = new Precio(this._claseRuta, this._fecha, this._preciosMultiples);
+
             List<int> clientesDistintos = new List<int>();
             Cliente cliente = new Cliente(0,7);
             
@@ -438,17 +441,13 @@ namespace SigametLiquidacion
                
                 if (!Convert.ToBoolean(Convert.ToByte(this._parametros.ValorParametro("DescuentoProntoPago"))))
                 {
-                    //if (cliente!=null)
-                    //{
-                    //    dataRow["Descuento"] = !cliente.Encontrado ? (object)0 : (object)(cliente.Descuento * Convert.ToDecimal(dataRow["Litros"]));
-                    //}
-
-
-
 
                     if ((int)Convert.ToInt16(this._parametros.ValorParametro("LiqPrecioNeto")) == 0)
                     {
-                        Precio precio = new Precio(this._claseRuta, this._fecha, this._preciosMultiples);
+
+                        //Precio precio = new Precio(this._claseRuta, this._fecha, this._preciosMultiples);
+
+
                         DataTable dataTable = new DataTable();
                         Decimal num1 = ControlDeDescuento.Instance.PrecioAutorizado(precio.ListaPrecios(), cliente.Descuento, cliente.ZonaEconomica);
                         if (Convert.ToDecimal(dataRow["Precio"]) == num1 )

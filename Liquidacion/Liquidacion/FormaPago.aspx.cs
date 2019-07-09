@@ -1169,6 +1169,12 @@ else
             Session["dsLiquidacion"] = null;
             Session["PedidosParientes"] = null;
             Session["CargoTarjeta"] = null;
+			Session["idCliente"] = null;
+            Session["idCobroConsec"] = null;
+            Session["ImporteOperacion"] = null;
+			Session["BancoTarjetaSeleccionado"] = null;
+            Session["NombreBancoTarjetaSeleccionado"] =null;
+            Session["AfiliacionSeleccionada"] = null;
             Response.Redirect("ReporteLiquidacion.aspx");
 
             //Parametros param = new Parametros(1, 1, 22);

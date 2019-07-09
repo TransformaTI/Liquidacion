@@ -128,6 +128,20 @@ public partial class GenerarPago : System.Web.UI.Page
         try
         {
             rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dsPagos.Tables["Pedidos"], dsPagos.Tables["Cobro"], dsPagos.Tables["CobroPedido"], dtResumenLiquidacion);
+
+            Session["dsLiquidacion"] = null; 
+            Session["CargoTarjeta"] = null;
+            Session["TDCdisponibles"] = null;
+            Session["PrimerRegTDC"] = null;
+            Session["PedidosParientes"] = null;
+            Session["FormaPago"] = null;
+			Session["idCliente"] = null;
+            Session["idCobroConsec"] = null;
+			Session["ImporteOperacion"] = null;
+			Session["BancoTarjetaSeleccionado"] = null;
+            Session["NombreBancoTarjetaSeleccionado"] =null;
+            Session["AfiliacionSeleccionada"] = null;
+            GC.Collect();
         }
         catch (Exception ex)
         {
@@ -163,11 +177,19 @@ public partial class GenerarPago : System.Web.UI.Page
 
 
             rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dtPedidosEf, dsPagos.Tables["Cobro"], dsPagos.Tables["CobroPedido"], dtResumenLiquidacion, dsPagos.Tables["LiqPagoAnticipado"]);
-            Session["dsLiquidacion"] = null; // MCC  se limpia la session de liquidacion despues de registrar el pago  2018 05 31
+            Session["dsLiquidacion"] = null; // MCC  se limpia la session de liquidacion despues de registrar el pago  2019 07 09
             Session["CargoTarjeta"] = null;
             Session["TDCdisponibles"] = null;
             Session["PrimerRegTDC"] = null;
             Session["PedidosParientes"] = null;
+            Session["FormaPago"] = null;
+			Session["idCliente"] = null;
+            Session["idCobroConsec"] = null;
+            Session["ImporteOperacion"] = null;
+			Session["BancoTarjetaSeleccionado"] = null;
+            Session["NombreBancoTarjetaSeleccionado"] =null;
+            Session["AfiliacionSeleccionada"] = null;
+			
             Response.Redirect("ReporteLiquidacion.aspx");
             
 

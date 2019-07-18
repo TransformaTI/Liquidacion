@@ -376,7 +376,10 @@ public partial class RegistroPagos : System.Web.UI.Page
 
     protected void CancelaRelacionPagoPedido()
     {
+        DataRow[] drArray;
         int pagoActivo = Convert.ToInt32(Session["idCobroConsec"]);
+        string Folio = "";
+        string Anio = "";
 
         foreach (DataRow pedidos in ds.Tables["CobroPedido"].Rows)
         {
@@ -392,7 +395,32 @@ public partial class RegistroPagos : System.Web.UI.Page
                         row["Pedidos"] = row["Pedidos"].ToString().Replace(pedidos["Pedido"].ToString(), "");
                         row.EndEdit();
                     }
+                    else if (string.IsNullOrEmpty(row["Pedidos"].ToString()))
+                    {
+                        Folio = row["Folio"].ToString();
+                        Anio = row["AñoMovimiento"].ToString(); 
+                                                    
+
+
+                    }
+
+
                 }
+
+
+                // Eliminar pago anticipado sin pedido  
+
+                if (Folio!= string.Empty && Anio!= string.Empty)
+                {
+                    drArray = dtLiqAnticipo.Select("Folio = '" + Folio + "' AND AñoMovimiento='"+ Anio +"'", null);
+                    foreach (DataRow dr in drArray)
+                    {
+                        dtLiqAnticipo.Rows.Remove(dr);
+                        Folio = string.Empty;
+                        Anio = string.Empty;
+                    }
+                }
+
                 ds.Tables.Remove("LiqPagoAnticipado");
                 ds.Tables.Add(dtLiqAnticipo);
             }

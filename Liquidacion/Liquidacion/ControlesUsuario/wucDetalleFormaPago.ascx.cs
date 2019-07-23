@@ -737,8 +737,32 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
             dtPedidos = rp.PedidosLiquidacion(int.Parse(txtAntCliente.Text), folio,añoatt);
             dtPedidos.TableName = "Pedidos";
 
-            (Session["PedidosParientes"]) = dtPedidos;
-        }        
+            //(Session["PedidosParientes"]) = dtPedidos;
+        
+
+
+                if (Session["PedidosParientes"] != null && dtPedidos.Rows.Count > 0)
+                {
+
+                  DataTable  dtTemp = (DataTable)Session["PedidosParientes"];
+
+                    DataRow[] rows = dtTemp.Select("Cliente = '" + txtAntCliente.Text + "'");
+
+                    if (rows.Length == 0)
+                    {
+                    DataTable dttmp = dtPedidos;
+                        dttmp.Merge(dtTemp);
+                        Session["PedidosParientes"] = dttmp;
+                    }
+                }
+
+                else
+                {
+                    Session["PedidosParientes"] = dtPedidos;
+                }
+
+
+        }
     }
     
     private void ConsultaSaldos()

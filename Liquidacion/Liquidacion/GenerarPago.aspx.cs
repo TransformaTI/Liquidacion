@@ -149,31 +149,48 @@ public partial class GenerarPago : System.Web.UI.Page
         }
     }
     protected void imbGuardar_Click(object sender, ImageClickEventArgs e)
-    {    
-
+    {
+        
         try
         {
 
-           DataTable dtPedidosEf = ((DataTable)(Session["dtPedidos"]));
+            decimal MontoAplicado = 0;
+            DataTable dtPedidosEf = ((DataTable)(Session["dtPedidos"]));
 
-            DataTable dtPedidosParientes = (DataTable)(Session["PedidosParientes"]);
+            DataTable CobroPedido = dsPagos.Tables["CobroPedido"];
 
-            if (dtPedidosParientes != null)
-            {
+            //DataTable dtPedidosParientes = (DataTable)(Session["PedidosParientes"]);
+
                 foreach (DataRow item in dtPedidosEf.Rows)
                 {
-                    foreach (DataRow row in dtPedidosParientes.Rows)
+                MontoAplicado = 0;
+                    foreach (DataRow row in CobroPedido.Rows)
                     {
-                        if (item["Pedido"].ToString().Trim() == row["Pedido"].ToString().Trim())
+                        if (item["Pedido"].ToString() == row["Pedido"].ToString())
                         {
-                            item.BeginEdit();
-                            item["Saldo"] = row["Saldo"];
-                            item.EndEdit();
+                            MontoAplicado = MontoAplicado + decimal.Parse(row["Importe"].ToString());
                         }
-
                     }
+
+
+
+                    if (MontoAplicado == decimal.Parse(item["Total"].ToString()))
+                    {
+                        item.BeginEdit();
+                        item["Saldo"] = 0;
+                        item.EndEdit();
+                    }
+                    else
+                    {
+                        item.BeginEdit();
+                        item["Saldo"] = decimal.Parse(item["Total"].ToString()) - MontoAplicado;
+                        item.EndEdit();
+                    }
+
                 }
-            }
+
+
+
 
 
             rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dtPedidosEf, dsPagos.Tables["Cobro"], dsPagos.Tables["CobroPedido"], dtResumenLiquidacion, dsPagos.Tables["LiqPagoAnticipado"]);
@@ -199,6 +216,12 @@ public partial class GenerarPago : System.Web.UI.Page
             lblError.Text = ex.Message;
         }
     }
+
+    private void ActualizaSaldos()
+    {
+      
+    }
+   
     protected void imbNuevoPago_Click(object sender, ImageClickEventArgs e)
     {
         Response.Redirect("FormaPago.aspx");

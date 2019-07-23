@@ -85,7 +85,7 @@ public partial class FormaPago : System.Web.UI.Page
 
         if (cuenta!=string.Empty)
         {
-                    TextReader textReader = (TextReader)new StreamReader(HttpContext.Current.Server.MapPath("Conexion.txt"));
+                TextReader textReader = (TextReader)new StreamReader(HttpContext.Current.Server.MapPath("Conexion.txt"));
                 string conexionTemp = textReader.ReadLine();
 
                 FormasPago.Cuenta cuentaOrigen = new FormasPago.Cuenta();
@@ -1134,35 +1134,84 @@ else
             lblError.Text = ex.Message;
         }
     }
+    private void ActualizaSaldos()
+    {
+       
+    }
+
     protected void imbEfectivo_Click(object sender, ImageClickEventArgs e)
     {
         try
         {
+            // DataTable dtPedidosEf = new DataTable();
+            //dtPedidosEf = ((DataTable)(Session["dtPedidos"]));
+            //DataSet dsPagos = (DataSet)(Session["dsLiquidacion"]);
+            //DataTable LiqPagoAnticipado = dsPagos != null ? dsPagos.Tables["LiqPagoAnticipado"] : null;
+
+            //DataTable dtPedidosParientes =( DataTable)(Session["PedidosParientes"]);
+
+            // if (dtPedidosParientes!=null)
+            // {
+            //     foreach (DataRow item in dtPedidosEf.Rows)
+            //     {
+            //         foreach (DataRow row in dtPedidosParientes.Rows)
+            //         {
+            //             if (item["Pedido"].ToString().Trim()== row["Pedido"].ToString().Trim())
+            //             {
+            //                 item.BeginEdit();
+            //                 item["Saldo"] =row ["Saldo"];
+            //                 item.EndEdit();
+            //             }
+
+            //         }
+            //     }
+            // }
             DataTable dtPedidosEf = new DataTable();
+            decimal MontoAplicado = 0;
             dtPedidosEf = ((DataTable)(Session["dtPedidos"]));
             DataSet dsPagos = (DataSet)(Session["dsLiquidacion"]);
             DataTable LiqPagoAnticipado = dsPagos != null ? dsPagos.Tables["LiqPagoAnticipado"] : null;
 
-           DataTable dtPedidosParientes =( DataTable)(Session["PedidosParientes"]);
+            DataTable CobroPedido = dsPagos.Tables["CobroPedido"];
 
-            if (dtPedidosParientes!=null)
-            {
+            DataTable dtPedidosParientes = (DataTable)(Session["PedidosParientes"]);
+
+            //if (dtPedidosParientes != null)
+            //{
                 foreach (DataRow item in dtPedidosEf.Rows)
                 {
-                    foreach (DataRow row in dtPedidosParientes.Rows)
+                MontoAplicado = 0;
+                foreach (DataRow row in CobroPedido.Rows)
                     {
-                        if (item["Pedido"].ToString().Trim()== row["Pedido"].ToString().Trim())
+                        if (item["Pedido"].ToString() == row["Pedido"].ToString())
                         {
-                            item.BeginEdit();
-                            item["Saldo"] =row ["Saldo"];
-                            item.EndEdit();
+                            MontoAplicado = MontoAplicado + decimal.Parse(row["Importe"].ToString());
                         }
-
                     }
-                }
-            }
 
-        
+
+
+
+                    if (MontoAplicado == decimal.Parse(item["Total"].ToString()))
+                    {
+                        item.BeginEdit();
+                        item["Saldo"] = 0;
+                        item.EndEdit();
+                    }
+                    else
+                    {
+                        item.BeginEdit();
+                        item["Saldo"] = decimal.Parse(item["Total"].ToString()) - MontoAplicado;
+                        item.EndEdit();
+                    }
+
+
+
+
+                }
+            //}
+
+
 
             rp.GuardaPagos(Convert.ToString(Session["Usuario"]), dtPedidosEf, dsPagos!=null?dsPagos.Tables["Cobro"]:null, dsPagos!=null?dsPagos.Tables["CobroPedido"]:null, (DataTable)(Session["dtResumenLiquidacion"]), LiqPagoAnticipado);
             Session["FormaPago"] = "Efectivo";

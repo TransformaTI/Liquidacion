@@ -61,9 +61,12 @@ namespace SigametLiquidacion
         
         public DataTable ListaPrecios()
         {      
-            DataTable dataTable = this.dtListaPrecios;
+            DataTable dataTable = dtListaPrecios.Clone();
 
-            if (dataTable.Rows.Count >0)
+
+
+
+            if (dtListaPrecios.Rows.Count >0)
             {
                 this._precioVigente = Convert.ToDecimal(this.dtListaPrecios.Compute("MAX(Precio)", "ClaseRuta = " + this._claseRuta.ToString()));
             

@@ -1141,43 +1141,33 @@ else
 
     protected void imbEfectivo_Click(object sender, ImageClickEventArgs e)
     {
+        DataTable CobroPedido = null;
         try
         {
-            // DataTable dtPedidosEf = new DataTable();
-            //dtPedidosEf = ((DataTable)(Session["dtPedidos"]));
-            //DataSet dsPagos = (DataSet)(Session["dsLiquidacion"]);
-            //DataTable LiqPagoAnticipado = dsPagos != null ? dsPagos.Tables["LiqPagoAnticipado"] : null;
 
-            //DataTable dtPedidosParientes =( DataTable)(Session["PedidosParientes"]);
 
-            // if (dtPedidosParientes!=null)
-            // {
-            //     foreach (DataRow item in dtPedidosEf.Rows)
-            //     {
-            //         foreach (DataRow row in dtPedidosParientes.Rows)
-            //         {
-            //             if (item["Pedido"].ToString().Trim()== row["Pedido"].ToString().Trim())
-            //             {
-            //                 item.BeginEdit();
-            //                 item["Saldo"] =row ["Saldo"];
-            //                 item.EndEdit();
-            //             }
 
-            //         }
-            //     }
-            // }
             DataTable dtPedidosEf = new DataTable();
             decimal MontoAplicado = 0;
             dtPedidosEf = ((DataTable)(Session["dtPedidos"]));
             DataSet dsPagos = (DataSet)(Session["dsLiquidacion"]);
             DataTable LiqPagoAnticipado = dsPagos != null ? dsPagos.Tables["LiqPagoAnticipado"] : null;
 
-            DataTable CobroPedido = dsPagos.Tables["CobroPedido"];
+            if (dsPagos!=null)
+              {
+                if (dsPagos.Tables["CobroPedido"].Rows.Count >0)
+                    {
+                      CobroPedido = dsPagos.Tables["CobroPedido"];
+                    }
+            }     
+
+
+
 
             DataTable dtPedidosParientes = (DataTable)(Session["PedidosParientes"]);
 
-            //if (dtPedidosParientes != null)
-            //{
+            if (CobroPedido != null)
+            {
                 foreach (DataRow item in dtPedidosEf.Rows)
                 {
                 MontoAplicado = 0;
@@ -1188,8 +1178,6 @@ else
                             MontoAplicado = MontoAplicado + decimal.Parse(row["Importe"].ToString());
                         }
                     }
-
-
 
 
                     if (MontoAplicado == decimal.Parse(item["Total"].ToString()))
@@ -1209,7 +1197,7 @@ else
 
 
                 }
-            //}
+            }
 
 
 
@@ -1226,54 +1214,7 @@ else
             Session["AfiliacionSeleccionada"] = null;
             Response.Redirect("ReporteLiquidacion.aspx");
 
-            //Parametros param = new Parametros(1, 1, 22);
-            // Reporte
-
-            //Ruta en disco
-            //string strReporte = Request.PhysicalApplicationPath + "/rptLiquidacion.rpt";
-
-            //if (File.Exists(strReporte))
-            //{
-            //    try
-            //    {
-
-            //        string strServer = param.ValorParametro("Server").ToString();
-            //        string strDatabase = param.ValorParametro("Database").ToString();
-            //        string strUsuario = param.ValorParametro("Usuario").ToString();
-            //        string strPW = param.ValorParametro("Password").ToString();
-            //        string añoAtt;
-            //        string folio;
-
-            //        string strError = "";
-            //        //Parametros
-            //        añoAtt = Session["AñoAtt"].ToString();
-            //        folio = Session["Folio"].ToString();
-            //        ArrayList Par = new ArrayList();
-            //        //FIX THIS
-            //        Par.Add("@añoAtt=" + añoAtt);
-            //        Par.Add("@Folio=" + folio);
-
-            //        Clase_Reporte Reporte = new Clase_Reporte(strReporte, Par, strServer, strDatabase, strUsuario, strPW);
-            //        strError = "Clase";
-            //        Session["RepDoc"] = Reporte.RepDoc;
-            //        Session["Parametros"] = Par;
-            //        Response.Redirect("ReporteLiquidacion.aspx");
-            //        if (Reporte.Hay_Error)
-            //        {
-            //            strError = Reporte.Error;
-            //            throw new Exception("strError");
-            //        }
-            //        Reporte = null;
-            //}
-            //catch (Exception ex)
-            //{
-            //    lblError.Text = ex.Message;
-            //}
-            //}
-            //else
-            //{
-            //    lblError.Text = "El archivo de Reporte no fue encontrado";
-            //}
+           
         }
         catch (Exception ex)
         {

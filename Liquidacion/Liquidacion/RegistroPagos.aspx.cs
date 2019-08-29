@@ -45,6 +45,22 @@ public partial class RegistroPagos : System.Web.UI.Page
         if (Session["dsLiquidacion"] != null)
         {
             // if (!Page.IsPostBack)
+
+            if(((DataSet)(Session["dsLiquidacion"])).Tables["Pedidos"] == null)
+            {
+                ds = (DataSet)(Session["dsLiquidacion"]);
+                dtPedidos = ((DataTable)(Session["dtPedidos"]));
+                dtPedidos.TableName = "Pedidos";
+
+                if (Session["FormaPago"] != null && (string)Session["FormaPago"] != "Anticipo")
+                {
+                   
+                    ds.Tables.Add(dtPedidos);
+                }
+
+                Session["dsLiquidacion"] = ds;
+            }
+
             if (((DataSet)(Session["dsLiquidacion"])).Tables["Pedidos"].Rows.Count == 0)
             {
                 ds = (DataSet)(Session["dsLiquidacion"]);

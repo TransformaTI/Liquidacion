@@ -741,25 +741,25 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         
 
 
-                if (Session["PedidosParientes"] != null && dtPedidos.Rows.Count > 0)
-                {
+                //if (Session["PedidosParientes"] != null && dtPedidos.Rows.Count > 0)
+                //{
 
-                  DataTable  dtTemp = (DataTable)Session["PedidosParientes"];
+                //  DataTable  dtTemp = (DataTable)Session["PedidosParientes"];
 
-                    DataRow[] rows = dtTemp.Select("Cliente = '" + txtAntCliente.Text + "'");
+                //    DataRow[] rows = dtTemp.Select("Cliente = '" + txtAntCliente.Text + "'");
 
-                    if (rows.Length == 0)
-                    {
-                    DataTable dttmp = dtPedidos;
-                        dttmp.Merge(dtTemp);
-                        Session["PedidosParientes"] = dttmp;
-                    }
-                }
+                //    if (rows.Length == 0)
+                //    {
+                //    DataTable dttmp = dtPedidos;
+                //        dttmp.Merge(dtTemp);
+                //        Session["PedidosParientes"] = dttmp;
+                //    }
+                //}
 
-                else
-                {
+                //else
+                //{
                     Session["PedidosParientes"] = dtPedidos;
-                }
+                //}
 
 
         }

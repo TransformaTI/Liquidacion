@@ -232,6 +232,7 @@ function SeleccionBanco(e){
         var ModalProgress = '<%= ModalProgress.ClientID %>';
         var HiddenInput = '<%= HiddenInput.Value %>';   // mcc 2018 05 10
         var HiddenInputPCT = '<%= HiddenInputPCT.Value %>';   // mcc 2018 05 10
+        var HiddenAltaTarjeta = '<%= HiddenAltaTarjeta.Value %>';   // mcc 2018 05 10
         var NumCte = '<%= txtClienteTarjeta.Text %>'; // mcc 2018 05 10
         var NumPagos = '<%=Session["TDCdisponibles"]!=null?Session["TDCdisponibles"].ToString():"0" %>'; // mcc 2018 05 10
         var Ruta = '<%=Session["Ruta"]%>';
@@ -275,7 +276,7 @@ function SeleccionBanco(e){
             }
 
             
-            if (HiddenInputPCT == 'Si' && (HiddenInput == 'ConsultaTPV' || HiddenInput == 'ConsultaTPV-Trans') && FolioPrimerReg != '0') {
+            if (HiddenInputPCT == 'Si' && (HiddenInput == 'ConsultaTPV' || HiddenInput == 'ConsultaTPV-Trans') && FolioPrimerReg != '0' && HiddenAltaTarjeta == '1') {
                 var respuesta = confirm(smMensajeCargo);
                 var bandera = document.getElementById('ctl00_MainPlaceHolder_hfCargoTarjetaEncontrado');
                 bandera.value = respuesta;
@@ -334,7 +335,7 @@ function SeleccionBanco(e){
                 document.getElementById('<%= txtClienteTarjeta.ClientID %>').value='' ;
             } 
 
-            if ( HiddenInputPCT== 'No' && NumCte != '' && HiddenInput!='ConsultaCteAnticipo' && (HiddenTDCDupliado=='' || HiddenTDCDupliado=='No') && HiddenPagosOtraRuta=='' && NomCteTarjeta!='' && HiddenInput == 'ConsultaTPV') {
+            if ( HiddenInputPCT== 'No' && NumCte != '' && HiddenInput!='ConsultaCteAnticipo' && (HiddenTDCDupliado=='' || HiddenTDCDupliado=='No') && HiddenPagosOtraRuta=='' && NomCteTarjeta!='' && HiddenInput == 'ConsultaTPV' && HiddenAltaTarjeta == '1') {
                 alert('No se encontraron pagos de TPV para el cliente, por favor verifique con el área de tarjetas de crédito');
                 document.getElementById('ctl00_MainPlaceHolder_ddBancoTarjeta').selectedIndex = "0";
                 document.getElementById('ctl00_MainPlaceHolder_ddBancoTarjeta').disabled = false;
@@ -961,7 +962,7 @@ function SeleccionBanco(e){
                 <asp:HiddenField ID="HiddenNomCteVale" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenAfiliaciones" runat="server" Value="" />
                 <asp:HiddenField ID="HiddenUsoPagoTarjeta" runat="server" Value="" />
-                
+                <asp:HiddenField ID="HiddenAltaTarjeta" runat="server" Value="" />
 
                 <div style="text-align: left; height: 650px; width: 1000px; vertical-align: top;">
                     <table style="vertical-align: top; height: 650px;">

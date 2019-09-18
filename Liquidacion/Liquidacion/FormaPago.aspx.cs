@@ -1648,9 +1648,12 @@ else
     /// <param name="NumCliente"></param>
     private void ConsultarCargoTarjeta(int NumCliente, string sFormaPago, int Ruta, int Autotanque)
     {
-    
-      
 
+        Parametros _parametros = (Parametros)Session["Parametros"];
+
+        String paramAltaTarjeta = _parametros.ValorParametro("AltaDeTarjeta").ToString();
+
+        HiddenAltaTarjeta.Value = paramAltaTarjeta;
         Session["TDCdisponibles"] = null;
         Session["PrimerRegTDC"] = null;
         
@@ -1666,7 +1669,15 @@ else
 
         if (sFormaPago == "tarjeta")
         {
-            dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text), Ruta, Autotanque);
+            //if (paramAltaTarjeta.Equals("1"))
+            //{
+                dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text), Ruta, Autotanque);
+            //}
+            //else
+            //{
+            //    dtPagosConTarjeta = null;
+            //}
+            
             if (dtPagosConTarjeta!=null )
             {
                 

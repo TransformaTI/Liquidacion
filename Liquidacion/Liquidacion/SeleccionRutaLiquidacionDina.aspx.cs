@@ -342,7 +342,9 @@ public partial class SeleccionRutaLiquidacionDina : System.Web.UI.Page
                 {
                     Session["AñoAtt"] = bt.AñoAtt;
                     Session["Folio"] = bt.Folio;
-                    
+                    Session["Ruta"] = bt.Ruta; // mcc 2018 05 16
+                    Session["Autotanque"] = bt.Autotanque;// mcc 2018 05 16
+
                     if (bt.FormaLiquidacion == "AUTOMATICA")
                     {
                         updPnlSeleccionFormaLiquidacion.Update();

@@ -134,7 +134,8 @@
                 url: "FormaPago.aspx/revisaCuentaOrigen",
                 data: '{cuenta: "' + cuenta + '" }',
                 contentType: "application/json; charset=utf-8",
-                dataType: "json",
+                async: false,
+                dataType: "json",                
                 success: function (resultado) {                            // función que va a ejecutar si el pedido fue exitoso
                 var res = resultado.d;
 

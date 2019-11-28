@@ -429,6 +429,7 @@ function SeleccionBanco(e){
                   alert('¡El cliente no existe!');
                   document.getElementById('ctl00_MainPlaceHolder_txtClienteCheque').value = '';
                   document.getElementById('ctl00_MainPlaceHolder_txtClienteCheque').focus();
+
                  
                  }
 
@@ -478,10 +479,10 @@ function SeleccionBanco(e){
                              }
                              NombreClienteVale='';
             }
-             else
-            {
-                document.getElementById('vale').style.display = 'none';
-            }    
+            // else
+            //{
+            //    document.getElementById('vale').style.display = 'none';
+            //}    
 
             if (NumCteAnticipo != '' && NomCteAnticipo == '' && HiddenInput=='ConsultaCteAnticipo')
             {
@@ -598,7 +599,10 @@ function SeleccionBanco(e){
                 document.getElementById('ctl00_MainPlaceHolder_txtClienteTarjeta').value = ""
                 
                 
-            }
+             }
+    
+
+              
 
             $("input[type='text']:visible:enabled:first").focus();
                       

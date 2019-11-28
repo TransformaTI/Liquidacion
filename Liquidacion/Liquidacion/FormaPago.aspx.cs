@@ -82,6 +82,7 @@ public partial class FormaPago : System.Web.UI.Page
     public static string revisaCuentaOrigen(string cuenta)
     {
         string resultado = string.Empty;
+        Boolean res;
 
         if (cuenta!=string.Empty)
         {
@@ -90,7 +91,16 @@ public partial class FormaPago : System.Web.UI.Page
 
                 FormasPago.Cuenta cuentaOrigen = new FormasPago.Cuenta();
 
-             resultado = cuentaOrigen.validarExpresionRegular(3, cuenta, conexionTemp).ToString();
+             res = cuentaOrigen.validarExpresionRegular(3, cuenta, conexionTemp);
+
+            if (res)
+            {
+                resultado = "True";
+            }
+            else
+            {
+                resultado = "False";
+            }
 
         }
 
@@ -99,7 +109,7 @@ public partial class FormaPago : System.Web.UI.Page
             resultado = "True";
         }
 
-
+        
         return resultado;
     }
 
@@ -139,7 +149,18 @@ public partial class FormaPago : System.Web.UI.Page
                     Session["NombreBancoTarjetaSeleccionado"] ="";
                     Session["AfiliacionSeleccionada"] = "";
 
-                    ConsultarCargoTarjeta(int.Parse(txtClienteTarjeta.Text), "tarjeta", int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
+                    int ClienteID = 0;
+
+                    try
+                    {
+                        ClienteID = Convert.ToInt32(this.txtClienteTarjeta.Text.Trim());
+                    }
+                    catch
+                    {
+                        ClienteID = -1;
+                    }
+
+                    ConsultarCargoTarjeta(ClienteID, "tarjeta", int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
 
                     txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
                     txtNoAutorizacionTarjetaConfirm.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
@@ -204,9 +225,19 @@ public partial class FormaPago : System.Web.UI.Page
             {
                 if (txtClienteCheque.Text != string.Empty)
                 {
-                    
+
+                    int ClienteID = 0;
+
+                    try
+                    {
+                        ClienteID = Convert.ToInt32(this.txtClienteCheque.Text.Trim());
+                    }
+                    catch
+                    {
+                        ClienteID = -1;
+                    }
                     RegistroPago RegPago = new RegistroPago();
-                    DataTable dt = RegPago.DatosCliente(int.Parse(txtClienteCheque.Text));
+                    DataTable dt = RegPago.DatosCliente(ClienteID);
 
                     if (dt!=null)
                     {
@@ -227,6 +258,10 @@ public partial class FormaPago : System.Web.UI.Page
                         }
 
                     }
+                    else
+                    {
+                        HiddenNomCteCheque.Value = "CTENOEXISTE";
+                    }
                 }
             }
 
@@ -236,8 +271,19 @@ public partial class FormaPago : System.Web.UI.Page
             {
                 if (txtClienteVale.Text != string.Empty)
                 {
+                    int ClienteID = 0;
+
+                    try
+                    {
+                        ClienteID = Convert.ToInt32(this.txtClienteVale.Text.Trim());
+                    }
+                    catch
+                    {
+                        ClienteID = -1;
+                    }
+
                     RegistroPago RegPago = new RegistroPago();
-                    DataTable dt = RegPago.DatosCliente(int.Parse(txtClienteVale.Text));
+                    DataTable dt = RegPago.DatosCliente(ClienteID);
                     if (dt != null)
                     {
                         if (dt.Rows.Count > 0 && dt.Rows[0]["estatus"].ToString().Trim() == "ACTIVO")
@@ -254,7 +300,11 @@ public partial class FormaPago : System.Web.UI.Page
                         {
                             HiddenNomCteVale.Value = "CTENOEXISTE";
                         }
-                        
+
+                    }
+                    else
+                    {
+                        HiddenNomCteVale.Value = "CTENOEXISTE";
                     }
 
                 }
@@ -1671,7 +1721,7 @@ else
         {
             //if (paramAltaTarjeta.Equals("1"))
             //{
-                dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text), Ruta, Autotanque);
+                dtPagosConTarjeta = rp.PagosConTarjeta(NumCliente, Ruta, Autotanque);
             //}
             //else
             //{
@@ -1689,15 +1739,23 @@ else
                 else {
                     try
                     {
-                        Cliente clienteTemp = new Cliente(int.Parse(txtClienteTarjeta.Text), 0);
+                        Cliente clienteTemp = new Cliente(NumCliente, 0);
                         clienteTemp.ConsultaNombreCliente();
-                        if (clienteTemp.statusCliente.Trim()!="INACTIVO")
+
+                        if (clienteTemp.Encontrado)
                         {
-                            txtNombreClienteTarjeta.Text = clienteTemp.Nombre;
+                            if (clienteTemp.statusCliente.Trim() != "INACTIVO")
+                            {
+                                txtNombreClienteTarjeta.Text = clienteTemp.Nombre;
+                            }
+                            else if (clienteTemp.statusCliente.Trim() == "INACTIVO")
+                            {
+                                txtNombreClienteTarjeta.Text = "INACTIVO";
+                            }
                         }
-                        else if (clienteTemp.statusCliente.Trim() == "INACTIVO")
+                        else
                         {
-                            txtNombreClienteTarjeta.Text = "INACTIVO";
+                            txtNombreClienteTarjeta.Text = string.Empty;
                         }
 
                     }

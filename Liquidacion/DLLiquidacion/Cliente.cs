@@ -442,8 +442,16 @@ namespace SigametLiquidacion
                     }
                     else
                     {
-                        _eleva = true;
-                        throw new Exception(objDireccionEntega.Message);
+                        if (objDireccionEntega.Message.Contains("No se encontraron registros") )
+                        {
+                            this._encontrado = false;
+                            return objDireccionEntega;
+                        }
+                        else
+                        {
+                            _eleva = true;
+                            throw new Exception(objDireccionEntega.Message);
+                        }
                     }
                 }
             }
@@ -512,7 +520,7 @@ namespace SigametLiquidacion
                 
                 if (objDireccionEntega.Message != null)
                 {
-                    if ( objDireccionEntega.Message.Contains("La consulta no produjo resultados") ||  objDireccionEntega.Message.Contains("No se encontraron registros con los parámetros proporcionados") )
+                    if ( objDireccionEntega.Message.Contains("La consulta no produjo resultados") ||  objDireccionEntega.Message.Contains("No se encontraron registros") )
                     //if (objDireccionEntega.Message.Contains("La consulta no produjo resultados con los parametros indicados"))
                     {
                         this._encontrado = false;

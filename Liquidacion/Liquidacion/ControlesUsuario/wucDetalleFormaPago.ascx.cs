@@ -216,7 +216,15 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
                 int ClienteID = 0;
                 if (txtCliente.Text.Trim().Length > 0)
                 {
-                    ClienteID = Convert.ToInt32(txtCliente.Text.Trim());
+                    try
+                    {
+                        ClienteID = Convert.ToInt32(txtCliente.Text.Trim());
+                    }
+                    catch
+                    {
+                        ClienteID = -1;
+                    }
+                    
                     txtNombre.Text = consultaNombreClienteTransferencia(ClienteID);
                     if (txtNombre.Text != "INACTIVO")
                     {
@@ -764,12 +772,25 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
 
         }
     }
-    
+
     private void ConsultaSaldos()
-        {
+    {
 
         Cliente _datosCliente = new Cliente(0, 1);
-        Cliente objCliente = new Cliente(Convert.ToInt32(this.txtAntCliente.Text), 0);
+
+        int ClienteID = 0;
+
+        try
+        {
+            ClienteID = Convert.ToInt32(this.txtAntCliente.Text.Trim());
+        }
+        catch
+        {
+            ClienteID = -1;
+        }
+
+
+        Cliente objCliente = new Cliente(ClienteID, 0);
         objCliente.ConsultaNombreCliente();
 
         decimal NuevoSaldo=0;
@@ -780,25 +801,35 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         try
         {
             dsLiq = (DataSet)(Session["dsLiquidacion"]);
-            _datosCliente.ConsultaSaldosAFavor(Convert.ToInt32(this.txtAntCliente.Text),"",0,0);
+            _datosCliente.ConsultaSaldosAFavor(ClienteID,"",0,0);
 
-            if (objCliente.statusCliente.Trim() != "INACTIVO")
+            if (objCliente.Encontrado)
             {
-                this.txtAntNombre.Text = objCliente.Nombre;
-                NombreCteAnticipo = objCliente.Nombre;
-            }
-            else if (objCliente.statusCliente.Trim() == "INACTIVO")
-            {
+                if (objCliente.statusCliente.Trim() != "INACTIVO")
+                {
+                    this.txtAntNombre.Text = objCliente.Nombre;
+                    NombreCteAnticipo = objCliente.Nombre;
+                }
+                else if (objCliente.statusCliente.Trim() == "INACTIVO")
+                {
 
-                NombreCteAnticipo = "INACTIVO";
-                             
+                    NombreCteAnticipo = "INACTIVO";
 
+
+                }
+                else
+                {
+
+                    NombreCteAnticipo = string.Empty;
+                }
             }
             else
             {
-
                 NombreCteAnticipo = string.Empty;
+                _datosCliente = null;
+
             }
+            
 
             if (_datosCliente!=null)
             {
@@ -863,17 +894,13 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
 
 
                     try
-                    {
-
-                        
+                    {                       
 
 
                         foreach (DataRow row in _datosCliente.SaldosCliente.Rows)
                         {
                             row["Nombre"] = objCliente.Nombre;
-                        }
-
-                       
+                        }                      
 
 
                         LstSaldos.DataSource = _datosCliente.SaldosCliente;
@@ -905,18 +932,24 @@ public partial class UserControl_DetalleFormaPago_wucDetalleFormaPago : System.W
         string NombreCliente = "";
         try
         {
+           
+
             Cliente objCliente = new Cliente(ClienteID,0);
             objCliente.ConsultaNombreCliente();
 
-            if (objCliente.statusCliente.Trim()!="INACTIVO")
+            if (objCliente.Encontrado)
             {
-                NombreCliente = objCliente.Nombre;
+                if (objCliente.statusCliente.Trim() != "INACTIVO")
+                {
+                    NombreCliente = objCliente.Nombre;
+                }
+                else if (objCliente.statusCliente.Trim() == "INACTIVO")
+                {
+                    NombreCliente = "INACTIVO";
+
+                }
             }
-            else if (objCliente.statusCliente.Trim() == "INACTIVO")
-            {
-                NombreCliente = "INACTIVO";
-               
-            }
+            
 
         }
         catch (Exception ex)

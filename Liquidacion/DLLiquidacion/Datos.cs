@@ -58,12 +58,12 @@ namespace SigametLiquidacion
             {
                 this.DataCompInitialize();
             }
-            catch
+            catch (Exception ex)
             {
                
             }
-      
-    }
+
+        }
 
     public void DataCompInitialize()
     {

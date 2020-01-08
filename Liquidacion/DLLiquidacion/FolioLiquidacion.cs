@@ -377,12 +377,19 @@ namespace SigametLiquidacion
 
         private void ConsultarDirecciones(int IDDireccionEntrega)
         {
+            //try
+            //{
+                Cliente cliente = new Cliente(IDDireccionEntrega, (byte)7, this._parametros, _usuario, _cadenaConexion);
+                cliente.FSuministro = Fecha;
+                cliente.ConsultaDatosCliente();
 
-            Cliente cliente = new Cliente(IDDireccionEntrega, (byte)7, this._parametros, _usuario, _cadenaConexion);
-            cliente.FSuministro = Fecha;
-            cliente.ConsultaDatosCliente();
+                ListaClientes.Add(cliente);
+            //}
+            //catch (Exception e)
+            //{
 
-            ListaClientes.Add(cliente);
+            //}
+
         }
 
         public void ConsultaPedidos()

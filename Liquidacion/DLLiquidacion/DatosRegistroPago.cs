@@ -838,7 +838,7 @@ namespace SigametLiquidacion
                         new SqlParameter("@CobroOrigen", (object)DBNull.Value)
 
 
-                };
+                    };
                     if (Fcobro!=null)
                     {
                         sqlParameterArray[18].Value = (object)Convert.ToDateTime(Fcobro);
@@ -885,7 +885,15 @@ namespace SigametLiquidacion
 
                     if (liqPagoAnticipado != null && dtPago.Rows[index1]["NombreTipoCobro"].ToString().Contains("ANTICIPO") )
                     {
-                        decimal Totalpedidos = decimal.Parse(liqPagoAnticipado.Compute("Sum(Monto)", "IdPago="+ dtPago.Rows[index1]["IdPago"].ToString().Trim()).ToString());
+                        decimal Totalpedidos = 0;// decimal.Parse(liqPagoAnticipado.Compute("Sum(Monto)", "IdPago="+ dtPago.Rows[index1]["IdPago"].ToString().Trim()).ToString());
+
+                        foreach (DataRow fila in liqPagoAnticipado.Rows)
+                        {
+                            if (fila["IdPago"].ToString().Trim() == dtPago.Rows[index1]["IdPago"].ToString().Trim())
+                            {
+                                Totalpedidos = Totalpedidos + decimal.Parse(fila["Monto"].ToString());
+                            }
+                        }
 
                         foreach (DataRow Anticipo in liqPagoAnticipado.Rows)
                         {
@@ -936,11 +944,11 @@ namespace SigametLiquidacion
 
                 this.ActualizaTerminado(dtResumenLiquidacion);
 
-             
+
 
                 //this._dataAccess.get_Transaction().Commit();
 
-
+                
 
                 this._dataAccess.Transaction.Commit();
             }

@@ -593,6 +593,16 @@ namespace SigametLiquidacion
                     }
 
                 }
+                else
+                {
+                    if (!objDireccionEntega.Success)
+                    {
+                        _errorDeServidor = false;
+                        _eleva = false;
+                        throw new Exception("RTGMGateway no devolvió datos");
+                    }
+
+                }
 
                 
 

@@ -166,7 +166,7 @@ public partial class GenerarPago : System.Web.UI.Page
                 MontoAplicado = 0;
                     foreach (DataRow row in CobroPedido.Rows)
                     {
-                        if (item["Pedido"].ToString() == row["Pedido"].ToString())
+                        if (item["Pedido"].ToString() == row["Pedido"].ToString() & item["Celula"].ToString() == row["Celula"].ToString())
                         {
                             MontoAplicado = MontoAplicado + decimal.Parse(row["Importe"].ToString());
                         }

@@ -1608,7 +1608,9 @@ else
     {
         string afiliacion = "";
         ListItem liAfiliacion = null;
+        int indice;
 
+        string tipoTarjeta;
         if (Request.Form["__EVENTTARGET"].ToString().Contains("tarjeta"))
         {
             HiddenInput.Value = "SeleccionaPago";
@@ -1642,8 +1644,10 @@ else
             txtObservacionesTarjeta.Text = dtPagosConTarjetaSelec[0]["Observacion"].ToString();
             txtNoAutorizacionTarjeta.ReadOnly = true;
 
+            tipoTarjeta = dtPagosConTarjetaSelec[0]["TipoCobroDescripcion"].ToString();
+            indice = ddTipTarjeta.Items.IndexOf(ddTipTarjeta.Items.FindByText(tipoTarjeta)); ;
 
-            ddTipTarjeta.SelectedIndex = ddTipTarjeta.Items.IndexOf(ddTipTarjeta.Items.FindByValue(dtPagosConTarjetaSelec[0]["TipoTarjeta"].ToString()));// int.Parse(dtPagosConTarjetaSelec[0]["TipoTarjeta"].ToString());
+            ddTipTarjeta.SelectedIndex = indice; // int.Parse(dtPagosConTarjetaSelec[0]["TipoTarjeta"].ToString());
             TxtAfiliacion.Text = dtPagosConTarjetaSelec[0]["numeroafiliacion"].ToString();
             chkLocal.Checked = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "True" ? true : false;
             txtFechaTarjeta.Text = DateTime.Parse(dtPagosConTarjetaSelec[0]["FAlta"].ToString()).ToShortDateString();
@@ -1661,7 +1665,7 @@ else
             ddBancoTarjeta.Enabled = txtNumTarjeta.Text == "" ? true : false;
             ddlBancoOrigen.Enabled = ddlBancoOrigen.SelectedIndex == 0 ? true : false;
             ddlTAfiliacion.Enabled = txtNumTarjeta.Text == "" ? true : false;
-            ddTipTarjeta.Enabled = ddTipTarjeta.SelectedIndex == 0 ? true : false;
+            ddTipTarjeta.Enabled = indice<0 ? true : false;
             chkLocal.Enabled = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "" ? true : false;
             txtObservacionesTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
             imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;

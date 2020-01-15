@@ -13,7 +13,7 @@
         <table style="text-align:left">
             <tr>
                 <td colspan="2" class="HeaderMainStyle">
-                    Cancelación de liquidaciónk
+                    Cancelación de liquidación
                 </td>
             </tr>
             <tr>

@@ -276,6 +276,11 @@ namespace SigametLiquidacion
         private void consultaDatosFolio()
         {
             this._datosFolio = new DatosFolio(this._añoAtt, this._folio);
+
+            if (this._datosFolio.ConsultaDatosFolio().Rows.Count==0)
+            {
+                throw new Exception("No se encontraron datos");
+            }
             foreach (DataRow dataRow in this._datosFolio.ConsultaDatosFolio().Rows)
             {
                 this._añoAtt = Convert.ToInt16(dataRow["AñoAtt"]);            

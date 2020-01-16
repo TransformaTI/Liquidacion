@@ -1613,6 +1613,7 @@ else
         string tipoTarjeta;
         if (Request.Form["__EVENTTARGET"].ToString().Contains("tarjeta"))
         {
+            TxtAfiliacion.Text = "";
             HiddenInput.Value = "SeleccionaPago";
             clave = Request.Form["__EVENTTARGET"].ToString().Split('=');
             dtPagosConTarjeta = rp.PagosConTarjeta(int.Parse(txtClienteTarjeta.Text), int.Parse(Session["Ruta"].ToString()), int.Parse(Session["Autotanque"].ToString()));
@@ -1627,7 +1628,7 @@ else
             TxtAfiliacion.Text = dtPagosConTarjetaSelec[0]["numeroafiliacion"].ToString();
 
 
-
+           
             ddBancoTarjeta.SelectedIndex = ddBancoTarjeta.Items.IndexOf(ddBancoTarjeta.Items.FindByValue(dtPagosConTarjetaSelec[0]["Banco"].ToString()));
             ddlBancoOrigen.SelectedIndex = ddlBancoOrigen.Items.IndexOf(ddlBancoOrigen.Items.FindByValue(dtPagosConTarjetaSelec[0]["Banco"].ToString()));
 
@@ -1665,6 +1666,7 @@ else
             ddBancoTarjeta.Enabled = txtNumTarjeta.Text == "" ? true : false;
             ddlBancoOrigen.Enabled = ddlBancoOrigen.SelectedIndex == 0 ? true : false;
             ddlTAfiliacion.Enabled = txtNumTarjeta.Text == "" ? true : false;
+            TxtAfiliacion.ReadOnly = txtNumTarjeta.Text == "" ? false : true;
             ddTipTarjeta.Enabled = indice<0 ? true : false;
             chkLocal.Enabled = dtPagosConTarjeta.Rows[0]["Local"].ToString() == "" ? true : false;
             txtObservacionesTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
@@ -1863,6 +1865,7 @@ else
         // chkLocal.Checked = dtPagosPrimerRegistro[0]["Local"].ToString() == "True" ? true : false;
         ddBancoTarjeta.SelectedIndex = 0;
         ddlTAfiliacion.SelectedIndex = 0;
+        TxtAfiliacion.Text = "";
         txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
         txtNoAutorizacionTarjetaConfirm.ReadOnly= txtNoAutorizacionTarjetaConfirm.Text == "" ? false : true;
         txtFechaTarjeta.ReadOnly = txtFechaTarjeta.Text == "" ? false : true;
@@ -1875,6 +1878,8 @@ else
         chkLocal.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
         txtObservacionesTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
         imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
+        TxtAfiliacion.ReadOnly = txtNumTarjeta.Text == "" ? false : true;
+        chkLocal.Checked = txtNumTarjeta.Text == "" ? false : true;
 
         //titNoAut.Visible = !txtNoAutorizacionTarjeta.ReadOnly;
         //titNoAutNum.Visible = !txtNoAutorizacionTarjeta.ReadOnly;
@@ -2067,6 +2072,8 @@ else
                 ddTipTarjeta.SelectedIndex = -1;
                 titNoAut.Visible = true;
                 titNoAutNum.Visible = true;
+                chkLocal.Enabled = true;
+                chkLocal.Checked = false;
 
 
                 break;

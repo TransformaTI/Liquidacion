@@ -1879,6 +1879,7 @@ else
         txtObservacionesTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
         imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
         TxtAfiliacion.ReadOnly = txtNumTarjeta.Text == "" ? false : true;
+        chkLocal.Checked = txtNumTarjeta.Text == "" ? false : true;
 
         //titNoAut.Visible = !txtNoAutorizacionTarjeta.ReadOnly;
         //titNoAutNum.Visible = !txtNoAutorizacionTarjeta.ReadOnly;
@@ -2071,6 +2072,8 @@ else
                 ddTipTarjeta.SelectedIndex = -1;
                 titNoAut.Visible = true;
                 titNoAutNum.Visible = true;
+                chkLocal.Enabled = true;
+                chkLocal.Checked = false;
 
 
                 break;

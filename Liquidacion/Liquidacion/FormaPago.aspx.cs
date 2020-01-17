@@ -1712,7 +1712,7 @@ else
         HiddenAltaTarjeta.Value = paramAltaTarjeta;
         Session["TDCdisponibles"] = null;
         Session["PrimerRegTDC"] = null;
-        
+
         HiddenTDCDupliado.Value = "No";
         dtDatosControlUsuario.Columns.Add("TipoCobro", typeof(string));
         dtDatosControlUsuario.Columns.Add("Tarjeta", typeof(string));
@@ -1727,20 +1727,20 @@ else
         {
             //if (paramAltaTarjeta.Equals("1"))
             //{
-                dtPagosConTarjeta = rp.PagosConTarjeta(NumCliente, Ruta, Autotanque);
+            dtPagosConTarjeta = rp.PagosConTarjeta(NumCliente, Ruta, Autotanque);
             //}
             //else
             //{
             //    dtPagosConTarjeta = null;
             //}
-            
-            if (dtPagosConTarjeta!=null )
+
+            if (dtPagosConTarjeta != null)
             {
-                
-                if (dtPagosConTarjeta.Rows.Count > 0)        
+
+                if (dtPagosConTarjeta.Rows.Count > 0)
                 {
-                   
-                    txtNombreClienteTarjeta.Text= dtPagosConTarjeta.Rows[0]["Nombrecliente"].ToString();
+
+                    txtNombreClienteTarjeta.Text = dtPagosConTarjeta.Rows[0]["Nombrecliente"].ToString();
                 }
                 else {
                     try
@@ -1768,11 +1768,11 @@ else
                     catch (Exception ex)
                     {
 
-                    }    
-                  
+                    }
+
                 }
-                
-                
+
+
             }
             //Session["PrimerRegTDC"] = dtPagosConTarjeta.Rows[0]["Folio"].ToString();
         }
@@ -1784,17 +1784,17 @@ else
 
         if (dtPagosConTarjeta.Rows.Count > 0)
         {
-     
+
 
             foreach (DataRow row in dtPagosConTarjeta.Rows)
-            {                
-                
+            {
+
                 if (!row.IsNull("Año"))
-                    {
-                          dtDatosControlUsuario.Rows.Add(row["TipoCobroDescripcion"].ToString(), row["NumeroTarjeta"].ToString(), row["NombreBanco"].ToString(), row["Autorizacion"].ToString(), row["Importe"].ToString(), row["Observacion"].ToString(), row["Año"].ToString(), row["Folio"].ToString());
-                          PagosDeRuta = PagosDeRuta + 1;
-                        
-                    }
+                {
+                    dtDatosControlUsuario.Rows.Add(row["TipoCobroDescripcion"].ToString(), row["NumeroTarjeta"].ToString(), row["NombreBanco"].ToString(), row["Autorizacion"].ToString(), row["Importe"].ToString(), row["Observacion"].ToString(), row["Año"].ToString(), row["Folio"].ToString());
+                    PagosDeRuta = PagosDeRuta + 1;
+
+                }
 
             }
             wucConsultaCargoTarjetaCliente1.sFormaPago = sFormaPago;
@@ -1802,20 +1802,20 @@ else
 
             Registrosdisponibles(dtDatosControlUsuario);
 
-            if (PagosDeRuta== 0)
+            if (PagosDeRuta == 0)
             {
                 ///ScriptManager.RegisterStartupScript(this, GetType(), "Hidepopup", " HideModalPopup();", true);
                 HiddenInputPCT.Value = "No";
             }
 
-            if ((PagosOtraRuta== 1 && dtDatosControlUsuario.Rows.Count==1 && Session["TDCdisponibles"] == null) || (PagosOtraRuta > 0 && PagosDeRuta >= 0 &&  Session["TDCdisponibles"] == null))
+            if ((PagosOtraRuta == 1 && dtDatosControlUsuario.Rows.Count == 1 && Session["TDCdisponibles"] == null) || (PagosOtraRuta > 0 && PagosDeRuta >= 0 && Session["TDCdisponibles"] == null))
             {
                 //  ScriptManager.RegisterStartupScript(this, GetType(), "CargoTarjeta", "document.getElementById('tarjeta').style.display = 'inherit';alert('¡Existen cargos para el cliente que pertenecen a otra ruta !');", true);
                 HiddenPagosOtraRuta.Value = "true";
             }
 
 
-            if (Session["TDCdisponibles"] != null && Session["TDCdisponibles"].ToString() != "0"&& PagosDeRuta > 0 )
+            if (Session["TDCdisponibles"] != null && Session["TDCdisponibles"].ToString() != "0" && PagosDeRuta > 0)
             {
                 HiddenInputPCT.Value = "Si";
             }
@@ -1836,7 +1836,7 @@ else
             //titNoAut.Visible = true;
             //titNoAutNum.Visible = true;
 
-            if (dtPagosConTarjeta.Rows[0]["Folio"].ToString()=="" || PagosDeRuta==0)
+            if (dtPagosConTarjeta.Rows[0]["Folio"].ToString() == "" || PagosDeRuta == 0)
             {
                 HiddenInputPCT.Value = "No";
                 titNoAut.Visible = true;
@@ -1852,8 +1852,8 @@ else
             titNoAutNum.Visible = true;
         }
 
-        HiddenInputNumPagos.Value = Session["TDCdisponibles"]!=null? Session["TDCdisponibles"].ToString():"0";
-        if (Session["PrimerRegTDC"] != null && HiddenUsoPagoTarjeta.Value== "true")
+        HiddenInputNumPagos.Value = Session["TDCdisponibles"] != null ? Session["TDCdisponibles"].ToString() : "0";
+        if (Session["PrimerRegTDC"] != null && HiddenUsoPagoTarjeta.Value == "true")
         {
             CargaPrimerRegistro(sFormaPago);
         }
@@ -1867,7 +1867,7 @@ else
         ddlTAfiliacion.SelectedIndex = 0;
         TxtAfiliacion.Text = "";
         txtNoAutorizacionTarjeta.ReadOnly = txtNoAutorizacionTarjeta.Text == "" ? false : true;
-        txtNoAutorizacionTarjetaConfirm.ReadOnly= txtNoAutorizacionTarjetaConfirm.Text == "" ? false : true;
+        txtNoAutorizacionTarjetaConfirm.ReadOnly = txtNoAutorizacionTarjetaConfirm.Text == "" ? false : true;
         txtFechaTarjeta.ReadOnly = txtFechaTarjeta.Text == "" ? false : true;
         txtNumTarjeta.ReadOnly = txtNumTarjeta.Text == "" ? false : true;
         txtImporteTarjeta.ReadOnly = txtImporteTarjeta.Text == "" ? false : true;
@@ -1880,6 +1880,11 @@ else
         imgCalendario0.Enabled = txtNoAutorizacionTarjeta.Text == "" ? true : false;
         TxtAfiliacion.ReadOnly = txtNumTarjeta.Text == "" ? false : true;
         chkLocal.Checked = txtNumTarjeta.Text == "" ? false : true;
+
+        if (txtNumTarjeta.Text=="")
+        {
+            Session["FolioAnio-PagSel"] = "-";
+        }
 
         //titNoAut.Visible = !txtNoAutorizacionTarjeta.ReadOnly;
         //titNoAutNum.Visible = !txtNoAutorizacionTarjeta.ReadOnly;
